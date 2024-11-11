@@ -96,5 +96,21 @@ submit_btn.addEventListener("click", function () {
   document.querySelector(".bg").classList.remove("hidden");
   document.querySelector(".loader").classList.remove("hidden");
 });
+
+// reviewの文字制限
+
+var reviews = document.querySelectorAll(".js_review");
+var review_containers = document.querySelectorAll(".js_review_container");
+var max_height = 0;
+review_containers.forEach(function (container) {
+  if (container.clientHeight > max_height) {
+    max_height = container.clientHeight;
+  }
+  container.style.height = "".concat(max_height, "px");
+});
+reviews.forEach(function (review) {
+  var text = review.textContent.trim();
+  review.textContent = text.length > 320 ? text.substring(0, 320) + "..." : text;
+});
 /******/ })()
 ;

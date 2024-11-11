@@ -156,7 +156,7 @@
                                 Some quick example text to build on the card title and make up
                                 the bulk of the card's content.
                             </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <a href="#" class="btn destination-btn">Go somewhere</a>
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
@@ -167,7 +167,7 @@
                                 Some quick example text to build on the card title and make up
                                 the bulk of the card's content.
                             </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <a href="#" class="btn destination-btn">Go somewhere</a>
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
@@ -178,7 +178,7 @@
                                 Some quick example text to build on the card title and make up
                                 the bulk of the card's content.
                             </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <a href="#" class="btn destination-btn">Go somewhere</a>
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                                 Some quick example text to build on the card title and make up
                                 the bulk of the card's content.
                             </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <a href="#" class="btn destination-btn">Go somewhere</a>
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
@@ -203,7 +203,7 @@
                                 Some quick example text to build on the card title and make up
                                 the bulk of the card's content.
                             </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <a href="#" class="btn destination-btn">Go somewhere</a>
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
@@ -214,7 +214,7 @@
                                 Some quick example text to build on the card title and make up
                                 the bulk of the card's content.
                             </p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <a href="#" class="btn destination-btn">Go somewhere</a>
                         </div>
                     </div>
                 </div>
@@ -222,17 +222,14 @@
         </section>
 
         <section class="section_fifth z3 relative padding_section">
-            <p class="review_title c relative">
-                <span class="bold">ー　What Our</span> Client Says　ー
+            <p class="review_title c relative"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
+                <span class="bold">ー　What Our</span> Customers Says　ー
             </p>
             <div class="section_fifth_wrapper">
                 <div class="slider" id="js-slick">
-                    <div class="review_container relative">
-                        <p class="review_container_txt relative review">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Aspernatur labore, tempore libero iure, laborum temporibus, fuga
-                            necessitatibus ratione hic optio enim minus alias. Sint quae
-                            iusto praesentium laborum facilis! Iste.
+                    <div class="review_container js_review_container relative">
+                        <p class="review_container_txt js_review relative review">
+                            The tour with Dean was amazing and FUN!. Dean was very patient and helpful guiding us to the correct location. I made a mistake and misread the instructions yet he was accommodating and patient. He imported alot of knowledge and shared great stories and legends that made the points of interest that much more interesting. Dean also shared Tod bits about the Japanese culture that were fascinating. It's great to hear it from a local person. I highly recommend taking this tour with Dean.
                         </p>
                         <span class="star">
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
@@ -241,18 +238,15 @@
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                         </span>
-                        <p class="review_name review_container_txt relative">
-                            Adam Smith
+                        <p class="review_name review_container_txt js_review relative">
+                            Judy – United States
                         </p>
                         <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
 
                     </div>
-                    <div class="review_container relative">
-                        <p class="review_container_txt relative review">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Aspernatur labore, tempore libero iure, laborum temporibus, fuga
-                            necessitatibus ratione hic optio enim minus alias. Sint quae
-                            iusto praesentium laborum facilis! Iste.
+                    <div class="review_container js_review_container relative">
+                        <p class="review_container_txt js_review relative review">
+                            Our guide, Dean, flexible, knowledgeable and fluent in English— all things that are important when touring with 4 teenagers. Dean was very good about managing our time and showing us some highlights of Tokyo. He was also very engaged with our teens and answered all their questions whether it was about a historical site or Japanese gaming culture. We highly recommend this tour, especially if you have kids / teens
                         </p>
                         <span class="star">
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
@@ -261,17 +255,14 @@
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                         </span>
-                        <p class="review_name review_container_txt relative">
-                            Adam Smith
+                        <p class="review_name review_container_txt js_review relative">
+                            Keith – United States
                         </p>
                         <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
                     </div>
-                    <div class="review_container relative">
-                        <p class="review_container_txt relative review">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Aspernatur labore, tempore libero iure, laborum temporibus, fuga
-                            necessitatibus ratione hic optio enim minus alias. Sint quae
-                            iusto praesentium laborum facilis! Iste.
+                    <div class="review_container js_review_container relative">
+                        <p class="review_container_txt js_review relative review">
+                            Incredible experience, highly recommend booking with Dean! We did a full day in Kamakura and he showed us so much of the rich history of the city and the surrounding area. Dean let us experience everything at our own pace and we never felt rushed. Felt like a friend showing us around town and we enjoyed the sightseeing very much (especially the stories he told us of the places we went to - which we would not have known if we attempted to do this ourselves lol). Again, had a really great time and highly recommend, especially if you’re looking for an escape from the hustle and bustle of Tokyo
                         </p>
                         <span class="star">
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
@@ -280,17 +271,14 @@
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                         </span>
-                        <p class="review_name review_container_txt relative">
-                            Adam Smith
+                        <p class="review_name review_container_txt js_review relative">
+                            Emily – United States
                         </p>
                         <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
                     </div>
-                    <div class="review_container relative">
-                        <p class="review_container_txt relative review">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Aspernatur labore, tempore libero iure, laborum temporibus, fuga
-                            necessitatibus ratione hic optio enim minus alias. Sint quae
-                            iusto praesentium laborum facilis! Iste.
+                    <div class="review_container js_review_container relative">
+                        <p class="review_container_txt js_review relative review">
+                            Dean is amazing! Not only he knows everything about Tokyo but he was showing me all the tips to take great pictures with the best spots. He has been very flexible stopping to buy water, finding air portable machine, staying more or less in the places that I preferred… He has also been very helpful along our walk. It is my first time in Japan and he showed me how the “basics” work and what to do or not to do! He also helped when people did not understand my English :-) I am so thankful I booked the tour with him! I will recommend him really strongly to anyone!
                         </p>
                         <span class="star">
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
@@ -299,17 +287,14 @@
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                         </span>
-                        <p class="review_name review_container_txt relative">
-                            Adam Smith
+                        <p class="review_name review_container_txt js_review relative">
+                            Florence – Belgium
                         </p>
                         <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
                     </div>
-                    <div class="review_container relative">
-                        <p class="review_container_txt relative review">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Aspernatur labore, tempore libero iure, laborum temporibus, fuga
-                            necessitatibus ratione hic optio enim minus alias. Sint quae
-                            iusto praesentium laborum facilis! Iste.
+                    <div class="review_container js_review_container relative">
+                        <p class="review_container_txt js_review relative review">
+                            Great attitude, knowledgable, flexible, great small talk, pleasure to be on this tour with Dean, and he knows special places with real food, no scam, fully recommend!!!
                         </p>
                         <span class="star">
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
@@ -318,17 +303,12 @@
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                         </span>
-                        <p class="review_name review_container_txt relative">
-                            Adam Smith
-                        </p>
+                        <p class="review_name review_container_txt js_review relative"> Michał – Poland </p>
                         <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
                     </div>
-                    <div class="review_container relative">
-                        <p class="review_container_txt relative review">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Aspernatur labore, tempore libero iure, laborum temporibus, fuga
-                            necessitatibus ratione hic optio enim minus alias. Sint quae
-                            iusto praesentium laborum facilis! Iste.
+                    <div class="review_container js_review_container relative">
+                        <p class="review_container_txt js_review relative review">
+                            perfect guide, mcj during a rainy day
                         </p>
                         <span class="star">
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
@@ -337,8 +317,8 @@
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                             <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
                         </span>
-                        <p class="review_name review_container_txt relative">
-                            Adam Smith
+                        <p class="review_name review_container_txt js_review relative">
+                            Francesca – Italy
                         </p>
                         <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
                     </div>
@@ -353,7 +333,7 @@
                 </h2>
                 <div class="section_sixth_wrapper">
                     <div class="hot_left_wrapper">
-                        <div class="hot_container">
+                        <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                             <div class="hot_container_left">
                                 <img src="{{asset("img/japan1.jpg")}}" alt="" class="hot_img" />
                             </div>
@@ -374,7 +354,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hot_container">
+                        <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                             <div class="hot_container_left">
                                 <img src="{{asset("img/japan1.jpg")}}" alt="" class="hot_img" />
                             </div>
@@ -395,7 +375,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="hot_container">
+                        <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                             <div class="hot_container_left">
                                 <img src="{{asset("img/japan1.jpg")}}" alt="" class="hot_img" />
                             </div>
@@ -423,9 +403,9 @@
         <section class="section_seventh z3 relative padding_section">
             <div class="contact_wrapper">
                 <p class="contact_large relative z3 c">
-                    Subscribe to pur newsletter to get the latest & news
+                    Let's Plan Your Next Adventure
                 </p>
-                <p class="contact_sml c z3 relative">Let's explore beautiful Japan</p>
+                <p class="contact_sml c z3 relative">Get in touch with our travel experts for personalized tour planning</p>
                 <form action="{{route("sendMessage")}}" method="POST">
                     @csrf
                     <div class="contact_filed_container relative z3">

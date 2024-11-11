@@ -715,3 +715,13 @@ label {
     font-size: 2em;
     margin-top: 60%;
 }
+
+.destination-btn{
+    background-color: #52aaf9 !important;
+    color: #fff !important; 
+    width: 100%;
+    padding: 10px 0 !important;
+}
+.card-body{
+    padding: 6% 7% !important;
+}

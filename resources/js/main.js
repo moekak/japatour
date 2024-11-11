@@ -71,3 +71,25 @@ submit_btn.addEventListener("click", ()=>{
   document.querySelector(".bg").classList.remove("hidden")
   document.querySelector(".loader").classList.remove("hidden")
 })
+
+
+// reviewの文字制限
+
+const reviews = document.querySelectorAll(".js_review")
+const review_containers = document.querySelectorAll(".js_review_container")
+let max_height = 0
+
+review_containers.forEach((container)=>{
+  if(container.clientHeight > max_height){
+    max_height = container.clientHeight
+  }
+
+  container.style.height = `${max_height}px`
+  
+
+})
+
+reviews.forEach((review)=>{
+  let text = review.textContent.trim();
+  review.textContent= text.length > 320 ? text.substring(0, 320) + "..." : text;
+})
