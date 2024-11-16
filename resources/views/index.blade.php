@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/index_sp.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -26,17 +27,17 @@
                 </div>
                 <p class="sending_txt">sending...</p>
         </div>
-        <section class="section_top">
+        <section class="section_top" id="home">
             <img src="{{asset("img/tokyoTower.jpg")}}" alt="" class="top_img sticky js-parallax image" data-y="-20vw" />
             <header class="absolute z2 js_header">
                 <div class="header_right font_icon">JapaTour</div>
                 <div class="header_center">
                     <ul>
-                        <li class="font_normal">Home</li>
-                        <li class="font_normal">About</li>
-                        <li class="font_normal">Tour</li>
-                        <li class="font_normal">Hot</li>
-                        <li class="font_normal">Contact</li>
+                        <li class="font_normal"><a href="#home">Home</a></li>
+                        <li class="font_normal"><a href="#about">About</a></li>
+                        <li class="font_normal"><a href="#tour">Tour</a></li>
+                        <li class="font_normal"><a href="#hot">Hot</a></li>
+                        <li class="font_normal"><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
                 <div class="header_left">
@@ -58,7 +59,7 @@
         </section>
 
         <!-- WHY CHOOSE US SECTION -->
-        <section class="section_second z3 padding_section relative">
+        <section class="section_second z3 padding_section relative" id="about">
             <div class="section_second_wrapper">
                 <h2 class="font_subtitle" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
                     data-aos-duration="1000">
@@ -448,6 +449,15 @@
             </div>
         </section>
     </main>
+    <!-- スムーススクロール -->
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js"></script>
+    <script>
+    var scroll = new SmoothScroll('a[href^="#"]', {
+        updateURL: false,
+        easing: 'easeOutQuad',
+        speed: 100,
+    });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.7.0/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

@@ -150,6 +150,10 @@ header {
     display: flex;
     gap: 30px;
 }
+.header_center ul li a{
+    color: inherit;
+    text-decoration: none;
+}
 
 .header_center ul li {
     list-style: none;
@@ -168,7 +172,6 @@ header {
 .title {
     color: #fffffff1;
     font-size: 100px;
-    top: 39%;
     width: 100%;
     text-align: center;
 }
@@ -303,6 +306,10 @@ header {
 }
 
 /* section_forth */
+.section_forth_wrapper{
+    margin: 0 auto;
+    width: 100%;
+}
 .section_forth {
     background-color: #f3fafd;
 }
@@ -355,10 +362,12 @@ header {
     z-index: 10;
     padding: 50px 30px 30px 30px;
     border: 1px solid #ffffff3a;
+    height: 340px;
 }
 .review_container_txt {
     color: #fff;
     margin: 0;
+    height: 220px;
 }
 .star_img {
     width: 20px;
@@ -439,6 +448,10 @@ header {
     background-size: cover;
     background-position: center;
     margin: 3% 0;
+}
+.section_sixth_area{
+    width: 100%;
+    margin: 0 auto;
 }
 .section_sixth .font_subtitle {
     max-width: 1200px;
@@ -575,7 +588,8 @@ label {
 }
 .slick-slide {
     margin: 0 10px;
-    width: 400px;
+    width: 1.4%;
+    height: 340px !important;
 }
 .slider {
     width: 100% !important;

@@ -59,8 +59,17 @@ $('#js-slick').slick({
   // centerMode: true,       // スライドを中央に表示
   centerPadding: '40px',  // 両端に見えるスライドの幅を調整
   slidesToShow: 3,        // 表示するスライドの数
+  responsive: [
+    {
+      breakpoint: 1200, // 画面幅1024px以下の場合
+      settings: {
+        slidesToShow: 2, // 2枚表示
+        centerPadding: '30px' // 両端の幅を調整
+      }
+    },
+  ]
 
-  variableWidth: true 
+
 
   // infinite: true //無限ループ
 });
@@ -76,20 +85,34 @@ submit_btn.addEventListener("click", ()=>{
 // reviewの文字制限
 
 const reviews = document.querySelectorAll(".js_review")
-const review_containers = document.querySelectorAll(".js_review_container")
-let max_height = 0
+// const review_containers = document.querySelectorAll(".js_review_container")
+// let max_height = 0
 
-review_containers.forEach((container)=>{
-  if(container.clientHeight > max_height){
-    max_height = container.clientHeight
-  }
+// review_containers.forEach((container)=>{
+//   if(container.clientHeight > max_height){
+//     max_height = container.clientHeight
+//   }
 
-  container.style.height = `${max_height}px`
+//   container.style.height = `${max_height}px`
   
 
-})
+// })
 
-reviews.forEach((review)=>{
+
+const mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
+let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
+
+reviews.forEach((review) => {
   let text = review.textContent.trim();
-  review.textContent= text.length > 320 ? text.substring(0, 320) + "..." : text;
-})
+  if (text.length > MAX_LENGTH) {
+    // 元のテキストを切り取る
+    let truncatedText = text.substring(0, MAX_LENGTH);
+
+    // 既存の内容を消して、新しい構造を作成
+    review.innerHTML = `
+      <span>${truncatedText}</span>
+      <span style="cursor: pointer; padding-left:8px; color: #007BFF;" class="js_see_more">... see more</span>
+    `;
+  }
+});
+

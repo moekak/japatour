@@ -1,0 +1,50 @@
+@media screen and (max-width: 1360px) {
+    .image {
+        height: 88vw;
+    }
+    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+        max-width: 1060px;
+    }
+    .reason_card {
+        padding: 22px 22px;
+    }
+    .slick-slide {
+        height: 390px !important;
+    }
+    .review_container_txt {
+        height: 272px;
+    }
+}
+@media screen and (max-width: 1200px){
+    .image {
+        height: 94vw;
+    }
+    .title {
+        font-size: 6rem;
+    }
+    .reason_card_container{
+        grid-template-columns: 1fr 1fr;
+    }
+    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+        max-width: 934px;
+    }
+    .reason_card img {
+        width: 58px;
+    }
+    .section_third p {
+        width: 86%;
+    }
+    .destinations_area {
+        gap: 11px;
+    }
+    .hot_container {
+        grid-template-columns: 44% 52%;
+    }
+    .hot_exlarge_txt {
+        font-size: 51px;
+    }
+    .hot_normal_txt {
+        font-size: 16px;
+    }
+
+}

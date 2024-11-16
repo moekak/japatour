@@ -86,8 +86,15 @@ $('#js-slick').slick({
   // 両端に見えるスライドの幅を調整
   slidesToShow: 3,
   // 表示するスライドの数
-
-  variableWidth: true
+  responsive: [{
+    breakpoint: 1200,
+    // 画面幅1024px以下の場合
+    settings: {
+      slidesToShow: 2,
+      // 2枚表示
+      centerPadding: '30px' // 両端の幅を調整
+    }
+  }]
 
   // infinite: true //無限ループ
 });
@@ -100,17 +107,29 @@ submit_btn.addEventListener("click", function () {
 // reviewの文字制限
 
 var reviews = document.querySelectorAll(".js_review");
-var review_containers = document.querySelectorAll(".js_review_container");
-var max_height = 0;
-review_containers.forEach(function (container) {
-  if (container.clientHeight > max_height) {
-    max_height = container.clientHeight;
-  }
-  container.style.height = "".concat(max_height, "px");
-});
+// const review_containers = document.querySelectorAll(".js_review_container")
+// let max_height = 0
+
+// review_containers.forEach((container)=>{
+//   if(container.clientHeight > max_height){
+//     max_height = container.clientHeight
+//   }
+
+//   container.style.height = `${max_height}px`
+
+// })
+
+var mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
+var MAX_LENGTH = mediaQuery1200.matches ? 500 : 310;
 reviews.forEach(function (review) {
   var text = review.textContent.trim();
-  review.textContent = text.length > 320 ? text.substring(0, 320) + "..." : text;
+  if (text.length > MAX_LENGTH) {
+    // 元のテキストを切り取る
+    var truncatedText = text.substring(0, MAX_LENGTH);
+
+    // 既存の内容を消して、新しい構造を作成
+    review.innerHTML = "\n      <span>".concat(truncatedText, "</span>\n      <span style=\"cursor: pointer; padding-left:8px; color: #007BFF;\" class=\"js_see_more\">... see more</span>\n    ");
+  }
 });
 /******/ })()
 ;
