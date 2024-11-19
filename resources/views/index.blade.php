@@ -143,11 +143,11 @@
         </section>
         <section class="section_forth z3 relative padding_section">
             <div class="section_forth_wrapper">
-                <h2 class="font_subtitle" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+                <h2 class="font_subtitle" data-aos="fade-up" 
                     data-aos-duration="1000">
                     Popular Destinations
                 </h2>
-                <div class="destinations_area" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
+                <div class="destinations_area" data-aos="fade-up" 
                     data-aos-duration="1000">
                     <div class="card" style="width: 25rem">
                         <img src="{{asset("img/AdobeStock_74308722.jpeg")}}" class="card-img-top" alt="..." />
@@ -182,9 +182,6 @@
                             <a href="#" class="btn destination-btn">Go somewhere</a>
                         </div>
                     </div>
-                </div>
-                <div class="destinations_area" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
-                    data-aos-duration="1000" style="margin-top: 30px">
                     <div class="card" style="width: 25rem">
                         <img src="{{asset("img/AdobeStock_74308722.jpeg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
@@ -219,11 +216,12 @@
                         </div>
                     </div>
                 </div>
+ 
             </div>
         </section>
 
         <section class="section_fifth z3 relative padding_section">
-            <p class="review_title c relative"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
+            <p class="review_title c relative"  data-aos="fade-up"  data-aos-duration="1000">
                 <span class="bold">ー　What Our</span> Customers Says　ー
             </p>
             <div class="section_fifth_wrapper">

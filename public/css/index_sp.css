@@ -48,3 +48,38 @@
     }
 
 }
+
+@media screen and (max-width: 1000px){
+    .image {
+        height: 111vw;
+    }
+    .title {
+        font-size: 5rem;
+    }
+    header {
+        padding: 20px 34px;
+    }
+    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+        max-width: 800px;
+    }
+    .font_subtitle {
+        font-size: 46px;
+    }
+    .section_third p {
+        width: 100%;
+    }
+    .destinations_area {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .card{
+        width: 100% !important;
+    }
+    .hot_container {
+        grid-template-columns: 49% 48%;
+    }
+}
+
+@media screen and (max-width: 900px){
+  
+}

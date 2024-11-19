@@ -318,12 +318,16 @@ header {
     margin: 0 auto;
 }
 .destinations_area {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     width: 100%;
     margin: 0 auto;
     gap: 30px;
     max-width: 1200px;
     margin-top: 53px;
+}
+.card{
+    width: 100% !important;
 }
 
 .section_forth_desc {
@@ -367,7 +371,7 @@ header {
 .review_container_txt {
     color: #fff;
     margin: 0;
-    height: 220px;
+    height: 230px;
 }
 .star_img {
     width: 20px;
@@ -589,7 +593,7 @@ label {
 .slick-slide {
     margin: 0 10px;
     width: 1.4%;
-    height: 340px !important;
+    height: 360px !important;
 }
 .slider {
     width: 100% !important;
