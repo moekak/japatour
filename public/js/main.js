@@ -120,7 +120,11 @@ var reviews = document.querySelectorAll(".js_review");
 // })
 
 var mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
-var MAX_LENGTH = mediaQuery1200.matches ? 500 : 310;
+var mediaQuery900 = window.matchMedia('(max-width: 900px)');
+// let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
+// let MAX_LENGTH = mediaQuery1200.matches ? 500: (mediaQuery900.matches ? 200 : 310);
+var MAX_LENGTH = mediaQuery900.matches ? 280 : mediaQuery1200.matches ? 400 : 310;
+console.log(MAX_LENGTH);
 reviews.forEach(function (review) {
   var text = review.textContent.trim();
   if (text.length > MAX_LENGTH) {

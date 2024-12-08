@@ -100,7 +100,12 @@ const reviews = document.querySelectorAll(".js_review")
 
 
 const mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
-let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
+const mediaQuery900 = window.matchMedia('(max-width: 900px)');
+// let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
+// let MAX_LENGTH = mediaQuery1200.matches ? 500: (mediaQuery900.matches ? 200 : 310);
+let MAX_LENGTH = mediaQuery900.matches ? 280: (mediaQuery1200.matches ? 400 : 310);
+console.log(MAX_LENGTH);
+
 
 reviews.forEach((review) => {
   let text = review.textContent.trim();

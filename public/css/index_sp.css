@@ -81,5 +81,73 @@
 }
 
 @media screen and (max-width: 900px){
-  
+    .title {
+        font-size: 4rem;
+    }
+    .see-tour {
+        width: 14%;
+        padding: 10px 5px;
+    }
+    .image {
+        height: 122vw;
+    }
+    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+        max-width: 720px;
+    }
+    .font_subtitle {
+        font-size: 39px;
+    }
+    .reason_desc {
+        font-size: 15px;
+    }
+    .font_normal {
+        font-size: 16px;
+    }
+    .section_third h2 {
+        font-size: 54px;
+    }
+    .section_third_box button{
+        width: 19%;
+        padding: 10px 5px;
+    }
+    .review_title {
+        font-size: 41px;
+    }
+    .review_container_txt {
+        font-size: 15px;
+    }
+    .quote_img {
+        right: 7%;
+        bottom: 6%;
+        width: 20%;
+    }
+    .slick-slide {
+        height: 335px !important;
+    }
+    .review_container_txt {
+        height: 215px;
+    }
+    .hot_exlarge_txt {
+        font-size: 43px;
+    }
+    .hot_large_txt {
+        font-size: 27px;
+    }
+    .hot_normal_txt {
+        font-size: 15px;
+        margin: 0
+        ;
+    }
+    .reason_card_padding {
+        padding: 10px 7px 7px 0px;
+    }
+    .reason_see_more_btn {
+        font-size: 14px;
+    }
+    .input_field {
+        height: 41px;
+    }
+    .textarea {
+        height: 81%;
+    }
 }
