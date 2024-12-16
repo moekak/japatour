@@ -58,6 +58,43 @@ ScrollTrigger.create({
   }
 });
 AOS.init();
+var headerSP = document.querySelector(".js_header_pc");
+var title2 = document.querySelectorAll(".js_title");
+var tl2 = gsap.timeline();
+tl2.to(title2, {
+  y: 0,
+  duration: 1
+});
+tl2.to(headerSP, {
+  y: 0,
+  duration: 1
+});
+gsap.registerPlugin(ScrollTrigger);
+gsap.utils.toArray(".js-parallax").forEach(function (wrap) {
+  var y = wrap.getAttribute("data-y") || -100;
+  gsap.to(wrap, {
+    y: y,
+    scrollTrigger: {
+      trigger: wrap,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 0.5
+      //markers: true
+    }
+  });
+});
+ScrollTrigger.create({
+  start: "top 30%",
+  trigger: ".js_title",
+  end: function end() {
+    return "+=".concat(document.documentElement.scrollHeight);
+  },
+  toggleClass: {
+    targets: ".js_header",
+    className: "header-active"
+  }
+});
+AOS.init();
 
 // why choose japa tourのところの高さを合わせる
 
@@ -121,9 +158,10 @@ var reviews = document.querySelectorAll(".js_review");
 
 var mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
 var mediaQuery900 = window.matchMedia('(max-width: 900px)');
+var mediaQuery800 = window.matchMedia('(max-width: 800px)');
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: (mediaQuery900.matches ? 200 : 310);
-var MAX_LENGTH = mediaQuery900.matches ? 280 : mediaQuery1200.matches ? 400 : 310;
+var MAX_LENGTH = mediaQuery800.matches ? 230 : mediaQuery900.matches ? 280 : mediaQuery1200.matches ? 400 : 310;
 console.log(MAX_LENGTH);
 reviews.forEach(function (review) {
   var text = review.textContent.trim();
@@ -134,6 +172,12 @@ reviews.forEach(function (review) {
     // 既存の内容を消して、新しい構造を作成
     review.innerHTML = "\n      <span>".concat(truncatedText, "</span>\n      <span style=\"cursor: pointer; padding-left:8px; color: #007BFF;\" class=\"js_see_more\">... see more</span>\n    ");
   }
+});
+
+// ハンバーガーメニュー
+var header_btn = document.querySelector(".js_header_btn");
+header_btn.addEventListener("click", function () {
+  header_btn.classList.toggle('is-active');
 });
 /******/ })()
 ;

@@ -94,17 +94,23 @@ ul {
 /* section top */
 .section_top {
     height: 100vh;
+    overflow: hidden;
+    position: relative;
 }
 
 .top_img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;  /* 画像の比率を保ちながら領域を埋める */
+    object-position: center;  /* 中央を基準に配置 */
+    position: absolute;
 }
 .section_top::after {
     position: absolute;
     top: 0;
     right: 0;
     content: "";
-    background-color: rgba(0, 0, 0, 0.582);
+    background-color: rgb(0 0 0 / 32%);
     /* z-index: 55; */
     width: 100%;
     height: 100%;
@@ -115,8 +121,7 @@ ul {
 }
 .image {
     width: 100%;
-    height: 80vw;
-    overflow: visible;
+    height: 100vh;
 }
 
 /* header */
@@ -142,6 +147,10 @@ header {
 }
 .header_left {
     margin: 0;
+}
+.sp_header{
+    justify-content: right;
+    z-index: 999;
 }
 .title {
     transform: translateY(-20px);
@@ -742,4 +751,48 @@ label {
 }
 .card-body{
     padding: 6% 7% !important;
+}
+
+
+/* ハンバーガーメニュー */
+.hamburger {
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: transparent;
+    position: relative;
+    cursor: pointer;
+    padding: 0;
+}
+
+.hamburger__line {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background: #fff;
+    position: absolute;
+    left: 12px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* 三本線の位置設定 */
+.hamburger__line:nth-child(1) {
+    top: 16px;
+}
+.hamburger__line:nth-child(2) {
+    top: 26px;
+}
+.hamburger__line:nth-child(3) {
+    top: 36px;
+}
+
+/* バツ印に変化 */
+.hamburger.is-active .hamburger__line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.hamburger.is-active .hamburger__line:nth-child(2) {
+    opacity: 0;
+}
+.hamburger.is-active .hamburger__line:nth-child(3) {
+    transform: translateY(-13px) rotate(-46deg);
 }

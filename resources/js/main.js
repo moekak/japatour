@@ -29,6 +29,37 @@ ScrollTrigger.create({
 });
 
 AOS.init();
+const headerSP = document.querySelector(".js_header_pc");
+const title2 = document.querySelectorAll(".js_title");
+
+const tl2 = gsap.timeline();
+tl2.to(title2, { y: 0, duration: 1 });
+tl2.to(headerSP, { y: 0, duration: 1 });
+
+gsap.registerPlugin(ScrollTrigger);
+gsap.utils.toArray(".js-parallax").forEach((wrap) => {
+  const y = wrap.getAttribute("data-y") || -100;
+
+  gsap.to(wrap, {
+    y: y,
+    scrollTrigger: {
+      trigger: wrap,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 0.5,
+      //markers: true
+    },
+  });
+});
+
+ScrollTrigger.create({
+  start: "top 30%",
+  trigger: ".js_title",
+  end: () => `+=${document.documentElement.scrollHeight}`,
+  toggleClass: { targets: ".js_header", className: "header-active" },
+});
+
+AOS.init();
 
 // why choose japa tourのところの高さを合わせる
 
@@ -101,9 +132,10 @@ const reviews = document.querySelectorAll(".js_review")
 
 const mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
 const mediaQuery900 = window.matchMedia('(max-width: 900px)');
+const mediaQuery800 = window.matchMedia('(max-width: 800px)');
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: (mediaQuery900.matches ? 200 : 310);
-let MAX_LENGTH = mediaQuery900.matches ? 280: (mediaQuery1200.matches ? 400 : 310);
+let MAX_LENGTH = mediaQuery800.matches ? 230 : (mediaQuery900.matches ? 280: (mediaQuery1200.matches ? 400 : 310));
 console.log(MAX_LENGTH);
 
 
@@ -121,3 +153,10 @@ reviews.forEach((review) => {
   }
 });
 
+
+
+// ハンバーガーメニュー
+const header_btn = document.querySelector(".js_header_btn")
+header_btn.addEventListener("click", ()=>{
+  header_btn.classList.toggle('is-active');
+})

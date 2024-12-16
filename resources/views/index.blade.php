@@ -28,8 +28,8 @@
                 <p class="sending_txt">sending...</p>
         </div>
         <section class="section_top" id="home">
-            <img src="{{asset("img/tokyoTower.jpg")}}" alt="" class="top_img sticky js-parallax image" data-y="-20vw" />
-            <header class="absolute z2 js_header">
+            <img src="{{asset("img/bg.jpg")}}" alt="" class="top_img image" />
+            <header class="absolute z2 js_header_pc pc_header">
                 <div class="header_right font_icon">JapaTour</div>
                 <div class="header_center">
                     <ul>
@@ -46,6 +46,13 @@
                     <img src="{{asset("img/icons8-youtube.svg")}}" alt="" />
                     <img src="{{asset("img/icons8-linkedin.svg")}}" alt="" />
                 </div>
+            </header>
+            <header class="sp_header js_header relative">
+                <button class="hamburger js_header_btn" type="button">
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                </button>
             </header>
             <div class="top_container absolute z2">
                 <h1 class="title z2 js_title">Let Us Take You Away</h1>
