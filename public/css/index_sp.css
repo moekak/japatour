@@ -75,6 +75,9 @@
 }
 
 @media screen and (max-width: 900px){
+    .sp_header{
+        display: flex;
+    }
     .pc_header{
         display: none;
     }
@@ -182,6 +185,82 @@
         margin-top: 4px;
     }
     .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
-        max-width: 550px;
+        max-width: 600px;
+    }
+    .review_container {
+        padding: 35px 30px 30px 30px;
+    }
+}
+@media screen and (max-width: 650px){
+    .reason_card_container{
+        display: block;
+    }
+    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+        max-width: 470px;
+    }
+    .section_third h2 {
+        font-size: 39px;
+    }
+    .font_normal {
+        font-size: 15px;
+    }
+    .section_third_box button {
+        width: 23%;
+        padding: 6px 4px;
+    }
+    .section_third_box button {
+        width: 23%;
+        padding: 6px 4px;
+        margin-top: 20px;
+    }
+    .destinations_area{
+        display: block;
+    }
+    .card{
+        margin-bottom: 25px;
+    }
+    .section_top_desc {
+        width: 47%;
+    }
+    .reason_card{
+        margin-bottom: 10px;
+    }
+    .hot_container {
+        display: block;
+    }
+    .hot_normal_txt {
+        font-size: 15px;
+    }
+    .padding_section {
+        padding: 80px 0px;
+    }
+    .contact_filed_container {
+        display: block;
+    }
+    .textarea{
+        width: 100%;
+        margin-top: 12%;
+    }
+}
+@media screen and (max-width: 500px){
+
+    .title {
+        font-size: 46px;
+    }
+    .section_top_desc {
+        width: 39%;
+    }
+    .see-tour {
+        width: 14%;
+        padding: 6px 5px;
+    }
+    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+        max-width: 450px;
+    }
+    .font_normal {
+        font-size: 14px;
+    }
+    .section_third_area {
+        padding: 5%;
     }
 }

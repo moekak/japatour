@@ -21,6 +21,10 @@ var __webpack_exports__ = {};
   !*** ./resources/js/main.js ***!
   \******************************/
 __webpack_require__.r(__webpack_exports__);
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 var header = document.querySelector(".js_header");
 var title = document.querySelectorAll(".js_title");
 var tl = gsap.timeline();
@@ -123,7 +127,7 @@ $('#js-slick').slick({
   // 両端に見えるスライドの幅を調整
   slidesToShow: 3,
   // 表示するスライドの数
-  responsive: [{
+  responsive: [_defineProperty(_defineProperty({
     breakpoint: 1200,
     // 画面幅1024px以下の場合
     settings: {
@@ -131,9 +135,11 @@ $('#js-slick').slick({
       // 2枚表示
       centerPadding: '30px' // 両端の幅を調整
     }
-  }]
-
-  // infinite: true //無限ループ
+  }, "breakpoint", 650), "settings", {
+    slidesToShow: 1,
+    // 2枚表示
+    centerPadding: '30px' // 両端の幅を調整
+  })]
 });
 var submit_btn = document.getElementById("js_submit_btn");
 submit_btn.addEventListener("click", function () {
@@ -159,9 +165,10 @@ var reviews = document.querySelectorAll(".js_review");
 var mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
 var mediaQuery900 = window.matchMedia('(max-width: 900px)');
 var mediaQuery800 = window.matchMedia('(max-width: 800px)');
+var mediaQuery650 = window.matchMedia('(max-width: 650px)');
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: (mediaQuery900.matches ? 200 : 310);
-var MAX_LENGTH = mediaQuery800.matches ? 230 : mediaQuery900.matches ? 280 : mediaQuery1200.matches ? 400 : 310;
+var MAX_LENGTH = mediaQuery650.matches ? 420 : mediaQuery800.matches ? 230 : mediaQuery900.matches ? 280 : mediaQuery1200.matches ? 400 : 310;
 console.log(MAX_LENGTH);
 reviews.forEach(function (review) {
   var text = review.textContent.trim();
@@ -170,14 +177,28 @@ reviews.forEach(function (review) {
     var truncatedText = text.substring(0, MAX_LENGTH);
 
     // 既存の内容を消して、新しい構造を作成
-    review.innerHTML = "\n      <span>".concat(truncatedText, "</span>\n      <span style=\"cursor: pointer; padding-left:8px; color: #007BFF;\" class=\"js_see_more\">... see more</span>\n    ");
+    review.innerHTML = "\n\t\t\t<span>".concat(truncatedText, "</span>\n\t\t\t<span style=\"cursor: pointer; padding-left:8px; color: #007BFF;\" class=\"js_see_more\">... see more</span>\n\t\t");
   }
 });
 
 // ハンバーガーメニュー
 var header_btn = document.querySelector(".js_header_btn");
+var menu_modal = document.querySelector(".menu_modal");
 header_btn.addEventListener("click", function () {
-  header_btn.classList.toggle('is-active');
+  if (!menu_modal.classList.contains("menu_active")) {
+    // アニメーションを開始
+    menu_modal.classList.add("menu_active");
+    menu_modal.classList.remove("menu_close");
+    document.body.style.overflow = "hidden";
+  } else {
+    // アニメーションを終了
+    menu_modal.classList.remove("menu_active");
+    menu_modal.classList.add("menu_close");
+    document.body.style.overflowY = "auto";
+  }
+
+  // ボタンの状態を切り替え
+  header_btn.classList.toggle("is-active");
 });
 /******/ })()
 ;

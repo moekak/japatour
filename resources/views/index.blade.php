@@ -16,6 +16,15 @@
 </head>
 
 <body>
+    <div class="menu_modal">
+        <ul>
+            <li>Home</li>
+            <li>About</li>
+            <li>Tour</li>
+            <li>Hot</li>
+            <li>Contact</li>
+        </ul>
+    </div>
     <div class="bg hidden"></div>
     <main>
         <div class="loader hidden">
@@ -54,6 +63,7 @@
                     <span class="hamburger__line"></span>
                 </button>
             </header>
+
             <div class="top_container absolute z2">
                 <h1 class="title z2 js_title">Let Us Take You Away</h1>
                 <p class="section_top_desc font_normal z2 js_title">
@@ -228,9 +238,9 @@
         </section>
 
         <section class="section_fifth z3 relative padding_section">
-            <p class="review_title c relative"  data-aos="fade-up"  data-aos-duration="1000">
-                <span class="bold">ー　What Our</span> Customers Says　ー
-            </p>
+            <h2 class="font_subtitle aos-init aos-animate review_title" data-aos="fade-up" data-aos-duration="1000">
+                Customers Review
+            </h2>
             <div class="section_fifth_wrapper">
                 <div class="slider" id="js-slick">
                     <div class="review_container js_review_container relative">
@@ -408,9 +418,12 @@
         </section>
         <section class="section_seventh z3 relative padding_section">
             <div class="contact_wrapper">
-                <p class="contact_large relative z3 c">
+                <h2 class="font_subtitle aos-init aos-animate review_title relative z3" data-aos="fade-up" data-aos-duration="1000">
+                    Contat Us
+                </h2>
+                {{-- <p class="contact_large relative z3 c">
                     Let's Plan Your Next Adventure
-                </p>
+                </p> --}}
                 <p class="contact_sml c z3 relative">Get in touch with our travel experts for personalized tour planning</p>
                 <form action="{{route("sendMessage")}}" method="POST">
                     @csrf
@@ -427,7 +440,7 @@
                         </div>
                         <div class="contact_right">
                             <label for="">Message</label> <br />
-                            <textarea  id="" class="textarea" name="body"></textarea>
+                            <textarea  id="" class="textarea" name="body" rows="10"></textarea>
                         </div>
                     </div>
                     <div class="btn_container relative z3">
