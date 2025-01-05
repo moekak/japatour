@@ -128,7 +128,7 @@ $('#js-slick').slick({
   slidesToShow: 3,
   // 表示するスライドの数
   responsive: [_defineProperty(_defineProperty({
-    breakpoint: 1200,
+    breakpoint: 1000,
     // 画面幅1024px以下の場合
     settings: {
       slidesToShow: 2,
@@ -166,9 +166,11 @@ var mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
 var mediaQuery900 = window.matchMedia('(max-width: 900px)');
 var mediaQuery800 = window.matchMedia('(max-width: 800px)');
 var mediaQuery650 = window.matchMedia('(max-width: 650px)');
+var mediaQuery450 = window.matchMedia('(max-width: 450px)');
+var mediaQuery350 = window.matchMedia('(max-width: 350px)');
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: (mediaQuery900.matches ? 200 : 310);
-var MAX_LENGTH = mediaQuery650.matches ? 420 : mediaQuery800.matches ? 230 : mediaQuery900.matches ? 280 : mediaQuery1200.matches ? 400 : 310;
+var MAX_LENGTH = mediaQuery350.matches ? 170 : mediaQuery450.matches ? 350 : mediaQuery650.matches ? 420 : mediaQuery800.matches ? 230 : mediaQuery900.matches ? 280 : mediaQuery1200.matches ? 240 : 310;
 console.log(MAX_LENGTH);
 reviews.forEach(function (review) {
   var text = review.textContent.trim();

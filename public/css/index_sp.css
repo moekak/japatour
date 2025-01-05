@@ -14,9 +14,21 @@
     }
 }
 @media screen and (max-width: 1200px){
-
+    .quote_img {
+        width: 28%;
+    }
+    .review_container_txt {
+        font-size: 15px;
+        height: 239px;
+    }
+    .review_container {
+        padding: 28px 30px 30px 30px;
+    }
     .title {
         font-size: 6rem;
+    }
+    .slick-slide {
+        height: 328px !important;
     }
     .reason_card_container{
         grid-template-columns: 1fr 1fr;
@@ -239,10 +251,10 @@
     }
     .textarea{
         width: 100%;
-        margin-top: 12%;
+        margin-top: 0%;
     }
 }
-@media screen and (max-width: 500px){
+@media screen and (max-width: 550px){
 
     .title {
         font-size: 46px;
@@ -262,5 +274,156 @@
     }
     .section_third_area {
         padding: 5%;
+    }
+    .section_third_box button {
+        font-size: 14px;
+    }
+    .reason_card_container, .destinations_area, .hot_container {
+        margin-top: 27px;
+    }
+}
+@media screen and (max-width: 450px){
+
+    header{
+        padding: 13px 10px;
+    }
+    .title {
+        font-size: 36px;
+    }
+    .section_top_desc{
+        width: 32%;
+        margin: 0;
+    }
+    .see-tour{
+        padding: 8px 5px;
+        font-size: 15px;
+        border: .6px solid #fff;
+    }
+    .font_subtitle {
+        font-size: 29px;
+    }
+    .padding_section {
+        padding: 50px 0px;
+    }
+    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+        max-width: 330px;
+    }
+    .reason_see_more_btn{
+        font-size: 15px;
+        padding: 8px 23px;
+    }
+    .section_third h2{
+        font-size: 25px;
+    }
+    .section_third_area{
+        padding: 10% 5%;
+    }
+    .section_third_box button{
+        padding: 10px 4px;
+        width: 53%;
+    }
+    .card-text{
+        font-size: 14px;
+    }
+    .reason_desc {
+        font-size: 14px;
+    }
+    .review_container_txt {
+        font-size: 14px;
+    }
+    .hot_normal_txt {
+        font-size: 14px;
+    }
+    .contact_sml {
+        font-size: 15px;;
+        text-align: left;
+    }
+    label {
+        font-size: 14px;
+    }
+    .btn_container button {
+        padding: 7px 16px;
+        font-size: 13px;
+    }
+}
+@media screen and (max-width:350px){
+    .title {
+        font-size: 32px;
+    }
+    .section_top_desc {
+        width: 29%;
+    }
+    .see-tour {
+        width: 12%;
+        padding: 5px 5px;
+        font-size: 14px;
+    }
+    .font_subtitle {
+        font-size: 27px;
+    }
+    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+        max-width: 300px;
+    }
+    .font_normal {
+        font-size: 13px;
+    }
+    .reason_card img {
+        width: 45px;
+    }
+    .reason_desc {
+        font-size: 13px;
+    }
+    .section_third h2 {
+        font-size: 30px;
+    }
+    .section_third_box button {
+        width: 34%;
+        padding: 6px 6px;
+        margin-top: 20px;
+        font-size: 13px;
+    }
+
+    .card-text{
+        font-size: 13px;
+    }
+    .destination-btn{
+        font-size: 14px;
+    }
+    .review_container_txt {
+        font-size: 13px;
+    }
+    .slick-slide {
+        height: 271px !important;
+    }
+    .review_container {
+        padding: 20px 25px 30px 25px;
+    }
+    .review_container_txt {
+        height: 190px;
+    }
+    .hot_exlarge_txt {
+        font-size: 36px;
+    }
+    .hot_large_txt {
+        font-size: 24px;
+    }
+    .hot_sml_txt {
+        font-size: 11px;
+    }
+    .hot_normal_txt {
+        font-size: 13px;
+    }
+    .reason_see_more_btn {
+        font-size: 13px;
+        margin-top: 6px;
+    }
+    .contact_sml {
+        font-size: 13px;
+    }
+    label {
+        font-size: 13px;
+    }
+    .input_field {
+        height: 34px;
     }
 }

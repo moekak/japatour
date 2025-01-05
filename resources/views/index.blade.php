@@ -142,16 +142,10 @@
         <section class="section_third z3 relative">
             <div class="section_third_container relative">
                 <div class="section_third_box relative">
-                    <img src="{{asset("img/AdobeStock_105983553_Preview.jpeg")}}" alt=""
-                        class="section_third_img js-parallax" data-y="-20vw" />
-                    <div class="section_third_area absolute">
+                    <div class="section_third_area">
                         <h2 class="z3 relative">Seasonal Highlights</h2>
                         <p class="font_normal z3 relative">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam,
-                            deleniti, maxime asperiores et odit dolorem at architecto
-                            consequatur laborum ipsa animi consectetur amet doloribus veniam
-                            iure nostrum quasi unde id. Beatae nulla amet distinctio
-                            repellat accusamus corrupti quo animi quae.
+                            Experience Japan's stunning seasonal changes - from spring cherry blossoms and summer festivals to autumn foliage and winter illuminations & snowscapes. Each season brings unique cultural experiences and natural beauty, making every visit special.
                         </p>
                         <button class="z3 relative">see more</button>
                     </div>

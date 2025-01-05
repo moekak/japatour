@@ -92,7 +92,7 @@ $('#js-slick').slick({
 	slidesToShow: 3,        // 表示するスライドの数
 	responsive: [
 		{
-			breakpoint: 1200, // 画面幅1024px以下の場合
+			breakpoint: 1000, // 画面幅1024px以下の場合
 			settings: {
 				slidesToShow: 2, // 2枚表示
 				centerPadding: '30px' // 両端の幅を調整
@@ -109,8 +109,8 @@ $('#js-slick').slick({
 
 const submit_btn = document.getElementById("js_submit_btn")
 submit_btn.addEventListener("click", ()=>{
-  document.querySelector(".bg").classList.remove("hidden")
-  document.querySelector(".loader").classList.remove("hidden")
+	document.querySelector(".bg").classList.remove("hidden")
+	document.querySelector(".loader").classList.remove("hidden")
 })
 
 
@@ -135,9 +135,11 @@ const mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
 const mediaQuery900 = window.matchMedia('(max-width: 900px)');
 const mediaQuery800 = window.matchMedia('(max-width: 800px)');
 const mediaQuery650 = window.matchMedia('(max-width: 650px)');
+const mediaQuery450 = window.matchMedia('(max-width: 450px)');
+const mediaQuery350 = window.matchMedia('(max-width: 350px)');
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
 // let MAX_LENGTH = mediaQuery1200.matches ? 500: (mediaQuery900.matches ? 200 : 310);
-let MAX_LENGTH = mediaQuery650.matches ? 420 : ( mediaQuery800.matches ? 230 : (mediaQuery900.matches ? 280: (mediaQuery1200.matches ? 400 : 310)));
+let MAX_LENGTH = mediaQuery350.matches ? 170 : (mediaQuery450.matches ? 350 : (mediaQuery650.matches ? 420 : ( mediaQuery800.matches ? 230 : (mediaQuery900.matches ? 280: (mediaQuery1200.matches ? 240 : 310)))));
 console.log(MAX_LENGTH);
 
 
