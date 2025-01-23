@@ -161,23 +161,21 @@
                 <div class="destinations_area" data-aos="fade-up" 
                     data-aos-duration="1000">
                     <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/AdobeStock_74308722.jpeg")}}" class="card-img-top" alt="..." />
+                        <img src="{{asset("img/tokyo_01.jpg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title">Asakusa</h5>
+                            <h5 class="card-title">Tokyo</h5>
                             <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
+                                Immerse yourself in Tokyo’s vibrant energy, where cutting-edge modernity meets traditional charm. From bustling markets to tranquil gardens, the city offers endless adventures.
                             </p>
                             <a href="#" class="btn destination-btn">Go somewhere</a>
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/kamakura.jpg")}}" class="card-img-top" alt="..." />
+                        <img src="{{asset("img/enoshima.jpg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title">Kamakura</h5>
+                            <h5 class="card-title">Enoshima</h5>
                             <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
+                                Venture to Enoshima Island for breathtaking ocean views, fascinating caves, and ancient shrines. A seaside gem perfect for nature lovers and adventurers.
                             </p>
                             <a href="#" class="btn destination-btn">Go somewhere</a>
                         </div>
