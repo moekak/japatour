@@ -85,7 +85,7 @@ if (mediaQuery.matches) {
 $('#js-slick').slick({
 	// autoplay: true, //自動再生
 	autoplaySpeed: 3000, //自動再生の速度
-	// arrows: true, //前へ・次への矢印ナビを表示
+	arrows: true, //前へ・次への矢印ナビを表示
 	dots: true, //ドット型のナビを表示,
 	// centerMode: true,       // スライドを中央に表示
 	centerPadding: '40px',  // 両端に見えるスライドの幅を調整

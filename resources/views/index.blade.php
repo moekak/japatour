@@ -11,7 +11,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.css" />
-    <link rel="shortcut icon" href="{{asset("img/favicon.ico")}}">
+    <link rel="shortcut icon" href="{{asset("img/logo3.svg")}}">
     <title>JapaTour</title>
 </head>
 
@@ -163,69 +163,69 @@
                     <div class="card" style="width: 25rem">
                         <img src="{{asset("img/tokyo_01.jpg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title">Tokyo</h5>
-                            <p class="card-text">
-                                Immerse yourself in Tokyo’s vibrant energy, where cutting-edge modernity meets traditional charm. From bustling markets to tranquil gardens, the city offers endless adventures.
-                            </p>
-                            <a href="#" class="btn destination-btn">Go somewhere</a>
+                            <div>
+                                <h5 class="card-title">Tokyo</h5>
+                                <p class="card-text">
+                                    Immerse yourself in Tokyo’s vibrant energy, where cutting-edge modernity meets traditional charm. From bustling markets to tranquil gardens, the city offers endless adventures.
+                                </p>
+                            </div>
+                            
+                            <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="btn destination-btn" target="blank">See details</a>
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/enoshima.jpg")}}" class="card-img-top" alt="..." />
+                        <img src="{{asset("img/AdobeStock_392437232.jpeg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title">Enoshima</h5>
-                            <p class="card-text">
-                                Venture to Enoshima Island for breathtaking ocean views, fascinating caves, and ancient shrines. A seaside gem perfect for nature lovers and adventurers.
-                            </p>
-                            <a href="#" class="btn destination-btn">Go somewhere</a>
+                            <div>
+                                <h5 class="card-title">Enoshima</h5>
+                                <p class="card-text">
+                                    Venture to Enoshima Island for breathtaking ocean views, fascinating caves, and ancient shrines. A seaside gem perfect for nature lovers and adventurers.
+                                </p> 
+                            </div>                           
+                            <a href="https://www.getyourguide.com/tokyo-l193/enoshima-island-private-walking-tours-with-local-guide-t746962/?preview=YXO3ZGDVG6LFLS54WKFNLRWSG72CKGP7" class="btn destination-btn" target="blank">See details</a>
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/tokyo.jpg")}}" class="card-img-top" alt="..." />
+                        <img src="{{asset("img/AdobeStock_196137005.jpeg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title">Tokyo</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </p>
-                            <a href="#" class="btn destination-btn">Go somewhere</a>
+                            <div>
+                                <h5 class="card-title">Yokohama</h5>
+                                <p class="card-text">
+                                    Explore Yokohama’s scenic waterfront, historic architecture, and dynamic attractions like Chinatown and the Red Brick Warehouses. A perfect blend of culture and coastal beauty.
+                                </p>  
+                            </div>
+                            
+                            <a href="https://www.getyourguide.com/tokyo-l193/yokohama-private-personalized-tours-with-local-guide-t746936/?preview=UAJ52MRGL3EKZHRPKE6AD4GQMJ0W6D62" class="btn destination-btn" target="blank">See details</a>
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/AdobeStock_74308722.jpeg")}}" class="card-img-top" alt="..." />
+                        <img src="{{asset("img/AdobeStock_556238176.jpeg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title">Asakusa</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </p>
-                            <a href="#" class="btn destination-btn">Go somewhere</a>
+                            <div>
+                                <h5 class="card-title">Sankeien Garden
+                                </h5>
+                                <p class="card-text">
+                                    Step into the peaceful haven of Sankeien Garden, a picturesque escape filled with historic buildings, koi ponds, and seasonal blooms that change throughout the year.
+                                </p>  
+                            </div>
+                            
+                            <a href="https://www.getyourguide.com/yokohama-l2128/sankeien-garden-private-walking-tour-with-local-expert--t845779/?preview=X1I5T00029M5BXTX5IQ8CTZJGOT6ZIRT" class="btn destination-btn" target="blank">See details</a>
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
                         <img src="{{asset("img/kamakura.jpg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
-                            <h5 class="card-title">Kamakura</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </p>
-                            <a href="#" class="btn destination-btn">Go somewhere</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/tokyo.jpg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <h5 class="card-title">Tokyo</h5>
-                            <p class="card-text">
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </p>
-                            <a href="#" class="btn destination-btn">Go somewhere</a>
+                            <div>
+                                <h5 class="card-title">Kamakura</h5>
+                                <p class="card-text">
+                                    Discover Kamakura, a city of timeless history and natural beauty. Marvel at the Great Buddha, wander through serene bamboo groves, and explore ancient Zen temples surrounded by lush greenery.
+                                </p>  
+                            </div>
+                            
+                            <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="btn destination-btn" target="blank">See details</a>
                         </div>
                     </div>
                 </div>
- 
             </div>
         </section>
 
@@ -235,102 +235,173 @@
             </h2>
             <div class="section_fifth_wrapper">
                 <div class="slider" id="js-slick">
-                    <div class="review_container js_review_container relative">
-                        <p class="review_container_txt js_review relative review">
-                            The tour with Dean was amazing and FUN!. Dean was very patient and helpful guiding us to the correct location. I made a mistake and misread the instructions yet he was accommodating and patient. He imported alot of knowledge and shared great stories and legends that made the points of interest that much more interesting. Dean also shared Tod bits about the Japanese culture that were fascinating. It's great to hear it from a local person. I highly recommend taking this tour with Dean.
-                        </p>
-                        <span class="star">
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                        </span>
-                        <p class="review_name review_container_txt js_review relative">
-                            Judy – United States
-                        </p>
-                        <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-
-                    </div>
-                    <div class="review_container js_review_container relative">
-                        <p class="review_container_txt js_review relative review">
-                            Our guide, Dean, flexible, knowledgeable and fluent in English— all things that are important when touring with 4 teenagers. Dean was very good about managing our time and showing us some highlights of Tokyo. He was also very engaged with our teens and answered all their questions whether it was about a historical site or Japanese gaming culture. We highly recommend this tour, especially if you have kids / teens
-                        </p>
-                        <span class="star">
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                        </span>
-                        <p class="review_name review_container_txt js_review relative">
-                            Keith – United States
-                        </p>
-                        <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-                    </div>
-                    <div class="review_container js_review_container relative">
-                        <p class="review_container_txt js_review relative review">
-                            Incredible experience, highly recommend booking with Dean! We did a full day in Kamakura and he showed us so much of the rich history of the city and the surrounding area. Dean let us experience everything at our own pace and we never felt rushed. Felt like a friend showing us around town and we enjoyed the sightseeing very much (especially the stories he told us of the places we went to - which we would not have known if we attempted to do this ourselves lol). Again, had a really great time and highly recommend, especially if you’re looking for an escape from the hustle and bustle of Tokyo
-                        </p>
-                        <span class="star">
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                        </span>
-                        <p class="review_name review_container_txt js_review relative">
-                            Emily – United States
-                        </p>
-                        <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-                    </div>
-                    <div class="review_container js_review_container relative">
-                        <p class="review_container_txt js_review relative review">
-                            Dean is amazing! Not only he knows everything about Tokyo but he was showing me all the tips to take great pictures with the best spots. He has been very flexible stopping to buy water, finding air portable machine, staying more or less in the places that I preferred… He has also been very helpful along our walk. It is my first time in Japan and he showed me how the “basics” work and what to do or not to do! He also helped when people did not understand my English :-) I am so thankful I booked the tour with him! I will recommend him really strongly to anyone!
-                        </p>
-                        <span class="star">
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                        </span>
-                        <p class="review_name review_container_txt js_review relative">
-                            Florence – Belgium
-                        </p>
-                        <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-                    </div>
-                    <div class="review_container js_review_container relative">
-                        <p class="review_container_txt js_review relative review">
-                            Great attitude, knowledgable, flexible, great small talk, pleasure to be on this tour with Dean, and he knows special places with real food, no scam, fully recommend!!!
-                        </p>
-                        <span class="star">
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                        </span>
-                        <p class="review_name review_container_txt js_review relative"> Michał – Poland </p>
-                        <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-                    </div>
-                    <div class="review_container js_review_container relative">
-                        <p class="review_container_txt js_review relative review">
-                            perfect guide, mcj during a rainy day
-                        </p>
-                        <span class="star">
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                        </span>
-                        <p class="review_name review_container_txt js_review relative">
-                            Francesca – Italy
-                        </p>
-                        <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-                    </div>
-                </div>
+                    <a href="https://www.getyourguide.com/yokohama-l2128/sankeien-garden-private-walking-tour-with-local-expert--t845779/?preview=X1I5T00029M5BXTX5IQ8CTZJGOT6ZIRT" class="review_link" target="blank">
+                        <div class="review_container js_review_container relative">
+                            <p class="review_container_txt js_review relative review">
+                                Dean's Sankeien tour was very enjoyable. We were an elderly couple from England, but he was able to accommodate our pace at a relaxed pace. The couple seemed to enjoy themselves and were very pleased.
+                            </p>
+                            <span class="star">
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                            </span>
+                            <p class="review_name review_container_txt js_review relative">
+                                Akemi – Japan
+                            </p>
+                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+    
+                        </div>
+                    </a>
+                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="review_link"  target="blank">
+                        <div class="review_container js_review_container relative">
+                            <p class="review_container_txt js_review relative review">
+                                Dean is amazing! Not only he knows everything about Tokyo but he was showing me all the tips to take great pictures with the best spots. He has been very flexible stopping to buy water, finding air portable machine, staying more or less in the places that I preferred… He has also been very helpful along our walk. It is my first time in Japan and he showed me how the “basics” work and what to do or not to do! He also helped when people did not understand my English :-) I am so thankful I booked the tour with him! I will recommend him really strongly to anyone!
+                            </p>
+                            <span class="star">
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                            </span>
+                            <p class="review_name review_container_txt js_review relative">
+                                Florence – Belgium
+                            </p>
+                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+    
+                        </div>
+                    </a>
+                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="review_link" target="blank">
+                        <div class="review_container js_review_container relative">
+                            <p class="review_container_txt js_review relative review">
+                                Our guide, Dean, flexible, knowledgeable and fluent in English— all things that are important when touring with 4 teenagers. Dean was very good about managing our time and showing us some highlights of Tokyo. He was also very engaged with our teens and answered all their questions whether it was about a historical site or Japanese gaming culture. We highly recommend this tour, especially if you have kids / teens
+                            </p>
+                            <span class="star">
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                            </span>
+                            <p class="review_name review_container_txt js_review relative">
+                                Keith – United States
+                            </p>
+                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+    
+                        </div>
+                    </a>
+                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="review_link" target="blank">
+                        <div class="review_container js_review_container relative">
+                            <p class="review_container_txt js_review relative review">
+                                Great attitude, knowledgable, flexible, great small talk, pleasure to be on this tour with Dean, and he knows special places with real food, no scam, fully recommend!!!
+                            </p>
+                            <span class="star">
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                            </span>
+                            <p class="review_name review_container_txt js_review relative">
+                                Michał – Poland
+                            </p>
+                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+    
+                        </div>
+                    </a>
+                    <a href="https://www.getyourguide.com/tokyo-l193/yokohama-private-personalized-tours-with-local-guide-t746936/?preview=UAJ52MRGL3EKZHRPKE6AD4GQMJ0W6D62" class="review_link" target="blank">
+                        <div class="review_container js_review_container relative">
+                            <p class="review_container_txt js_review relative review">
+                                The tour was excellent! Dean was very nice and let us personalized the itinerary to our requirements. 100% recommended!
+                            </p>
+                            <span class="star">
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                            </span>
+                            <p class="review_name review_container_txt js_review relative">
+                                Patricia – Spain
+                            </p>
+                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+    
+                        </div>
+                    </a>
+                    <a href="https://www.getyourguide.com/tokyo-l193/enoshima-island-private-walking-tours-with-local-guide-t746962/?preview=YXO3ZGDVG6LFLS54WKFNLRWSG72CKGP7" class="review_link" target="blank">
+                        <div class="review_container js_review_container relative">
+                            <p class="review_container_txt js_review relative review">
+                                Incredible experience, highly recommend booking with Dean! We did a full day in Kamakura and he showed us so much of the rich history of the city and the surrounding area. Dean let us experience everything at our own pace and we never felt rushed. Felt like a friend showing us around town and we enjoyed the sightseeing very much (especially the stories he told us of the places we went to - which we would not have known if we attempted to do this ourselves lol). Again, had a really great time and highly recommend, especially if you’re looking for an escape from the hustle and bustle of Tokyo
+                            </p>
+                            <span class="star">
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                            </span>
+                            <p class="review_name review_container_txt js_review relative">
+                                Emily – United States
+                            </p>
+                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+                        </div>
+                    </a>
+                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="review_link" target="blank">
+                        <div class="review_container js_review_container relative">
+                            <p class="review_container_txt js_review relative review">
+                                We absolutely loved this tour! Dean was incredibly helpful and friendly, ensuring the entire day was planned nicely. The itinerary was well thought out, and his casual conversations made the experience even more enjoyable. He shared some fascinating insights and tips about Japanese culture that added so much value to our trip. If we had more time, we would have definitely booked his other tours as well. Highly recommended!
+                            </p>
+                            <span class="star">
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                            </span>
+                            <p class="review_name review_container_txt js_review relative">
+                                Rei – Turkey
+                            </p>
+                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+                        </div>
+                    </a>
+                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="review_link" target="blank">
+                        <div class="review_container js_review_container relative">
+                            <p class="review_container_txt js_review relative review">
+                                Dean was very flexible with our schedule. He suggested a shrine wrhat that wasn’t on my schedule but it turned out to be a beautiful site. So glad to be able to see Kamakura with Dean.
+                            </p>
+                            <span class="star">
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                            </span>
+                            <p class="review_name review_container_txt js_review relative">
+                                Helen – United States
+                            </p>
+                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+                        </div>
+                    </a>
+                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="review_link" target="blank">
+                        <div class="review_container js_review_container relative">
+                            <p class="review_container_txt js_review relative review">
+                                This tour was nothing short of incredible! Dean was so knowledgeable, kind, and funny throughout the tour. I had my one-year-old daughter with me and he helped me plan for navigating Kamakura with a toddler, which relieved the stress I had in doing a solo tour. The photos we received were stunning and so special because it’s difficult to get photos of the two of us when we’re traveling solo. I highly recommend adding them when booking. We were so impressed, that we’re also doing his tour of Enoshima and Yokohama!
+                            </p>
+                            <span class="star">
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                            </span>
+                            <p class="review_name review_container_txt js_review relative">
+                                Shaina – United States
+                            </p>
+                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+                        </div>
+                    </a>
             </div>
         </section>
         <section class="section_sixth z3 relative padding_section">
@@ -343,19 +414,17 @@
                     <div class="hot_left_wrapper">
                         <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                             <div class="hot_container_left">
-                                <img src="{{asset("img/japan1.jpg")}}" alt="" class="hot_img" />
+                                <img src="https://img.freepik.com/free-photo/cherry-blossoms-castle-himeji-japan_335224-167.jpg?semt=ais_hybrid" alt="" class="hot_img" />
                             </div>
                             <div class="hot_container_right">
                                 <p class="hot_normal_txt">
                                     <span class="hot_exlarge_txt bold" style="color: #52aaf9">01</span>
-                                    October
+                                    Spring
                                 </p>
-                                <p class="hot_large_txt bold">Best tips to travel light</p>
+                                <p class="hot_large_txt bold">Cherry Blossoms</p>
                                 <p class="hot_sml_txt">LIFESTYLE & TRAVEL</p>
                                 <p class="hot_normal_txt">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Nam modi, possimus mollitia eos illum assumenda qui impedit
-                                    fuga blanditiis error?
+                                    Spring in Japan is all about cherry blossoms, where parks in Kyoto and Tokyo bloom with pink petals, creating the perfect "Hanami" picnic spots. Vibrant spring festivals add cultural charm with colorful parades and traditional performances.
                                 </p>
                                 <div class="reason_btn_box reason_card_padding">
                                     <button class="reason_see_more_btn">see more</button>
@@ -364,19 +433,17 @@
                         </div>
                         <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                             <div class="hot_container_left">
-                                <img src="{{asset("img/japan1.jpg")}}" alt="" class="hot_img" />
+                                <img src="{{asset("img/AdobeStock_671008769.jpeg")}}" alt="" class="hot_img" />
                             </div>
                             <div class="hot_container_right">
                                 <p class="hot_normal_txt">
                                     <span class="hot_exlarge_txt bold" style="color: #52aaf9">02</span>
-                                    June
+                                    Summer
                                 </p>
-                                <p class="hot_large_txt bold">Best tips to travel light</p>
+                                <p class="hot_large_txt bold">Fireworks, Festivals</p>
                                 <p class="hot_sml_txt">LIFESTYLE & TRAVEL</p>
                                 <p class="hot_normal_txt">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Nam modi, possimus mollitia eos illum assumenda qui impedit
-                                    fuga blanditiis error?
+                                    In summer, dazzling fireworks illuminate the night skies, while lively festivals like Bon Odori bring people together for music, dance, and delicious street food.
                                 </p>
                                 <div class="reason_btn_box reason_card_padding">
                                     <button class="reason_see_more_btn">see more</button>
@@ -385,19 +452,38 @@
                         </div>
                         <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                             <div class="hot_container_left">
-                                <img src="{{asset("img/japan1.jpg")}}" alt="" class="hot_img" />
+                                <img src="{{asset("img/AdobeStock_309540151.jpeg")}}" alt="" class="hot_img" />
                             </div>
                             <div class="hot_container_right">
                                 <p class="hot_normal_txt">
-                                    <span class="hot_exlarge_txt bold" style="color: #52aaf9">02</span>
-                                    June
+                                    <span class="hot_exlarge_txt bold" style="color: #52aaf9">03</span>
+                                    Autumn
                                 </p>
-                                <p class="hot_large_txt bold">Best tips to travel light</p>
+                                <p class="hot_large_txt bold">Autumn Foliage, Seasonal Cuisine
+                                </p>
                                 <p class="hot_sml_txt">LIFESTYLE & TRAVEL</p>
                                 <p class="hot_normal_txt">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Nam modi, possimus mollitia eos illum assumenda qui impedit
-                                    fuga blanditiis error?
+                                    Autumn offers breathtaking foliage in places like Nikko and Kyoto, with fiery red and golden leaves, complemented by seasonal delights such as matsutake mushrooms and sweet Kyoho grapes.
+                                </p>
+                                <div class="reason_btn_box reason_card_padding">
+                                    <button class="reason_see_more_btn">see more</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
+                            <div class="hot_container_left">
+                                <img src="https://www.theinvisibletourist.com/wp-content/uploads/2019/05/nagano-3068677_1920_e.jpg" alt="" class="hot_img" />
+                            </div>
+                            <div class="hot_container_right">
+                                <p class="hot_normal_txt">
+                                    <span class="hot_exlarge_txt bold" style="color: #52aaf9">04</span>
+                                    Winter
+                                </p>
+                                <p class="hot_large_txt bold">Snow Festivals, Onsen Hot Springs
+                                </p>
+                                <p class="hot_sml_txt">LIFESTYLE & TRAVEL</p>
+                                <p class="hot_normal_txt">
+                                    Winter transforms Japan into a wonderland with snow festivals in Hokkaido, featuring impressive ice sculptures and romantic lights. To complete the experience, relaxing in an onsen hot spring while surrounded by snowy landscapes provides the ultimate winter retreat.
                                 </p>
                                 <div class="reason_btn_box reason_card_padding">
                                     <button class="reason_see_more_btn">see more</button>
