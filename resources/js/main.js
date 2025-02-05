@@ -178,3 +178,15 @@ header_btn.addEventListener("click", ()=>{
 	// ボタンの状態を切り替え
 	header_btn.classList.toggle("is-active");
 })
+
+const containers = document.querySelectorAll(".js_review_container")
+let maxHeight = 0
+containers.forEach((container)=>{
+	if(container.clientHeight > maxHeight){
+		maxHeight = container.clientHeight
+	}
+})
+
+containers.forEach((container)=>{
+	container.style.height = `${maxHeight}px`
+})
