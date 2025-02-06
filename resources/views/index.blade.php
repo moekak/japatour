@@ -161,7 +161,7 @@
                 <div class="destinations_area" data-aos="fade-up" 
                     data-aos-duration="1000">
                     <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/tokyo_01.jpg")}}" class="card-img-top" alt="..." />
+                        <img src="{{asset("img/tokyo.jpg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <div>
                                 <h5 class="card-title">Tokyo</h5>
@@ -174,7 +174,7 @@
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/AdobeStock_392437232.jpeg")}}" class="card-img-top" alt="..." />
+                        <img src="{{asset("img/enoshima.jpeg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <div>
                                 <h5 class="card-title">Enoshima</h5>
@@ -186,7 +186,7 @@
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/AdobeStock_196137005.jpeg")}}" class="card-img-top" alt="..." />
+                        <img src="{{asset("img/yokohama.jpeg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <div>
                                 <h5 class="card-title">Yokohama</h5>
@@ -199,7 +199,7 @@
                         </div>
                     </div>
                     <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/AdobeStock_556238176.jpeg")}}" class="card-img-top" alt="..." />
+                        <img src="{{asset("img/sankeien.jpeg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <div>
                                 <h5 class="card-title">Sankeien Garden
@@ -433,7 +433,7 @@
                         </div>
                         <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                             <div class="hot_container_left">
-                                <img src="{{asset("img/AdobeStock_671008769.jpeg")}}" alt="" class="hot_img" />
+                                <img src="{{asset("img/summer.jpeg")}}" alt="" class="hot_img" />
                             </div>
                             <div class="hot_container_right">
                                 <p class="hot_normal_txt">
@@ -452,7 +452,7 @@
                         </div>
                         <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                             <div class="hot_container_left">
-                                <img src="{{asset("img/AdobeStock_309540151.jpeg")}}" alt="" class="hot_img" />
+                                <img src="{{asset("img/fall.jpeg")}}" alt="" class="hot_img" />
                             </div>
                             <div class="hot_container_right">
                                 <p class="hot_normal_txt">
