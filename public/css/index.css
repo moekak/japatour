@@ -374,7 +374,10 @@ header {
     z-index: 10;
     padding: 50px 30px 30px 30px;
     border: 1px solid #ffffff3a;
-    height: 340px;
+    /* height: 340px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .review_link{
     text-decoration: none;
@@ -382,7 +385,7 @@ header {
 .review_container_txt {
     color: #fff;
     margin: 0;
-    height: 230px;
+    /* height: 230px; */
 }
 .star_img {
     width: 20px;
@@ -569,7 +572,6 @@ label {
 .icon_container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 80%;
     margin-right: auto;
     margin-left: auto;
     margin-top: 3%;
@@ -581,7 +583,7 @@ label {
     justify-content: center;
 }
 .icon_box img {
-    width: 14%;
+    width: 43px;
     margin-bottom: 10px;
 }
 
@@ -613,7 +615,7 @@ label {
 .slick-slide {
     margin: 0 10px;
     width: 1.4%;
-    height: 360px !important;
+    /* height: 360px !important; */
 }
 .slick-dots li button:before{
     color: #fff !important;

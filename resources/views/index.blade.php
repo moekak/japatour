@@ -240,16 +240,18 @@
                             <p class="review_container_txt js_review relative review">
                                 Dean's Sankeien tour was very enjoyable. We were an elderly couple from England, but he was able to accommodate our pace at a relaxed pace. The couple seemed to enjoy themselves and were very pleased.
                             </p>
-                            <span class="star">
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            </span>
-                            <p class="review_name review_container_txt js_review relative">
-                                Akemi – Japan
-                            </p>
+                            <div>
+                                <span class="star">
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                </span>
+                                <p class="review_name review_container_txt js_review relative">
+                                    Akemi – Japan
+                                </p>
+                            </div>
                             <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
     
                         </div>
@@ -259,16 +261,19 @@
                             <p class="review_container_txt js_review relative review">
                                 Dean is amazing! Not only he knows everything about Tokyo but he was showing me all the tips to take great pictures with the best spots. He has been very flexible stopping to buy water, finding air portable machine, staying more or less in the places that I preferred… He has also been very helpful along our walk. It is my first time in Japan and he showed me how the “basics” work and what to do or not to do! He also helped when people did not understand my English :-) I am so thankful I booked the tour with him! I will recommend him really strongly to anyone!
                             </p>
-                            <span class="star">
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            </span>
-                            <p class="review_name review_container_txt js_review relative">
-                                Florence – Belgium
-                            </p>
+                            <div>
+                                <span class="star">
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                </span>
+                                <p class="review_name review_container_txt js_review relative">
+                                    Florence – Belgium
+                                </p> 
+                            </div>
+                            
                             <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
     
                         </div>
@@ -278,16 +283,19 @@
                             <p class="review_container_txt js_review relative review">
                                 Our guide, Dean, flexible, knowledgeable and fluent in English— all things that are important when touring with 4 teenagers. Dean was very good about managing our time and showing us some highlights of Tokyo. He was also very engaged with our teens and answered all their questions whether it was about a historical site or Japanese gaming culture. We highly recommend this tour, especially if you have kids / teens
                             </p>
-                            <span class="star">
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            </span>
-                            <p class="review_name review_container_txt js_review relative">
-                                Keith – United States
-                            </p>
+                            <div>
+                                <span class="star">
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                </span>
+                                <p class="review_name review_container_txt js_review relative">
+                                    Keith – United States
+                                </p>
+                            </div>
+                            
                             <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
     
                         </div>
@@ -297,16 +305,19 @@
                             <p class="review_container_txt js_review relative review">
                                 Great attitude, knowledgable, flexible, great small talk, pleasure to be on this tour with Dean, and he knows special places with real food, no scam, fully recommend!!!
                             </p>
-                            <span class="star">
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            </span>
-                            <p class="review_name review_container_txt js_review relative">
-                                Michał – Poland
-                            </p>
+                            <div>
+                                <span class="star">
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                </span>
+                                <p class="review_name review_container_txt js_review relative">
+                                    Michał – Poland
+                                </p>
+                            </div>
+                            
                             <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
     
                         </div>
@@ -316,16 +327,19 @@
                             <p class="review_container_txt js_review relative review">
                                 The tour was excellent! Dean was very nice and let us personalized the itinerary to our requirements. 100% recommended!
                             </p>
-                            <span class="star">
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            </span>
-                            <p class="review_name review_container_txt js_review relative">
-                                Patricia – Spain
-                            </p>
+                            <div>
+                                <span class="star">
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                </span>
+                                <p class="review_name review_container_txt js_review relative">
+                                    Patricia – Spain
+                                </p> 
+                            </div>
+                            
                             <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
     
                         </div>
@@ -335,16 +349,18 @@
                             <p class="review_container_txt js_review relative review">
                                 Incredible experience, highly recommend booking with Dean! We did a full day in Kamakura and he showed us so much of the rich history of the city and the surrounding area. Dean let us experience everything at our own pace and we never felt rushed. Felt like a friend showing us around town and we enjoyed the sightseeing very much (especially the stories he told us of the places we went to - which we would not have known if we attempted to do this ourselves lol). Again, had a really great time and highly recommend, especially if you’re looking for an escape from the hustle and bustle of Tokyo
                             </p>
-                            <span class="star">
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            </span>
-                            <p class="review_name review_container_txt js_review relative">
-                                Emily – United States
-                            </p>
+                            <div>
+                                <span class="star">
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                </span>
+                                <p class="review_name review_container_txt js_review relative">
+                                    Emily – United States
+                                </p>
+                            </div>
                             <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
                         </div>
                     </a>
@@ -353,16 +369,19 @@
                             <p class="review_container_txt js_review relative review">
                                 We absolutely loved this tour! Dean was incredibly helpful and friendly, ensuring the entire day was planned nicely. The itinerary was well thought out, and his casual conversations made the experience even more enjoyable. He shared some fascinating insights and tips about Japanese culture that added so much value to our trip. If we had more time, we would have definitely booked his other tours as well. Highly recommended!
                             </p>
-                            <span class="star">
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            </span>
-                            <p class="review_name review_container_txt js_review relative">
-                                Rei – Turkey
-                            </p>
+                            <div>
+                                <span class="star">
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                </span>
+                                <p class="review_name review_container_txt js_review relative">
+                                    Rei – Turkey
+                                </p>  
+                            </div>
+                            
                             <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
                         </div>
                     </a>
@@ -371,16 +390,19 @@
                             <p class="review_container_txt js_review relative review">
                                 Dean was very flexible with our schedule. He suggested a shrine wrhat that wasn’t on my schedule but it turned out to be a beautiful site. So glad to be able to see Kamakura with Dean.
                             </p>
-                            <span class="star">
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            </span>
-                            <p class="review_name review_container_txt js_review relative">
-                                Helen – United States
-                            </p>
+                            <div>
+                                <span class="star">
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                </span>
+                                <p class="review_name review_container_txt js_review relative">
+                                    Helen – United States
+                                </p> 
+                            </div>
+                            
                             <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
                         </div>
                     </a>
@@ -389,16 +411,19 @@
                             <p class="review_container_txt js_review relative review">
                                 This tour was nothing short of incredible! Dean was so knowledgeable, kind, and funny throughout the tour. I had my one-year-old daughter with me and he helped me plan for navigating Kamakura with a toddler, which relieved the stress I had in doing a solo tour. The photos we received were stunning and so special because it’s difficult to get photos of the two of us when we’re traveling solo. I highly recommend adding them when booking. We were so impressed, that we’re also doing his tour of Enoshima and Yokohama!
                             </p>
-                            <span class="star">
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                            </span>
-                            <p class="review_name review_container_txt js_review relative">
-                                Shaina – United States
-                            </p>
+                            <div>
+                                <span class="star">
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
+                                </span>
+                                <p class="review_name review_container_txt js_review relative">
+                                    Shaina – United States
+                                </p>
+                            </div>
+                            
                             <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
                         </div>
                     </a>

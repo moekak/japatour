@@ -203,5 +203,15 @@ header_btn.addEventListener("click", function () {
   // ボタンの状態を切り替え
   header_btn.classList.toggle("is-active");
 });
+var containers = document.querySelectorAll(".js_review_container");
+var maxHeight = 0;
+containers.forEach(function (container) {
+  if (container.clientHeight > maxHeight) {
+    maxHeight = container.clientHeight;
+  }
+});
+containers.forEach(function (container) {
+  container.style.height = "".concat(maxHeight, "px");
+});
 /******/ })()
 ;
