@@ -5,6 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 検索用キーワード -->
+    <meta name="keywords" content="japatour, japan tour, tokyo tour, japatour-official">
+    <!-- robots設定 -->
+    <meta name="robots" content="index,follow">
+    <!-- OGP設定（SNSでシェアされた時の表示設定） -->
+    <meta property="og:title" content="JapaTour">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://japatour-official.com/">
+    <meta property="og:image" content="{{asset("img/logo3.svg")}}">
+    <meta property="og:description" content="ページの説明">
+    <meta property="og:site_name" content="Discover the beauty of bespoke travel with us, where your dreams of perfect escapes turn into vivid realities filled with unforgettable memories.">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/index_sp.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
@@ -18,15 +29,15 @@
 <body>
     <div class="menu_modal">
         <ul>
-            <li>Home</li>
-            <li>About</li>
-            <li>Tour</li>
-            <li>Hot</li>
-            <li>Contact</li>
+            <li><a href="#home" class="js_menu">Home</a></li>
+            <li><a href="#about" class="js_menu">About</a></li>
+            <li><a href="#tour" class="js_menu">Tour</a></li>
+            <li><a href="#hot" class="js_menu">Hot</a></li>
+            <li><a href="#contact" class="js_menu">Contact</a></li>
         </ul>
     </div>
     <div class="bg hidden"></div>
-    <main>
+    <main id="home">
         <div class="loader hidden">
             <div id="rotate">
                 <div id="move">
@@ -39,22 +50,22 @@
         <section class="section_top" id="home">
             <img src="{{asset("img/bg.jpg")}}" alt="" class="top_img image" />
             <header class="absolute z2 js_header_pc pc_header">
-                <div class="header_right font_icon">JapaTour</div>
+                <div class="header_right font_icon"><a href="#home">JapaTour</a></div>
                 <div class="header_center">
                     <ul>
-                        <li class="font_normal"><a href="#home">Home</a></li>
-                        <li class="font_normal"><a href="#about">About</a></li>
-                        <li class="font_normal"><a href="#tour">Tour</a></li>
+                        <li class="font_normal"><a href="#home" >Home</a></li>
+                        <li class="font_normal"><a href="#about" >About</a></li>
+                        <li class="font_normal"><a href="#tour" >Tour</a></li>
                         <li class="font_normal"><a href="#hot">Hot</a></li>
                         <li class="font_normal"><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                <div class="header_left">
+                {{-- <div class="header_left">
                     <img src="{{asset("img/icons8-instagram.svg")}}" alt="" />
                     <img src="{{asset("img/icons8-tiktok.svg")}}" alt="" />
                     <img src="{{asset("img/icons8-youtube.svg")}}" alt="" />
                     <img src="{{asset("img/icons8-linkedin.svg")}}" alt="" />
-                </div>
+                </div> --}}
             </header>
             <header class="sp_header js_header relative">
                 <button class="hamburger js_header_btn" type="button">
@@ -71,7 +82,6 @@
                     perfect escapes turn into vivid realities filled with unforgettable
                     memories.
                 </p>
-                <button class="z2 see-tour js_title">See More</button>
             </div>
         </section>
 
@@ -100,13 +110,13 @@
                             services provide excellent value for your money and time,
                             ensuring you get the most out of your visit to Japan.
                         </p>
-                        <div class="reason_btn_box reason_card_padding">
+                        {{-- <div class="reason_btn_box reason_card_padding">
                             <button class="reason_see_more_btn">see more</button>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="reason_card" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
                         data-aos-duration="1000">
-                        <img src="{{asset("img/icons8-customize-80.png")}}" alt="" /><br />
+                        <img class="reason_card-img2" src="{{asset("img/icons8-customize-80.png")}}" alt="" /><br />
                         <small class="num reason_card_padding" style="display: block">02</small>
                         <p class="reason_sub reason_card_padding">Customizable Tours</p>
                         <p class="reason_desc reason_card_padding js_reason_card">
@@ -116,9 +126,9 @@
                             countryside, we can design an itinerary that perfectly matches
                             your desires.
                         </p>
-                        <div class="reason_btn_box reason_card_padding">
+                        {{-- <div class="reason_btn_box reason_card_padding">
                             <button class="reason_see_more_btn">see more</button>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="reason_card second-item" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
@@ -132,15 +142,25 @@
                             and a deep understanding of Japan's rich history and culture,
                             ensuring you have an enriching and immersive experience.
                         </p>
-                        <div class="reason_btn_box reason_card_padding">
+                        {{-- <div class="reason_btn_box reason_card_padding">
                             <button class="reason_see_more_btn">see more</button>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
         </section>
         <section class="section_third z3 relative">
-            <div class="section_third_container relative">
+            <div class="section_third_wrapper">
+                <div class="secttion_third-left-area">
+                    <h2>We're Hiring Tour Guides!</h2>
+                    <p>We are currently looking for enthusiastic Tour Guides for Japatour! Apply today!</p>
+                    <button class="section_third_wrapper_btn"><a href="#contact">Become a tour guide</a></button>
+                </div>
+                <img src="{{asset("img/tourguide2.png")}}" alt="" class="tourguide_img">
+            </div>
+            
+
+            {{-- <div class="section_third_container relative">
                 <div class="section_third_box relative">
                     <div class="section_third_area">
                         <h2 class="z3 relative">Seasonal Highlights</h2>
@@ -150,9 +170,10 @@
                         <button class="z3 relative">see more</button>
                     </div>
                 </div>
-            </div>
+                <img src="{{asset("img/tourguide.jpg")}}" alt="">
+            </div> --}}
         </section>
-        <section class="section_forth z3 relative padding_section">
+        <section class="section_forth z3 relative padding_section" id="tour">
             <div class="section_forth_wrapper">
                 <h2 class="font_subtitle" data-aos="fade-up" 
                     data-aos-duration="1000">
@@ -230,7 +251,7 @@
         </section>
 
         <section class="section_fifth z3 relative padding_section">
-            <h2 class="font_subtitle aos-init aos-animate review_title" data-aos="fade-up" data-aos-duration="1000">
+            <h2 class="font_subtitle aos-init aos-animate review_title" data-aos="fade-up" data-aos-duration="1000" style="color: #fff;">
                 Customers Review
             </h2>
             <div class="section_fifth_wrapper">
@@ -429,11 +450,11 @@
                     </a>
             </div>
         </section>
-        <section class="section_sixth z3 relative padding_section">
+        <section class="section_sixth z3 relative padding_section" id="hot">
             <div class="section_sixth_area">
                 <h2 class="font_subtitle" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
                     data-aos-duration="1000" style="max-width: 1200px">
-                    New Seasonal Tours
+                    Seasonal Highlights
                 </h2>
                 <div class="section_sixth_wrapper">
                     <div class="hot_left_wrapper">
@@ -519,38 +540,37 @@
                 </div>
             </div>
         </section>
-        <section class="section_seventh z3 relative padding_section">
+        <section class="section_seventh z3 relative padding_section" id="contact">
             <div class="contact_wrapper">
                 <h2 class="font_subtitle aos-init aos-animate review_title relative z3" data-aos="fade-up" data-aos-duration="1000">
                     Contat Us
                 </h2>
-                {{-- <p class="contact_large relative z3 c">
-                    Let's Plan Your Next Adventure
-                </p> --}}
-                <p class="contact_sml c z3 relative">Get in touch with our travel experts for personalized tour planning</p>
+                <p class="contact_sml c z3 relative">For more information beside the Q&A, employment vacancies or if you just need to ask a question - leave a message below and we'll get right back to you!</p>
                 <form action="{{route("sendMessage")}}" method="POST">
                     @csrf
                     <div class="contact_filed_container relative z3">
-                        <div class="contact_left">
-                            <div class="input_container">
-                                <label for="">name</label><br />
-                                <input type="text" class="input_field" name="name"/>
-                            </div>
-                            <div class="input_container">
-                                <label for="">email</label><br />
-                                <input type="text" class="input_field" name="email"/>
-                            </div>
-                        </div>
                         <div class="contact_right">
                             <label for="">Message</label> <br />
                             <textarea  id="" class="textarea" name="body" rows="10"></textarea>
                         </div>
-                    </div>
-                    <div class="btn_container relative z3">
-                        <button type="submit" id="js_submit_btn">Submit</button>
+                        <div class="contact_left">
+                            <div class="input_container-area">
+                                <div class="input_container">
+                                    <label for="">name</label><br />
+                                    <input type="text" class="input_field" name="name"/>
+                                </div>
+                                <div class="input_container">
+                                    <label for="">email</label><br />
+                                    <input type="text" class="input_field" name="email"/>
+                                </div> 
+                            </div>
+                            <div class="btn_container relative z3">
+                                <button type="submit" id="js_submit_btn">Submit</button>
+                            </div>
+                        </div>
                     </div>
                 </form>
-                <div class="icon_container relative z3">
+                {{-- <div class="icon_container relative z3">
                     <div class="icon_box">
                         <img src="{{asset("img/icons8-call-100.png")}}" alt="" />
                         <p class="icon_txt c">GIVE US A CALL</p>
@@ -566,7 +586,7 @@
                         <p class="icon_txt c">GIVE US A CALL</p>
                         <p class="icon_sml">000-0000-0000</p>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </section>
     </main>

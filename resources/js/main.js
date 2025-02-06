@@ -1,65 +1,46 @@
-const header = document.querySelector(".js_header");
-const title = document.querySelectorAll(".js_title");
-
-const tl = gsap.timeline();
-tl.to(title, { y: 0, duration: 1 });
-tl.to(header, { y: 0, duration: 1 });
-
-gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray(".js-parallax").forEach((wrap) => {
-  const y = wrap.getAttribute("data-y") || -100;
-
-  gsap.to(wrap, {
-    y: y,
-    scrollTrigger: {
-      trigger: wrap,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 0.5,
-      //markers: true
-    },
-  });
-});
-
-ScrollTrigger.create({
-  start: "top 30%",
-  trigger: ".js_title",
-  end: () => `+=${document.documentElement.scrollHeight}`,
-  toggleClass: { targets: ".js_header", className: "header-active" },
-});
 
 AOS.init();
+
+// 要素の取得をまとめる
+const header = document.querySelector(".js_header");
 const headerSP = document.querySelector(".js_header_pc");
-const title2 = document.querySelectorAll(".js_title");
+const titles = document.querySelectorAll(".js_title");
 
-const tl2 = gsap.timeline();
-tl2.to(title2, { y: 0, duration: 1 });
-tl2.to(headerSP, { y: 0, duration: 1 });
-
+// ScrollTriggerの登録（1回だけで良い）
 gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray(".js-parallax").forEach((wrap) => {
-  const y = wrap.getAttribute("data-y") || -100;
 
-gsap.to(wrap, {
-	y: y,
+// タイムラインのアニメーションをまとめる
+const tl = gsap.timeline();
+tl.to(titles, { y: 0, duration: 1 })
+  .to([header, headerSP], { y: 0, duration: 1 }); // 両方のヘッダーを同時にアニメーション
+
+// パララックス効果（1回だけで良い）
+gsap.utils.toArray(".js-parallax").forEach((wrap) => {
+	const y = wrap.getAttribute("data-y") || -100;
+	
+	gsap.to(wrap, {
+		y: y,
 		scrollTrigger: {
-			trigger: wrap,
-			start: "top bottom",
-			end: "bottom top",
-			scrub: 0.5,
-			//markers: true
+		trigger: wrap,
+		start: "top bottom",
+		end: "bottom top",
+		scrub: 0.5,
+		//markers: true
 		},
 	});
 });
 
+// ヘッダーのクラス切り替え
 ScrollTrigger.create({
 	start: "top 30%",
 	trigger: ".js_title",
 	end: () => `+=${document.documentElement.scrollHeight}`,
-	toggleClass: { targets: ".js_header", className: "header-active" },
+	toggleClass: { 
+		targets: [".js_header", ".js_header_pc"], // 両方のヘッダーを対象に
+		className: "header-active" 
+	},
 });
 
-AOS.init();
 
 // why choose japa tourのところの高さを合わせる
 
@@ -114,22 +95,8 @@ submit_btn.addEventListener("click", ()=>{
 })
 
 
-// reviewの文字制限
 
 const reviews = document.querySelectorAll(".js_review")
-// const review_containers = document.querySelectorAll(".js_review_container")
-// let max_height = 0
-
-// review_containers.forEach((container)=>{
-//   if(container.clientHeight > max_height){
-//     max_height = container.clientHeight
-//   }
-
-//   container.style.height = `${max_height}px`
-  
-
-// })
-
 
 const mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
 const mediaQuery900 = window.matchMedia('(max-width: 900px)');
@@ -137,8 +104,7 @@ const mediaQuery800 = window.matchMedia('(max-width: 800px)');
 const mediaQuery650 = window.matchMedia('(max-width: 650px)');
 const mediaQuery450 = window.matchMedia('(max-width: 450px)');
 const mediaQuery350 = window.matchMedia('(max-width: 350px)');
-// let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
-// let MAX_LENGTH = mediaQuery1200.matches ? 500: (mediaQuery900.matches ? 200 : 310);
+
 let MAX_LENGTH = mediaQuery350.matches ? 170 : (mediaQuery450.matches ? 350 : (mediaQuery650.matches ? 420 : ( mediaQuery800.matches ? 230 : (mediaQuery900.matches ? 280: (mediaQuery1200.matches ? 240 : 310)))));
 console.log(MAX_LENGTH);
 
@@ -189,4 +155,15 @@ containers.forEach((container)=>{
 
 containers.forEach((container)=>{
 	container.style.height = `${maxHeight}px`
+})
+
+
+const menus = document.querySelectorAll(".js_menu")
+menus.forEach((menu)=>{
+	menu.addEventListener("click", ()=>{
+		menu_modal.classList.remove("menu_active");
+		menu_modal.classList.add("menu_close");
+		document.body.style.overflowY = "auto";
+		header_btn.classList.remove("is-active");
+	})
 })

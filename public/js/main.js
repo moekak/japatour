@@ -25,55 +25,27 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+AOS.init();
+
+// 要素の取得をまとめる
 var header = document.querySelector(".js_header");
-var title = document.querySelectorAll(".js_title");
-var tl = gsap.timeline();
-tl.to(title, {
-  y: 0,
-  duration: 1
-});
-tl.to(header, {
-  y: 0,
-  duration: 1
-});
-gsap.registerPlugin(ScrollTrigger);
-gsap.utils.toArray(".js-parallax").forEach(function (wrap) {
-  var y = wrap.getAttribute("data-y") || -100;
-  gsap.to(wrap, {
-    y: y,
-    scrollTrigger: {
-      trigger: wrap,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: 0.5
-      //markers: true
-    }
-  });
-});
-ScrollTrigger.create({
-  start: "top 30%",
-  trigger: ".js_title",
-  end: function end() {
-    return "+=".concat(document.documentElement.scrollHeight);
-  },
-  toggleClass: {
-    targets: ".js_header",
-    className: "header-active"
-  }
-});
-AOS.init();
 var headerSP = document.querySelector(".js_header_pc");
-var title2 = document.querySelectorAll(".js_title");
-var tl2 = gsap.timeline();
-tl2.to(title2, {
-  y: 0,
-  duration: 1
-});
-tl2.to(headerSP, {
-  y: 0,
-  duration: 1
-});
+var titles = document.querySelectorAll(".js_title");
+
+// ScrollTriggerの登録（1回だけで良い）
 gsap.registerPlugin(ScrollTrigger);
+
+// タイムラインのアニメーションをまとめる
+var tl = gsap.timeline();
+tl.to(titles, {
+  y: 0,
+  duration: 1
+}).to([header, headerSP], {
+  y: 0,
+  duration: 1
+}); // 両方のヘッダーを同時にアニメーション
+
+// パララックス効果（1回だけで良い）
 gsap.utils.toArray(".js-parallax").forEach(function (wrap) {
   var y = wrap.getAttribute("data-y") || -100;
   gsap.to(wrap, {
@@ -87,6 +59,8 @@ gsap.utils.toArray(".js-parallax").forEach(function (wrap) {
     }
   });
 });
+
+// ヘッダーのクラス切り替え
 ScrollTrigger.create({
   start: "top 30%",
   trigger: ".js_title",
@@ -94,11 +68,11 @@ ScrollTrigger.create({
     return "+=".concat(document.documentElement.scrollHeight);
   },
   toggleClass: {
-    targets: ".js_header",
+    targets: [".js_header", ".js_header_pc"],
+    // 両方のヘッダーを対象に
     className: "header-active"
   }
 });
-AOS.init();
 
 // why choose japa tourのところの高さを合わせる
 
@@ -128,6 +102,10 @@ $('#js-slick').slick({
   // 両端に見えるスライドの幅を調整
   slidesToShow: 3,
   // 表示するスライドの数
+  prevArrow: '<button class="slick-prev">Previous</button>',
+  // ここに追加
+  nextArrow: '<button class="slick-next">Next</button>',
+  // ここに追加
   responsive: [_defineProperty(_defineProperty({
     breakpoint: 1000,
     // 画面幅1024px以下の場合
@@ -147,30 +125,13 @@ submit_btn.addEventListener("click", function () {
   document.querySelector(".bg").classList.remove("hidden");
   document.querySelector(".loader").classList.remove("hidden");
 });
-
-// reviewの文字制限
-
 var reviews = document.querySelectorAll(".js_review");
-// const review_containers = document.querySelectorAll(".js_review_container")
-// let max_height = 0
-
-// review_containers.forEach((container)=>{
-//   if(container.clientHeight > max_height){
-//     max_height = container.clientHeight
-//   }
-
-//   container.style.height = `${max_height}px`
-
-// })
-
 var mediaQuery1200 = window.matchMedia('(max-width: 1200px)');
 var mediaQuery900 = window.matchMedia('(max-width: 900px)');
 var mediaQuery800 = window.matchMedia('(max-width: 800px)');
 var mediaQuery650 = window.matchMedia('(max-width: 650px)');
 var mediaQuery450 = window.matchMedia('(max-width: 450px)');
 var mediaQuery350 = window.matchMedia('(max-width: 350px)');
-// let MAX_LENGTH = mediaQuery1200.matches ? 500: 310;
-// let MAX_LENGTH = mediaQuery1200.matches ? 500: (mediaQuery900.matches ? 200 : 310);
 var MAX_LENGTH = mediaQuery350.matches ? 170 : mediaQuery450.matches ? 350 : mediaQuery650.matches ? 420 : mediaQuery800.matches ? 230 : mediaQuery900.matches ? 280 : mediaQuery1200.matches ? 240 : 310;
 console.log(MAX_LENGTH);
 reviews.forEach(function (review) {
@@ -212,6 +173,14 @@ containers.forEach(function (container) {
 });
 containers.forEach(function (container) {
   container.style.height = "".concat(maxHeight, "px");
+});
+var menus = document.querySelectorAll(".js_menu");
+menus.forEach(function (menu) {
+  menu.addEventListener("click", function () {
+    menu_modal.classList.remove("menu_active");
+    menu_modal.classList.add("menu_close");
+    document.body.style.overflowY = "auto";
+  });
 });
 /******/ })()
 ;

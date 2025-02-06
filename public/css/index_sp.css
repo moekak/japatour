@@ -1,6 +1,6 @@
 @media screen and (max-width: 1360px) {
 
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper, .section_third_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 1060px;
     }
     .reason_card {
@@ -14,6 +14,12 @@
     }
 }
 @media screen and (max-width: 1200px){
+    .section_third h2{
+        font-size: 49px;
+    }
+    .tourguide_img {
+        width: 360px;
+    }
     .quote_img {
         width: 28%;
         bottom: 7%;
@@ -34,11 +40,14 @@
     .reason_card_container{
         grid-template-columns: 1fr 1fr;
     }
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper,.section_third_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 934px;
     }
     .reason_card img {
         width: 58px;
+    }
+    .reason_card-img2{
+        width: 48px !important;
     }
     .section_third p {
         width: 86%;
@@ -59,14 +68,22 @@
 }
 
 @media screen and (max-width: 1000px){
-
+    .section_third h2 {
+        font-size: 37px;
+    }
+    .section_third p {
+        font-size: 18px;
+    }
+    .section_third_wrapper_btn{
+        font-size: 14px;
+    }
     .title {
         font-size: 5rem;
     }
     header {
         padding: 20px 34px;
     }
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper, .section_third_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 800px;
     }
     .font_subtitle {
@@ -88,6 +105,18 @@
 }
 
 @media screen and (max-width: 900px){
+    .tourguide_img {
+        width: 328px;
+    }
+    .section_third h2 {
+        font-size: 33px;
+    }
+    .section_third p {
+        font-size: 16px;
+    }
+    .section_third_wrapper_btn{
+        font-size: 14px;
+    }
     .sp_header{
         display: flex;
     }
@@ -101,7 +130,7 @@
         width: 14%;
         padding: 10px 5px;
     }
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper, .section_third_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 720px;
     }
     .font_subtitle {
@@ -113,9 +142,7 @@
     .font_normal {
         font-size: 16px;
     }
-    .section_third h2 {
-        font-size: 54px;
-    }
+
     .section_third_box button{
         width: 19%;
         padding: 10px 5px;
@@ -163,6 +190,18 @@
 }
 
 @media screen and (max-width: 800px){
+    .tourguide_img {
+        width: 300px;
+    }
+    .section_third h2 {
+        font-size: 30px;
+    }
+    .section_third_wrapper_btn {
+        font-size: 12px;
+    }
+    .section_third p {
+        font-size: 16px;
+    }
     .title {
         font-size: 58px;
     }
@@ -170,7 +209,7 @@
 
         width: 55%;
     }
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper, .section_third_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 650px;
     }
     .hot_normal_txt {
@@ -191,13 +230,25 @@
     }
 }
 @media screen and (max-width: 700px){
+    .section_third p {
+        font-size: 15px;
+    }
+    .tourguide_img {
+        width: 257px;
+    }
+    .section_third h2 {
+        font-size: 29px;
+    }
+    .section_third_wrapper_btn {
+        padding: 12px 40px 12px 21px;
+    }
     .title {
         font-size: 54px;
     }
     .section_top_desc {
         margin-top: 4px;
     }
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper, .section_third_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 600px;
     }
     .review_container {
@@ -205,10 +256,34 @@
     }
 }
 @media screen and (max-width: 650px){
+    .contact_sml{
+        width: 100%;
+    }
+    .section_third_wrapper{
+        flex-direction: column;
+        padding-top: 30px;
+        padding-bottom: 52px;
+    }
+    .tourguide_img{
+        order: 1;
+    }
+    .secttion_third-left-area{
+        order: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .section_third h2{
+        text-align: center;
+    }
+    .section_third p{
+        text-align: center;
+    }
     .reason_card_container{
         display: block;
     }
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper, .section_third_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 470px;
     }
     .section_third h2 {
@@ -254,8 +329,12 @@
         width: 100%;
         margin-top: 0%;
     }
+    .slick-arrow{
+        display: none !important;
+    }
 }
 @media screen and (max-width: 550px){
+
 
     .title {
         font-size: 46px;
@@ -267,7 +346,7 @@
         width: 14%;
         padding: 6px 5px;
     }
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper, .section_third_wrapper,.section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 450px;
     }
     .font_normal {
@@ -282,9 +361,11 @@
     .reason_card_container, .destinations_area, .hot_container {
         margin-top: 27px;
     }
+    .hot_large_txt {
+        font-size: 25px;
+    }
 }
 @media screen and (max-width: 450px){
-
     header{
         padding: 13px 10px;
     }
@@ -306,7 +387,7 @@
     .padding_section {
         padding: 50px 0px;
     }
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper, .section_third_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 330px;
     }
     .reason_see_more_btn{
@@ -343,7 +424,7 @@
         font-size: 14px;
     }
     .btn_container button {
-        padding: 7px 16px;
+        padding: 9px 43px 9px 29px;
         font-size: 13px;
     }
 }
@@ -362,7 +443,7 @@
     .font_subtitle {
         font-size: 27px;
     }
-    .section_second_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
+    .section_second_wrapper,.section_third_wrapper, .section_forth_wrapper, .section_fifth_wrapper, .section_sixth_area, .contact_wrapper {
         max-width: 300px;
     }
     .font_normal {
@@ -370,6 +451,9 @@
     }
     .reason_card img {
         width: 45px;
+    }
+    .reason_card-img2{
+        width: 35px !important;
     }
     .reason_desc {
         font-size: 13px;
