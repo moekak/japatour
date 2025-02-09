@@ -124,46 +124,37 @@ reviews.forEach((review) => {
 });
 
 
+document.addEventListener("DOMContentLoaded", ()=>{
 
-// ハンバーガーメニュー
-const header_btn = document.querySelector(".js_header_btn")
-const menu_modal = document.querySelector(".menu_modal")
-header_btn.addEventListener("click", ()=>{
-	if (!menu_modal.classList.contains("menu_active")) {
-		// アニメーションを開始
-		menu_modal.classList.add("menu_active");
-		menu_modal.classList.remove("menu_close");
-		document.body.style.overflow = "hidden";
-	} else {
-		// アニメーションを終了
-		menu_modal.classList.remove("menu_active");
-		menu_modal.classList.add("menu_close");
-		document.body.style.overflowY = "auto";
-	}
-
-	// ボタンの状態を切り替え
-	header_btn.classList.toggle("is-active");
-})
-
-const containers = document.querySelectorAll(".js_review_container")
-let maxHeight = 0
-containers.forEach((container)=>{
-	if(container.clientHeight > maxHeight){
-		maxHeight = container.clientHeight
-	}
-})
-
-containers.forEach((container)=>{
-	container.style.height = `${maxHeight}px`
-})
-
-
-const menus = document.querySelectorAll(".js_menu")
-menus.forEach((menu)=>{
-	menu.addEventListener("click", ()=>{
-		menu_modal.classList.remove("menu_active");
-		menu_modal.classList.add("menu_close");
-		document.body.style.overflowY = "auto";
-		header_btn.classList.remove("is-active");
+	// レビュー親要素の高さを一番高い要素に合わせる
+	const containers = document.querySelectorAll(".js_review_container")
+	let maxHeight = 0
+	containers.forEach((container)=>{
+		if(container.clientHeight > maxHeight){
+			maxHeight = container.clientHeight
+		}
 	})
+
+	containers.forEach((container)=>{
+		container.style.height = `${maxHeight}px`
+	})
+
+
+	const menus = document.querySelectorAll(".js_menu")
+	menus.forEach((menu)=>{
+		menu.addEventListener("click", ()=>{
+			menu_modal.classList.remove("menu_active");
+			menu_modal.classList.add("menu_close");
+			document.body.style.overflowY = "auto";
+			header_btn.classList.remove("is-active");
+		})
+	})
+
+
+
+	// // 電話アイコン押したら電話をかける
+	// const phone = document.getElementById("eld4n96c55y5")
+	// phone.addEventListener("click", ()=>{
+	// 	window.location.href = 'tel:090-6495-4567'
+	// })
 })

@@ -22,6 +22,6 @@ class SendContactMail extends Controller
         Mail::to(env("MAIL_FROM_ADDRESS"))->send(new ContactAdminMail($name, $message, $email));
         Mail::to($email)->send(new ContactUserMail($name, $message, $email));
 
-        return view("thank");
+        return view("emails.thank");
     }
 }

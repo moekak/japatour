@@ -102,10 +102,6 @@ $('#js-slick').slick({
   // 両端に見えるスライドの幅を調整
   slidesToShow: 3,
   // 表示するスライドの数
-  prevArrow: '<button class="slick-prev">Previous</button>',
-  // ここに追加
-  nextArrow: '<button class="slick-next">Next</button>',
-  // ここに追加
   responsive: [_defineProperty(_defineProperty({
     breakpoint: 1000,
     // 画面幅1024px以下の場合
@@ -144,43 +140,33 @@ reviews.forEach(function (review) {
     review.innerHTML = "\n\t\t\t<span>".concat(truncatedText, "</span>\n\t\t\t<span style=\"cursor: pointer; padding-left:8px; color: #007BFF;\" class=\"js_see_more\">... see more</span>\n\t\t");
   }
 });
-
-// ハンバーガーメニュー
-var header_btn = document.querySelector(".js_header_btn");
-var menu_modal = document.querySelector(".menu_modal");
-header_btn.addEventListener("click", function () {
-  if (!menu_modal.classList.contains("menu_active")) {
-    // アニメーションを開始
-    menu_modal.classList.add("menu_active");
-    menu_modal.classList.remove("menu_close");
-    document.body.style.overflow = "hidden";
-  } else {
-    // アニメーションを終了
-    menu_modal.classList.remove("menu_active");
-    menu_modal.classList.add("menu_close");
-    document.body.style.overflowY = "auto";
-  }
-
-  // ボタンの状態を切り替え
-  header_btn.classList.toggle("is-active");
-});
-var containers = document.querySelectorAll(".js_review_container");
-var maxHeight = 0;
-containers.forEach(function (container) {
-  if (container.clientHeight > maxHeight) {
-    maxHeight = container.clientHeight;
-  }
-});
-containers.forEach(function (container) {
-  container.style.height = "".concat(maxHeight, "px");
-});
-var menus = document.querySelectorAll(".js_menu");
-menus.forEach(function (menu) {
-  menu.addEventListener("click", function () {
-    menu_modal.classList.remove("menu_active");
-    menu_modal.classList.add("menu_close");
-    document.body.style.overflowY = "auto";
+document.addEventListener("DOMContentLoaded", function () {
+  // レビュー親要素の高さを一番高い要素に合わせる
+  var containers = document.querySelectorAll(".js_review_container");
+  var maxHeight = 0;
+  containers.forEach(function (container) {
+    if (container.clientHeight > maxHeight) {
+      maxHeight = container.clientHeight;
+    }
   });
+  containers.forEach(function (container) {
+    container.style.height = "".concat(maxHeight, "px");
+  });
+  var menus = document.querySelectorAll(".js_menu");
+  menus.forEach(function (menu) {
+    menu.addEventListener("click", function () {
+      menu_modal.classList.remove("menu_active");
+      menu_modal.classList.add("menu_close");
+      document.body.style.overflowY = "auto";
+      header_btn.classList.remove("is-active");
+    });
+  });
+
+  // // 電話アイコン押したら電話をかける
+  // const phone = document.getElementById("eld4n96c55y5")
+  // phone.addEventListener("click", ()=>{
+  // 	window.location.href = 'tel:090-6495-4567'
+  // })
 });
 /******/ })()
 ;

@@ -6,12 +6,6 @@
     .reason_card {
         padding: 22px 22px;
     }
-    /* .slick-slide {
-        height: 390px !important;
-    } */
-    .review_container_txt {
-        /* height: 272px; */
-    }
 }
 @media screen and (max-width: 1200px){
     .section_third h2{
@@ -64,10 +58,24 @@
     .hot_normal_txt {
         font-size: 16px;
     }
+    .animated{
+        width: 474px;
+        height: auto;
+    }
+    .contact_filed_container{
+        gap: 0;
+    }
 
 }
 
 @media screen and (max-width: 1000px){
+    .animated{
+        width: 440px;
+        height: auto;
+    }
+    .textarea {
+        height: 140px;
+    }
     .section_third h2 {
         font-size: 37px;
     }
@@ -105,6 +113,10 @@
 }
 
 @media screen and (max-width: 900px){
+    .animated{
+        width: 384px;
+    }
+
     .tourguide_img {
         width: 328px;
     }
@@ -184,12 +196,13 @@
     .input_field {
         height: 41px;
     }
-    .textarea {
-        height: 81%;
-    }
+
 }
 
 @media screen and (max-width: 800px){
+    .animated{
+        width: 350px;
+    }
     .tourguide_img {
         width: 300px;
     }
@@ -230,6 +243,12 @@
     }
 }
 @media screen and (max-width: 700px){
+    .animated {
+        width: 301px;
+    }
+    .textarea{
+        height: 100px;
+    }
     .section_third p {
         font-size: 15px;
     }
@@ -256,6 +275,20 @@
     }
 }
 @media screen and (max-width: 650px){
+    .contact_filed_container{
+        display: flex;
+        flex-direction: column;
+    }
+    .animated{
+        order: 1;
+        width: 100%;
+    }
+    .textarea {
+        height: 271px;
+    }
+    .contact_filed_box{
+        order: 2;
+    }
     .contact_sml{
         width: 100%;
     }
@@ -322,13 +355,6 @@
     .padding_section {
         padding: 80px 0px;
     }
-    .contact_filed_container {
-        display: block;
-    }
-    .textarea{
-        width: 100%;
-        margin-top: 0%;
-    }
     .slick-arrow{
         display: none !important;
     }
@@ -364,8 +390,21 @@
     .hot_large_txt {
         font-size: 25px;
     }
+    footer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 10px ;
+    }
+    footer p, footer p a{
+        font-size: 12px;
+    }
 }
 @media screen and (max-width: 450px){
+    .review_title {
+        font-size: 31px !important;
+    }
     header{
         padding: 13px 10px;
     }

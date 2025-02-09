@@ -7,9 +7,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 })->name("home");
+
 Route::get('/thank', function () {
-    return view('thank');
-});
+    return view('emails.thank');
+})->name("thank");
+
+Route::get('/law', function () {
+    return view('law');
+})->name("law");
 
 Route::get("/admin", [AdminController::class, "index"]);
 Route::post("/sendMessage", [SendContactMail::class, "SendContactMail"])->name("sendMessage");
