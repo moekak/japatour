@@ -1,3 +1,7 @@
+@php
+use Biscolab\ReCaptcha\Facades\ReCaptcha;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,5 +35,13 @@
     @include('components.footer')
     <script src="{{mix("js/common.js")}}"></script>
     @yield('script')
+    <script src="https://www.google.com/recaptcha/api.js?render=6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle"></script>
+<script>
+grecaptcha.ready(function() {
+    grecaptcha.execute('6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle', {action: 'submit'}).then(function(token) {
+        document.getElementById('recaptchaResponse').value = token;
+    });
+});
+</script>
 </body>
 </html>
