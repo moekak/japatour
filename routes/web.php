@@ -8,6 +8,11 @@ Route::get('/', function () {
     return view('index');
 })->name("home");
 
+Route::get('/show', function () {
+    return view('show');
+})->name("show");
+
+
 Route::get('/thank', function () {
     return view('emails.thank');
 })->name("thank");

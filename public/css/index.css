@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Zen+Kaku+Gothic+New&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --main-color: #52aaf9;
+}
+
 body {
-    font-family: "Geist", serif !important;
+    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
     font-optical-sizing: auto;
     font-weight: 500;
     font-style: normal;
@@ -72,7 +81,7 @@ ul {
 .font_subtitle {
     font-size: 50px;
     font-weight: 700;
-    color: #52aaf9;
+    color: var(--main-color);
 }
 .reason_sub {
     font-size: 20px;
@@ -146,8 +155,13 @@ header {
     width: 100%;
     transition: all 600ms ease-in-out;
     align-items: center;
+    font-weight: 600;
 }
 
+.header-style{
+    color: rgb(66, 66, 66);
+    font-weight: 600;
+}
 .header_left {
     margin: 0;
 }
@@ -260,7 +274,7 @@ header {
     margin-top: 53px;
 }
 .reason_see_more_btn {
-    background-color: #52aaf9;
+    background-color: var(--main-color);
     border: none;
     color: #fff;
     padding: 5px 20px;
@@ -280,7 +294,7 @@ header {
     justify-content: center;
 }
 .section_third {
-    background-color: #52aaf9;
+    background-color: var(--main-color);
 }
 
 .section_third h2 {
@@ -300,7 +314,7 @@ header {
 }
 
 .section_third_wrapper_btn {
-    color: #52aaf9;
+    color: var(--main-color);
     /* width: 10%; */
     text-align: center;
     background: #fff;
@@ -315,8 +329,8 @@ header {
     position: relative;
 }
 .section_third_wrapper_btn::before{
-    border-right: 2px solid #52aaf9;
-    border-top: 2px solid #52aaf9;
+    border-right: 2px solid var(--main-color);
+    border-top: 2px solid var(--main-color);
     bottom: 0;
     content: "";
     height: 7px;
@@ -459,7 +473,7 @@ header {
 }
 .review_title {
     font-size: 50px;
-    color: #52aaf9;
+    color: var(--main-color);
     margin-bottom: 4%;
     z-index: 10;
     position: relative;
@@ -584,7 +598,7 @@ header {
     outline: none;
 }
 label {
-    color: #52aaf9;
+    color: var(--main-color);
     padding-bottom: 10px;
     font-size: 16px;
 }
@@ -609,7 +623,7 @@ label {
     color: #fff;
     /* width: 10%; */
     text-align: center;
-    background: #52aaf9;
+    background: var(--main-color);
     border: none;
     padding: 12px 47px  12px 33px;
     transition: 0.5s ease;
@@ -737,7 +751,7 @@ label {
     top: 0;
     bottom: 0;
 
-    background: #52aaf9;
+    background: var(--main-color);
 }
 
 #ring {
@@ -752,7 +766,7 @@ label {
     top: 0;
     bottom: 0;
 
-    border: 2px solid #52aaf9;
+    border: 2px solid var(--main-color);
 
     animation-name: bloop;
     animation-duration: 1s;
@@ -841,7 +855,7 @@ label {
 }
 
 .destination-btn{
-    background-color: #52aaf9 !important;
+    background-color: var(--main-color) !important;
     color: #fff !important; 
     width: 100%;
     padding: 10px 0 !important;
@@ -939,7 +953,7 @@ label {
 
 /* footer */
 footer{
-    background-color: #52aaf9;
+    background-color: var(--main-color);
     display: flex;
     color: #fff;
     padding: 20px;
