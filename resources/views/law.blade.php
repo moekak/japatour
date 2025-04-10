@@ -1,4 +1,7 @@
 @extends('layout.default')
+@section('style')
+<link rel="stylesheet" href="{{ asset('css/law.css') }}">
+@endsection
 @section('main')
 @include('components.menu_modal')
 @include('components.header')  

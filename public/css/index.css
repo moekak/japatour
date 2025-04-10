@@ -255,6 +255,7 @@ header {
     justify-content: center;
     padding: 30px 30px;
     color: #333;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     font-weight: 400;
 }
 .reason_card img {
@@ -385,6 +386,11 @@ header {
 }
 .card{
     width: 100% !important;
+    border: none !important;
+    /* border: 2px solid var(--main-color) !important; */
+}
+.card-title{
+    color: var(--main-color) !important;
 }
 
 .section_forth_desc {
@@ -693,7 +699,6 @@ label {
     margin: 0 auto;
 }
 .card {
-    border: none !important;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     transition: 0.5s ease;
     cursor: pointer;

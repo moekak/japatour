@@ -153,11 +153,15 @@ document.addEventListener("DOMContentLoaded", function () {
     container.style.height = "".concat(maxHeight, "px");
   });
   var menus = document.querySelectorAll(".js_menu");
+  var menu_modal = document.querySelector(".menu_modal");
+  var header_btn = document.querySelector(".js_header_btn");
   menus.forEach(function (menu) {
     menu.addEventListener("click", function () {
       menu_modal.classList.remove("menu_active");
       menu_modal.classList.add("menu_close");
       document.body.style.overflowY = "auto";
+      header_btn.classList.remove("is-active");
+      // ボタンの状態を切り替え
       header_btn.classList.remove("is-active");
     });
   });

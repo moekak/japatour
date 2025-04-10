@@ -520,5 +520,6 @@
             AOS.init();
         </script>
         <script src="{{mix("js/main.js")}}"></script>
+        <script src="{{mix("js/common.js")}}"></script>
 @endsection
 

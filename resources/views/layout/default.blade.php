@@ -17,12 +17,11 @@ use Biscolab\ReCaptcha\Facades\ReCaptcha;
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://japatour-official.com/">
     <meta property="og:image" content="{{asset("img/logo3.svg")}}">
+    @yield('style')
     <meta property="og:description" content="Discover the beauty of bespoke travel with us, where your dreams of perfect escapes turn into vivid realities filled with unforgettable memories.">
     <meta property="og:site_name" content="Japatour">
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/index_sp.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/law.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/show.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
@@ -35,7 +34,6 @@ use Biscolab\ReCaptcha\Facades\ReCaptcha;
     <div class="bg hidden"></div>
     @yield('main')
     @include('components.footer')
-    <script src="{{mix("js/common.js")}}"></script>
     @yield('script')
     <script src="https://www.google.com/recaptcha/api.js?render=6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle"></script>
 <script>
