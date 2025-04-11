@@ -75,174 +75,41 @@
             </div>
 
             <div class="tours-grid">
-                <!-- Tour 1 -->
-                <div class="tour-card">
-                    <div class="tour-card-image">
-                        <img src="https://via.placeholder.com/400x300?text=Kyoto+Nara+Osaka" alt="Kyoto, Nara & Osaka">
-                        <div class="tour-card-badge">SAVE 15%</div>
-                    </div>
-                    <div class="tour-card-content">
-                        <h3 class="tour-card-title">Kyoto, Nara & Osaka</h3>
-                        <div class="tour-card-meta">
-                            <div class="tour-meta-item">
-                                <i class="fas fa-map-marker-alt"></i> Kyoto, Nara, Osaka
-                            </div>
-                            <div class="tour-meta-item">
-                                <i class="fas fa-calendar-alt"></i> 3 Days
-                            </div>
+                @foreach ($tours as $tour)
+                    <div class="tour-card">
+                        <div class="tour-card-image">
+                            <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}">
+                            <div class="tour-card-badge">{{$tour->badge}}</div>
                         </div>
-                        <div class="tour-card-price">
-                            ¥80,000
-                            <span class="price-note">per person</span>
-                        </div>
-                        <div class="tour-card-actions">
-                            <a href="#" class="btn-secondary">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a href="#" class="btn-outline">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <button type="button" class="btn-icon delete-tour" data-tour-id="1" data-tour-title="Kyoto, Nara & Osaka">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tour 2 -->
-                <div class="tour-card">
-                    <div class="tour-card-image">
-                        <img src="https://via.placeholder.com/400x300?text=Hokkaido+Winter" alt="Hokkaido Winter Wonderland">
-                        <div class="tour-card-badge">Winter Special</div>
-                    </div>
-                    <div class="tour-card-content">
-                        <h3 class="tour-card-title">Hokkaido Winter Wonderland</h3>
-                        <div class="tour-card-meta">
-                            <div class="tour-meta-item">
-                                <i class="fas fa-map-marker-alt"></i> Sapporo, Otaru, Noboribetsu
+                        <div class="tour-card-content">
+                            <h3 class="tour-card-title">{{$tour->title}}</h3>
+                            <div class="tour-card-meta">
+                                <div class="tour-meta-item">
+                                    <i class="fas fa-map-marker-alt"></i>{{$tour->destinations}}
+                                </div>
+                                <div class="tour-meta-item">
+                                    <i class="fas fa-calendar-alt"></i>{{$tour->duration_days}}Days
+                                </div>
                             </div>
-                            <div class="tour-meta-item">
-                                <i class="fas fa-calendar-alt"></i> 5 Days
+                            <div class="tour-card-price">
+                                {{$tour->price}}
+                                <span class="price-note">per person</span>
+                            </div>
+                            <div class="tour-card-actions">
+                                <a href="#" class="btn-secondary">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <a href="#" class="btn-outline">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                                <button type="button" class="btn-icon delete-tour" data-tour-id="1" data-tour-title="Kyoto, Nara & Osaka">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
                             </div>
                         </div>
-                        <div class="tour-card-price">
-                            ¥120,000
-                            <span class="price-note">per person</span>
-                        </div>
-                        <div class="tour-card-actions">
-                            <a href="#" class="btn-secondary">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a href="#" class="btn-outline">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <button type="button" class="btn-icon delete-tour" data-tour-id="2" data-tour-title="Hokkaido Winter Wonderland">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
                     </div>
-                </div>
-
-                <!-- Tour 3 -->
-                <div class="tour-card">
-                    <div class="tour-card-image">
-                        <img src="https://via.placeholder.com/400x300?text=Tokyo+Area" alt="Tokyo Area Highlights">
-                        <div class="tour-card-badge">SAVE 10%</div>
-                    </div>
-                    <div class="tour-card-content">
-                        <h3 class="tour-card-title">Tokyo Area Highlights</h3>
-                        <div class="tour-card-meta">
-                            <div class="tour-meta-item">
-                                <i class="fas fa-map-marker-alt"></i> Tokyo, Kamakura, Hakone
-                            </div>
-                            <div class="tour-meta-item">
-                                <i class="fas fa-calendar-alt"></i> 4 Days
-                            </div>
-                        </div>
-                        <div class="tour-card-price">
-                            ¥95,000
-                            <span class="price-note">per person</span>
-                        </div>
-                        <div class="tour-card-actions">
-                            <a href="#" class="btn-secondary">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a href="#" class="btn-outline">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <button type="button" class="btn-icon delete-tour" data-tour-id="3" data-tour-title="Tokyo Area Highlights">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tour 4 -->
-                <div class="tour-card">
-                    <div class="tour-card-image">
-                        <img src="https://via.placeholder.com/400x300?text=Kyushu+Island" alt="Kyushu Island Explorer">
-                        <div class="tour-card-badge">SAVE 5%</div>
-                    </div>
-                    <div class="tour-card-content">
-                        <h3 class="tour-card-title">Kyushu Island Explorer</h3>
-                        <div class="tour-card-meta">
-                            <div class="tour-meta-item">
-                                <i class="fas fa-map-marker-alt"></i> Fukuoka, Nagasaki, Kumamoto
-                            </div>
-                            <div class="tour-meta-item">
-                                <i class="fas fa-calendar-alt"></i> 6 Days
-                            </div>
-                        </div>
-                        <div class="tour-card-price">
-                            ¥145,000
-                            <span class="price-note">per person</span>
-                        </div>
-                        <div class="tour-card-actions">
-                            <a href="#" class="btn-secondary">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a href="#" class="btn-outline">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <button type="button" class="btn-icon delete-tour" data-tour-id="4" data-tour-title="Kyushu Island Explorer">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tour 5 -->
-                <div class="tour-card">
-                    <div class="tour-card-image">
-                        <img src="https://via.placeholder.com/400x300?text=Japan+Alps" alt="Japan Alps Adventure">
-                    </div>
-                    <div class="tour-card-content">
-                        <h3 class="tour-card-title">Japan Alps Adventure</h3>
-                        <div class="tour-card-meta">
-                            <div class="tour-meta-item">
-                                <i class="fas fa-map-marker-alt"></i> Nagano, Matsumoto, Takayama
-                            </div>
-                            <div class="tour-meta-item">
-                                <i class="fas fa-calendar-alt"></i> 5 Days
-                            </div>
-                        </div>
-                        <div class="tour-card-price">
-                            ¥135,000
-                            <span class="price-note">per person</span>
-                        </div>
-                        <div class="tour-card-actions">
-                            <a href="#" class="btn-secondary">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            <a href="#" class="btn-outline">
-                                <i class="fas fa-eye"></i> View
-                            </a>
-                            <button type="button" class="btn-icon delete-tour" data-tour-id="5" data-tour-title="Japan Alps Adventure">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+                
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@ class CreateTourRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -26,72 +26,118 @@ class CreateTourRequest extends FormRequest
             "subtitle" => ["required", "string", "max:255"],
             "badge" => ["nullable", "string", "max:255"],
             "duration_days" => ["required", "integer", "max:255"],
-            "last_name" => ["required", "string", "max:255"],
-            "password" => ["required", "string", "min:8", "max:255"],
-            "login_id" => ["required", "string", "max:255", "unique:users"], 
-            'icon' => ['nullable', 'file', 'mimes:jpeg,png,jpg', 'max:800'],// 800KB制限
-            "email" => ["required", "string", "email", "max:255", "unique:users"], 
-            "phone_number" => ["required", "string", "max:15", "unique:users"],
-            "hire_date" => ["required", "date"], 
-            "gender" => ["required", "string", "in:male,female"], 
+            "start_location" => ["required", "string", "max:255"],
+            "end_location" => ["required", "string", "max:255"],
+            "destinations" => ["required", "string", "max:255"],
+            "languages" => ["required", "string", "max:255"],
+            "min_participants" => ["required", "integer"],
+            "max_participants" => ["required", "integer"],
+            "currency" => ["required", "string", "max:5"],
+            "price" => ["required", "numeric", "min:0", "max:99999999.99"],
+            "discount_percentage" => ["required", "integer"],
+            "accommodation" => ["required", "string", "max:255"],
+            "departure_dates" => ["required", "string", "max:255"],
+            "limited_spots" => ["nullable", "string", "max:255"],
+            "overview" => ["required", "string"],
+            "highlights" => ["required", "array"],
+            "itinerary" => ["required", "array"],
+            "inclusions" => ["required", "array"],
+            "exclusions" => ["required", "array"],
+            "hero_image" => ["required", "image", "mimes:jpeg,png,jpg,gif", "max:2048"],
+            "gallery_images" => ["required", "array"],
+            "gallery_images.*" => ["image", "mimes:jpeg,png,jpg,gif", "max:2048"],
         ];
     }
 
     public function messages(): array
     {
-        session()->flash('show_modal', true);
-
         return [
-            // Position ID
-            'position_id.required' => 'Please select position.',
-            'position_id.exists' => 'Invalid data',
-            // First Name
-            'first_name.required' => 'Please enter your first name.',
-            'first_name.string' => 'First name must be text.',
-            'first_name.max' => 'First name cannot exceed 255 characters.',
+            'title.required' => 'The title field is required.',
+            'title.string' => 'The title must be a string.',
+            'title.max' => 'The title must not exceed 255 characters.',
             
-            // Last Name
-            'last_name.required' => 'Please enter your last name.',
-            'last_name.string' => 'Last name must be text.',
-            'last_name.max' => 'Last name cannot exceed 255 characters.',
+            'subtitle.required' => 'The subtitle field is required.',
+            'subtitle.string' => 'The subtitle must be a string.',
+            'subtitle.max' => 'The subtitle must not exceed 255 characters.',
             
-            // Password
-            'password.required' => 'Password is required.',
-            'password.string' => 'Password must be text.',
-            'password.min' => 'Password must be at least 8 characters long.',
-            'password.max' => 'Password cannot exceed 255 characters.',
+            'badge.string' => 'The badge must be a string.',
+            'badge.max' => 'The badge must not exceed 255 characters.',
             
-            // Login ID
-            'login_id.required' => 'Login ID is required.',
-            'login_id.string' => 'Login ID must be text.',
-            'login_id.max' => 'Login ID cannot exceed 255 characters.',
-            'login_id.unique' => 'This login ID is already in use.',
+            'duration_days.required' => 'The duration days field is required.',
+            'duration_days.integer' => 'The duration days must be an integer.',
+            'duration_days.max' => 'The duration days must not exceed 255.',
             
-            // Icon
-            'icon.string' => 'Icon must be a valid string.',
-            'icon.max' => 'Icon path cannot exceed 800KB.',
+            'start_location.required' => 'The start location field is required.',
+            'start_location.string' => 'The start location must be a string.',
+            'start_location.max' => 'The start location must not exceed 255 characters.',
             
-            // Email
-            'email.required' => 'Email address is required.',
-            'email.string' => 'Email must be text.',
-            'email.email' => 'Please enter a valid email address.',
-            'email.max' => 'Email cannot exceed 255 characters.',
-            'email.unique' => 'This email address is already registered.',
+            'end_location.required' => 'The end location field is required.',
+            'end_location.string' => 'The end location must be a string.',
+            'end_location.max' => 'The end location must not exceed 255 characters.',
             
-            // Phone Number
-            'phone_number.required' => 'Phone number is required.',
-            'phone_number.string' => 'Phone number must be text.',
-            'phone_number.max' => 'Phone number cannot exceed 13 characters.',
-            'phone_number.unique' => 'This phone number is already registered.',
+            'destinations.required' => 'The destinations field is required.',
+            'destinations.string' => 'The destinations must be a string.',
+            'destinations.max' => 'The destinations must not exceed 255 characters.',
             
-            // Hire Date
-            'hire_date.required' => 'Hire date is required.',
-            'hire_date.date' => 'Please enter a valid date.',
+            'languages.required' => 'The languages field is required.',
+            'languages.string' => 'The languages must be a string.',
+            'languages.max' => 'The languages must not exceed 255 characters.',
             
-            // Gender
-            'gender.required' => 'Please select a gender.',
-            'gender.string' => 'Gender must be text.',
-            'gender.in' => 'Please select either male or female.'
+            'min_participants.required' => 'The minimum participants field is required.',
+            'min_participants.integer' => 'The minimum participants must be an integer.',
+            
+            'max_participants.required' => 'The maximum participants field is required.',
+            'max_participants.integer' => 'The maximum participants must be an integer.',
+            
+            'currency.required' => 'The currency field is required.',
+            'currency.string' => 'The currency must be a string.',
+            'currency.max' => 'The currency must not exceed 5 characters.',
+            
+            'price.required' => 'The price field is required.',
+            'price.decimal' => 'The price must be a decimal number with up to 2 decimal places.',
+            'price.min' => 'The price must be at least 0.',
+            'price.max' => 'The price must not exceed 99,999,999.99.',
+            
+            'discount_percentage.required' => 'The discount percentage field is required.',
+            'discount_percentage.integer' => 'The discount percentage must be an integer.',
+            
+            'accommodation.required' => 'The accommodation field is required.',
+            'accommodation.string' => 'The accommodation must be a string.',
+            'accommodation.max' => 'The accommodation must not exceed 255 characters.',
+            
+            'departure_dates.required' => 'The departure dates field is required.',
+            'departure_dates.string' => 'The departure dates must be a string.',
+            'departure_dates.max' => 'The departure dates must not exceed 255 characters.',
+            
+            'limited_spots.string' => 'The limited spots must be a string.',
+            'limited_spots.max' => 'The limited spots must not exceed 255 characters.',
+            
+            'overview.required' => 'The overview field is required.',
+            'overview.string' => 'The overview must be a string.',
+            
+            'highlights.required' => 'The highlights field is required.',
+            'highlights.array' => 'The highlights must be a valid array format.',
+    
+            'itinerary.required' => 'The itinerary field is required.',
+            'itinerary.array' => 'The itinerary must be a valid array format.',
+            
+            'inclusions.required' => 'The inclusions field is required.',
+            'inclusions.array' => 'The inclusions must be a valid array format.',
+            
+            'exclusions.required' => 'The exclusions field is required.',
+            'exclusions.array' => 'The exclusions must be a valid array format.',
+            
+            'hero_image.required' => 'The hero image field is required.',
+            'hero_image.image' => 'The hero image must be an image file.',
+            'hero_image.mimes' => 'The hero image must be a file of type: jpeg, png, jpg, gif.',
+            'hero_image.max' => 'The hero image must not exceed 2MB.',
+
+            'gallery_images.required' => 'The gallery images field is required.',
+            'gallery_images.array' => 'The gallery images must be an array of files.',
+            'gallery_images.*.image' => 'All gallery files must be images.',
+            'gallery_images.*.mimes' => 'All gallery images must be a file of type: jpeg, png, jpg, gif.',
+            'gallery_images.*.max' => 'Each gallery image must not exceed 2MB.',
+            
         ];
     }
 }

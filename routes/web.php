@@ -42,13 +42,12 @@ Route::middleware(['auth'])->group(function () {
         return view('show');
     })->name("show");
     
-    Route::get('/tour/list', function () {
-        return view('admin.tour_list');
-    });
     Route::get('/tour/edit', function () {
         return view('admin.tour_edit');
     });
-    
+
+    Route::get("/tour/list", [TourController::class, "index"])->name("tour_list");
+
     Route::post("/tour/create", [TourController::class, "store"])->name("tours.store");
     Route::post("/tour/edit", [SendContactMail::class, "SendContactMail"])->name("tours.edit");
     Route::post("/tour/show", [SendContactMail::class, "SendContactMail"])->name("tours.show");
