@@ -48,30 +48,15 @@
                             <input type="text" id="badge" name="badge" value="{{ old('badge') }}" placeholder="e.g. Best Seller, New Tour">
                         </div>
                     </div>
-
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="duration_days">Duration (Days) <span class="required">*</span></label>
-                            <input type="number" id="duration_days" name="duration_days" value="{{ old('duration_days') }}" min="1" >
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="duration_nights">Duration (Nights) <span class="required">*</span></label>
-                            <input type="number" id="duration_nights" name="duration_nights" value="{{ old('duration_nights') }}" min="0" >
-                        </div>
+                    <div class="form-group">
+                        <label for="hours">Hours<span class="required">*</span></label>
+                        <input type="number" id="hours" name="hours" value="{{ old('hours') }}" min="1" >
+                    </div>
+                    <div class="form-group">
+                        <label for="start_location">Start Location <span class="required">*</span></label>
+                        <input type="text" id="start_location" name="start_location" value="{{ old('start_location') }}" >
                     </div>
 
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="start_location">Start Location <span class="required">*</span></label>
-                            <input type="text" id="start_location" name="start_location" value="{{ old('start_location') }}" >
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="end_location">End Location <span class="required">*</span></label>
-                            <input type="text" id="end_location" name="end_location" value="{{ old('end_location') }}" >
-                        </div>
-                    </div>
 
                     <div class="form-grid-2">
                         <div class="form-group">
@@ -94,6 +79,21 @@
                         <div class="form-group">
                             <label for="max_participants">Max. Group Size <span class="required">*</span></label>
                             <input type="number" id="max_participants" name="max_participants" value="{{ old('max_participants') }}" min="1" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="available_dates">Available Dates <span class="required">*</span></label>
+                        <div class="date-selection">
+                            <div class="date-range-inputs">
+                                <input type="text" id="date_range_start" placeholder="choose multiple dates" class="flatpickr-input" style="width: 100%;">
+                            </div>
+                            <div class="selected-dates" id="selected_dates_container">
+                                <!-- Selected dates will appear here as tags -->
+                            </div>
+                            
+                            <!-- Hidden input to store all selected dates as JSON -->
+                            <input type="hidden" name="available_dates" id="available_dates_input">
                         </div>
                     </div>
                 </div>
@@ -122,20 +122,7 @@
                                 <span class="input-icon">%</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="accommodation">Accommodation Details <span class="required">*</span></label>
-                            <input type="text" id="accommodation" name="accommodation" value="{{ old('accommodation') }}" >
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="departure_dates">Departure Dates <span class="required">*</span></label>
-                            <input type="text" id="departure_dates" name="departure_dates" value="{{ old('departure_dates') }}" placeholder="e.g. Mon, Wed, Fri or Specific dates" >
-                        </div>
-                    </div>
-
+                    </div> 
                     <div class="form-group">
                         <label for="limited_spots">Limited Availability Message (optional)</label>
                         <input type="text" id="limited_spots" name="limited_spots" value="{{ old('limited_spots') }}" placeholder="e.g. Only 5 spots left for May dates!">
@@ -549,4 +536,54 @@
             });
         });
     </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        const multiDatePicker = flatpickr("#date_range_start", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            mode: "multiple",
+            onChange: function(selectedDates, dateStr, instance) {
+                // 選択された日付をJSON形式で隠しフィールドに保存
+                document.getElementById('available_dates_input').value = JSON.stringify(selectedDates.map(date => {
+                // タイムゾーンを考慮した日付フォーマット
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }));
+                
+                // オプション: 選択された日付をタグとして表示
+                updateSelectedDatesDisplay(selectedDates);
+            }
+        });
+
+        // オプション: 選択された日付をタグとして表示する関数
+        // function updateSelectedDatesDisplay(dates) {
+        //     const container = document.getElementById('selected_dates_container');
+        //     container.innerHTML = '';
+            
+        //     dates.forEach(date => {
+        //         const formattedDate = date.toISOString().split('T')[0];
+        //         const dateTag = document.createElement('span');
+        //         dateTag.className = 'date-tag';
+        //         dateTag.innerHTML = `${formattedDate} <button type="button" class="remove-date" data-date="${formattedDate}">×</button>`;
+        //         container.appendChild(dateTag);
+        //     });
+            
+            // // タグの削除ボタンにイベントリスナーを追加
+            // document.querySelectorAll('.remove-date').forEach(button => {
+            //     button.addEventListener('click', function() {
+            //         const dateToRemove = this.getAttribute('data-date');
+            //         // flatpickrインスタンスから日付を削除
+            //         const currentDates = multiDatePicker.selectedDates;
+            //         const filteredDates = currentDates.filter(date => 
+            //             date.toISOString().split('T')[0] !== dateToRemove
+            //         );
+            //         multiDatePicker.setDate(filteredDates);
+            //     });
+            // });
+        // }
+    </script>
+    
 @endsection

@@ -1,5 +1,5 @@
 
-@if (Route::currentRouteName() == 'home')  
+@if (Route::currentRouteName() == 'top')  
     <header class="absolute z2 js_header_pc pc_header">
         <div class="header_right font_icon"><a href="#home">JapaTour</a></div>
         <div class="header_center">
@@ -20,7 +20,7 @@
             <span class="hamburger__line"></span>
         </button>
     </header>
-@elseif(Route::currentRouteName() == 'show')
+@elseif(Route::currentRouteName() == 'tour.show')
 
     <header class="pc_header" style="transform: none;">
         <div class="header_right font_icon" style="color: #52aaf9;"><a href="#home">JapaTour</a></div>
@@ -44,14 +44,14 @@
     </header>
 @else
     <header class="pc_header header_style_law">
-        <div class="header_right font_icon"><a href="{{route("home")}}">JapaTour</a></div>
+        <div class="header_right font_icon"><a href="{{route("top")}}">JapaTour</a></div>
         <div class="header_center_law">
             <ul>
-                <li class="font_normal"><a href="{{route("home")}}" >Home</a></li>
-                <li class="font_normal"><a href="{{route("home")}}#about" >About</a></li>
-                <li class="font_normal"><a href="{{route("home")}}#tour" >Tour</a></li>
-                <li class="font_normal"><a href="{{route("home")}}#hot">Hot</a></li>
-                <li class="font_normal"><a href="{{route("home")}}#contact">Contact</a></li>
+                <li class="font_normal"><a href="{{route("top")}}" >Home</a></li>
+                <li class="font_normal"><a href="{{route("top")}}#about" >About</a></li>
+                <li class="font_normal"><a href="{{route("top")}}#tour" >Tour</a></li>
+                <li class="font_normal"><a href="{{route("top")}}#hot">Hot</a></li>
+                <li class="font_normal"><a href="{{route("top")}}#contact">Contact</a></li>
             </ul>
         </div>
     </header>

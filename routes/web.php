@@ -1,20 +1,15 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\Admin\TourController;
+use App\Http\Controllers\admin\TourController;
+use App\Http\Controllers\GetYourGuideController;
 use App\Http\Controllers\mail\SendContactMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
-})->name("home");
-
-
-Route::get('/tour/create', function () {
-    return view('admin.tour_create');
-});
-
+})->name("top");
 
 Route::get('/thank', function () {
     return view('emails.thank');
@@ -27,30 +22,30 @@ Route::get('/law', function () {
 Route::get("/admin", [AdminController::class, "index"]);
 Route::post("/sendMessage", [SendContactMail::class, "SendContactMail"])->name("sendMessage");
 
-
-
 // routes/web.php
 Route::middleware(['auth'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', 'AdminController@dashboard');
-    Route::get('/users', 'AdminController@users');
+    Route::get('/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/users', [AdminController::class, 'users']);
     // 他の管理者用ルート
 });
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/show', function () {
-        return view('show');
-    })->name("show");
-    
     Route::get('/tour/edit', function () {
         return view('admin.tour_edit');
     });
 
     Route::get("/tour/list", [TourController::class, "index"])->name("tour_list");
 
+    Route::get("/tour/show/{id}", [TourController::class, "show"])->name("tour.show");
     Route::post("/tour/create", [TourController::class, "store"])->name("tours.store");
     Route::post("/tour/edit", [SendContactMail::class, "SendContactMail"])->name("tours.edit");
     Route::post("/tour/show", [SendContactMail::class, "SendContactMail"])->name("tours.show");
+    Route::delete("/tour/destroy/{id}", [TourController::class, "destroy"])->name("tours.destroy");
+    Route::get('/tour/create', function () {
+        return view('admin.tour_create');
+    });
+    
 });
 // Auth::routes(['register' => false]);
 Auth::routes();

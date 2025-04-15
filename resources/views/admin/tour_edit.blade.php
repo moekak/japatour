@@ -50,30 +50,15 @@
                         </div>
                     </div>
 
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="duration_days">Duration (Days) <span class="required">*</span></label>
-                            <input type="number" id="duration_days" name="duration_days" value="3" min="1" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="duration_nights">Duration (Nights) <span class="required">*</span></label>
-                            <input type="number" id="duration_nights" name="duration_nights" value="2" min="0" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="hours">Hours <span class="required">*</span></label>
+                        <input type="number" id="hours" name="hours" value="3" min="1" required>
                     </div>
-
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="start_location">Start Location <span class="required">*</span></label>
-                            <input type="text" id="start_location" name="start_location" value="Kyoto" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="end_location">End Location <span class="required">*</span></label>
-                            <input type="text" id="end_location" name="end_location" value="Osaka" required>
-                        </div>
+                    
+                    <div class="form-group">
+                        <label for="start_location">Start Location <span class="required">*</span></label>
+                        <input type="text" id="start_location" name="start_location" value="Kyoto" required>
                     </div>
-
                     <div class="form-grid-2">
                         <div class="form-group">
                             <label for="destinations">Destinations <span class="required">*</span></label>
@@ -124,19 +109,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="accommodation">Accommodation Details <span class="required">*</span></label>
-                            <input type="text" id="accommodation" name="accommodation" value="4-star Kyoto hotel" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="departure_dates">Departure Dates <span class="required">*</span></label>
-                            <input type="text" id="departure_dates" name="departure_dates" value="Tue, Thu, Sat" placeholder="e.g. Mon, Wed, Fri or Specific dates" required>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label for="limited_spots">Limited Availability Message (optional)</label>
                         <input type="text" id="limited_spots" name="limited_spots" value="Only 5 spots left for May dates!" placeholder="e.g. Only 5 spots left for May dates!">

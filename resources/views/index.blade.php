@@ -521,5 +521,13 @@
         </script>
         <script src="{{mix("js/main.js")}}"></script>
         <script src="{{mix("js/common.js")}}"></script>
+        <script src="https://www.google.com/recaptcha/api.js?render=6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle"></script>
+        <script>
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle', {action: 'submit'}).then(function(token) {
+                    document.getElementById('recaptchaResponse').value = token;
+                });
+            });
+        </script>
 @endsection
 

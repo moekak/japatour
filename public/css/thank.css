@@ -45,7 +45,7 @@ h2{
     height: 0;
     border-style: solid;
     border-width: 58vh 41vw 0 0; /* ここで三角形のサイズを調整 */
-    border-color: var(--main-color) transparent transparent transparent; /* 斜めの部分の色 */
+    border-color:#52aaf9 transparent transparent transparent; /* 斜めの部分の色 */
 }
 
 /* 右下の三角形 */

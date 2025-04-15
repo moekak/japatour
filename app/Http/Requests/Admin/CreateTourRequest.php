@@ -25,18 +25,16 @@ class CreateTourRequest extends FormRequest
             "title" => ["required", "string", "max:255"],
             "subtitle" => ["required", "string", "max:255"],
             "badge" => ["nullable", "string", "max:255"],
-            "duration_days" => ["required", "integer", "max:255"],
+            "hours" => ["required", "integer"],
             "start_location" => ["required", "string", "max:255"],
-            "end_location" => ["required", "string", "max:255"],
             "destinations" => ["required", "string", "max:255"],
             "languages" => ["required", "string", "max:255"],
             "min_participants" => ["required", "integer"],
             "max_participants" => ["required", "integer"],
+            "available_dates" => ["required", "json"],
             "currency" => ["required", "string", "max:5"],
             "price" => ["required", "numeric", "min:0", "max:99999999.99"],
             "discount_percentage" => ["required", "integer"],
-            "accommodation" => ["required", "string", "max:255"],
-            "departure_dates" => ["required", "string", "max:255"],
             "limited_spots" => ["nullable", "string", "max:255"],
             "overview" => ["required", "string"],
             "highlights" => ["required", "array"],
@@ -63,17 +61,12 @@ class CreateTourRequest extends FormRequest
             'badge.string' => 'The badge must be a string.',
             'badge.max' => 'The badge must not exceed 255 characters.',
             
-            'duration_days.required' => 'The duration days field is required.',
-            'duration_days.integer' => 'The duration days must be an integer.',
-            'duration_days.max' => 'The duration days must not exceed 255.',
+            'hours.required' => 'The duration days field is required.',
+            'hours.integer' => 'The duration days must be an integer.',
             
             'start_location.required' => 'The start location field is required.',
             'start_location.string' => 'The start location must be a string.',
             'start_location.max' => 'The start location must not exceed 255 characters.',
-            
-            'end_location.required' => 'The end location field is required.',
-            'end_location.string' => 'The end location must be a string.',
-            'end_location.max' => 'The end location must not exceed 255 characters.',
             
             'destinations.required' => 'The destinations field is required.',
             'destinations.string' => 'The destinations must be a string.',
@@ -88,6 +81,9 @@ class CreateTourRequest extends FormRequest
             
             'max_participants.required' => 'The maximum participants field is required.',
             'max_participants.integer' => 'The maximum participants must be an integer.',
+
+            'available_dates.required' => 'The available dates field is required.',
+            'available_dates.json' => 'The available dates must be an json object.',
             
             'currency.required' => 'The currency field is required.',
             'currency.string' => 'The currency must be a string.',
@@ -100,14 +96,6 @@ class CreateTourRequest extends FormRequest
             
             'discount_percentage.required' => 'The discount percentage field is required.',
             'discount_percentage.integer' => 'The discount percentage must be an integer.',
-            
-            'accommodation.required' => 'The accommodation field is required.',
-            'accommodation.string' => 'The accommodation must be a string.',
-            'accommodation.max' => 'The accommodation must not exceed 255 characters.',
-            
-            'departure_dates.required' => 'The departure dates field is required.',
-            'departure_dates.string' => 'The departure dates must be a string.',
-            'departure_dates.max' => 'The departure dates must not exceed 255 characters.',
             
             'limited_spots.string' => 'The limited spots must be a string.',
             'limited_spots.max' => 'The limited spots must not exceed 255 characters.',

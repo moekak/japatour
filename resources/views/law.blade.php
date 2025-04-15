@@ -22,7 +22,7 @@
         </div>
         <div class="law-info-box">
             <label>メールアドレス</label>
-            <p>uth.view@gmail.com</p> 
+            <p>info@japatour-official.com</p> 
         </div>
         <div class="law-info-box">
             <label>販売価格</label>

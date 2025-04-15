@@ -106,9 +106,6 @@ const mediaQuery450 = window.matchMedia('(max-width: 450px)');
 const mediaQuery350 = window.matchMedia('(max-width: 350px)');
 
 let MAX_LENGTH = mediaQuery350.matches ? 170 : (mediaQuery450.matches ? 350 : (mediaQuery650.matches ? 420 : ( mediaQuery800.matches ? 230 : (mediaQuery900.matches ? 280: (mediaQuery1200.matches ? 240 : 310)))));
-console.log(MAX_LENGTH);
-
-
 reviews.forEach((review) => {
 	let text = review.textContent.trim();
 	if (text.length > MAX_LENGTH) {

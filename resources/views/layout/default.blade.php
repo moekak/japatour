@@ -35,13 +35,7 @@ use Biscolab\ReCaptcha\Facades\ReCaptcha;
     @yield('main')
     @include('components.footer')
     @yield('script')
-    <script src="https://www.google.com/recaptcha/api.js?render=6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle"></script>
 <script>
-grecaptcha.ready(function() {
-    grecaptcha.execute('6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle', {action: 'submit'}).then(function(token) {
-        document.getElementById('recaptchaResponse').value = token;
-    });
-});
 </script>
 </body>
 </html>

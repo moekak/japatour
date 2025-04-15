@@ -129,7 +129,6 @@ var mediaQuery650 = window.matchMedia('(max-width: 650px)');
 var mediaQuery450 = window.matchMedia('(max-width: 450px)');
 var mediaQuery350 = window.matchMedia('(max-width: 350px)');
 var MAX_LENGTH = mediaQuery350.matches ? 170 : mediaQuery450.matches ? 350 : mediaQuery650.matches ? 420 : mediaQuery800.matches ? 230 : mediaQuery900.matches ? 280 : mediaQuery1200.matches ? 240 : 310;
-console.log(MAX_LENGTH);
 reviews.forEach(function (review) {
   var text = review.textContent.trim();
   if (text.length > MAX_LENGTH) {

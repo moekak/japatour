@@ -13,7 +13,7 @@
             <img src="{{asset("img/icons8-check-60.png")}}" alt="">
             <h2>Thank you!</h2>
             <p>We have received your inquiry and will get back to you within 24-48 business hours. <br>While you wait, why not explore some of our popular tours?</p>
-            <a href="{{route("home")}}">→ back to top page</a>
+            <a href="{{route("top")}}">→ back to top page</a>
         </div>
     </div>
 </body>

@@ -16,7 +16,6 @@ class TourController extends Controller
     public function index()
     {
         $tours = Tour::getAllTours();
-        // print_r($tours);
         return view("admin.tour_list", ["tours" => $tours]);
     }
     /**
@@ -32,6 +31,7 @@ class TourController extends Controller
      */
     public function store(CreateTourRequest $request)
     {
+
 
 
         $validated = $request->validated();
@@ -62,7 +62,8 @@ class TourController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $tour = Tour::getSpecificTour($id);
+        return view("show", ["tour" => $tour]);
     }
 
     /**
@@ -86,6 +87,9 @@ class TourController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tour = Tour::findOrFail($id);
+        $tour->delete();
+
+        return redirect()->route("tour_list")->with("success", "success to delete Tour!");  
     }
 }

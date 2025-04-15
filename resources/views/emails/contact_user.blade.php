@@ -42,12 +42,10 @@
         <div class="footer">
             <p>This is an automated response. Please do not reply to this email.</p>
             <p>JapaTour<br>
-            [Company Address]<br>
-            [Contact Information]</p>
+            phone number: 090-6495-4567
+            email: info@japatour-official.com</p>
             <p>Follow us on: 
-                <a href="#">Twitter</a> | 
-                <a href="#">Facebook</a> | 
-                <a href="#">LinkedIn</a>
+                <a href="https://www.instagram.com/japatour_official/">Instagram</a> | 
             </p>
         </div>
     </div>
