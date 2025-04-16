@@ -71,15 +71,17 @@ class TourController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $tour = Tour::getSpecificTour($id);
+        return view("admin.tour_edit", ["tour" => $tour]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CreateTourRequest $request, string $id)
     {
-        //
+        $validated = $request->validated();
+        print_r($validated);
     }
 
     /**

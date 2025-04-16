@@ -39,7 +39,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get("/tour/show/{id}", [TourController::class, "show"])->name("tour.show");
     Route::post("/tour/create", [TourController::class, "store"])->name("tours.store");
-    Route::post("/tour/edit", [SendContactMail::class, "SendContactMail"])->name("tours.edit");
+    Route::post("/tour/update/{id}", [TourController::class, "update"])->name("tour.update");
+    Route::get("/tour/edit/{id}", [TourController::class, "edit"])->name("tour.edit");
     Route::post("/tour/show", [SendContactMail::class, "SendContactMail"])->name("tours.show");
     Route::delete("/tour/destroy/{id}", [TourController::class, "destroy"])->name("tours.destroy");
     Route::get('/tour/create', function () {

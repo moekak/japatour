@@ -1,6 +1,7 @@
 @extends('layout.default')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/admin/admin-tours.css') }}">
+<link rel="stylesheet" href="{{ asset('css/tour_create.css') }}">
 @endsection
 
 @section('title', 'Edit Tour')
@@ -12,10 +13,10 @@
         <div class="admin-header">
             <div class="admin-header-title">
                 <h1>Edit Tour</h1>
-                <p>Update details for "Kyoto, Nara & Osaka"</p>
+                <p>Update details for {{$tour->title}}</p>
             </div>
             <div class="admin-header-actions">
-                <a href="" class="btn-outline">
+                <a href="{{route('tour_list')}}" class="btn-outline">
                     <i class="fas fa-arrow-left"></i> Back to Tours
                 </a>
                 <a href="#" class="btn-secondary">
@@ -24,9 +25,17 @@
             </div>
         </div>
 
-        <form action="#" method="POST" enctype="multipart/form-data" class="tour-form">
+        <form action="{{ route('tour.update', $tour->id) }}" method="POST" enctype="multipart/form-data" class="tour-form">
             @csrf
-            @method('PUT')
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
             <div class="form-sections">
                 <!-- Basic Info Section -->
@@ -35,51 +44,65 @@
                     
                     <div class="form-group">
                         <label for="title">Tour Title <span class="required">*</span></label>
-                        <input type="text" id="title" name="title" value="Kyoto, Nara & Osaka" required>
+                        <input type="text" id="title" name="title" value="{{$tour->title}}" >
                     </div>
 
                     <div class="form-grid-2">
                         <div class="form-group">
                             <label for="subtitle">Subtitle <span class="required">*</span></label>
-                            <input type="text" id="subtitle" name="subtitle" value="3-Day Historical Journey Through Japan's Ancient Capitals" required>
+                            <input type="text" id="subtitle" name="subtitle" value="{{$tour->subtitle}}" >
                         </div>
                         
                         <div class="form-group">
                             <label for="badge">Badge Text (optional)</label>
-                            <input type="text" id="badge" name="badge" value="Best Seller" placeholder="e.g. Best Seller, New Tour">
+                            <input type="text" id="badge" name="badge" value="{{$tour->badge}}" placeholder="e.g. Best Seller, New Tour">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="hours">Hours <span class="required">*</span></label>
-                        <input type="number" id="hours" name="hours" value="3" min="1" required>
+                        <input type="number" id="hours" name="{{$tour->hours}}" value="3" min="1" >
                     </div>
                     
                     <div class="form-group">
                         <label for="start_location">Start Location <span class="required">*</span></label>
-                        <input type="text" id="start_location" name="start_location" value="Kyoto" required>
+                        <input type="text" id="start_location" name="start_location" value="{{$tour->start_location}}" >
                     </div>
                     <div class="form-grid-2">
                         <div class="form-group">
                             <label for="destinations">Destinations <span class="required">*</span></label>
-                            <input type="text" id="destinations" name="destinations" value="Kyoto, Nara, Osaka" placeholder="e.g. Kyoto, Nara, Osaka" required>
+                            <input type="text" id="destinations" name="destinations" value="{{$tour->destinations}}" placeholder="e.g. Kyoto, Nara, Osaka" >
                         </div>
                         
                         <div class="form-group">
                             <label for="languages">Available Languages <span class="required">*</span></label>
-                            <input type="text" id="languages" name="languages" value="English, Japanese" placeholder="e.g. English, Japanese" required>
+                            <input type="text" id="languages" name="languages" value="{{$tour->languages}}" placeholder="e.g. English, Japanese" >
                         </div>
                     </div>
 
                     <div class="form-grid-2">
                         <div class="form-group">
                             <label for="min_participants">Min. Participants <span class="required">*</span></label>
-                            <input type="number" id="min_participants" name="min_participants" value="4" min="1" required>
+                            <input type="number" id="min_participants" name="min_participants" value="{{$tour->min_participants}}" min="1" >
                         </div>
                         
                         <div class="form-group">
                             <label for="max_participants">Max. Group Size <span class="required">*</span></label>
-                            <input type="number" id="max_participants" name="max_participants" value="12" min="1" required>
+                            <input type="number" id="max_participants" name="max_participants" value="{{$tour->max_participants}}" min="1" >
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="available_dates">Available Dates <span class="required">*</span></label>
+                        <div class="date-selection">
+                            <div class="date-range-inputs">
+                                <input type="text" id="date_range_start" placeholder="choose multiple dates" class="flatpickr-input" style="width: 100%;">
+                            </div>
+                            <div class="selected-dates" id="selected_dates_container">
+                                <!-- Selected dates will appear here as tags -->
+                            </div>
+                            
+                            <!-- Hidden input to store all selected dates as JSON -->
+                            <input type="hidden" name="available_dates" id="available_dates_input" value="{{$tour->available_dates}}">
                         </div>
                     </div>
                 </div>
@@ -93,25 +116,25 @@
                             <label for="price">Price (per person) <span class="required">*</span></label>
                             <div class="price-input">
                                 <select id="currency" name="currency">
-                                    <option value="¥" selected>¥ (JPY)</option>
+                                    <option value="¥" {{ $tour->currency == "yen" ? "selected" : "" }}>¥ (JPY)</option>
                                     <option value="$">$ (USD)</option>
                                     <option value="€">€ (EUR)</option>
                                 </select>
-                                <input type="number" id="price" name="price" value="80000" min="0" required>
+                                <input type="number" id="price" name="price" value="{{$tour->price}}" min="0" >
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label for="discount_percentage">Discount Percentage (optional)</label>
                             <div class="input-with-icon">
-                                <input type="number" id="discount_percentage" name="discount_percentage" value="15" min="0" max="100">
+                                <input type="number" id="discount_percentage" name="discount_percentage" value="{{$tour->discount_percentage}}" min="0" max="100">
                                 <span class="input-icon">%</span>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="limited_spots">Limited Availability Message (optional)</label>
-                        <input type="text" id="limited_spots" name="limited_spots" value="Only 5 spots left for May dates!" placeholder="e.g. Only 5 spots left for May dates!">
+                        <input type="text" id="limited_spots" name="limited_spots" value="{{$tour->limited_spots}}" placeholder="e.g. Only 5 spots left for May dates!">
                     </div>
                 </div>
 
@@ -121,39 +144,19 @@
                     
                     <div class="form-group">
                         <label for="overview">Tour Overview <span class="required">*</span></label>
-                        <textarea id="overview" name="overview" rows="5" required>Experience the best of Japan's cultural heritage in this 3-day journey through the historic cities of Kyoto, Nara, and Osaka. From ancient temples and shrines to modern culinary experiences, this tour offers a perfect blend of Japan's traditional past and vibrant present.
-
-Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit UNESCO World Heritage sites before traveling to Nara, home to friendly deer and impressive Buddhist monuments. The journey concludes in Osaka, where you'll experience contemporary Japan through its castle, lively districts, and renowned food culture.</textarea>
+                        <textarea id="overview" name="overview" rows="5" >{{$tour->overview}}</textarea>
                         <p class="field-help">Provide a compelling overview of the tour experience. This will appear in the Tour Overview section.</p>
                     </div>
 
                     <div class="form-group">
                         <label>Tour Highlights <span class="required">*</span></label>
                         <div id="highlights-container">
-                            <div class="highlight-item">
-                                <input type="text" name="highlights[]" value="Visit Kyoto's UNESCO World Heritage Sites" required>
-                                <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="highlight-item">
-                                <input type="text" name="highlights[]" value="Interact with sacred deer at Nara Park" required>
-                                <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="highlight-item">
-                                <input type="text" name="highlights[]" value="Explore the iconic Fushimi Inari Shrine" required>
-                                <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="highlight-item">
-                                <input type="text" name="highlights[]" value="Tour Osaka Castle and its surroundings" required>
-                                <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="highlight-item">
-                                <input type="text" name="highlights[]" value="Experience authentic Japanese cuisine" required>
-                                <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="highlight-item">
-                                <input type="text" name="highlights[]" value="Optional traditional tea ceremony" required>
-                                <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
+                            @foreach ($tour->highlights as $highlight)
+                                <div class="highlight-item">
+                                    <input type="text" name="highlights[]" value="{{$highlight}}" >
+                                    <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
+                                </div>
+                            @endforeach
                         </div>
                         <button type="button" id="add-highlight" class="btn-secondary"><i class="fas fa-plus"></i> Add Highlight</button>
                     </div>
@@ -165,160 +168,44 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
                     
                     <div id="itinerary-days-container">
                         <!-- Day 1 -->
-                        <div class="itinerary-day-item">
-                            <div class="day-header">
-                                <h3>Day 1</h3>
-                                <button type="button" class="remove-day btn-icon" data-day="1"><i class="fas fa-times"></i></button>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="itinerary[0][title]">Day Title <span class="required">*</span></label>
-                                <input type="text" id="itinerary[0][title]" name="itinerary[0][title]" value="Kyoto Exploration" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="itinerary[0][description]">Day Description <span class="required">*</span></label>
-                                <textarea id="itinerary[0][description]" name="itinerary[0][description]" rows="3" required>After meeting at Kyoto Station, we'll visit the iconic Golden Pavilion (Kinkaku-ji) and Kiyomizu Temple. In the afternoon, we'll explore the famous torii gates of Fushimi Inari Shrine, followed by a traditional Kyoto kaiseki dinner.</textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Schedule <span class="required">*</span></label>
-                                <div class="schedule-items-container" data-day="0">
-                                    <div class="schedule-item">
-                                        <div class="schedule-time">
-                                            <input type="text" name="itinerary[0][schedule][0][time]" value="9:00 AM" placeholder="e.g. 9:00 AM" required>
-                                        </div>
-                                        <div class="schedule-description">
-                                            <input type="text" name="itinerary[0][schedule][0][description]" value="Meet at Kyoto Station, tour orientation" placeholder="Activity description" required>
-                                        </div>
-                                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                    <div class="schedule-item">
-                                        <div class="schedule-time">
-                                            <input type="text" name="itinerary[0][schedule][1][time]" value="10:00 AM" placeholder="e.g. 9:00 AM" required>
-                                        </div>
-                                        <div class="schedule-description">
-                                            <input type="text" name="itinerary[0][schedule][1][description]" value="Visit Kinkaku-ji (Golden Pavilion)" placeholder="Activity description" required>
-                                        </div>
-                                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                    <div class="schedule-item">
-                                        <div class="schedule-time">
-                                            <input type="text" name="itinerary[0][schedule][2][time]" value="12:00 PM" placeholder="e.g. 9:00 AM" required>
-                                        </div>
-                                        <div class="schedule-description">
-                                            <input type="text" name="itinerary[0][schedule][2][description]" value="Lunch featuring Kyoto's famous tofu cuisine" placeholder="Activity description" required>
-                                        </div>
-                                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
+                        @foreach ($tour->itinerary as $itinerary)
+                            <div class="itinerary-day-item">
+                                <div class="day-header">
+                                    <button type="button" class="remove-day btn-icon" data-day="1"><i class="fas fa-times"></i></button>
                                 </div>
-                                <button type="button" class="add-schedule btn-secondary" data-day="0"><i class="fas fa-plus"></i> Add Schedule Item</button>
+                                
+                                <div class="form-group">
+                                    <label for="itinerary[0][title]">Day Title <span class="required">*</span></label>
+                                    <input type="text" id="itinerary[0][title]" name="itinerary[0][title]" value="{{$itinerary["title"]}}" >
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="itinerary[0][description]">Day Description <span class="required">*</span></label>
+                                    <textarea id="itinerary[0][description]" name="itinerary[0][description]" rows="3" >{{$itinerary["description"]}}</textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Schedule <span class="required">*</span></label>
+                                    <div class="schedule-items-container" data-day="0">
+                                        @foreach ($itinerary["schedule"] as $schedule)
+                                            <div class="schedule-item">
+                                                <div class="schedule-time">
+                                                    <input type="text" name="itinerary[0][schedule][0][time]" value="{{$schedule["time"]}}" placeholder="e.g. 9:00 AM" >
+                                                </div>
+                                                <div class="schedule-description">
+                                                    <input type="text" name="itinerary[0][schedule][0][description]" value="{{$schedule["description"]}}" placeholder="Activity description" >
+                                                </div>
+                                                <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <button type="button" class="add-schedule btn-secondary" data-day="0"><i class="fas fa-plus"></i> Add Schedule Item</button>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Day 2 -->
-                        <div class="itinerary-day-item">
-                            <div class="day-header">
-                                <h3>Day 2</h3>
-                                <button type="button" class="remove-day btn-icon" data-day="2"><i class="fas fa-times"></i></button>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="itinerary[1][title]">Day Title <span class="required">*</span></label>
-                                <input type="text" id="itinerary[1][title]" name="itinerary[1][title]" value="Nara Day Trip" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="itinerary[1][description]">Day Description <span class="required">*</span></label>
-                                <textarea id="itinerary[1][description]" name="itinerary[1][description]" rows="3" required>Travel by train to Nara, Japan's first permanent capital. Visit Todai-ji Temple with its Great Buddha statue and explore Nara Park with its friendly deer. After visiting Kasuga Taisha Shrine, return to Kyoto for an evening at leisure.</textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Schedule <span class="required">*</span></label>
-                                <div class="schedule-items-container" data-day="1">
-                                    <div class="schedule-item">
-                                        <div class="schedule-time">
-                                            <input type="text" name="itinerary[1][schedule][0][time]" value="8:30 AM" placeholder="e.g. 9:00 AM" required>
-                                        </div>
-                                        <div class="schedule-description">
-                                            <input type="text" name="itinerary[1][schedule][0][description]" value="Depart hotel for Nara" placeholder="Activity description" required>
-                                        </div>
-                                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                    <div class="schedule-item">
-                                        <div class="schedule-time">
-                                            <input type="text" name="itinerary[1][schedule][1][time]" value="9:30 AM" placeholder="e.g. 9:00 AM" required>
-                                        </div>
-                                        <div class="schedule-description">
-                                            <input type="text" name="itinerary[1][schedule][1][description]" value="Arrive in Nara, visit Todai-ji Temple" placeholder="Activity description" required>
-                                        </div>
-                                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                    <div class="schedule-item">
-                                        <div class="schedule-time">
-                                            <input type="text" name="itinerary[1][schedule][2][time]" value="11:00 AM" placeholder="e.g. 9:00 AM" required>
-                                        </div>
-                                        <div class="schedule-description">
-                                            <input type="text" name="itinerary[1][schedule][2][description]" value="Explore Nara Park (interact with friendly deer)" placeholder="Activity description" required>
-                                        </div>
-                                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <button type="button" class="add-schedule btn-secondary" data-day="1"><i class="fas fa-plus"></i> Add Schedule Item</button>
-                            </div>
-                        </div>
-
-                        <!-- Day 3 -->
-                        <div class="itinerary-day-item">
-                            <div class="day-header">
-                                <h3>Day 3</h3>
-                                <button type="button" class="remove-day btn-icon" data-day="3"><i class="fas fa-times"></i></button>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="itinerary[2][title]">Day Title <span class="required">*</span></label>
-                                <input type="text" id="itinerary[2][title]" name="itinerary[2][title]" value="Osaka Adventure" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="itinerary[2][description]">Day Description <span class="required">*</span></label>
-                                <textarea id="itinerary[2][description]" name="itinerary[2][description]" rows="3" required>Travel to vibrant Osaka and visit Osaka Castle and its surrounding park. Experience local Osaka cuisine with a street food lunch, then explore Tennoji district before finishing at the lively Dotonbori and Shinsaibashi areas.</textarea>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Schedule <span class="required">*</span></label>
-                                <div class="schedule-items-container" data-day="2">
-                                    <div class="schedule-item">
-                                        <div class="schedule-time">
-                                            <input type="text" name="itinerary[2][schedule][0][time]" value="9:00 AM" placeholder="e.g. 9:00 AM" required>
-                                        </div>
-                                        <div class="schedule-description">
-                                            <input type="text" name="itinerary[2][schedule][0][description]" value="Hotel checkout, travel to Osaka" placeholder="Activity description" required>
-                                        </div>
-                                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                    <div class="schedule-item">
-                                        <div class="schedule-time">
-                                            <input type="text" name="itinerary[2][schedule][1][time]" value="10:30 AM" placeholder="e.g. 9:00 AM" required>
-                                        </div>
-                                        <div class="schedule-description">
-                                            <input type="text" name="itinerary[2][schedule][1][description]" value="Osaka Castle and park exploration" placeholder="Activity description" required>
-                                        </div>
-                                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                    <div class="schedule-item">
-                                        <div class="schedule-time">
-                                            <input type="text" name="itinerary[2][schedule][2][time]" value="12:30 PM" placeholder="e.g. 9:00 AM" required>
-                                        </div>
-                                        <div class="schedule-description">
-                                            <input type="text" name="itinerary[2][schedule][2][description]" value="Osaka street food experience (takoyaki & okonomiyaki)" placeholder="Activity description" required>
-                                        </div>
-                                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <button type="button" class="add-schedule btn-secondary" data-day="2"><i class="fas fa-plus"></i> Add Schedule Item</button>
-                            </div>
-                        </div>
+                        @endforeach
+                        
+                        
                     </div>
                     
                     <button type="button" id="add-day" class="btn-secondary"><i class="fas fa-plus"></i> Add Day</button>
@@ -331,30 +218,12 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
                     <div class="form-group">
                         <label>Inclusions <span class="required">*</span></label>
                         <div id="inclusions-container">
-                            <div class="inclusion-item">
-                                <input type="text" name="inclusions[]" value="Accommodation (2 nights with breakfast)" required>
-                                <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="inclusion-item">
-                                <input type="text" name="inclusions[]" value="Lunch (all 3 days)" required>
-                                <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="inclusion-item">
-                                <input type="text" name="inclusions[]" value="Welcome dinner (Day 1)" required>
-                                <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="inclusion-item">
-                                <input type="text" name="inclusions[]" value="Professional English-speaking guide" required>
-                                <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="inclusion-item">
-                                <input type="text" name="inclusions[]" value="All entrance fees to attractions" required>
-                                <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="inclusion-item">
-                                <input type="text" name="inclusions[]" value="Transportation between Kyoto, Nara and Osaka" required>
-                                <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
+                            @foreach ($tour->inclusions as $inclusion)
+                                <div class="inclusion-item">
+                                    <input type="text" name="inclusions[]" value="{{$inclusion}}" >
+                                    <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
+                                </div>
+                            @endforeach
                         </div>
                         <button type="button" id="add-inclusion" class="btn-secondary"><i class="fas fa-plus"></i> Add Inclusion</button>
                     </div>
@@ -362,26 +231,12 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
                     <div class="form-group">
                         <label>Exclusions <span class="required">*</span></label>
                         <div id="exclusions-container">
-                            <div class="exclusion-item">
-                                <input type="text" name="exclusions[]" value="Transportation to Kyoto/from Osaka" required>
-                                <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="exclusion-item">
-                                <input type="text" name="exclusions[]" value="Dinner on Day 2" required>
-                                <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="exclusion-item">
-                                <input type="text" name="exclusions[]" value="Optional activities and tours" required>
-                                <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="exclusion-item">
-                                <input type="text" name="exclusions[]" value="Personal expenses" required>
-                                <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
-                            <div class="exclusion-item">
-                                <input type="text" name="exclusions[]" value="Travel insurance" required>
-                                <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
-                            </div>
+                            @foreach ($tour->exclusions as $exclusion)
+                                <div class="exclusion-item">
+                                    <input type="text" name="exclusions[]" value="{{$tour->exclusion}}" >
+                                    <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
+                                </div>
+                            @endforeach
                         </div>
                         <button type="button" id="add-exclusion" class="btn-secondary"><i class="fas fa-plus"></i> Add Exclusion</button>
                     </div>
@@ -394,8 +249,9 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
                     <div class="form-group">
                         <label for="hero_image">Hero Image</label>
                         <div class="current-image">
-                            <img src="https://via.placeholder.com/100x70?text=Hero+Image" alt="Hero Image" class="thumbnail">
-                            <p class="current-image-name">Current: kyoto_nara_osaka_hero.jpg</p>
+{{--                             
+                            <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" alt="Hero Image" class="thumbnail"> --}}
+                            <img src="https://placehold.jp/150x150.png" alt="{{ $tour->title }}" alt="Hero Image" class="thumbnail">
                         </div>
                         <div class="image-upload-container">
                             <input type="file" id="hero_image" name="hero_image" accept="image/*" class="image-upload-input">
@@ -411,27 +267,17 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
                     <div class="form-group">
                         <label for="gallery_images">Gallery Images</label>
                         <div class="current-gallery">
-                            <div class="gallery-image-item">
-                                <img src="https://via.placeholder.com/100x70?text=Image+1" alt="Gallery image 1" class="thumbnail">
-                                <div class="gallery-image-actions">
-                                    <input type="checkbox" id="remove_gallery_0" name="remove_gallery[]" value="tours/kyoto_nara_osaka_1.jpg">
-                                    <label for="remove_gallery_0" class="remove-checkbox-label">Remove</label>
+                            @foreach ($tour->gallery_images as $gallery_image)
+                                <div class="gallery-image-item">
+                                    {{-- <img src="{{ asset('storage/' . $gallery_image) }}" alt="{{ $tour->title }}" alt="Gallery image 1" class="thumbnail"> --}}
+                                    <img src="https://placehold.jp/150x150.png" alt="{{ $tour->title }}" alt="Gallery image 1" class="thumbnail">
+                                    <div class="gallery-image-actions">
+                                        <input type="checkbox" id="remove_gallery_0" name="remove_gallery[]" value="{{$gallery_image}}">
+                                        <input type="hidden"  name="current_gallery_images[]"value="{{$gallery_image}}">
+                                        <label for="remove_gallery_0" class="remove-checkbox-label">Remove</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="gallery-image-item">
-                                <img src="https://via.placeholder.com/100x70?text=Image+2" alt="Gallery image 2" class="thumbnail">
-                                <div class="gallery-image-actions">
-                                    <input type="checkbox" id="remove_gallery_1" name="remove_gallery[]" value="tours/kyoto_nara_osaka_2.jpg">
-                                    <label for="remove_gallery_1" class="remove-checkbox-label">Remove</label>
-                                </div>
-                            </div>
-                            <div class="gallery-image-item">
-                                <img src="https://via.placeholder.com/100x70?text=Image+3" alt="Gallery image 3" class="thumbnail">
-                                <div class="gallery-image-actions">
-                                    <input type="checkbox" id="remove_gallery_2" name="remove_gallery[]" value="tours/kyoto_nara_osaka_3.jpg">
-                                    <label for="remove_gallery_2" class="remove-checkbox-label">Remove</label>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                         <div class="image-upload-container">
                             <input type="file" id="gallery_images" name="new_gallery_images[]" accept="image/*" class="image-upload-input" multiple>
@@ -447,7 +293,7 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
             </div>
 
             <div class="form-actions">
-                <button type="button" class="btn-outline" onclick="window.location.href=''">Cancel</button>
+                <button type="button" class="btn-outline" onclick="window.location.href=">Cancel</button>
                 <button type="submit" class="btn-primary">Update Tour</button>
             </div>
         </form>
@@ -463,12 +309,12 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
             
             <div class="form-group">
                 <label for="itinerary[{day_index}][title]">Day Title <span class="required">*</span></label>
-                <input type="text" id="itinerary[{day_index}][title]" name="itinerary[{day_index}][title]" required>
+                <input type="text" id="itinerary[{day_index}][title]" name="itinerary[{day_index}][title]" >
             </div>
             
             <div class="form-group">
                 <label for="itinerary[{day_index}][description]">Day Description <span class="required">*</span></label>
-                <textarea id="itinerary[{day_index}][description]" name="itinerary[{day_index}][description]" rows="3" required></textarea>
+                <textarea id="itinerary[{day_index}][description]" name="itinerary[{day_index}][description]" rows="3" ></textarea>
             </div>
             
             <div class="form-group">
@@ -476,10 +322,10 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
                 <div class="schedule-items-container" data-day="{day_index}">
                     <div class="schedule-item">
                         <div class="schedule-time">
-                            <input type="text" name="itinerary[{day_index}][schedule][0][time]" placeholder="e.g. 9:00 AM" required>
+                            <input type="text" name="itinerary[{day_index}][schedule][0][time]" placeholder="e.g. 9:00 AM" >
                         </div>
                         <div class="schedule-description">
-                            <input type="text" name="itinerary[{day_index}][schedule][0][description]" placeholder="Activity description" required>
+                            <input type="text" name="itinerary[{day_index}][schedule][0][description]" placeholder="Activity description" >
                         </div>
                         <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
                     </div>
@@ -493,10 +339,10 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
     <template id="schedule-template">
         <div class="schedule-item">
             <div class="schedule-time">
-                <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][time]" placeholder="e.g. 9:00 AM" required>
+                <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][time]" placeholder="e.g. 9:00 AM" >
             </div>
             <div class="schedule-description">
-                <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][description]" placeholder="Activity description" required>
+                <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][description]" placeholder="Activity description" >
             </div>
             <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
         </div>
@@ -510,7 +356,7 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
                 const newItem = document.createElement('div');
                 newItem.className = 'highlight-item';
                 newItem.innerHTML = `
-                    <input type="text" name="highlights[]" required>
+                    <input type="text" name="highlights[]" >
                     <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
                 `;
                 container.appendChild(newItem);
@@ -533,7 +379,7 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
                 const newItem = document.createElement('div');
                 newItem.className = 'inclusion-item';
                 newItem.innerHTML = `
-                    <input type="text" name="inclusions[]" required>
+                    <input type="text" name="inclusions[]" >
                     <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
                 `;
                 container.appendChild(newItem);
@@ -556,7 +402,7 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
                 const newItem = document.createElement('div');
                 newItem.className = 'exclusion-item';
                 newItem.innerHTML = `
-                    <input type="text" name="exclusions[]" required>
+                    <input type="text" name="exclusions[]" >
                     <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
                 `;
                 container.appendChild(newItem);
@@ -662,4 +508,25 @@ Beginning in Kyoto, Japan's cultural capital for over 1,000 years, you'll visit 
             });
         });
     </script>
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+       <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+            const multiDatePicker = flatpickr("#date_range_start", {
+                dateFormat: "Y-m-d",
+                minDate: "today",
+                mode: "multiple",
+                onChange: function(selectedDates, dateStr, instance) {
+                    // 選択された日付をJSON形式で隠しフィールドに保存
+                    document.getElementById('available_dates_input').value = JSON.stringify(selectedDates.map(date => {
+                    // タイムゾーンを考慮した日付フォーマット
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                }));
+
+                }
+            });
+    
+        </script>
 @endsection

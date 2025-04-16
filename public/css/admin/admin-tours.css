@@ -443,7 +443,7 @@ body {
 }
 
 .tour-card-title {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   margin-bottom: 16px;
   color: var(--dark-text);
@@ -477,8 +477,8 @@ body {
 }
 
 .tour-card-price {
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 29px;
+  font-weight: 900;
   color: var(--accent-color);
   margin-bottom: 24px;
   margin-top: auto;
@@ -886,4 +886,14 @@ body {
   .modal-footer {
     padding: 20px;
   }
+}
+
+.gallery-image-actions{
+  display: flex;
+  align-items: baseline;
+  gap: 13px;
+}
+
+.current-image{
+  padding-bottom: 2%;
 }

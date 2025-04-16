@@ -552,38 +552,10 @@
                 const day = String(date.getDate()).padStart(2, '0');
                 return `${year}-${month}-${day}`;
             }));
-                
-                // オプション: 選択された日付をタグとして表示
-                updateSelectedDatesDisplay(selectedDates);
+
             }
         });
 
-        // オプション: 選択された日付をタグとして表示する関数
-        // function updateSelectedDatesDisplay(dates) {
-        //     const container = document.getElementById('selected_dates_container');
-        //     container.innerHTML = '';
-            
-        //     dates.forEach(date => {
-        //         const formattedDate = date.toISOString().split('T')[0];
-        //         const dateTag = document.createElement('span');
-        //         dateTag.className = 'date-tag';
-        //         dateTag.innerHTML = `${formattedDate} <button type="button" class="remove-date" data-date="${formattedDate}">×</button>`;
-        //         container.appendChild(dateTag);
-        //     });
-            
-            // // タグの削除ボタンにイベントリスナーを追加
-            // document.querySelectorAll('.remove-date').forEach(button => {
-            //     button.addEventListener('click', function() {
-            //         const dateToRemove = this.getAttribute('data-date');
-            //         // flatpickrインスタンスから日付を削除
-            //         const currentDates = multiDatePicker.selectedDates;
-            //         const filteredDates = currentDates.filter(date => 
-            //             date.toISOString().split('T')[0] !== dateToRemove
-            //         );
-            //         multiDatePicker.setDate(filteredDates);
-            //     });
-            // });
-        // }
     </script>
     
 @endsection
