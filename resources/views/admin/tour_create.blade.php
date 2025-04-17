@@ -298,11 +298,14 @@
                             <input type="file" id="hero_image" name="hero_image" accept="image/*" class="image-upload-input" >
                             <label for="hero_image" class="image-upload-label">
                                 <i class="fas fa-cloud-upload-alt"></i>
-                                <span>Choose a file...</span>
+                                <span style="color: #fff;">Choose a file...</span>
                             </label>
                             <div class="selected-file"></div>
                         </div>
                         <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
+                        <div class="preview-container">
+                            <img id="previewImage" class="preview-image" src="">
+                        </div>
                     </div>
                     
                     <div class="form-group">
@@ -311,11 +314,13 @@
                             <input type="file" id="gallery_images" name="gallery_images[]" accept="image/*" class="image-upload-input" multiple >
                             <label for="gallery_images" class="image-upload-label">
                                 <i class="fas fa-images"></i>
-                                <span>Choose multiple files...</span>
+                                <span style="color: #fff;">Choose multiple files...</span>
                             </label>
                             <div class="selected-files"></div>
                         </div>
                         <p class="field-help">Upload at least 3 images for the tour gallery. Recommended size: 1200x800px.</p>
+                        <div class="preview-container" id="gallery_image">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -514,25 +519,20 @@
             // File upload previews
             document.getElementById('hero_image').addEventListener('change', function(e) {
                 const fileName = e.target.files[0]?.name || 'No file chosen';
-                e.target.parentElement.querySelector('.selected-file').textContent = fileName;
+                const objectURL = URL.createObjectURL(e.target.files[0]);
+                document.getElementById("previewImage").src = objectURL
             });
 
+            let imageCount = 0
             document.getElementById('gallery_images').addEventListener('change', function(e) {
-                const fileCount = e.target.files.length;
-                const fileDisplay = e.target.parentElement.querySelector('.selected-files');
-                fileDisplay.innerHTML = '';
+                const objectURL = URL.createObjectURL(e.target.files[0]);
+                const previewContainer = document.getElementById("gallery_image")
+                const img = document.createElement("img")
+                img.id = `previewgalleryImage${imageCount}`
+                img.classList.add("preview-image")
+                img.src = objectURL
+                previewContainer.appendChild(img)
                 
-                if (fileCount > 0) {
-                    const fileList = document.createElement('ul');
-                    for (let i = 0; i < fileCount; i++) {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = e.target.files[i].name;
-                        fileList.appendChild(listItem);
-                    }
-                    fileDisplay.appendChild(fileList);
-                } else {
-                    fileDisplay.textContent = 'No files chosen';
-                }
             });
         });
     </script>

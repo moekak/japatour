@@ -31,7 +31,7 @@ class TourController extends Controller{
      */
     public function create()
     {
-        //
+        return view("admin.tour_create");
     }
 
     /**
@@ -79,9 +79,6 @@ class TourController extends Controller{
      */
     public function update(EditTourRequest $request, string $id)
     {
-
-        // print_r($request->all());
-        // exit;
         try {
             $this->tourService->updateTour($request, $id);
             return redirect()->route("tour_list")->with("success", "success to update Tour");

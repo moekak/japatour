@@ -28,7 +28,7 @@
                 <h1>Tour Management</h1>
                 <p>Create, update, and manage all your tour packages in one place</p>
             </div>
-            <button class="create-tour">
+            <a href="{{route("admin.tour_create")}}" class="create-tour">
                 <span>
                     <svg
                         height="24"
@@ -39,61 +39,14 @@
                         <path d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z" fill="currentColor"></path>
                     </svg>
-                        Create New Tour
+                    Create New Tour
                     </span>
-            </button>
+              </a>
               
         </div>
         
         <!-- Enhanced Filter Section with Visual Improvements -->
-        <div class="tours-filters">
-            <form action="" method="GET" class="filter-form">
-                <div class="filter-row">
-                    <div class="filter-group">
-                        <label for="search">Search Tours</label>
-                        <input type="text" id="search" name="search" value="{{ request('search') }}" 
-                            placeholder="Search by title, description or destination...">
-                    </div>
-                    <div class="filter-group">
-                        <label for="destination">Destination</label>
-                        <select id="destination" name="destination">
-                            <option value="">All Destinations</option>
-                            {{-- @foreach($destinations as $destination)
-                                <option value="{{ $destination }}" {{ request('destination') == $destination ? 'selected' : '' }}>
-                                    {{ $destination }}
-                                </option>
-                            @endforeach --}}
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="duration">Duration</label>
-                        <select id="duration" name="duration">
-                            <option value="">Any Duration</option>
-                            <option value="1-3" {{ request('duration') == '1-3' ? 'selected' : '' }}>1-3 Days</option>
-                            <option value="4-7" {{ request('duration') == '4-7' ? 'selected' : '' }}>4-7 Days</option>
-                            <option value="8+" {{ request('duration') == '8+' ? 'selected' : '' }}>8+ Days</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="price_range">Price Range</label>
-                        <select id="price_range" name="price_range">
-                            <option value="">Any Price</option>
-                            <option value="budget" {{ request('price_range') == 'budget' ? 'selected' : '' }}>Budget (Under ¥50,000)</option>
-                            <option value="standard" {{ request('price_range') == 'standard' ? 'selected' : '' }}>Standard (¥50,000-¥150,000)</option>
-                            <option value="premium" {{ request('price_range') == 'premium' ? 'selected' : '' }}>Premium (¥150,000+)</option>
-                        </select>
-                    </div>
-                    <div class="filter-actions">
-                        <button type="submit" class="btn-secondary">
-                            <i class="fas fa-filter"></i> Apply Filters
-                        </button>
-                        <a href="" class="btn-outline">
-                            <i class="fas fa-redo"></i> Reset
-                        </a>
-                    </div>
-                </div>
-            </form>
-        </div>
+        
 
         <!-- Tours Results Section -->
         <div class="tours-list">
@@ -101,7 +54,7 @@
                 <div class="tours-count">
                     {{-- Showing <span>{{ $tours->firstItem() ?: 0 }}</span> to <span>{{ $tours->lastItem() ?: 0 }}</span> of <span>{{ $tours->total() }}</span> tours --}}
                 </div>
-                <div class="tours-sort">
+                {{-- <div class="tours-sort">
                     <label for="sort">Sort by:</label>
                     <select id="sort" name="sort" class="sort-select">
                         <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Newest First</option>
@@ -112,7 +65,7 @@
                         <option value="price_high" {{ request('sort') == 'price_high' ? 'selected' : '' }}>Price (High to Low)</option>
                         <option value="popularity" {{ request('sort') == 'popularity' ? 'selected' : '' }}>Most Popular</option>
                     </select>
-                </div>
+                </div> --}}
             </div>
 
             @if($tours->isEmpty())
@@ -130,42 +83,55 @@
                 <div class="tours-grid">
                     @foreach ($tours as $tour)
                         <div class="tour-card" data-id="{{ $tour->id }}">
-                            <div class="tour-card-image">
-                                <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}">
+                            <!-- Image Section -->
+                            <div class="image-wrapper">
+                                <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="tour-image">
+        
                                 @if($tour->badge)
-                                    <div class="tour-card-badge">{{ $tour->badge }}</div>
+                                    <div class="badge">{{ $tour->badge }}</div>
                                 @endif
+                                <div class="price-tag">¥{{ number_format($tour->price) }}<span class="price-note">per person</span></div>
                             </div>
-                            <div class="tour-card-content">
-                                <h3 class="tour-card-title">{{ $tour->title }}</h3>
-                                <p>
-                                    @if(strlen($tour->overview) > 100)
-                                        {{ substr($tour->overview, 0, 100) }}...
-                                        <a href="#" class="see-more" data-tour-id="{{ $tour->id }}">see more</a>
-                                    @else
-                                        {{ $tour->overview }}
-                                    @endif
+                            
+                            <!-- Content Section -->
+                            <div class="card-content">
+                                <h3 class="title">{{$tour->title}}</h3>
+                                
+                                <p class="overview">
+                                    {{mb_strlen($tour->overview) > 90 ? mb_substr($tour->overview, 0, 90) . '...' : $tour->overview}}
                                 </p>
-                                <div class="tour-card-meta">
-                                    <div class="tour-meta-item">
-                                        <i class="fas fa-map-marker-alt"></i> {{ $tour->destinations }}
+                                
+                                <!-- Features -->
+                                <div class="features">
+                                    <div class="feature">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                        {{ $tour->destinations }}
                                     </div>
-                                    <div class="tour-meta-item">
-                                        <i class="fa-solid fa-clock"></i> {{ $tour->hours }} hrs
+                                    <div class="feature">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                        </svg>
+                                        {{ $tour->hours }} hrs
                                     </div>
-                                    <div class="tour-meta-item">
-                                        <i class="fa-solid fa-language"></i>{{ $tour->languages }}
+                                    <div class="feature">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                                            <path d="M2 12h20"></path>
+                                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                        </svg>
+                                        {{ $tour->languages }}
                                     </div>
                                 </div>
-                                <div class="tour-card-price">
-                                    ¥{{ number_format($tour->price) }}
-                                    <span class="price-note">per person</span>
-                                </div>
-                                <div class="tour-card-actions">
-                                    <!-- From Uiverse.io by vinodjangid07 --> 
-                                    <a href="{{ route('tour.edit', $tour->id) }}" style="color: inherit; display: flex; text-decoration: none;"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <a href="{{ route('tour.show', $tour->id) }}" style="color: inherit; display: flex; text-decoration: none;"><i class="fa-solid fa-eye"></i></a>
-                                    <i class="fa-solid fa-trash delete-tour" data-tour-id="{{ $tour->id }}" data-tour-title="{{ $tour->title }}"></i>
+                                
+                                <!-- Actions -->
+                                <div class="actions">
+                                    <a href="{{ route('tour.show', $tour->id) }}" class="btn btn-view">View</a>
+                                    <a href="{{ route('tour.edit', $tour->id) }}" class="btn btn-edit">Edit</a>
+                                    <button class="btn delete-tour btn-delete" data-tour-id="{{ $tour->id }}" data-tour-title="{{ $tour->title }}">Delete</button>
                                 </div>
                             </div>
                         </div>

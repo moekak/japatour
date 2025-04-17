@@ -129,7 +129,7 @@
             <div class="content-right">
                 <div class="tour-details">
                     <div class="pricing-header">
-                        <div class="price">{{$tour->currency}}{{$tour->price}}</div>
+                        <div class="price">{{$tour->currency}}{{ number_format($tour->price) }}</div>
                         <p class="price-note">per person (based on double occupancy)</p>
                     </div>
 
@@ -155,7 +155,7 @@
                             <div class="calendar-legend">
                                 <div class="legend-item">
                                     <span class="legend-color available"></span>
-                                    <span>Available</span>
+                                    <span>Available dates</span>
                                 </div>
                             </div>
                         </div>
@@ -177,11 +177,13 @@
                             </ul>
                             
                             <h3 class="includes-title">What's Not Included</h3>
-                            <ul class="not-includes-list">
-                                @foreach ($tour->exclusions as $exclusion)
-                                    <li>{{$exclusion}}</li>
-                                @endforeach
-                            </ul>
+                            @if (count($tour->exclusions) > 1)
+                                <ul class="not-includes-list">
+                                    @foreach ($tour->exclusions as $exclusion)
+                                        <li>{{$exclusion}}</li>
+                                    @endforeach
+                                </ul>
+                            @endif
                         </div>
                     </div>
                 </div>

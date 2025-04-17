@@ -43,9 +43,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get("/tour/edit/{id}", [TourController::class, "edit"])->name("tour.edit");
     Route::post("/tour/show", [SendContactMail::class, "SendContactMail"])->name("tours.show");
     Route::delete("/tour/destroy/{id}", [TourController::class, "destroy"])->name("tours.destroy");
-    Route::get('/tour/create', function () {
-        return view('admin.tour_create');
-    });
+    Route::get("/tour/create", [TourController::class, "create"])->name("admin.tour_create");
     
 });
 // Auth::routes(['register' => false]);

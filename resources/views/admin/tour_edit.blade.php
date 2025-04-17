@@ -167,38 +167,38 @@
                     
                     <div id="itinerary-days-container">
                         <!-- Day 1 -->
-                        @foreach ($tour->itinerary as $itinerary)
+                        @foreach ($tour->itinerary as $index => $itinerary)
                             <div class="itinerary-day-item">
                                 <div class="day-header">
                                     <button type="button" class="remove-day btn-icon" data-day="1"><i class="fas fa-times"></i></button>
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="itinerary[0][title]">Day Title <span class="required">*</span></label>
-                                    <input type="text" id="itinerary[0][title]" name="itinerary[0][title]" value="{{$itinerary["title"]}}" >
+                                    <label for="itinerary[{{$index}}][title]">Day Title <span class="required">*</span></label>
+                                    <input type="text" id="itinerary[{{$index}}][title]" name="itinerary[{{$index}}][title]" value="{{$itinerary["title"]}}" >
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label for="itinerary[0][description]">Day Description <span class="required">*</span></label>
-                                    <textarea id="itinerary[0][description]" name="itinerary[0][description]" rows="3" >{{$itinerary["description"]}}</textarea>
+                                    <label for="itinerary[{{$index}}][description]">Day Description <span class="required">*</span></label>
+                                    <textarea id="itinerary[{{$index}}][description]" name="itinerary[{{$index}}][description]" rows="3" >{{$itinerary["description"]}}</textarea>
                                 </div>
                                 
                                 <div class="form-group">
                                     <label>Schedule <span class="required">*</span></label>
-                                    <div class="schedule-items-container" data-day="0">
-                                        @foreach ($itinerary["schedule"] as $schedule)
+                                    <div class="schedule-items-container" data-day={{$index}}>
+                                        @foreach ($itinerary["schedule"] as $index2 =>$schedule)
                                             <div class="schedule-item">
                                                 <div class="schedule-time">
-                                                    <input type="text" name="itinerary[0][schedule][0][time]" value="{{$schedule["time"]}}" placeholder="e.g. 9:00 AM" >
+                                                    <input type="text" name="itinerary[{{$index}}][schedule][{{$index2}}][time]" value="{{$schedule["time"]}}" placeholder="e.g. 9:00 AM" >
                                                 </div>
                                                 <div class="schedule-description">
-                                                    <input type="text" name="itinerary[0][schedule][0][description]" value="{{$schedule["description"]}}" placeholder="Activity description" >
+                                                    <input type="text" name="itinerary[{{$index}}][schedule][{{$index2}}][description]" value="{{$schedule["description"]}}" placeholder="Activity description" >
                                                 </div>
                                                 <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
                                             </div>
                                         @endforeach
                                     </div>
-                                    <button type="button" class="add-schedule btn-secondary" data-day="0"><i class="fas fa-plus"></i> Add Schedule Item</button>
+                                    <button type="button" class="add-schedule btn-secondary" data-day={{$index}}><i class="fas fa-plus"></i> Add Schedule Item</button>
                                 </div>
                             </div>
 
@@ -247,11 +247,6 @@
                     
                     <div class="form-group">
                         <label for="hero_image">Hero Image</label>
-                        <div class="current-image">
-{{--                             
-                            <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" alt="Hero Image" class="thumbnail"> --}}
-                            <img src="https://placehold.jp/150x150.png" alt="{{ $tour->title }}" alt="Hero Image" class="thumbnail">
-                        </div>
                         <div class="image-upload-container">
                             <input type="file" id="hero_image" name="hero_image" accept="image/*" class="image-upload-input">
                             <label for="hero_image" class="image-upload-label">
@@ -260,24 +255,14 @@
                             </label>
                             <div class="selected-file"></div>
                         </div>
-                        <p class="field-help">Leave empty to keep the current image.</p>
+                        <div class="preview-container">
+                            <img id="previewImage" class="preview-image" src="{{ asset('storage/' . $tour->hero_image) }}">
+                        </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="gallery_images">Gallery Images</label>
-                        <div class="current-gallery">
-                            @foreach ($tour->gallery_images as $gallery_image)
-                                <div class="gallery-image-item">
-                                    {{-- <img src="{{ asset('storage/' . $gallery_image) }}" alt="{{ $tour->title }}" alt="Gallery image 1" class="thumbnail"> --}}
-                                    <img src="https://placehold.jp/150x150.png" alt="{{ $tour->title }}" alt="Gallery image 1" class="thumbnail">
-                                    <div class="gallery-image-actions">
-                                        <input type="checkbox" id="remove_gallery_0" name="remove_gallery[]" value="{{$gallery_image}}">
-                                        <input type="hidden"  name="current_gallery_images[]"value="{{$gallery_image}}">
-                                        <label for="remove_gallery_0" class="remove-checkbox-label">Remove</label>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+
                         <div class="image-upload-container">
                             <input type="file" id="gallery_images" name="new_gallery_images[]" accept="image/*" class="image-upload-input" multiple>
                             <label for="gallery_images" class="image-upload-label">
@@ -287,6 +272,21 @@
                             <div class="selected-files"></div>
                         </div>
                         <p class="field-help">Check the "Remove" box to delete existing images. Upload new images to add to the gallery.</p>
+                        <div class="current-gallery">
+                            @foreach ($tour->gallery_images as $index => $gallery_image)
+                                <div class="gallery-image-item">
+                                    <img src="{{ asset('storage/' . $gallery_image) }}" alt="{{ $tour->title }}" alt="Gallery image 1" class="thumbnail">
+                                    <div class="gallery-image-actions">
+                                        <input type="checkbox" id="remove_gallery_{{$index}}" name="remove_gallery[]" value="{{$gallery_image}}">
+                                        <input type="hidden"  name="current_gallery_images[]"value="{{$gallery_image}}">
+                                        <label for="remove_gallery_{{$index}}" class="remove-checkbox-label">Remove</label>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <p class="field-help">new gallery images</p>
+                        <div class="preview-container" id="gallery_image">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -488,22 +488,16 @@
                 e.target.parentElement.querySelector('.selected-file').textContent = fileName;
             });
 
+            let imageCount = 0
             document.getElementById('gallery_images').addEventListener('change', function(e) {
-                const fileCount = e.target.files.length;
-                const fileDisplay = e.target.parentElement.querySelector('.selected-files');
-                fileDisplay.innerHTML = '';
+                const objectURL = URL.createObjectURL(e.target.files[0]);
+                const previewContainer = document.getElementById("gallery_image")
+                const img = document.createElement("img")
+                img.id = `previewgalleryImage${imageCount}`
+                img.classList.add("preview-image")
+                img.src = objectURL
+                previewContainer.appendChild(img)
                 
-                if (fileCount > 0) {
-                    const fileList = document.createElement('ul');
-                    for (let i = 0; i < fileCount; i++) {
-                        const listItem = document.createElement('li');
-                        listItem.textContent = e.target.files[i].name;
-                        fileList.appendChild(listItem);
-                    }
-                    fileDisplay.appendChild(fileList);
-                } else {
-                    fileDisplay.textContent = 'No files chosen';
-                }
             });
         });
     </script>

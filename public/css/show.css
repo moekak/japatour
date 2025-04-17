@@ -36,7 +36,7 @@
   /* Enhanced Hero section */
   .hero {
     position: relative;
-    height: 600px;
+    height: 684px;
     overflow: hidden;
     margin-bottom: 60px;
   }
@@ -48,11 +48,19 @@
     filter: brightness(0.7);
     transform: scale(1);
     transition: transform 8s ease;
+    position: relative;
   }
-  
+  /* .hero::after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: #0000;
+    position: absolute;
+    z-index: 999;
+  }
   .hero:hover .hero-image {
     transform: scale(1.05);
-  }
+  } */
   
   .hero-content {
     position: absolute;
@@ -297,6 +305,8 @@
     padding-bottom: 10px;
     scrollbar-width: thin;
     scrollbar-color: var(--main-color) transparent;
+    padding-right: 20px;
+    padding-left: 20px;
   }
   
   .preview-thumbs::-webkit-scrollbar {
