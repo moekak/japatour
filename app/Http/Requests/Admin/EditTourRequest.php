@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateTourRequest extends FormRequest
+class EditTourRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,6 +19,7 @@ class CreateTourRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
     public function rules(): array
     {
         return [
@@ -41,9 +42,13 @@ class CreateTourRequest extends FormRequest
             "itinerary" => ["required", "array"],
             "inclusions" => ["required", "array"],
             "exclusions" => ["required", "array"],
-            "hero_image" => ["required", "image", "mimes:jpeg,png,jpg,gif", "max:2048"],
-            "gallery_images" => ["required", "array"],
+            "hero_image" => ["nullable", "image", "mimes:jpeg,png,jpg,gif", "max:2048"],
+            "gallery_images" => ["nullable", "array"],
             "gallery_images.*" => ["image", "mimes:jpeg,png,jpg,gif", "max:2048"],
+            "current_gallery_images" => ["nullable", "array"],
+            "current_gallery_images.*" => ["string", "max:2048"],
+            "remove_gallery" => ["nullable", "array"],
+            "remove_gallery.*" => ["string", "max:2048"],
         ];
     }
 
@@ -115,16 +120,17 @@ class CreateTourRequest extends FormRequest
             'exclusions.required' => 'The exclusions field is required.',
             'exclusions.array' => 'The exclusions must be a valid array format.',
             
-            'hero_image.required' => 'The hero image field is required.',
             'hero_image.image' => 'The hero image must be an image file.',
             'hero_image.mimes' => 'The hero image must be a file of type: jpeg, png, jpg, gif.',
             'hero_image.max' => 'The hero image must not exceed 2MB.',
 
-            'gallery_images.required' => 'The gallery images field is required.',
             'gallery_images.array' => 'The gallery images must be an array of files.',
             'gallery_images.*.image' => 'All gallery files must be images.',
             'gallery_images.*.mimes' => 'All gallery images must be a file of type: jpeg, png, jpg, gif.',
             'gallery_images.*.max' => 'Each gallery image must not exceed 2MB.',
+
+            'current_gallery_images.array' => 'The current gallery images must be an array of files.',
+            'remove_gallery.array' => 'The remove gallery images must be an array of files.',
             
         ];
     }

@@ -61,9 +61,8 @@
 
                     <div class="form-group">
                         <label for="hours">Hours <span class="required">*</span></label>
-                        <input type="number" id="hours" name="{{$tour->hours}}" value="3" min="1" >
+                        <input type="number" id="hours" name="hours" value="{{$tour->hours}}" min="1" >
                     </div>
-                    
                     <div class="form-group">
                         <label for="start_location">Start Location <span class="required">*</span></label>
                         <input type="text" id="start_location" name="start_location" value="{{$tour->start_location}}" >
@@ -508,25 +507,26 @@
             });
         });
     </script>
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-       <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <script>
-            const multiDatePicker = flatpickr("#date_range_start", {
-                dateFormat: "Y-m-d",
-                minDate: "today",
-                mode: "multiple",
-                onChange: function(selectedDates, dateStr, instance) {
-                    // 選択された日付をJSON形式で隠しフィールドに保存
-                    document.getElementById('available_dates_input').value = JSON.stringify(selectedDates.map(date => {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        const availableDates = <?php echo json_encode($tour->available_dates); ?>;
+        const multiDatePicker = flatpickr("#date_range_start", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            mode: "multiple",
+            // あらかじめ選択する日付を配列で指定
+            defaultDate: availableDates,
+            onChange: function(selectedDates, dateStr, instance) {
+                // 選択された日付をJSON形式で隠しフィールドに保存
+                document.getElementById('available_dates_input').value = JSON.stringify(selectedDates.map(date => {
                     // タイムゾーンを考慮した日付フォーマット
                     const year = date.getFullYear();
                     const month = String(date.getMonth() + 1).padStart(2, '0');
                     const day = String(date.getDate()).padStart(2, '0');
                     return `${year}-${month}-${day}`;
                 }));
-
-                }
-            });
-    
-        </script>
+            }
+        });
+    </script>
 @endsection
