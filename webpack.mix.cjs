@@ -6,6 +6,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js("resources/js/main.js", 'public/js')
     .js("resources/js/common.js", 'public/js')
     .js("resources/js/show.js", 'public/js')
+    .js("resources/js/pages/tour_create.js", 'public/js')
     // .sass('resources/sass/app.scss', 'public/css')
     .setPublicPath('public')
     .webpackConfig({

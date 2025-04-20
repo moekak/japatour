@@ -20,17 +20,17 @@
             <span class="hamburger__line"></span>
         </button>
     </header>
-@elseif(Route::currentRouteName() == 'tour.show')
+@elseif(Route::currentRouteName() == 'tour.show' || Route::currentRouteName() == 'tour.book')
 
     <header class="pc_header" style="transform: none;">
-        <div class="header_right font_icon" style="color: #52aaf9;"><a href="#home">JapaTour</a></div>
+        <div class="header_right font_icon" style="color: #52aaf9;"><a href="{{route("top")}}">JapaTour</a></div>
         <div class="header_center">
             <ul>
-                <li class="font_normal header-style"><a href="#home" >Home</a></li>
-                <li class="font_normal header-style"><a href="#about" >About</a></li>
-                <li class="font_normal header-style"><a href="#tour" >Tour</a></li>
-                <li class="font_normal header-style"><a href="#hot">Hot</a></li>
-                <li class="font_normal header-style"><a href="#contact">Contact</a></li>
+                <li class="font_normal header-style"><a href="{{route("top")}}" >Home</a></li>
+                <li class="font_normal header-style"><a href="{{route("top")}}#about" >About</a></li>
+                <li class="font_normal header-style"><a href="{{route("top")}}#tour" >Tour</a></li>
+                <li class="font_normal header-style"><a href="{{route("top")}}#hot">Hot</a></li>
+                <li class="font_normal header-style"><a href="{{route("top")}}#contact">Contact</a></li>
             </ul>
         </div>
     </header>

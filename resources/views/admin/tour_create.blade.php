@@ -4,6 +4,7 @@
 @section('title', 'Create New Tour')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/tour_create.css') }}">
+<link rel="stylesheet" href="{{ asset('css/admin/admin-tours.css') }}">
     
 @endsection
 
@@ -310,14 +311,18 @@
                     
                     <div class="form-group">
                         <label for="gallery_images">Gallery Images <span class="required">*</span></label>
-                        <div class="image-upload-container">
-                            <input type="file" id="gallery_images" name="gallery_images[]" accept="image/*" class="image-upload-input" multiple >
-                            <label for="gallery_images" class="image-upload-label">
-                                <i class="fas fa-images"></i>
-                                <span style="color: #fff;">Choose multiple files...</span>
-                            </label>
-                            <div class="selected-files"></div>
+                        <div class="gallery_image-wrapepr">
+                            <div class="image-upload-container" id="js_gallery_image">
+                                <input type="file"  id="gallery_images" name="gallery_images[0]" accept="image/*" class="image-upload-input"  >
+                                <label for="gallery_images" class="image-upload-label">
+                                    <i class="fas fa-images"></i>
+                                    <span style="color: #fff;">Choose a file</span>
+                                </label>
+                                <div class="selected-files"></div>
+                            </div>
                         </div>
+                        
+                        <button type="button" id="add-gallery" class="btn-secondary"><i class="fas fa-plus"></i> Add Gallery Image</button>
                         <p class="field-help">Upload at least 3 images for the tour gallery. Recommended size: 1200x800px.</p>
                         <div class="preview-container" id="gallery_image">
                         </div>
@@ -380,7 +385,6 @@
             <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
         </div>
     </template>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Highlight management
@@ -523,17 +527,18 @@
                 document.getElementById("previewImage").src = objectURL
             });
 
-            let imageCount = 0
-            document.getElementById('gallery_images').addEventListener('change', function(e) {
-                const objectURL = URL.createObjectURL(e.target.files[0]);
-                const previewContainer = document.getElementById("gallery_image")
-                const img = document.createElement("img")
-                img.id = `previewgalleryImage${imageCount}`
-                img.classList.add("preview-image")
-                img.src = objectURL
-                previewContainer.appendChild(img)
+            // let imageCount = 0
+            // document.getElementById('gallery_images').addEventListener('change', function(e) {
+            //     const objectURL = URL.createObjectURL(e.target.files[0]);
+            //     const previewContainer = document.getElementById("gallery_image")
+            //     const img = document.createElement("img")
+            //     img.id = `previewgalleryImage${imageCount}`
+            //     img.classList.add("preview-image")
+            //     img.src = objectURL
+            //     previewContainer.appendChild(img)
+            //     previewContainer.innerHTML += label
                 
-            });
+            // });
         });
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -557,5 +562,6 @@
         });
 
     </script>
+    <script src="{{mix("js/tour_create.js")}}"></script>
     
 @endsection

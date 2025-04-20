@@ -40,8 +40,6 @@ class Tour extends Model
     public static function getSpecificTour($id){
         $tour = Tour::where("is_active", true)->where("id", $id)->first();
         // JSONフィールドを配列に変換
-
-
         // もし highlights, gallery_images などがJSON型の場合
         if (isset($tour->highlights) && is_string($tour->highlights)) {
             $tour->highlights = json_decode($tour->highlights, true);
@@ -62,9 +60,6 @@ class Tour extends Model
         if (isset($tour->exclusions) && is_string($tour->exclusions)) {
             $tour->exclusions = json_decode($tour->exclusions, true);
         }
-        // print_r($tour);
-        // exit;
-    
         return $tour;
     }
 
@@ -93,6 +88,11 @@ class Tour extends Model
                 $tour->exclusions = json_decode($tour->exclusions, true);
             }
         }
+        return $tours;
+    }
+
+    public static function getTourInfo(){
+        $tours = Tour::select("title", "overview", "price", "destinations", "hours", "languages", "id", "hero_image", "badge",)->where("is_active", true)->get();
         return $tours;
     }
 }

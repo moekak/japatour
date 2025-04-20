@@ -6,6 +6,9 @@
     .reason_card {
         padding: 22px 22px;
     }
+    .destinations_area{
+        grid-template-columns: 1fr 1fr;
+    }
 }
 @media screen and (max-width: 1200px){
     .section_third h2{
@@ -25,7 +28,7 @@
     .review_container {
         padding: 28px 30px 30px 30px;
     }
-    .title {
+    .top_title {
         font-size: 6rem;
     }
     /* .slick-slide {
@@ -85,7 +88,7 @@
     .section_third_wrapper_btn{
         font-size: 14px;
     }
-    .title {
+    .top_title {
         font-size: 5rem;
     }
     header {
@@ -135,7 +138,7 @@
     .pc_header{
         display: none;
     }
-    .title {
+    .top_title {
         font-size: 4rem;
     }
     .see-tour {
@@ -215,7 +218,7 @@
     .section_third p {
         font-size: 16px;
     }
-    .title {
+    .top_title {
         font-size: 58px;
     }
     .section_top_desc {
@@ -261,7 +264,7 @@
     .section_third_wrapper_btn {
         padding: 12px 40px 12px 21px;
     }
-    .title {
+    .top_title {
         font-size: 54px;
     }
     .section_top_desc {
@@ -362,7 +365,7 @@
 @media screen and (max-width: 550px){
 
 
-    .title {
+    .top_title {
         font-size: 46px;
     }
     .section_top_desc {
@@ -402,13 +405,41 @@
     }
 }
 @media screen and (max-width: 450px){
+    .image-wrapper {
+        height: 195px;
+    }
+    .price-tag {
+        position: absolute;
+        bottom: 12px;
+        right: 10px;
+        background: var(--white);
+        color: var(--accent-color);
+        font-size: 18px;
+        font-weight: 800;
+        padding: 10px 13px;
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-md);
+        z-index: 2;
+        display: flex
+    ;
+        align-items: baseline;
+        gap: 4px;
+    }
+    .card-content {
+        padding: 18px 20px 23px;
+        display: flex
+    ;
+        flex-direction: column;
+        gap: 16px;
+        flex-grow: 1;
+    }
     .review_title {
         font-size: 31px !important;
     }
     header{
         padding: 13px 10px;
     }
-    .title {
+    .top_title {
         font-size: 36px;
     }
     .section_top_desc{
@@ -468,7 +499,7 @@
     }
 }
 @media screen and (max-width:350px){
-    .title {
+    .top_title {
         font-size: 32px;
     }
     .section_top_desc {

@@ -15,7 +15,7 @@
             <img src="{{asset("img/bg.jpg")}}" alt="" class="top_img image" />
             @include('components.header')
             <div class="top_container absolute z2">
-                <h1 class="title z2 js_title">Let Us Take You Away</h1>
+                <h1 class="top_title z2 js_title">Let Us Take You Away</h1>
                 <p class="section_top_desc font_normal z2 js_title">
                     Discover the beauty of bespoke travel with us, where your dreams of
                     perfect escapes turn into vivid realities filled with unforgettable
@@ -100,7 +100,58 @@
                 </h2>
                 <div class="destinations_area" data-aos="fade-up" 
                     data-aos-duration="1000">
-                    <div class="card" style="width: 25rem">
+                    @foreach ($tours as $tour)
+                        <div class="tour-card" data-id="{{ $tour->id }}">
+                            <!-- Image Section -->
+                            <div class="image-wrapper">
+                                <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="tour-image">
+        
+                                @if($tour->badge)
+                                    <div class="badge">{{ $tour->badge }}</div>
+                                @endif
+                                <div class="price-tag">¥{{ number_format($tour->price) }}<span class="price-note">per person</span></div>
+                            </div>
+                            
+                            <!-- Content Section -->
+                            <div class="card-content">
+                                <h3 class="title">{{$tour->title}}</h3>
+                                
+                                <p class="overview">
+                                    {{mb_strlen($tour->overview) > 90 ? mb_substr($tour->overview, 0, 90) . '...' : $tour->overview}}
+                                </p>
+                                
+                                <!-- Features -->
+                                <div class="features">
+                                    <div class="feature">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                            <circle cx="12" cy="10" r="3"></circle>
+                                        </svg>
+                                        {{ $tour->destinations }}
+                                    </div>
+                                    <div class="feature">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <polyline points="12 6 12 12 16 14"></polyline>
+                                        </svg>
+                                        {{ $tour->hours }} hrs
+                                    </div>
+                                    <div class="feature">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                                            <path d="M2 12h20"></path>
+                                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                        </svg>
+                                        {{ $tour->languages }}
+                                    </div>
+                                </div>
+                                <button class="see-tour-btn">
+                                    <a href="{{ route('tour.show', $tour->id) }}">See Tour</a>
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
+                    {{-- <div class="card" style="width: 25rem">
                         <img src="{{asset("img/tokyo.jpg")}}" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <div>
@@ -164,7 +215,7 @@
                             
                             <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="btn destination-btn" target="blank">See details</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </section>
