@@ -411,3 +411,10 @@
     width: 100%;
   }
 
+
+  .preview_remove-style{
+    position: absolute;
+    font-size: 27px;
+    left: 3%;
+    cursor: pointer;
+  }

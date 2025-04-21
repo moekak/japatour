@@ -37,10 +37,8 @@ class TourController extends Controller{
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(CreateTourRequest $request){
         try {
-            print_r($request->all());
-            exit;
             $this->tourService->createTour($request);
             return redirect()->route("tour_list")->with("success", "success to create Tours!");  ;
         } catch (\Exception $e) {

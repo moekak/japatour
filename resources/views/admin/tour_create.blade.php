@@ -312,9 +312,9 @@
                     <div class="form-group">
                         <label for="gallery_images">Gallery Images <span class="required">*</span></label>
                         <div class="gallery_image-wrapepr">
-                            <div class="image-upload-container" id="js_gallery_image">
-                                <input type="file"  id="gallery_images" name="gallery_images[0]" accept="image/*" class="image-upload-input"  >
-                                <label for="gallery_images" class="image-upload-label">
+                            <div class="image-upload-container" id="js_gallery_image" data-id="0">
+                                <input type="file"  id="gallery_images_0" name="gallery_images[0]" accept="image/*" class="image-upload-input js_galllery_images"  >
+                                <label for="gallery_images_0" class="image-upload-label">
                                     <i class="fas fa-images"></i>
                                     <span style="color: #fff;">Choose a file</span>
                                 </label>
@@ -332,7 +332,7 @@
 
             <div class="form-actions">
                 <button type="button" class="btn-outline" onclick="history.back()">Cancel</button>
-                <button type="submit" class="btn-primary">Create Tour</button>
+                <button type="submit" class="btn-primary create-tour-btn">Create Tour</button>
             </div>
         </form>
     </div>
