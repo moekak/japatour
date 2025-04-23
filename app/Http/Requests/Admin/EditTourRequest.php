@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class EditTourRequest extends FormRequest
 {
@@ -32,7 +33,7 @@ class EditTourRequest extends FormRequest
             "languages" => ["required", "string", "max:255"],
             "min_participants" => ["required", "integer"],
             "max_participants" => ["required", "integer"],
-            "available_dates" => ["required", "json"],
+            "available_dates" => ["required", "string"],
             "currency" => ["required", "string", "max:5"],
             "price" => ["required", "numeric", "min:0", "max:99999999.99"],
             "discount_percentage" => ["required", "integer"],
@@ -95,7 +96,7 @@ class EditTourRequest extends FormRequest
             'currency.max' => 'The currency must not exceed 5 characters.',
             
             'price.required' => 'The price field is required.',
-            'price.decimal' => 'The price must be a decimal number with up to 2 decimal places.',
+            'price.numeric' => 'The price must be a decimal number with up to 2 decimal places.',
             'price.min' => 'The price must be at least 0.',
             'price.max' => 'The price must not exceed 99,999,999.99.',
             
@@ -133,5 +134,13 @@ class EditTourRequest extends FormRequest
             'remove_gallery.array' => 'The remove gallery images must be an array of files.',
             
         ];
+    }
+
+
+    // EditTourRequestクラスに追加
+    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
+    {
+        Log::error('バリデーションエラー in EditTourRequest:', $validator->errors()->toArray());
+        parent::failedValidation($validator);
     }
 }

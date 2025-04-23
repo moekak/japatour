@@ -232,7 +232,7 @@
                         <div id="exclusions-container">
                             @foreach ($tour->exclusions as $exclusion)
                                 <div class="exclusion-item">
-                                    <input type="text" name="exclusions[]" value="{{$tour->exclusion}}" >
+                                    <input type="text" name="exclusions[]" value="{{$exclusion}}" >
                                     <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
                                 </div>
                             @endforeach
@@ -263,14 +263,17 @@
                     <div class="form-group">
                         <label for="gallery_images">Gallery Images</label>
 
-                        <div class="image-upload-container">
-                            <input type="file" id="gallery_images" name="new_gallery_images[]" accept="image/*" class="image-upload-input" multiple>
-                            <label for="gallery_images" class="image-upload-label">
-                                <i class="fas fa-images"></i>
-                                <span>Add more images...</span>
-                            </label>
-                            <div class="selected-files"></div>
+                        <div class="gallery_image-wrapepr">
+                            <div class="image-upload-container" id="js_gallery_image" data-id="0">
+                                <input type="file"  id="gallery_images_0" name="gallery_images[0]" accept="image/*" class="image-upload-input js_galllery_images"  >
+                                <label for="gallery_images_0" class="image-upload-label">
+                                    <i class="fas fa-images"></i>
+                                    <span style="color: #fff;">Choose a file</span>
+                                </label>
+                                <div class="selected-files"></div>
+                            </div>
                         </div>
+                        <button type="button" id="add-gallery" class="btn-secondary"><i class="fas fa-plus"></i> Add Gallery Image</button>
                         <p class="field-help">Check the "Remove" box to delete existing images. Upload new images to add to the gallery.</p>
                         <div class="current-gallery">
                             @foreach ($tour->gallery_images as $index => $gallery_image)
@@ -293,7 +296,7 @@
 
             <div class="form-actions">
                 <button type="button" class="btn-outline" onclick="window.location.href=">Cancel</button>
-                <button type="submit" class="btn-primary">Update Tour</button>
+                <button type="submit" class="btn-primary edit-tour-btn">Update Tour</button>
             </div>
         </form>
     </div>
@@ -488,17 +491,6 @@
                 e.target.parentElement.querySelector('.selected-file').textContent = fileName;
             });
 
-            let imageCount = 0
-            document.getElementById('gallery_images').addEventListener('change', function(e) {
-                const objectURL = URL.createObjectURL(e.target.files[0]);
-                const previewContainer = document.getElementById("gallery_image")
-                const img = document.createElement("img")
-                img.id = `previewgalleryImage${imageCount}`
-                img.classList.add("preview-image")
-                img.src = objectURL
-                previewContainer.appendChild(img)
-                
-            });
         });
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
@@ -523,4 +515,5 @@
             }
         });
     </script>
+    <script src="{{mix("js/tour_edit.js")}}"></script>
 @endsection
