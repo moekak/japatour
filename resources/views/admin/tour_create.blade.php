@@ -532,10 +532,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
+        // デバッグ用に変数の生の値を確認
+        const rawValue = '<?php echo addslashes(old("available_dates", "[]")); ?>';
+        let availableDates
+        if(rawValue){
+            availableDates = JSON.parse(rawValue);
+        }
+        
+        
         const multiDatePicker = flatpickr("#date_range_start", {
             dateFormat: "Y-m-d",
             minDate: "today",
             mode: "multiple",
+            defaultDate: availableDates,
             onChange: function(selectedDates, dateStr, instance) {
                 // 選択された日付をJSON形式で隠しフィールドに保存
                 document.getElementById('available_dates_input').value = JSON.stringify(selectedDates.map(date => {

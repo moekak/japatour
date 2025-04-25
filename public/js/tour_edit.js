@@ -223,13 +223,13 @@ var GalleryImageElement = /*#__PURE__*/function () {
 var __webpack_exports__ = {};
 // This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
 (() => {
-/*!*******************************************!*\
-  !*** ./resources/js/pages/tour_create.js ***!
-  \*******************************************/
+/*!*****************************************!*\
+  !*** ./resources/js/pages/tour_edit.js ***!
+  \*****************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/GalleryImage.js */ "./resources/js/components/GalleryImage.js");
 
-new _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_0__["default"](document.querySelector(".create-tour-btn"));
+new _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_0__["default"](document.querySelector(".edit-tour-btn"));
 })();
 
 /******/ })()

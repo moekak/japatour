@@ -1,12 +1,15 @@
 import GalleryImageElement from "./GalleryImageElement.js"
 
 export default class GalleryImage{
-    constructor(){
+    constructor(submitBtn){
+
+        console.log(submitBtn);
+        
         this.galleryCount = 1
         this.galleryContainer = document.getElementById("js_gallery_image")
         this.wrapper = document.querySelector(".gallery_image-wrapepr")
         this.addBtn = document.getElementById("add-gallery")
-        this.submitBtn = document.querySelector(".create-tour-btn")
+        this.submitBtn = submitBtn
         this.form = document.querySelector(".tour-form")
 
         this.initialize()
@@ -24,8 +27,12 @@ export default class GalleryImage{
         e.preventDefault()
         const files = document.querySelectorAll(".js_galllery_images")
         files.forEach((file, index)=>{
+            if(file.value == ""){
+                return
+            }
             file.setAttribute("name", `gallery_images[${index}]`)
         })
+
         this.form.submit()
 
 
@@ -34,6 +41,7 @@ export default class GalleryImage{
         const newGalleryImage = this.galleryContainer.cloneNode(true)
         newGalleryImage.dataset.id = this.galleryCount
         const fileInput = newGalleryImage.querySelector(".image-upload-input")
+        fileInput.value = ""
         const fileLabel= newGalleryImage.querySelector(".image-upload-label")
 
         fileInput.setAttribute('name', `gallery_images[${this.galleryCount}]`);

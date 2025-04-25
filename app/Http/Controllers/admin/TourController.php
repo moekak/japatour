@@ -11,6 +11,7 @@ use App\Services\ImageService;
 use App\Services\Tour\TourService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class TourController extends Controller{
     protected $tourService;
@@ -82,6 +83,7 @@ class TourController extends Controller{
             $this->tourService->updateTour($request, $id);
             return redirect()->route("tour_list")->with("success", "success to update Tour");
         } catch (\Exception $e) {
+            Log::debug($e);
             return redirect()->back()->with("error", "faild to update Tour: " . $e->getMessage())->withInput();
         }
     }

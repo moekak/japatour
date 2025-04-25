@@ -177,13 +177,12 @@
                             </ul>
                             
                             <h3 class="includes-title">What's Not Included</h3>
-                            @if (count($tour->exclusions) > 1)
-                                <ul class="not-includes-list">
-                                    @foreach ($tour->exclusions as $exclusion)
-                                        <li>{{$exclusion}}</li>
-                                    @endforeach
-                                </ul>
-                            @endif
+                            <ul class="not-includes-list">
+                                @foreach ($tour->exclusions as $exclusion)
+                                    <li>{{$exclusion}}</li>
+                                @endforeach
+                            </ul>
+                            
                         </div>
                     </div>
                 </div>
