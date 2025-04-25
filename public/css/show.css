@@ -308,6 +308,7 @@
     scrollbar-color: var(--main-color) transparent;
     padding-right: 20px;
     padding-left: 20px;
+    width: 100%;
   }
   
   .preview-thumbs::-webkit-scrollbar {
@@ -1065,11 +1066,11 @@
     }
     
     .hero-title {
-      font-size: 32px;
+      font-size: 37px;
     }
     
     .hero-subtitle {
-      font-size: 18px;
+      font-size: 16px;
     }
     
     .preview-main {
@@ -1088,5 +1089,67 @@
       width: 35px;
       height: 35px;
       font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .discount-badge{
+      display: none;
+    }
+    .hero-badge{
+      font-size: 14px;
+    }
+    .gallery-control{
+      width: 30px;
+      height: 30px;
+      font-size: 13px;
+    }
+    .gallery-controls{
+      top: 37%;
+      padding: 0 14px;
+    }
+    .preview-dot{
+      width: 9px;
+      height: 9px;
+    }
+    .section{
+      padding: 21px;
+    }
+    .tour-overview p{
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .highlights{
+      padding: 22px;
+    }
+    .highlights-list li{
+      padding: 14px;
+    }
+    .day-title{
+      font-size: 21px;
+    }
+    .day-title::before{
+      max-width: 35px;
+      height: 35px;
+      font-size: 16px;
+    }
+    .day-description{
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .day-content{
+      padding-left: 10px;
+    }
+    .tour-itinerary{
+      margin-bottom: 0 !important;
+    }
+    .pricing-body{
+      padding: 0px 22px 30px 22px;
+    }
+    .includes-section{
+      padding: 22px;
+    }
+    .includes-title{
+      margin: 21px 0;
     }
   }

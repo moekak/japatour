@@ -100,6 +100,74 @@
                 </h2>
                 <div class="destinations_area" data-aos="fade-up" 
                     data-aos-duration="1000">
+                    <div class="card" style="width: 25rem">
+                        <img src="{{asset("img/tokyo.jpg")}}" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <div>
+                                <h5 class="card-title">Tokyo</h5>
+                                <p class="card-text">
+                                    Immerse yourself in Tokyo’s vibrant energy, where cutting-edge modernity meets traditional charm. From bustling markets to tranquil gardens, the city offers endless adventures.
+                                </p>
+                            </div>
+                            
+                            <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="btn destination-btn" target="blank">See details</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 25rem">
+                        <img src="{{asset("img/enoshima.jpeg")}}" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <div>
+                                <h5 class="card-title">Enoshima</h5>
+                                <p class="card-text">
+                                    Venture to Enoshima Island for breathtaking ocean views, fascinating caves, and ancient shrines. A seaside gem perfect for nature lovers and adventurers.
+                                </p> 
+                            </div>                           
+                            <a href="https://www.getyourguide.com/tokyo-l193/enoshima-island-private-walking-tours-with-local-guide-t746962/?preview=YXO3ZGDVG6LFLS54WKFNLRWSG72CKGP7" class="btn destination-btn" target="blank">See details</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 25rem">
+                        <img src="{{asset("img/yokohama.jpeg")}}" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <div>
+                                <h5 class="card-title">Yokohama</h5>
+                                <p class="card-text">
+                                    Explore Yokohama’s scenic waterfront, historic architecture, and dynamic attractions like Chinatown and the Red Brick Warehouses. A perfect blend of culture and coastal beauty.
+                                </p>  
+                            </div>
+                            
+                            <a href="https://www.getyourguide.com/tokyo-l193/yokohama-private-personalized-tours-with-local-guide-t746936/?preview=UAJ52MRGL3EKZHRPKE6AD4GQMJ0W6D62" class="btn destination-btn" target="blank">See details</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 25rem">
+                        <img src="{{asset("img/sankeien.jpeg")}}" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <div>
+                                <h5 class="card-title">Sankeien Garden
+                                </h5>
+                                <p class="card-text">
+                                    Step into the peaceful haven of Sankeien Garden, a picturesque escape filled with historic buildings, koi ponds, and seasonal blooms that change throughout the year.
+                                </p>  
+                            </div>
+                            
+                            <a href="https://www.getyourguide.com/yokohama-l2128/sankeien-garden-private-walking-tour-with-local-expert--t845779/?preview=X1I5T00029M5BXTX5IQ8CTZJGOT6ZIRT" class="btn destination-btn" target="blank">See details</a>
+                        </div>
+                    </div>
+                    <div class="card" style="width: 25rem">
+                        <img src="{{asset("img/kamakura.jpg")}}" class="card-img-top" alt="..." />
+                        <div class="card-body">
+                            <div>
+                                <h5 class="card-title">Kamakura</h5>
+                                <p class="card-text">
+                                    Discover Kamakura, a city of timeless history and natural beauty. Marvel at the Great Buddha, wander through serene bamboo groves, and explore ancient Zen temples surrounded by lush greenery.
+                                </p>  
+                            </div>
+                            
+                            <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="btn destination-btn" target="blank">See details</a>
+                        </div>
+                    </div>
+                </div>
+                {{-- <div class="destinations_area" data-aos="fade-up" 
+                    data-aos-duration="1000">
                     @foreach ($tours as $tour)
                         <div class="tour-card" data-id="{{ $tour->id }}">
                             <!-- Image Section -->
@@ -216,7 +284,7 @@
                             <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="btn destination-btn" target="blank">See details</a>
                         </div>
                     </div> --}}
-                </div>
+                {{-- </div>  --}}
             </div>
         </section>
 
