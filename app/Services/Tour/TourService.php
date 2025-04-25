@@ -130,7 +130,6 @@ class TourService
         foreach ($jsonFields as $field) {
             $data[$field] = json_encode($data[$field]);
         }
-        
         return $data;
     }
 }

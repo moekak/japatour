@@ -60,15 +60,10 @@ export default class GalleryImage{
 
     #handleRemoveImage(){
         const removeBtns = document.querySelectorAll(".preview_remove-style")
-        console.log(removeBtns);
-        
-
         removeBtns.forEach((btn)=>{
             const newBtn = btn.cloneNode(true)
             btn.replaceWith(newBtn)
             newBtn.addEventListener("click", (e)=>{
-                console.log("click");
-                
                 const id = btn.dataset.id
                 const targetInput = Array.from(document.querySelectorAll(".image-upload-container")).find((container) => container.dataset.id == id)
                 this.wrapper.removeChild(targetInput)

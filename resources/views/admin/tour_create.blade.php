@@ -527,18 +527,6 @@
                 document.getElementById("previewImage").src = objectURL
             });
 
-            // let imageCount = 0
-            // document.getElementById('gallery_images').addEventListener('change', function(e) {
-            //     const objectURL = URL.createObjectURL(e.target.files[0]);
-            //     const previewContainer = document.getElementById("gallery_image")
-            //     const img = document.createElement("img")
-            //     img.id = `previewgalleryImage${imageCount}`
-            //     img.classList.add("preview-image")
-            //     img.src = objectURL
-            //     previewContainer.appendChild(img)
-            //     previewContainer.innerHTML += label
-                
-            // });
         });
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
