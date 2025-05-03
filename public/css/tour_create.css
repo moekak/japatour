@@ -88,6 +88,7 @@
   }
   
   .form-group input[type="text"],
+  .form-group input[type="time"],
   .form-group input[type="number"],
   .form-group input[type="email"],
   .form-group input[type="tel"],
@@ -247,6 +248,7 @@
   /* Dynamic Form Elements - Highlights, Inclusions, Exclusions */
   .highlight-item,
   .inclusion-item,
+  .itineary-highlight-item,
   .exclusion-item {
     display: flex;
     gap: 10px;

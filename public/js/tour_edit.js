@@ -28,7 +28,6 @@ var GalleryImage = /*#__PURE__*/function () {
   function GalleryImage(submitBtn) {
     _classCallCheck(this, GalleryImage);
     _classPrivateMethodInitSpec(this, _GalleryImage_brand);
-    console.log(submitBtn);
     this.galleryCount = 1;
     this.galleryContainer = document.getElementById("js_gallery_image");
     this.wrapper = document.querySelector(".gallery_image-wrapepr");
@@ -92,12 +91,10 @@ var GalleryImage = /*#__PURE__*/function () {
 function _handleRemoveImage() {
   var _this2 = this;
   var removeBtns = document.querySelectorAll(".preview_remove-style");
-  console.log(removeBtns);
   removeBtns.forEach(function (btn) {
     var newBtn = btn.cloneNode(true);
     btn.replaceWith(newBtn);
     newBtn.addEventListener("click", function (e) {
-      console.log("click");
       var id = btn.dataset.id;
       var targetInput = Array.from(document.querySelectorAll(".image-upload-container")).find(function (container) {
         return container.dataset.id == id;

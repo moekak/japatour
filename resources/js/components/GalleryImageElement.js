@@ -6,7 +6,7 @@ export default class GalleryImageElement{
                   findElement.querySelector(".preview-image").src = objectURL
                   return
             }
- 
+
             const div = document.createElement("div")
             div.classList.add("preview-box")
             div.style.position = "relative"

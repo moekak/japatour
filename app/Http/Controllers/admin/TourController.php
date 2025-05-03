@@ -55,7 +55,7 @@ class TourController extends Controller{
     {
         try {
             $tour = $this->tourService->getTourById($id);
-            return view("show", compact("tour"));
+            return view("showe", compact("tour"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
         }

@@ -184,6 +184,34 @@
                                         <label for="itinerary[{{ $dayIndex }}][description]">Day Description <span class="required">*</span></label>
                                         <textarea id="itinerary[{{ $dayIndex }}][description]" name="itinerary[{{ $dayIndex }}][description]" rows="3" >{{ $day['description'] }}</textarea>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="hero_image">Itinerary Image <span class="required">*</span></label>
+                                        <div class="image-upload-container">
+                                            <input type="file" id="itinerary_image"  name="itinerary[{{$dayIndex}}][itinerary_image]" accept="image/*" class="image-upload-input" >
+                                            <label for="itinerary_image" class="image-upload-label">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <span style="color: #fff;">Choose a file...</span>
+                                            </label>
+                                            <div class="selected-file"></div>
+                                        </div>
+                                        <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
+                                        <div class="preview-container">
+                                            <img id="itineraryPreviewImage" class="preview-image" src="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Itineary highlights<span class="required">*</span></label>
+                                        <div class="itinerary-highlights-container">
+                                            @foreach($day['itinerary_highlight'] as $index => $highlight)
+                                                <div class="itineary-highlight-item">
+                                                    <input type="text" name="itinerary[{{ $dayIndex }}][itinerary_highlight][{{ $index}}]" value="{{ $highlight }}" >
+                                                    <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                        <button type="button" id="add-highlight" class="btn-secondary"><i class="fas fa-plus"></i> Add Highlight</button>
+                                    </div>
                                     
                                     <div class="form-group">
                                         <label>Schedule <span class="required">*</span></label>
@@ -191,7 +219,7 @@
                                             @foreach($day['schedule'] as $scheduleIndex => $scheduleItem)
                                                 <div class="schedule-item">
                                                     <div class="schedule-time">
-                                                        <input type="text" name="itinerary[{{ $dayIndex }}][schedule][{{ $scheduleIndex }}][time]" placeholder="e.g. 9:00 AM" value="{{ $scheduleItem['time'] }}" >
+                                                        <input type="time" name="itinerary[{{ $dayIndex }}][schedule][{{ $scheduleIndex }}][time]" placeholder="e.g. 9:00 AM" value="{{ $scheduleItem['time'] }}" >
                                                     </div>
                                                     <div class="schedule-description">
                                                         <input type="text" name="itinerary[{{ $dayIndex }}][schedule][{{ $scheduleIndex }}][description]" placeholder="Activity description" value="{{ $scheduleItem['description'] }}" >
@@ -221,13 +249,37 @@
                                     <label for="itinerary[0][description]">Day Description <span class="required">*</span></label>
                                     <textarea id="itinerary[0][description]" name="itinerary[0][description]" rows="3" ></textarea>
                                 </div>
-                                
+                                <div class="form-group">
+                                    <label for="hero_image">Itinerary Image <span class="required">*</span></label>
+                                    <div class="image-upload-container">
+                                        <input type="file" id="itinerary_image" name="itinerary[0][itinerary_image]" accept="image/*" class="image-upload-input" >
+                                        <label for="itinerary_image" class="image-upload-label">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <span style="color: #fff;">Choose a file...</span>
+                                        </label>
+                                        <div class="selected-file"></div>
+                                    </div>
+                                    <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
+                                    <div class="preview-container">
+                                        <img id="itineraryPreviewImage" class="preview-image" src="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Itineary highlights <span class="required">*</span></label>
+                                    <div class="itinerary-highlights-container">
+                                        <div class="itineary-highlight-item">
+                                            <input type="text" name="itinerary[0][itinerary_highlight][0]" value="" >
+                                            <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    </div>                          
+                                    <button type="button" class="add-itinerary-highlight btn-secondary"><i class="fas fa-plus"></i> Add Itinerary highlights</button>
+                                </div>
                                 <div class="form-group">
                                     <label>Schedule <span class="required">*</span></label>
                                     <div class="schedule-items-container" data-day="0">
                                         <div class="schedule-item">
                                             <div class="schedule-time">
-                                                <input type="text" name="itinerary[0][schedule][0][time]" placeholder="e.g. 9:00 AM" >
+                                                <input type="time" name="itinerary[0][schedule][0][time]" placeholder="e.g. 9:00 AM" >
                                             </div>
                                             <div class="schedule-description">
                                                 <input type="text" name="itinerary[0][schedule][0][description]" placeholder="Activity description" >
@@ -354,13 +406,40 @@
                 <label for="itinerary[{day_index}][description]">Day Description <span class="required">*</span></label>
                 <textarea id="itinerary[{day_index}][description]" name="itinerary[{day_index}][description]" rows="3" ></textarea>
             </div>
+
+            <div class="form-group">
+                <label for="hero_image">Itinerary Image <span class="required">*</span></label>
+                <div class="image-upload-container">
+                    <input type="file" id="itinerary_image{day_index}" name="itinerary[{day_index}][itinerary_image]" accept="image/*" class="image-upload-input" >
+                    <label for="itinerary_image{day_index}" class="image-upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span style="color: #fff;">Choose a file...</span>
+                    </label>
+                    <div class="selected-file"></div>
+                </div>
+                <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
+                <div class="preview-container">
+                    <img id="itineraryPreviewImage" class="preview-image" src="">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Itineary highlights <span class="required">*</span></label>
+                <div class="itinerary-highlights-container">
+                    <div class="itineary-highlight-item">
+                        <input type="text" name="itinerary[{day_index}][itinerary_highlight][0]" value="" >
+                        <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <button type="button" class="add-itinerary-highlight btn-secondary"><i class="fas fa-plus"></i> Add Itinerary highlights</button>
+            </div>
             
             <div class="form-group">
                 <label>Schedule <span class="required">*</span></label>
                 <div class="schedule-items-container" data-day="{day_index}">
                     <div class="schedule-item">
                         <div class="schedule-time">
-                            <input type="text" name="itinerary[{day_index}][schedule][0][time]" placeholder="e.g. 9:00 AM" >
+                            <input type="time" name="itinerary[{day_index}][schedule][0][time]" placeholder="e.g. 9:00 AM" >
                         </div>
                         <div class="schedule-description">
                             <input type="text" name="itinerary[{day_index}][schedule][0][description]" placeholder="Activity description" >
@@ -377,7 +456,7 @@
     <template id="schedule-template">
         <div class="schedule-item">
             <div class="schedule-time">
-                <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][time]" placeholder="e.g. 9:00 AM" >
+                <input type="time" name="itinerary[{day_index}][schedule][{schedule_index}][time]" placeholder="e.g. 9:00 AM" >
             </div>
             <div class="schedule-description">
                 <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][description]" placeholder="Activity description" >
@@ -387,138 +466,83 @@
     </template>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Highlight management
-            document.getElementById('add-highlight').addEventListener('click', function() {
-                const container = document.getElementById('highlights-container');
-                const newItem = document.createElement('div');
-                newItem.className = 'highlight-item';
-                newItem.innerHTML = `
-                    <input type="text" name="highlights[]" >
-                    <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                `;
-                container.appendChild(newItem);
-            });
 
-            document.getElementById('highlights-container').addEventListener('click', function(e) {
-                if (e.target.closest('.remove-highlight')) {
-                    const item = e.target.closest('.highlight-item');
-                    if (document.querySelectorAll('.highlight-item').length > 1) {
-                        item.remove();
-                    } else {
-                        alert('At least one highlight is required.');
-                    }
-                }
-            });
+            // document.getElementById('itinerary-highlights-container').addEventListener('click', function(e) {
+            //     if (e.target.closest('.remove-itinerary_highlight')) {
+            //         const item = e.target.closest('.itineary-highlight-item');
+            //         if (document.querySelectorAll('.itineary-highlight-item').length > 1) {
+            //             item.remove();
+            //         } else {
+            //             alert('At least one itineary highlight is required.');
+            //         }
+            //     }
+            // });
 
-            // Inclusion management
-            document.getElementById('add-inclusion').addEventListener('click', function() {
-                const container = document.getElementById('inclusions-container');
-                const newItem = document.createElement('div');
-                newItem.className = 'inclusion-item';
-                newItem.innerHTML = `
-                    <input type="text" name="inclusions[]" >
-                    <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                `;
-                container.appendChild(newItem);
-            });
 
-            document.getElementById('inclusions-container').addEventListener('click', function(e) {
-                if (e.target.closest('.remove-inclusion')) {
-                    const item = e.target.closest('.inclusion-item');
-                    if (document.querySelectorAll('.inclusion-item').length > 1) {
-                        item.remove();
-                    } else {
-                        alert('At least one inclusion is required.');
-                    }
-                }
-            });
 
-            // Exclusion management
-            document.getElementById('add-exclusion').addEventListener('click', function() {
-                const container = document.getElementById('exclusions-container');
-                const newItem = document.createElement('div');
-                newItem.className = 'exclusion-item';
-                newItem.innerHTML = `
-                    <input type="text" name="exclusions[]" >
-                    <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
-                `;
-                container.appendChild(newItem);
-            });
 
-            document.getElementById('exclusions-container').addEventListener('click', function(e) {
-                if (e.target.closest('.remove-exclusion')) {
-                    const item = e.target.closest('.exclusion-item');
-                    if (document.querySelectorAll('.exclusion-item').length > 1) {
-                        item.remove();
-                    } else {
-                        alert('At least one exclusion is required.');
-                    }
-                }
-            });
-
-            // Itinerary days management
-            const dayTemplate = document.getElementById('day-template').innerHTML;
-            const scheduleTemplate = document.getElementById('schedule-template').innerHTML;
-            let dayCount = document.querySelectorAll('.itinerary-day-item').length;
-
-            document.getElementById('add-day').addEventListener('click', function() {
-                const container = document.getElementById('itinerary-days-container');
-                dayCount++;
-                const dayIndex = dayCount - 1;
-                let newDayHtml = dayTemplate
-                    .replace(/{day_number}/g, dayCount)
-                    .replace(/{day_index}/g, dayIndex);
-                
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = newDayHtml;
-                const newDay = tempDiv.firstElementChild;
-                container.appendChild(newDay);
-            });
 
             document.getElementById('itinerary-days-container').addEventListener('click', function(e) {
-                // Handle remove day
-                if (e.target.closest('.remove-day')) {
-                    const item = e.target.closest('.itinerary-day-item');
-                    if (document.querySelectorAll('.itinerary-day-item').length > 1) {
-                        item.remove();
-                        // Re-number the days
-                        document.querySelectorAll('.itinerary-day-item').forEach((day, index) => {
-                            day.querySelector('h3').textContent = `Day ${index + 1}`;
-                        });
-                    } else {
-                        alert('At least one day is required in the itinerary.');
-                    }
-                }
-                
-                // Handle add schedule item
-                if (e.target.closest('.add-schedule')) {
-                    const btn = e.target.closest('.add-schedule');
-                    const dayIndex = btn.getAttribute('data-day');
-                    const container = document.querySelector(`.schedule-items-container[data-day="${dayIndex}"]`);
-                    const scheduleItems = container.querySelectorAll('.schedule-item');
-                    const scheduleIndex = scheduleItems.length;
+            // Handle remove day
+            // if (e.target.closest('.remove-day')) {
+            //     const item = e.target.closest('.itinerary-day-item');
+            //     if (document.querySelectorAll('.itinerary-day-item').length > 1) {
+            //         item.remove();
+            //         // Re-number the days
+            //         document.querySelectorAll('.itinerary-day-item').forEach((day, index) => {
+            //             day.querySelector('h3').textContent = `Day ${index + 1}`;
+            //         });
+            //     } else {
+            //         alert('At least one day is required in the itinerary.');
+            //     }
+            // }
+            
+
+
+        //   // Handle remove itinerary highlight
+        // if (e.target.closest('.remove-itinerary_highlight')) {
+        //     const item = e.target.closest('.itineary-highlight-item');
+        //     // ここでエラーが発生しています - コンテナが見つからない
+        //     const container = item.closest('.itinerary-highlights-container');
+        //     // コンテナが null のため、ここで querySelectorAll でエラーになります
+        //     const items = container.querySelectorAll('.itineary-highlight-item');
+            
+        //     if (items.length > 1) {
+        //         item.remove();
+        //     } else {
+        //         alert('At least one itinerary highlight is required.');
+        //     }
+        // }
                     
-                    let newScheduleHtml = scheduleTemplate
-                        .replace(/{day_index}/g, dayIndex)
-                        .replace(/{schedule_index}/g, scheduleIndex);
-                    
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = newScheduleHtml;
-                    const newSchedule = tempDiv.firstElementChild;
-                    container.appendChild(newSchedule);
-                }
+            // Handle add schedule item
+            // if (e.target.closest('.add-schedule')) {
+            //     const btn = e.target.closest('.add-schedule');
+            //     const dayIndex = btn.getAttribute('data-day');
+            //     const container = document.querySelector(`.schedule-items-container[data-day="${dayIndex}"]`);
+            //     const scheduleItems = container.querySelectorAll('.schedule-item');
+            //     const scheduleIndex = scheduleItems.length;
                 
-                // Handle remove schedule item
-                if (e.target.closest('.remove-schedule')) {
-                    const item = e.target.closest('.schedule-item');
-                    const container = item.closest('.schedule-items-container');
-                    if (container.querySelectorAll('.schedule-item').length > 1) {
-                        item.remove();
-                    } else {
-                        alert('At least one schedule item is required per day.');
-                    }
-                }
-            });
+            //     let newScheduleHtml = scheduleTemplate
+            //         .replace(/{day_index}/g, dayIndex)
+            //         .replace(/{schedule_index}/g, scheduleIndex);
+                
+            //     const tempDiv = document.createElement('div');
+            //     tempDiv.innerHTML = newScheduleHtml;
+            //     const newSchedule = tempDiv.firstElementChild;
+            //     container.appendChild(newSchedule);
+            // }
+            
+            // Handle remove schedule item
+            // if (e.target.closest('.remove-schedule')) {
+            //     const item = e.target.closest('.schedule-item');
+            //     const container = item.closest('.schedule-items-container');
+            //     if (container.querySelectorAll('.schedule-item').length > 1) {
+            //         item.remove();
+            //     } else {
+            //         alert('At least one schedule item is required per day.');
+            //     }
+            // }
+        });
 
             // File upload previews
             document.getElementById('hero_image').addEventListener('change', function(e) {

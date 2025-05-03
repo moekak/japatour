@@ -2,9 +2,6 @@ import GalleryImageElement from "./GalleryImageElement.js"
 
 export default class GalleryImage{
     constructor(submitBtn){
-
-        console.log(submitBtn);
-        
         this.galleryCount = 1
         this.galleryContainer = document.getElementById("js_gallery_image")
         this.wrapper = document.querySelector(".gallery_image-wrapepr")

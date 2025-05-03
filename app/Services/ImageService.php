@@ -10,9 +10,7 @@ class ImageService
             try {
                   // 引数で渡されたファイルオブジェクトを使用
                   $path = $imageFile->store($folder, 'public');
-                  
-                  // S3に画像を保存する処理があればここに記述
-                  
+            
                   return $path;
             } catch (\Exception $e) {
             Log::error('Image save error: ' . $e->getMessage());

@@ -8,6 +8,7 @@ use App\Services\GenerateData;
 use App\Services\ImageService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 class TourService
 {
@@ -122,14 +123,19 @@ class TourService
      */
     private function prepareTourData($request)
     {
+
         $data = $request->validated();
-        
+        foreach($data["itinerary"] as $key => $itinerary){
+            $data["itinerary"][$key]["itinerary_image"] = $this->imageService->saveImage($itinerary["itinerary_image"], "itinerary_image");
+        }
+
         // JSON変換が必要なフィールド
         $jsonFields = ['highlights', 'itinerary', 'inclusions', 'exclusions'];
         
         foreach ($jsonFields as $field) {
             $data[$field] = json_encode($data[$field]);
         }
+
         return $data;
     }
 }
