@@ -170,7 +170,8 @@
                         @foreach ($tour->itinerary as $index => $itinerary)
                             <div class="itinerary-day-item">
                                 <div class="day-header">
-                                    <button type="button" class="remove-day btn-icon" data-day="1"><i class="fas fa-times"></i></button>
+                                    <h3>Day {{ $index + 1 }}</h3>
+                                    <button type="button" class="remove-day btn-icon" data-day="{{ $index + 1 }}"><i class="fas fa-times"></i></button>
                                 </div>
                                 
                                 <div class="form-group">
@@ -182,6 +183,34 @@
                                     <label for="itinerary[{{$index}}][description]">Day Description <span class="required">*</span></label>
                                     <textarea id="itinerary[{{$index}}][description]" name="itinerary[{{$index}}][description]" rows="3" >{{$itinerary["description"]}}</textarea>
                                 </div>
+                                <div class="form-group">
+                                    <label for="itinerary_image{{$index}}">Itinerary Image <span class="required">*</span></label>
+                                    <div class="image-upload-container">
+                                        <input type="file" id="itinerary_image{{$index}}"  name="itinerary[{{$index}}][itinerary_image]" accept="image/*" class="image-upload-input">
+                                        <label for="itinerary_image{{$index}}" class="image-upload-label">
+                                            <i class="fas fa-cloud-upload-alt"></i>
+                                            <span style="color: #fff;">Choose a file...</span>
+                                        </label>
+                                        <div class="selected-file"></div>
+                                    </div>
+                                    <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
+                                    <div class="preview-container">
+                                        <img id="itineraryPreviewImage" class="preview-image" src="">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Itineary highlights<span class="required">*</span></label>
+                                    <div class="itinerary-highlights-container">
+                                        @foreach($itinerary['itinerary_highlight'] as $highlight_index => $highlight)
+                                            <div class="itineary-highlight-item">
+                                                <input type="text" name="itinerary[{{ $index }}][itinerary_highlight][{{ $highlight_index}}]" value="{{ $highlight }}" >
+                                                <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
+                                            </div>
+                                        @endforeach
+
+                                    </div>
+                                    <button type="button" id="add-highlight" class="btn-secondary"><i class="fas fa-plus"></i> Add Highlight</button>
+                                </div>
                                 
                                 <div class="form-group">
                                     <label>Schedule <span class="required">*</span></label>
@@ -189,7 +218,7 @@
                                         @foreach ($itinerary["schedule"] as $index2 =>$schedule)
                                             <div class="schedule-item">
                                                 <div class="schedule-time">
-                                                    <input type="text" name="itinerary[{{$index}}][schedule][{{$index2}}][time]" value="{{$schedule["time"]}}" placeholder="e.g. 9:00 AM" >
+                                                    <input type="time" name="itinerary[{{$index}}][schedule][{{$index2}}][time]" value="{{$schedule["time"]}}" placeholder="e.g. 9:00 AM" >
                                                 </div>
                                                 <div class="schedule-description">
                                                     <input type="text" name="itinerary[{{$index}}][schedule][{{$index2}}][description]" value="{{$schedule["description"]}}" placeholder="Activity description" >
@@ -201,12 +230,8 @@
                                     <button type="button" class="add-schedule btn-secondary" data-day={{$index}}><i class="fas fa-plus"></i> Add Schedule Item</button>
                                 </div>
                             </div>
-
                         @endforeach
-                        
-                        
                     </div>
-                    
                     <button type="button" id="add-day" class="btn-secondary"><i class="fas fa-plus"></i> Add Day</button>
                 </div>
 
@@ -292,6 +317,65 @@
                         </div>
                     </div>
                 </div>
+                {{-- review form --}}
+                <div class="form-section">
+                    <h2 class="section-title">Reviews</h2>
+                    <div id="review-container">
+                        <!-- Day template will be added here dynamically -->
+                        @foreach ($tour->reviews as $review_index => $review)
+                            <div class="review-item">
+                                <div class="day-header">
+                                    <h3>Review {{$review_index + 1}}</h3>
+                                    <button type="button" class="remove-review btn-icon"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="review[{{$review_index}}][name]">Customer's name<span class="required">*</span></label>
+                                    <input type="text" id="review[{{$review_index}}][name]" name="review[{{$review_index}}][name]" value="{{ old('review.'.$review_index.'.name') ?? $review->name}}">
+                                </div>
+                                <div class="form-grid-2">
+                                    <div class="form-group">
+                                        <label for="review[{{$review_index}}][date]">Date<span class="required">*</span></label>
+                                        <input type="date" id="review[{{$review_index}}][date]" name="review[{{$review_index}}][date]" value="{{ old('review.'.$review_index.'.date') ?? $review->date }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="review[{{$review_index}}][rate]">Rate<span class="required">*</span></label>
+                                        <input type="number" id="review[{{$review_index}}][rate]" name="review[{{$review_index}}][rate]" max=5 value="{{ old('review.'.$review_index.'.rate') ?? $review->rate}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="review[{{$review_index}}][review]">Review<span class="required">*</span></label>
+                                    <textarea id="review[{{$review_index}}][review]" name="review[{{$review_index}}][review]" rows="3" >{{ old('review.'.$review_index.'.review') ?? $review->review}}</textarea>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    
+                    <button type="button" id="add-review" class="btn-secondary"><i class="fas fa-plus"></i> Add Review</button>
+                </div>
+                {{-- QA form --}}
+                <div class="form-section">
+                    <h2 class="section-title">QA</h2>
+                    <div id="qa-container">
+                        @foreach($tour->questions  as $qaIndex => $qa)
+                            <div class="qa-item">
+                                <div class="day-header">
+                                    <h3>Question {{$qaIndex + 1}}</h3>
+                                    <button type="button" class="remove-qa btn-icon"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="qa[{{$qaIndex}}][question]">Question<span class="required">*</span></label>
+                                    <textarea id="qa[{{$qaIndex}}][question]" name="qa[{{$qaIndex}}][question]" rows="3" >{{ old('qa.'.$qaIndex.'.question') ?? $qa->question}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="qa[{{$qaIndex}}][answer]">Answer<span class="required">*</span></label>
+                                    <textarea id="qa[{{$qaIndex}}][answer]" name="qa[{{$qaIndex}}][answer]" rows="3" >{{ old('qa.'.$qaIndex.'.answer') ?? $qa->answer}}</textarea>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <button type="button" id="add-qa" class="btn-secondary"><i class="fas fa-plus"></i> Add QA</button>
+                </div>
+
             </div>
 
             <div class="form-actions">
@@ -324,7 +408,7 @@
                 <div class="schedule-items-container" data-day="{day_index}">
                     <div class="schedule-item">
                         <div class="schedule-time">
-                            <input type="text" name="itinerary[{day_index}][schedule][0][time]" placeholder="e.g. 9:00 AM" >
+                            <input type="time" name="itinerary[{day_index}][schedule][0][time]" placeholder="e.g. 9:00 AM" >
                         </div>
                         <div class="schedule-description">
                             <input type="text" name="itinerary[{day_index}][schedule][0][description]" placeholder="Activity description" >
@@ -341,7 +425,7 @@
     <template id="schedule-template">
         <div class="schedule-item">
             <div class="schedule-time">
-                <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][time]" placeholder="e.g. 9:00 AM" >
+                <input type="time" name="itinerary[{day_index}][schedule][{schedule_index}][time]" placeholder="e.g. 9:00 AM" >
             </div>
             <div class="schedule-description">
                 <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][description]" placeholder="Activity description" >
@@ -350,147 +434,57 @@
         </div>
     </template>
 
+    <!-- Review Item Template (Hidden) -->
+    <template id="review-template">
+        <div class="review-item">
+            <div class="day-header">
+                <h3>Review {day_index}</h3>
+                <button type="button" class="remove-review btn-icon"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="form-group">
+                <label for="review[{day_index}][name]">Customer's name<span class="required">*</span></label>
+                <input type="text" id="review[{day_index}][name]" name="review[{day_index}][name]" >
+            </div>
+            <div class="form-grid-2">
+                <div class="form-group">
+                    <label for="review[{day_index}][date]">Date<span class="required">*</span></label>
+                    <input type="date" id="review[{day_index}][date]" name="review[{day_index}][date]" >
+                </div>
+                <div class="form-group">
+                    <label for="review[{day_index}][rate]">Rate<span class="required">*</span></label>
+                    <input type="number" id="review[{day_index}][rate]" name="review[{day_index}][rate]" max=5>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="review[{day_index}][review]">Review<span class="required">*</span></label>
+                <textarea id="review[{day_index}][review]" name="review[{day_index}][review]" rows="3" ></textarea>
+            </div>
+        </div>
+    </template>
+
+    <!-- Review QA Template (Hidden) -->
+    <template id="qa-template">
+        <div class="qa-item">
+            <div class="day-header">
+                <h3>Question {day_index}</h3>
+                <button type="button" class="remove-qa btn-icon"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="form-group">
+                <label for="qa[{day_index}][question]">Question<span class="required">*</span></label>
+                <textarea id="qa[{day_index}][question]" name="qa[{day_index}][question]" rows="3" ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="qa[{day_index}][answer]">Answer<span class="required">*</span></label>
+                <textarea id="qa[{day_index}][answer]" name="qa[{day_index}][answer]" rows="3" ></textarea>
+            </div>
+        </div>
+    </template>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Highlight management
-            document.getElementById('add-highlight').addEventListener('click', function() {
-                const container = document.getElementById('highlights-container');
-                const newItem = document.createElement('div');
-                newItem.className = 'highlight-item';
-                newItem.innerHTML = `
-                    <input type="text" name="highlights[]" >
-                    <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                `;
-                container.appendChild(newItem);
-            });
-
-            document.getElementById('highlights-container').addEventListener('click', function(e) {
-                if (e.target.closest('.remove-highlight')) {
-                    const item = e.target.closest('.highlight-item');
-                    if (document.querySelectorAll('.highlight-item').length > 1) {
-                        item.remove();
-                    } else {
-                        alert('At least one highlight is required.');
-                    }
-                }
-            });
-
-            // Inclusion management
-            document.getElementById('add-inclusion').addEventListener('click', function() {
-                const container = document.getElementById('inclusions-container');
-                const newItem = document.createElement('div');
-                newItem.className = 'inclusion-item';
-                newItem.innerHTML = `
-                    <input type="text" name="inclusions[]" >
-                    <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                `;
-                container.appendChild(newItem);
-            });
-
-            document.getElementById('inclusions-container').addEventListener('click', function(e) {
-                if (e.target.closest('.remove-inclusion')) {
-                    const item = e.target.closest('.inclusion-item');
-                    if (document.querySelectorAll('.inclusion-item').length > 1) {
-                        item.remove();
-                    } else {
-                        alert('At least one inclusion is required.');
-                    }
-                }
-            });
-
-            // Exclusion management
-            document.getElementById('add-exclusion').addEventListener('click', function() {
-                const container = document.getElementById('exclusions-container');
-                const newItem = document.createElement('div');
-                newItem.className = 'exclusion-item';
-                newItem.innerHTML = `
-                    <input type="text" name="exclusions[]" >
-                    <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
-                `;
-                container.appendChild(newItem);
-            });
-
-            document.getElementById('exclusions-container').addEventListener('click', function(e) {
-                if (e.target.closest('.remove-exclusion')) {
-                    const item = e.target.closest('.exclusion-item');
-                    if (document.querySelectorAll('.exclusion-item').length > 1) {
-                        item.remove();
-                    } else {
-                        alert('At least one exclusion is required.');
-                    }
-                }
-            });
-
-            // Itinerary days management
-            const dayTemplate = document.getElementById('day-template').innerHTML;
-            const scheduleTemplate = document.getElementById('schedule-template').innerHTML;
-            let dayCount = document.querySelectorAll('.itinerary-day-item').length;
-
-            document.getElementById('add-day').addEventListener('click', function() {
-                const container = document.getElementById('itinerary-days-container');
-                dayCount++;
-                const dayIndex = dayCount - 1;
-                let newDayHtml = dayTemplate
-                    .replace(/{day_number}/g, dayCount)
-                    .replace(/{day_index}/g, dayIndex);
-                
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = newDayHtml;
-                const newDay = tempDiv.firstElementChild;
-                container.appendChild(newDay);
-            });
-
-            document.getElementById('itinerary-days-container').addEventListener('click', function(e) {
-                // Handle remove day
-                if (e.target.closest('.remove-day')) {
-                    const item = e.target.closest('.itinerary-day-item');
-                    if (document.querySelectorAll('.itinerary-day-item').length > 1) {
-                        item.remove();
-                        // Re-number the days
-                        document.querySelectorAll('.itinerary-day-item').forEach((day, index) => {
-                            day.querySelector('h3').textContent = `Day ${index + 1}`;
-                        });
-                    } else {
-                        alert('At least one day is required in the itinerary.');
-                    }
-                }
-                
-                // Handle add schedule item
-                if (e.target.closest('.add-schedule')) {
-                    const btn = e.target.closest('.add-schedule');
-                    const dayIndex = btn.getAttribute('data-day');
-                    const container = document.querySelector(`.schedule-items-container[data-day="${dayIndex}"]`);
-                    const scheduleItems = container.querySelectorAll('.schedule-item');
-                    const scheduleIndex = scheduleItems.length;
-                    
-                    let newScheduleHtml = scheduleTemplate
-                        .replace(/{day_index}/g, dayIndex)
-                        .replace(/{schedule_index}/g, scheduleIndex);
-                    
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = newScheduleHtml;
-                    const newSchedule = tempDiv.firstElementChild;
-                    container.appendChild(newSchedule);
-                }
-                
-                // Handle remove schedule item
-                if (e.target.closest('.remove-schedule')) {
-                    const item = e.target.closest('.schedule-item');
-                    const container = item.closest('.schedule-items-container');
-                    if (container.querySelectorAll('.schedule-item').length > 1) {
-                        item.remove();
-                    } else {
-                        alert('At least one schedule item is required per day.');
-                    }
-                }
-            });
-
-            // File upload previews
-            document.getElementById('hero_image').addEventListener('change', function(e) {
-                const fileName = e.target.files[0]?.name || 'No file chosen';
-                e.target.parentElement.querySelector('.selected-file').textContent = fileName;
-            });
-
+        // File upload previews
+        document.getElementById('hero_image').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file chosen';
+            e.target.parentElement.querySelector('.selected-file').textContent = fileName;
         });
     </script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">

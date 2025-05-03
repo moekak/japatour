@@ -94,7 +94,7 @@
                             </div>
                             
                             <!-- Hidden input to store all selected dates as JSON -->
-                            <input type="hidden" name="available_dates" id="available_dates_input">
+                            <input type="hidden" name="available_dates" id="available_dates_input" value="{{old("available_dates")}}">
                         </div>
                     </div>
                 </div>
@@ -185,10 +185,10 @@
                                         <textarea id="itinerary[{{ $dayIndex }}][description]" name="itinerary[{{ $dayIndex }}][description]" rows="3" >{{ $day['description'] }}</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="hero_image">Itinerary Image <span class="required">*</span></label>
+                                        <label for="itinerary_image{{$dayIndex}}">Itinerary Image <span class="required">*</span></label>
                                         <div class="image-upload-container">
-                                            <input type="file" id="itinerary_image"  name="itinerary[{{$dayIndex}}][itinerary_image]" accept="image/*" class="image-upload-input" >
-                                            <label for="itinerary_image" class="image-upload-label">
+                                            <input type="file" id="itinerary_image{{$dayIndex}}"  name="itinerary[{{$dayIndex}}][itinerary_image]" accept="image/*" class="image-upload-input">
+                                            <label for="itinerary_image{{$dayIndex}}" class="image-upload-label">
                                                 <i class="fas fa-cloud-upload-alt"></i>
                                                 <span style="color: #fff;">Choose a file...</span>
                                             </label>
@@ -250,10 +250,10 @@
                                     <textarea id="itinerary[0][description]" name="itinerary[0][description]" rows="3" ></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="hero_image">Itinerary Image <span class="required">*</span></label>
+                                    <label for="itinerary_image0">Itinerary Image <span class="required">*</span></label>
                                     <div class="image-upload-container">
-                                        <input type="file" id="itinerary_image" name="itinerary[0][itinerary_image]" accept="image/*" class="image-upload-input" >
-                                        <label for="itinerary_image" class="image-upload-label">
+                                        <input type="file" id="itinerary_image0" name="itinerary[0][itinerary_image]" accept="image/*" class="image-upload-input" >
+                                        <label for="itinerary_image0" class="image-upload-label">
                                             <i class="fas fa-cloud-upload-alt"></i>
                                             <span style="color: #fff;">Choose a file...</span>
                                         </label>
@@ -380,7 +380,115 @@
                         </div>
                     </div>
                 </div>
+                {{-- review form --}}
+                <div class="form-section">
+                    <h2 class="section-title">Reviews</h2>
+                    <div id="review-container">
+                        <!-- Day template will be added here dynamically -->
+                        @if(old('review'))
+                            @foreach(old('review') as $dayIndex => $day)
+                                <div class="review-item">
+                                    <div class="day-header">
+                                        <h3>Review {{$dayIndex + 1}}</h3>
+                                        <button type="button" class="remove-review btn-icon"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="review[{{$dayIndex}}][name]">Customer's name<span class="required">*</span></label>
+                                        <input type="text" id="review[{{$dayIndex}}][name]" name="review[{{$dayIndex}}][name]" value="{{ old('review.'.$dayIndex.'.name') }}">
+                                    </div>
+                                    <div class="form-grid-2">
+                                        <div class="form-group">
+                                            <label for="review[{{$dayIndex}}][date]">Date<span class="required">*</span></label>
+                                            <input type="date" id="review[{{$dayIndex}}][date]" name="review[{{$dayIndex}}][date]" value="{{ old('review.'.$dayIndex.'.date') }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="review[{{$dayIndex}}][rate]">Rate<span class="required">*</span></label>
+                                            <input type="number" id="review[{{$dayIndex}}][rate]" name="review[{{$dayIndex}}][rate]" max=5 value="{{ old('review.'.$dayIndex.'.rate') }}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="review[{{$dayIndex}}][review]">Review<span class="required">*</span></label>
+                                        <textarea id="review[{{$dayIndex}}][review]" name="review[{{$dayIndex}}][review]" rows="3" >{{ old('review.'.$dayIndex.'.review') }}</textarea>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <!-- Default first review if no old input -->
+                            <div class="review-item">
+                                <div class="day-header">
+                                    <h3>Review 1</h3>
+                                    <button type="button" class="remove-review btn-icon"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="review[0][name]">Customer's name<span class="required">*</span></label>
+                                    <input type="text" id="review[0][name]" name="review[0][name]" >
+                                </div>
+                                <div class="form-grid-2">
+                                    <div class="form-group">
+                                        <label for="review[0][date]">Date<span class="required">*</span></label>
+                                        <input type="date" id="review[0][date]" name="review[0][date]" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="review[0][rate]">Rate<span class="required">*</span></label>
+                                        <input type="number" id="review[0][rate]" name="review[0][rate]" max=5>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="review[0][review]">Review<span class="required">*</span></label>
+                                    <textarea id="review[0][review]" name="review[0][review]" rows="3" ></textarea>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                    
+                    <button type="button" id="add-review" class="btn-secondary"><i class="fas fa-plus"></i> Add Review</button>
+                </div>
+                {{-- QA form --}}
+                <div class="form-section">
+                    <h2 class="section-title">QA</h2>
+                    <div id="qa-container">
+                        <!-- Day template will be added here dynamically -->
+                        @if(old('qa'))
+                            @foreach(old('qa') as $dayIndex => $day)
+                                <div class="qa-item">
+                                    <div class="day-header">
+                                        <h3>Question {{$dayIndex + 1}}</h3>
+                                        <button type="button" class="remove-qa btn-icon"><i class="fas fa-times"></i></button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="qa[{{$dayIndex}}][question]">Question<span class="required">*</span></label>
+                                        <textarea id="qa[{{$dayIndex}}][question]" name="qa[{{$dayIndex}}][question]" rows="3" >{{ old('qa.'.$dayIndex.'.question') }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="qa[{{$dayIndex}}][answer]">Answer<span class="required">*</span></label>
+                                        <textarea id="qa[{{$dayIndex}}][answer]" name="qa[{{$dayIndex}}][answer]" rows="3" >{{ old('qa.'.$dayIndex.'.answer') }}</textarea>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <!-- Default first review if no old input -->
+                            <div class="qa-item">
+                                <div class="day-header">
+                                    <h3>Question 1</h3>
+                                    <button type="button" class="remove-qa btn-icon"><i class="fas fa-times"></i></button>
+                                </div>
+                                <div class="form-group">
+                                    <label for="qa[0][question]">Question<span class="required">*</span></label>
+                                    <textarea id="qa[0][question]" name="qa[0][question]" rows="3" ></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="qa[0][answer]">Answer<span class="required">*</span></label>
+                                    <textarea id="qa[0][answer]" name="qa[0][answer]" rows="3" ></textarea>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                    
+                    <button type="button" id="add-qa" class="btn-secondary"><i class="fas fa-plus"></i> Add QA</button>
+                </div>
             </div>
+
+            
 
             <div class="form-actions">
                 <button type="button" class="btn-outline" onclick="history.back()">Cancel</button>
@@ -388,6 +496,8 @@
             </div>
         </form>
     </div>
+
+    
 
     <!-- Itinerary Day Template (Hidden) -->
     <template id="day-template">
@@ -408,9 +518,9 @@
             </div>
 
             <div class="form-group">
-                <label for="hero_image">Itinerary Image <span class="required">*</span></label>
+                <label for="itinerary_image{day_index}">Itinerary Image <span class="required">*</span></label>
                 <div class="image-upload-container">
-                    <input type="file" id="itinerary_image{day_index}" name="itinerary[{day_index}][itinerary_image]" accept="image/*" class="image-upload-input" >
+                    <input type="file" id="itinerary_image{day_index}" name="itinerary[{day_index}][itinerary_image]" accept="image/*" class="image-upload-input">
                     <label for="itinerary_image{day_index}" class="image-upload-label">
                         <i class="fas fa-cloud-upload-alt"></i>
                         <span style="color: #fff;">Choose a file...</span>
@@ -464,86 +574,54 @@
             <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
         </div>
     </template>
+
+    <!-- Review Item Template (Hidden) -->
+    <template id="review-template">
+        <div class="review-item">
+            <div class="day-header">
+                <h3>Review {day_index}</h3>
+                <button type="button" class="remove-review btn-icon"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="form-group">
+                <label for="review[{day_index}][name]">Customer's name<span class="required">*</span></label>
+                <input type="text" id="review[{day_index}][name]" name="review[{day_index}][name]" >
+            </div>
+            <div class="form-grid-2">
+                <div class="form-group">
+                    <label for="review[{day_index}][date]">Date<span class="required">*</span></label>
+                    <input type="date" id="review[{day_index}][date]" name="review[{day_index}][date]" >
+                </div>
+                <div class="form-group">
+                    <label for="review[{day_index}][rate]">Rate<span class="required">*</span></label>
+                    <input type="number" id="review[{day_index}][rate]" name="review[{day_index}][rate]" max=5>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="review[{day_index}][review]">Review<span class="required">*</span></label>
+                <textarea id="review[{day_index}][review]" name="review[{day_index}][review]" rows="3" ></textarea>
+            </div>
+        </div>
+    </template>
+
+    <!-- Review QA Template (Hidden) -->
+    <template id="qa-template">
+        <div class="qa-item">
+            <div class="day-header">
+                <h3>Question {day_index}</h3>
+                <button type="button" class="remove-qa btn-icon"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="form-group">
+                <label for="qa[{day_index}][question]">Question<span class="required">*</span></label>
+                <textarea id="qa[{day_index}][question]" name="qa[{day_index}][question]" rows="3" ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="qa[{day_index}][answer]">Answer<span class="required">*</span></label>
+                <textarea id="qa[{day_index}][answer]" name="qa[{day_index}][answer]" rows="3" ></textarea>
+            </div>
+        </div>
+    </template>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-
-            // document.getElementById('itinerary-highlights-container').addEventListener('click', function(e) {
-            //     if (e.target.closest('.remove-itinerary_highlight')) {
-            //         const item = e.target.closest('.itineary-highlight-item');
-            //         if (document.querySelectorAll('.itineary-highlight-item').length > 1) {
-            //             item.remove();
-            //         } else {
-            //             alert('At least one itineary highlight is required.');
-            //         }
-            //     }
-            // });
-
-
-
-
-
-            document.getElementById('itinerary-days-container').addEventListener('click', function(e) {
-            // Handle remove day
-            // if (e.target.closest('.remove-day')) {
-            //     const item = e.target.closest('.itinerary-day-item');
-            //     if (document.querySelectorAll('.itinerary-day-item').length > 1) {
-            //         item.remove();
-            //         // Re-number the days
-            //         document.querySelectorAll('.itinerary-day-item').forEach((day, index) => {
-            //             day.querySelector('h3').textContent = `Day ${index + 1}`;
-            //         });
-            //     } else {
-            //         alert('At least one day is required in the itinerary.');
-            //     }
-            // }
-            
-
-
-        //   // Handle remove itinerary highlight
-        // if (e.target.closest('.remove-itinerary_highlight')) {
-        //     const item = e.target.closest('.itineary-highlight-item');
-        //     // ここでエラーが発生しています - コンテナが見つからない
-        //     const container = item.closest('.itinerary-highlights-container');
-        //     // コンテナが null のため、ここで querySelectorAll でエラーになります
-        //     const items = container.querySelectorAll('.itineary-highlight-item');
-            
-        //     if (items.length > 1) {
-        //         item.remove();
-        //     } else {
-        //         alert('At least one itinerary highlight is required.');
-        //     }
-        // }
-                    
-            // Handle add schedule item
-            // if (e.target.closest('.add-schedule')) {
-            //     const btn = e.target.closest('.add-schedule');
-            //     const dayIndex = btn.getAttribute('data-day');
-            //     const container = document.querySelector(`.schedule-items-container[data-day="${dayIndex}"]`);
-            //     const scheduleItems = container.querySelectorAll('.schedule-item');
-            //     const scheduleIndex = scheduleItems.length;
-                
-            //     let newScheduleHtml = scheduleTemplate
-            //         .replace(/{day_index}/g, dayIndex)
-            //         .replace(/{schedule_index}/g, scheduleIndex);
-                
-            //     const tempDiv = document.createElement('div');
-            //     tempDiv.innerHTML = newScheduleHtml;
-            //     const newSchedule = tempDiv.firstElementChild;
-            //     container.appendChild(newSchedule);
-            // }
-            
-            // Handle remove schedule item
-            // if (e.target.closest('.remove-schedule')) {
-            //     const item = e.target.closest('.schedule-item');
-            //     const container = item.closest('.schedule-items-container');
-            //     if (container.querySelectorAll('.schedule-item').length > 1) {
-            //         item.remove();
-            //     } else {
-            //         alert('At least one schedule item is required per day.');
-            //     }
-            // }
-        });
-
             // File upload previews
             document.getElementById('hero_image').addEventListener('change', function(e) {
                 const fileName = e.target.files[0]?.name || 'No file chosen';
@@ -562,7 +640,8 @@
         if(rawValue){
             availableDates = JSON.parse(rawValue);
         }
-        
+
+        console.log(availableDates);
         
         const multiDatePicker = flatpickr("#date_range_start", {
             dateFormat: "Y-m-d",

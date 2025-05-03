@@ -1085,11 +1085,6 @@ footer p a{
     gap: 4px;
 }
 
-.price-note {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--medium-text);
-}
 
 /* Content Section */
 .card-content {

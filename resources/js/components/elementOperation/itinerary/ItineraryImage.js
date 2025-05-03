@@ -1,10 +1,12 @@
 export default class ItineraryImage{
       constructor(event){
-            console.log(event.target);
-            
+            this.event = event
            // imageInputの設定
-            this.imageInput = event.target.closest(".image-upload-input");
-            this.imageInput.addEventListener("change", this.#handleImage.bind(this));
+            if( this.event.target.closest(".image-upload-input") !== null){
+                  this.imageInput =  this.event.target.closest(".image-upload-input");
+                  this.previewContainer = this.imageInput.closest(".form-group").querySelector(".preview-image");
+                  this.imageInput.addEventListener("change", this.#handleImage.bind(this)); 
+            }
             
             // プロパティを初期化
             this.file = null;
@@ -12,11 +14,10 @@ export default class ItineraryImage{
       }
       
       #handleImage(){
-            this.file = e.target.files[0]
+            this.file = this.event.target.files[0]
             this.objectURL = URL.createObjectURL(this.file)
-
-            console.log(this.objectURL);
-            
+            // プレビューに表示する
+            this.previewContainer.src = this.objectURL
             
       }
 }

@@ -739,7 +739,7 @@ img {
 }
 
 .pricing-body {
-    padding: 30px;
+    padding: 13px;
 }
 
 .calendar-container {
@@ -1361,15 +1361,15 @@ img {
         </div>
     </header>
 
-      <!-- Hero Section -->
-      <section class="hero">
-            <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="hero-image">
-            <div class="discount-badge">{{$tour->badge}}</div>
-            <div class="hero-content">
-                  <h1 class="hero-title">{{$tour->title}}</h1>
-                  <p class="hero-subtitle">{{$tour->subtitle}}</p>
-            </div>
-      </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="hero-image">
+        <div class="discount-badge">{{$tour->badge}}</div>
+        <div class="hero-content">
+                <h1 class="hero-title">{{$tour->title}}</h1>
+                <p class="hero-subtitle">{{$tour->subtitle}}</p>
+        </div>
+    </section>
       
       <!-- Quick Info -->
       <div class="container">
@@ -1398,104 +1398,95 @@ img {
             
             <!-- Main Content -->
             <div class="main-content">
-                  <!-- Left Content -->
-                  <div class="content-left">
-                        <!-- Tour Preview Images -->
-                        <div class="tour-preview">
-                              <img src="{{ asset('storage/' . $tour->gallery_images[0]) }}" alt="{{ $tour->title }}" class="preview-main">
-                              <div class="gallery-controls">
-                                    <div class="gallery-control prev-image"><i class="fas fa-chevron-left"></i></div>
-                                    <div class="gallery-control next-image"><i class="fas fa-chevron-right"></i></div>
-                              </div>
-                              <div class="preview-slider">
-                                    <div class="preview-dot active"></div>
-                                    <div class="preview-dot"></div>
-                                    <div class="preview-dot"></div>
-                                    <div class="preview-dot"></div>
-                                    <div class="preview-dot"></div>
-                              </div>
-                              <div class="preview-thumbs">
-                                    @foreach ($tour->gallery_images as $image)
+                <!-- Left Content -->
+                <div class="content-left">
+                    <!-- Tour Preview Images -->
+                    <div class="tour-preview">
+                            <img src="{{ asset('storage/' . $tour->gallery_images[0]) }}" alt="{{ $tour->title }}" class="preview-main">
+                            <div class="gallery-controls">
+                                <div class="gallery-control prev-image"><i class="fas fa-chevron-left"></i></div>
+                                <div class="gallery-control next-image"><i class="fas fa-chevron-right"></i></div>
+                            </div>
+                            <div class="preview-slider">
+                                <div class="preview-dot active"></div>
+                                <div class="preview-dot"></div>
+                                <div class="preview-dot"></div>
+                                <div class="preview-dot"></div>
+                                <div class="preview-dot"></div>
+                            </div>
+                            <div class="preview-thumbs">
+                                @foreach ($tour->gallery_images as $image)
                                     <img src="{{ asset('storage/' . $image) }}" class="thumb">
-                                    @endforeach
-                              </div>
+                                @endforeach
+                            </div>
                         </div>
-                  
+                
                         <!-- Tour Overview -->
                         <section class="section tour-overview">
-                              <h2 class="section-title">Tour Overview</h2>
-                              <p>{{$tour->overview}}</p>
-                              
-                              <div class="highlights">
-                              <h3 class="highlights-title">Tour Highlights</h3>
-                              <ul class="highlights-list">
+                            <h2 class="section-title">Tour Overview</h2>
+                            <p>{{$tour->overview}}</p>
+                            <div class="highlights">
+                                <h3 class="highlights-title">Tour Highlights</h3>
+                                <ul class="highlights-list">
                                     @foreach ($tour->highlights as $highlight)
-                                          <li>{{$highlight}}</li>
+                                        <li>{{$highlight}}</li>
                                     @endforeach
-                              </ul>
-                              </div>
+                                </ul>
+                            </div>
                         </section>
                         <section class="section tour-itinerary">
-                              <h2 class="section-title">Detailed Itinerary</h2>
-                              
-                              <div class="itinerary-container">
-                                    <div class="itinerary-timeline"></div>
-                                    <div class="itinerary-days">
-                                          @foreach ($tour->itinerary as $index => $itinerary)
-                                                <div class="itinerary-day">
-                                                      <div class="itinerary-day-marker">{{$index + 1}}</div>
-                                                      
-                                                      <div class="itinerary-day-left">
-                                                            <h3 class="itinerary-day-title">{{$itinerary["title"]}}</h3>
-                                                            <p class="itinerary-day-description">{{$itinerary["description"]}}</p>
-                                                            
-                                                            <div class="day-features itinerary-day-features">
-                                                                  <div class="day-feature">
-                                                                        <i class="fas fa-utensils"></i>
-                                                                        <span class="day-feature-text">Welcome Dinner</span>
-                                                                  </div>
-                                                                  <div class="day-feature">
-                                                                        <i class="fas fa-hotel"></i>
-                                                                        <span class="day-feature-text">4-Star Hotel</span>
-                                                                  </div>
-                                                                  <div class="day-feature">
-                                                                        <i class="fas fa-map-marker-alt"></i>
-                                                                        <span class="day-feature-text">Shinjuku</span>
-                                                                  </div>
-                                                            </div>
-                                                      
-                                                            <div class="day-actions">
-                                                                  <div class="day-action-btn details">
-                                                                        <i class="fas fa-info-circle"></i>
-                                                                        <span>More Details</span>
-                                                                  </div>
-                                                                  <div class="day-action-btn map">
-                                                                        <i class="fas fa-map"></i>
-                                                                        <span>View on Map</span>
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-                                                      
-                                                      <div class="itinerary-day-right">
-                                                            <img src="https://picsum.photos/600/300" alt="Tokyo Skyline" class="itinerary-day-image">
-                                                            
-                                                            <div class="day-schedule">
-                                                                  <h4 class="schedule-title">
-                                                                        <i class="fas fa-clock"></i>
-                                                                        Tour Schedule
-                                                                  </h4>
-                                                                  @foreach ($itinerary["schedule"] as $schedule)
-                                                                        <div class="schedule-item">
-                                                                              <div class="schedule-time">{{$schedule["time"]}}</div>
-                                                                              <div class="schedule-description">{{$schedule["description"]}}</div>
-                                                                        </div>
-                                                                  @endforeach
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          @endforeach
-                                    </div>
-                              </div>
+                            <h2 class="section-title">Detailed Itinerary</h2>
+                            <div class="itinerary-container">
+                                <div class="itinerary-timeline"></div>
+                                <div class="itinerary-days">
+                                        @foreach ($tour->itinerary as $index => $itinerary)
+                                            <div class="itinerary-day">
+                                                    <div class="itinerary-day-marker">{{$index + 1}}</div>
+                                                    
+                                                    <div class="itinerary-day-left">
+                                                        <h3 class="itinerary-day-title">{{$itinerary["title"]}}</h3>
+                                                        <p class="itinerary-day-description">{{$itinerary["description"]}}</p>
+                                                        
+                                                        <div class="day-features itinerary-day-features">
+                                                            @foreach ($itinerary["itinerary_highlight"] as $highlight)
+                                                                <div class="day-feature">
+                                                                    <i class="fas fa-utensils"></i>
+                                                                    <span class="day-feature-text">{{$highlight}}</span>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    
+                                                        <div class="day-actions">
+                                                                <div class="day-action-btn details">
+                                                                    <i class="fas fa-info-circle"></i>
+                                                                    <span>More Details</span>
+                                                                </div>
+                                                                <div class="day-action-btn map">
+                                                                    <i class="fas fa-map"></i>
+                                                                    <span>View on Map</span>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="itinerary-day-right">
+                                                        <img src="{{ asset('storage/' . $itinerary["itinerary_image"]) }}" alt="{{ $tour->title }}"  class="itinerary-day-image">
+                                                        <div class="day-schedule">
+                                                                <h4 class="schedule-title">
+                                                                    <i class="fas fa-clock"></i>
+                                                                    Tour Schedule
+                                                                </h4>
+                                                                @foreach ($itinerary["schedule"] as $schedule)
+                                                                    <div class="schedule-item">
+                                                                            <div class="schedule-time">{{$schedule["time"]}}</div>
+                                                                            <div class="schedule-description">{{$schedule["description"]}}</div>
+                                                                    </div>
+                                                                @endforeach
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        @endforeach
+                                </div>
+                            </div>
                         </section>
 
                         <!-- Customer Reviews Section -->

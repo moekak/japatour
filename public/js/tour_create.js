@@ -351,6 +351,242 @@ var HighlightOperator = /*#__PURE__*/function (_ElementOperatorInter) {
 
 /***/ }),
 
+/***/ "./resources/js/components/elementOperation/QaOperator.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/elementOperation/QaOperator.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ QaOperator)
+/* harmony export */ });
+/* harmony import */ var _ElementOperatorInterface_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ElementOperatorInterface.js */ "./resources/js/components/elementOperation/ElementOperatorInterface.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+
+var QaOperator = /*#__PURE__*/function (_ElementOperatorInter) {
+  function QaOperator() {
+    var _this;
+    _classCallCheck(this, QaOperator);
+    _this = _callSuper(this, QaOperator); // 親クラスのコンストラクタを呼び出す
+    _this.addButton = document.getElementById('add-qa');
+    _this.qaCount = document.querySelectorAll('.qa-item').length;
+    _this.qaTemplate = document.getElementById('qa-template').innerHTML;
+    _this.qaWrapper = document.getElementById("qa-container");
+    _this.initialize();
+    return _this;
+  }
+
+  /**
+   * イベントリスナーの初期化
+   * @override
+   */
+  _inherits(QaOperator, _ElementOperatorInter);
+  return _createClass(QaOperator, [{
+    key: "initialize",
+    value: function initialize() {
+      // qa項目作成処理
+      this.addButton.addEventListener("click", this.addElement.bind(this));
+      // qa項目削除処理
+      this.qaWrapper.addEventListener("click", this.removeElement.bind(this));
+    }
+
+    /**
+     * ハイライト項目を追加する
+     * @override
+     */
+  }, {
+    key: "addElement",
+    value: function addElement() {
+      this.qaCount++;
+      this.qaWrapper.appendChild(this.createDOMElement());
+    }
+
+    /**
+     * ハイライト項目のHTML文字列を生成
+     * @override
+     * @returns {string} ハイライト項目のHTML
+     */
+  }, {
+    key: "createRawHTML",
+    value: function createRawHTML() {
+      return;
+    }
+
+    /**
+     * ハイライト項目のDOM要素を作成
+     * @override
+     * @returns {HTMLElement} ハイライト項目のdiv要素
+     */
+  }, {
+    key: "createDOMElement",
+    value: function createDOMElement() {
+      var newDayHtml = this.qaTemplate.replace(/{day_index}/g, this.qaCount);
+      var tempDiv = document.createElement('div');
+      tempDiv.innerHTML = newDayHtml;
+      var newDay = tempDiv.firstElementChild;
+      return newDay;
+    }
+
+    /**
+     * ハイライト項目を削除
+     * @override
+     * @param {Event} e - クリックイベント
+     */
+  }, {
+    key: "removeElement",
+    value: function removeElement(e) {
+      if (e.target.closest('.remove-qa')) {
+        this.qaCount--;
+        var item = e.target.closest('.qa-item');
+        if (document.querySelectorAll('.qa-item').length > 1) {
+          item.remove();
+          // Re-number the days
+          document.querySelectorAll('.qa-item').forEach(function (day, index) {
+            day.querySelector('h3').textContent = "Question ".concat(index + 1);
+          });
+        } else {
+          alert('At least one qa is required in the itinerary.');
+        }
+      }
+    }
+  }]);
+}(_ElementOperatorInterface_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
+/***/ "./resources/js/components/elementOperation/ReviewOperator.js":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/elementOperation/ReviewOperator.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ReviewOperator)
+/* harmony export */ });
+/* harmony import */ var _ElementOperatorInterface_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ElementOperatorInterface.js */ "./resources/js/components/elementOperation/ElementOperatorInterface.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+
+var ReviewOperator = /*#__PURE__*/function (_ElementOperatorInter) {
+  function ReviewOperator() {
+    var _this;
+    _classCallCheck(this, ReviewOperator);
+    _this = _callSuper(this, ReviewOperator); // 親クラスのコンストラクタを呼び出す
+    _this.addButton = document.getElementById('add-review');
+    _this.reviewCount = document.querySelectorAll('.review-item').length;
+    _this.reviewTemplate = document.getElementById('review-template').innerHTML;
+    _this.reviewWrapper = document.getElementById("review-container");
+    console.log(_this.reviewCount + "review counr");
+    _this.initialize();
+    return _this;
+  }
+
+  /**
+   * イベントリスナーの初期化
+   * @override
+   */
+  _inherits(ReviewOperator, _ElementOperatorInter);
+  return _createClass(ReviewOperator, [{
+    key: "initialize",
+    value: function initialize() {
+      // review項目作成処理
+      this.addButton.addEventListener("click", this.addElement.bind(this));
+      // review項目削除処理
+      this.reviewWrapper.addEventListener("click", this.removeElement.bind(this));
+    }
+
+    /**
+     * ハイライト項目を追加する
+     * @override
+     */
+  }, {
+    key: "addElement",
+    value: function addElement() {
+      this.reviewWrapper.appendChild(this.createDOMElement());
+      this.reviewCount++;
+    }
+
+    /**
+     * ハイライト項目のHTML文字列を生成
+     * @override
+     * @returns {string} ハイライト項目のHTML
+     */
+  }, {
+    key: "createRawHTML",
+    value: function createRawHTML() {
+      return;
+    }
+
+    /**
+     * ハイライト項目のDOM要素を作成
+     * @override
+     * @returns {HTMLElement} ハイライト項目のdiv要素
+     */
+  }, {
+    key: "createDOMElement",
+    value: function createDOMElement() {
+      var newDayHtml = this.reviewTemplate.replace(/{day_index}/g, this.reviewCount);
+      var tempDiv = document.createElement('div');
+      tempDiv.innerHTML = newDayHtml;
+      var newDay = tempDiv.firstElementChild;
+      return newDay;
+    }
+
+    /**
+     * ハイライト項目を削除
+     * @override
+     * @param {Event} e - クリックイベント
+     */
+  }, {
+    key: "removeElement",
+    value: function removeElement(e) {
+      console.log(e.target);
+      if (e.target.closest('.remove-review')) {
+        this.reviewCount--;
+        var item = e.target.closest('.review-item');
+        if (document.querySelectorAll('.review-item').length > 1) {
+          item.remove();
+          // Re-number the days
+          document.querySelectorAll('.review-item').forEach(function (day, index) {
+            day.querySelector('h3').textContent = "Review ".concat(index + 1);
+          });
+        } else {
+          alert('At least one review is required in the itinerary.');
+        }
+      }
+    }
+  }]);
+}(_ElementOperatorInterface_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
 /***/ "./resources/js/components/elementOperation/TourTermsOperator.js":
 /*!***********************************************************************!*\
   !*** ./resources/js/components/elementOperation/TourTermsOperator.js ***!
@@ -492,6 +728,7 @@ var ItineraryHighlight = /*#__PURE__*/function (_ElementOperatorInter) {
     _classCallCheck(this, ItineraryHighlight);
     _this = _callSuper(this, ItineraryHighlight); // 親クラスのコンストラクタを呼び出す - これが欠けている
     _this.event = event;
+    console.log("222");
     if (_this.event.target.closest(".add-itinerary-highlight")) {
       _this.itineraryBtnOperator = _this.event.target.closest(".add-itinerary-highlight");
     } else if (_this.event.target.closest(".remove-itinerary_highlight")) {
@@ -602,20 +839,23 @@ var _ItineraryImage_brand = /*#__PURE__*/new WeakSet();
 var ItineraryImage = /*#__PURE__*/_createClass(function ItineraryImage(event) {
   _classCallCheck(this, ItineraryImage);
   _classPrivateMethodInitSpec(this, _ItineraryImage_brand);
-  console.log(event.target);
-
+  this.event = event;
   // imageInputの設定
-  this.imageInput = event.target.closest(".image-upload-input");
-  this.imageInput.addEventListener("change", _assertClassBrand(_ItineraryImage_brand, this, _handleImage).bind(this));
+  if (this.event.target.closest(".image-upload-input") !== null) {
+    this.imageInput = this.event.target.closest(".image-upload-input");
+    this.previewContainer = this.imageInput.closest(".form-group").querySelector(".preview-image");
+    this.imageInput.addEventListener("change", _assertClassBrand(_ItineraryImage_brand, this, _handleImage).bind(this));
+  }
 
   // プロパティを初期化
   this.file = null;
   this.objectURL = null;
 });
 function _handleImage() {
-  this.file = e.target.files[0];
+  this.file = this.event.target.files[0];
   this.objectURL = URL.createObjectURL(this.file);
-  console.log(this.objectURL);
+  // プレビューに表示する
+  this.previewContainer.src = this.objectURL;
 }
 
 
@@ -677,8 +917,10 @@ var ItineraryOperator = /*#__PURE__*/function (_ElementOperatorInter) {
       // itinerary項目作成処理
       this.addButton.addEventListener("click", this.addElement.bind(this));
       // itinerary項目作成処理項目削除処理
+
+      // const newItineraryWrapper = this.itineraryWrapper.cloneNode(true)
+      // this.itineraryWrapper.replaceWith(newItineraryWrapper)
       this.itineraryWrapper.addEventListener("click", this.removeElement.bind(this));
-      // itinerary項目の項目の追加と、削除処理
       this.itineraryWrapper.addEventListener("click", function (e) {
         new _ItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_1__["default"](e);
         new _ItinerarySchedule_js__WEBPACK_IMPORTED_MODULE_3__["default"](e);
@@ -733,6 +975,7 @@ var ItineraryOperator = /*#__PURE__*/function (_ElementOperatorInter) {
   }, {
     key: "removeElement",
     value: function removeElement(e) {
+      console.log(e.target);
       if (e.target.closest('.remove-day')) {
         this.dayCount--;
         var item = e.target.closest('.itinerary-day-item');
@@ -740,8 +983,6 @@ var ItineraryOperator = /*#__PURE__*/function (_ElementOperatorInter) {
           item.remove();
           // Re-number the days
           document.querySelectorAll('.itinerary-day-item').forEach(function (day, index) {
-            console.log(day.querySelector('h3'));
-            console.log(index);
             day.querySelector('h3').textContent = "Day ".concat(index + 1);
           });
         } else {
@@ -942,17 +1183,23 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_elementOperation_HighlightOperator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/elementOperation/HighlightOperator.js */ "./resources/js/components/elementOperation/HighlightOperator.js");
 /* harmony import */ var _components_elementOperation_itinerary_ItineraryOperator_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/elementOperation/itinerary/ItineraryOperator.js */ "./resources/js/components/elementOperation/itinerary/ItineraryOperator.js");
-/* harmony import */ var _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/elementOperation/TourTermsOperator.js */ "./resources/js/components/elementOperation/TourTermsOperator.js");
-/* harmony import */ var _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/GalleryImage.js */ "./resources/js/components/GalleryImage.js");
+/* harmony import */ var _components_elementOperation_QaOperator_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/elementOperation/QaOperator.js */ "./resources/js/components/elementOperation/QaOperator.js");
+/* harmony import */ var _components_elementOperation_ReviewOperator_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/elementOperation/ReviewOperator.js */ "./resources/js/components/elementOperation/ReviewOperator.js");
+/* harmony import */ var _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/elementOperation/TourTermsOperator.js */ "./resources/js/components/elementOperation/TourTermsOperator.js");
+/* harmony import */ var _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GalleryImage.js */ "./resources/js/components/GalleryImage.js");
 
 
 
 
-new _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_3__["default"](document.querySelector(".create-tour-btn"));
+
+
+new _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_5__["default"](document.querySelector(".create-tour-btn"));
 new _components_elementOperation_HighlightOperator_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
-new _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_2__["default"]("inclusion");
-new _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_2__["default"]("exclusion");
+new _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_4__["default"]("inclusion");
+new _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_4__["default"]("exclusion");
 new _components_elementOperation_itinerary_ItineraryOperator_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+new _components_elementOperation_ReviewOperator_js__WEBPACK_IMPORTED_MODULE_3__["default"]();
+new _components_elementOperation_QaOperator_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
 })();
 
 /******/ })()

@@ -22,13 +22,16 @@ export default class ItineraryOperator extends ElementOperatorInterface{
             // itinerary項目作成処理
             this.addButton.addEventListener("click", this.addElement.bind(this))
             // itinerary項目作成処理項目削除処理
+
+            // const newItineraryWrapper = this.itineraryWrapper.cloneNode(true)
+            // this.itineraryWrapper.replaceWith(newItineraryWrapper)
             this.itineraryWrapper.addEventListener("click", this.removeElement.bind(this))
-            // itinerary項目の項目の追加と、削除処理
-            this.itineraryWrapper.addEventListener("click",(e)=>{
+            this.itineraryWrapper.addEventListener("click", e =>{
                   new ItineraryHighlight(e)
                   new ItinerarySchedule(e)
                   new ItineraryImage(e)
             })
+
       }
 
       /**
@@ -75,6 +78,8 @@ export default class ItineraryOperator extends ElementOperatorInterface{
        * @param {Event} e - クリックイベント
        */
       removeElement(e){
+            console.log(e.target);
+            
             if (e.target.closest('.remove-day')) {
                   this.dayCount--
                   const item = e.target.closest('.itinerary-day-item');
@@ -82,10 +87,6 @@ export default class ItineraryOperator extends ElementOperatorInterface{
                         item.remove();
                       // Re-number the days
                         document.querySelectorAll('.itinerary-day-item').forEach((day, index) => {
-                              console.log(day.querySelector('h3'));
-                              console.log(index);
-                              
-                              
                               day.querySelector('h3').textContent = `Day ${index + 1}`;
                         });
                   } else {

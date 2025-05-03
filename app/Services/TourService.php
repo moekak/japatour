@@ -1,30 +1,38 @@
 <?php
 
-namespace App\Services\Tour;
+namespace App\Services;
 
 use App\Http\Requests\Admin\CreateTourRequest;
 use App\Http\Requests\Admin\EditTourRequest;
-use App\Services\GenerateData;
-use App\Services\ImageService;
+use App\Services\Repository\QaRepository;
+use App\Services\Repository\ReviewRepository;
+use App\Services\Repository\TourRepository;
+use App\Services\Util\GenerateData;
+use App\Services\Util\ImageService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
 
 class TourService
 {
     protected $tourRepository;
+    protected $reviewRepository;
+    protected $qaRepository;
     protected $imageService;
+    protected $generateData;
 
-    public function __construct(TourRepository $tourRepository, ImageService $imageService)
+    public function __construct(TourRepository $tourRepository, ReviewRepository $reviewRepository, QaRepository $qaRepository, ImageService $imageService, GenerateData $generateData)
     {
         $this->tourRepository = $tourRepository;
+        $this->reviewRepository = $reviewRepository;
+        $this->qaRepository = $qaRepository;
         $this->imageService = $imageService;
+        $this->generateData = $generateData;
     }
 
     /**
      * 全てのツアーを取得
      */
-    public function getAllTours()
+    public function getAllData()
     {
         return $this->tourRepository->getAll();
     }
@@ -42,7 +50,7 @@ class TourService
      */
     public function createTour(CreateTourRequest $request)
     {
-        $tourData = $this->prepareTourData($request);
+        $tourData = $this->generateData->prepareTourData($request);
         
         // ギャラリー画像の処理
         $tourData["gallery_images"] = json_encode(
@@ -57,7 +65,16 @@ class TourService
 
         DB::beginTransaction();
         try {
-            $this->tourRepository->create($tourData);
+            $tour = $this->tourRepository->create($tourData);
+            $reviewData = $this->generateData->prepareReviewData($request, $tour["id"]);
+            $qaData = $this->generateData->prepareQAData($request, $tour["id"]);
+
+            foreach($qaData as $qa) {
+                $this->qaRepository->create($qa);; // 各qaを個別に作成
+            }
+            foreach($reviewData as $review) {
+                $this->reviewRepository->create($review);; // 各レビューを個別に作成
+            }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
@@ -70,7 +87,7 @@ class TourService
      */
     public function updateTour(EditTourRequest $request, string $id)
     {
-        $tourData = $this->prepareTourData($request);
+        $tourData = $this->generateData->prepareTourData($request);
         
         $tour = $this->tourRepository->findById($id);
         
@@ -118,24 +135,4 @@ class TourService
         }
     }
 
-    /**
-     * ツアーデータの共通準備処理
-     */
-    private function prepareTourData($request)
-    {
-
-        $data = $request->validated();
-        foreach($data["itinerary"] as $key => $itinerary){
-            $data["itinerary"][$key]["itinerary_image"] = $this->imageService->saveImage($itinerary["itinerary_image"], "itinerary_image");
-        }
-
-        // JSON変換が必要なフィールド
-        $jsonFields = ['highlights', 'itinerary', 'inclusions', 'exclusions'];
-        
-        foreach ($jsonFields as $field) {
-            $data[$field] = json_encode($data[$field]);
-        }
-
-        return $data;
-    }
 }

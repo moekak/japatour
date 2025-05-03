@@ -5,12 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateTourRequest;
 use App\Http\Requests\Admin\EditTourRequest;
-use App\Models\Tour;
-use App\Services\GenerateData;
-use App\Services\ImageService;
-use App\Services\Tour\TourService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
+use App\Services\TourService;
 use Illuminate\Support\Facades\Log;
 
 class TourController extends Controller{
@@ -24,7 +19,7 @@ class TourController extends Controller{
      */
     public function index()
     {
-        $tours = $this->tourService->getAllTours();
+        $tours = $this->tourService->getAllData();
         return view("admin.tour_list", compact("tours"));
     }
     /**
@@ -43,6 +38,7 @@ class TourController extends Controller{
             $this->tourService->createTour($request);
             return redirect()->route("tour_list")->with("success", "success to create Tours!");  ;
         } catch (\Exception $e) {
+            Log::debug($e);
             return redirect()->back()->with("error", "failed to create tours: " . $e->getMessage())->withInput();
         }
 
@@ -55,7 +51,7 @@ class TourController extends Controller{
     {
         try {
             $tour = $this->tourService->getTourById($id);
-            return view("showe", compact("tour"));
+            return view("show", compact("tour"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
         }
@@ -68,6 +64,8 @@ class TourController extends Controller{
     {
         try {
             $tour = $this->tourService->getTourById($id);
+            // print_r($tour->toArray());
+            // exit;
             return view("admin.tour_edit", compact("tour"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());

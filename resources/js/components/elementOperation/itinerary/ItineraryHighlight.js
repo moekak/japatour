@@ -5,6 +5,9 @@ export default class ItineraryHighlight extends ElementOperatorInterface{
             super(); // 親クラスのコンストラクタを呼び出す - これが欠けている
             this.event = event
 
+            console.log("222");
+            
+
             if(this.event.target.closest(".add-itinerary-highlight")){
                   this.itineraryBtnOperator = this.event.target.closest(".add-itinerary-highlight")
             }else if(this.event.target.closest(".remove-itinerary_highlight")){

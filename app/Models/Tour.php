@@ -33,12 +33,23 @@ class Tour extends Model
     ];
 
 
+    public function reviews() {
+        return $this->hasMany(Review::class, "tour_id", "id");
+    }
+    public function questions() {
+        return $this->hasMany(Question::class, "tour_id", "id");
+    }
+    
     public function scopWithId($query, $id){
         return $query->where("id", $id);
     }
 
-    public static function getSpecificTour($id){
-        $tour = Tour::where("is_active", true)->where("id", $id)->first();
+    public function scopeWithTables($query){
+        return $query->with("reviews", "questions");
+    }
+
+    public static function getSpecificData($id){
+        $tour = Tour::where("is_active", true)->where("id", $id)->withTables()->first();
         // JSONフィールドを配列に変換
         // もし highlights, gallery_images などがJSON型の場合
         if (isset($tour->highlights) && is_string($tour->highlights)) {
@@ -63,8 +74,8 @@ class Tour extends Model
         return $tour;
     }
 
-    public static function getAllTours(){
-        $tours = Tour::where("is_active", true)->get();
+    public static function getAllData(){
+        $tours = Tour::where("is_active", true)->withTables()->get();
         // JSONフィールドを配列に変換
         foreach ($tours as $tour) {
             // もし highlights, gallery_images などがJSON型の場合
