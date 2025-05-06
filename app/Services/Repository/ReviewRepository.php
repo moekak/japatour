@@ -13,4 +13,9 @@ class ReviewRepository extends BaseRepository
             parent::__construct($review);
       }
 
+      public function deleteWhere(string $id)
+      {
+            return $this->model->where('tour_id', $id)->delete();
+      }
+
 }

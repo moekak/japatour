@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Admin\TopController;
-use App\Http\Controllers\admin\TourController;
+use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\GetYourGuideController;
 use App\Http\Controllers\mail\SendContactMail;
 use Illuminate\Support\Facades\Auth;

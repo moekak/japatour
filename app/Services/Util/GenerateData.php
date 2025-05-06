@@ -54,7 +54,10 @@ class GenerateData
 
         $data = $request->validated();
         foreach($data["itinerary"] as $key => $itinerary){
-            $data["itinerary"][$key]["itinerary_image"] = $this->imageService->saveImage($itinerary["itinerary_image"], "itinerary_image");
+            if(isset($itinerary["itinerary_image"])){
+                $data["itinerary"][$key]["itinerary_image"] = $this->imageService->saveImage($itinerary["itinerary_image"], "itinerary_image");
+            }
+            
         }
 
         // JSON変換が必要なフィールド

@@ -13,4 +13,8 @@ class QaRepository extends BaseRepository
             parent::__construct($question);
       }
 
+      public function deleteWhere(string $id)
+      {
+            return $this->model->where('tour_id', $id)->delete();
+      }
 }

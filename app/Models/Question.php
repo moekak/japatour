@@ -16,4 +16,7 @@ class Question extends Model
         return $this->belongsTo(Tour::class, "tour_id", "id");
     }
 
+    public function getSpecificData($id){
+        return Question::where("id", $id)->first();
+    }
 }

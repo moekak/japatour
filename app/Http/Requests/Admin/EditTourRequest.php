@@ -40,7 +40,18 @@ class EditTourRequest extends FormRequest
             "limited_spots" => ["nullable", "string", "max:255"],
             "overview" => ["required", "string"],
             "highlights" => ["required", "array"],
+            // itineraryのバリデーションルール
             "itinerary" => ["required", "array"],
+            "itinerary.*" => ["required", "array"],
+            "itinerary.*.title" => ["required", "string", "max:255"],
+            "itinerary.*.description" => ["required", "string"], 
+            "itinerary.*.itinerary_highlight" => ["required", "array"], 
+            "itinerary.*.itinerary_highlight.*" => ["required", "string"], 
+            "itinerary.*.schedule" => ["required", "array"], 
+            "itinerary.*.schedule.*" => ["required", "array"], 
+            "itinerary.*.schedule.*.time" => ["required", "string"], 
+            "itinerary.*.schedule.*.description" => ["required", "string"], 
+            'itinerary.*.itinerary_image' => ["nullable", "image"],
             "inclusions" => ["required", "array"],
             "exclusions" => ["required", "array"],
             "hero_image" => ["nullable", "image", "mimes:jpeg,png,jpg,gif", "max:2048"],
@@ -50,6 +61,20 @@ class EditTourRequest extends FormRequest
             "current_gallery_images.*" => ["string", "max:2048"],
             "remove_gallery" => ["nullable", "array"],
             "remove_gallery.*" => ["string", "max:2048"],
+            // reviewのバリデーションルール
+            "review_id" => ["required", "exists:reviews,id"],
+            "review" => ["required", "array"],
+            "review.*" => ["required", "array"],
+            "review.*.name" => ["required", "string", "max:255"],
+            "review.*.date" => ["required", "date", "date_format:Y-m-d"],
+            "review.*.rate" => ["required", "integer", "min:1", "max:5"],
+            "review.*.review" => ["required", "string", "max:2000"],
+            //QAのバリデーションルール
+            "qa_id" => ["required", "exists:questions,id"],
+            "qa" => ["required", "array"],
+            "qa.*" => ["required", "array"],
+            "qa.*.question" => ["required", "string", "max:2000"],
+            "qa.*.answer" => ["required", "string", "max:2000"],
         ];
     }
 
@@ -112,8 +137,29 @@ class EditTourRequest extends FormRequest
             'highlights.required' => 'The highlights field is required.',
             'highlights.array' => 'The highlights must be a valid array format.',
     
+            // itineraryのバリデーションメッセージ
             'itinerary.required' => 'The itinerary field is required.',
             'itinerary.array' => 'The itinerary must be a valid array format.',
+            'itinerary.*.required' => 'Each itinerary item is required.',
+            'itinerary.*.array' => 'Each itinerary item must be a valid array format.',
+            'itinerary.*.title.required' => 'The itinerary title is required.',
+            'itinerary.*.title.string' => 'The itinerary title must be a string.',
+            'itinerary.*.title.max' => 'The itinerary title must not exceed 255 characters.',
+            'itinerary.*.description.required' => 'The itinerary description is required.',
+            'itinerary.*.description.string' => 'The itinerary description must be a string.',
+            'itinerary.*.itinerary_highlight.required' => 'The itinerary highlight is required.',
+            'itinerary.*.itinerary_highlight.array' => 'The itinerary highlight must be a valid array format.',
+            'itinerary.*.itinerary_highlight.*.required' => 'Each itinerary highlight item is required.',
+            'itinerary.*.itinerary_highlight.*.string' => 'Each itinerary highlight item must be a string.',
+            'itinerary.*.schedule.required' => 'The schedule is required.',
+            'itinerary.*.schedule.array' => 'The schedule must be a valid array format.',
+            'itinerary.*.schedule.*.required' => 'Each schedule item is required.',
+            'itinerary.*.schedule.*.array' => 'Each schedule item must be a valid array format.',
+            'itinerary.*.schedule.*.time.required' => 'The schedule time is required.',
+            'itinerary.*.schedule.*.time.string' => 'The schedule time must be a string.',
+            'itinerary.*.schedule.*.description.required' => 'The schedule description is required.',
+            'itinerary.*.schedule.*.description.string' => 'The schedule description must be a string.',
+            'itinerary.*.itinerary_image.*image' => 'The itinerary image must be an image file.',
             
             'inclusions.required' => 'The inclusions field is required.',
             'inclusions.array' => 'The inclusions must be a valid array format.',
@@ -132,6 +178,43 @@ class EditTourRequest extends FormRequest
 
             'current_gallery_images.array' => 'The current gallery images must be an array of files.',
             'remove_gallery.array' => 'The remove gallery images must be an array of files.',
+
+            // reviewのバリデーションメッセージ
+            'review.required' => 'The review field is required.',
+            'review.array' => 'The review must be a valid array format.',
+            'review.*.required' => 'Each review item is required.',
+            'review.*.array' => 'Each review item must be a valid array format.',
+            'review.*.name.required' => 'The reviewer name is required for each review.',
+            'review.*.name.string' => 'The reviewer name must be a string.',
+            'review.*.name.max' => 'The reviewer name must not exceed 255 characters.',
+            'review.*.date.required' => 'The review date is required for each review.',
+            'review.*.date.date' => 'The review date must be a valid date.',
+            'review.*.date.date_format' => 'The review date must be in the format YYYY-MM-DD.',
+            'review.*.rate.required' => 'The review rating is required for each review.',
+            'review.*.rate.integer' => 'The review rating must be an integer.',
+            'review.*.rate.min' => 'The review rating must be at least 1.',
+            'review.*.rate.max' => 'The review rating must not exceed 5.',
+            'review.*.review.required' => 'The review content is required for each review.',
+            'review.*.review.string' => 'The review content must be a string.',
+            'review.*.review.max' => 'The review content must not exceed 2000 characters.',
+
+            // QAのバリデーションメッセージ
+            'qa.required' => 'The Q&A section is required.',
+            'qa.array' => 'The Q&A must be in a valid array format.',
+            'qa.*.required' => 'Each Q&A item is required.',
+            'qa.*.array' => 'Each Q&A item must be in a valid array format.',
+            'qa.*.question.required' => 'The question field is required for each Q&A item.',
+            'qa.*.question.string' => 'The question must be a string.',
+            'qa.*.question.max' => 'The question must not exceed 2000 characters.',
+            'qa.*.answer.required' => 'The answer field is required for each Q&A item.',
+            'qa.*.answer.string' => 'The answer must be a string.',
+            'qa.*.answer.max' => 'The answer must not exceed 2000 characters.',
+
+            'review_id.required' => 'The review ID is required.',
+            'review_id.exists' => 'The selected review ID is invalid or does not exist.',
+
+            'qa_id.required' => 'The question ID is required.',
+            'qa_id.exists' => 'The selected question ID is invalid or does not exist.',
             
         ];
     }

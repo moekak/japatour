@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Requests\Admin\CreateTourRequest;
 use App\Http\Requests\Admin\EditTourRequest;
+use App\Models\Review;
 use App\Services\Repository\QaRepository;
 use App\Services\Repository\ReviewRepository;
 use App\Services\Repository\TourRepository;
@@ -42,7 +43,16 @@ class TourService
      */
     public function getTourById(string $id)
     {
-        return $this->tourRepository->findById($id);
+    
+        $tour = $this->tourRepository->findById($id);
+        $tourReview = $tour->reviews;
+        $tourReviewRate = 0;
+        foreach($tourReview as $reveiw){
+            $tourReviewRate += intval($reveiw["rate"]);
+        }
+
+        $averageRate = $tourReviewRate / count($tourReview);
+        return ["tour" => $tour, "averageRate" => $averageRate ];
     }
 
     /**
@@ -66,8 +76,8 @@ class TourService
         DB::beginTransaction();
         try {
             $tour = $this->tourRepository->create($tourData);
-            $reviewData = $this->generateData->prepareReviewData($request, $tour["id"]);
-            $qaData = $this->generateData->prepareQAData($request, $tour["id"]);
+            $reviewData = $this->generateData->prepareReviewData($request, intval($tour["id"]));
+            $qaData = $this->generateData->prepareQAData($request, intval($tour["id"]));
 
             foreach($qaData as $qa) {
                 $this->qaRepository->create($qa);; // 各qaを個別に作成
@@ -88,9 +98,10 @@ class TourService
     public function updateTour(EditTourRequest $request, string $id)
     {
         $tourData = $this->generateData->prepareTourData($request);
-        
         $tour = $this->tourRepository->findById($id);
-        
+
+        $reviewData = $this->generateData->prepareReviewData($request, $tour["id"]);// review更新のデータ
+        $qaData = $this->generateData->prepareQAData($request, $tour["id"]);// QA更新のデータ
         // 既存のギャラリー画像を取得
         $currentGalleryImages = GenerateData::generateCurrentImageGalleries($tourData);
         
@@ -110,11 +121,48 @@ class TourService
             $tourData["hero_image"] = $tour->hero_image;
         }
 
+        // itinerary画像の更新処理
+        $itineraries = $request->input("itinerary"); 
+        if ($itineraries) {
+            foreach ($itineraries as $index => $itineraryData) {
+                $fileKey = "itinerary.{$index}.itinerary_image";
+                if ($request->hasFile($fileKey)) {
+
+                    // 新しい画像がある場合、更新
+                    $imageFile = $request->file($fileKey);
+                    json_decode($tourData["itinerary"], true)[$index]["itinerary_image"] = $this->imageService->saveImage(
+                        $imageFile, 
+                        "itinerary_image"
+                    );
+                } elseif (isset($tour->itinerary[$index]["itinerary_image"])) {
+                    // 新しい画像がなく、既存の画像がある場合、既存の画像を保持
+                    $itineraryData = json_decode($tourData["itinerary"], true); // true を追加して配列として取得
+                    $itineraryData[$index]["itinerary_image"] = $tour->itinerary[$index]["itinerary_image"];
+                    $tourData["itinerary"] = json_encode($itineraryData); // 再度JSONに変換して戻す
+                }
+            }
+        }
+
         DB::beginTransaction();
         try {
+
             $this->tourRepository->update($id, $tourData);
+            $this->reviewRepository->deleteWhere($tour["id"]);
+            foreach($reviewData as $review){
+                // print_r($review);
+                // exit;
+                $this->reviewRepository->create($review);
+            }
+            
+            $this->qaRepository->deleteWhere($tour["id"]);
+            foreach($qaData as $qa){
+                $this->qaRepository->create($qa);
+            }
+            
+            
             DB::commit();
         } catch (\Exception $e) {
+            Log::debug($e);
             DB::rollBack();
             throw $e;
         }

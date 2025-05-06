@@ -1,4 +1,5 @@
-@extends('layout.default')
+
+@extends('layouts.app')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/admin/admin-tours.css') }}">
 <link rel="stylesheet" href="{{ asset('css/tour_create.css') }}">
@@ -6,9 +7,7 @@
 
 @section('title', 'Edit Tour')
 
-@section('main')
-    @include('components.header')
-
+@section('content')
     <div class="container">
         <div class="admin-header">
             <div class="admin-header-title">
@@ -195,7 +194,7 @@
                                     </div>
                                     <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
                                     <div class="preview-container">
-                                        <img id="itineraryPreviewImage" class="preview-image" src="">
+                                        <img id="itineraryPreviewImage" class="preview-image" src="{{ asset('storage/' . $itinerary["itinerary_image"]) }}">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -323,6 +322,7 @@
                     <div id="review-container">
                         <!-- Day template will be added here dynamically -->
                         @foreach ($tour->reviews as $review_index => $review)
+                            <input type="hidden" name="review_id" value="{{$review->id}}">
                             <div class="review-item">
                                 <div class="day-header">
                                     <h3>Review {{$review_index + 1}}</h3>
@@ -335,7 +335,7 @@
                                 <div class="form-grid-2">
                                     <div class="form-group">
                                         <label for="review[{{$review_index}}][date]">Date<span class="required">*</span></label>
-                                        <input type="date" id="review[{{$review_index}}][date]" name="review[{{$review_index}}][date]" value="{{ old('review.'.$review_index.'.date') ?? $review->date }}">
+                                        <input type="date" id="review[{{$review_index}}][date]" name="review[{{$review_index}}][date]" value="{{ old('review.'.$review_index.'.date') ?? $review->review_date }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="review[{{$review_index}}][rate]">Rate<span class="required">*</span></label>
@@ -357,6 +357,7 @@
                     <h2 class="section-title">QA</h2>
                     <div id="qa-container">
                         @foreach($tour->questions  as $qaIndex => $qa)
+                            <input type="hidden" name="qa_id" value="{{$qa->id}}">
                             <div class="qa-item">
                                 <div class="day-header">
                                     <h3>Question {{$qaIndex + 1}}</h3>
@@ -401,6 +402,31 @@
             <div class="form-group">
                 <label for="itinerary[{day_index}][description]">Day Description <span class="required">*</span></label>
                 <textarea id="itinerary[{day_index}][description]" name="itinerary[{day_index}][description]" rows="3" ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="itinerary_image{day_index}">Itinerary Image <span class="required">*</span></label>
+                <div class="image-upload-container">
+                    <input type="file" id="itinerary_image{day_index}"  name="itinerary{day_index}][itinerary_image]" accept="image/*" class="image-upload-input">
+                    <label for="itinerary_image{day_index}" class="image-upload-label">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span style="color: #fff;">Choose a file...</span>
+                    </label>
+                    <div class="selected-file"></div>
+                </div>
+                <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
+                <div class="preview-container">
+                    <img id="itineraryPreviewImage" class="preview-image">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Itineary highlights<span class="required">*</span></label>
+                <div class="itinerary-highlights-container">
+                    <div class="itineary-highlight-item">
+                        <input type="text" name="itinerary[{day_index}][itinerary_highlight][0]">
+                        <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
+                <button type="button" id="add-highlight" class="btn-secondary"><i class="fas fa-plus"></i> Add Highlight</button>
             </div>
             
             <div class="form-group">
@@ -490,7 +516,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
-        const availableDates = <?php echo json_encode($tour->available_dates); ?>;
+        const availableDates = <?php echo $tour->available_dates; ?>;
+        console.log(availableDates);
+        
         const multiDatePicker = flatpickr("#date_range_start", {
             dateFormat: "Y-m-d",
             minDate: "today",

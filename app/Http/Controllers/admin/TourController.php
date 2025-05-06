@@ -50,8 +50,10 @@ class TourController extends Controller{
     public function show(string $id)
     {
         try {
-            $tour = $this->tourService->getTourById($id);
-            return view("show", compact("tour"));
+            $tourData = $this->tourService->getTourById($id);
+            $tour = $tourData["tour"];
+            $averageRate = $tourData["averageRate"];
+            return view("show", compact("tour", "averageRate"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
         }
@@ -63,9 +65,8 @@ class TourController extends Controller{
     public function edit(string $id)
     {
         try {
-            $tour = $this->tourService->getTourById($id);
-            // print_r($tour->toArray());
-            // exit;
+            $tourData = $this->tourService->getTourById($id);
+            $tour = $tourData["tour"];
             return view("admin.tour_edit", compact("tour"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());

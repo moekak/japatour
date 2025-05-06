@@ -35,11 +35,11 @@
         </div>
     </header>
 
-    <header class="sp_header relative">
-        <button class="hamburger" type="button">
-            <span class="hamburger__line"></span>
-            <span class="hamburger__line"></span>
-            <span class="hamburger__line"></span>
+    <header class="sp_header relative" style="transform: none;">
+        <button class="hamburger js_header_btn" type="button">
+            <span class="hamburger__line" style="background: #424242"></span>
+            <span class="hamburger__line" style="background: #424242"></span>
+            <span class="hamburger__line" style="background: #424242"></span>
         </button>
     </header>
 @else

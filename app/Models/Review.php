@@ -17,4 +17,8 @@ class Review extends Model
     public function tour() {
         return $this->belongsTo(Tour::class, "tour_id", "id");
     }
+
+    public function getSpecificData($id){
+        return Review::where("id", $id)->first();
+    }
 }

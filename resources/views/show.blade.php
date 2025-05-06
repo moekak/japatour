@@ -4,6 +4,7 @@
 @endsection
 
 @section("main")
+@include('components.menu_modal')
 @include('components.header')
 <!-- Hero Section -->
 <section class="hero">
@@ -51,13 +52,13 @@
                         <div class="gallery-control prev-image"><i class="fas fa-chevron-left"></i></div>
                         <div class="gallery-control next-image"><i class="fas fa-chevron-right"></i></div>
                     </div>
-                    <div class="preview-slider">
+                    {{-- <div class="preview-slider">
                         <div class="preview-dot active"></div>
                         <div class="preview-dot"></div>
                         <div class="preview-dot"></div>
                         <div class="preview-dot"></div>
                         <div class="preview-dot"></div>
-                    </div>
+                    </div> --}}
                     <div class="preview-thumbs">
                         @foreach ($tour->gallery_images as $image)
                             <img src="{{ asset('storage/' . $image) }}" class="thumb">
@@ -93,7 +94,7 @@
                                         <div class="day-features itinerary-day-features">
                                             @foreach ($itinerary["itinerary_highlight"] as $highlight)
                                                 <div class="day-feature">
-                                                    <i class="fas fa-utensils"></i>
+                                                    <i class="fa-solid fa-bullhorn"></i>
                                                     <span class="day-feature-text">{{$highlight}}</span>
                                                 </div>
                                             @endforeach
@@ -137,72 +138,53 @@
                     <div class="reviews-header">
                         <h2 class="reviews-title">Customer Reviews</h2>
                         <div class="avg-rating">
-                            <div class="rating-value">4.8</div>
+                            <div class="rating-value">{{$averageRate}}</div>
                             <div class="rating-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
+                                @php
+                                    $integerPart = intval($averageRate);
+                                    $decimalPart = $averageRate - $integerPart;  // 0.4
+                                    $emptyPart = 5 - $averageRate;
+                                    for($i = 0; $i < $integerPart; $i ++){
+                                        echo '<i class="fas fa-star"></i>';
+                                    }
+                                @endphp
+                                @if ($decimalPart > 0)
+                                    <i class="fa-solid fa-star-half-stroke"></i>
+                                @endif
+                                @if ($emptyPart > 1)
+                                    <i class="fa-regular fa-star"></i>
+                                @endif
                             </div>
-                            <div class="rating-count">based on 127 reviews</div>
+                            <div class="rating-count">based on {{count($tour->reviews)}} reviews</div>
                         </div>
                     </div>
                     
                     <div class="reviews-grid">
-                        <div class="review-card">
-                            <div class="review-header">
-                                <img src="/api/placeholder/100/100" alt="Sarah Johnson" class="reviewer-avatar">
-                                <div class="reviewer-info">
-                                        <div class="reviewer-name">Sarah Johnson</div>
-                                        <div class="review-date">April 15, 2025</div>
+                        @foreach ($tour->reviews as $review)
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <div class="reviewer-info">
+                                        <div class="reviewer-name">{{$review->name}}</div>
+                                        <div class="review-date">{{ \Carbon\Carbon::parse($review->review_date)->format('F j, Y') }}</div>
+                                    </div>
+                                </div>
+                                <div class="reviewer-rating">
+                                    @php
+                                        $emptyStar = 5 - intval($review->rate);
+                                        for($i = 0; $i < $review->rate; $i++){
+                                            echo '<i class="fas fa-star"></i>';
+                                        }
+                                        for($i = 0; $i < $emptyStar; $i++){
+                                            echo '<i class="fa-regular fa-star"></i>';
+                                        }
+                                    @endphp
+                                </div>
+                                <div class="review-text-container">
+                                    <p class="review-text truncated">{{$review->review}}</p>
+                                    <button class="expand-btn">Read more</button>
                                 </div>
                             </div>
-                            <div class="reviewer-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="review-text">This tour exceeded all my expectations! Our guide was incredibly knowledgeable and passionate about the history of each location. The itinerary was perfectly balanced between guided exploration and free time.</p>
-                        </div>
-                        
-                        <div class="review-card">
-                            <div class="review-header">
-                                <img src="/api/placeholder/100/101" alt="Michael Torres" class="reviewer-avatar">
-                                <div class="reviewer-info">
-                                        <div class="reviewer-name">Michael Torres</div>
-                                        <div class="review-date">April 8, 2025</div>
-                                </div>
-                            </div>
-                            <div class="reviewer-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <p class="review-text">Absolutely worth every penny! The small group size made the experience feel personal and intimate. The accommodations were comfortable and the food was delicious. Highly recommend!</p>
-                        </div>
-                            
-                        <div class="review-card">
-                            <div class="review-header">
-                                <img src="/api/placeholder/100/102" alt="Emma Wilson" class="reviewer-avatar">
-                                <div class="reviewer-info">
-                                        <div class="reviewer-name">Emma Wilson</div>
-                                        <div class="review-date">March 30, 2025</div>
-                                </div>
-                            </div>
-                            <div class="reviewer-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="review-text">My family and I had an amazing time on this tour. It was well-organized from start to finish. The guide was friendly and accommodating, especially with our young children. Would book again!</p>
-                        </div>
+                        @endforeach
                     </div>
                 </section>
 
@@ -210,26 +192,12 @@
                 <section class="faq-section">
                     <h2 class="section-title">Frequently Asked Questions</h2>
                     <div class="faq-grid">
-                        <div class="faq-item">
-                                <div class="faq-question">What should I pack for this tour?</div>
-                                <div class="faq-answer">We recommend packing comfortable walking shoes, weather-appropriate clothing, sunscreen, a hat, a reusable water bottle, and a camera. For specific tours, you might need additional items like swimwear or hiking gear, which will be specified in your confirmation email.</div>
-                        </div>
-                        <div class="faq-item">
-                                <div class="faq-question">Is this tour suitable for children?</div>
-                                <div class="faq-answer">Yes, this tour is family-friendly and suitable for children of all ages. However, for younger children, please note that some days involve extensive walking. Feel free to contact us if you have specific concerns about your child's comfort during the tour.</div>
-                        </div>
-                        <div class="faq-item">
-                                <div class="faq-question">What is the cancellation policy?</div>
-                                <div class="faq-answer">You can cancel up to 48 hours before the start of your tour for a full refund. Cancellations less than 48 hours before the tour start time are non-refundable. In case of unexpected weather conditions or other circumstances beyond our control, we may offer an alternative date or a full refund.</div>
-                        </div> 
-                        <div class="faq-item">
-                                <div class="faq-question">Are meals included in the tour price?</div>
-                                <div class="faq-answer">Some meals are included as specified in the "What's Included" section. Typically, breakfast is included daily if you're staying at our partner hotels, and some lunches or dinners at select locations. Your guide will recommend local restaurants for meals not included in the package.</div>
-                        </div>
-                        <div class="faq-item">
-                                <div class="faq-question">Is transportation provided during the tour?</div>
-                                <div class="faq-answer">Yes, all transportation between destinations listed in the itinerary is included. This may be a combination of private vehicles, trains, or boats depending on the specific tour. Airport transfers on arrival and departure are also included if you book the complete package.</div>
-                        </div>
+                        @foreach ($tour->questions as $question)
+                            <div class="faq-item">
+                                    <div class="faq-question">{{$question->question}}</div>
+                                    <div class="faq-answer">{{$question->answer}}</div>
+                            </div> 
+                        @endforeach
                     </div>
             </section>
         </div>
@@ -655,27 +623,58 @@
               });
         }
 
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
-              const navLinks = document.querySelector('.nav-links');
-              navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        // // Mobile menu toggle
+        // document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+        //       const navLinks = document.querySelector('.nav-links');
+        //       navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        // });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const reviewTexts = document.querySelectorAll('.review-text');
+        
+        reviewTexts.forEach(text => {
+            const container = text.parentElement;
+            const expandBtn = container.querySelector('.expand-btn');
+            
+            // テキストが切り詰められているかチェック
+            if (text.scrollHeight > text.clientHeight) {
+            expandBtn.style.display = 'block';
+            
+            // ボタンクリックで展開/折りたたみを切り替え
+            expandBtn.addEventListener('click', function() {
+                if (text.classList.contains('truncated')) {
+                text.classList.remove('truncated');
+                expandBtn.textContent = 'Show less';
+                } else {
+                text.classList.add('truncated');
+                expandBtn.textContent = 'Read more';
+                }
+            });
+            }
         });
-  </script>
-  <script>
+    });
+    </script>
+    <script>
         // Expand/collapse functionality for day details
         document.querySelectorAll('.day-action-btn.details').forEach(btn => {
-              btn.addEventListener('click', function() {
+            btn.addEventListener('click', function() {
                     const dayElement = this.closest('.itinerary-day');
                     const scheduleElement = dayElement.querySelector('.day-schedule');
+                    const computedStyle = window.getComputedStyle(scheduleElement);
+
+                    console.log(computedStyle.display);
                     
-                    if (scheduleElement.style.display === 'none') {
-                          scheduleElement.style.display = 'block';
-                          this.innerHTML = '<i class="fas fa-minus-circle"></i><span>Less Details</span>';
+                    
+                    if (computedStyle.display=== 'none') {
+                        scheduleElement.style.display = 'block';
+                        this.innerHTML = '<i class="fas fa-minus-circle"></i><span>Less Details</span>';
                     } else {
-                          scheduleElement.style.display = 'none';
-                          this.innerHTML = '<i class="fas fa-info-circle"></i><span>More Details</span>';
+                        scheduleElement.style.display = 'none';
+                        this.innerHTML = '<i class="fas fa-info-circle"></i><span>More Details</span>';
                     }
-              });
+            });
         });
-  </script>
+</script>
+<script src="{{mix("js/common.js")}}"></script>
 @endsection
