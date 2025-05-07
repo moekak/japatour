@@ -18,7 +18,7 @@
                 <a href="{{route('tour_list')}}" class="btn-outline">
                     <i class="fas fa-arrow-left"></i> Back to Tours
                 </a>
-                <a href="#" class="btn-secondary">
+                <a href="{{ route('tour.show', $tour->id) }}" class="btn-secondary">
                     <i class="fas fa-eye"></i> View Tour
                 </a>
             </div>
@@ -384,7 +384,7 @@
             </div>
 
             <div class="form-actions">
-                <button type="button" class="btn-outline" onclick="window.location.href=">Cancel</button>
+                <button type="button" class="btn-outline" ><a href="{{route("tour_list")}}">Cancel</a></button>
                 <button type="submit" class="btn-primary edit-tour-btn">Update Tour</button>
             </div>
         </form>

@@ -12,7 +12,6 @@
     <div class="container">
         <div class="admin-header">
             <h1>Create New Tour</h1>
-            <p>Add a new tour to your catalog</p>
         </div>
 
         <form action="{{ route('tours.store') }}" method="POST" enctype="multipart/form-data" class="tour-form">
@@ -186,7 +185,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="itinerary[{{ $dayIndex }}][map]">Map URL</label>
-                                        <input type="text" id="itinerary[{{ $dayIndex }}][map]" name="itinerary[{{ $dayIndex }}][map]" >
+                                        <input type="text" id="itinerary[{{ $dayIndex }}][map]" name="itinerary[{{ $dayIndex }}][map]"value="{{ $day['map'] }}" >
                                     </div>
                                     <div class="form-group">
                                         <label for="itinerary_image{{$dayIndex}}">Itinerary Image <span class="required">*</span></label>
@@ -499,7 +498,7 @@
             
 
             <div class="form-actions">
-                <button type="button" class="btn-outline" onclick="history.back()">Cancel</button>
+                <button type="button" class="btn-outline" ><a href="{{route("tour_list")}}">Cancel</a></button>
                 <button type="submit" class="btn-primary create-tour-btn">Create Tour</button>
             </div>
         </form>

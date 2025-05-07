@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\TopController;
 use App\Http\Controllers\Admin\TourController;
 use App\Http\Controllers\GetYourGuideController;
@@ -49,4 +50,12 @@ Route::middleware(['auth'])->group(function () {
 Auth::routes(['register' => false]);
 // Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+Route::get('/tour/book', function () {
+    return view('tour_book');
+})->name("tour.book");
+
+Route::get('/tour/book', [BookingController::class, 'showForm'])->name('tour.book');
+Route::post('/payment-intent', [BookingController::class, 'createPaymentIntent']);

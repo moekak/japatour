@@ -105,10 +105,13 @@
                                                 <i class="fas fa-info-circle"></i>
                                                 <span>More Details</span>
                                             </div>
-                                            <div class="day-action-btn map">
-                                                <i class="fas fa-map"></i>
-                                                <span>View on Map</span>
-                                            </div>
+                                            @if ($itinerary["map"])
+                                                <div class="day-action-btn map">
+                                                    <i class="fas fa-map"></i>
+                                                    <span><a href="{{$itinerary["map"]}}" target="_blank" rel="noopener noreferrer">View on Map</a></span>
+                                                </div>
+                                            @endif
+                                            
                                         </div>
                                     </div>
                                     
