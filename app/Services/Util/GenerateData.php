@@ -53,6 +53,7 @@ class GenerateData
     {
 
         $data = $request->validated();
+
         foreach($data["itinerary"] as $key => $itinerary){
             if(isset($itinerary["itinerary_image"])){
                 $data["itinerary"][$key]["itinerary_image"] = $this->imageService->saveImage($itinerary["itinerary_image"], "itinerary_image");

@@ -185,6 +185,10 @@
                                         <textarea id="itinerary[{{ $dayIndex }}][description]" name="itinerary[{{ $dayIndex }}][description]" rows="3" >{{ $day['description'] }}</textarea>
                                     </div>
                                     <div class="form-group">
+                                        <label for="itinerary[{{ $dayIndex }}][map]">Map URL</label>
+                                        <input type="text" id="itinerary[{{ $dayIndex }}][map]" name="itinerary[{{ $dayIndex }}][map]" >
+                                    </div>
+                                    <div class="form-group">
                                         <label for="itinerary_image{{$dayIndex}}">Itinerary Image <span class="required">*</span></label>
                                         <div class="image-upload-container">
                                             <input type="file" id="itinerary_image{{$dayIndex}}"  name="itinerary[{{$dayIndex}}][itinerary_image]" accept="image/*" class="image-upload-input">
@@ -248,6 +252,10 @@
                                 <div class="form-group">
                                     <label for="itinerary[0][description]">Day Description <span class="required">*</span></label>
                                     <textarea id="itinerary[0][description]" name="itinerary[0][description]" rows="3" ></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="itinerary[0][map]">Map URL</label>
+                                    <input type="text" id="itinerary[0][map]" name="itinerary[0][map]" >
                                 </div>
                                 <div class="form-group">
                                     <label for="itinerary_image0">Itinerary Image <span class="required">*</span></label>
@@ -515,6 +523,10 @@
             <div class="form-group">
                 <label for="itinerary[{day_index}][description]">Day Description <span class="required">*</span></label>
                 <textarea id="itinerary[{day_index}][description]" name="itinerary[{day_index}][description]" rows="3" ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="itinerary[{day_index}][map]">Map URL</label>
+                <input type="text" id="itinerary[{day_index}][map]" name="itinerary[{day_index}][map]" >
             </div>
 
             <div class="form-group">

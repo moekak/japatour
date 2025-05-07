@@ -183,6 +183,10 @@
                                     <textarea id="itinerary[{{$index}}][description]" name="itinerary[{{$index}}][description]" rows="3" >{{$itinerary["description"]}}</textarea>
                                 </div>
                                 <div class="form-group">
+                                    <label for="itinerary[{{$index}}][map]">Map URL</label>
+                                    <input type="text" id="itinerary[{{$index}}][map]" name="itinerary[{{$index}}][map]" value="{{$itinerary["map"]}}" >
+                                </div>
+                                <div class="form-group">
                                     <label for="itinerary_image{{$index}}">Itinerary Image <span class="required">*</span></label>
                                     <div class="image-upload-container">
                                         <input type="file" id="itinerary_image{{$index}}"  name="itinerary[{{$index}}][itinerary_image]" accept="image/*" class="image-upload-input">
@@ -402,6 +406,10 @@
             <div class="form-group">
                 <label for="itinerary[{day_index}][description]">Day Description <span class="required">*</span></label>
                 <textarea id="itinerary[{day_index}][description]" name="itinerary[{day_index}][description]" rows="3" ></textarea>
+            </div>
+            <div class="form-group">
+                <label for="itinerary[{day_index}][map]">Map URL</label>
+                <input type="text" id="itinerary[{day_index}][map]" name="itinerary[{day_index}][map]" >
             </div>
             <div class="form-group">
                 <label for="itinerary_image{day_index}">Itinerary Image <span class="required">*</span></label>

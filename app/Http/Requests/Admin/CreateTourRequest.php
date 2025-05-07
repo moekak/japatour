@@ -43,6 +43,7 @@ class CreateTourRequest extends FormRequest
             "itinerary.*" => ["required", "array"],
             "itinerary.*.title" => ["required", "string", "max:255"],
             "itinerary.*.description" => ["required", "string"], 
+            "itinerary.*.map" => ["nullable", "url", "max:2048"],
             "itinerary.*.itinerary_highlight" => ["required", "array"], 
             "itinerary.*.itinerary_highlight.*" => ["required", "string"], 
             "itinerary.*.schedule" => ["required", "array"], 
@@ -80,7 +81,7 @@ class CreateTourRequest extends FormRequest
             'subtitle.required' => 'The subtitle field is required.',
             'subtitle.string' => 'The subtitle must be a string.',
             'subtitle.max' => 'The subtitle must not exceed 255 characters.',
-            
+
             'badge.string' => 'The badge must be a string.',
             'badge.max' => 'The badge must not exceed 255 characters.',
             
@@ -139,6 +140,8 @@ class CreateTourRequest extends FormRequest
             'itinerary.*.title.max' => 'The itinerary title must not exceed 255 characters.',
             'itinerary.*.description.required' => 'The itinerary description is required.',
             'itinerary.*.description.string' => 'The itinerary description must be a string.',
+            '"itinerary.*.map".url' => 'Please enter a valid URL format (e.g., https://example.com).',
+            '"itinerary.*.map".max' => 'The URL must not exceed 2048 characters in length.',
             'itinerary.*.itinerary_highlight.required' => 'The itinerary highlight is required.',
             'itinerary.*.itinerary_highlight.array' => 'The itinerary highlight must be a valid array format.',
             'itinerary.*.itinerary_highlight.*.required' => 'Each itinerary highlight item is required.',
