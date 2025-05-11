@@ -10,21 +10,26 @@ use Stripe\Stripe;
 
 class BookingController extends Controller
 {
-    public function showForm()
+    public function index()
     {
-        return view('tour_book');
+        return view("tour_book");
     }
 
-    public function createPaymentIntent(Request $request)
-    {
+    public function createPaymentIntent(){
         Stripe::setApiKey(config('services.stripe.secret'));
-
+    
         $intent = PaymentIntent::create([
-            'amount' => 2000, // 単位は最小通貨単位（例: 2000 = ¥2000）
-            'currency' => 'jpy',
+            'amount' => 259800, // $2,598.00固定
+            'currency' => 'usd',
             'automatic_payment_methods' => ['enabled' => true],
         ]);
+        
+        return response()->json([
+            'clientSecret' => $intent->client_secret
+        ]);
 
-        return response()->json(['clientSecret' => $intent->client_secret]);
+
     }
+
+
 }

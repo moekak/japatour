@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\GetYourGuideController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
@@ -27,3 +27,6 @@ Route::prefix('/getyourguide')->group(function () {
     // 予約更新
     Route::put('/bookings/{bookingId}', [GetYourGuideController::class, 'updateBooking']);
 });
+
+
+Route::post('/create-payment-intent', [BookingController::class, 'createPaymentIntent']);

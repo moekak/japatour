@@ -1,508 +1,612 @@
 @extends('layout.default')
 @section('style')
 <link rel="stylesheet" href="{{ asset('css/tour_book.css') }}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://pay.google.com/gp/p/js/pay.js"></script>
 
 @endsection
 
 @section("main")
       @include('components.header')
-      <!-- Hero Section for Booking -->
+      <!-- Hero Section -->
       <section class="booking-hero">
-      <img src="https://picsum.photos/1920/500" alt="Booking" class="booking-hero-image">
-      <div class="booking-hero-content">
-            <h1 class="booking-hero-title">Complete Your Booking</h1>
-            <p class="booking-hero-subtitle">Just a few steps away from your unforgettable adventure!</p>
-      </div>
-</section>
-
+            <img src="https://picsum.photos/1920/500" alt="Booking" class="booking-hero-image">
+            <div class="booking-hero-content">
+                  <h1 class="booking-hero-title">Complete Your Booking</h1>
+                  <p class="booking-hero-subtitle">Just a few steps away from your unforgettable adventure!</p>
+            </div>
+      </section>
 <!-- Main Booking Section -->
 <div class="container">
       <div class="booking-container">
             <!-- Booking Form -->
-            <div class="booking-form-container">
-            <h2 class="section-title">Book Your Tour</h2>
-            
-            <!-- Form Progress -->
-            <div class="form-progress">
-                  <div class="progress-bar"></div>
-                  <div class="progress-step active" data-step="1">
-                        <div class="step-number">1</div>
-                        <div class="step-label">Personal Details</div>
+            <div class="booking-form-container">      
+                  <h2 class="section-title">Book Your Tour</h2>
+                  <!-- Form Progress -->
+                  <div class="form-progress">
+                        <div class="progress-bar"></div>
+                              <div class="progress-step active" data-step="1">
+                              <div class="step-number">1</div>
+                              <div class="step-label">Personal Details</div>
+                        </div>
+                        <div class="progress-step" data-step="2">
+                              <div class="step-number">2</div>
+                              <div class="step-label">Tour Options</div>
+                        </div>
+                        <div class="progress-step" data-step="3">
+                              <div class="step-number">3</div>
+                              <div class="step-label">Payment</div>
+                        </div>
                   </div>
-                  <div class="progress-step" data-step="2">
-                        <div class="step-number">2</div>
-                        <div class="step-label">Tour Options</div>
-                  </div>
-                  <div class="progress-step" data-step="3">
-                        <div class="step-number">3</div>
-                        <div class="step-label">Payment</div>
-                  </div>
-            </div>
 
-            <form id="payment-form">
-                  <!-- Step 1: Personal Details -->
-                  <div class="form-section active" id="step-1">
-                        <div class="form-group">
-                              <label class="form-label">Full Name*</label>
-                              <input type="text" class="form-input" placeholder="Enter your full name" required>
-                        </div>
-                        
-                        <div class="input-group">
+                  <form id="booking-form">
+                        <!-- Step 1: Personal Details -->
+                        <div class="form-section active" id="step-1">
                               <div class="form-group">
-                                    <label class="form-label">Email Address*</label>
-                                    <input type="email" class="form-input" placeholder="Enter your email" required>
-                              </div>
-                              <div class="form-group">
-                                    <label class="form-label">Phone Number*</label>
-                                    <input type="tel" class="form-input" placeholder="Enter your phone number" required>
-                              </div>
-                        </div>
-                        
-                        <div class="input-group">
-                              <div class="form-group">
-                                    <label class="form-label">Country*</label>
-                                    <select class="form-select" required>
-                                          <option value="" selected disabled>Select your country</option>
-                                          <option value="us">United States</option>
-                                          <option value="ca">Canada</option>
-                                          <option value="uk">United Kingdom</option>
-                                          <option value="au">Australia</option>
-                                          <option value="jp">Japan</option>
-                                          <!-- More countries -->
-                                    </select>
-                              </div>
-                              <div class="form-group">
-                                    <label class="form-label">Number of Travelers*</label>
-                                    <select class="form-select" required>
-                                          <option value="1">1 Person</option>
-                                          <option value="2" selected>2 People</option>
-                                          <option value="3">3 People</option>
-                                          <option value="4">4 People</option>
-                                          <option value="5">5 People</option>
-                                          <option value="6">6 People</option>
-                                    </select>
-                              </div>
-                        </div>
-                        
-                        <div class="form-group">
-                              <label class="form-label">Special Requests (Optional)</label>
-                              <textarea class="form-input" rows="4" placeholder="Any special requirements or requests?"></textarea>
-                        </div>
-                        
-                        <div class="form-actions">
-                              <a href="#" class="btn"><i class="fas fa-arrow-left"></i> Back to Tour</a>
-                              <button type="button" class="btn btn-primary next-step">Continue <i class="fas fa-arrow-right"></i></button>
-                        </div>
-                  </div>
-                  
-                  <!-- Step 2: Tour Options -->
-                  <div class="form-section" id="step-2">
-                        <div class="form-group">
-                              <label class="form-label">Select Tour Date*</label>
-                              <input type="date" class="form-input" required>
-                        </div>
-                        
-                        <div class="form-group">
-                              <label class="form-label">Accommodation Options*</label>
-                              <div class="option-card selected">
-                                    <div class="option-header">
-                                          <h3 class="option-title">Standard Package</h3>
-                                          <div class="option-price">$1,299</div>
-                                    </div>
-                                    <p class="option-description">Comfortable 3-star hotels with all the essential amenities for a pleasant stay.</p>
-                                    <div class="option-features">
-                                          <div class="option-feature"><i class="fas fa-bed"></i> Private Room</div>
-                                          <div class="option-feature"><i class="fas fa-wifi"></i> Free WiFi</div>
-                                          <div class="option-feature"><i class="fas fa-utensils"></i> Breakfast</div>
-                                    </div>
-                              </div>
-                              
-                              <div class="option-card">
-                                    <div class="option-header">
-                                          <h3 class="option-title">Premium Package</h3>
-                                          <div class="option-price">$1,699</div>
-                                    </div>
-                                    <p class="option-description">Upscale 4-star accommodations with additional amenities and more spacious rooms.</p>
-                                    <div class="option-features">
-                                          <div class="option-feature"><i class="fas fa-bed"></i> Deluxe Room</div>
-                                          <div class="option-feature"><i class="fas fa-wifi"></i> Free WiFi</div>
-                                          <div class="option-feature"><i class="fas fa-utensils"></i> Breakfast & Dinner</div>
-                                          <div class="option-feature"><i class="fas fa-swimmer"></i> Pool Access</div>
-                                    </div>
-                              </div>
-                        
-                              <div class="option-card">
-                                    <div class="option-header">
-                                          <h3 class="option-title">Luxury Package</h3>
-                                          <div class="option-price">$2,299</div>
-                                    </div>
-                                    <p class="option-description">5-star luxury accommodations with premium services and exclusive experiences.</p>
-                                    <div class="option-features">
-                                          <div class="option-feature"><i class="fas fa-bed"></i> Suite</div>
-                                          <div class="option-feature"><i class="fas fa-wifi"></i> Free WiFi</div>
-                                          <div class="option-feature"><i class="fas fa-utensils"></i> All Meals</div>
-                                          <div class="option-feature"><i class="fas fa-swimmer"></i> Pool & Spa</div>
-                                          <div class="option-feature"><i class="fas fa-glass-cheers"></i> Welcome Drink</div>
-                                    </div>
-                              </div>
-                        </div>
-                        <div class="form-group">
-                              <label class="form-label">Additional Services</label>
-                              
-                              <div class="checkbox-group">
-                                    <input type="checkbox" id="airport-transfer" class="form-checkbox">
-                                    <label for="airport-transfer">Airport Transfer ($50 per person)</label>
-                              </div>
-                              
-                              <div class="checkbox-group">
-                                    <input type="checkbox" id="guided-tour" class="form-checkbox">
-                                    <label for="guided-tour">Private Guided Tour ($150 per group)</label>
-                              </div>
-                              
-                              <div class="checkbox-group">
-                                    <input type="checkbox" id="travel-insurance" class="form-checkbox">
-                                    <label for="travel-insurance">Travel Insurance ($75 per person)</label>
-                              </div>
-                        </div>
-                        
-                        <div class="form-actions">
-                              <button type="button" class="btn btn-secondary prev-step"><i class="fas fa-arrow-left"></i> Back</button>
-                              <button type="button" class="btn btn-primary next-step">Continue <i class="fas fa-arrow-right"></i></button>
-                        </div>
-                  </div>
-                  <!-- Step 3: Payment -->
-                  <div class="form-section" id="step-3">
-                        <div class="form-group">
-                              <label class="form-label">Payment Method</label>
-                              
-                              {{-- <div class="payment-option selected">
-                                    <input type="radio" name="payment-method" id="credit-card" class="payment-radio" checked>
-                                    <label for="credit-card">Credit/Debit Card</label>
-                                    <img src="https://picsum.photos/120/40" alt="Credit Cards" class="payment-logo">
-                              </div> --}}
-                              
-                              <div class="payment-option">
-                                    <input type="radio" name="payment-method" id="paypal" class="payment-radio">
-                                    <label for="paypal">PayPal</label>
-                                    <img src="https://picsum.photos/80/40" alt="PayPal" class="payment-logo">
-                              </div>
-                        </div>
-                        
-                        <div class="form-group">
-                              <div id="card-element"><!-- Stripeがここにカード入力欄を描画 --></div>
-                              <div id="card-errors" role="alert" style="color:red;"></div>
-                              {{-- <label class="form-label">Card Information</label>
-                              <!-- Stripe Card Element would go here -->
-                              <div class="card-element">
-                                    <!-- Stripe Elements Placeholder -->
-                                    <p style="color: #95A5A6; text-align: center;">Stripe Card Element will be rendered here</p>
+                                    <label class="form-label">Full Name*</label>
+                                    <input type="text" id="customer-name" class="form-input" placeholder="Enter your full name" required>
                               </div>
                               
                               <div class="input-group">
                                     <div class="form-group">
-                                          <label class="form-label">Name on Card</label>
-                                          <input type="text" class="form-input" placeholder="Enter name as it appears on card">
+                                          <label class="form-label">Email Address*</label>
+                                          <input type="email" id="customer-email" class="form-input" placeholder="Enter your email" required>
                                     </div>
                                     <div class="form-group">
-                                          <label class="form-label">Billing Zip/Postal Code</label>
-                                          <input type="text" class="form-input" placeholder="Enter billing zip code">
+                                          <label class="form-label">Phone Number*</label>
+                                          <input type="tel" id="customer-phone" class="form-input" placeholder="Enter your phone number" required>
                                     </div>
-                              </div> --}}
-                        </div>
-                        
-                        <div class="checkbox-group">
-                              <input type="checkbox" id="terms" class="form-checkbox" required>
-                              <label for="terms">I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Cancellation Policy</a></label>
-                        </div>
-                        
-                        <div class="form-actions">
-                              <button type="button" class="btn btn-secondary prev-step"><i class="fas fa-arrow-left"></i> Back</button>
-                              <button type="button" class="btn btn-success" id="complete-booking"><i class="fas fa-check"></i> Complete Booking</button>
-                        </div>
-                  </div>
-                  
-                  <!-- Confirmation (Hidden initially) -->
-                  <div class="form-section" id="confirmation">
-                        <div class="booking-confirmation">
-                              <div class="confirmation-icon">
-                                    <i class="fas fa-check"></i>
                               </div>
-                              <h2 class="confirmation-title">Booking Confirmed!</h2>
-                              <p class="confirmation-message">
-                              Thank you for booking with us! We've sent a confirmation email to your provided email address with all the details of your booking.
-                              </p>
                               
-                              <div class="booking-details">
-                                    <div class="booking-detail">
-                                          <div class="detail-label">Booking Reference:</div>
-                                          <div class="detail-value">TE-23456789</div>
+                              <div class="input-group">
+                                    <div class="form-group">
+                                          <label class="form-label">Country*</label>
+                                          <select id="customer-country" class="form-select" required>
+                                                <option value="" selected disabled>Select your country</option>
+                                                <option value="us">United States</option>
+                                                <option value="ca">Canada</option>
+                                                <option value="uk">United Kingdom</option>
+                                                <option value="au">Australia</option>
+                                                <option value="jp">Japan</option>
+                                          </select>
                                     </div>
-                                    <div class="booking-detail">
-                                          <div class="detail-label">Tour:</div>
-                                          <div class="detail-value">Majestic Mountain Explorer</div>
-                                    </div>
-                                    <div class="booking-detail">
-                                          <div class="detail-label">Date:</div>
-                                          <div class="detail-value">May 15, 2025</div>
-                                    </div>
-                                    <div class="booking-detail">
-                                          <div class="detail-label">Travelers:</div>
-                                          <div class="detail-value">2 Adults</div>
-                                    </div>
-                                    <div class="booking-detail">
-                                          <div class="detail-label">Total Amount:</div>
-                                          <div class="detail-value">$2,598.00</div>
+                                    <div class="form-group">
+                                          <label class="form-label">Number of Travelers*</label>
+                                          <select id="travelers" class="form-select" required>
+                                                <option value="1">1 Person</option>
+                                                <option value="2" selected>2 People</option>
+                                                <option value="3">3 People</option>
+                                                <option value="4">4 People</option>
+                                                <option value="5">5 People</option>
+                                                <option value="6">6 People</option>
+                                          </select>
                                     </div>
                               </div>
-                              <a href="#" class="btn btn-primary"><i class="fas fa-home"></i> Back to Home</a>
-                        </div>
-                  </div>
-            </form>
-      </div>
-      <!-- Order Summary -->
-      <div class="order-summary">
-            <div class="summary-header">
-                  <h3 class="summary-title">Order Summary</h3>
-                  <p class="summary-subtitle">Review your booking details</p>
-            </div>
-            
-            <div class="summary-body">
-                  <div class="summary-tour">
-                        <div class="tour-img-container">
-                              <img src="https://picsum.photos/400/200" alt="Tour" class="tour-img">
-                        </div>
-                        <h3 class="tour-name">Majestic Mountain Explorer</h3>
-                        <div class="tour-date-wrapper">
-                              <p class="tour-date"><i class="far fa-calendar-alt"></i> May 15, 2025</p>
-                              <p class="tour-date"><i class="fas fa-users"></i> 2 Travelers</p>   
+                              
+                              <div class="form-group">
+                                    <label class="form-label">Special Requests (Optional)</label>
+                                    <textarea class="form-input" rows="4" placeholder="Any special requirements or requests?"></textarea>
+                              </div>
+                              
+                              <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary" onclick="history.back()">
+                                          <i class="fas fa-arrow-left"></i> Back to Tour
+                                    </button>
+                                    <button type="button" class="btn btn-primary next-step">
+                                          Continue <i class="fas fa-arrow-right"></i>
+                                    </button>
+                              </div>
                         </div>
                         
-                  </div>
-                  
-                  <div class="summary-items">
-                        <div class="summary-item">
-                              <div class="item-label">Tour Package (2 × $1,299)</div>
-                              <div class="item-value">$2,598.00</div>
+                        <!-- Step 2: Tour Options -->
+                        <div class="form-section" id="step-2">
+                              <div class="form-group">
+                                    <label class="form-label">Select Tour Date*</label>
+                                    <input type="text" id="date_range_start" placeholder="Choose a date" class="form-input">
+                                    <input type="hidden" id="available_dates_input" name="available_dates">
+                              </div>
+                              
+                              <div class="form-group">
+                                    <label class="form-label">Accommodation Options*</label>
+                                    <div class="option-card selected" data-package="standard" data-price="1299">
+                                          <div class="option-header">
+                                                <h3 class="option-title">Standard Package</h3>
+                                                <div class="option-price">$1,299</div>
+                                          </div>
+                                          <p class="option-description">Comfortable 3-star hotels with all the essential amenities for a pleasant stay.</p>
+                                          <div class="option-features">
+                                                <div class="option-feature"><i class="fas fa-bed"></i> Private Room</div>
+                                                <div class="option-feature"><i class="fas fa-wifi"></i> Free WiFi</div>
+                                                <div class="option-feature"><i class="fas fa-utensils"></i> Breakfast</div>
+                                          </div>
+                                    </div>
+                                    <div class="option-card" data-package="premium" data-price="1699">
+                                          <div class="option-header">
+                                                <h3 class="option-title">Premium Package</h3>
+                                                <div class="option-price">$1,699</div>
+                                          </div>
+                                          <p class="option-description">Upscale 4-star accommodations with additional amenities and more spacious rooms.</p>
+                                          <div class="option-features">
+                                                <div class="option-feature"><i class="fas fa-bed"></i> Deluxe Room</div>
+                                                <div class="option-feature"><i class="fas fa-wifi"></i> Free WiFi</div>
+                                                <div class="option-feature"><i class="fas fa-utensils"></i> Breakfast & Dinner</div>
+                                                <div class="option-feature"><i class="fas fa-swimmer"></i> Pool Access</div>
+                                          </div>
+                                    </div>
+                              
+                                    <div class="option-card" data-package="luxury" data-price="2299">
+                                          <div class="option-header">
+                                                <h3 class="option-title">Luxury Package</h3>
+                                                <div class="option-price">$2,299</div>
+                                          </div>
+                                          <p class="option-description">5-star luxury accommodations with premium services and exclusive experiences.</p>
+                                          <div class="option-features">
+                                                <div class="option-feature"><i class="fas fa-bed"></i> Suite</div>
+                                                <div class="option-feature"><i class="fas fa-wifi"></i> Free WiFi</div>
+                                                <div class="option-feature"><i class="fas fa-utensils"></i> All Meals</div>
+                                                <div class="option-feature"><i class="fas fa-swimmer"></i> Pool & Spa</div>
+                                                <div class="option-feature"><i class="fas fa-glass-cheers"></i> Welcome Drink</div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="form-group">
+                                    <label class="form-label">Additional Services</label>
+                                    <div class="checkbox-group">
+                                          <input type="checkbox" id="airport-transfer" class="form-checkbox">
+                                          <label for="airport-transfer">Airport Transfer ($50 per person)</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-group">
+                                          <input type="checkbox" id="guided-tour" class="form-checkbox">
+                                          <label for="guided-tour">Private Guided Tour ($150 per group)</label>
+                                    </div>
+                                    
+                                    <div class="checkbox-group">
+                                          <input type="checkbox" id="travel-insurance" class="form-checkbox">
+                                          <label for="travel-insurance">Travel Insurance ($75 per person)</label>
+                                    </div>
+                              </div>
+                              
+                              <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary prev-step">
+                                          <i class="fas fa-arrow-left"></i> Back
+                                    </button>
+                                    <button type="button" class="btn btn-primary next-step">
+                                          Continue <i class="fas fa-arrow-right"></i>
+                                    </button>
+                              </div>
                         </div>
-                        <div class="summary-item">
-                              <div class="item-label">Accommodation Upgrade</div>
-                              <div class="item-value">$0.00</div>
+                        
+                        <!-- Step 3: Payment -->
+                        <div class="form-section"  id="step-3">
+                              <div class="payment-section">
+                                    <div class="payment-header">
+                                          <div class="payment-icon">
+                                                <i class="fas fa-credit-card"></i>
+                                          </div>
+                                          <h3>Secure Payment</h3>
+                                          <p>Complete your booking securely</p>
+                                    </div>
+                                    
+                                    <div class="total-display">
+                                          <div class="total-label">Total Amount</div>
+                                          <div class="total-amount" id="payment-total">$2,598.00</div>
+                                    </div>
+                                    
+                                    <!-- Payment Element-->
+                                    <div id="payment-element">
+                                          <!-- ここにGoogle Pay、Apple Pay、クレジットカード等が表示される -->
+                                    </div>
+                                    
+                                    <div id="card-errors"></div>
+                                    
+                                    <!-- 決済ボタンを追加 -->
+                                    <button id="submit-payment" class="payment-button">
+                                          Complete Payment
+                                    </button>
+                                    
+                                    <div class="security-badges">
+                                          <div class="security-badge">
+                                                <i class="fas fa-shield-alt"></i>
+                                                <span>SSL Encrypted</span>
+                                          </div>
+                                          <div class="security-badge">
+                                                <i class="fas fa-lock"></i>
+                                                <span>Secure Payment</span>
+                                          </div>
+                                          <div class="security-badge">
+                                                <i class="fas fa-credit-card"></i>
+                                                <span>All Cards Accepted</span>
+                                          </div>
+                                    </div>
+                              </div>
+                              
+                              <div class="form-actions">
+                                    <button type="button" class="btn btn-secondary prev-step">
+                                          <i class="fas fa-arrow-left"></i> Back
+                                    </button>
+                              </div>
                         </div>
-                        <div class="summary-item">
-                              <div class="item-label">Additional Services</div>
-                              <div class="item-value">$0.00</div>
-                        </div>
-                        <div class="summary-item">
-                              <div class="item-label">Taxes & Fees</div>
-                              <div class="item-value">Included</div>
-                        </div>
-                  </div>
-                  
-                  <div class="summary-total">
-                        <div class="total-label">Total</div>
-                        <div class="total-value">$2,598.00</div>
-                  </div>
-                  
-                  <div class="summary-note">
-                        <i class="fas fa-info-circle"></i>
-                        <div>A 20% deposit ($519.60) will be charged now to secure your booking. The remaining balance is due 30 days before the tour date.</div>
-                  </div>
+                  </form>
             </div>
+      
+            <!-- Order Summary -->
+            <div class="order-summary">
+                  <div class="summary-header">
+                        <h3 class="summary-title">Order Summary</h3>
+                        <p class="summary-subtitle">Review your booking details</p>
+                  </div>
+                  
+                  <div class="summary-body">
+                        <div class="summary-tour">
+                              <div class="tour-img-container">
+                                    <img src="https://picsum.photos/400/200" alt="Tour" class="tour-img">
+                              </div>
+                              <h3 class="tour-name">Majestic Mountain Explorer</h3>
+                              <div class="tour-date-wrapper">
+                                    <p class="tour-date"><i class="far fa-calendar-alt"></i> <span id="selected-date">Select date</span></p>
+                                    <p class="tour-date"><i class="fas fa-users"></i> <span id="summary-travelers">2</span> Travelers</p>   
+                              </div>
+                        </div>
+                        
+                        <div class="summary-items">
+                              <div class="summary-item">
+                                    <div class="item-label">Tour Package</div>
+                                    <div class="item-value" id="package-total">$2,598.00</div>
+                              </div>
+                              <div class="summary-item">
+                                    <div class="item-label">Airport Transfer</div>
+                                    <div class="item-value" id="transfer-total">$0.00</div>
+                              </div>
+                              <div class="summary-item">
+                                    <div class="item-label">Guided Tour</div>
+                                    <div class="item-value" id="guided-total">$0.00</div>
+                              </div>
+                              <div class="summary-item">
+                                    <div class="item-label">Travel Insurance</div>
+                                    <div class="item-value" id="insurance-total">$0.00</div>
+                              </div>
+                              <div class="summary-item">
+                                    <div class="item-label">Taxes & Fees</div>
+                                    <div class="item-value">Included</div>
+                              </div>
+                        </div>
+                        
+                        <div class="summary-total">
+                              <div class="total-label">Total</div>
+                              <div class="total-value" id="grand-total">$2,598.00</div>
+                        </div>
+                        
+                        <div class="summary-note">
+                              <i class="fas fa-info-circle"></i>
+                              <div>A 20% deposit (<span id="deposit-amount">$519.60</span>) will be charged now to secure your booking. The remaining balance is due 30 days before the tour date.</div>
+                        </div>
+                  </div>
             </div>
       </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
-      const stripe = Stripe("{{ config('services.stripe.key') }}", {locale: 'en'});
-      let elements = stripe.elements();
-      const style = {
-            base: {
-                  color: "#000",
-                  fontSize: "16px",
-                  fontFamily: "'Helvetica Neue', sans-serif",
-                  fontSmoothing: "antialiased",
-                  "::placeholder": {
-                        color: "#888"
+      // Stripe初期化
+      const stripe = Stripe('pk_test_51RFVYHIm3ld88wDBI6fJgwCohTKZhiE1L5bHpiNwvNczVxxQYlifsyNb5FVOYrFdo7ReMSsyOFRPzFjoMQCksqdk00fC6BwA2O');
+      let paymentElement;
+      
+      // PaymentIntent作成関数
+      async function createPaymentIntent() {
+            return fetch('/api/create-payment-intent', {
+                  method: 'POST',
+                  headers: {
+                        'Content-Type': 'application/json',
                   },
-                  iconColor: "#666"
-            },
-            invalid: {
-                  color: "#e3342f",
-                  iconColor: "#e3342f"
-            }
-      };
-      let card = elements.create('card', { style: style });
-      card.mount('#card-element');
+            });
+      }
+      
+      // Payment Element初期化関数
+      
+      async function initializePaymentElement() {
+            try {
+                  const response = await createPaymentIntent();
+                  const data = await response.json();
+                  
+                  console.log('PaymentIntent created:', data);
+                  
+                  if (!response.ok) {
+                        throw new Error(data.error || 'Payment Intent creation failed');
+                  }
+                  
+                  // Payment Elementを初期化
+                  const elements = stripe.elements({
+                        clientSecret: data.clientSecret,
+                        locale: 'en', // この行を追加
+                        appearance: {
+                              theme: 'stripe',
+                              // その他の外観設定
+                        },
+                        paymentMethods: {
+                              applePay: 'always',
+                              googlePay: 'always',
+                              link: 'always'
+                        }
+                  });
 
-      card.on('change', function(event) {
-          const displayError = document.getElementById('card-errors');
-          displayError.textContent = event.error ? event.error.message : '';
-      });
-
-      const form = document.getElementById('payment-form');
-      form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-          // LaravelからPaymentIntentのclient_secretを取得
-          const response = await fetch('/payment-intent', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-          });
-          const { clientSecret } = await response.json();
-
-          const result = await stripe.confirmCardPayment(clientSecret, {
-              payment_method: {
-                  card: card,
-                  billing_details: { name: 'テストユーザー' }
-              }
-          });
-
-          if (result.error) {
-            console.log(result.error);
             
-              document.getElementById('card-errors').textContent = result.error.message;
-          } else {
-              if (result.paymentIntent.status === 'succeeded') {
-                  alert('支払いが完了しました！');
-                  // location.href = '/thanks'; // 任意でリダイレクトも可
-              }
-          }
+                  // デバッグ：Payment Request の可用性を確認
+                  const paymentRequest = stripe.paymentRequest({
+                        country: 'US',
+                        currency: 'usd',
+                        total: {
+                              label: 'Tour Booking',
+                              amount: 259800,
+                        },
+                        requestPayerName: true,
+                        requestPayerEmail: true,
+                  });
+                  
+                  const result = await paymentRequest.canMakePayment();
+                  console.log('Payment methods available:', result);
+                  
+                  if (result && result.googlePay) {
+                        console.log('Google Pay is available');
+                  } else {
+                        console.log('Google Pay is not available');
+                        console.log('Available payment methods:', result);
+                        }
+                  
+                  paymentElement = elements.create('payment', {
+                        layout: 'tabs',
+                        defaultValues: {
+                              billingDetails: {
+                                    name: document.getElementById('customer-name')?.value || '',
+                                    email: document.getElementById('customer-email')?.value || '',
+                              }
+                        }
+                  });
+            
+                  // Payment Elementをマウント
+                  paymentElement.mount('#payment-element');
+                  
+                  // デバッグ：Payment Elementに何が表示されているかを確認
+                  paymentElement.on('ready', () => {
+                        console.log('Payment Element is ready');
+                  });
+                  
+                  // エラーハンドリング
+                  paymentElement.on('change', (event) => {
+                        console.log('Payment Element changed:', event);
+                        const displayError = document.getElementById('card-errors');
+                        if (event.error && displayError) {
+                              displayError.textContent = event.error.message;
+                        } else if (displayError) {
+                              displayError.textContent = '';
+                        }
+                  });
+            
+            } catch (error) {
+                  console.error('Error:', error);
+                  const displayError = document.getElementById('card-errors');
+                  if (displayError) {
+                        displayError.textContent = 'Failed to initialize payment. Please try again.';
+                  }
+            }
+      }
+
+    // さらにGoogle Pay設定をチェックする関数
+      async function checkGooglePayStatus() {
+            try {
+                  const paymentsClient = new google.payments.api.PaymentsClient({
+                        environment: 'TEST'
+                  });
+                  
+                  const isReadyToPayRequest = {
+                        apiVersion: 2,
+                        apiVersionMinor: 0,
+                        allowedPaymentMethods: [{
+                              type: 'CARD',
+                              parameters: {
+                                    allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+                                    allowedCardNetworks: ['AMEX', 'DISCOVER', 'JCB', 'MASTERCARD', 'VISA']
+                              }
+                        }]
+                  };
+                  
+                  const canMakePayment = await paymentsClient.isReadyToPay(isReadyToPayRequest);
+                  console.log('Google Pay direct check:', canMakePayment);
+            } catch (error) {
+                  console.error('Google Pay status check failed:', error);
+            }
+      }
+      
+      // フラットピッカー初期化
+      const singleDatePicker = flatpickr("#date_range_start", {
+            dateFormat: "Y-m-d",
+            minDate: "today",
+            mode: "single",
+            onChange: function(selectedDates, dateStr, instance) {
+                  if (selectedDates.length > 0) {
+                        const formattedDate = dateStr;
+                        document.getElementById('available_dates_input').value = formattedDate;
+                        document.getElementById('selected-date').textContent = formattedDate;
+                  } else {
+                        document.getElementById('available_dates_input').value = '';
+                        document.getElementById('selected-date').textContent = 'Select date';
+                  }
+            }
       });
-  </script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get form sections and progress steps
-        const formSections = document.querySelectorAll('.form-section');
-        const progressSteps = document.querySelectorAll('.progress-step');
-        const progressBar = document.querySelector('.progress-bar');
-        
-        // Navigation buttons
-        const nextButtons = document.querySelectorAll('.next-step');
-        const prevButtons = document.querySelectorAll('.prev-step');
-        const completeButton = document.getElementById('complete-booking');
-        
-        // Current step tracker
-        let currentStep = 1;
-        
-        // Update the progress bar
-        function updateProgress(step) {
+      
+      // ステップ管理
+      let currentStep = 1;
+      let selectedPackage = 'standard';
+      let packagePrice = 1299;
+      
+      function updateProgress(step) {
+            const progressBar = document.querySelector('.progress-bar');
+            const progressSteps = document.querySelectorAll('.progress-step');
+            
+            // Progress bar update
             const percent = ((step - 1) / (progressSteps.length - 1)) * 100;
             progressBar.style.width = `${percent}%`;
             
-            // Update step status
+            // Step status update
             progressSteps.forEach((stepEl, idx) => {
-                const stepNum = idx + 1;
-                if (stepNum < step) {
-                  //   stepEl.classList.add('completed');
-                  //   stepEl.classList.remove('active');
-                } else if (stepNum === step) {
-                    stepEl.classList.add('active');
-                  //   stepEl.classList.remove('completed');
-                } else {
-                  //   stepEl.classList.remove('active', 'completed');
-                }
+                  const stepNum = idx + 1;
+                  stepEl.classList.remove('active', 'completed');
+                  
+                  if (stepNum < step) {
+                        stepEl.classList.add('completed');
+                  } else if (stepNum === step) {
+                        stepEl.classList.add('active');
+                  }
             });
-        }
-        
-        // Show a specific step
-        function showStep(step) {
+      }
+      
+      function showStep(step) {
+            const formSections = document.querySelectorAll('.form-section');
             formSections.forEach((section, idx) => {
-                if (idx + 1 === step) {
-                    section.classList.add('active');
-                } else {
-                    section.classList.remove('active');
-                }
+                  section.classList.remove('active');
+                  if (idx + 1 === step) {
+                        section.classList.add('active');
+                  }
             });
             
             updateProgress(step);
             currentStep = step;
             
-            // Update summary based on selections
-            updateSummary();
-        }
-        
-        // Handle next button clicks
-        nextButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (currentStep < formSections.length) {
-                    showStep(currentStep + 1);
-                }
-            });
-        });
-        
-        // Handle previous button clicks
-        prevButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (currentStep > 1) {
-                    showStep(currentStep - 1);
-                }
-            });
-        });
-        
-        // Handle complete booking button
-        completeButton.addEventListener('click', () => {
-            // In a real app, you would validate and process the payment here
-            // For this demo, we'll just show the confirmation
-            showStep(4); // The confirmation is the 4th section
-        });
-        
-        // Handle accommodation option selection
-        const optionCards = document.querySelectorAll('.option-card');
-        optionCards.forEach(card => {
-            card.addEventListener('click', () => {
-                optionCards.forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-                updateSummary();
-            });
-        });
-        
-        // Handle payment option selection
-        const paymentOptions = document.querySelectorAll('.payment-option');
-        paymentOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                paymentOptions.forEach(o => o.classList.remove('selected'));
-                option.classList.add('selected');
-                const radio = option.querySelector('input[type="radio"]');
-                radio.checked = true;
-            });
-        });
-        
-        // Update order summary based on selections
-        function updateSummary() {
-            // In a real app, you would calculate the totals based on all selections
-            const selectedPackage = document.querySelector('.option-card.selected .option-title');
-            const packagePrice = document.querySelector('.option-card.selected .option-price');
-            
-            if (selectedPackage && packagePrice) {
-                document.querySelector('.summary-item:first-child .item-label').textContent = 
-                    `${selectedPackage.textContent} (2 × ${packagePrice.textContent})`;
-                
-                // Calculate and update total
-                const price = parseFloat(packagePrice.textContent.replace('$', ''));
-                const total = price * 2;
-                document.querySelector('.summary-item:first-child .item-value').textContent = `$${total.toFixed(2)}`;
-                document.querySelector('.total-value').textContent = `$${total.toFixed(2)}`;
-                
-                // Update deposit note
-                const deposit = total * 0.2;
-                document.querySelector('.summary-note div').textContent = 
-                    `A 20% deposit ($${deposit.toFixed(2)}) will be charged now to secure your booking. The remaining balance is due 30 days before the tour date.`;
+            // Step 3に移動したときにPayment Elementを初期化
+            if (step === 3) {
+                  initializePaymentElement();
             }
             
-            // Add additional services if selected
-            const additionalServices = [];
-            const checkboxes = document.querySelectorAll('.form-checkbox:checked');
-            checkboxes.forEach(checkbox => {
-                if (checkbox.id !== 'terms') {
-                    additionalServices.push(checkbox.nextElementSibling.textContent);
-                }
+            updateSummary();
+      }
+      
+      // Next/Previous button handlers
+      document.querySelectorAll('.next-step').forEach(button => {
+            button.addEventListener('click', () => {
+                  if (currentStep < 3) {
+                        showStep(currentStep + 1);
+                  }
             });
+      });
+      
+      document.querySelectorAll('.prev-step').forEach(button => {
+            button.addEventListener('click', () => {
+                  if (currentStep > 1) {
+                        showStep(currentStep - 1);
+                  }
+            });
+      });
+      
+      // パッケージ選択
+      document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', () => {
+                  document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                  card.classList.add('selected');
+                  selectedPackage = card.dataset.package;
+                  packagePrice = parseInt(card.dataset.price);
+                  updateSummary();
+            });
+      });
+      
+      // 旅行者数変更
+      document.getElementById('travelers').addEventListener('change', (e) => {
+            document.getElementById('summary-travelers').textContent = e.target.value;
+            updateSummary();
+      });
+      
+      // 追加サービス変更
+      document.querySelectorAll('.form-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', updateSummary);
+      });
+      
+      // サマリー更新
+      function updateSummary() {
+            const travelers = parseInt(document.getElementById('travelers').value);
+            const airportTransfer = document.getElementById('airport-transfer').checked;
+            const guidedTour = document.getElementById('guided-tour').checked;
+            const travelInsurance = document.getElementById('travel-insurance').checked;
             
-            // In a real app, you would update the additional services line item too
-        }
-        
-        // Initialize the form
-        showStep(1);
-    });
+            // 計算
+            const packageTotal = packagePrice * travelers;
+            const transferTotal = airportTransfer ? 50 * travelers : 0;
+            const guidedTotal = guidedTour ? 150 : 0;
+            const insuranceTotal = travelInsurance ? 75 * travelers : 0;
+            const grandTotal = packageTotal + transferTotal + guidedTotal + insuranceTotal;
+            const deposit = grandTotal * 0.2;
+            
+            // 表示更新
+            document.getElementById('package-total').textContent = `$${packageTotal.toLocaleString()}.00`;
+            document.getElementById('transfer-total').textContent = `$${transferTotal.toLocaleString()}.00`;
+            document.getElementById('guided-total').textContent = `$${guidedTotal.toLocaleString()}.00`;
+            document.getElementById('insurance-total').textContent = `$${insuranceTotal.toLocaleString()}.00`;
+            document.getElementById('grand-total').textContent = `$${grandTotal.toLocaleString()}.00`;
+            document.getElementById('payment-total').textContent = `$${grandTotal.toLocaleString()}.00`;
+            document.getElementById('deposit-amount').textContent = `$${deposit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            
+            // パッケージ名更新
+            const selectedCard = document.querySelector('.option-card.selected');
+            if (selectedCard) {
+                  const packageName = selectedCard.querySelector('.option-title').textContent;
+                  const firstItemLabel = document.querySelector('.summary-item:first-child .item-label');
+                  if (firstItemLabel) {
+                        firstItemLabel.textContent = `${packageName} (${travelers} × $${packagePrice})`;
+                  }
+            }
+      }
+      
+      // 決済処理
+      document.addEventListener('DOMContentLoaded', () => {
+            checkGooglePayStatus();
+            const submitButton = document.getElementById('submit-payment');
+            if (submitButton) {
+                  submitButton.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        
+                        const button = e.target;
+                        button.disabled = true;
+                        button.classList.add('loading');
+                        
+                        try {
+                              // Payment Elementが初期化されているか確認
+                              if (!paymentElement) {
+                                    throw new Error('Payment Element not initialized');
+                              }
+                              
+                              // 決済確定
+                              const {error} = await stripe.confirmPayment({
+                                    elements: paymentElement,
+                                    redirect: 'if_required',
+                                    confirmParams: {
+                                          return_url: window.location.origin + '/booking/success'
+                                    }
+                              });
+                              
+                              if (error) {
+                                    const displayError = document.getElementById('card-errors');
+                                    if (displayError) {
+                                          displayError.textContent = error.message;
+                                    }
+                              } else {
+                                    // 成功処理
+                                    window.location.href = '/booking/success';
+                              }
+                        } catch (error) {
+                              console.error('Error:', error);
+                              const displayError = document.getElementById('card-errors');
+                              if (displayError) {
+                                    displayError.textContent = error.message || 'An unexpected error occurred.';
+                              }
+                        } finally {
+                              button.disabled = false;
+                              button.classList.remove('loading');
+                        }
+                  });
+            }
+      });
+      
+      // 初期化
+      updateSummary();
 </script>
 @endsection

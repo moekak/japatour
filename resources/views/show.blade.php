@@ -103,7 +103,7 @@
                                         <div class="day-actions">
                                             <div class="day-action-btn details">
                                                 <i class="fas fa-info-circle"></i>
-                                                <span>More Details</span>
+                                                <span>Show Itinerary</span>
                                             </div>
                                             @if ($itinerary["map"])
                                                 <div class="day-action-btn map">
@@ -671,10 +671,10 @@
                     
                     if (computedStyle.display=== 'none') {
                         scheduleElement.style.display = 'block';
-                        this.innerHTML = '<i class="fas fa-minus-circle"></i><span>Less Details</span>';
+                        this.innerHTML = '<i class="fas fa-minus-circle"></i><span>Hide Itinerary</span>';
                     } else {
                         scheduleElement.style.display = 'none';
-                        this.innerHTML = '<i class="fas fa-info-circle"></i><span>More Details</span>';
+                        this.innerHTML = '<i class="fas fa-info-circle"></i><span>Show Itinerary</span>';
                     }
             });
         });

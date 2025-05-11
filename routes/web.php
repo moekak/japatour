@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/thank', function () {
     return view('emails.thank');
 })->name("thank");
-Route::get('/tour/book', function () {
-    return view('tour_book');
-})->name("tour.book");
 
 Route::get('/law', function () {
     return view('law');
@@ -45,17 +42,11 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/tour/show", [SendContactMail::class, "SendContactMail"])->name("tours.show");
     Route::delete("/tour/destroy/{id}", [TourController::class, "destroy"])->name("tours.destroy");
     Route::get("/tour/create", [TourController::class, "create"])->name("admin.tour_create");
+    Route::get("/tour/book", [BookingController::class, "index"])->name("tour.book");
     
 });
 Auth::routes(['register' => false]);
 // Auth::routes();
 
 
-
-
-Route::get('/tour/book', function () {
-    return view('tour_book');
-})->name("tour.book");
-
-Route::get('/tour/book', [BookingController::class, 'showForm'])->name('tour.book');
 Route::post('/payment-intent', [BookingController::class, 'createPaymentIntent']);
