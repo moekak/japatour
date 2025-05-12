@@ -250,7 +250,9 @@
   .highlight-item,
   .inclusion-item,
   .itineary-highlight-item,
-  .exclusion-item {
+  .exclusion-item, 
+  .service-item
+  {
     display: flex;
     gap: 10px;
     margin-bottom: 10px;

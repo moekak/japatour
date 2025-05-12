@@ -493,7 +493,39 @@
                     
                     <button type="button" id="add-qa" class="btn-secondary"><i class="fas fa-plus"></i> Add QA</button>
                 </div>
-            </div>
+
+                <!-- Additional services -->
+                <div class="form-section">
+                    <h2 class="section-title">Additional Services</h2>
+                        <div class="form-group">
+                            <label>Additional Services<span class="required">*</span></label>
+                            <div id="services-container">
+                                @if(old('services'))
+                                    @foreach(old('services') as $index => $service)
+                                        <div class="service-item">
+                                            <div class="form-grid-2">
+                                                <input type="text" name="services[service][]" value="{{ $service->service }}" >
+                                                <div class="price-input">
+                                                    <input type="number" id="price" name="services[price][]" value="{{ $service->price }}" min="0" >
+                                                </div>
+                                            </div>
+                                            {{-- <input type="text" name="services[]" value="{{ $service }}" > --}}
+                                            <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="service-item">
+                                        <input type="text" name="services[service][]" >
+                                        <div class="price-input">
+                                            <input type="number" id="price" name="services[price][]"  min="0" placeholder="price(￥)">
+                                        </div>
+                                        <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
+                                    </div>
+                                @endif
+                            </div>
+                            <button type="button" id="add-service" class="btn-secondary"><i class="fas fa-plus"></i> Add Service</button>
+                        </div>
+                </div>
 
             
 
@@ -651,9 +683,6 @@
         if(rawValue){
             availableDates = JSON.parse(rawValue);
         }
-
-        console.log(availableDates);
-        
         const multiDatePicker = flatpickr("#date_range_start", {
             dateFormat: "Y-m-d",
             minDate: "today",

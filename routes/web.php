@@ -42,7 +42,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post("/tour/show", [SendContactMail::class, "SendContactMail"])->name("tours.show");
     Route::delete("/tour/destroy/{id}", [TourController::class, "destroy"])->name("tours.destroy");
     Route::get("/tour/create", [TourController::class, "create"])->name("admin.tour_create");
-    Route::get("/tour/book", [BookingController::class, "index"])->name("tour.book");
+    Route::get("/tour/book/{id}", [BookingController::class, "index"])->name("tour.book");
+    Route::get("/tour/book/{id}/{date}", [BookingController::class, "index"])->name("tour_date.book");
     
 });
 Auth::routes(['register' => false]);

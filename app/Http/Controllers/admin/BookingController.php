@@ -4,15 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Tour;
 use Illuminate\Http\Request;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
 class BookingController extends Controller
 {
-    public function index()
+    public function index($id, $date = null)
     {
-        return view("tour_book");
+        $tour = Tour::getSpecificData($id);
+        return view("tour_book", compact("tour", "date"));
     }
 
     public function createPaymentIntent(){

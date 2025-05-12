@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\Requests\Admin\CreateTourRequest;
 use App\Http\Requests\Admin\EditTourRequest;
 use App\Models\Review;
+use App\Services\Repository\AdditionalServiceRepository;
 use App\Services\Repository\QaRepository;
 use App\Services\Repository\ReviewRepository;
 use App\Services\Repository\TourRepository;
@@ -17,17 +18,19 @@ class TourService
 {
     protected $tourRepository;
     protected $reviewRepository;
+    protected $additionalServiceRepository;
     protected $qaRepository;
     protected $imageService;
     protected $generateData;
 
-    public function __construct(TourRepository $tourRepository, ReviewRepository $reviewRepository, QaRepository $qaRepository, ImageService $imageService, GenerateData $generateData)
+    public function __construct(TourRepository $tourRepository, ReviewRepository $reviewRepository, QaRepository $qaRepository, AdditionalServiceRepository $additionalServiceRepository,ImageService $imageService, GenerateData $generateData)
     {
         $this->tourRepository = $tourRepository;
         $this->reviewRepository = $reviewRepository;
         $this->qaRepository = $qaRepository;
         $this->imageService = $imageService;
         $this->generateData = $generateData;
+        $this->additionalServiceRepository = $additionalServiceRepository;
     }
 
     /**
@@ -78,12 +81,16 @@ class TourService
             $tour = $this->tourRepository->create($tourData);
             $reviewData = $this->generateData->prepareReviewData($request, intval($tour["id"]));
             $qaData = $this->generateData->prepareQAData($request, intval($tour["id"]));
+            $additionalServiceData = $this->generateData->prepareAdditionalServiceData($request);
 
             foreach($qaData as $qa) {
                 $this->qaRepository->create($qa);; // 各qaを個別に作成
             }
             foreach($reviewData as $review) {
                 $this->reviewRepository->create($review);; // 各レビューを個別に作成
+            }
+            foreach($additionalServiceData as $service) {
+                $this->additionalServiceRepository->create($service);; // 各レビューを個別に作成
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -102,6 +109,7 @@ class TourService
 
         $reviewData = $this->generateData->prepareReviewData($request, $tour["id"]);// review更新のデータ
         $qaData = $this->generateData->prepareQAData($request, $tour["id"]);// QA更新のデータ
+        $additionalServiceData = $this->generateData->prepareAdditionalServiceData($request);
         // 既存のギャラリー画像を取得
         $currentGalleryImages = GenerateData::generateCurrentImageGalleries($tourData);
         
@@ -159,6 +167,10 @@ class TourService
                 $this->qaRepository->create($qa);
             }
             
+            $this->additionalServiceRepository->deleteWhere();
+            foreach($additionalServiceData as $service){
+                $this->additionalServiceRepository->create($service);
+            }
             
             DB::commit();
         } catch (\Exception $e) {

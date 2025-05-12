@@ -110,4 +110,26 @@ class GenerateData
 
         return $insertingReviewData;
     }
+
+    /**
+     * 追加サービスの共通準備処理
+     */
+    public function prepareAdditionalServiceData($request)
+    {
+
+        $data = $request->validated();
+        $insertingAdditionalServiceData = [];
+        foreach($data["services"] as $key => $service){
+            $insertingReviewData[$key] = [
+                "price" => $service["price"],
+                "service" => $service["service"],
+            ];
+        }
+
+        print_r($insertingAdditionalServiceData);
+        exit;
+        return $insertingAdditionalServiceData;
+    }
+
+
 }

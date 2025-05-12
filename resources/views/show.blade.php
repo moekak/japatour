@@ -6,6 +6,7 @@
 @section("main")
 @include('components.menu_modal')
 @include('components.header')
+<div id="tourData" data-tour-id="{{ $tour->id }}"></div>
 <!-- Hero Section -->
 <section class="hero">
     <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="hero-image">
@@ -52,13 +53,6 @@
                         <div class="gallery-control prev-image"><i class="fas fa-chevron-left"></i></div>
                         <div class="gallery-control next-image"><i class="fas fa-chevron-right"></i></div>
                     </div>
-                    {{-- <div class="preview-slider">
-                        <div class="preview-dot active"></div>
-                        <div class="preview-dot"></div>
-                        <div class="preview-dot"></div>
-                        <div class="preview-dot"></div>
-                        <div class="preview-dot"></div>
-                    </div> --}}
                     <div class="preview-thumbs">
                         @foreach ($tour->gallery_images as $image)
                             <img src="{{ asset('storage/' . $image) }}" class="thumb">
@@ -277,7 +271,7 @@
                         <div class="limited-spots urgent">
                                 <i class="fas fa-exclamation-circle"></i> {{$tour->limited_spots}}
                         </div>
-                        <a href="#" class="book-button">Book This Tour Now</a>
+                        <a href="{{route("tour.book", ["id" => $tour->id])}}" class="book-button">Book This Tour Now</a>
                         <div class="includes-section">
                                 <h3 class="includes-title">What's Included</h3>
                                 <ul class="includes-list">
@@ -381,6 +375,7 @@
                           const dateElement = document.createElement('div');
                           dateElement.className = 'date';
                           dateElement.textContent = day;
+                  
                           
                           // Check if the date is in the past
                           const isPastDate = date < realToday;
@@ -409,7 +404,13 @@
                     
                           }
                           
-                          calendarGrid.appendChild(dateElement);
+                        dateElement.dataset.date = formattedDate
+                        calendarGrid.appendChild(dateElement);
+                        const tourId = document.getElementById('tourData').dataset.tourId;
+
+                        dateElement.addEventListener("click", ()=>{
+                              window.location.href = `/tour/book/${tourId}/${dateElement.dataset.date}`;
+                        })
                     }
               }
               

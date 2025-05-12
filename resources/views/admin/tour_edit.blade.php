@@ -381,6 +381,30 @@
                     <button type="button" id="add-qa" class="btn-secondary"><i class="fas fa-plus"></i> Add QA</button>
                 </div>
 
+                <!-- Additional services -->
+                <div class="form-section">
+                    <h2 class="section-title">Additional Services</h2>
+                        <div class="form-group">
+                            <label>Additional Services<span class="required">*</span></label>
+                            <div id="services-container">
+                                @foreach(old('services') as $index => $service)
+                                    <div class="service-item">
+                                        <div class="form-grid-2">
+                                            <input type="text" name="services[service][]" value="{{ $service->service }}" >
+                                            <div class="price-input">
+                                                <input type="number" id="price" name="services[price][]" value="{{ $service->price }}" min="0" >
+                                            </div>
+                                        </div>
+                                        {{-- <input type="text" name="services[]" value="{{ $service }}" > --}}
+                                        <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
+                                    </div>
+                                @endforeach
+                            
+                            </div>
+                            <button type="button" id="add-service" class="btn-secondary"><i class="fas fa-plus"></i> Add Service</button>
+                        </div>
+                </div>
+
             </div>
 
             <div class="form-actions">

@@ -108,47 +108,21 @@
                               </div>
                               
                               <div class="form-group">
-                                    <label class="form-label">Accommodation Options*</label>
-                                    <div class="option-card selected" data-package="standard" data-price="1299">
-                                          <div class="option-header">
-                                                <h3 class="option-title">Standard Package</h3>
-                                                <div class="option-price">$1,299</div>
-                                          </div>
-                                          <p class="option-description">Comfortable 3-star hotels with all the essential amenities for a pleasant stay.</p>
-                                          <div class="option-features">
-                                                <div class="option-feature"><i class="fas fa-bed"></i> Private Room</div>
-                                                <div class="option-feature"><i class="fas fa-wifi"></i> Free WiFi</div>
-                                                <div class="option-feature"><i class="fas fa-utensils"></i> Breakfast</div>
-                                          </div>
-                                    </div>
-                                    <div class="option-card" data-package="premium" data-price="1699">
-                                          <div class="option-header">
-                                                <h3 class="option-title">Premium Package</h3>
-                                                <div class="option-price">$1,699</div>
-                                          </div>
-                                          <p class="option-description">Upscale 4-star accommodations with additional amenities and more spacious rooms.</p>
-                                          <div class="option-features">
-                                                <div class="option-feature"><i class="fas fa-bed"></i> Deluxe Room</div>
-                                                <div class="option-feature"><i class="fas fa-wifi"></i> Free WiFi</div>
-                                                <div class="option-feature"><i class="fas fa-utensils"></i> Breakfast & Dinner</div>
-                                                <div class="option-feature"><i class="fas fa-swimmer"></i> Pool Access</div>
-                                          </div>
-                                    </div>
-                              
-                                    <div class="option-card" data-package="luxury" data-price="2299">
-                                          <div class="option-header">
-                                                <h3 class="option-title">Luxury Package</h3>
-                                                <div class="option-price">$2,299</div>
-                                          </div>
-                                          <p class="option-description">5-star luxury accommodations with premium services and exclusive experiences.</p>
-                                          <div class="option-features">
-                                                <div class="option-feature"><i class="fas fa-bed"></i> Suite</div>
-                                                <div class="option-feature"><i class="fas fa-wifi"></i> Free WiFi</div>
-                                                <div class="option-feature"><i class="fas fa-utensils"></i> All Meals</div>
-                                                <div class="option-feature"><i class="fas fa-swimmer"></i> Pool & Spa</div>
-                                                <div class="option-feature"><i class="fas fa-glass-cheers"></i> Welcome Drink</div>
-                                          </div>
-                                    </div>
+                                    <label class="form-label">Itineary Options*</label>
+                                    @foreach ($tour->itinerary as $index => $itinerary)
+                                          <div class="option-card" {{$index == 0 ? "selected" : ""}} data-itinerary="{{$itinerary["title"]}}" data-price="1299">
+                                                <div clasummary-itemsss="option-header">
+                                                      <h3 class="option-title">{{$itinerary["title"]}}</h3>
+                                                      <div class="option-price">￥2,0000</div>
+                                                </div>
+                                                <p class="option-description">5-star luxury accommodations with premium services and exclusive experiences.</p>
+                                                <div class="option-features">
+                                                      @foreach ($itinerary["itinerary_highlight"] as $highlight)
+                                                            <div class="option-feature"><i class="fas fa-bed"></i>{{$highlight}}</div>
+                                                      @endforeach
+                                                </div>
+                                          </div> 
+                                    @endforeach
                               </div>
                               <div class="form-group">
                                     <label class="form-label">Additional Services</label>
@@ -243,7 +217,7 @@
                               <div class="tour-img-container">
                                     <img src="https://picsum.photos/400/200" alt="Tour" class="tour-img">
                               </div>
-                              <h3 class="tour-name">Majestic Mountain Explorer</h3>
+                              <h3 class="tour-name">{{$tour->title}}</h3>
                               <div class="tour-date-wrapper">
                                     <p class="tour-date"><i class="far fa-calendar-alt"></i> <span id="selected-date">Select date</span></p>
                                     <p class="tour-date"><i class="fas fa-users"></i> <span id="summary-travelers">2</span> Travelers</p>   
@@ -253,23 +227,15 @@
                         <div class="summary-items">
                               <div class="summary-item">
                                     <div class="item-label">Tour Package</div>
-                                    <div class="item-value" id="package-total">$2,598.00</div>
-                              </div>
-                              <div class="summary-item">
-                                    <div class="item-label">Airport Transfer</div>
-                                    <div class="item-value" id="transfer-total">$0.00</div>
-                              </div>
-                              <div class="summary-item">
-                                    <div class="item-label">Guided Tour</div>
-                                    <div class="item-value" id="guided-total">$0.00</div>
-                              </div>
-                              <div class="summary-item">
-                                    <div class="item-label">Travel Insurance</div>
-                                    <div class="item-value" id="insurance-total">$0.00</div>
+                                    <div class="item-value" id="package-total">￥2,0000</div>
                               </div>
                               <div class="summary-item">
                                     <div class="item-label">Taxes & Fees</div>
                                     <div class="item-value">Included</div>
+                              </div>
+                              <div class="summary-item">
+                                    <div class="item-label">Additional services</div>
+                                    <div class="item-value">￥0</div>
                               </div>
                         </div>
                         
@@ -420,10 +386,20 @@
       }
       
       // フラットピッカー初期化
+      const rawValue = '<?php echo json_encode($date); ?>';
+      let selectedDate
+
+      if(rawValue){
+            selectedDate = JSON.parse(rawValue);
+            document.getElementById("selected-date").innerHTML = selectedDate
+      }
+
+
       const singleDatePicker = flatpickr("#date_range_start", {
             dateFormat: "Y-m-d",
             minDate: "today",
             mode: "single",
+            defaultDate: selectedDate,
             onChange: function(selectedDates, dateStr, instance) {
                   if (selectedDates.length > 0) {
                         const formattedDate = dateStr;

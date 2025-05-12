@@ -161,6 +161,110 @@ var GalleryImageElement = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./resources/js/components/elementOperation/AdditionalServiceOperator.js":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/elementOperation/AdditionalServiceOperator.js ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AdditionalServiceOperator)
+/* harmony export */ });
+/* harmony import */ var _ElementOperatorInterface_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ElementOperatorInterface.js */ "./resources/js/components/elementOperation/ElementOperatorInterface.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+
+var AdditionalServiceOperator = /*#__PURE__*/function (_ElementOperatorInter) {
+  function AdditionalServiceOperator() {
+    var _this;
+    _classCallCheck(this, AdditionalServiceOperator);
+    _this = _callSuper(this, AdditionalServiceOperator); // 親クラスのコンストラクタを呼び出す
+    _this.container = document.getElementById('services-container');
+    _this.addButton = document.getElementById('add-service');
+    _this.initialize();
+    return _this;
+  }
+
+  /**
+   * イベントリスナーの初期化
+   * @override
+   */
+  _inherits(AdditionalServiceOperator, _ElementOperatorInter);
+  return _createClass(AdditionalServiceOperator, [{
+    key: "initialize",
+    value: function initialize() {
+      // ハイライト項目作成処理
+      this.addButton.addEventListener("click", this.addElement.bind(this));
+      // ハイライト項目削除処理
+      this.container.addEventListener("click", this.removeElement.bind(this));
+    }
+
+    /**
+     * ハイライト項目を追加する
+     * @override
+     */
+  }, {
+    key: "addElement",
+    value: function addElement() {
+      this.container.appendChild(this.createDOMElement());
+    }
+
+    /**
+     * ハイライト項目のHTML文字列を生成
+     * @override
+     * @returns {string} ハイライト項目のHTML
+     */
+  }, {
+    key: "createRawHTML",
+    value: function createRawHTML() {
+      return "\n                  <input type=\"text\" name=\"services[service][]\" >\n                  <div class=\"price-input\">\n                        <input type=\"number\" id=\"price\" name=\"services[price][]\"  min=\"0\" placeholder=\"price(\uFFE5)\">\n                  </div>\n                  <button type=\"button\" class=\"remove-service btn-icon\"><i class=\"fas fa-times\"></i></button>\n            ";
+    }
+
+    /**
+     * ハイライト項目のDOM要素を作成
+     * @override
+     * @returns {HTMLElement} ハイライト項目のdiv要素
+     */
+  }, {
+    key: "createDOMElement",
+    value: function createDOMElement() {
+      var newItem = document.createElement('div');
+      newItem.className = 'service-item';
+      newItem.innerHTML = this.createRawHTML();
+      return newItem;
+    }
+
+    /**
+     * ハイライト項目を削除
+     * @override
+     * @param {Event} e - クリックイベント
+     */
+  }, {
+    key: "removeElement",
+    value: function removeElement(e) {
+      if (e.target.closest('.remove-service')) {
+        var item = e.target.closest('.service-item');
+        item.remove();
+      }
+    }
+  }]);
+}(_ElementOperatorInterface_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
 /***/ "./resources/js/components/elementOperation/ElementOperatorInterface.js":
 /*!******************************************************************************!*\
   !*** ./resources/js/components/elementOperation/ElementOperatorInterface.js ***!
@@ -1181,25 +1285,28 @@ var __webpack_exports__ = {};
   !*** ./resources/js/pages/tour_create.js ***!
   \*******************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_elementOperation_HighlightOperator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/elementOperation/HighlightOperator.js */ "./resources/js/components/elementOperation/HighlightOperator.js");
-/* harmony import */ var _components_elementOperation_itinerary_ItineraryOperator_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/elementOperation/itinerary/ItineraryOperator.js */ "./resources/js/components/elementOperation/itinerary/ItineraryOperator.js");
-/* harmony import */ var _components_elementOperation_QaOperator_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/elementOperation/QaOperator.js */ "./resources/js/components/elementOperation/QaOperator.js");
-/* harmony import */ var _components_elementOperation_ReviewOperator_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/elementOperation/ReviewOperator.js */ "./resources/js/components/elementOperation/ReviewOperator.js");
-/* harmony import */ var _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/elementOperation/TourTermsOperator.js */ "./resources/js/components/elementOperation/TourTermsOperator.js");
-/* harmony import */ var _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/GalleryImage.js */ "./resources/js/components/GalleryImage.js");
+/* harmony import */ var _components_elementOperation_AdditionalServiceOperator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/elementOperation/AdditionalServiceOperator.js */ "./resources/js/components/elementOperation/AdditionalServiceOperator.js");
+/* harmony import */ var _components_elementOperation_HighlightOperator_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/elementOperation/HighlightOperator.js */ "./resources/js/components/elementOperation/HighlightOperator.js");
+/* harmony import */ var _components_elementOperation_itinerary_ItineraryOperator_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/elementOperation/itinerary/ItineraryOperator.js */ "./resources/js/components/elementOperation/itinerary/ItineraryOperator.js");
+/* harmony import */ var _components_elementOperation_QaOperator_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/elementOperation/QaOperator.js */ "./resources/js/components/elementOperation/QaOperator.js");
+/* harmony import */ var _components_elementOperation_ReviewOperator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/elementOperation/ReviewOperator.js */ "./resources/js/components/elementOperation/ReviewOperator.js");
+/* harmony import */ var _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/elementOperation/TourTermsOperator.js */ "./resources/js/components/elementOperation/TourTermsOperator.js");
+/* harmony import */ var _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/GalleryImage.js */ "./resources/js/components/GalleryImage.js");
 
 
 
 
 
 
-new _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_5__["default"](document.querySelector(".create-tour-btn"));
-new _components_elementOperation_HighlightOperator_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
-new _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_4__["default"]("inclusion");
-new _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_4__["default"]("exclusion");
-new _components_elementOperation_itinerary_ItineraryOperator_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
-new _components_elementOperation_ReviewOperator_js__WEBPACK_IMPORTED_MODULE_3__["default"]();
-new _components_elementOperation_QaOperator_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
+
+new _components_GalleryImage_js__WEBPACK_IMPORTED_MODULE_6__["default"](document.querySelector(".create-tour-btn"));
+new _components_elementOperation_HighlightOperator_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+new _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_5__["default"]("inclusion");
+new _components_elementOperation_TourTermsOperator_js__WEBPACK_IMPORTED_MODULE_5__["default"]("exclusion");
+new _components_elementOperation_itinerary_ItineraryOperator_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
+new _components_elementOperation_ReviewOperator_js__WEBPACK_IMPORTED_MODULE_4__["default"]();
+new _components_elementOperation_QaOperator_js__WEBPACK_IMPORTED_MODULE_3__["default"]();
+new _components_elementOperation_AdditionalServiceOperator_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
 })();
 
 /******/ })()

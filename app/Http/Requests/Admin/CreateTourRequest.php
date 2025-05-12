@@ -38,6 +38,9 @@ class CreateTourRequest extends FormRequest
             "limited_spots" => ["nullable", "string", "max:255"],
             "overview" => ["required", "string"],
             "highlights" => ["required", "array"],
+            "services" => ["nullable", "array"],
+            'services.*' => ['array', 'required_array_keys:service,price'],
+
             // itineraryのバリデーションルール
             "itinerary" => ["required", "array"],
             "itinerary.*" => ["required", "array"],
@@ -129,6 +132,9 @@ class CreateTourRequest extends FormRequest
             
             'highlights.required' => 'The highlights field is required.',
             'highlights.array' => 'The highlights must be a valid array format.',
+
+            'services.array' => 'The services must be a valid array format.',
+            'services.*.required_array_keys' => 'Service information must include both service name and price.',
     
             // itineraryのバリデーションメッセージ
             'itinerary.required' => 'The itinerary field is required.',
