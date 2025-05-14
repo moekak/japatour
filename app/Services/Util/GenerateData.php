@@ -125,9 +125,6 @@ class GenerateData
                 "service" => $service["service"],
             ];
         }
-
-        print_r($insertingAdditionalServiceData);
-        exit;
         return $insertingAdditionalServiceData;
     }
 

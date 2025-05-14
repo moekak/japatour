@@ -5,6 +5,8 @@ export default class AdditionalServiceOperator extends ElementOperatorInterface{
             super(); // 親クラスのコンストラクタを呼び出す
             this.container = document.getElementById('services-container')
             this.addButton = document.getElementById('add-service')
+            this.serviceTemplate = document.getElementById("service-template").innerHTML
+            this.serviceCount  = document.querySelectorAll('.service-item').length
             this.initialize()
       }
 
@@ -33,13 +35,7 @@ export default class AdditionalServiceOperator extends ElementOperatorInterface{
        * @returns {string} ハイライト項目のHTML
        */
       createRawHTML(){
-            return `
-                  <input type="text" name="services[service][]" >
-                  <div class="price-input">
-                        <input type="number" id="price" name="services[price][]"  min="0" placeholder="price(￥)">
-                  </div>
-                  <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
-            `
+            return
       }
 
       /**
@@ -48,11 +44,13 @@ export default class AdditionalServiceOperator extends ElementOperatorInterface{
        * @returns {HTMLElement} ハイライト項目のdiv要素
        */
       createDOMElement(){
-            const newItem = document.createElement('div');
-            newItem.className = 'service-item';
-            newItem.innerHTML = this.createRawHTML()
+            let newDayHtml = this.serviceTemplate
+                  .replace(/{index}/g, this.serviceCount);
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = newDayHtml;
+            const newDay = tempDiv.firstElementChild;
 
-            return newItem
+            return newDay
       }
 
       /**
@@ -62,6 +60,7 @@ export default class AdditionalServiceOperator extends ElementOperatorInterface{
        */
       removeElement(e){
             if (e.target.closest('.remove-service')) {
+                  this.serviceCount--
                   const item = e.target.closest('.service-item');
                   item.remove();
             }

@@ -193,6 +193,8 @@ var AdditionalServiceOperator = /*#__PURE__*/function (_ElementOperatorInter) {
     _this = _callSuper(this, AdditionalServiceOperator); // 親クラスのコンストラクタを呼び出す
     _this.container = document.getElementById('services-container');
     _this.addButton = document.getElementById('add-service');
+    _this.serviceTemplate = document.getElementById("service-template").innerHTML;
+    _this.serviceCount = document.querySelectorAll('.service-item').length;
     _this.initialize();
     return _this;
   }
@@ -229,7 +231,7 @@ var AdditionalServiceOperator = /*#__PURE__*/function (_ElementOperatorInter) {
   }, {
     key: "createRawHTML",
     value: function createRawHTML() {
-      return "\n                  <input type=\"text\" name=\"services[service][]\" >\n                  <div class=\"price-input\">\n                        <input type=\"number\" id=\"price\" name=\"services[price][]\"  min=\"0\" placeholder=\"price(\uFFE5)\">\n                  </div>\n                  <button type=\"button\" class=\"remove-service btn-icon\"><i class=\"fas fa-times\"></i></button>\n            ";
+      return;
     }
 
     /**
@@ -240,10 +242,11 @@ var AdditionalServiceOperator = /*#__PURE__*/function (_ElementOperatorInter) {
   }, {
     key: "createDOMElement",
     value: function createDOMElement() {
-      var newItem = document.createElement('div');
-      newItem.className = 'service-item';
-      newItem.innerHTML = this.createRawHTML();
-      return newItem;
+      var newDayHtml = this.serviceTemplate.replace(/{index}/g, this.serviceCount);
+      var tempDiv = document.createElement('div');
+      tempDiv.innerHTML = newDayHtml;
+      var newDay = tempDiv.firstElementChild;
+      return newDay;
     }
 
     /**
@@ -255,6 +258,7 @@ var AdditionalServiceOperator = /*#__PURE__*/function (_ElementOperatorInter) {
     key: "removeElement",
     value: function removeElement(e) {
       if (e.target.closest('.remove-service')) {
+        this.serviceCount--;
         var item = e.target.closest('.service-item');
         item.remove();
       }

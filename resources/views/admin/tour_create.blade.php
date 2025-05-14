@@ -503,21 +503,18 @@
                                 @if(old('services'))
                                     @foreach(old('services') as $index => $service)
                                         <div class="service-item">
-                                            <div class="form-grid-2">
-                                                <input type="text" name="services[service][]" value="{{ $service->service }}" >
-                                                <div class="price-input">
-                                                    <input type="number" id="price" name="services[price][]" value="{{ $service->price }}" min="0" >
-                                                </div>
+                                            <input type="text" name="services[{{$index}}][service]" >
+                                            <div class="price-input">
+                                                <input type="number" id="price" name="services[price][{{$index}}]"  min="0" placeholder="price(￥)">
                                             </div>
-                                            {{-- <input type="text" name="services[]" value="{{ $service }}" > --}}
                                             <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
                                         </div>
                                     @endforeach
                                 @else
                                     <div class="service-item">
-                                        <input type="text" name="services[service][]" >
+                                        <input type="text" name="services[0][service]" >
                                         <div class="price-input">
-                                            <input type="number" id="price" name="services[price][]"  min="0" placeholder="price(￥)">
+                                            <input type="number" id="price" name="services[0][price]"  min="0" placeholder="price(￥)">
                                         </div>
                                         <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
                                     </div>
@@ -661,6 +658,15 @@
                 <label for="qa[{day_index}][answer]">Answer<span class="required">*</span></label>
                 <textarea id="qa[{day_index}][answer]" name="qa[{day_index}][answer]" rows="3" ></textarea>
             </div>
+        </div>
+    </template>
+    <template id="service-template">
+        <div class="service-item">
+            <input type="text" name="services[{index}][service]" >
+            <div class="price-input">
+                <input type="number" id="price" name="services[{index}][price]"  min="0" placeholder="price(￥)">
+            </div>
+            <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
         </div>
     </template>
     <script>
