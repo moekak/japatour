@@ -2,13 +2,13 @@
 
 namespace App\Services\Repository;
 
-use App\Models\Question;
+use App\Models\AdditionalService;
 
 class AdditionalServiceRepository extends BaseRepository
 {
       protected $model;
 
-      public function __construct(Question $question)
+      public function __construct(AdditionalService $question)
       {
             parent::__construct($question);
       }

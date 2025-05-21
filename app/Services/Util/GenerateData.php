@@ -99,16 +99,18 @@ class GenerateData
     {
 
         $data = $request->validated();
-        $insertingReviewData = [];
+            // バリデーション済みデータの構造を確認
+    
+        $insertingQAData = [];
         foreach($data["qa"] as $key => $qa){
-            $insertingReviewData[$key] = [
+            $insertingQAData[$key] = [
                 "question" => $qa["question"],
                 "answer" => $qa["answer"],
                 "tour_id" => $tourId
             ];
         }
 
-        return $insertingReviewData;
+        return $insertingQAData;
     }
 
     /**
@@ -118,13 +120,15 @@ class GenerateData
     {
 
         $data = $request->validated();
+        // print_r($data["services"]);
         $insertingAdditionalServiceData = [];
         foreach($data["services"] as $key => $service){
-            $insertingReviewData[$key] = [
+            $insertingAdditionalServiceData[$key] = [
                 "price" => $service["price"],
                 "service" => $service["service"],
             ];
         }
+
         return $insertingAdditionalServiceData;
     }
 

@@ -660,6 +660,7 @@
             </div>
         </div>
     </template>
+    <!-- Addditional Services Template (Hidden) -->
     <template id="service-template">
         <div class="service-item">
             <input type="text" name="services[{index}][service]" >

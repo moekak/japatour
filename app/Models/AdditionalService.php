@@ -14,4 +14,8 @@ class AdditionalService extends Model
     public function getSpecificData($id){
         return AdditionalService::where("id", $id)->first();
     }
+
+    public static function getServices(){
+        return AdditionalService::all();
+    }
 }

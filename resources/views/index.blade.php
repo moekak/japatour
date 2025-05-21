@@ -1,6 +1,15 @@
 @extends('layout.default')
 @section('main')
     @include('components.menu_modal')
+ @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <main id="home">
         <div class="loader hidden">
             <div id="rotate">
@@ -583,7 +592,7 @@
                 <h2 class="font_subtitle aos-init aos-animate review_title relative z3" data-aos="fade-up" data-aos-duration="1000">
                     Contat Us
                 <p class="contact_sml c z3 relative">Have questions about your tour or job openings? Leave a message below, and we’ll get back to you shortly!</p>
-                <form action="{{route("sendMessage")}}" method="POST">
+                <form action="{{route("sendMessage")}}" method="POST" class="js_form">
                     @csrf
                     <div class="contact_filed_container relative z3" data-aos="fade-up" data-aos-duration="1000">
                         <div class="contact_filed_box">
@@ -642,10 +651,23 @@
         <script src="{{mix("js/common.js")}}"></script>
         <script src="https://www.google.com/recaptcha/api.js?render=6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle"></script>
         <script>
-            grecaptcha.ready(function() {
-                grecaptcha.execute('6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle', {action: 'submit'}).then(function(token) {
-                    document.getElementById('recaptchaResponse').value = token;
-                });
+            document.addEventListener('DOMContentLoaded', function() {
+                var submitForm = document.querySelector(".js_form")
+                if (submitForm) {
+                    submitForm.addEventListener('submit', function(e) {
+                        e.preventDefault(); // フォームの自動送信を防止
+
+
+                        grecaptcha.ready(function() {
+                            grecaptcha.execute('6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle', {action: 'submit'}).then(function(token) {
+                                document.getElementById('recaptchaResponse').value = token;
+                                document.querySelector('form').submit(); // フォームを送信
+                            });
+                        });
+                    });
+                } else {
+                    console.error('Submit button not found');
+                }
             });
         </script>
 @endsection

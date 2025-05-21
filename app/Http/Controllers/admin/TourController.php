@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateTourRequest;
 use App\Http\Requests\Admin\EditTourRequest;
+use App\Models\AdditionalService;
 use App\Services\TourService;
 use Illuminate\Support\Facades\Log;
 
@@ -66,8 +67,12 @@ class TourController extends Controller{
     {
         try {
             $tourData = $this->tourService->getTourById($id);
+            $services = AdditionalService::getServices();
+
+            // print_r($services->toArray());
+            // exit;
             $tour = $tourData["tour"];
-            return view("admin.tour_edit", compact("tour"));
+            return view("admin.tour_edit", compact("tour", "services"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
         }

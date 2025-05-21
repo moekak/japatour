@@ -2,6 +2,7 @@
   --primary: #2C3E50;
   --primary-light: #34495E;
   --secondary: #3498DB;
+  --secondary-dark: #2c536c;
   --secondary-light: #5DADE2;
   --accent: #E74C3C;
   --light: #ECF0F1;
@@ -29,6 +30,10 @@ body {
   line-height: 1.6;
 }
 
+  /* Required Fields */
+  .required {
+    color: var(--danger-color);
+  }
 .container {
   max-width: 1320px;
   margin: 0 auto;
@@ -79,6 +84,7 @@ body {
   margin-bottom: 30px;
   opacity: 0.9;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  color: #fff;
 }
 
 /* Booking Container */
@@ -187,13 +193,13 @@ body {
 }
 
 .progress-step.completed .step-number {
-  background: var(--success);
-  border-color: var(--success);
+  background: var(--secondary-dark);
+  border-color: var(--secondary-dark);
   color: white;
 }
 
 .progress-step.completed .step-label {
-  color: var(--success);
+  color: var(--secondary-dark);
 }
 
 /* Form Sections */

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdditionalService;
 use App\Models\Customer;
 use App\Models\Tour;
 use Illuminate\Http\Request;
@@ -14,7 +15,8 @@ class BookingController extends Controller
     public function index($id, $date = null)
     {
         $tour = Tour::getSpecificData($id);
-        return view("tour_book", compact("tour", "date"));
+        $services = AdditionalService::getServices();
+        return view("tour_book", compact("tour", "date", "services"));
     }
 
     public function createPaymentIntent(){
@@ -22,7 +24,7 @@ class BookingController extends Controller
     
         $intent = PaymentIntent::create([
             'amount' => 259800, // $2,598.00固定
-            'currency' => 'usd',
+            'currency' => 'jpy',
             'automatic_payment_methods' => ['enabled' => true],
         ]);
         

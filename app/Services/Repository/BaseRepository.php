@@ -54,4 +54,12 @@ abstract class BaseRepository
             $tour = $this->model->findOrFail($id);
             return $tour->delete();
       }
+
+      /**
+       * ツアーをすべて削除
+       */    
+      public function deleteAll()
+      {
+      return $this->model->query()->delete();
+      }
 }

@@ -11,6 +11,7 @@
       @include('components.header')
       <!-- Hero Section -->
       <section class="booking-hero">
+            {{-- <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="booking-hero-image"> --}}
             <img src="https://picsum.photos/1920/500" alt="Booking" class="booking-hero-image">
             <div class="booking-hero-content">
                   <h1 class="booking-hero-title">Complete Your Booking</h1>
@@ -44,24 +45,24 @@
                         <!-- Step 1: Personal Details -->
                         <div class="form-section active" id="step-1">
                               <div class="form-group">
-                                    <label class="form-label">Full Name*</label>
+                                    <label class="form-label">Full Name<span class="required">*</span></label>
                                     <input type="text" id="customer-name" class="form-input" placeholder="Enter your full name" required>
                               </div>
                               
                               <div class="input-group">
                                     <div class="form-group">
-                                          <label class="form-label">Email Address*</label>
+                                          <label class="form-label">Email Address<span class="required">*</span></label>
                                           <input type="email" id="customer-email" class="form-input" placeholder="Enter your email" required>
                                     </div>
                                     <div class="form-group">
-                                          <label class="form-label">Phone Number*</label>
+                                          <label class="form-label">Phone Number<span class="required">*</span></label>
                                           <input type="tel" id="customer-phone" class="form-input" placeholder="Enter your phone number" required>
                                     </div>
                               </div>
                               
                               <div class="input-group">
                                     <div class="form-group">
-                                          <label class="form-label">Country*</label>
+                                          <label class="form-label">Country<span class="required">*</span></label>
                                           <select id="customer-country" class="form-select" required>
                                                 <option value="" selected disabled>Select your country</option>
                                                 <option value="us">United States</option>
@@ -72,10 +73,11 @@
                                           </select>
                                     </div>
                                     <div class="form-group">
-                                          <label class="form-label">Number of Travelers*</label>
+                                          <label class="form-label">Number of Travelers<span class="required">*</span></label>
                                           <select id="travelers" class="form-select" required>
+                                                <option value="Select number of travelers" selected disabled>Select number of travelers</option>
                                                 <option value="1">1 Person</option>
-                                                <option value="2" selected>2 People</option>
+                                                <option value="2">2 People</option>
                                                 <option value="3">3 People</option>
                                                 <option value="4">4 People</option>
                                                 <option value="5">5 People</option>
@@ -102,18 +104,18 @@
                         <!-- Step 2: Tour Options -->
                         <div class="form-section" id="step-2">
                               <div class="form-group">
-                                    <label class="form-label">Select Tour Date*</label>
+                                    <label class="form-label">Select Tour Date<span class="required">*</span></label>
                                     <input type="text" id="date_range_start" placeholder="Choose a date" class="form-input">
                                     <input type="hidden" id="available_dates_input" name="available_dates">
                               </div>
                               
                               <div class="form-group">
-                                    <label class="form-label">Itineary Options*</label>
+                                    <label class="form-label">Itineary Options<span class="required">*</span></label>
                                     @foreach ($tour->itinerary as $index => $itinerary)
                                           <div class="option-card" {{$index == 0 ? "selected" : ""}} data-itinerary="{{$itinerary["title"]}}" data-price="1299">
                                                 <div clasummary-itemsss="option-header">
                                                       <h3 class="option-title">{{$itinerary["title"]}}</h3>
-                                                      <div class="option-price">￥2,0000</div>
+                                                      <div class="option-price">￥{{$tour->price}}</div>
                                                 </div>
                                                 <p class="option-description">5-star luxury accommodations with premium services and exclusive experiences.</p>
                                                 <div class="option-features">
@@ -126,20 +128,13 @@
                               </div>
                               <div class="form-group">
                                     <label class="form-label">Additional Services</label>
-                                    <div class="checkbox-group">
-                                          <input type="checkbox" id="airport-transfer" class="form-checkbox">
-                                          <label for="airport-transfer">Airport Transfer ($50 per person)</label>
-                                    </div>
-                                    
-                                    <div class="checkbox-group">
-                                          <input type="checkbox" id="guided-tour" class="form-checkbox">
-                                          <label for="guided-tour">Private Guided Tour ($150 per group)</label>
-                                    </div>
-                                    
-                                    <div class="checkbox-group">
-                                          <input type="checkbox" id="travel-insurance" class="form-checkbox">
-                                          <label for="travel-insurance">Travel Insurance ($75 per person)</label>
-                                    </div>
+                                    @foreach ($services as $index => $service)
+                                          <div class="checkbox-group">
+                                                <input type="checkbox" id="{{$service->id}}" data-price="{{$service->price}}" class="form-checkbox js_service_checkbox">
+                                                <label for="{{$service->id}}">{{$service->service}} (￥{{$service->price}} per group)</label>
+                                          </div>  
+                                    @endforeach
+
                               </div>
                               
                               <div class="form-actions">
@@ -220,14 +215,14 @@
                               <h3 class="tour-name">{{$tour->title}}</h3>
                               <div class="tour-date-wrapper">
                                     <p class="tour-date"><i class="far fa-calendar-alt"></i> <span id="selected-date">Select date</span></p>
-                                    <p class="tour-date"><i class="fas fa-users"></i> <span id="summary-travelers">2</span> Travelers</p>   
+                                    <p class="tour-date"><i class="fas fa-users"></i> <span id="summary-travelers">1</span> Travelers</p>   
                               </div>
                         </div>
                         
                         <div class="summary-items">
                               <div class="summary-item">
-                                    <div class="item-label">Tour Package</div>
-                                    <div class="item-value" id="package-total">￥2,0000</div>
+                                    <div class="item-label">Basic price (per person) × <span class="js_number">1</span></div>
+                                    <div class="item-value" id="package-total">￥<span class="tour-price">20,000</span></div>
                               </div>
                               <div class="summary-item">
                                     <div class="item-label">Taxes & Fees</div>
@@ -235,13 +230,13 @@
                               </div>
                               <div class="summary-item">
                                     <div class="item-label">Additional services</div>
-                                    <div class="item-value">￥0</div>
+                                    <div class="item-value"><span class="additional-service-price">0</span></div>
                               </div>
                         </div>
                         
                         <div class="summary-total">
                               <div class="total-label">Total</div>
-                              <div class="total-value" id="grand-total">$2,598.00</div>
+                              <div class="total-value" id="grand-total"><span class="total-price">20,000</span></div>
                         </div>
                         
                         <div class="summary-note">
@@ -252,13 +247,14 @@
             </div>
       </div>
 </div>
-
+<script src="{{mix("js/tour_book.js")}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
       // Stripe初期化
       const stripe = Stripe('pk_test_51RFVYHIm3ld88wDBI6fJgwCohTKZhiE1L5bHpiNwvNczVxxQYlifsyNb5FVOYrFdo7ReMSsyOFRPzFjoMQCksqdk00fC6BwA2O');
       let paymentElement;
+      let elements; // グローバル変数として宣言
       
       // PaymentIntent作成関数
       async function createPaymentIntent() {
@@ -277,14 +273,12 @@
                   const response = await createPaymentIntent();
                   const data = await response.json();
                   
-                  console.log('PaymentIntent created:', data);
-                  
                   if (!response.ok) {
                         throw new Error(data.error || 'Payment Intent creation failed');
                   }
                   
                   // Payment Elementを初期化
-                  const elements = stripe.elements({
+                  elements = stripe.elements({
                         clientSecret: data.clientSecret,
                         locale: 'en', // この行を追加
                         appearance: {
@@ -312,15 +306,6 @@
                   });
                   
                   const result = await paymentRequest.canMakePayment();
-                  console.log('Payment methods available:', result);
-                  
-                  if (result && result.googlePay) {
-                        console.log('Google Pay is available');
-                  } else {
-                        console.log('Google Pay is not available');
-                        console.log('Available payment methods:', result);
-                        }
-                  
                   paymentElement = elements.create('payment', {
                         layout: 'tabs',
                         defaultValues: {
@@ -359,32 +344,11 @@
             }
       }
 
-    // さらにGoogle Pay設定をチェックする関数
-      async function checkGooglePayStatus() {
-            try {
-                  const paymentsClient = new google.payments.api.PaymentsClient({
-                        environment: 'TEST'
-                  });
-                  
-                  const isReadyToPayRequest = {
-                        apiVersion: 2,
-                        apiVersionMinor: 0,
-                        allowedPaymentMethods: [{
-                              type: 'CARD',
-                              parameters: {
-                                    allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
-                                    allowedCardNetworks: ['AMEX', 'DISCOVER', 'JCB', 'MASTERCARD', 'VISA']
-                              }
-                        }]
-                  };
-                  
-                  const canMakePayment = await paymentsClient.isReadyToPay(isReadyToPayRequest);
-                  console.log('Google Pay direct check:', canMakePayment);
-            } catch (error) {
-                  console.error('Google Pay status check failed:', error);
-            }
-      }
-      
+
+
+
+
+
       // フラットピッカー初期化
       const rawValue = '<?php echo json_encode($date); ?>';
       let selectedDate
@@ -474,67 +438,98 @@
                   }
             });
       });
+
+      // // カンマを取り除いて数値に変換する関数
+      // const parseNumericValue = (value) => {
+      //       return Number(value.replace(/,/g, ''));
+      // };
       
-      // パッケージ選択
-      document.querySelectorAll('.option-card').forEach(card => {
-            card.addEventListener('click', () => {
-                  document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-                  card.classList.add('selected');
-                  selectedPackage = card.dataset.package;
-                  packagePrice = parseInt(card.dataset.price);
-                  updateSummary();
-            });
-      });
+
+      // // 追加サービス選択
+      // const servicePrice = document.querySelector(".additional-service-price")
+      // const totalPrice = document.querySelector(".total-price")
+
+      // document.querySelectorAll(".js_service_checkbox").forEach((service)=>{
+      //       service.addEventListener("change", (e) => {
+      //             const target = e.target
+                  
+      //             if(target.checked) {
+      //                   const currentServicePrice = parseNumericValue(servicePrice.innerHTML);
+      //                   const currentTotalPrice = parseNumericValue(totalPrice.innerHTML);
+      //                   const addPrice = Number(target.dataset.price);
+                        
+      //                   servicePrice.innerHTML = (currentServicePrice + addPrice).toLocaleString('ja-JP');
+      //                   totalPrice.innerHTML = (currentTotalPrice + addPrice).toLocaleString('ja-JP');
+      //             } else {
+      //                   const currentServicePrice = parseNumericValue(servicePrice.innerHTML);
+      //                   const currentTotalPrice = parseNumericValue(totalPrice.innerHTML);
+      //                   const subPrice = Number(target.dataset.price);
+                        
+      //                   servicePrice.innerHTML = (currentServicePrice - subPrice).toLocaleString('ja-JP');
+      //                   totalPrice.innerHTML = (currentTotalPrice - subPrice).toLocaleString('ja-JP');
+      //             }
+      //       })
+      // })
+      
+      // // パッケージ選択
+      // document.querySelectorAll('.option-card').forEach(card => {
+      //       card.addEventListener('click', () => {
+      //             document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+      //             card.classList.add('selected');
+      //             selectedPackage = card.dataset.package;
+      //             packagePrice = parseInt(card.dataset.price);
+      //             updateSummary();
+      //       });
+      // });
       
       // 旅行者数変更
-      document.getElementById('travelers').addEventListener('change', (e) => {
-            document.getElementById('summary-travelers').textContent = e.target.value;
-            updateSummary();
-      });
+      // const number = document.querySelector(".js_number")
+      // const tourPrice = document.querySelector(".tour-price")
+      // document.getElementById('travelers').addEventListener('change', (e) => {
+      //       document.getElementById('summary-travelers').textContent = e.target.value;
+      //       number.textContent = e.target.value
+      //       tourPrice.innerHTML = (20000 * Number(e.target.value)).toLocaleString('ja-JP')
+      //       updateSummary();
+      // });
       
-      // 追加サービス変更
-      document.querySelectorAll('.form-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('change', updateSummary);
-      });
       
       // サマリー更新
       function updateSummary() {
-            const travelers = parseInt(document.getElementById('travelers').value);
-            const airportTransfer = document.getElementById('airport-transfer').checked;
-            const guidedTour = document.getElementById('guided-tour').checked;
-            const travelInsurance = document.getElementById('travel-insurance').checked;
+            // const travelers = parseInt(document.getElementById('travelers').value);
+            // const airportTransfer = document.getElementById('airport-transfer').checked;
+            // const guidedTour = document.getElementById('guided-tour').checked;
+            // const travelInsurance = document.getElementById('travel-insurance').checked;
             
-            // 計算
-            const packageTotal = packagePrice * travelers;
-            const transferTotal = airportTransfer ? 50 * travelers : 0;
-            const guidedTotal = guidedTour ? 150 : 0;
-            const insuranceTotal = travelInsurance ? 75 * travelers : 0;
-            const grandTotal = packageTotal + transferTotal + guidedTotal + insuranceTotal;
-            const deposit = grandTotal * 0.2;
+            // // 計算
+            // const packageTotal = packagePrice <span class="required">*</span> travelers;
+            // const transferTotal = airportTransfer ? 50 <span class="required">*</span> travelers : 0;
+            // const guidedTotal = guidedTour ? 150 : 0;
+            // const insuranceTotal = travelInsurance ? 75 <span class="required">*</span> travelers : 0;
+            // const grandTotal = packageTotal + transferTotal + guidedTotal + insuranceTotal;
+            // const deposit = grandTotal <span class="required">*</span> 0.2;
             
-            // 表示更新
-            document.getElementById('package-total').textContent = `$${packageTotal.toLocaleString()}.00`;
-            document.getElementById('transfer-total').textContent = `$${transferTotal.toLocaleString()}.00`;
-            document.getElementById('guided-total').textContent = `$${guidedTotal.toLocaleString()}.00`;
-            document.getElementById('insurance-total').textContent = `$${insuranceTotal.toLocaleString()}.00`;
-            document.getElementById('grand-total').textContent = `$${grandTotal.toLocaleString()}.00`;
-            document.getElementById('payment-total').textContent = `$${grandTotal.toLocaleString()}.00`;
-            document.getElementById('deposit-amount').textContent = `$${deposit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            // // 表示更新
+            // document.getElementById('package-total').textContent = `$${packageTotal.toLocaleString()}.00`;
+            // document.getElementById('transfer-total').textContent = `$${transferTotal.toLocaleString()}.00`;
+            // document.getElementById('guided-total').textContent = `$${guidedTotal.toLocaleString()}.00`;
+            // document.getElementById('insurance-total').textContent = `$${insuranceTotal.toLocaleString()}.00`;
+            // document.getElementById('grand-total').textContent = `$${grandTotal.toLocaleString()}.00`;
+            // document.getElementById('payment-total').textContent = `$${grandTotal.toLocaleString()}.00`;
+            // document.getElementById('deposit-amount').textContent = `$${deposit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
             
-            // パッケージ名更新
-            const selectedCard = document.querySelector('.option-card.selected');
-            if (selectedCard) {
-                  const packageName = selectedCard.querySelector('.option-title').textContent;
-                  const firstItemLabel = document.querySelector('.summary-item:first-child .item-label');
-                  if (firstItemLabel) {
-                        firstItemLabel.textContent = `${packageName} (${travelers} × $${packagePrice})`;
-                  }
-            }
+            // // パッケージ名更新
+            // const selectedCard = document.querySelector('.option-card.selected');
+            // if (selectedCard) {
+            //       const packageName = selectedCard.querySelector('.option-title').textContent;
+            //       const firstItemLabel = document.querySelector('.summary-item:first-child .item-label');
+            //       if (firstItemLabel) {
+            //             firstItemLabel.textContent = `${packageName} (${travelers} × $${packagePrice})`;
+            //       }
+            // }
       }
       
       // 決済処理
       document.addEventListener('DOMContentLoaded', () => {
-            checkGooglePayStatus();
             const submitButton = document.getElementById('submit-payment');
             if (submitButton) {
                   submitButton.addEventListener('click', async (e) => {
@@ -550,9 +545,12 @@
                                     throw new Error('Payment Element not initialized');
                               }
                               
+
+                              console.log(paymentElement);
+                              
                               // 決済確定
                               const {error} = await stripe.confirmPayment({
-                                    elements: paymentElement,
+                                    elements,
                                     redirect: 'if_required',
                                     confirmParams: {
                                           return_url: window.location.origin + '/booking/success'
@@ -582,7 +580,7 @@
             }
       });
       
-      // 初期化
-      updateSummary();
+      // // 初期化
+      // updateSummary();
 </script>
 @endsection

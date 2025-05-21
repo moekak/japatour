@@ -84,13 +84,13 @@ class TourService
             $additionalServiceData = $this->generateData->prepareAdditionalServiceData($request);
 
             foreach($qaData as $qa) {
-                $this->qaRepository->create($qa);; // 各qaを個別に作成
+                $this->qaRepository->create($qa); // 各qaを個別に作成
             }
             foreach($reviewData as $review) {
-                $this->reviewRepository->create($review);; // 各レビューを個別に作成
+                $this->reviewRepository->create($review); // 各レビューを個別に作成
             }
             foreach($additionalServiceData as $service) {
-                $this->additionalServiceRepository->create($service);; // 各レビューを個別に作成
+                $this->additionalServiceRepository->create($service); // 各レビューを個別に作成
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -151,14 +151,12 @@ class TourService
             }
         }
 
-        DB::beginTransaction();
         try {
 
+            DB::beginTransaction();
             $this->tourRepository->update($id, $tourData);
             $this->reviewRepository->deleteWhere($tour["id"]);
             foreach($reviewData as $review){
-                // print_r($review);
-                // exit;
                 $this->reviewRepository->create($review);
             }
             
@@ -167,7 +165,7 @@ class TourService
                 $this->qaRepository->create($qa);
             }
             
-            $this->additionalServiceRepository->deleteWhere();
+            $this->additionalServiceRepository->deleteAll();
             foreach($additionalServiceData as $service){
                 $this->additionalServiceRepository->create($service);
             }
