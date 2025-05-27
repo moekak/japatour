@@ -118,7 +118,7 @@
                                             </h4>
                                             @foreach ($itinerary["schedule"] as $schedule)
                                                 <div class="schedule-item">
-                                                    <div class="schedule-time">{{$schedule["time"]}}</div>
+                                                    {{-- <div class="schedule-time">{{$schedule["time"]}}</div> --}}
                                                     <div class="schedule-description">{{$schedule["description"]}}</div>
                                                 </div>
                                             @endforeach
@@ -297,7 +297,7 @@
             <div class="cta-content">
                 <h2 class="cta-title">Ready for an Unforgettable Experience?</h2>
                 <p class="cta-text">Book this tour today and create memories that will last a lifetime. Limited spots available for the upcoming season!</p>
-                <a href="#" class="cta-button">Reserve Your Spot Now</a>
+                <a href="{{route("tour.book", ["id" => $tour->id])}}" class="cta-button">Reserve Your Spot Now</a>
             </div>
     </section>
 </div>
@@ -667,9 +667,6 @@
                     const scheduleElement = dayElement.querySelector('.day-schedule');
                     const computedStyle = window.getComputedStyle(scheduleElement);
 
-                    console.log(computedStyle.display);
-                    
-                    
                     if (computedStyle.display=== 'none') {
                         scheduleElement.style.display = 'block';
                         this.innerHTML = '<i class="fas fa-minus-circle"></i><span>Hide Itinerary</span>';

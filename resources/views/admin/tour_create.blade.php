@@ -221,9 +221,6 @@
                                         <div class="schedule-items-container" data-day="{{ $dayIndex }}">
                                             @foreach($day['schedule'] as $scheduleIndex => $scheduleItem)
                                                 <div class="schedule-item">
-                                                    <div class="schedule-time">
-                                                        <input type="time" name="itinerary[{{ $dayIndex }}][schedule][{{ $scheduleIndex }}][time]" placeholder="e.g. 9:00 AM" value="{{ $scheduleItem['time'] }}" >
-                                                    </div>
                                                     <div class="schedule-description">
                                                         <input type="text" name="itinerary[{{ $dayIndex }}][schedule][{{ $scheduleIndex }}][description]" placeholder="Activity description" value="{{ $scheduleItem['description'] }}" >
                                                     </div>
@@ -285,9 +282,6 @@
                                     <label>Schedule <span class="required">*</span></label>
                                     <div class="schedule-items-container" data-day="0">
                                         <div class="schedule-item">
-                                            <div class="schedule-time">
-                                                <input type="time" name="itinerary[0][schedule][0][time]" placeholder="e.g. 9:00 AM" >
-                                            </div>
                                             <div class="schedule-description">
                                                 <input type="text" name="itinerary[0][schedule][0][description]" placeholder="Activity description" >
                                             </div>
@@ -500,6 +494,15 @@
                         <div class="form-group">
                             <label>Additional Services<span class="required">*</span></label>
                             <div id="services-container">
+                                @foreach($services as $index => $service)
+                                    <div class="service-item">
+                                        <input type="text" name="services[{{$index}}][service]" value="{{ $service->service }}" >
+                                        <div class="price-input">
+                                            <input type="number" id="price" name="services[{{$index}}][price]" value="{{ $service->price }}" min="0" >
+                                        </div>
+                                        <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
+                                    </div>
+                                @endforeach
                                 @if(old('services'))
                                     @foreach(old('services') as $index => $service)
                                         <div class="service-item">
@@ -510,14 +513,6 @@
                                             <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
                                         </div>
                                     @endforeach
-                                @else
-                                    <div class="service-item">
-                                        <input type="text" name="services[0][service]" >
-                                        <div class="price-input">
-                                            <input type="number" id="price" name="services[0][price]"  min="0" placeholder="price(￥)">
-                                        </div>
-                                        <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
                                 @endif
                             </div>
                             <button type="button" id="add-service" class="btn-secondary"><i class="fas fa-plus"></i> Add Service</button>
@@ -588,9 +583,6 @@
                 <label>Schedule <span class="required">*</span></label>
                 <div class="schedule-items-container" data-day="{day_index}">
                     <div class="schedule-item">
-                        <div class="schedule-time">
-                            <input type="time" name="itinerary[{day_index}][schedule][0][time]" placeholder="e.g. 9:00 AM" >
-                        </div>
                         <div class="schedule-description">
                             <input type="text" name="itinerary[{day_index}][schedule][0][description]" placeholder="Activity description" >
                         </div>
@@ -605,9 +597,6 @@
     <!-- Schedule Item Template (Hidden) -->
     <template id="schedule-template">
         <div class="schedule-item">
-            <div class="schedule-time">
-                <input type="time" name="itinerary[{day_index}][schedule][{schedule_index}][time]" placeholder="e.g. 9:00 AM" >
-            </div>
             <div class="schedule-description">
                 <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][description]" placeholder="Activity description" >
             </div>
@@ -619,7 +608,7 @@
     <template id="review-template">
         <div class="review-item">
             <div class="day-header">
-                <h3>Review {day_index}</h3>
+                <h3>Review {review_index}</h3>
                 <button type="button" class="remove-review btn-icon"><i class="fas fa-times"></i></button>
             </div>
             <div class="form-group">

@@ -12,6 +12,7 @@ export default class SummaryDisplayObserver extends PriceObserver{
             this.elements.paymentTotal.textContent = `￥${priceData.grandTotal.toLocaleString('ja-JP')}`;
             this.elements.depositAmount.textContent = `￥${(priceData.grandTotal * 0.2).toLocaleString('ja-JP')}`;
             this.elements.serviceTotal.textContent = `￥${(priceData.serviceTotal).toLocaleString('ja-JP')}`;
+            this.elements.touristNumber.innerHTML = priceData.travelers;
       }
       
 }

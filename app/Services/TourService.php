@@ -89,6 +89,7 @@ class TourService
             foreach($reviewData as $review) {
                 $this->reviewRepository->create($review); // 各レビューを個別に作成
             }
+            $this->additionalServiceRepository->deleteAll();
             foreach($additionalServiceData as $service) {
                 $this->additionalServiceRepository->create($service); // 各レビューを個別に作成
             }

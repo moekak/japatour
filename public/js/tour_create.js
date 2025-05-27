@@ -610,7 +610,6 @@ var ReviewOperator = /*#__PURE__*/function (_ElementOperatorInter) {
     _this.reviewCount = document.querySelectorAll('.review-item').length;
     _this.reviewTemplate = document.getElementById('review-template').innerHTML;
     _this.reviewWrapper = document.getElementById("review-container");
-    console.log(_this.reviewCount + "review counr");
     _this.initialize();
     return _this;
   }
@@ -659,7 +658,7 @@ var ReviewOperator = /*#__PURE__*/function (_ElementOperatorInter) {
   }, {
     key: "createDOMElement",
     value: function createDOMElement() {
-      var newDayHtml = this.reviewTemplate.replace(/{day_index}/g, this.reviewCount);
+      var newDayHtml = this.reviewTemplate.replace(/{day_index}/g, this.reviewCount).replace(/{review_index}/g, this.reviewCount + 1);
       var tempDiv = document.createElement('div');
       tempDiv.innerHTML = newDayHtml;
       var newDay = tempDiv.firstElementChild;
@@ -674,7 +673,6 @@ var ReviewOperator = /*#__PURE__*/function (_ElementOperatorInter) {
   }, {
     key: "removeElement",
     value: function removeElement(e) {
-      console.log(e.target);
       if (e.target.closest('.remove-review')) {
         this.reviewCount--;
         var item = e.target.closest('.review-item');
@@ -836,7 +834,6 @@ var ItineraryHighlight = /*#__PURE__*/function (_ElementOperatorInter) {
     _classCallCheck(this, ItineraryHighlight);
     _this = _callSuper(this, ItineraryHighlight); // 親クラスのコンストラクタを呼び出す - これが欠けている
     _this.event = event;
-    console.log("222");
     if (_this.event.target.closest(".add-itinerary-highlight")) {
       _this.itineraryBtnOperator = _this.event.target.closest(".add-itinerary-highlight");
     } else if (_this.event.target.closest(".remove-itinerary_highlight")) {
@@ -872,6 +869,7 @@ var ItineraryHighlight = /*#__PURE__*/function (_ElementOperatorInter) {
   }, {
     key: "addElement",
     value: function addElement() {
+      console.log("clickされました");
       if (this.event.target.closest(".add-itinerary-highlight")) {
         this.container.appendChild(this.createDOMElement());
       }
@@ -1025,9 +1023,6 @@ var ItineraryOperator = /*#__PURE__*/function (_ElementOperatorInter) {
       // itinerary項目作成処理
       this.addButton.addEventListener("click", this.addElement.bind(this));
       // itinerary項目作成処理項目削除処理
-
-      // const newItineraryWrapper = this.itineraryWrapper.cloneNode(true)
-      // this.itineraryWrapper.replaceWith(newItineraryWrapper)
       this.itineraryWrapper.addEventListener("click", this.removeElement.bind(this));
       this.itineraryWrapper.addEventListener("click", function (e) {
         new _ItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_1__["default"](e);
@@ -1067,7 +1062,6 @@ var ItineraryOperator = /*#__PURE__*/function (_ElementOperatorInter) {
     key: "createDOMElement",
     value: function createDOMElement() {
       var dayIndex = this.dayCount - 1;
-      console.log("dayCount: ".concat(this.dayCount));
       var newDayHtml = this.dayTemplate.replace(/{day_number}/g, this.dayCount).replace(/{day_index}/g, dayIndex);
       var tempDiv = document.createElement('div');
       tempDiv.innerHTML = newDayHtml;
@@ -1083,7 +1077,6 @@ var ItineraryOperator = /*#__PURE__*/function (_ElementOperatorInter) {
   }, {
     key: "removeElement",
     value: function removeElement(e) {
-      console.log(e.target);
       if (e.target.closest('.remove-day')) {
         this.dayCount--;
         var item = e.target.closest('.itinerary-day-item');

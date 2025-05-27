@@ -22,9 +22,6 @@ export default class ItineraryOperator extends ElementOperatorInterface{
             // itinerary項目作成処理
             this.addButton.addEventListener("click", this.addElement.bind(this))
             // itinerary項目作成処理項目削除処理
-
-            // const newItineraryWrapper = this.itineraryWrapper.cloneNode(true)
-            // this.itineraryWrapper.replaceWith(newItineraryWrapper)
             this.itineraryWrapper.addEventListener("click", this.removeElement.bind(this))
             this.itineraryWrapper.addEventListener("click", e =>{
                   new ItineraryHighlight(e)
@@ -59,9 +56,6 @@ export default class ItineraryOperator extends ElementOperatorInterface{
        */
       createDOMElement(){
             const dayIndex = this.dayCount - 1;
-
-            console.log(`dayCount: ${this.dayCount}`);
-            
             let newDayHtml = this.dayTemplate
                   .replace(/{day_number}/g, this.dayCount)
                   .replace(/{day_index}/g, dayIndex);
@@ -78,8 +72,6 @@ export default class ItineraryOperator extends ElementOperatorInterface{
        * @param {Event} e - クリックイベント
        */
       removeElement(e){
-            console.log(e.target);
-            
             if (e.target.closest('.remove-day')) {
                   this.dayCount--
                   const item = e.target.closest('.itinerary-day-item');

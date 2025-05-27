@@ -28,7 +28,8 @@ class TourController extends Controller{
      */
     public function create()
     {
-        return view("admin.tour_create");
+        $services = AdditionalService::getServices();
+        return view("admin.tour_create", compact("services"));
     }
 
     /**
@@ -84,8 +85,6 @@ class TourController extends Controller{
     public function update(EditTourRequest $request, string $id)
     {
         try {
-            // print_r($request->all());
-            // exit;
             $this->tourService->updateTour($request, $id);
             return redirect()->route("tour_list")->with("success", "success to update Tour");
         } catch (\Exception $e) {

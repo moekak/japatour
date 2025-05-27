@@ -8,7 +8,7 @@ export default class BookingCalculator{
             this.serviceStrategy = new AdditionalServiceStrategy()
 
             // 基本料金の設定
-            this.basePackagePrice = 20000; // 基本パッケージ料金
+            this.basePackagePrice = document.getElementById("js_basic_price").value; // 基本パッケージ料金
             // オブザーバーリスト
             this.observers = []
             // DOM要素の取得
@@ -55,6 +55,7 @@ export default class BookingCalculator{
                   grandTotal: document.querySelector('.total-price'),
                   paymentTotal: document.getElementById('payment-total'),
                   depositAmount: document.getElementById('deposit-amount'),
+                  touristNumber: document.getElementById('summary-travelers'),
             }));
       }
 
@@ -65,8 +66,6 @@ export default class BookingCalculator{
 
       // オブザーバーへの通知メソッド
       notifyObservers(priceData) {
-            console.log(this.observers);
-            
             this.observers.forEach(observer => {
                   observer.update(priceData);
             });
@@ -147,8 +146,8 @@ export default class BookingCalculator{
                   services
             };
 
+            console.log(travelers);
 
-            
             // 戦略パターンを使って計算
             const packageTotal = this.packageStrategy.calculate(basePrice, options);
             const serviceTotal = this.serviceStrategy.calculate(0, options);
@@ -162,7 +161,7 @@ export default class BookingCalculator{
                   basePrice,
                   travelers,
                   packageName: selectedPackageName,
-                  selectedDate
+                  selectedDate,
             });
       }
 }

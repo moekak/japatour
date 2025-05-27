@@ -212,7 +212,7 @@
                                         @endforeach
 
                                     </div>
-                                    <button type="button" id="add-highlight" class="btn-secondary"><i class="fas fa-plus"></i> Add Highlight</button>
+                                    <button type="button" class="add-itinerary-highlight btn-secondary"><i class="fas fa-plus"></i> Add Itinerary highlights</button>
                                 </div>
                                 
                                 <div class="form-group">
@@ -220,9 +220,6 @@
                                     <div class="schedule-items-container" data-day={{$index}}>
                                         @foreach ($itinerary["schedule"] as $index2 =>$schedule)
                                             <div class="schedule-item">
-                                                <div class="schedule-time">
-                                                    <input type="time" name="itinerary[{{$index}}][schedule][{{$index2}}][time]" value="{{$schedule["time"]}}" placeholder="e.g. 9:00 AM" >
-                                                </div>
                                                 <div class="schedule-description">
                                                     <input type="text" name="itinerary[{{$index}}][schedule][{{$index2}}][description]" value="{{$schedule["description"]}}" placeholder="Activity description" >
                                                 </div>
@@ -396,7 +393,6 @@
                                         <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
                                     </div>
                                 @endforeach
-                            
                             </div>
                             <button type="button" id="add-service" class="btn-secondary"><i class="fas fa-plus"></i> Add Service</button>
                         </div>
@@ -435,7 +431,7 @@
             <div class="form-group">
                 <label for="itinerary_image{day_index}">Itinerary Image <span class="required">*</span></label>
                 <div class="image-upload-container">
-                    <input type="file" id="itinerary_image{day_index}"  name="itinerary{day_index}][itinerary_image]" accept="image/*" class="image-upload-input">
+                    <input type="file" id="itinerary_image{day_index}"  name="itinerary[{day_index}][itinerary_image]" accept="image/*" class="image-upload-input">
                     <label for="itinerary_image{day_index}" class="image-upload-label">
                         <i class="fas fa-cloud-upload-alt"></i>
                         <span style="color: #fff;">Choose a file...</span>
@@ -455,16 +451,13 @@
                         <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
                     </div>
                 </div>
-                <button type="button" id="add-highlight" class="btn-secondary"><i class="fas fa-plus"></i> Add Highlight</button>
+                <button type="button" class="add-itinerary-highlight btn-secondary"><i class="fas fa-plus"></i> Add Itinerary highlights</button>
             </div>
             
             <div class="form-group">
                 <label>Schedule <span class="required">*</span></label>
                 <div class="schedule-items-container" data-day="{day_index}">
                     <div class="schedule-item">
-                        <div class="schedule-time">
-                            <input type="time" name="itinerary[{day_index}][schedule][0][time]" placeholder="e.g. 9:00 AM" >
-                        </div>
                         <div class="schedule-description">
                             <input type="text" name="itinerary[{day_index}][schedule][0][description]" placeholder="Activity description" >
                         </div>
@@ -479,9 +472,6 @@
     <!-- Schedule Item Template (Hidden) -->
     <template id="schedule-template">
         <div class="schedule-item">
-            <div class="schedule-time">
-                <input type="time" name="itinerary[{day_index}][schedule][{schedule_index}][time]" placeholder="e.g. 9:00 AM" >
-            </div>
             <div class="schedule-description">
                 <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][description]" placeholder="Activity description" >
             </div>
@@ -558,8 +548,6 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         const availableDates = <?php echo $tour->available_dates; ?>;
-        console.log(availableDates);
-        
         const multiDatePicker = flatpickr("#date_range_start", {
             dateFormat: "Y-m-d",
             minDate: "today",

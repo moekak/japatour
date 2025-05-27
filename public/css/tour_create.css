@@ -283,11 +283,13 @@
   
   /* Schedule Item Styling */
   .schedule-item {
-    display: grid;
-    grid-template-columns: 150px 1fr 40px;
+    display: flex;
     gap: 15px;
     align-items: center;
     margin-bottom: 15px;
+  }
+  .schedule-description{
+    width: 100%;
   }
   
   .schedule-items-container {

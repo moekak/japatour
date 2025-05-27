@@ -7,9 +7,6 @@ export default class ReviewOperator extends ElementOperatorInterface{
             this.reviewCount  = document.querySelectorAll('.review-item').length
             this.reviewTemplate = document.getElementById('review-template').innerHTML;
             this.reviewWrapper = document.getElementById("review-container")
-
-            console.log(this.reviewCount + "review counr");
-            
             this.initialize()
       }
 
@@ -49,7 +46,8 @@ export default class ReviewOperator extends ElementOperatorInterface{
        */
       createDOMElement(){
             let newDayHtml = this.reviewTemplate
-                  .replace(/{day_index}/g, this.reviewCount);
+                  .replace(/{day_index}/g, this.reviewCount)
+                  .replace(/{review_index}/g, this.reviewCount + 1);
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = newDayHtml;
             const newDay = tempDiv.firstElementChild;
@@ -63,8 +61,6 @@ export default class ReviewOperator extends ElementOperatorInterface{
        * @param {Event} e - クリックイベント
        */
       removeElement(e){
-            console.log(e.target);
-            
             if (e.target.closest('.remove-review')) {
                   this.reviewCount--
                   const item = e.target.closest('.review-item');
