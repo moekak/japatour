@@ -76,10 +76,11 @@
                 <section class="section tour-itinerary">
                     <h2 class="section-title">Detailed Itinerary</h2>
                     <div class="itinerary-container">
-                        <div class="itinerary-timeline"></div>
+                        {{-- <div class="itinerary-timeline"></div> --}}
                         <div class="itinerary-days">
                             @foreach ($tour->itinerary as $index => $itinerary)
                                 <div class="itinerary-day">
+                                    <div class="itinerary-timeline"></div>
                                     <div class="itinerary-day-marker">{{$index + 1}}</div>
                                     <div class="itinerary-day-left">
                                         <h3 class="itinerary-day-title">{{$itinerary["title"]}}</h3>

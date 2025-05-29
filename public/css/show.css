@@ -685,8 +685,8 @@ img {
 }
 
 .day-action-btn.details {
-  background: var(--light);
-  color: var(--primary);
+  background: var(--secondary);
+  color: white;
 }
 
 .day-action-btn.details:hover {

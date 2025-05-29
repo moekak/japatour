@@ -12,8 +12,8 @@
       <input type="hidden" value="{{$tour->price}}" id="js_basic_price">
       <!-- Hero Section -->
       <section class="booking-hero">
-            {{-- <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="booking-hero-image"> --}}
-            <img src="https://picsum.photos/1920/500" alt="Booking" class="booking-hero-image">
+            <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="booking-hero-image">
+            {{-- <img src="https://picsum.photos/1920/500" alt="Booking" class="booking-hero-image"> --}}
             <div class="booking-hero-content">
                   <h1 class="booking-hero-title">Complete Your Booking</h1>
                   <p class="booking-hero-subtitle">Just a few steps away from your unforgettable adventure!</p>
