@@ -107,7 +107,7 @@
                     data-aos-duration="1000">
                     Popular Destinations
                 </h2>
-                <div class="destinations_area" data-aos="fade-up" 
+                {{-- <div class="destinations_area" data-aos="fade-up" 
                     data-aos-duration="1000">
                     <div class="card" style="width: 25rem">
                         <img src="{{asset("img/tokyo.jpg")}}" class="card-img-top" alt="..." />
@@ -174,8 +174,12 @@
                             <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="btn destination-btn" target="blank">See details</a>
                         </div>
                     </div>
-                </div>
-                {{-- <div class="destinations_area" data-aos="fade-up" 
+                </div> --}}
+
+
+
+                {{-- 切り替え --}}
+                <div class="destinations_area" data-aos="fade-up" 
                     data-aos-duration="1000">
                     @foreach ($tours as $tour)
                         <div class="tour-card" data-id="{{ $tour->id }}">
@@ -186,7 +190,7 @@
                                 @if($tour->badge)
                                     <div class="badge">{{ $tour->badge }}</div>
                                 @endif
-                                <div class="price-tag">¥{{ number_format($tour->price) }}<span class="price-note">per person</span></div>
+                                <div class="price-tag">¥{{ number_format($tour->price) }}<span class="price-note">~</span></div>
                             </div>
                             
                             <!-- Content Section -->
@@ -292,7 +296,7 @@
                             
                             <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="btn destination-btn" target="blank">See details</a>
                         </div>
-                    </div> --}}
+                    </div>
                 {{-- </div>  --}}
             </div>
         </section>

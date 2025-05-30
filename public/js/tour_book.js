@@ -689,6 +689,10 @@ document.querySelectorAll('.next-step').forEach(function (button) {
       console.log("aaaaaa");
       return;
     }
+    if (currentStep === 2 && validatorTourOptions() === false) {
+      console.log("vvvv");
+      return;
+    }
     if (currentStep < 3) {
       showStep(currentStep + 1);
     }
@@ -732,7 +736,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // elementsオブジェクトを渡す
                 redirect: 'if_required',
                 confirmParams: {
-                  return_url: window.location.origin + '/booking/success'
+                  return_url: window.location.origin + '/thank'
                 }
               });
             case 10:
@@ -745,7 +749,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
               } else {
                 // 成功処理
-                window.location.href = '/booking/success';
+                window.location.href = '/thank';
               }
               _context.next = 20;
               break;
@@ -819,6 +823,26 @@ var validator = function validator() {
     _iterator2.f();
   }
   return hasAllValue;
+};
+var validatorTourOptions = function validatorTourOptions() {
+  var date = document.getElementById("date_range_start");
+  var itineraryOptions = document.querySelectorAll(".option-card");
+  var hasdate = true;
+  var hasItinerary = false;
+  if (date.value.length == 0 || date.value === "") {
+    hasdate = false;
+    date.closest(".form-group").querySelector(".form-input").classList.add("error");
+    date.closest(".form-group").querySelector(".field-error").classList.remove("hidden");
+  }
+  itineraryOptions.forEach(function (option) {
+    if (option.classList.contains("selected")) {
+      hasItinerary = true;
+    }
+  });
+  if (!hasItinerary) {
+    document.querySelector(".itineary_option_error").classList.remove("hidden");
+  }
+  return hasdate && hasItinerary;
 };
 })();
 

@@ -1088,7 +1088,9 @@ footer p a{
     align-items: baseline;
     gap: 4px;
 }
-
+.price-note{
+    
+}
 
 /* Content Section */
 .card-content {

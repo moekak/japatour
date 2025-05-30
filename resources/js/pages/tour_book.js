@@ -175,6 +175,9 @@ document.querySelectorAll('.next-step').forEach(button => {
                   console.log("aaaaaa");
                   return
                   
+            }if(currentStep === 2 && validatorTourOptions() === false){
+                  console.log("vvvv");
+                  return
             }
             if (currentStep < 3) {
                   showStep(currentStep + 1);
@@ -214,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                               elements, // elementsオブジェクトを渡す
                               redirect: 'if_required',
                               confirmParams: {
-                                    return_url: window.location.origin + '/booking/success'
+                                    return_url: window.location.origin + '/thank'
                               }
                         });
                         
@@ -225,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
                               }
                         } else {
                               // 成功処理
-                              window.location.href = '/booking/success';
+                              window.location.href = '/thank';
                         }
                   } catch (error) {
                         console.error('Error:', error);
@@ -272,4 +275,29 @@ const validator = () =>{
       }
 
       return hasAllValue
+}
+
+const validatorTourOptions = ()=>{
+      const date = document.getElementById("date_range_start")
+      const itineraryOptions = document.querySelectorAll(".option-card")
+      let hasdate= true
+      let hasItinerary = false
+
+      if(date.value.length == 0 || date.value === ""){
+            hasdate = false
+            date.closest(".form-group").querySelector(".form-input").classList.add("error")
+            date.closest(".form-group").querySelector(".field-error").classList.remove("hidden")
+      }
+
+      itineraryOptions.forEach((option)=>{
+            if(option.classList.contains("selected")){
+                  hasItinerary = true
+            }
+      })
+
+
+      if(!hasItinerary){
+            document.querySelector(".itineary_option_error").classList.remove("hidden")
+      }
+      return hasdate && hasItinerary
 }
