@@ -24,10 +24,10 @@ class BookingController extends Controller
         try{
             Log::debug($request->all());
             $tourId = $request->input("tour_id");
-            $fullName = $request->input("fullName");
-            $email = $request->input("email");
-            $phone = $request->input("phone");
-            $number = $request->input("number");
+            $fullName = $request->input("customer_name");
+            $email = $request->input("customer_email");
+            $phone = $request->input("cusomter_phone");
+            $number = $request->input("number_of_participants");
             $country = $request->input("country");
             $additional_services = json_decode($request->input("additional_services"), true);
             $tour_date = $request->input("tour_date");
