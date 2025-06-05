@@ -67,19 +67,19 @@
                         <div class="form-section active" id="step-1">
                               <div class="form-group">
                                     <label class="form-label">Full Name<span class="required">*</span></label>
-                                    <input type="text" name="fullName" id="customer-name" class="form-input input-required" placeholder="Enter your full name" required>
+                                    <input type="text" name="customer_name" id="customer-name" class="form-input input-required" placeholder="Enter your full name" required>
                                     <div class="field-error hidden">Please enter your full name</div>
                               </div>
                               
                               <div class="input-group">
                                     <div class="form-group">
                                           <label class="form-label">Email Address<span class="required">*</span></label>
-                                          <input type="email" name="email" id="customer-email" class="form-input input-required" placeholder="Enter your email" required>
+                                          <input type="email" name="customer_email" id="customer-email" class="form-input input-required" placeholder="Enter your email" required>
                                           <div class="field-error hidden">Please enter a valid email address</div>
                                     </div>
                                     <div class="form-group">
                                           <label class="form-label">Phone Number<span class="required">*</span></label>
-                                          <input type="tel" name="phone" id="customer-phone" class="form-input input-required" placeholder="Enter your phone number" required>
+                                          <input type="tel" name="cusomter_phone" id="customer-phone" class="form-input input-required" placeholder="Enter your phone number" required>
                                           <div class="field-error hidden">Please enter a valid phone number</div>
                                     </div>
                               </div>
@@ -293,7 +293,7 @@
                                     </div>
                                     <div class="form-group">
                                           <label class="form-label">Number of Travelers<span class="required">*</span></label>
-                                          <select id="travelers" name="number" class="form-select select-required" required>
+                                          <select id="travelers" name="number_of_participants" class="form-select select-required" required>
                                                 <option value="Select number of travelers" selected disabled>Select number of travelers</option>
                                                 @php
                                                       for ($i = 1; $i < 100; $i++) { 
@@ -307,7 +307,7 @@
                               
                               <div class="form-group">
                                     <label class="form-label">Special Requests (Optional)</label>
-                                    <textarea class="form-input" name="requests" rows="4" placeholder="Any special requirements or requests?"></textarea>
+                                    <textarea class="form-input" name="special_requests" rows="4" placeholder="Any special requirements or requests?"></textarea>
                               </div>
                               
                               <div class="form-actions">
