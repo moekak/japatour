@@ -335,7 +335,7 @@
                                     <div class="field-error itineary_option_error hidden">Please choose one itinerary options</div>
                                     @foreach ($tour->itinerary as $index => $itinerary)
                                           <div class="option-card" {{$index == 0 ? "selected" : ""}} data-itinerary="{{$itinerary["title"]}}" data-price="{{$tour->price}}">
-                                                <div classummary-itemsss="option-header">
+                                                <div class="summary-items option-header">
                                                       <h3 class="option-title">{{$itinerary["title"]}}</h3>
                                                       <div class="option-price">￥{{ number_format($tour->price) }}</div>
                                                 </div>
@@ -425,6 +425,7 @@
             <!-- Order Summary -->
             <div class="order-summary">
                   <div class="summary-header">
+                        <div class="group-discount-badge">GROUP DEAL</div>
                         <h3 class="summary-title">Order Summary</h3>
                         <p class="summary-subtitle">Review your booking details</p>
                   </div>
@@ -434,36 +435,77 @@
                               <div class="tour-img-container">
                                     <img src="https://picsum.photos/400/200" alt="Tour" class="tour-img">
                               </div>
-                              <h3 class="tour-name">{{$tour->title}}</h3>
+                              <h3 class="tour-name">Amazing Tokyo Tour</h3>
                               <div class="tour-date-wrapper">
-                                    <p class="tour-date"><i class="far fa-calendar-alt"></i> <span id="selected-date">Select date</span></p>
-                                    <p class="tour-date"><i class="fas fa-users"></i> <span id="summary-travelers">1</span> Travelers</p>   
+                                    <p class="tour-date"><i class="far fa-calendar-alt"></i> <span id="selected-date">2024-03-15</span></p>
+                                    <p class="tour-date"><i class="fas fa-users"></i> <span id="summary-travelers">3</span> Travelers</p>   
                               </div>
                         </div>
-                        
+                                    
                         <div class="summary-items">
                               <div class="summary-item">
-                                    <div class="item-label">Basic price (per person) × <span class="js_number">1</span></div>
-                                    <div class="item-value" id="package-total">￥<span class="tour-price">20,000</span></div>
+                                    <div class="item-label">Basic price (per person) × <span class="js_number">3</span></div>
+                                    <div class="item-value">
+                                          <span class="original-price" id="package-total">￥60,000</span>
+                                    </div>
                               </div>
+                        </div>
+
+                        <!-- Group Discount Section -->
+                        <div class="discount-section hidden">
+                              <div class="discount-header">
+                                    <div class="discount-title">
+                                          <div class="discount-icon">
+                                                <i class="fas fa-tag"></i>
+                                          </div>
+                                          Group Discount Applied!
+                                    </div>
+                                    <div class="discount-percentage">-15%</div>
+                              </div>
+                              <div class="discount-details">
+                                    <div class="discount-item">
+                                          <span class="discount-label">3+ people discount</span>
+                                          <span class="discount-value">-￥9,000</span>
+                                    </div>
+                                    <div class="discount-item">
+                                          <span class="discount-label">Price after discount</span>
+                                          <span class="discounted-price">￥51,000</span>
+                                    </div>
+                              </div>
+                        </div>
+
+                        <div class="summary-items">
                               <div class="summary-item">
                                     <div class="item-label">Taxes & Fees</div>
                                     <div class="item-value">Included</div>
                               </div>
                               <div class="summary-item">
                                     <div class="item-label">Additional services</div>
-                                    <div class="item-value"><span class="additional-service-price">0</span></div>
+                                    <div class="item-value">￥<span class="additional-service-price">5,000</span></div>
                               </div>
                         </div>
                         
                         <div class="summary-total">
                               <div class="total-label">Total</div>
-                              <div class="total-value" id="grand-total"><span class="total-price">￥{{$tour->price}}</span></div>
+                              <div class="total-value">
+                                    <span class="total-price">￥56,000</span>
+                                    <span class="total-savings hidden">You saved ￥9,000!</span>
+                              </div>
                         </div>
-                        
+
+                        <div class="group-benefit">
+                              <div class="group-benefit-title">
+                                    <i class="fas fa-users"></i>
+                                    Travel with friends & save more!
+                              </div>
+                              <div class="group-benefit-text">
+                                    The more people, the bigger the discount!
+                              </div>
+                        </div>
+                                    
                         <div class="summary-note">
                               <i class="fas fa-info-circle"></i>
-                              <div>A 20% deposit (<span id="deposit-amount">$519.60</span>) will be charged now to secure your booking. The remaining balance is due 30 days before the tour date.</div>
+                              <div>A 20% deposit (<span id="deposit-amount">￥11,200</span>) will be charged now to secure your booking. The remaining balance is due 30 days before the tour date.</div>
                         </div>
                   </div>
             </div>

@@ -39,7 +39,7 @@
     --header-height: 70px;
     
     /* Typography */
-    --font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 body {
@@ -227,7 +227,7 @@ header {
     transition: 0.3 ease;
 }
 .header_center ul li:hover {
-    color: #fff;
+    opacity: 80%;
 }
 
 .header_left img {

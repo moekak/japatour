@@ -210,8 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
                               throw new Error('Payment Element not initialized');
                         }
                         
-                        console.log(paymentElement);
-                        
                         // 決済確定
                         const {error} = await stripe.confirmPayment({
                               elements, // elementsオブジェクトを渡す

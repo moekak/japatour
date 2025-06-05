@@ -20,9 +20,9 @@
             <span class="hamburger__line"></span>
         </button>
     </header>
-@elseif(Route::currentRouteName() == 'tour.show' || Route::currentRouteName() == 'tour.book')
+@elseif(Route::currentRouteName() == 'tour.show' || Route::currentRouteName() == 'tour.book' ||  Route::currentRouteName() == 'tour.contact')
 
-    <header class="pc_header" style="transform: none;">
+    <header class="pc_header" style="transform: none; border-bottom: 1px solid rgba(128, 128, 128, 0.371);">
         <div class="header_right font_icon" style="color: #52aaf9;"><a href="{{route("top")}}">JapaTour</a></div>
         <div class="header_center">
             <ul>

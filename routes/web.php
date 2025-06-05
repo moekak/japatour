@@ -13,6 +13,11 @@ Route::get('/thank', function () {
     return view('emails.thank');
 })->name("thank");
 
+Route::get('/book/contact', function () {
+    return view('book_contact');
+})->name("tour.contact");
+
+
 Route::get('/law', function () {
     return view('law');
 })->name("law");
@@ -20,6 +25,7 @@ Route::get('/law', function () {
 Route::get("/", [TopController::class, "index"])->name("top");
 Route::get("/admin", [AdminController::class, "index"]);
 Route::post("/sendMessage", [SendContactMail::class, "SendContactMail"])->name("sendMessage");
+    Route::get("/tour/show/{id}", [TourController::class, "show"])->name("tour.show");
 
 // routes/web.php
 Route::middleware(['auth'])->prefix('admin')->group(function () {
@@ -35,7 +41,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get("/tour/list", [TourController::class, "index"])->name("tour_list");
-    Route::get("/tour/show/{id}", [TourController::class, "show"])->name("tour.show");
     Route::post("/tour/create", [TourController::class, "store"])->name("tours.store");
     Route::post("/tour/update/{id}", [TourController::class, "update"])->name("tour.update");
     Route::get("/tour/edit/{id}", [TourController::class, "edit"])->name("tour.edit");
@@ -52,7 +57,5 @@ Route::middleware(['auth'])->group(function () {
     
 });
 Auth::routes(['register' => false]);
-// Auth::routes();
-
 
 Route::post('/payment-intent', [BookingController::class, 'createPaymentIntent']);

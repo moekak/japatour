@@ -1,12 +1,10 @@
 import AdditionalServiceStrategy from "./calculator/AdditionalServiceStrategy.js";
+import DiscountStrategy from "./calculator/DiscountStrategy.js";
 import StandardPriceStrategy from "./calculator/StandardPriceStrategy.js";
 import SummaryDisplayObserver from "./observer/SummaryDisplayObserver.js";
 
 export default class BookingCalculator{
       constructor(){
-            this.packageStrategy = new StandardPriceStrategy()
-            this.serviceStrategy = new AdditionalServiceStrategy()
-
             // 基本料金の設定
             this.basePackagePrice = document.getElementById("js_basic_price").value; // 基本パッケージ料金
             // オブザーバーリスト
@@ -56,6 +54,9 @@ export default class BookingCalculator{
                   paymentTotal: document.getElementById('payment-total'),
                   depositAmount: document.getElementById('deposit-amount'),
                   touristNumber: document.getElementById('summary-travelers'),
+                  discountTotal : document.querySelector(".discount-value"),
+                  discountSection : document.querySelector(".discount-section"),
+                  totalSaving : document.querySelector(".total-savings"),
             }));
       }
 
@@ -146,12 +147,11 @@ export default class BookingCalculator{
                   services
             };
 
-            console.log(travelers);
-
             // 戦略パターンを使って計算
-            const packageTotal = this.packageStrategy.calculate(basePrice, options);
-            const serviceTotal = this.serviceStrategy.calculate(0, options);
+            const packageTotal = StandardPriceStrategy.calculate(basePrice, options);
+            const serviceTotal = AdditionalServiceStrategy.calculate(0, options);
             const grandTotal = packageTotal + serviceTotal;
+            const discount = DiscountStrategy.calculate(basePrice, options)
             
             // 結果をオブザーバーに通知
             this.notifyObservers({
@@ -162,6 +162,9 @@ export default class BookingCalculator{
                   travelers,
                   packageName: selectedPackageName,
                   selectedDate,
+                  discount,
+                  basePrice,
+                  travelersNumber : options.travelers
             });
       }
 }

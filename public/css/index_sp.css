@@ -282,6 +282,9 @@
         display: flex;
         flex-direction: column;
     }
+    .tour-card{
+        margin: 8% auto;
+    }
     .animated{
         order: 1;
         width: 100%;

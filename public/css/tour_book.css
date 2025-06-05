@@ -30,6 +30,9 @@ body {
     line-height: 1.6;
 }
 
+.hidden{
+    display: none;
+}
 /* Required Fields */
 .required {
     color: var(--danger-color);
@@ -681,12 +684,32 @@ body {
     position: sticky;
     top: 100px;
     overflow: hidden;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .summary-header {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
     padding: 27px;
+    position: relative;
+    overflow: hidden;
+}
+
+.summary-header::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.3; }
 }
 
 .summary-title {
@@ -694,6 +717,8 @@ body {
     font-weight: 700;
     margin-bottom: 0px;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .summary-subtitle {
@@ -702,6 +727,25 @@ body {
     color: #fff;
     text-align: center;
     margin-bottom: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* Group Discount Badge */
+.group-discount-badge {
+    position: absolute;
+    top: 20px;
+    right: -35px;
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+    padding: 8px 40px;
+    transform: rotate(45deg);
+    font-size: 12px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(243, 156, 18, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
 }
 
 .summary-body {
@@ -718,6 +762,7 @@ body {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 15px;
+    position: relative;
 }
 
 .tour-img {
@@ -758,6 +803,7 @@ body {
     color: var(--secondary);
 }
 
+/* Enhanced Summary Items */
 .summary-items {
     margin-top: 25px;
     padding-top: 20px;
@@ -767,8 +813,9 @@ body {
 .summary-item {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 12px;
-    align-items: center;
+    margin-bottom: 16px;
+    align-items: start;
+    position: relative;
 }
 
 .item-label {
@@ -781,29 +828,142 @@ body {
     font-weight: 600;
     color: var(--primary);
     font-size: 15px;
+    text-align: right;
 }
 
+/* Special styling for discount section */
+.discount-section {
+    background: linear-gradient(to right, rgba(46, 204, 113, 0.05), rgba(46, 204, 113, 0.1));
+    margin: 0 -25px;
+    padding: 20px 25px;
+    border-left: 4px solid var(--success);
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.discount-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.discount-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    color: var(--success);
+    font-size: 18px;
+}
+
+.discount-icon {
+    width: 35px;
+    height: 35px;
+    background: var(--success);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.discount-percentage {
+    background: var(--success);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    animation: pulse-badge 2s infinite;
+}
+
+@keyframes pulse-badge {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.discount-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.discount-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.discount-label {
+    color: var(--gray);
+}
+
+.discount-value {
+    color: var(--success);
+    font-weight: 600;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: var(--gray);
+    font-size: 14px;
+    margin-right: 8px;
+}
+
+.discounted-price {
+    color: var(--success);
+    font-weight: 700;
+    font-size: 18px;
+}
+
+/* Summary Total Enhanced */
 .summary-total {
     margin-top: 25px;
-    padding-top: 20px;
-    border-top: 2px solid var(--light-gray);
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    border: 2px solid var(--secondary);
+    border-radius: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.1);
 }
 
 .total-label {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 20px;
     color: var(--primary);
 }
 
 .total-value {
-    font-weight: 800;
-    font-size: 30px;
-    color: var(--secondary);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
+.total-price {
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--secondary);
+    line-height: 1;
+}
+
+.total-savings {
+    font-size: 14px;
+    color: var(--success);
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+/* Enhanced Note */
 .summary-note {
     margin-top: 25px;
     padding: 20px;
@@ -814,6 +974,7 @@ body {
     display: flex;
     align-items: flex-start;
     line-height: 1.5;
+    border: 1px solid #f9e79f;
 }
 
 .summary-note i {
@@ -822,6 +983,43 @@ body {
     margin-top: 2px;
 }
 
+/* Group Benefit Highlight */
+.group-benefit {
+    background: linear-gradient(135deg, var(--discount-bg), #c8e6c9);
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 20px;
+    text-align: center;
+    border: 2px dashed var(--success);
+}
+
+.group-benefit-title {
+    font-weight: 700;
+    color: var(--success);
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.group-benefit-text {
+    font-size: 14px;
+    color: var(--dark);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .order-summary {
+        max-width: 100%;
+    }
+    
+    .discount-section {
+        margin: 0 -15px;
+        padding: 15px;
+    }
+}
 /* Responsive */
 @media (max-width: 992px) {
     .booking-container {

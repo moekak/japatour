@@ -272,7 +272,7 @@
                         <div class="limited-spots urgent">
                                 <i class="fas fa-exclamation-circle"></i> {{$tour->limited_spots}}
                         </div>
-                        <a href="{{route("tour.book", ["id" => $tour->id])}}" class="book-button">Book This Tour Now</a>
+                        <a href="{{route("tour.contact")}}" class="book-button">Contact us</a>
                         <div class="includes-section">
                                 <h3 class="includes-title">What's Included</h3>
                                 <ul class="includes-list">
@@ -298,7 +298,7 @@
             <div class="cta-content">
                 <h2 class="cta-title">Ready for an Unforgettable Experience?</h2>
                 <p class="cta-text">Book this tour today and create memories that will last a lifetime. Limited spots available for the upcoming season!</p>
-                <a href="{{route("tour.book", ["id" => $tour->id])}}" class="cta-button">Reserve Your Spot Now</a>
+                <a href="{{route("tour.contact", ["id" => $tour->id])}}" class="cta-button">Reserve Your Spot Now</a>
             </div>
     </section>
 </div>
