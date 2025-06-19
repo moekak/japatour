@@ -68,6 +68,29 @@
                     </div>
                     <div class="form-grid-2">
                         <div class="form-group">
+                            <label for="region">Region<span class="required">*</span></label>
+                            <p>{{$tour->region}}</p>
+                            <select name="region_id" class="form-control">
+                                <option value="" disabled @selected(!old('region_id', $tour->region_id))>select a region</option>
+                                @foreach ($regions as $region)
+                                    <option value="{{ $region->id }}" @selected(old('region_id', $tour->region_id) == $region->id)>
+                                        {{ $region->region }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category<span class="required">*</span></label>
+                            <select id="category" name="category_id">
+                                <option value="" disabled @selected(!old('category_id', $tour->category_id))>select a category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}" @selected(old('category_id', $tour->category_id) == $category->id)>{{$category->category}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="form-grid-2">
+                        <div class="form-group">
                             <label for="destinations">Destinations <span class="required">*</span></label>
                             <input type="text" id="destinations" name="destinations" value="{{$tour->destinations}}" placeholder="e.g. Kyoto, Nara, Osaka" >
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use BcMath\Number;
 use Illuminate\Database\Eloquent\Model;
 
 class Tour extends Model
@@ -40,12 +41,23 @@ class Tour extends Model
         return $this->hasMany(Question::class, "tour_id", "id");
     }
     
+    public function category() {
+        return $this->belongsTo(Category::class, "category_id", "id");
+    }
+    
     public function scopWithId($query, $id){
         return $query->where("id", $id);
     }
 
     public function scopeWithTables($query){
         return $query->with("reviews", "questions");
+    }
+
+    public function scopeWithReviewsAndCategories($query){
+        return $query->with([
+            'reviews:tour_id,rate', // 短縮記法
+            'category'
+        ]);
     }
 
     public static function getSpecificData($id){
@@ -102,8 +114,42 @@ class Tour extends Model
         return $tours;
     }
 
-    public static function getTourInfo(){
-        $tours = Tour::select("title", "overview", "price", "destinations", "hours", "languages", "id", "hero_image", "badge",)->where("is_active", true)->get();
-        return $tours;
+public static function getTourInfo(){
+    $tours = Tour::select("id", "title", "overview", "price", "destinations", "hours", "languages", "hero_image", "badge", "category_id")
+        ->withReviewsAndCategories()
+        ->where("is_active", true)
+        ->get();
+    
+    // カテゴリ名でグループ化（データ整形前に行う）
+    $groupedTours = $tours->groupBy(function($tour) {
+        // カテゴリ名を取得（最初の文字を大文字に）
+        return ucfirst(strtolower($tour->category->category));
+    });
+    
+    // 各グループのツアーデータを整形
+    $result = [];
+    foreach ($groupedTours as $category => $categoryTours) {
+        $result[$category] = $categoryTours->map(function($tour) {
+            $reviewCount = count($tour->reviews);
+            $rating = 0;
+            
+            if ($reviewCount > 0) {
+                $rating = $tour->reviews->avg('rate');
+            }
+            
+            return [
+                'id' => $tour->id,
+                'title' => $tour->title,
+                'description' => $tour->overview, // JSではdescriptionを使っている
+                'price' => $tour->price,
+                'duration' => $tour->hours . ' hours', // JSでは "8 hours" の形式
+                'rating' => round($rating, 1), // 小数点1桁に丸める
+                'reviews' => $reviewCount,
+                'image' => '/storage/' . $tour->hero_image // 画像パスの整形
+            ];
+        })->values()->toArray();
     }
+    
+    return $result;
+}
 }

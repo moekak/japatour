@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateTourRequest;
 use App\Http\Requests\Admin\EditTourRequest;
 use App\Models\AdditionalService;
+use App\Models\Category;
+use App\Models\Region;
 use App\Services\TourService;
 use Illuminate\Support\Facades\Log;
 
@@ -28,8 +30,10 @@ class TourController extends Controller{
      */
     public function create()
     {
+        $categories = Category::getAllCategories();
+        $regions = Region::getAllRigions();
         $services = AdditionalService::getServices();
-        return view("admin.tour_create", compact("services"));
+        return view("admin.tour_create", compact("services",  "categories", "regions"));
     }
 
     /**
@@ -69,11 +73,10 @@ class TourController extends Controller{
         try {
             $tourData = $this->tourService->getTourById($id);
             $services = AdditionalService::getServices();
-
-            // print_r($services->toArray());
-            // exit;
+            $categories = Category::getAllCategories();
+            $regions = Region::getAllRigions();
             $tour = $tourData["tour"];
-            return view("admin.tour_edit", compact("tour", "services"));
+            return view("admin.tour_edit", compact("tour", "services", "regions", "categories"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
         }

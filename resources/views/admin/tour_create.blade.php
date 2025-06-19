@@ -56,6 +56,27 @@
                         <label for="start_location">Start Location <span class="required">*</span></label>
                         <input type="text" id="start_location" name="start_location" value="{{ old('start_location') }}" >
                     </div>
+                    <div class="form-grid-2">
+                        <div class="form-group">
+                            <label for="region">Region<span class="required">*</span></label>
+                            <select id="region" name="region_id">
+                                <option value="" disabled @selected(!old('region_id', $tour->region_id))>select a region</option>
+                                @foreach ($regions as $region)
+                                    <option value="{{$region->id}}" @selected(old('region_id', $tour->region_id) == $region->id)>{{$region->region}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category<span class="required">*</span></label>
+                            <p></p>
+                            <select id="category" name="category_id">
+                                <option value=""  disabled @selected(!old('category_id', $tour->category_id))>select a category</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}" @selected(old('category_id', $tour->category_id) == $category->id)>{{$category->category}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div> 
 
 
                     <div class="form-grid-2">

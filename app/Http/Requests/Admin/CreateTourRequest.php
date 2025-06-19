@@ -27,6 +27,8 @@ class CreateTourRequest extends FormRequest
             "badge" => ["nullable", "string", "max:255"],
             "hours" => ["required", "integer"],
             "start_location" => ["required", "string", "max:255"],
+            "region_id" => ["required", "string", "exists:regions,id"],
+            "category_id" => ["required", "string", "exists:categories,id"],
             "destinations" => ["required", "string", "max:255"],
             "languages" => ["required", "string", "max:255"],
             "min_participants" => ["required", "integer"],

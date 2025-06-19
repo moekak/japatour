@@ -33,277 +33,65 @@
             </div>
         </section>
 
-        <!-- WHY CHOOSE US SECTION -->
-        <section class="section_second z3 padding_section relative" id="about">
-            <div class="section_second_wrapper">
-                <h2 class="font_subtitle" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
-                    data-aos-duration="1000">
-                    Why choose JapaTour?
+
+
+      <section class="section_forth z3 relative padding_section" id="tour">
+      <div class="section_forth_wrapper">
+       <!-- Destinations Section -->
+        <div id="destinations-section">
+            <div class="section-header">
+                <h1 class="section-title">Popular Destinations</h1>
+                <p class="section-subtitle">Choose your destination and explore our amazing tours</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterDestinations('all')">All Destinations</button>
+                <button class="filter-tab" onclick="filterDestinations('kanto')">Kanto Region</button>
+                <button class="filter-tab" onclick="filterDestinations('kansai')">Kansai Region</button>
+                <button class="filter-tab" onclick="filterDestinations('other')">Other Regions</button>
+            </div>
+
+            <!-- Destinations Grid -->
+            <div class="destinations-grid">
+                @foreach ($categories as $category)
+                    <div class="destination-card" data-region="{{$category->region["region"]}}" onclick="showTours('{{$category->category}}')">
+                        <img src="/img/{{$category->category}}_category.jpg" alt="{{$category->category}}" class="destination-image">
+                        <div class="destination-overlay">
+                            <h3 class="destination-name">{{$category->category}}</h3>
+                            <div class="destination-info">
+                                <span><i class="fas fa-map-marked-alt"></i> {{$category->tours_count}}Tours</span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- Tours Section (Hidden by default) -->
+        <div id="tours-section" class="tours-section">
+            <div class="tours-header">
+                <h2 class="tours-title">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span id="destination-name">Tokyo</span> Tours
                 </h2>
-                <p class="section_third_desc font_normal" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
-                    data-aos-duration="1000">
-                    Choose JapaTour for an unforgettable journey that combines
-                    affordability, customization, seasonal highlights, expertise, and
-                    safety.
-                </p>
-                <div class="reason_card_container">
-                    <div class="reason_card" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
-                        data-aos-duration="1000">
-                        <img src="{{asset("img/icons8-dollar-coin-80.png")}}" alt="" /><br />
-                        <small class="num reason_card_padding" style="display: block">01</small>
-                        <p class="reason_sub reason_card_padding">Budget-Friendly</p>
-                        <p class="reason_desc reason_card_padding js_reason_card">
-                            At JapaTour, we pride ourselves on offering budget-friendly
-                            itineraries and tours without compromising on quality. Our
-                            services provide excellent value for your money and time,
-                            ensuring you get the most out of your visit to Japan.
-                        </p>
-                        {{-- <div class="reason_btn_box reason_card_padding">
-                            <button class="reason_see_more_btn">see more</button>
-                        </div> --}}
-                    </div>
-                    <div class="reason_card" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
-                        data-aos-duration="1000">
-                        <img class="reason_card-img2" src="{{asset("img/icons8-customize-80.png")}}" alt="" /><br />
-                        <small class="num reason_card_padding" style="display: block">02</small>
-                        <p class="reason_sub reason_card_padding">Customizable Tours</p>
-                        <p class="reason_desc reason_card_padding js_reason_card">
-                            Our tours are highly customizable, tailored to fit your unique
-                            schedule and interests. Whether you're looking to explore the
-                            bustling cities, serene temples, or the natural beauty of the
-                            countryside, we can design an itinerary that perfectly matches
-                            your desires.
-                        </p>
-                    </div>
-
-                    <div class="reason_card second-item" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
-                        data-aos-duration="1000">
-                        <img src="{{asset("img/icons8-guide-80.png")}}" alt="" /><br />
-                        <small class="num reason_card_padding" style="display: block">03</small>
-                        <p class="reason_sub reason_card_padding">Experienced Guides</p>
-                        <p class="reason_desc reason_card_padding js_reason_card">
-                            Our experienced guides are not only local experts but also
-                            bilingual and multicultural. They bring a wealth of knowledge
-                            and a deep understanding of Japan's rich history and culture,
-                            ensuring you have an enriching and immersive experience.
-                        </p>
-                    </div>
-                </div>
+                <button class="back-button" onclick="showDestinations()">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Destinations
+                </button>
             </div>
-        </section>
-        <section class="section_third z3 relative">
-            <div class="section_third_wrapper">
-                <div class="secttion_third-left-area">
-                    <h2>We're Hiring Tour Guides!</h2>
-                    <p>Exciting opportunity! Japatour is seeking passionate Tour Guides. Apply today!</p>
-                    <button class="section_third_wrapper_btn"><a href="#contact">Become a tour guide</a></button>
-                </div>
-                <img src="{{asset("img/tourguide2.png")}}" alt="" class="tourguide_img">
+
+            <div id="tours-grid" class="tours-grid">
+                <!-- Tours will be dynamically loaded here -->
             </div>
-        </section>
-        <section class="section_forth z3 relative padding_section" id="tour">
-            <div class="section_forth_wrapper">
-                <h2 class="font_subtitle" data-aos="fade-up" 
-                    data-aos-duration="1000">
-                    Popular Destinations
-                </h2>
-                {{-- <div class="destinations_area" data-aos="fade-up" 
-                    data-aos-duration="1000">
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/tokyo.jpg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Tokyo</h5>
-                                <p class="card-text">
-                                    Immerse yourself in Tokyo’s vibrant energy, where cutting-edge modernity meets traditional charm. From bustling markets to tranquil gardens, the city offers endless adventures.
-                                </p>
-                            </div>
-                            
-                            <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/enoshima.jpeg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Enoshima</h5>
-                                <p class="card-text">
-                                    Venture to Enoshima Island for breathtaking ocean views, fascinating caves, and ancient shrines. A seaside gem perfect for nature lovers and adventurers.
-                                </p> 
-                            </div>                           
-                            <a href="https://www.getyourguide.com/tokyo-l193/enoshima-island-private-walking-tours-with-local-guide-t746962/?preview=YXO3ZGDVG6LFLS54WKFNLRWSG72CKGP7" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/yokohama.jpeg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Yokohama</h5>
-                                <p class="card-text">
-                                    Explore Yokohama’s scenic waterfront, historic architecture, and dynamic attractions like Chinatown and the Red Brick Warehouses. A perfect blend of culture and coastal beauty.
-                                </p>  
-                            </div>
-                            
-                            <a href="https://www.getyourguide.com/tokyo-l193/yokohama-private-personalized-tours-with-local-guide-t746936/?preview=UAJ52MRGL3EKZHRPKE6AD4GQMJ0W6D62" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/sankeien.jpeg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Sankeien Garden
-                                </h5>
-                                <p class="card-text">
-                                    Step into the peaceful haven of Sankeien Garden, a picturesque escape filled with historic buildings, koi ponds, and seasonal blooms that change throughout the year.
-                                </p>  
-                            </div>
-                            
-                            <a href="https://www.getyourguide.com/yokohama-l2128/sankeien-garden-private-walking-tour-with-local-expert--t845779/?preview=X1I5T00029M5BXTX5IQ8CTZJGOT6ZIRT" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/kamakura.jpg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Kamakura</h5>
-                                <p class="card-text">
-                                    Discover Kamakura, a city of timeless history and natural beauty. Marvel at the Great Buddha, wander through serene bamboo groves, and explore ancient Zen temples surrounded by lush greenery.
-                                </p>  
-                            </div>
-                            
-                            <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                </div> --}}
-
-
-
-                {{-- 切り替え --}}
-                <div class="destinations_area" data-aos="fade-up" 
-                    data-aos-duration="1000">
-                    @foreach ($tours as $tour)
-                        <div class="tour-card" data-id="{{ $tour->id }}">
-                            <!-- Image Section -->
-                            <div class="image-wrapper">
-                                <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="tour-image">
-        
-                                @if($tour->badge)
-                                    <div class="badge">{{ $tour->badge }}</div>
-                                @endif
-                                <div class="price-tag">¥{{ number_format($tour->price) }}<span class="price-note">~</span></div>
-                            </div>
-                            
-                            <!-- Content Section -->
-                            <div class="card-content">
-                                <h3 class="title">{{$tour->title}}</h3>
-                                
-                                <p class="overview">
-                                    {{mb_strlen($tour->overview) > 90 ? mb_substr($tour->overview, 0, 90) . '...' : $tour->overview}}
-                                </p>
-                                
-                                <!-- Features -->
-                                <div class="features">
-                                    <div class="feature">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                            <circle cx="12" cy="10" r="3"></circle>
-                                        </svg>
-                                        {{ $tour->destinations }}
-                                    </div>
-                                    <div class="feature">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <polyline points="12 6 12 12 16 14"></polyline>
-                                        </svg>
-                                        {{ $tour->hours }} hrs
-                                    </div>
-                                    <div class="feature">
-                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
-                                            <path d="M2 12h20"></path>
-                                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                                        </svg>
-                                        {{ $tour->languages }}
-                                    </div>
-                                </div>
-                                <button class="see-tour-btn">
-                                    <a href="{{ route('tour.show', $tour->id) }}">See Tour</a>
-                                </button>
-                            </div>
-                        </div>
-                    @endforeach
-                    {{-- <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/tokyo.jpg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Tokyo</h5>
-                                <p class="card-text">
-                                    Immerse yourself in Tokyo’s vibrant energy, where cutting-edge modernity meets traditional charm. From bustling markets to tranquil gardens, the city offers endless adventures.
-                                </p>
-                            </div>
-                            
-                            <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/enoshima.jpeg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Enoshima</h5>
-                                <p class="card-text">
-                                    Venture to Enoshima Island for breathtaking ocean views, fascinating caves, and ancient shrines. A seaside gem perfect for nature lovers and adventurers.
-                                </p> 
-                            </div>                           
-                            <a href="https://www.getyourguide.com/tokyo-l193/enoshima-island-private-walking-tours-with-local-guide-t746962/?preview=YXO3ZGDVG6LFLS54WKFNLRWSG72CKGP7" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/yokohama.jpeg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Yokohama</h5>
-                                <p class="card-text">
-                                    Explore Yokohama’s scenic waterfront, historic architecture, and dynamic attractions like Chinatown and the Red Brick Warehouses. A perfect blend of culture and coastal beauty.
-                                </p>  
-                            </div>
-                            
-                            <a href="https://www.getyourguide.com/tokyo-l193/yokohama-private-personalized-tours-with-local-guide-t746936/?preview=UAJ52MRGL3EKZHRPKE6AD4GQMJ0W6D62" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/sankeien.jpeg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Sankeien Garden
-                                </h5>
-                                <p class="card-text">
-                                    Step into the peaceful haven of Sankeien Garden, a picturesque escape filled with historic buildings, koi ponds, and seasonal blooms that change throughout the year.
-                                </p>  
-                            </div>
-                            
-                            <a href="https://www.getyourguide.com/yokohama-l2128/sankeien-garden-private-walking-tour-with-local-expert--t845779/?preview=X1I5T00029M5BXTX5IQ8CTZJGOT6ZIRT" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                    <div class="card" style="width: 25rem">
-                        <img src="{{asset("img/kamakura.jpg")}}" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <div>
-                                <h5 class="card-title">Kamakura</h5>
-                                <p class="card-text">
-                                    Discover Kamakura, a city of timeless history and natural beauty. Marvel at the Great Buddha, wander through serene bamboo groves, and explore ancient Zen temples surrounded by lush greenery.
-                                </p>  
-                            </div>
-                            
-                            <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="btn destination-btn" target="blank">See details</a>
-                        </div>
-                    </div>
-                {{-- </div>  --}}
-            </div>
-        </section>
+        </div>
+    </div>
+      </div>
+      </section>
 
         <section class="section_fifth z3 relative padding_section">
             <h2 class="font_subtitle aos-init aos-animate review_title" data-aos="fade-up" data-aos-duration="1000" style="color: #fff;">
-                Customers Review
+                Testimonials
             </h2>
             <div class="section_fifth_wrapper">
                 <div class="slider" id="js-slick">
@@ -501,94 +289,14 @@
                     </a>
             </div>
         </section>
-        <section class="section_sixth z3 relative padding_section" id="hot">
-            <div class="section_sixth_area">
-                <h2 class="font_subtitle" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
-                    data-aos-duration="1000" style="max-width: 1200px">
-                    Seasonal Highlights
-                </h2>
-                <div class="section_sixth_wrapper">
-                    <div class="hot_left_wrapper">
-                        <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
-                            <div class="hot_container_left">
-                                <img src="https://img.freepik.com/free-photo/cherry-blossoms-castle-himeji-japan_335224-167.jpg?semt=ais_hybrid" alt="" class="hot_img" />
-                            </div>
-                            <div class="hot_container_right">
-                                <p class="hot_normal_txt">
-                                    <span class="hot_exlarge_txt bold" style="color: #52aaf9">01</span>
-                                    Spring
-                                </p>
-                                <p class="hot_large_txt bold">Cherry Blossoms</p>
-                                <p class="hot_sml_txt">LIFESTYLE & TRAVEL</p>
-                                <p class="hot_normal_txt">
-                                    Spring in Japan is all about cherry blossoms, where parks in Kyoto and Tokyo bloom with pink petals, creating the perfect "Hanami" picnic spots. Vibrant spring festivals add cultural charm with colorful parades and traditional performances.
-                                </p>
-                                <div class="reason_btn_box reason_card_padding">
-                                    <button class="reason_see_more_btn">see more</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
-                            <div class="hot_container_left">
-                                <img src="{{asset("img/summer.jpeg")}}" alt="" class="hot_img" />
-                            </div>
-                            <div class="hot_container_right">
-                                <p class="hot_normal_txt">
-                                    <span class="hot_exlarge_txt bold" style="color: #52aaf9">02</span>
-                                    Summer
-                                </p>
-                                <p class="hot_large_txt bold">Fireworks, Festivals</p>
-                                <p class="hot_sml_txt">LIFESTYLE & TRAVEL</p>
-                                <p class="hot_normal_txt">
-                                    In summer, dazzling fireworks illuminate the night skies, while lively festivals like Bon Odori bring people together for music, dance, and delicious street food.
-                                </p>
-                                <div class="reason_btn_box reason_card_padding">
-                                    <button class="reason_see_more_btn">see more</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
-                            <div class="hot_container_left">
-                                <img src="{{asset("img/fall.jpeg")}}" alt="" class="hot_img" />
-                            </div>
-                            <div class="hot_container_right">
-                                <p class="hot_normal_txt">
-                                    <span class="hot_exlarge_txt bold" style="color: #52aaf9">03</span>
-                                    Autumn
-                                </p>
-                                <p class="hot_large_txt bold">Autumn Foliage, Seasonal Cuisine
-                                </p>
-                                <p class="hot_sml_txt">LIFESTYLE & TRAVEL</p>
-                                <p class="hot_normal_txt">
-                                    Autumn offers breathtaking foliage in places like Nikko and Kyoto, with fiery red and golden leaves, complemented by seasonal delights such as matsutake mushrooms and sweet Kyoho grapes.
-                                </p>
-                                <div class="reason_btn_box reason_card_padding">
-                                    <button class="reason_see_more_btn">see more</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hot_container"  data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
-                            <div class="hot_container_left">
-                                <img src="https://www.theinvisibletourist.com/wp-content/uploads/2019/05/nagano-3068677_1920_e.jpg" alt="" class="hot_img" />
-                            </div>
-                            <div class="hot_container_right">
-                                <p class="hot_normal_txt">
-                                    <span class="hot_exlarge_txt bold" style="color: #52aaf9">04</span>
-                                    Winter
-                                </p>
-                                <p class="hot_large_txt bold">Snow Festivals, Onsen Hot Springs
-                                </p>
-                                <p class="hot_sml_txt">LIFESTYLE & TRAVEL</p>
-                                <p class="hot_normal_txt">
-                                    Winter transforms Japan into a wonderland with snow festivals in Hokkaido, featuring impressive ice sculptures and romantic lights. To complete the experience, relaxing in an onsen hot spring while surrounded by snowy landscapes provides the ultimate winter retreat.
-                                </p>
-                                <div class="reason_btn_box reason_card_padding">
-                                    <button class="reason_see_more_btn">see more</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <section class="section_third z3 relative">
+            <div class="section_third_wrapper">
+                <div class="secttion_third-left-area">
+                    <h2>We're Hiring Tour Guides!</h2>
+                    <p>Exciting opportunity! Japatour is seeking passionate Tour Guides. Apply today!</p>
+                    <button class="section_third_wrapper_btn"><a href="#contact">Become a tour guide</a></button>
                 </div>
+                <img src="{{asset("img/tourguide2.png")}}" alt="" class="tourguide_img">
             </div>
         </section>
         <section class="section_seventh z3 relative padding_section" id="contact">
@@ -674,5 +382,150 @@
                 }
             });
         </script>
+<script>
+        // Sample tour data for demo
+        const tourData = @json($tours);
+
+    
+      // Show tours for selected destination
+    function showTours(destination) {
+            // Hide destinations, show tours
+            document.getElementById('destinations-section').style.display = 'none';
+            document.getElementById('tours-section').classList.add('active');
+            
+            // Update destination name
+            document.getElementById('destination-name').textContent = destination.charAt(0).toUpperCase() + destination.slice(1);
+            
+            // Get tours for this destination
+            const tours = tourData[destination] || [];
+            
+            // Render tours
+            const toursGrid = document.getElementById('tours-grid');
+            
+            if (tours.length === 0) {
+                toursGrid.innerHTML = `
+                    <div class="no-tours">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <h3>No tours available yet</h3>
+                            <p>We're working on adding tours for this destination.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            toursGrid.innerHTML = tours.map(tour => `
+                  <div class="tour-card">
+                        ${tour.bookings_count > 100 ? `
+                              <div class="popular-tag">
+                              <i class="fas fa-fire"></i> Popular
+                              </div>
+                        ` : ''}
+                        
+                        <div class="image-wrapper">
+                              <img src="/storage/${tour.hero_image}" alt="${tour.title}" class="tour-image">
+                              <div class="price-badge">
+                                    <span class="currency">¥</span>${tour.price.toLocaleString()}<span class="from">~</span>
+                              </div>
+                              ${tour.badge ? `
+                              <div class="special-badge" 
+                                    style="background: ${tour.badge_color || 'var(--accent-color)'};">
+                                    <i class="fas fa-${tour.badge_icon || 'star'}"></i> ${tour.badge}
+                              </div>
+                              ` : ''}
+                        </div>
+                        
+                        <div class="card-content">
+                              <div class="title-section">
+                                    <h3 class="tour-title">${tour.title}</h3>
+                                    <div class="tour-location">
+                                          <i class="fas fa-map-marker-alt"></i>
+                                          <span>${tour.destinations}</span>
+                                    </div>
+                              </div>
+                              
+                              <p class="tour-description">
+                                    ${tour.overview.length > 100 ? tour.overview.substring(0, 100) + '...' : tour.overview}
+                              </p>
+                              
+                              <div class="features-grid">
+                                    <div class="feature-item">
+                                          <i class="fas fa-clock"></i>
+                                          <span>${tour.hours} hours</span>
+                                    </div>
+                                    <div class="feature-item">
+                                          <i class="fas fa-users"></i>
+                                          <span>Max ${tour.max_participants || 15} people</span>
+                                    </div>
+                                    <div class="feature-item">
+                                          <i class="fas fa-language"></i>
+                                          <span>${tour.languages}</span>
+                                    </div>
+                                    <div class="feature-item">
+                                          <i class="fas fa-${tour.includes_meal ? 'utensils' : 'walking'}"></i>
+                                          <span>${tour.includes_meal ? 'Meal included' : 'Walking tour'}</span>
+                                    </div>
+                              </div>
+                              
+                              <div class="rating-section">
+                                    <div class="rating">
+                                          <div class="stars">
+                                                ${generateStars(tour.rating)}
+                                          </div>
+                                          <span class="rating-text">
+                                                <strong>${tour.rating.toFixed(1)}</strong> 
+                                                (${tour.reviewCount} reviews)
+                                          </span>
+                                    </div>
+                              </div>
+                        </div>
+                        
+                        <div class="quick-view" onclick="window.location.href='/tour/show/${tour.id}'">
+                              <i class="fas fa-eye"></i> See details
+                        </div>
+                  </div>
+                  `).join('');
+
+            // Helper function to generate star ratings
+            function generateStars(rating) {
+                  let stars = '';
+                  for (let i = 1; i <= 5; i++) {
+                        if (i <= Math.floor(rating)) {
+                              stars += '<i class="fas fa-star"></i>';
+                        } else if (i - 0.5 <= rating) {
+                              stars += '<i class="fas fa-star-half-alt"></i>';
+                        } else {
+                              stars += '<i class="far fa-star"></i>';
+                        }
+                  }
+                  return stars;
+            }
+                  
+      }
+
+        // Show destinations (back button)
+      function showDestinations() {
+            document.getElementById('tours-section').classList.remove('active');
+            document.getElementById('destinations-section').style.display = 'block';
+      }
+
+        // Filter destinations by region
+      function filterDestinations(region) {
+            const cards = document.querySelectorAll('.destination-card');
+            const tabs = document.querySelectorAll('.filter-tab');
+            
+            // Update active tab
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter cards
+            cards.forEach(card => {
+                  if (region === 'all' || card.dataset.region === region) {
+                        card.style.display = 'block';
+                  } else {
+                        card.style.display = 'none';
+                  }
+            });
+      }
+</script>
 @endsection
 
