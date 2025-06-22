@@ -11,7 +11,8 @@ use App\Models\Region;
 use App\Services\TourService;
 use Illuminate\Support\Facades\Log;
 
-class TourController extends Controller{
+class TourController extends Controller
+{
     protected $tourService;
     public function __construct(TourService $tourService)
     {
@@ -39,15 +40,15 @@ class TourController extends Controller{
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateTourRequest $request){
+    public function store(CreateTourRequest $request)
+    {
         try {
             $this->tourService->createTour($request);
-            return redirect()->route("tour_list")->with("success", "success to create Tours!");  ;
+            return redirect()->route("tour_list")->with("success", "success to create Tours!");;
         } catch (\Exception $e) {
             Log::debug($e);
             return redirect()->back()->with("error", "failed to create tours: " . $e->getMessage())->withInput();
         }
-
     }
 
     /**
@@ -59,7 +60,7 @@ class TourController extends Controller{
             $tourData = $this->tourService->getTourById($id);
             $tour = $tourData["tour"];
             $averageRate = $tourData["averageRate"];
-            return view("show", compact("tour", "averageRate"));
+            return view("show2", compact("tour", "averageRate"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
         }
@@ -103,7 +104,7 @@ class TourController extends Controller{
     {
         try {
             $this->tourService->deleteTour($id);
-            return redirect()->route("tour_list")->with("success", "success to delete Tour!");  
+            return redirect()->route("tour_list")->with("success", "success to delete Tour!");
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to delere Tour: " . $e->getMessage());
         }
