@@ -34,7 +34,7 @@ class TourController extends Controller
         $categories = Category::getAllCategories();
         $regions = Region::getAllRigions();
         $services = AdditionalService::getServices();
-        return view("admin.tour_create", compact("services",  "categories", "regions"));
+        return view("admin.tour_create2", compact("services",  "categories", "regions"));
     }
 
     /**

@@ -174,7 +174,7 @@
             </section>
 
             <!-- Overview Section -->
-            <section id="overview" class="py-20 max-w-[960px] m-auto">
+            <section id="overview" class="my-20 pb-20 max-w-[1100px] m-auto">
                   <div class="container mx-auto px-6">
                         <div class="grid md:grid-cols-2 gap-12 items-center">
                               <div>
@@ -260,8 +260,8 @@
             </section>
 
             <!-- Tour Selection with Modern Cards -->
-            <section id="tours" class="py-20 -mt-20  bg-gray-50">
-                  <div class="max-w-7xl mx-auto px-6">
+            <section id="tours" class="py-20 -mt-20  bg-gray-50 ">
+                  <div class="mx-auto px-6 max-w-[1100px] m-auto">
                         <div class="text-center mb-12">
                               <h2 class="text-4xl font-bold text-gray-800 mb-4">Choose Your Tokyo Adventure</h2>
                               <p class="text-gray-600 text-lg max-w-2xl mx-auto">
@@ -275,7 +275,7 @@
                               @foreach ($tour->itinerary as $index => $itinerary)
                               <div class="bg-white rounded-2xl overflow-hidden smooth-shadow-lg card-hover cursor-pointer"
                                     onclick="showTourDetails('highlights')">
-                                    <div class="relative h-56 overflow-hidden">
+                                    <div class="relative h-48 overflow-hidden">
                                           <img src="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=600&h=300&fit=crop"
                                                 alt="Tokyo Temple" class="w-full h-full object-cover">
                                           <div class="absolute top-4 left-4">
@@ -286,20 +286,20 @@
                                           </div>
                                           <div class="absolute bottom-4 right-4">
                                                 <div class="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                                                      <span class="text-2xl font-bold text-gray-800">¥12,000</span>
+                                                      <span class="text-xl font-bold text-gray-800">¥12,000</span>
                                                 </div>
                                           </div>
                                     </div>
 
-                                    <div class="p-6">
+                                    <div class="p-4">
                                           <h3 class="text-xl font-bold text-gray-800 mb-2">{{$itinerary["title"]}}</h3>
-                                          <p class="text-gray-600 mb-4">{{$itinerary["description"]}}</p>
+                                          <p class="text-gray-600 mb-4 line-clamp-3 text-sm">{{$itinerary["description"]}}</p>
 
                                           <div class="flex items-center justify-between mb-4">
-                                                <div class="flex items-center gap-4 test-base text-gray-500">
-                                                      <span><i class="fas fa-clock text-[#e92929]"></i> {{$tour->hours}}
+                                                <div class="flex items-center gap-4 test-sm text-gray-500">
+                                                      <span class="text-sm"><i class="fas fa-clock text-[#e92929]"></i> {{$tour->hours}}
                                                             hours</span>
-                                                      <span><i class="fas fa-users text-[#e92929]"></i> Max
+                                                      <span class="text-sm"><i class="fas fa-users text-[#e92929]"></i> Max
                                                             {{$tour->max_participants}}</span>
                                                 </div>
                                           </div>
@@ -312,7 +312,7 @@
                                           </div>
 
                                           <button
-                                                class="w-full bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+                                                class="w-full bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white py-3 rounded-xl text-sm font-semibold hover:shadow-lg transition-all">
                                                 View Details <i class="fas fa-arrow-right ml-2"></i>
                                           </button>
                                     </div>
@@ -338,9 +338,7 @@
                               <h2 class="text-4xl font-bold mb-4">Capture the Moments</h2>
                               <p class="text-gray-600 text-lg">A visual journey through our tour highlights</p>
                         </div>
-
-                        <!-- mx-auto を追加して中央寄せ -->
-                        <div class="grid grid-cols-3 gap-4 max-w-[1200px] mx-auto">
+                        <div class="grid grid-cols-3 gap-4 max-w-[1100px] mx-auto">
                               <div class="space-y-4">
                                     <img src="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=400&h=500&fit=crop"
                                           alt="Gallery"
