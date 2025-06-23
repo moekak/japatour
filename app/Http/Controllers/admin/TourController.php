@@ -9,6 +9,7 @@ use App\Models\AdditionalService;
 use App\Models\Category;
 use App\Models\Region;
 use App\Services\TourService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class TourController extends Controller
@@ -40,9 +41,21 @@ class TourController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateTourRequest $request)
-    {
+    // public function store(CreateTourRequest $request)
+    // {
+    //     try {
+    //         $this->tourService->createTour($request);
+    //         return redirect()->route("tour_list")->with("success", "success to create Tours!");;
+    //     } catch (\Exception $e) {
+    //         Log::debug($e);
+    //         return redirect()->back()->with("error", "failed to create tours: " . $e->getMessage())->withInput();
+    //     }
+    // }
+
+    public function store(Request $request){
         try {
+            print_r($request->all());
+            exit;
             $this->tourService->createTour($request);
             return redirect()->route("tour_list")->with("success", "success to create Tours!");;
         } catch (\Exception $e) {

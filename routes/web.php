@@ -42,7 +42,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::get("/tour/list", [TourController::class, "index"])->name("tour_list");
-    Route::post("/tour/store", [TourController::class, "store"])->name("tours.store");
     Route::post("/tour/update/{id}", [TourController::class, "update"])->name("tour.update");
     Route::get("/tour/edit/{id}", [TourController::class, "edit"])->name("tour.edit");
     Route::post("/tour/show", [SendContactMail::class, "SendContactMail"])->name("tours.show");
@@ -58,7 +57,9 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+
 Route::get("/tour/create", [TourController::class, "create"])->name("admin.tour_create");
+Route::post("/tour/store", [TourController::class, "store"])->name("tours.store");
 Auth::routes(['register' => false]);
 
 Route::post('/payment-intent', [BookingController::class, 'createPaymentIntent']);

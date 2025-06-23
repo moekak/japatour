@@ -4,6 +4,7 @@
     "/js/common.js": "/js/common.js",
     "/js/show.js": "/js/show.js",
     "/js/tour_create.js": "/js/tour_create.js",
+    "/js/tour_create2.js": "/js/tour_create2.js",
     "/js/tour_edit.js": "/js/tour_edit.js",
     "/js/tour_book.js": "/js/tour_book.js"
 }
