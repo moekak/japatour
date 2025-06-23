@@ -80,7 +80,7 @@
                                     <div class="w-8 h-8 bg-[#e92929] rounded-lg flex items-center justify-center">
                                           <i class="fas fa-mountain text-white test-base"></i>
                                     </div>
-                                    <span class="font-bold text-xl">Adventure Tours</span>
+                                    <span class="font-bold text-xl">Japatour</span>
                               </div>
                               <nav class="hidden md:flex items-center gap-8">
                                     <a href="#overview"
@@ -293,13 +293,16 @@
 
                                     <div class="p-4">
                                           <h3 class="text-xl font-bold text-gray-800 mb-2">{{$itinerary["title"]}}</h3>
-                                          <p class="text-gray-600 mb-4 line-clamp-3 text-sm">{{$itinerary["description"]}}</p>
+                                          <p class="text-gray-600 mb-4 line-clamp-3 text-sm">
+                                                {{$itinerary["description"]}}</p>
 
                                           <div class="flex items-center justify-between mb-4">
                                                 <div class="flex items-center gap-4 test-sm text-gray-500">
-                                                      <span class="text-sm"><i class="fas fa-clock text-[#e92929]"></i> {{$tour->hours}}
+                                                      <span class="text-sm"><i class="fas fa-clock text-[#e92929]"></i>
+                                                            {{$tour->hours}}
                                                             hours</span>
-                                                      <span class="text-sm"><i class="fas fa-users text-[#e92929]"></i> Max
+                                                      <span class="text-sm"><i class="fas fa-users text-[#e92929]"></i>
+                                                            Max
                                                             {{$tour->max_participants}}</span>
                                                 </div>
                                           </div>
