@@ -64,7 +64,8 @@
 
       <!-- Main Content -->
       <main class="pt-20 pb-10">
-            <form class="container mx-auto px-6 max-w-[1100px]" action="{{ route('tours.store') }}" method="POST" enctype="multipart/form-data">
+            <form class="container mx-auto px-6 max-w-[1100px]" action="{{ route('tours.store') }}" method="POST"
+                  enctype="multipart/form-data">
                   @csrf
                   <!-- Page Header -->
                   <div class="mb-8">
@@ -129,14 +130,15 @@
                                     </div>
                                     Hero Image
                               </h2>
-                              <img src="" alt="" class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#e92929] transition-colors cursor-pointer hidden preview_src">
-                              <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#e92929] transition-colors cursor-pointer">
+                              <img src="" alt=""
+                                    class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#e92929] transition-colors cursor-pointer hidden preview_src">
+                              <div
+                                    class="hero_image_element border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#e92929] transition-colors cursor-pointer">
                                     <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
                                     <p class="text-gray-600 font-medium mb-2">Upload main tour image</p>
                                     <p class="text-sm text-gray-500">This will be displayed as the main banner image</p>
                                     <p class="text-sm text-gray-500 mb-4">Recommended size: 1920x1080px</p>
-                                    <label
-                                          for="hero_image"
+                                    <label for="hero_image"
                                           class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm">
                                           Select Hero Image
                                     </label>
@@ -203,7 +205,8 @@
                                                                   placeholder="Brief description of this highlight..."
                                                                   class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
                                                       </div>
-                                                      <button class="p-2 text-gray-400 hover:text-red-500 transition-colors delete_highlight-button">
+                                                      <button
+                                                            class="p-2 text-gray-400 hover:text-red-500 transition-colors delete_highlight-button">
                                                             <i class="fas fa-trash"></i>
                                                       </button>
                                                 </div>
@@ -211,8 +214,7 @@
                                     </div>
                               </div>
 
-                              <button
-                                    type="button"
+                              <button type="button"
                                     class="duplicate_button mt-4 w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-[#e92929] hover:text-[#e92929] transition-colors flex items-center justify-center gap-2">
                                     <i class="fas fa-plus"></i>
                                     <span class="font-medium">Add Highlight</span>

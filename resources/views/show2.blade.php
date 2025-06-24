@@ -294,7 +294,8 @@
                                     <div class="p-4">
                                           <h3 class="text-xl font-bold text-gray-800 mb-2">{{$itinerary["title"]}}</h3>
                                           <p class="text-gray-600 mb-4 line-clamp-3 text-sm">
-                                                {{$itinerary["description"]}}</p>
+                                                {{$itinerary["description"]}}
+                                          </p>
 
                                           <div class="flex items-center justify-between mb-4">
                                                 <div class="flex items-center gap-4 test-sm text-gray-500">
