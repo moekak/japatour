@@ -63,6 +63,68 @@ function _deleteElement(button) {
 
 /***/ }),
 
+/***/ "./resources/js/components/elementOperation2/itinerary/DupeItineraryActivity.js":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/elementOperation2/itinerary/DupeItineraryActivity.js ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DupeItineraryActivity)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _classPrivateMethodInitSpec(e, a) { _checkPrivateRedeclaration(e, a), a.add(e); }
+function _checkPrivateRedeclaration(e, t) { if (t.has(e)) throw new TypeError("Cannot initialize the same private elements twice on an object"); }
+function _assertClassBrand(e, t, n) { if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n; throw new TypeError("Private element is not present on this object"); }
+var _DupeItineraryActivity_brand = /*#__PURE__*/new WeakSet();
+var DupeItineraryActivity = /*#__PURE__*/function () {
+  function DupeItineraryActivity() {
+    _classCallCheck(this, DupeItineraryActivity);
+    _classPrivateMethodInitSpec(this, _DupeItineraryActivity_brand);
+    this.template = document.getElementById("activity_template").innerHTML;
+    this.wrapper = document.getElementById("activity-wrapper");
+    this.section = document.getElementById("itinerary-section");
+    this.initialize();
+  }
+  return _createClass(DupeItineraryActivity, [{
+    key: "initialize",
+    value: function initialize() {
+      this.section.addEventListener("click", _assertClassBrand(_DupeItineraryActivity_brand, this, _handleEvent).bind(this));
+    }
+  }]);
+}();
+function _handleEvent(e) {
+  var clickedElement = e.target;
+  if (clickedElement.closest(".add-activity")) _assertClassBrand(_DupeItineraryActivity_brand, this, _duplicateElement).call(this);
+  if (clickedElement.closest(".remove-activity")) _assertClassBrand(_DupeItineraryActivity_brand, this, _deleteElement).call(this, clickedElement.closest(".remove-activity"));
+}
+// Tour Hightlightの要素の追加
+function _duplicateElement() {
+  _assertClassBrand(_DupeItineraryActivity_brand, this, _createDOM).call(this);
+}
+function _createDOM() {
+  var newDiv = document.createElement("div");
+  newDiv.classList.add("activity-item");
+  newDiv.innerHTML = this.template;
+  this.wrapper.appendChild(newDiv);
+}
+// Tour highlightの要素の削除
+function _deleteElement(button) {
+  var targetElement = button.closest(".activity-item");
+  console.log(button);
+  console.log(targetElement);
+  this.wrapper.removeChild(targetElement);
+}
+
+
+/***/ }),
+
 /***/ "./resources/js/components/fileOperation/FileOperation.js":
 /*!****************************************************************!*\
   !*** ./resources/js/components/fileOperation/FileOperation.js ***!
@@ -194,11 +256,14 @@ var __webpack_exports__ = {};
   \********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_elementOperation2_DupeHighlight_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/elementOperation2/DupeHighlight.js */ "./resources/js/components/elementOperation2/DupeHighlight.js");
-/* harmony import */ var _components_fileOperation_FileOperation_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/fileOperation/FileOperation.js */ "./resources/js/components/fileOperation/FileOperation.js");
+/* harmony import */ var _components_elementOperation2_itinerary_DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/elementOperation2/itinerary/DupeItineraryActivity.js */ "./resources/js/components/elementOperation2/itinerary/DupeItineraryActivity.js");
+/* harmony import */ var _components_fileOperation_FileOperation_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/fileOperation/FileOperation.js */ "./resources/js/components/fileOperation/FileOperation.js");
+
 
 
 new _components_elementOperation2_DupeHighlight_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
-new _components_fileOperation_FileOperation_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+new _components_fileOperation_FileOperation_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
+new _components_elementOperation2_itinerary_DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
 })();
 
 /******/ })()
