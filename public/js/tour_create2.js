@@ -90,6 +90,8 @@ var DupeItineraryActivity = /*#__PURE__*/function () {
     this.template = document.getElementById("activity_template").innerHTML;
     this.wrapper = document.getElementById("activity-wrapper");
     this.section = document.getElementById("itinerary-section");
+    this.itineraryIndex = 0;
+    this.activityIndex = 0;
     this.initialize();
   }
   return _createClass(DupeItineraryActivity, [{
@@ -106,12 +108,16 @@ function _handleEvent(e) {
 }
 // Tour Hightlightの要素の追加
 function _duplicateElement() {
+  this.itineraryIndex++;
+  this.activityIndex++;
   _assertClassBrand(_DupeItineraryActivity_brand, this, _createDOM).call(this);
 }
 function _createDOM() {
+  var rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, this.activityIndex);
+  ;
   var newDiv = document.createElement("div");
   newDiv.classList.add("activity-item");
-  newDiv.innerHTML = this.template;
+  newDiv.innerHTML = rawHTML;
   this.wrapper.appendChild(newDiv);
 }
 // Tour highlightの要素の削除

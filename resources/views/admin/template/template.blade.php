@@ -29,12 +29,14 @@
                         <div class="grid md:grid-cols-3 gap-3">
                               <div class="md:col-span-2">
                                     <input type="text"
+                                          name="itinerary[{itinerary_index}][activity_title][{activity_index}]"
                                           placeholder="e.g., Senso-ji Temple Visit"
                                           class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
                               </div>
                         </div>
                         <div>
                               <textarea rows="2"
+                                    name="itinerary[{itinerary_index}][activity_description][{activity_index}]"
                                     placeholder="Brief description of the activity..."
                                     class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
                         </div>
