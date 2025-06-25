@@ -369,7 +369,7 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <button type="button"
-                                                                                    class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity">
+                                                                                    class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
                                                                                     <i class="fas fa-times"></i>
                                                                                 </button>
                                                                         </div>
@@ -378,7 +378,7 @@
                                                         </div>
                                                         
                                                         <!-- Add Activity Button -->
-                                                        <button type="button" class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity">
+                                                        <button type="button" class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
                                                             <i class="fas fa-plus-circle"></i>
                                                             Add activity
                                                         </button>
@@ -396,23 +396,25 @@
 
                                                 <div>
                                                         <label class="block text-sm font-medium text-gray-700 mb-2">Activity Highlights</label>
-                                                        <div class="space-y-2">
-                                                            <div class="flex items-center gap-2">
-                                                                    <input type="text"
-                                                                        name="itinerary[0][activity_highlight][]"
-                                                                        placeholder="e.g., Tokyo's oldest Buddhist temple"
-                                                                        class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                    <button
-                                                                        class="p-2 text-gray-400 hover:text-red-500 transition-colors">
-                                                                        <i class="fas fa-times"></i>
-                                                                    </button>
+                                                        <div class="space-y-2" id="itinerary_highlight-wrapper">
+                                                            <div class="itinerary_highlight-item">
+                                                                <div class="flex items-center gap-2">
+                                                                        <input type="text"
+                                                                            name="itinerary[0][activity_highlight][]"
+                                                                            placeholder="e.g., Tokyo's oldest Buddhist temple"
+                                                                            class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                        <button
+                                                                            class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
+                                                                            <i class="fas fa-times"></i>
+                                                                        </button>
+                                                                </div>
                                                             </div>
-                                                            <button
-                                                                    class="text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1">
-                                                                    <i class="fas fa-plus-circle"></i>
-                                                                    Add highlight
-                                                            </button>
                                                         </div>
+                                                        <button type="button"
+                                                                class="text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-itinerary-highlight_button">
+                                                                <i class="fas fa-plus-circle"></i>
+                                                                Add highlight
+                                                        </button>
                                                 </div>
                                             </div>
                                     </div>

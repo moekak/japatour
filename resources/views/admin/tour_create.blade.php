@@ -297,7 +297,7 @@
                                             <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
                                         </div>
                                     </div>                          
-                                    <button type="button" class="add-itinerary-highlight btn-secondary"><i class="fas fa-plus"></i> Add Itinerary highlights</button>
+                                    <button type="button" class="add-button btn-secondary"><i class="fas fa-plus"></i> Add Itinerary highlights</button>
                                 </div>
                                 <div class="form-group">
                                     <label>Schedule <span class="required">*</span></label>

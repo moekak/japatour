@@ -1,11 +1,11 @@
 import ItineraryInterface from "./ItineraryInterface.js"
 
-export default class DupeItineraryActivity extends ItineraryInterface {
+export default class DupeItineraryHighlight extends ItineraryInterface {
       constructor(){
             super(); 
-            this.template = document.getElementById("activity_template").innerHTML
-            this.wrapper = document.getElementById("activity-wrapper")
-            this.activityIndex = 0
+            this.template = document.getElementById("itinerary-highlight_template").innerHTML
+            this.wrapper = document.getElementById("itinerary_highlight-wrapper")
+
       }
 
 
@@ -24,7 +24,7 @@ export default class DupeItineraryActivity extends ItineraryInterface {
       createDOM(){
             let rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, this.activityIndex);;
             const newDiv = document.createElement("div")
-            newDiv.classList.add("activity-item")
+            newDiv.classList.add("itinerary_highlight-item")
             newDiv.innerHTML = rawHTML
             this.wrapper.appendChild(newDiv)
       }
@@ -34,11 +34,7 @@ export default class DupeItineraryActivity extends ItineraryInterface {
        * @override
        */
       deleteElement(button){
-            const targetElement = button.closest(".activity-item")
-            console.log(button);
-            console.log(targetElement);
-            
-            
+            const targetElement = button.closest(".itinerary_highlight-item")
             this.wrapper.removeChild(targetElement)
       }
 }

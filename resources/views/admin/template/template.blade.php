@@ -42,7 +42,7 @@
                         </div>
                   </div>
                   <button type="button"
-                        class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity">
+                        class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
                         <i class="fas fa-times"></i>
                   </button>
             </div>
@@ -196,7 +196,7 @@
                                                                   </div>
                                                             </div>
                                                             <button type="button"
-                                                                  class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity">
+                                                                  class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity-button">
                                                                   <i class="fas fa-times"></i>
                                                             </button>
                                                       </div>
@@ -230,7 +230,7 @@
                                                       placeholder="e.g., Tokyo's oldest Buddhist temple"
                                                       class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
                                                 <button
-                                                      class="p-2 text-gray-400 hover:text-red-500 transition-colors">
+                                                      class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
                                                       <i class="fas fa-times"></i>
                                                 </button>
                                           </div>
@@ -252,3 +252,19 @@
             </button>
       </div>
 </template>
+
+
+
+{{-- ACTIVITY TEMPLATE --}}
+<template id="itinerary-highlight_template">
+      <div class="flex items-center gap-2">
+            <input type="text"
+                  name="itinerary[{itinerary_index}][activity_highlight][]"
+                  placeholder="e.g., Tokyo's oldest Buddhist temple"
+                  class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+            <button
+                  class="p-2 text-gray-400 hover:text-red-500 transition-colors">
+                  <i class="fas fa-times"></i>
+            </button>
+      </div>
+</template>>
