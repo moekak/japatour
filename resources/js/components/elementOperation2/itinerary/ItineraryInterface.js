@@ -1,8 +1,9 @@
 export default class ItineraryInterface{
       constructor(){
-            this.itineraryIndex = 0
             this.template = ""
             this.wrapper = ""
+            this.activityIndex = 0
+            this.itineraryIndex = 0
       }
 
 

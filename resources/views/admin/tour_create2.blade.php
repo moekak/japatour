@@ -222,214 +222,219 @@
                     </div>
 
                     <!-- Multiple Tour Itineraries Section -->
-                    <div class="space-y-6">
+                    <div class="space-y-6" id="itinerary-section">
                         <h2 class="text-2xl font-bold text-gray-800">Tour Itineraries</h2>
-                        <div class="itinerary-item">
-                            <div class="bg-white rounded-xl shadow-sm p-6 relative">
-                                <div class="absolute top-6 right-6">
-                                    <button class="p-2 text-gray-400 hover:text-red-500 transition-colors"
-                                            title="Delete this itinerary">
-                                            <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                                <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                                    <div
-                                            class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                                            <i class="fas fa-route text-[#e92929]"></i>
+                        <div id="itinerary-wrapper">
+                            <div class="itinerary-item">
+                                <div class="bg-white rounded-xl shadow-sm p-6 relative">
+                                    <div class="absolute top-6 right-6">
+                                        <button class="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                                                title="Delete this itinerary">
+                                                <i class="fas fa-trash"></i>
+                                        </button>
                                     </div>
-                                    Tour Itinerary & Details #1
-                                </h3>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                                        <div
+                                                class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-route text-[#e92929]"></i>
+                                        </div>
+                                        Tour Itinerary & Details #1
+                                    </h3>
 
-                                <!-- Tour Basic Details -->
-                                <div class="bg-gray-50 rounded-lg p-5 mb-6">
+                                    <!-- Tour Basic Details -->
+                                    <div class="bg-gray-50 rounded-lg p-5 mb-6">
+                                        <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
+                                                <i class="fas fa-info-circle text-gray-400 mr-2"></i>
+                                                Tour Information
+                                        </h4>
+                                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">Duration (hours) *</label>
+                                                    <input  name="itinerary[0][duration]" type="number" placeholder="e.g., 8" min="1" max="24"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">MaxParticipants *</label>
+                                                    <input name="itinerary[0][max_participants]" type="number" placeholder="e.g., 15" min="1" max="50"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">Tour Type *</label>
+                                                    <select name="itinerary[0][tour_type]"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                            <option>City Tour</option>
+                                                            <option>Cultural Experience</option>
+                                                            <option>Food Tour</option>
+                                                            <option>Nature & Adventure</option>
+                                                            <option>Night Tour</option>
+                                                    </select>
+                                                </div>
+
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">Meeting Point *</label>
+                                                    <input type="text" name="itinerary[0][meeting_point]"
+                                                            placeholder="e.g., Hotel lobby or JR Shibuya Station"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">Adult Price (¥) *</label>
+                                                    <input name="itinerary[0][adult_price]" type="number" placeholder="e.g., 12000" min="0"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+
+                                                <div>
+                                                    <label class="block text-sm font-medium text-gray-700 mb-1">Child Price (¥)</label>
+                                                    <input name="itinerary[0][child_price]" type="number" placeholder="e.g., 6000" min="0"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+                                        </div>
+
+                                        <div class="mt-4">
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Languages
+                                                    Available</label>
+                                                <div class="flex flex-wrap gap-3">
+                                                    <label class="flex items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" checked name="itinerary[0][languages][]"
+                                                                class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
+                                                            <span class="text-sm text-gray-700">English</span>
+                                                    </label>
+                                                    <label class="flex items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" checked name="itinerary[0][languages][]"
+                                                                class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
+                                                            <span class="text-sm text-gray-700">Japanese</span>
+                                                    </label>
+                                                    <label class="flex items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" name="itinerary[0][languages][]"
+                                                                class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
+                                                            <span class="text-sm text-gray-700">Chinese</span>
+                                                    </label>
+                                                    <label class="flex items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" name="itinerary[0][languages][]"
+                                                                class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
+                                                            <span class="text-sm text-gray-700">Korean</span>
+                                                    </label>
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Itinerary Items -->
                                     <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
-                                            <i class="fas fa-info-circle text-gray-400 mr-2"></i>
-                                            Tour Information
+                                        <i class="fas fa-list-ol text-gray-400 mr-2"></i>
+                                        Itinerary Schedule
                                     </h4>
-                                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                            <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Duration (hours) *</label>
-                                                <input  name="itinerary[0][duration]" type="number" placeholder="e.g., 8" min="1" max="24"
-                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                            </div>
 
-                                            <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">MaxParticipants *</label>
-                                                <input name="itinerary[0][max_participants]" type="number" placeholder="e.g., 15" min="1" max="50"
-                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                            </div>
-
-                                            <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Tour Type *</label>
-                                                <select name="itinerary[0][tour_type]"
-                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                        <option>City Tour</option>
-                                                        <option>Cultural Experience</option>
-                                                        <option>Food Tour</option>
-                                                        <option>Nature & Adventure</option>
-                                                        <option>Night Tour</option>
-                                                </select>
-                                            </div>
-
-                                            <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Meeting Point *</label>
-                                                <input type="text" name="itinerary[0][meeting_point]"
-                                                        placeholder="e.g., Hotel lobby or JR Shibuya Station"
-                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                            </div>
-
-                                            <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Adult Price (¥) *</label>
-                                                <input name="itinerary[0][adult_price]" type="number" placeholder="e.g., 12000" min="0"
-                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                            </div>
-
-                                            <div>
-                                                <label class="block text-sm font-medium text-gray-700 mb-1">Child Price (¥)</label>
-                                                <input name="itinerary[0][child_price]" type="number" placeholder="e.g., 6000" min="0"
-                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                            </div>
-                                    </div>
-
-                                    <div class="mt-4">
-                                            <label class="block text-sm font-medium text-gray-700 mb-2">Languages
-                                                Available</label>
-                                            <div class="flex flex-wrap gap-3">
-                                                <label class="flex items-center gap-2 cursor-pointer">
-                                                        <input type="checkbox" checked name="itinerary[0][languages][]"
-                                                            class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
-                                                        <span class="text-sm text-gray-700">English</span>
-                                                </label>
-                                                <label class="flex items-center gap-2 cursor-pointer">
-                                                        <input type="checkbox" checked name="itinerary[0][languages][]"
-                                                            class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
-                                                        <span class="text-sm text-gray-700">Japanese</span>
-                                                </label>
-                                                <label class="flex items-center gap-2 cursor-pointer">
-                                                        <input type="checkbox" name="itinerary[0][languages][]"
-                                                            class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
-                                                        <span class="text-sm text-gray-700">Chinese</span>
-                                                </label>
-                                                <label class="flex items-center gap-2 cursor-pointer">
-                                                        <input type="checkbox" name="itinerary[0][languages][]"
-                                                            class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
-                                                        <span class="text-sm text-gray-700">Korean</span>
-                                                </label>
-                                            </div>
-                                    </div>
-                                </div>
-
-                                <!-- Itinerary Items -->
-                                <h4 class="font-semibold text-gray-800 mb-4 flex items-center">
-                                    <i class="fas fa-list-ol text-gray-400 mr-2"></i>
-                                    Itinerary Schedule
-                                </h4>
-
-                                <div class="space-y-4"  id="itinerary-section">
-                                    <!-- Itinerary Item 1 -->
-                                    <div class="border border-gray-200 rounded-lg overflow-hidden">
-                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                <div class="flex items-center justify-between">
-                                                        <h5 class="font-semibold text-gray-800">Itinerary Item #0</h5>
-                                                        <div class="flex gap-2">
-                                                            <button
-                                                                    class="p-1.5 text-gray-400 hover:text-gray-600 transition-colors">
-                                                                    <i class="fas fa-grip-vertical"></i>
-                                                            </button>
-                                                            <button
-                                                                    class="p-1.5 text-gray-400 hover:text-red-500 transition-colors">
-                                                                    <i class="fas fa-trash"></i>
-                                                            </button>
-                                                        </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="p-4 space-y-4">
-                                                <!-- Activities Section -->
-                                                <div>
-                                                        <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
-                                                        <div class="space-y-3" id="activity-wrapper">
-                                                            <!-- Activity Entry 1 -->
-                                                            <div class="activity-item">
-                                                                    <div class="bg-gray-50 rounded-lg p-3">
-                                                                        <div class="flex items-start gap-3">
-                                                                                <div class="flex-1 space-y-3">
-                                                                                    <div class="grid md:grid-cols-3 gap-3">
-                                                                                            <div class="md:col-span-2">
-                                                                                                <input type="text"  name="itinerary[0][activity_title][0]"
-                                                                                                        placeholder="e.g., Senso-ji Temple Visit"
-                                                                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                                            </div>
-                                                                                    </div>
-                                                                                    <div>
-                                                                                            <textarea rows="2"
-                                                                                                name="itinerary[0][activity_description][0]"
-                                                                                                placeholder="Brief description of the activity..."
-                                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <button type="button"
-                                                                                    class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
-                                                                                    <i class="fas fa-times"></i>
-                                                                                </button>
-                                                                        </div>
-                                                                    </div>
+                                    <div class="space-y-4">
+                                        <!-- Itinerary Item 1 -->
+                                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                                <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                    <div class="flex items-center justify-between">
+                                                            <h5 class="font-semibold text-gray-800">Itinerary Item #1</h5>
+                                                            <div class="flex gap-2">
+                                                                <button
+                                                                        class="p-1.5 text-gray-400 hover:text-gray-600 transition-colors">
+                                                                        <i class="fas fa-grip-vertical"></i>
+                                                                </button>
+                                                                <button
+                                                                        class="p-1.5 text-gray-400 hover:text-red-500 transition-colors">
+                                                                        <i class="fas fa-trash"></i>
+                                                                </button>
                                                             </div>
-                                                        </div>
-                                                        
-                                                        <!-- Add Activity Button -->
-                                                        <button type="button" class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
-                                                            <i class="fas fa-plus-circle"></i>
-                                                            Add activity
-                                                        </button>
+                                                    </div>
                                                 </div>
 
-                                                <div>
-                                                        <label class="block text-sm font-medium text-gray-700 mb-2">Main
-                                                            Image for this Activity</label>
-                                                        <div
-                                                            class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#e92929] transition-colors cursor-pointer">
-                                                            <i class="fas fa-image text-2xl text-gray-400 mb-2"></i>
-                                                            <p class="text-xs text-gray-500">Upload activity image</p>
-                                                        </div>
-                                                </div>
-
-                                                <div>
-                                                        <label class="block text-sm font-medium text-gray-700 mb-2">Activity Highlights</label>
-                                                        <div class="space-y-2" id="itinerary_highlight-wrapper">
-                                                            <div class="itinerary_highlight-item">
-                                                                <div class="flex items-center gap-2">
-                                                                        <input type="text"
-                                                                            name="itinerary[0][activity_highlight][]"
-                                                                            placeholder="e.g., Tokyo's oldest Buddhist temple"
-                                                                            class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                        <button
-                                                                            class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
-                                                                            <i class="fas fa-times"></i>
-                                                                        </button>
+                                                <div class="p-4 space-y-4">
+                                                    <!-- Activities Section -->
+                                                    <div>
+                                                            <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
+                                                            <div class="space-y-3" id="activity-wrapper">
+                                                                <!-- Activity Entry 1 -->
+                                                                <div class="activity-item">
+                                                                        <div class="bg-gray-50 rounded-lg p-3">
+                                                                            <div class="flex items-start gap-3">
+                                                                                    <div class="flex-1 space-y-3">
+                                                                                        <div class="grid md:grid-cols-3 gap-3">
+                                                                                                <div class="md:col-span-2">
+                                                                                                    <input type="text"  name="itinerary[0][activity_title][0]"
+                                                                                                            placeholder="e.g., Senso-ji Temple Visit"
+                                                                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                                                </div>
+                                                                                        </div>
+                                                                                        <div>
+                                                                                                <textarea rows="2"
+                                                                                                    name="itinerary[0][activity_description][0]"
+                                                                                                    placeholder="Brief description of the activity..."
+                                                                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <button type="button"
+                                                                                        class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
+                                                                                        <i class="fas fa-times"></i>
+                                                                                    </button>
+                                                                            </div>
+                                                                        </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <button type="button"
-                                                                class="text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-itinerary-highlight_button">
+                                                            
+                                                            <!-- Add Activity Button -->
+                                                            <button type="button" class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
                                                                 <i class="fas fa-plus-circle"></i>
-                                                                Add highlight
-                                                        </button>
-                                                </div>
-                                            </div>
-                                    </div>
-                                </div>
+                                                                Add activity
+                                                            </button>
+                                                    </div>
 
-                                <button
-                                    class="mt-4 w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-[#e92929] hover:text-[#e92929] transition-colors flex items-center justify-center gap-2">
-                                    <i class="fas fa-plus"></i>
-                                    <span class="font-medium">Add Itinerary Item</span>
-                                </button>
-                            </div> 
+                                                    <div>
+                                                            <label class="block text-sm font-medium text-gray-700 mb-2">Main
+                                                                Image for this Activity</label>
+                                                            <div
+                                                                class="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-[#e92929] transition-colors cursor-pointer">
+                                                                <i class="fas fa-image text-2xl text-gray-400 mb-2"></i>
+                                                                <p class="text-xs text-gray-500">Upload activity image</p>
+                                                            </div>
+                                                    </div>
+
+                                                    <div>
+                                                            <label class="block text-sm font-medium text-gray-700 mb-2">Activity Highlights</label>
+                                                            <div class="space-y-2" id="itinerary_highlight-wrapper">
+                                                                <div class="itinerary_highlight-item">
+                                                                    <div class="flex items-center gap-2">
+                                                                            <input type="text"
+                                                                                name="itinerary[0][activity_highlight][]"
+                                                                                placeholder="e.g., Tokyo's oldest Buddhist temple"
+                                                                                class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                            <button
+                                                                            type="button"
+                                                                                class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
+                                                                                <i class="fas fa-times"></i>
+                                                                            </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <button type="button"
+                                                                    class="text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-itinerary-highlight_button mt-3">
+                                                                    <i class="fas fa-plus-circle"></i>
+                                                                    Add highlight
+                                                            </button>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        class="mt-4 w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-[#e92929] hover:text-[#e92929] transition-colors flex items-center justify-center gap-2">
+                                        <i class="fas fa-plus"></i>
+                                        <span class="font-medium">Add Itinerary Item</span>
+                                    </button>
+                                </div> 
+                            </div>
                         </div>
+
                         <!-- Add New Tour Itinerary Button -->
                         <button
-                            class="w-full py-4 border-2 border-dashed border-[#e92929] rounded-xl text-[#e92929] hover:bg-[#e92929]/5 transition-colors flex items-center justify-center gap-2 font-medium">
+                        type="button"
+                            class="add-itinerary_button w-full py-4 border-2 border-dashed border-[#e92929] rounded-xl text-[#e92929] hover:bg-[#e92929]/5 transition-colors flex items-center justify-center gap-2 font-medium">
                             <i class="fas fa-plus-circle"></i>
                             <span>Add New Tour Itinerary & Details</span>
                         </button>

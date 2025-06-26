@@ -5,7 +5,6 @@ export default class DupeItineraryActivity extends ItineraryInterface {
             super(); 
             this.template = document.getElementById("activity_template").innerHTML
             this.wrapper = document.getElementById("activity-wrapper")
-            this.activityIndex = 0
       }
 
 
@@ -35,10 +34,6 @@ export default class DupeItineraryActivity extends ItineraryInterface {
        */
       deleteElement(button){
             const targetElement = button.closest(".activity-item")
-            console.log(button);
-            console.log(targetElement);
-            
-            
             this.wrapper.removeChild(targetElement)
       }
 }

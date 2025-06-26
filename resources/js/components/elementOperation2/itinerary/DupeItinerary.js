@@ -1,42 +1,41 @@
-export default class DupeItinerary {
+import ItineraryInterface from "./ItineraryInterface.js"
+
+export default class DupeItinerary extends ItineraryInterface {
       constructor(){
-            this.template = document.getElementById("highlight_template").innerHTML
-            this.duplicateButton = document.getElementById("duplicate_button")
-            this.tourHighlightWrapper = document.getElementById("tour_highlight-wrapper")
-            this.tourHightlightSection = document.getElementById("highlight-section")
-
-            this.initialize()
-
+            super(); 
+            this.template = document.getElementById("itinerary-template").innerHTML
+            this.wrapper = document.getElementById("itinerary-wrapper")
       }
 
-      initialize(){
-            this.tourHightlightSection.addEventListener("click", this.#handleEvent.bind(this))
-      }
 
-      #handleEvent(e){
-            const clickedElement = e.target
-
-            if(clickedElement.closest(".duplicate_button")) this.#duplicateElement()
-            if(clickedElement.closest(".delete_highlight-button")) this.#deleteElement(clickedElement.closest(".delete_highlight-button"));
-                  
-      }
-
-      // Tour Hightlightの要素の追加
-      #duplicateElement(){
-            this.#createDOM()
+      /**
+       * @override
+       */
+      duplicateElement(){
+            this.activityIndex ++
+            this.itineraryIndex ++
+            this.createDOM()
             
       }
 
-      #createDOM(){
+      /**
+       * @override
+       */
+      createDOM(){
+            let rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, this.activityIndex).replace(/{itinerary_count}/g, this.itineraryIndex +1);
             const newDiv = document.createElement("div")
-            newDiv.classList.add("highlight-item")
-            newDiv.innerHTML = this.template
-            this.tourHighlightWrapper.appendChild(newDiv)
+            newDiv.classList.add("itinerary-item")
+            newDiv.datasetId = this.itineraryIndex
+            newDiv.innerHTML = rawHTML
+            this.wrapper.appendChild(newDiv)
       }
 
-      // Tour highlightの要素の削除
-      #deleteElement(button){
-            const targetElement = button.closest(".highlight-item")
-            this.tourHighlightWrapper.removeChild(targetElement)
+      
+      /**
+       * @override
+       */
+      deleteElement(button){
+            const targetElement = button.closest(".itinerary-item")
+            this.wrapper.removeChild(targetElement)
       }
 }

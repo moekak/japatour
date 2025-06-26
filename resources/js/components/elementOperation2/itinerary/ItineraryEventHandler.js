@@ -16,6 +16,9 @@ export default class ItineraryEventHandler{
 
       #handleEvent(e){
 
+            console.log(e.target.closest(`.add-${this.elementType}_button`));
+            
+
             if(e.target.closest(`.remove-${this.elementType}_button`)){
                   this.instance.deleteElement(e.target.closest(`.remove-${this.elementType}_button`))
             }

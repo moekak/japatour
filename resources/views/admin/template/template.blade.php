@@ -14,7 +14,7 @@
                               placeholder="Brief description of this highlight..."
                               class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
                   </div>
-                  <button class="p-2 text-gray-400 hover:text-red-500 transition-colors delete_highlight-button">
+                  <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors delete_highlight-button">
                         <i class="fas fa-trash"></i>
                   </button>
             </div>
@@ -51,10 +51,10 @@
 
 
 {{-- ITINERARY TEMPLATE --}}
-<template>  
+<template id="itinerary-template">  
       <div class="bg-white rounded-xl shadow-sm p-6 relative">
             <div class="absolute top-6 right-6">
-                  <button class="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                  <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary_button"
                         title="Delete this itinerary">
                         <i class="fas fa-trash"></i>
                   </button>
@@ -64,7 +64,7 @@
                         class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
                         <i class="fas fa-route text-[#e92929]"></i>
                   </div>
-                  Tour Itinerary & Details #{itinerary_index}
+                  Tour Itinerary & Details #{itinerary_count}
             </h3>
 
             <!-- Tour Basic Details -->
@@ -160,11 +160,14 @@
                                     <h5 class="font-semibold text-gray-800">Itinerary Item #{activity_index}</h5>
                                     <div class="flex gap-2">
                                           <button
-                                                class="p-1.5 text-gray-400 hover:text-gray-600 transition-colors">
+                                                type="button"
+                                                class="p-1.5 text-gray-400 hover:text-gray-600 transition-colors add-itinerary-item_button">
                                                 <i class="fas fa-grip-vertical"></i>
                                           </button>
+                              
                                           <button
-                                                class="p-1.5 text-gray-400 hover:text-red-500 transition-colors">
+                                                type="button"
+                                                class="p-1.5 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-item_button">
                                                 <i class="fas fa-trash"></i>
                                           </button>
                                     </div>
@@ -230,12 +233,14 @@
                                                       placeholder="e.g., Tokyo's oldest Buddhist temple"
                                                       class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
                                                 <button
+                                                      type="button"
                                                       class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
                                                       <i class="fas fa-times"></i>
                                                 </button>
                                           </div>
                                           <button
-                                                class="text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1">
+                                          type="button"
+                                                class="text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-itinerary-highlight_button">
                                                 <i class="fas fa-plus-circle"></i>
                                                 Add highlight
                                           </button>
@@ -246,7 +251,8 @@
             </div>
 
             <button
-                  class="mt-4 w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-[#e92929] hover:text-[#e92929] transition-colors flex items-center justify-center gap-2">
+            type="button"
+                  class="add-itinerary-item_button mt-4 w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-[#e92929] hover:text-[#e92929] transition-colors flex items-center justify-center gap-2">
                   <i class="fas fa-plus"></i>
                   <span class="font-medium">Add Itinerary Item</span>
             </button>
@@ -255,7 +261,7 @@
 
 
 
-{{-- ACTIVITY TEMPLATE --}}
+{{-- ITINERARY HIGHLIGHT TEMPLATE --}}
 <template id="itinerary-highlight_template">
       <div class="flex items-center gap-2">
             <input type="text"
@@ -263,7 +269,8 @@
                   placeholder="e.g., Tokyo's oldest Buddhist temple"
                   class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
             <button
-                  class="p-2 text-gray-400 hover:text-red-500 transition-colors">
+            type="button"
+                  class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
                   <i class="fas fa-times"></i>
             </button>
       </div>
