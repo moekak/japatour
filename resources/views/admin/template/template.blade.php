@@ -178,7 +178,7 @@
                               <!-- Activities Section -->
                               <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
-                                    <div class="space-y-3" id="activity-wrapper">
+                                    <div class="space-y-3 activity-wrapper">
                                           <!-- Activity Entry 1 -->
                                           <div class="activity-item">
                                                 <div class="bg-gray-50 rounded-lg p-3">
@@ -208,7 +208,7 @@
                                     </div>
                                     
                                     <!-- Add Activity Button -->
-                                    <button type="button" class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity">
+                                    <button type="button" class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
                                           <i class="fas fa-plus-circle"></i>
                                           Add activity
                                     </button>

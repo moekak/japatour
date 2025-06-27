@@ -22,11 +22,11 @@ export default class DupeItinerary extends ItineraryInterface {
     createDOM() {
         let rawHTML = this.template
             .replace(/{itinerary_index}/g, this.itineraryIndex)
-            .replace(/{activity_index}/g, this.activityIndex)
+            .replace(/{activity_index}/g, 0)
             .replace(/{itinerary_count}/g, this.itineraryIndex + 1);
         const newDiv = document.createElement("div");
         newDiv.classList.add("itinerary-item");
-        newDiv.datasetId = this.itineraryIndex;
+        newDiv.dataset.id = this.itineraryIndex;
         newDiv.innerHTML = rawHTML;
         this.wrapper.appendChild(newDiv);
     }

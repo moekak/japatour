@@ -225,7 +225,7 @@
                     <div class="space-y-6" id="itinerary-section">
                         <h2 class="text-2xl font-bold text-gray-800">Tour Itineraries</h2>
                         <div id="itinerary-wrapper">
-                            <div class="itinerary-item">
+                            <div class="itinerary-item" data-id="0">
                                 <div class="bg-white rounded-xl shadow-sm p-6 relative">
                                     <div class="absolute top-6 right-6">
                                         <button class="p-2 text-gray-400 hover:text-red-500 transition-colors"
@@ -349,7 +349,7 @@
                                                     <!-- Activities Section -->
                                                     <div>
                                                             <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
-                                                            <div class="space-y-3" id="activity-wrapper">
+                                                            <div class="space-y-3 activity-wrapper">
                                                                 <!-- Activity Entry 1 -->
                                                                 <div class="activity-item">
                                                                         <div class="bg-gray-50 rounded-lg p-3">

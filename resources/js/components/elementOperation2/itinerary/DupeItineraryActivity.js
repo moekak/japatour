@@ -11,29 +11,32 @@ export default class DupeItineraryActivity extends ItineraryInterface {
       /**
        * @override
        */
-      duplicateElement(){
+      duplicateElement(wrapper){
             this.activityIndex ++
-            this.createDOM()
+            this.createDOM(wrapper)
             
       }
 
       /**
        * @override
        */
-      createDOM(){
-            let rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, this.activityIndex);;
+      createDOM(wrapper){
+            const activityWrapper = wrapper.querySelector(".activity-wrapper")
+            const activityCount = activityWrapper.querySelectorAll(".activity-item").length
+
+            let rawHTML = this.template.replace(/{itinerary_index}/g, wrapper.dataset.id).replace(/{activity_index}/g, activityCount);
             const newDiv = document.createElement("div")
             newDiv.classList.add("activity-item")
             newDiv.innerHTML = rawHTML
-            this.wrapper.appendChild(newDiv)
+            activityWrapper.appendChild(newDiv)
       }
 
       
       /**
        * @override
        */
-      deleteElement(button){
+      deleteElement(button, wrapper){
             const targetElement = button.closest(".activity-item")
-            this.wrapper.removeChild(targetElement)
+            wrapper.querySelector(".activity-wrapper").removeChild(targetElement)
       }
 }

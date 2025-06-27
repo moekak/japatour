@@ -116,9 +116,10 @@ var DupeItinerary = /*#__PURE__*/function (_ItineraryInterface) {
   }, {
     key: "createDOM",
     value: function createDOM() {
-      var rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, this.activityIndex).replace(/{itinerary_count}/g, this.itineraryIndex + 1);
+      var rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, 0).replace(/{itinerary_count}/g, this.itineraryIndex + 1);
       var newDiv = document.createElement("div");
       newDiv.classList.add("itinerary-item");
+      newDiv.dataset.id = this.itineraryIndex;
       newDiv.innerHTML = rawHTML;
       this.wrapper.appendChild(newDiv);
     }
@@ -179,9 +180,9 @@ var DupeItineraryActivity = /*#__PURE__*/function (_ItineraryInterface) {
   _inherits(DupeItineraryActivity, _ItineraryInterface);
   return _createClass(DupeItineraryActivity, [{
     key: "duplicateElement",
-    value: function duplicateElement() {
+    value: function duplicateElement(wrapper) {
       this.activityIndex++;
-      this.createDOM();
+      this.createDOM(wrapper);
     }
 
     /**
@@ -189,13 +190,14 @@ var DupeItineraryActivity = /*#__PURE__*/function (_ItineraryInterface) {
      */
   }, {
     key: "createDOM",
-    value: function createDOM() {
-      var rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, this.activityIndex);
-      ;
+    value: function createDOM(wrapper) {
+      var activityWrapper = wrapper.querySelector(".activity-wrapper");
+      var activityCount = activityWrapper.querySelectorAll(".activity-item").length;
+      var rawHTML = this.template.replace(/{itinerary_index}/g, wrapper.dataset.id).replace(/{activity_index}/g, activityCount);
       var newDiv = document.createElement("div");
       newDiv.classList.add("activity-item");
       newDiv.innerHTML = rawHTML;
-      this.wrapper.appendChild(newDiv);
+      activityWrapper.appendChild(newDiv);
     }
 
     /**
@@ -203,9 +205,9 @@ var DupeItineraryActivity = /*#__PURE__*/function (_ItineraryInterface) {
      */
   }, {
     key: "deleteElement",
-    value: function deleteElement(button) {
+    value: function deleteElement(button, wrapper) {
       var targetElement = button.closest(".activity-item");
-      this.wrapper.removeChild(targetElement);
+      wrapper.querySelector(".activity-wrapper").removeChild(targetElement);
     }
   }]);
 }(_ItineraryInterface_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
@@ -298,7 +300,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ ItineraryEventHandler)
 /* harmony export */ });
-/* harmony import */ var _ItineraryEventHandlerFactory_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ItineraryEventHandlerFactory.js */ "./resources/js/components/elementOperation2/itinerary/ItineraryEventHandlerFactory.js");
+/* harmony import */ var _DupeItinerary_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DupeItinerary.js */ "./resources/js/components/elementOperation2/itinerary/DupeItinerary.js");
+/* harmony import */ var _DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DupeItineraryActivity.js */ "./resources/js/components/elementOperation2/itinerary/DupeItineraryActivity.js");
+/* harmony import */ var _DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DupeItineraryHighlight.js */ "./resources/js/components/elementOperation2/itinerary/DupeItineraryHighlight.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -309,76 +313,53 @@ function _classPrivateMethodInitSpec(e, a) { _checkPrivateRedeclaration(e, a), a
 function _checkPrivateRedeclaration(e, t) { if (t.has(e)) throw new TypeError("Cannot initialize the same private elements twice on an object"); }
 function _assertClassBrand(e, t, n) { if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n; throw new TypeError("Private element is not present on this object"); }
 
+
+
 var _ItineraryEventHandler_brand = /*#__PURE__*/new WeakSet();
 var ItineraryEventHandler = /*#__PURE__*/function () {
-  function ItineraryEventHandler(elementType) {
+  function ItineraryEventHandler() {
     _classCallCheck(this, ItineraryEventHandler);
     _classPrivateMethodInitSpec(this, _ItineraryEventHandler_brand);
-    this.elementType = elementType;
+    console.log('ItineraryEventHandler インスタンス作成');
     this.section = document.getElementById("itinerary-section");
-    this.instance = _ItineraryEventHandlerFactory_js__WEBPACK_IMPORTED_MODULE_0__["default"].getHandler(elementType);
+    // this.instance = ItineraryEventHandlerFactory.getHandler(elementType)
+    this.instance = null;
     this.initialize();
   }
   return _createClass(ItineraryEventHandler, [{
     key: "initialize",
     value: function initialize() {
-      this.section.addEventListener("click", _assertClassBrand(_ItineraryEventHandler_brand, this, _handleEvent).bind(this));
+      document.getElementById("itinerary-section").addEventListener("click", _assertClassBrand(_ItineraryEventHandler_brand, this, _handleEvent).bind(this));
     }
   }]);
 }();
 function _handleEvent(e) {
-  console.log(e.target.closest(".add-".concat(this.elementType, "_button")));
-  if (e.target.closest(".remove-".concat(this.elementType, "_button"))) {
-    this.instance.deleteElement(e.target.closest(".remove-".concat(this.elementType, "_button")));
+  var wrapper = e.target.closest(".itinerary-item");
+  if (e.target.closest(".remove-activity_button")) {
+    this.instance = new _DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    this.instance.deleteElement(e.target.closest(".remove-activity_button"), wrapper);
   }
-  if (e.target.closest(".add-".concat(this.elementType, "_button"))) {
+  if (e.target.closest(".add-activity_button")) {
+    this.instance = new _DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
+    this.instance.duplicateElement(wrapper);
+  }
+  if (e.target.closest(".remove-itinerary_button")) {
+    this.instance = new _DupeItinerary_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    this.instance.deleteElement(e.target.closest(".remove-itinerary_button"));
+  }
+  if (e.target.closest(".add-itinerary_button")) {
+    this.instance = new _DupeItinerary_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    this.instance.duplicateElement();
+  }
+  if (e.target.closest(".remove-itinerary-highlight_button")) {
+    this.instance = new _DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
+    this.instance.deleteElement(e.target.closest(".remove-itinerary-highlight_button"));
+  }
+  if (e.target.closest(".add-itinerary-highlight_button")) {
+    this.instance = new _DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
     this.instance.duplicateElement();
   }
 }
-
-
-/***/ }),
-
-/***/ "./resources/js/components/elementOperation2/itinerary/ItineraryEventHandlerFactory.js":
-/*!*********************************************************************************************!*\
-  !*** ./resources/js/components/elementOperation2/itinerary/ItineraryEventHandlerFactory.js ***!
-  \*********************************************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ItineraryEventHandlerFactory)
-/* harmony export */ });
-/* harmony import */ var _DupeItinerary_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DupeItinerary.js */ "./resources/js/components/elementOperation2/itinerary/DupeItinerary.js");
-/* harmony import */ var _DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DupeItineraryActivity.js */ "./resources/js/components/elementOperation2/itinerary/DupeItineraryActivity.js");
-/* harmony import */ var _DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DupeItineraryHighlight.js */ "./resources/js/components/elementOperation2/itinerary/DupeItineraryHighlight.js");
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
-function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
-function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-
-
-
-var ItineraryEventHandlerFactory = /*#__PURE__*/function () {
-  function ItineraryEventHandlerFactory() {
-    _classCallCheck(this, ItineraryEventHandlerFactory);
-  }
-  return _createClass(ItineraryEventHandlerFactory, null, [{
-    key: "getHandler",
-    value: function getHandler(elementType) {
-      switch (elementType) {
-        case "itinerary-highlight":
-          return new _DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
-        case "activity":
-          return new _DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
-        case "itinerary":
-          return new _DupeItinerary_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
-      }
-    }
-  }]);
-}();
 
 
 /***/ }),
@@ -490,9 +471,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_elementOperation2_itinerary_ItineraryEventHandler_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/elementOperation2/itinerary/ItineraryEventHandler.js */ "./resources/js/components/elementOperation2/itinerary/ItineraryEventHandler.js");
 
 
-new _components_elementOperation2_itinerary_ItineraryEventHandler_js__WEBPACK_IMPORTED_MODULE_1__["default"]("itinerary-highlight");
-new _components_elementOperation2_itinerary_ItineraryEventHandler_js__WEBPACK_IMPORTED_MODULE_1__["default"]("activity");
-new _components_elementOperation2_itinerary_ItineraryEventHandler_js__WEBPACK_IMPORTED_MODULE_1__["default"]("itinerary");
+new _components_elementOperation2_itinerary_ItineraryEventHandler_js__WEBPACK_IMPORTED_MODULE_1__["default"]();
 new _components_elementOperation2_DupeHighlight_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
 })();
 
