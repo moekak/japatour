@@ -11,8 +11,6 @@ export default class DupeItinerary extends ItineraryInterface {
      * @override
      */
     duplicateElement() {
-        this.activityIndex++;
-        this.itineraryIndex++;
         this.createDOM();
     }
 
@@ -20,13 +18,16 @@ export default class DupeItinerary extends ItineraryInterface {
      * @override
      */
     createDOM() {
+        console.log(this.generateItineraryId());
+
+        const itineraryIndex = this.generateItineraryId();
         let rawHTML = this.template
-            .replace(/{itinerary_index}/g, this.itineraryIndex)
+            .replace(/{itinerary_index}/g, itineraryIndex)
             .replace(/{activity_index}/g, 0)
-            .replace(/{itinerary_count}/g, this.itineraryIndex + 1);
+            .replace(/{itinerary_count}/g, itineraryIndex + 1);
         const newDiv = document.createElement("div");
         newDiv.classList.add("itinerary-item");
-        newDiv.dataset.id = this.itineraryIndex;
+        newDiv.dataset.id = itineraryIndex;
         newDiv.innerHTML = rawHTML;
         this.wrapper.appendChild(newDiv);
     }

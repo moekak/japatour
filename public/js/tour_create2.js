@@ -105,8 +105,6 @@ var DupeItinerary = /*#__PURE__*/function (_ItineraryInterface) {
   return _createClass(DupeItinerary, [{
     key: "duplicateElement",
     value: function duplicateElement() {
-      this.activityIndex++;
-      this.itineraryIndex++;
       this.createDOM();
     }
 
@@ -116,10 +114,12 @@ var DupeItinerary = /*#__PURE__*/function (_ItineraryInterface) {
   }, {
     key: "createDOM",
     value: function createDOM() {
-      var rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, 0).replace(/{itinerary_count}/g, this.itineraryIndex + 1);
+      console.log(this.generateItineraryId());
+      var itineraryIndex = this.generateItineraryId();
+      var rawHTML = this.template.replace(/{itinerary_index}/g, itineraryIndex).replace(/{activity_index}/g, 0).replace(/{itinerary_count}/g, itineraryIndex + 1);
       var newDiv = document.createElement("div");
       newDiv.classList.add("itinerary-item");
-      newDiv.dataset.id = this.itineraryIndex;
+      newDiv.dataset.id = itineraryIndex;
       newDiv.innerHTML = rawHTML;
       this.wrapper.appendChild(newDiv);
     }
@@ -246,7 +246,6 @@ var DupeItineraryHighlight = /*#__PURE__*/function (_ItineraryInterface) {
     _classCallCheck(this, DupeItineraryHighlight);
     _this = _callSuper(this, DupeItineraryHighlight);
     _this.template = document.getElementById("itinerary-highlight_template").innerHTML;
-    _this.wrapper = document.getElementById("itinerary_highlight-wrapper");
     return _this;
   }
 
@@ -256,9 +255,9 @@ var DupeItineraryHighlight = /*#__PURE__*/function (_ItineraryInterface) {
   _inherits(DupeItineraryHighlight, _ItineraryInterface);
   return _createClass(DupeItineraryHighlight, [{
     key: "duplicateElement",
-    value: function duplicateElement() {
+    value: function duplicateElement(wrapper) {
       this.activityIndex++;
-      this.createDOM();
+      this.createDOM(wrapper);
     }
 
     /**
@@ -266,13 +265,16 @@ var DupeItineraryHighlight = /*#__PURE__*/function (_ItineraryInterface) {
      */
   }, {
     key: "createDOM",
-    value: function createDOM() {
-      var rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, this.activityIndex);
-      ;
+    value: function createDOM(wrapper) {
+      console.log(wrapper);
+      var highlightWrapper = wrapper.querySelector(".itinerary_highlight-wrapper");
+      console.log(highlightWrapper);
+      var highlightCount = highlightWrapper.querySelectorAll(".itinerary_highlight-item").length;
+      var rawHTML = this.template.replace(/{itinerary_index}/g, wrapper.dataset.id).replace(/{activity_highlight}/g, highlightCount);
       var newDiv = document.createElement("div");
       newDiv.classList.add("itinerary_highlight-item");
       newDiv.innerHTML = rawHTML;
-      this.wrapper.appendChild(newDiv);
+      highlightWrapper.appendChild(newDiv);
     }
 
     /**
@@ -280,9 +282,9 @@ var DupeItineraryHighlight = /*#__PURE__*/function (_ItineraryInterface) {
      */
   }, {
     key: "deleteElement",
-    value: function deleteElement(button) {
+    value: function deleteElement(button, wrapper) {
       var targetElement = button.closest(".itinerary_highlight-item");
-      this.wrapper.removeChild(targetElement);
+      wrapper.querySelector(".itinerary_highlight-wrapper").removeChild(targetElement);
     }
   }]);
 }(_ItineraryInterface_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
@@ -320,7 +322,7 @@ var ItineraryEventHandler = /*#__PURE__*/function () {
   function ItineraryEventHandler() {
     _classCallCheck(this, ItineraryEventHandler);
     _classPrivateMethodInitSpec(this, _ItineraryEventHandler_brand);
-    console.log('ItineraryEventHandler インスタンス作成');
+    console.log("ItineraryEventHandler インスタンス作成");
     this.section = document.getElementById("itinerary-section");
     // this.instance = ItineraryEventHandlerFactory.getHandler(elementType)
     this.instance = null;
@@ -345,19 +347,19 @@ function _handleEvent(e) {
   }
   if (e.target.closest(".remove-itinerary_button")) {
     this.instance = new _DupeItinerary_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
-    this.instance.deleteElement(e.target.closest(".remove-itinerary_button"));
+    this.instance.deleteElement(e.target.closest(".remove-itinerary_button"), wrapper);
   }
   if (e.target.closest(".add-itinerary_button")) {
     this.instance = new _DupeItinerary_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
-    this.instance.duplicateElement();
+    this.instance.duplicateElement(wrapper);
   }
   if (e.target.closest(".remove-itinerary-highlight_button")) {
     this.instance = new _DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
-    this.instance.deleteElement(e.target.closest(".remove-itinerary-highlight_button"));
+    this.instance.deleteElement(e.target.closest(".remove-itinerary-highlight_button"), wrapper);
   }
   if (e.target.closest(".add-itinerary-highlight_button")) {
     this.instance = new _DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_2__["default"]();
-    this.instance.duplicateElement();
+    this.instance.duplicateElement(wrapper);
   }
 }
 
@@ -375,30 +377,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ ItineraryInterface)
 /* harmony export */ });
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _classPrivateMethodInitSpec(e, a) { _checkPrivateRedeclaration(e, a), a.add(e); }
 function _checkPrivateRedeclaration(e, t) { if (t.has(e)) throw new TypeError("Cannot initialize the same private elements twice on an object"); }
 var _ItineraryInterface_brand = /*#__PURE__*/new WeakSet();
-var ItineraryInterface = /*#__PURE__*/_createClass(function ItineraryInterface() {
-  _classCallCheck(this, ItineraryInterface);
-  _classPrivateMethodInitSpec(this, _ItineraryInterface_brand);
-  this.template = "";
-  this.wrapper = "";
-  this.activityIndex = 0;
-  this.itineraryIndex = 0;
-});
+var ItineraryInterface = /*#__PURE__*/function () {
+  function ItineraryInterface() {
+    _classCallCheck(this, ItineraryInterface);
+    _classPrivateMethodInitSpec(this, _ItineraryInterface_brand);
+    this.template = "";
+    this.wrapper = "";
+  }
+  return _createClass(ItineraryInterface, [{
+    key: "generateItineraryId",
+    value: function generateItineraryId() {
+      var items = Array.from(document.querySelectorAll(".itinerary-item"));
+      return Number(items[items.length - 1].dataset.id) + 1;
+    }
+  }]);
+}();
 function _duplicateElement() {
-  throw new Error('Method not implemented');
+  throw new Error("Method not implemented");
 }
 function _createDOM() {
-  throw new Error('Method not implemented');
+  throw new Error("Method not implemented");
 }
 function _deleteElement() {
-  throw new Error('Method not implemented');
+  throw new Error("Method not implemented");
 }
 
 

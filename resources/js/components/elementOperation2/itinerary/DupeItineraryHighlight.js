@@ -1,40 +1,52 @@
-import ItineraryInterface from "./ItineraryInterface.js"
+import ItineraryInterface from "./ItineraryInterface.js";
 
 export default class DupeItineraryHighlight extends ItineraryInterface {
-      constructor(){
-            super(); 
-            this.template = document.getElementById("itinerary-highlight_template").innerHTML
-            this.wrapper = document.getElementById("itinerary_highlight-wrapper")
+    constructor() {
+        super();
+        this.template = document.getElementById(
+            "itinerary-highlight_template"
+        ).innerHTML;
+    }
 
-      }
+    /**
+     * @override
+     */
+    duplicateElement(wrapper) {
+        this.activityIndex++;
+        this.createDOM(wrapper);
+    }
 
+    /**
+     * @override
+     */
+    createDOM(wrapper) {
+        console.log(wrapper);
 
-      /**
-       * @override
-       */
-      duplicateElement(){
-            this.activityIndex ++
-            this.createDOM()
-            
-      }
+        const highlightWrapper = wrapper.querySelector(
+            ".itinerary_highlight-wrapper"
+        );
 
-      /**
-       * @override
-       */
-      createDOM(){
-            let rawHTML = this.template.replace(/{itinerary_index}/g, this.itineraryIndex).replace(/{activity_index}/g, this.activityIndex);;
-            const newDiv = document.createElement("div")
-            newDiv.classList.add("itinerary_highlight-item")
-            newDiv.innerHTML = rawHTML
-            this.wrapper.appendChild(newDiv)
-      }
+        console.log(highlightWrapper);
 
-      
-      /**
-       * @override
-       */
-      deleteElement(button){
-            const targetElement = button.closest(".itinerary_highlight-item")
-            this.wrapper.removeChild(targetElement)
-      }
+        const highlightCount = highlightWrapper.querySelectorAll(
+            ".itinerary_highlight-item"
+        ).length;
+        let rawHTML = this.template
+            .replace(/{itinerary_index}/g, wrapper.dataset.id)
+            .replace(/{activity_highlight}/g, highlightCount);
+        const newDiv = document.createElement("div");
+        newDiv.classList.add("itinerary_highlight-item");
+        newDiv.innerHTML = rawHTML;
+        highlightWrapper.appendChild(newDiv);
+    }
+
+    /**
+     * @override
+     */
+    deleteElement(button, wrapper) {
+        const targetElement = button.closest(".itinerary_highlight-item");
+        wrapper
+            .querySelector(".itinerary_highlight-wrapper")
+            .removeChild(targetElement);
+    }
 }
