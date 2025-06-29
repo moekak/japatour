@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateTourRequest;
 use App\Http\Requests\Admin\EditTourRequest;
+use App\Http\Requests\Admin\Tour\CreateRequest;
 use App\Models\AdditionalService;
 use App\Models\Category;
+use App\Models\Language;
 use App\Models\Region;
+use App\Models\ToursNew;
+use App\Services\TempImageService;
 use App\Services\TourService;
+use App\Services\Util\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -24,7 +29,7 @@ class TourController extends Controller
      */
     public function index()
     {
-        $tours = $this->tourService->getAllData();
+        $tours = ToursNew::getAllTours();
         return view("admin.tour_list", compact("tours"));
     }
     /**
@@ -32,35 +37,38 @@ class TourController extends Controller
      */
     public function create()
     {
-        $categories = Category::getAllCategories();
+        $languages = Language::getAllLanguages();
         $regions = Region::getAllRigions();
-        $services = AdditionalService::getServices();
-        return view("admin.tour_create2", compact("services",  "categories", "regions"));
+        $categories = Category::getAllCategories();
+        return view("admin.tour_create2", compact("languages", "regions", "categories"));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(CreateTourRequest $request)
-    // {
-    //     try {
-    //         $this->tourService->createTour($request);
-    //         return redirect()->route("tour_list")->with("success", "success to create Tours!");;
-    //     } catch (\Exception $e) {
-    //         Log::debug($e);
-    //         return redirect()->back()->with("error", "failed to create tours: " . $e->getMessage())->withInput();
-    //     }
-    // }
 
-    public function store(Request $request){
+
+
+    public function store(CreateRequest $request){
         try {
-            print_r($request->all());
-            exit;
+
+
             $this->tourService->createTour($request);
-            return redirect()->route("tour_list")->with("success", "success to create Tours!");;
+            return redirect()->route("tour_list")->with("success", "success to create Tours!");
+        
         } catch (\Exception $e) {
-            Log::debug($e);
-            return redirect()->back()->with("error", "failed to create tours: " . $e->getMessage())->withInput();
+            // バリデーション失敗時に画像を一時保存
+            $tempImageService = new TempImageService($request);
+            $tempImageService->handleTempHeroImage($request);
+            $tempImageService->handleTempItineraryImages($request);
+            $tempImageService->handleTempGalleryImages($request);
+
+            Log::error('failed to create a tour', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'request_data' => $request->all()
+            ]);
+        
+            return redirect()->back()
+                ->with("error", "failed to create Tours. Please try it again " . $e->getMessage())
+                ->withInput();
         }
     }
 

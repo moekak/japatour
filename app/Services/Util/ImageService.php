@@ -13,8 +13,8 @@ class ImageService
             
                   return $path;
             } catch (\Exception $e) {
-            Log::error('Image save error: ' . $e->getMessage());
-            return ['error' => 'Failed to save image'];
+                  Log::error('Image save error: ' . $e->getMessage());
+                  return ['error' => 'Failed to save image'];
             }
       }
       

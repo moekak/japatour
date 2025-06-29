@@ -1,14 +1,13 @@
 export default class FileOperation {
-      constructor() {
-            this.fileUpload = document.getElementById("hero_image");
-            this.previewImageElement = document.querySelector(".preview_src");
-            this.imageElement = document.querySelector(".hero_image_element");
-
-            this.handleUpload();
+      constructor(uploadInput, previewSrc, imageElement) {
+            this.fileUpload = uploadInput;
+            this.previewImageElement = previewSrc;
+            this.imageElement = imageElement;
       }
 
       async handleUpload() {
             this.fileUpload.addEventListener("change", (e) => {
+
                   const file = e.target.files[0];
                   this.#displayPreview(file);
             });
@@ -16,7 +15,9 @@ export default class FileOperation {
 
       #displayPreview(file) {
             const objectURL = URL.createObjectURL(file);
-            this.previewImageElement.classList.remove("hidden");
+            console.log(this.previewImageElement);
+            
+            this.previewImageElement.closest(".preview_container").classList.remove("hidden");
             this.imageElement.classList.add("hidden");
             this.previewImageElement.src = objectURL;
       }

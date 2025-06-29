@@ -1,7 +1,6 @@
-export default class ItineraryInterface {
+export default class DupeInterface {
     constructor() {
         this.template = "";
-        this.wrapper = "";
     }
 
     generateItineraryId() {
@@ -9,15 +8,23 @@ export default class ItineraryInterface {
         return Number(items[items.length - 1].dataset.id) + 1;
     }
 
-    #duplicateElement() {
+    hasOneData(element, type){
+        return element?.querySelectorAll(`.${type}-item`).length > 1
+    }
+
+    duplicateElement(itineraryContainer = null) {
         throw new Error("Method not implemented");
     }
 
-    #createDOM() {
+    createDOM(itineraryContainer = null) {
         throw new Error("Method not implemented");
     }
 
-    #deleteElement() {
+    deleteElement(button) {
+        throw new Error("Method not implemented");
+    }
+
+    static getInstance(){
         throw new Error("Method not implemented");
     }
 }
