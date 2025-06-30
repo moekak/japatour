@@ -790,6 +790,9 @@
       });
 
       const tourData = @json($tours);
+
+      console.log(tourData);
+      
       // Show tours for selected destination
       function showTours(destination) {
             // Hide destinations, show tours
@@ -819,12 +822,12 @@
             <div class="relative h-48 overflow-hidden">
               <img src="${tour.image}" alt="${tour.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
               <div class="absolute top-4 right-4 bg-[#e92929] text-white px-3 py-1 rounded-full test-base font-medium">
-                ¥${tour.price.toLocaleString()}~
+                ¥${tour.price}~
               </div>
             </div>
             <div class="p-4">
               <h3 class="text-[#1b0e0e] text-lg font-bold mb-2">${tour.title}</h3>
-              <p class="text-[#994d4d] test-base mb-3 line-clamp-2">${tour.description}</p>
+              <p class="text-[#994d4d] test-base mb-3 line-clamp-2">${tour.subtitle}</p>
               <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center gap-1">
                   ${generateStars(tour.rating)}

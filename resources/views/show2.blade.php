@@ -112,35 +112,35 @@
                         <div
                               class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
                               <i class="fas fa-fire text-yellow-400"></i>
-                              <span class="test-base font-medium">{{$tour->badge}}</span>
+                              <span class="test-base font-medium">{{$tour->bagde}}</span>
                         </div>
                         <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">{{$tour->title}}</h1>
                         <p class="text-xl md:text-2xl mb-8 text-white/90">{{$tour->subtitle}}</p>
 
-                        <div class="flex flex-wrap items-center justify-center gap-6 mb-12">
+                        {{-- <div class="flex flex-wrap items-center justify-center gap-6 mb-12">
                               <div class="flex items-center gap-2">
                                     <i class="fas fa-clock text-white/80"></i>
-                                    <span>{{$tour->hours}} hours</span>
+                                    <span>12 hours</span>
                               </div>
                               <div class="flex items-center gap-2">
                                     <i class="fas fa-users text-white/80"></i>
-                                    <span>Max {{$tour->max_participants}} people</span>
+                                    <span>Max 12 people</span>
                               </div>
                               <div class="flex items-center gap-2">
                                     <i class="fas fa-star text-yellow-400"></i>
                                     <span>4.8 (245 reviews)</span>
                               </div>
-                        </div>
+                        </div> --}}
 
                         <div class="flex flex-col sm:flex-row gap-4 justify-center">
                               <button
                                     class="bg-[#e92929] text-white px-8 py-4 rounded-full font-medium hover:bg-[#d61f1f] transition-all transform hover:scale-105">
                                     Reserve Your Spot - ¥12,000
                               </button>
-                              <button
+                              {{-- <button
                                     class="bg-white/20 backdrop-blur-sm text-white border-2 border-white/50 px-8 py-4 rounded-full font-medium hover:bg-white/30 transition-all">
                                     Watch Video Tour
-                              </button>
+                              </button> --}}
                         </div>
                   </div>
 
@@ -178,9 +178,9 @@
                   <div class="container mx-auto px-6">
                         <div class="grid md:grid-cols-2 gap-12 items-center">
                               <div>
-                                    <h2 class="text-4xl font-bold mb-6">Experience Tokyo Like Never Before</h2>
+                                    <h2 class="text-4xl font-bold mb-6">{{$tour->overview_title}}</h2>
                                     <p class="text-gray-600 text-base font-normal mb-6">
-                                          {{$tour->overview}}
+                                          {{$tour->overview_description}}
                                     </p>
 
                                     <div class="space-y-4 mb-8">
@@ -272,7 +272,7 @@
                         <!-- Tour Cards -->
                         <div class="grid md:grid-cols-3 gap-8 ">
                               <!-- Tokyo Highlights Card -->
-                              @foreach ($tour->itinerary as $index => $itinerary)
+                              {{-- @foreach ($tour->itinerary as $index => $itinerary) --}}
                               <div class="bg-white rounded-2xl overflow-hidden smooth-shadow-lg card-hover cursor-pointer"
                                     onclick="showTourDetails('highlights')">
                                     <div class="relative h-48 overflow-hidden">
@@ -292,27 +292,27 @@
                                     </div>
 
                                     <div class="p-4">
-                                          <h3 class="text-xl font-bold text-gray-800 mb-2">{{$itinerary["title"]}}</h3>
+                                          <h3 class="text-xl font-bold text-gray-800 mb-2">dddd</h3>
                                           <p class="text-gray-600 mb-4 line-clamp-3 text-sm">
-                                                {{$itinerary["description"]}}
+                                                ddd
                                           </p>
 
                                           <div class="flex items-center justify-between mb-4">
                                                 <div class="flex items-center gap-4 test-sm text-gray-500">
                                                       <span class="text-sm"><i class="fas fa-clock text-[#e92929]"></i>
-                                                            {{$tour->hours}}
+                                                            5
                                                             hours</span>
                                                       <span class="text-sm"><i class="fas fa-users text-[#e92929]"></i>
                                                             Max
-                                                            {{$tour->max_participants}}</span>
+                                                            12</span>
                                                 </div>
                                           </div>
 
                                           <div class="flex flex-wrap gap-2 mb-4">
-                                                @foreach ($itinerary["itinerary_highlight"] as $highlight)
+                                                {{-- @foreach ($itinerary["itinerary_highlight"] as $highlight) --}}
                                                 <span
-                                                      class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs">{{$highlight}}</span>
-                                                @endforeach
+                                                      class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs">dddd</span>
+                                                {{-- @endforeach --}}
                                           </div>
 
                                           <button
@@ -321,7 +321,7 @@
                                           </button>
                                     </div>
                               </div>
-                              @endforeach
+                              {{-- @endforeach --}}
                         </div>
                   </div>
             </section>
@@ -390,13 +390,13 @@
                         </div>
 
                         <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                              @foreach ($tour->reviews as $review)
+                              {{-- @foreach ($tour->reviews as $review) --}}
                               <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                                     <div class="flex items-center gap-4 mb-4">
                                           <img src="https://i.pravatar.cc/60?img=1" alt="Sarah"
                                                 class="w-12 h-12 rounded-full">
                                           <div>
-                                                <h4 class="font-semibold">{{$review->name}}</h4>
+                                                {{-- <h4 class="font-semibold">{{$review->name}}</h4>
                                                 <div class="flex gap-1">
                                                       @php
                                                       $emptyStar = 5 - intval($review->rate);
@@ -409,15 +409,16 @@
                                                                   echo '<i class="fa-regular fa-star text-yellow-400 text-xs"></i>'
                                                                   ; } @endphp </div>
                                                 </div>
-                                          </div>
+                                          </div> --}}
                                           <p class="text-gray-600 mb-4 line-clamp-6">
-                                                {{$review->review}}
+                                                dddddddd
                                           </p>
                                           <p class="test-base text-gray-400">
-                                                {{ \Carbon\Carbon::parse($review->review_date)->format('F j, Y') }}
+                                                12:222
+                                                {{-- {{ \Carbon\Carbon::parse($review->review_date)->format('F j, Y') }} --}}
                                           </p>
                                     </div>
-                                    @endforeach
+                                    {{-- @endforeach --}}
 
                               </div>
                         </div>

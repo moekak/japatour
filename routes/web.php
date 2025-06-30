@@ -29,14 +29,14 @@ Route::post("/sendMessage", [SendContactMail::class, "SendContactMail"])->name("
 Route::get("/tour/show/{id}", [TourController::class, "show"])->name("tour.show");
 
 // routes/web.php
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+// Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard']);
     Route::get('/users', [AdminController::class, 'users']);
     // 他の管理者用ルート
-});
+// });
 
 
-Route::middleware(['auth'])->group(function () {
+// Route::middleware(['auth'])->group(function () {
     Route::get('/tour/edit', function () {
         return view('admin.tour_edit');
     });
@@ -55,7 +55,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/thank', function () {
         return view('thank');
     });
-});
+// });
 
 
 Route::get("/tour/create", [TourController::class, "create"])->name("admin.tour_create");

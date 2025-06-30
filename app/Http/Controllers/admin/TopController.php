@@ -14,9 +14,9 @@ class TopController extends Controller
     public function index()
     {
         $tours =ToursNew::getAllTours();
-        print_r($tours->toArray());
-        exit;
-        $tours = Tour::getTourInfo();
+        // print_r($tours->toArray());
+        // exit;
+        // $tours = Tour::getTourInfo();
         $categories = Category::getCateforiesDataWithRegion();
         $regions = Region::getAllRigions();
         return view("index2", compact("tours", "categories", "regions"));

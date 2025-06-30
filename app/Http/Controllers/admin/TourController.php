@@ -78,12 +78,14 @@ class TourController extends Controller
     public function show(string $id)
     {
         try {
-            $tourData = $this->tourService->getTourById($id);
-            $tour = $tourData["tour"];
-            $averageRate = $tourData["averageRate"];
-            return view("show2", compact("tour", "averageRate"));
+            $tour = ToursNew::getSpecificTour($id);
+            // print_r($tour->toArray());
+            // exit;
+
+            return view("show2", compact("tour"));
         } catch (\Exception $e) {
-            return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
+            Log::debug($e);
+            // return redirect()->route("show")->with("error", "faild to get Tour: " . $e->getMessage());
         }
     }
 
@@ -93,12 +95,15 @@ class TourController extends Controller
     public function edit(string $id)
     {
         try {
-            $tourData = $this->tourService->getTourById($id);
-            $services = AdditionalService::getServices();
-            $categories = Category::getAllCategories();
+            $tour = ToursNew::getSpecificTour($id)->toArray();
             $regions = Region::getAllRigions();
-            $tour = $tourData["tour"];
-            return view("admin.tour_edit", compact("tour", "services", "regions", "categories"));
+            $languages = Language::getAllLanguages();
+            $categories = Category::getAllCategories();
+
+     
+            // print_r($tour);
+            // exit;
+            return view("admin.tour_edit", compact("tour",  "regions", "categories", "languages"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
         }

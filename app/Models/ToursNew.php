@@ -38,11 +38,17 @@ class ToursNew extends Model
         return $query->with(["category","itineraries", "tourHighlights", "tourGalleryImages", "itineraries.itineraryActivities", "itineraries.itineraryHighlights", "itineraries.itineraryLanguages"]);
     }
     
+    public function scopeWithId($query, $id){
+        return $query->where("id", $id);
+    }
 
     public static function getAllTours(){
         $tours = static::withRelations()->get()->groupBy('category.category');
+        return $tours;
+    }
 
-
+    public static function getSpecificTour($id){
+        $tours = static::withId($id)->withRelations()->first();
         return $tours;
     }
 
