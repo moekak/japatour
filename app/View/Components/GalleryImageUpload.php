@@ -12,16 +12,16 @@ class GalleryImageUpload extends Component
 
     public $index;
     public $height;
-    public $tour = [];
+    public $src = null;
 
     /**
      * Create a new component instance.
      */
-    public function __construct($index, $height, $tour = [])
+    public function __construct($index, $height, $src = null)
     {
         $this->index = $index;
         $this->height = $height;
-        $this->tour = $tour;
+        $this->src = $src;
 
     }
 

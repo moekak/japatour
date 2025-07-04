@@ -101,7 +101,7 @@ class TourController extends Controller
             $categories = Category::getAllCategories();
 
      
-            // print_r($tour["tour_gallery_images"]));
+            // print_r($tour["tour_gallery_images"]);
             // exit;
             return view("admin.tour_edit", compact("tour",  "regions", "categories", "languages"));
         } catch (\Exception $e) {
