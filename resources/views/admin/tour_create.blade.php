@@ -1,724 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
 
-@extends('layouts.app')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Tour - Adventure Tours</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-@section('title', 'Create New Tour')
-@section('style')
-<link rel="stylesheet" href="{{ asset('css/tour_create.css') }}">
-<link rel="stylesheet" href="{{ asset('css/admin/admin-tours.css') }}">
-    
-@endsection
-
-@section('content')
-    <div class="container">
-        <div class="admin-header">
-            <h1>Create New Tour</h1>
-        </div>
-
-        <form action="{{ route('tours.store') }}" method="POST" enctype="multipart/form-data" class="tour-form">
-            @csrf
-
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <div class="form-sections">
-                <!-- Basic Info Section -->
-                <div class="form-section">
-                    <h2 class="section-title">Basic Information</h2>
-                    
-                    <div class="form-group">
-                        <label for="title">Tour Title <span class="required">*</span></label>
-                        <input type="text" id="title" name="title" value="{{ old('title') }}" >
-                    </div>
-
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="subtitle">Subtitle <span class="required">*</span></label>
-                            <input type="text" id="subtitle" name="subtitle" value="{{ old('subtitle') }}" >
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="badge">Badge Text (optional)</label>
-                            <input type="text" id="badge" name="badge" value="{{ old('badge') }}" placeholder="e.g. Best Seller, New Tour">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="hours">Hours<span class="required">*</span></label>
-                        <input type="number" id="hours" name="hours" value="{{ old('hours') }}" min="1" >
-                    </div>
-                    <div class="form-group">
-                        <label for="start_location">Start Location <span class="required">*</span></label>
-                        <input type="text" id="start_location" name="start_location" value="{{ old('start_location') }}" >
-                    </div>
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="region">Region<span class="required">*</span></label>
-                            <select id="region" name="region_id">
-                                <option value="" disabled @selected(!old('region_id', $tour->region_id))>select a region</option>
-                                @foreach ($regions as $region)
-                                    <option value="{{$region->id}}" @selected(old('region_id', $tour->region_id) == $region->id)>{{$region->region}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Category<span class="required">*</span></label>
-                            <p></p>
-                            <select id="category" name="category_id">
-                                <option value=""  disabled @selected(!old('category_id', $tour->category_id))>select a category</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{$category->id}}" @selected(old('category_id', $tour->category_id) == $category->id)>{{$category->category}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div> 
-
-
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="destinations">Destinations <span class="required">*</span></label>
-                            <input type="text" id="destinations" name="destinations" value="{{ old('destinations') }}" placeholder="e.g. Kyoto, Nara, Osaka" >
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="languages">Available Languages <span class="required">*</span></label>
-                            <input type="text" id="languages" name="languages" value="{{ old('languages') }}" placeholder="e.g. English, Japanese" >
-                        </div>
-                    </div>
-
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="min_participants">Min. Participants <span class="required">*</span></label>
-                            <input type="number" id="min_participants" name="min_participants" value="{{ old('min_participants') }}" min="1" >
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="max_participants">Max. Group Size <span class="required">*</span></label>
-                            <input type="number" id="max_participants" name="max_participants" value="{{ old('max_participants') }}" min="1" >
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="available_dates">Available Dates <span class="required">*</span></label>
-                        <div class="date-selection">
-                            <div class="date-range-inputs">
-                                <input type="text" id="date_range_start" placeholder="choose multiple dates" class="flatpickr-input" style="width: 100%;">
-                            </div>
-                            <div class="selected-dates" id="selected_dates_container">
-                                <!-- Selected dates will appear here as tags -->
-                            </div>
-                            
-                            <!-- Hidden input to store all selected dates as JSON -->
-                            <input type="hidden" name="available_dates" id="available_dates_input" value="{{old("available_dates")}}">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pricing Section -->
-                <div class="form-section">
-                    <h2 class="section-title">Pricing Information</h2>
-                    
-                    <div class="form-grid-2">
-                        <div class="form-group">
-                            <label for="price">Price (per person) <span class="required">*</span></label>
-                            <div class="price-input">
-                                <select id="currency" name="currency">
-                                    <option value="¥">¥ (JPY)</option>
-                                    <option value="$">$ (USD)</option>
-                                    <option value="€">€ (EUR)</option>
-                                </select>
-                                <input type="number" id="price" name="price" value="{{ old('price') }}" min="0" >
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="discount_percentage">Discount Percentage (optional)</label>
-                            <div class="input-with-icon">
-                                <input type="number" id="discount_percentage" name="discount_percentage" value="{{ old('discount_percentage', 0) }}" min="0" max="100">
-                                <span class="input-icon">%</span>
-                            </div>
-                        </div>
-                    </div> 
-                    <div class="form-group">
-                        <label for="limited_spots">Limited Availability Message (optional)</label>
-                        <input type="text" id="limited_spots" name="limited_spots" value="{{ old('limited_spots') }}" placeholder="e.g. Only 5 spots left for May dates!">
-                    </div>
-                </div>
-
-                <!-- Description Section -->
-                <div class="form-section">
-                    <h2 class="section-title">Tour Description</h2>
-                    
-                    <div class="form-group">
-                        <label for="overview">Tour Overview <span class="required">*</span></label>
-                        <textarea id="overview" name="overview" rows="5" >{{ old('overview') }}</textarea>
-                        <p class="field-help">Provide a compelling overview of the tour experience. This will appear in the Tour Overview section.</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Tour Highlights <span class="required">*</span></label>
-                        <div id="highlights-container">
-                            @if(old('highlights'))
-                                @foreach(old('highlights') as $index => $highlight)
-                                    <div class="highlight-item">
-                                        <input type="text" name="highlights[]" value="{{ $highlight }}" >
-                                        <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="highlight-item">
-                                    <input type="text" name="highlights[]" >
-                                    <button type="button" class="remove-highlight btn-icon"><i class="fas fa-times"></i></button>
-                                </div>
-                            @endif
-                        </div>
-                        <button type="button" id="add-highlight" class="btn-secondary"><i class="fas fa-plus"></i> Add Highlight</button>
-                    </div>
-                </div>
-
-                <!-- Itinerary Section -->
-                <div class="form-section">
-                    <h2 class="section-title">Itinerary Details</h2>
-                    
-                    <div id="itinerary-days-container">
-                        <!-- Day template will be added here dynamically -->
-                        @if(old('itinerary'))
-                            @foreach(old('itinerary') as $dayIndex => $day)
-                                <div class="itinerary-day-item">
-                                    <div class="day-header">
-                                        <h3>Day {{ $dayIndex + 1 }}</h3>
-                                        <button type="button" class="remove-day btn-icon" data-day="{{ $dayIndex + 1 }}"><i class="fas fa-times"></i></button>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="itinerary[{{ $dayIndex }}][title]">Day Title <span class="required">*</span></label>
-                                        <input type="text" id="itinerary[{{ $dayIndex }}][title]" name="itinerary[{{ $dayIndex }}][title]" value="{{ $day['title'] }}" >
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="itinerary[{{ $dayIndex }}][description]">Day Description <span class="required">*</span></label>
-                                        <textarea id="itinerary[{{ $dayIndex }}][description]" name="itinerary[{{ $dayIndex }}][description]" rows="3" >{{ $day['description'] }}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="itinerary[{{ $dayIndex }}][map]">Map URL</label>
-                                        <input type="text" id="itinerary[{{ $dayIndex }}][map]" name="itinerary[{{ $dayIndex }}][map]"value="{{ $day['map'] }}" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="itinerary_image{{$dayIndex}}">Itinerary Image <span class="required">*</span></label>
-                                        <div class="image-upload-container">
-                                            <input type="file" id="itinerary_image{{$dayIndex}}"  name="itinerary[{{$dayIndex}}][itinerary_image]" accept="image/*" class="image-upload-input">
-                                            <label for="itinerary_image{{$dayIndex}}" class="image-upload-label">
-                                                <i class="fas fa-cloud-upload-alt"></i>
-                                                <span style="color: #fff;">Choose a file...</span>
-                                            </label>
-                                            <div class="selected-file"></div>
-                                        </div>
-                                        <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
-                                        <div class="preview-container">
-                                            <img id="itineraryPreviewImage" class="preview-image" src="">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Itineary highlights<span class="required">*</span></label>
-                                        <div class="itinerary-highlights-container">
-                                            @foreach($day['itinerary_highlight'] as $index => $highlight)
-                                                <div class="itineary-highlight-item">
-                                                    <input type="text" name="itinerary[{{ $dayIndex }}][itinerary_highlight][{{ $index}}]" value="{{ $highlight }}" >
-                                                    <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
-                                                </div>
-                                            @endforeach
-
-                                        </div>
-                                        <button type="button" id="add-highlight" class="btn-secondary"><i class="fas fa-plus"></i> Add Highlight</button>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label>Schedule <span class="required">*</span></label>
-                                        <div class="schedule-items-container" data-day="{{ $dayIndex }}">
-                                            @foreach($day['schedule'] as $scheduleIndex => $scheduleItem)
-                                                <div class="schedule-item">
-                                                    <div class="schedule-description">
-                                                        <input type="text" name="itinerary[{{ $dayIndex }}][schedule][{{ $scheduleIndex }}][description]" placeholder="Activity description" value="{{ $scheduleItem['description'] }}" >
-                                                    </div>
-                                                    <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <button type="button" class="add-schedule btn-secondary" data-day="{{ $dayIndex }}"><i class="fas fa-plus"></i> Add Schedule Item</button>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <!-- Default first day if no old input -->
-                            <div class="itinerary-day-item">
-                                <div class="day-header">
-                                    <h3>Day 1</h3>
-                                    <button type="button" class="remove-day btn-icon" data-day="1"><i class="fas fa-times"></i></button>
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="itinerary[0][title]">Day Title <span class="required">*</span></label>
-                                    <input type="text" id="itinerary[0][title]" name="itinerary[0][title]" >
-                                </div>
-                                
-                                <div class="form-group">
-                                    <label for="itinerary[0][description]">Day Description <span class="required">*</span></label>
-                                    <textarea id="itinerary[0][description]" name="itinerary[0][description]" rows="3" ></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="itinerary[0][map]">Map URL</label>
-                                    <input type="text" id="itinerary[0][map]" name="itinerary[0][map]" >
-                                </div>
-                                <div class="form-group">
-                                    <label for="itinerary_image0">Itinerary Image <span class="required">*</span></label>
-                                    <div class="image-upload-container">
-                                        <input type="file" id="itinerary_image0" name="itinerary[0][itinerary_image]" accept="image/*" class="image-upload-input" >
-                                        <label for="itinerary_image0" class="image-upload-label">
-                                            <i class="fas fa-cloud-upload-alt"></i>
-                                            <span style="color: #fff;">Choose a file...</span>
-                                        </label>
-                                        <div class="selected-file"></div>
-                                    </div>
-                                    <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
-                                    <div class="preview-container">
-                                        <img id="itineraryPreviewImage" class="preview-image" src="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Itineary highlights <span class="required">*</span></label>
-                                    <div class="itinerary-highlights-container">
-                                        <div class="itineary-highlight-item">
-                                            <input type="text" name="itinerary[0][itinerary_highlight][0]" value="" >
-                                            <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
-                                        </div>
-                                    </div>                          
-                                    <button type="button" class="add-button btn-secondary"><i class="fas fa-plus"></i> Add Itinerary highlights</button>
-                                </div>
-                                <div class="form-group">
-                                    <label>Schedule <span class="required">*</span></label>
-                                    <div class="schedule-items-container" data-day="0">
-                                        <div class="schedule-item">
-                                            <div class="schedule-description">
-                                                <input type="text" name="itinerary[0][schedule][0][description]" placeholder="Activity description" >
-                                            </div>
-                                            <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="add-schedule btn-secondary" data-day="0"><i class="fas fa-plus"></i> Add Schedule Item</button>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <button type="button" id="add-day" class="btn-secondary"><i class="fas fa-plus"></i> Add Day</button>
-                </div>
-
-                <!-- Inclusions & Exclusions -->
-                <div class="form-section">
-                    <h2 class="section-title">What's Included / Not Included</h2>
-                    
-                    <div class="form-group">
-                        <label>Inclusions <span class="required">*</span></label>
-                        <div id="inclusions-container">
-                            @if(old('inclusions'))
-                                @foreach(old('inclusions') as $index => $inclusion)
-                                    <div class="inclusion-item">
-                                        <input type="text" name="inclusions[]" value="{{ $inclusion }}" >
-                                        <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="inclusion-item">
-                                    <input type="text" name="inclusions[]" >
-                                    <button type="button" class="remove-inclusion btn-icon"><i class="fas fa-times"></i></button>
-                                </div>
-                            @endif
-                        </div>
-                        <button type="button" id="add-inclusion" class="btn-secondary"><i class="fas fa-plus"></i> Add Inclusion</button>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Exclusions <span class="required">*</span></label>
-                        <div id="exclusions-container">
-                            @if(old('exclusions'))
-                                @foreach(old('exclusions') as $index => $exclusion)
-                                    <div class="exclusion-item">
-                                        <input type="text" name="exclusions[]" value="{{ $exclusion }}" >
-                                        <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="exclusion-item">
-                                    <input type="text" name="exclusions[]" >
-                                    <button type="button" class="remove-exclusion btn-icon"><i class="fas fa-times"></i></button>
-                                </div>
-                            @endif
-                        </div>
-                        <button type="button" id="add-exclusion" class="btn-secondary"><i class="fas fa-plus"></i> Add Exclusion</button>
-                    </div>
-                </div>
-
-                <!-- Tour Images -->
-                <div class="form-section">
-                    <h2 class="section-title">Tour Images</h2>
-                    
-                    <div class="form-group">
-                        <label for="hero_image">Hero Image <span class="required">*</span></label>
-                        <div class="image-upload-container">
-                            <input type="file" id="hero_image" name="hero_image" accept="image/*" class="image-upload-input" >
-                            <label for="hero_image" class="image-upload-label">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <span style="color: #fff;">Choose a file...</span>
-                            </label>
-                            <div class="selected-file"></div>
-                        </div>
-                        <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
-                        <div class="preview-container">
-                            <img id="previewImage" class="preview-image" src="">
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="gallery_images">Gallery Images <span class="required">*</span></label>
-                        <div class="gallery_image-wrapepr">
-                            <div class="image-upload-container" id="js_gallery_image" data-id="0">
-                                <input type="file"  id="gallery_images_0" name="gallery_images[0]" accept="image/*" class="image-upload-input js_galllery_images"  >
-                                <label for="gallery_images_0" class="image-upload-label">
-                                    <i class="fas fa-images"></i>
-                                    <span style="color: #fff;">Choose a file</span>
-                                </label>
-                                <div class="selected-files"></div>
-                            </div>
-                        </div>
-                        
-                        <button type="button" id="add-gallery" class="btn-secondary"><i class="fas fa-plus"></i> Add Gallery Image</button>
-                        <p class="field-help">Upload at least 3 images for the tour gallery. Recommended size: 1200x800px.</p>
-                        <div class="preview-container" id="gallery_image">
-                        </div>
-                    </div>
-                </div>
-                {{-- review form --}}
-                <div class="form-section">
-                    <h2 class="section-title">Reviews</h2>
-                    <div id="review-container">
-                        <!-- Day template will be added here dynamically -->
-                        @if(old('review'))
-                            @foreach(old('review') as $dayIndex => $day)
-                                <div class="review-item">
-                                    <div class="day-header">
-                                        <h3>Review {{$dayIndex + 1}}</h3>
-                                        <button type="button" class="remove-review btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="review[{{$dayIndex}}][name]">Customer's name<span class="required">*</span></label>
-                                        <input type="text" id="review[{{$dayIndex}}][name]" name="review[{{$dayIndex}}][name]" value="{{ old('review.'.$dayIndex.'.name') }}">
-                                    </div>
-                                    <div class="form-grid-2">
-                                        <div class="form-group">
-                                            <label for="review[{{$dayIndex}}][date]">Date<span class="required">*</span></label>
-                                            <input type="date" id="review[{{$dayIndex}}][date]" name="review[{{$dayIndex}}][date]" value="{{ old('review.'.$dayIndex.'.date') }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="review[{{$dayIndex}}][rate]">Rate<span class="required">*</span></label>
-                                            <input type="number" id="review[{{$dayIndex}}][rate]" name="review[{{$dayIndex}}][rate]" max=5 value="{{ old('review.'.$dayIndex.'.rate') }}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="review[{{$dayIndex}}][review]">Review<span class="required">*</span></label>
-                                        <textarea id="review[{{$dayIndex}}][review]" name="review[{{$dayIndex}}][review]" rows="3" >{{ old('review.'.$dayIndex.'.review') }}</textarea>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <!-- Default first review if no old input -->
-                            <div class="review-item">
-                                <div class="day-header">
-                                    <h3>Review 1</h3>
-                                    <button type="button" class="remove-review btn-icon"><i class="fas fa-times"></i></button>
-                                </div>
-                                <div class="form-group">
-                                    <label for="review[0][name]">Customer's name<span class="required">*</span></label>
-                                    <input type="text" id="review[0][name]" name="review[0][name]" >
-                                </div>
-                                <div class="form-grid-2">
-                                    <div class="form-group">
-                                        <label for="review[0][date]">Date<span class="required">*</span></label>
-                                        <input type="date" id="review[0][date]" name="review[0][date]" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="review[0][rate]">Rate<span class="required">*</span></label>
-                                        <input type="number" id="review[0][rate]" name="review[0][rate]" max=5>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="review[0][review]">Review<span class="required">*</span></label>
-                                    <textarea id="review[0][review]" name="review[0][review]" rows="3" ></textarea>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <button type="button" id="add-review" class="btn-secondary"><i class="fas fa-plus"></i> Add Review</button>
-                </div>
-                {{-- QA form --}}
-                <div class="form-section">
-                    <h2 class="section-title">QA</h2>
-                    <div id="qa-container">
-                        <!-- Day template will be added here dynamically -->
-                        @if(old('qa'))
-                            @foreach(old('qa') as $dayIndex => $day)
-                                <div class="qa-item">
-                                    <div class="day-header">
-                                        <h3>Question {{$dayIndex + 1}}</h3>
-                                        <button type="button" class="remove-qa btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="qa[{{$dayIndex}}][question]">Question<span class="required">*</span></label>
-                                        <textarea id="qa[{{$dayIndex}}][question]" name="qa[{{$dayIndex}}][question]" rows="3" >{{ old('qa.'.$dayIndex.'.question') }}</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="qa[{{$dayIndex}}][answer]">Answer<span class="required">*</span></label>
-                                        <textarea id="qa[{{$dayIndex}}][answer]" name="qa[{{$dayIndex}}][answer]" rows="3" >{{ old('qa.'.$dayIndex.'.answer') }}</textarea>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @else
-                            <!-- Default first review if no old input -->
-                            <div class="qa-item">
-                                <div class="day-header">
-                                    <h3>Question 1</h3>
-                                    <button type="button" class="remove-qa btn-icon"><i class="fas fa-times"></i></button>
-                                </div>
-                                <div class="form-group">
-                                    <label for="qa[0][question]">Question<span class="required">*</span></label>
-                                    <textarea id="qa[0][question]" name="qa[0][question]" rows="3" ></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="qa[0][answer]">Answer<span class="required">*</span></label>
-                                    <textarea id="qa[0][answer]" name="qa[0][answer]" rows="3" ></textarea>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                    
-                    <button type="button" id="add-qa" class="btn-secondary"><i class="fas fa-plus"></i> Add QA</button>
-                </div>
-
-                <!-- Additional services -->
-                <div class="form-section">
-                    <h2 class="section-title">Additional Services</h2>
-                        <div class="form-group">
-                            <label>Additional Services<span class="required">*</span></label>
-                            <div id="services-container">
-                                @foreach($services as $index => $service)
-                                    <div class="service-item">
-                                        <input type="text" name="services[{{$index}}][service]" value="{{ $service->service }}" >
-                                        <div class="price-input">
-                                            <input type="number" id="price" name="services[{{$index}}][price]" value="{{ $service->price }}" min="0" >
-                                        </div>
-                                        <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
-                                    </div>
-                                @endforeach
-                                @if(old('services'))
-                                    @foreach(old('services') as $index => $service)
-                                        <div class="service-item">
-                                            <input type="text" name="services[{{$index}}][service]" >
-                                            <div class="price-input">
-                                                <input type="number" id="price" name="services[price][{{$index}}]"  min="0" placeholder="price(￥)">
-                                            </div>
-                                            <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
-                                        </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                            <button type="button" id="add-service" class="btn-secondary"><i class="fas fa-plus"></i> Add Service</button>
-                        </div>
-                </div>
-
-            
-
-            <div class="form-actions">
-                <button type="button" class="btn-outline" ><a href="{{route("tour_list")}}">Cancel</a></button>
-                <button type="submit" class="btn-primary create-tour-btn">Create Tour</button>
-            </div>
-        </form>
-    </div>
-
-    
-
-    <!-- Itinerary Day Template (Hidden) -->
-    <template id="day-template">
-        <div class="itinerary-day-item">
-            <div class="day-header">
-                <h3>Day {day_number}</h3>
-                <button type="button" class="remove-day btn-icon" data-day="{day_number}"><i class="fas fa-times"></i></button>
-            </div>
-            
-            <div class="form-group">
-                <label for="itinerary[{day_index}][title]">Day Title <span class="required">*</span></label>
-                <input type="text" id="itinerary[{day_index}][title]" name="itinerary[{day_index}][title]" >
-            </div>
-            
-            <div class="form-group">
-                <label for="itinerary[{day_index}][description]">Day Description <span class="required">*</span></label>
-                <textarea id="itinerary[{day_index}][description]" name="itinerary[{day_index}][description]" rows="3" ></textarea>
-            </div>
-            <div class="form-group">
-                <label for="itinerary[{day_index}][map]">Map URL</label>
-                <input type="text" id="itinerary[{day_index}][map]" name="itinerary[{day_index}][map]" >
-            </div>
-
-            <div class="form-group">
-                <label for="itinerary_image{day_index}">Itinerary Image <span class="required">*</span></label>
-                <div class="image-upload-container">
-                    <input type="file" id="itinerary_image{day_index}" name="itinerary[{day_index}][itinerary_image]" accept="image/*" class="image-upload-input">
-                    <label for="itinerary_image{day_index}" class="image-upload-label">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <span style="color: #fff;">Choose a file...</span>
-                    </label>
-                    <div class="selected-file"></div>
-                </div>
-                <p class="field-help">This image will appear at the top of the tour page. Recommended size: 1600x800px.</p>
-                <div class="preview-container">
-                    <img id="itineraryPreviewImage" class="preview-image" src="">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label>Itineary highlights <span class="required">*</span></label>
-                <div class="itinerary-highlights-container">
-                    <div class="itineary-highlight-item">
-                        <input type="text" name="itinerary[{day_index}][itinerary_highlight][0]" value="" >
-                        <button type="button" class="remove-itinerary_highlight btn-icon"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-                <button type="button" class="add-itinerary-highlight btn-secondary"><i class="fas fa-plus"></i> Add Itinerary highlights</button>
-            </div>
-            
-            <div class="form-group">
-                <label>Schedule <span class="required">*</span></label>
-                <div class="schedule-items-container" data-day="{day_index}">
-                    <div class="schedule-item">
-                        <div class="schedule-description">
-                            <input type="text" name="itinerary[{day_index}][schedule][0][description]" placeholder="Activity description" >
-                        </div>
-                        <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-                    </div>
-                </div>
-                <button type="button" class="add-schedule btn-secondary" data-day="{day_index}"><i class="fas fa-plus"></i> Add Schedule Item</button>
-            </div>
-        </div>
-    </template>
-
-    <!-- Schedule Item Template (Hidden) -->
-    <template id="schedule-template">
-        <div class="schedule-item">
-            <div class="schedule-description">
-                <input type="text" name="itinerary[{day_index}][schedule][{schedule_index}][description]" placeholder="Activity description" >
-            </div>
-            <button type="button" class="remove-schedule btn-icon"><i class="fas fa-times"></i></button>
-        </div>
-    </template>
-
-    <!-- Review Item Template (Hidden) -->
-    <template id="review-template">
-        <div class="review-item">
-            <div class="day-header">
-                <h3>Review {review_index}</h3>
-                <button type="button" class="remove-review btn-icon"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="form-group">
-                <label for="review[{day_index}][name]">Customer's name<span class="required">*</span></label>
-                <input type="text" id="review[{day_index}][name]" name="review[{day_index}][name]" >
-            </div>
-            <div class="form-grid-2">
-                <div class="form-group">
-                    <label for="review[{day_index}][date]">Date<span class="required">*</span></label>
-                    <input type="date" id="review[{day_index}][date]" name="review[{day_index}][date]" >
-                </div>
-                <div class="form-group">
-                    <label for="review[{day_index}][rate]">Rate<span class="required">*</span></label>
-                    <input type="number" id="review[{day_index}][rate]" name="review[{day_index}][rate]" max=5>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="review[{day_index}][review]">Review<span class="required">*</span></label>
-                <textarea id="review[{day_index}][review]" name="review[{day_index}][review]" rows="3" ></textarea>
-            </div>
-        </div>
-    </template>
-
-    <!-- Review QA Template (Hidden) -->
-    <template id="qa-template">
-        <div class="qa-item">
-            <div class="day-header">
-                <h3>Question {day_index}</h3>
-                <button type="button" class="remove-qa btn-icon"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="form-group">
-                <label for="qa[{day_index}][question]">Question<span class="required">*</span></label>
-                <textarea id="qa[{day_index}][question]" name="qa[{day_index}][question]" rows="3" ></textarea>
-            </div>
-            <div class="form-group">
-                <label for="qa[{day_index}][answer]">Answer<span class="required">*</span></label>
-                <textarea id="qa[{day_index}][answer]" name="qa[{day_index}][answer]" rows="3" ></textarea>
-            </div>
-        </div>
-    </template>
-    <!-- Addditional Services Template (Hidden) -->
-    <template id="service-template">
-        <div class="service-item">
-            <input type="text" name="services[{index}][service]" >
-            <div class="price-input">
-                <input type="number" id="price" name="services[{index}][price]"  min="0" placeholder="price(￥)">
-            </div>
-            <button type="button" class="remove-service btn-icon"><i class="fas fa-times"></i></button>
-        </div>
-    </template>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // File upload previews
-            document.getElementById('hero_image').addEventListener('change', function(e) {
-                const fileName = e.target.files[0]?.name || 'No file chosen';
-                const objectURL = URL.createObjectURL(e.target.files[0]);
-                document.getElementById("previewImage").src = objectURL
-            });
-
-        });
-    </script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script>
-        // デバッグ用に変数の生の値を確認
-        const rawValue = '<?php echo addslashes(old("available_dates", "[]")); ?>';
-        let availableDates
-        if(rawValue){
-            availableDates = JSON.parse(rawValue);
+        * {
+            font-family: 'Inter', sans-serif;
         }
-        const multiDatePicker = flatpickr("#date_range_start", {
-            dateFormat: "Y-m-d",
-            minDate: "today",
-            mode: "multiple",
-            defaultDate: availableDates,
-            onChange: function(selectedDates, dateStr, instance) {
-                // 選択された日付をJSON形式で隠しフィールドに保存
-                document.getElementById('available_dates_input').value = JSON.stringify(selectedDates.map(date => {
-                // タイムゾーンを考慮した日付フォーマット
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                return `${year}-${month}-${day}`;
-            }));
 
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #e92929 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header
+        class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 transition-all duration-300 border-b border-gray-100">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-[#e92929] rounded-lg flex items-center justify-center">
+                        <i class="fas fa-mountain text-white text-sm"></i>
+                    </div>
+                    <span class="font-bold text-xl">Japatour</span>
+                </div>
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#"
+                        class="text-gray-600 hover:text-[#e92929] transition-colors text-sm font-medium">Dashboard</a>
+                    <a href="#"
+                        class="text-gray-600 hover:text-[#e92929] transition-colors text-sm font-medium">Tours</a>
+                    <a href="#"
+                        class="text-gray-600 hover:text-[#e92929] transition-colors text-sm font-medium">Analytics</a>
+                    <a href="#"
+                        class="text-gray-600 hover:text-[#e92929] transition-colors text-sm font-medium">Settings</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <button class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+                        <i class="fas fa-bell text-gray-600"></i>
+                    </button>
+                    <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
+                        <i class="fas fa-user text-gray-600"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-10">
+        <form class="container mx-auto px-6 max-w-[1100px]" action="{{ route('tours.store') }}" method="POST"
+            enctype="multipart/form-data">
+            @csrf
+            <!-- Page Header -->
+            <div class="mb-8">
+                <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
+                    <a href="#" class="hover:text-[#e92929] transition-colors">Dashboard</a>
+                    <i class="fas fa-chevron-right text-xs"></i>
+                    <a href="#" class="hover:text-[#e92929] transition-colors">Tours</a>
+                    <i class="fas fa-chevron-right text-xs"></i>
+                    <span class="text-gray-800 font-medium">Create New Tour</span>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800">Create New Tour</h1>
+                <p class="text-gray-600 mt-2">Fill in the details below to create a new tour experience</p>
+            </div>
+
+            <!-- Form Sections -->
+            <div class="space-y-6" id="tour-section">
+                @if ($errors->any())
+                    <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <span class="font-medium">Ensure that these requirements are met:</span>
+                            <ul class="mt-1.5 list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                @endif
+                <!-- Basic Information -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <div
+                            class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-info-circle text-[#e92929]"></i>
+                        </div>
+                        Basic Information
+                    </h2>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tour Title
+                                *</label>
+                            <input type="text" name="title" placeholder="e.g., Tokyo City Highlights Tour" value="{{old("title")}}"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
+                            <input type="text" name="subtitle" value="{{old("subtitle")}}"
+                                placeholder="e.g., An unforgettable journey through Japan's vibrant capital"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">BadgeLabel</label>
+                            <input type="text" name="badge" value="{{old("badge")}}" placeholder="e.g., Best seller" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                        </div>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Region</label>
+                                <select name="region_id" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                    <option selected disabled >Choose a region</option>
+                                    @foreach ($regions as $region)
+                                        <option {{old("region_id") == $region->id ? "selected" : ""}} value="{{$region->id}}" >{{$region->region}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                <select name="category_id" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                    <option selected disabled >Choose a category</option>
+                                    @foreach ($categories as $category)
+                                        <option {{old("category_id") == $category->id ? "selected" : ""}} value="{{$category->id}}" >{{$category->category}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Hero Image Section -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <div
+                            class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-image text-[#e92929]"></i>
+                        </div>
+                        Hero Image
+                    </h2>
+                    @if (session("temp_hero_image"))
+                        <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
+                            <label for="hero_image" class="h-full block">
+                                <img src="{{asset("storage/" . session("temp_hero_image"))}}" alt="" class="preview_src h-full w-full object-cover">
+                            </label>
+                            <input type="hidden" name="temp_hero_image" value="{{session("temp_hero_image")}}">
+                        </div>
+                        <div class="hero_image_element">
+                                <input type="file"  name="hero_image" id="hero_image" class="hidden">
+                        </div>
+                        
+                    @else
+                        <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer hidden h-[350px]">
+                            <label for="hero_image" class="h-full block">
+                                <img src="" alt="" class="preview_src h-full w-full object-cover">
+                            </label>
+                        </div>
+                        <div
+                            class="hero_image_element border-2 border-dashed border-gray-300 rounded-lg p-8 text-center flex items-center flex-col justify-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-600 font-medium mb-2">Upload main tour image</p>
+                            <p class="text-sm text-gray-500">This will be displayed as the main banner image</p>
+                            <p class="text-sm text-gray-500 mb-4">Recommended size: 1920x1080px</p>
+                            <label for="hero_image"
+                                class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm w-fit">
+                                Select Hero Image
+                            </label>
+                            <input type="file"  name="hero_image" id="hero_image" class="hidden">
+                        </div>
+                    @endif
+
+
+
+
+                </div>
+
+                <!-- Overview Section -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <div
+                            class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-align-left text-[#e92929]"></i>
+                        </div>
+                        Overview Section
+                    </h2>
+
+                    <div class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Overview Title
+                                *</label>
+                            <input type="text" name="overview_title" value="{{old("overview_title")}}"
+                                placeholder="e.g., Experience Tokyo Like Never Before"
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Overview
+                                Description *</label>
+                            <textarea rows="4" name="overview_description"
+                                placeholder="Describe what makes this tour special..."
+                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all resize-none">{{old("overview_description")}}</textarea>
+                            <p class="text-xs text-gray-500 mt-1">0/500 characters</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Highlights Section -->
+                <div class="bg-white rounded-xl shadow-sm p-6" id="highlight-section">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                        <div
+                            class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-lightbulb text-[#e92929]"></i>
+                        </div>
+                        Tour Highlights
+                    </h2>
+
+                    <p class="text-sm text-gray-600 mb-4">Add key features and highlights that make this tour special</p>
+                    <div id="tour_highlight-wrapper">
+                        @if (old("highlights"))
+                            @foreach (old("highlights") as $highlightIndex => $highlight)
+                                <div class="highlight-item">
+                                    <div class="bg-gray-50 rounded-lg p-4">
+                                        <div class="flex items-start gap-4">
+                                            <div
+                                                class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                <i class="fas fa-torii-gate text-[#e92929]"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <input type="text" name="highlights[{{$highlightIndex}}][title]" value="{{$highlight["title"]}}"
+                                                    placeholder="Highlight title (e.g., Ancient Temples & Shrines)"
+                                                    class="w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm font-medium">
+                                                <textarea rows="2" name="highlights[{{$highlightIndex}}][description]"
+                                                    placeholder="Brief description of this highlight..."
+                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{$highlight["description"]}}</textarea>
+                                            </div>
+                                            <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-highlight_button">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="highlight-item">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="flex items-start gap-4">
+                                        <div
+                                            class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-torii-gate text-[#e92929]"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <input type="text" name="highlights[0][title]"
+                                                placeholder="Highlight title (e.g., Ancient Temples & Shrines)"
+                                                class="w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm font-medium">
+                                            <textarea rows="2" name="highlights[0][description]"
+                                                placeholder="Brief description of this highlight..."
+                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
+                                        </div>
+                                        <button
+                                            type="button"
+                                            class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-highlight_button">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                    </div>
+
+                    <button type="button"
+                        class="add-highlight_button mt-4 w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-[#e92929] hover:text-[#e92929] transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-plus"></i>
+                        <span class="font-medium">Add Highlight</span>
+                    </button>
+                </div>
+
+                <!-- Multiple Tour Itineraries Section -->
+                <div class="space-y-6" id="itinerary-section">
+                    <h2 class="text-2xl font-bold text-gray-800">Tour Itineraries</h2>
+                    <div id="itinerary-wrapper">
+                        @if (old("itinerary"))
+                            @foreach(old('itinerary') as $itineraryIndex => $itinerary)
+                                <div class="itinerary-item mt-8" data-id="0">
+                                    <div class="bg-white rounded-xl shadow-sm p-6 relative">
+                                        <div class="absolute top-6 right-6">
+                                            <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary_button" title="Delete this itinerary">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </div>
+                                        <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                                            <div
+                                                class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                                <i class="fas fa-route text-[#e92929]"></i>
+                                            </div>
+                                            Tour Itinerary & Details #1
+                                        </h3>
+
+                                        <!-- Tour Basic Details -->
+                                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                <div class="flex items-center justify-between">
+                                                    <h5 class="font-semibold text-gray-800">
+                                                        <i class="fas fa-info-circle text-gray-400 mr-2"></i>
+                                                        Tour Information
+                                                    </h5>
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="m-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                                <div>
+                                                    <label
+                                                        class="block text-sm font-medium text-gray-700 mb-1">Duration
+                                                        (hours) *</label>
+                                                    <input name="itinerary[{{$itineraryIndex}}][duration]" type="number" value="{{$itinerary["duration"]}}"
+                                                        placeholder="e.g., 8" min="1" max="24"
+                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+
+                                                <div>
+                                                    <label
+                                                        class="block text-sm font-medium text-gray-700 mb-1">MaxParticipants
+                                                        *</label>
+                                                    <input name="itinerary[{{$itineraryIndex}}][max_participants]" value="{{$itinerary["max_participants"]}}"
+                                                        type="number" placeholder="e.g., 15" min="1"
+                                                        max="50"
+                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+
+                                                <div>
+                                                    <label
+                                                        class="block text-sm font-medium text-gray-700 mb-1">Tour Type *</label>
+                                                    <select name="itinerary[{{$itineraryIndex}}][tour_type]"
+                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                        <option {{old("itinerary.{$itineraryIndex}.tour_type") === "public" ? "selected" : ""}}>public</option>
+                                                        <option {{old("itinerary.{$itineraryIndex}.tour_type") === "private" ? "selected" : ""}}>private</option>
+                                                    </select>
+                                                </div>
+
+                                                <div>
+                                                    <label
+                                                        class="block text-sm font-medium text-gray-700 mb-1">Meeting
+                                                        Point *</label>
+                                                    <input type="text" name="itinerary[{{$itineraryIndex}}][meeting_point]" value="{{old("itinerary.{$itineraryIndex}.meeting_point")}}"
+                                                        placeholder="e.g., Hotel lobby or JR Shibuya Station"
+                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+
+                                                <div>
+                                                    <label
+                                                        class="block text-sm font-medium text-gray-700 mb-1">Adult
+                                                        Price (¥) *</label>
+                                                    <input name="itinerary[{{$itineraryIndex}}][adult_price]" type="number" value="{{old("itinerary.{$itineraryIndex}.adult_price")}}"
+                                                        placeholder="e.g., 12000" min="0"
+                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+
+                                                <div>
+                                                    <label
+                                                        class="block text-sm font-medium text-gray-700 mb-1">Child
+                                                        Price (¥)</label>
+                                                    <input name="itinerary[{{$itineraryIndex}}][child_price]" type="number" value="{{old("itinerary.{$itineraryIndex}.child_price")}}"
+                                                        placeholder="e.g., 6000" min="0"
+                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                </div>
+                                            </div>
+
+                                            <div class="m-8">
+                                                <label class="block text-sm font-medium text-gray-700 mb-2">Languages
+                                                    Available</label>
+                                                <div class="flex flex-wrap gap-3">
+                                                    @php
+                                                        $selectedLanguages = old("itinerary.{$itineraryIndex}.languages", []);
+                                                        $selectedLanguages = is_array($selectedLanguages) ? $selectedLanguages : [];
+                                                    @endphp
+
+                                                    @foreach ($languages as $language)
+                                                        <label class="flex items-center gap-2 cursor-pointer">
+                                                            <input type="checkbox" 
+                                                                value="{{ $language->id }}"
+                                                                name="itinerary[{{$itineraryIndex}}][languages][]"{{ in_array($language->id, $selectedLanguages) ? 'checked' : '' }}
+                                                                class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
+                                                            <span class="text-sm text-gray-700">{{$language->language}}</span>
+                                                        </label>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-8">
+                                            <!-- Itinerary Item 1 -->
+                                            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                                <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                    <div class="flex items-center justify-between">
+                                                        <h5 class="font-semibold text-gray-800">
+                                                            Itinerary Item</h5>
+                                                        
+                                                    </div>
+                                                </div>
+
+                                                <div class="p-8">
+                                                    <!-- Activities Section -->
+                                                    <div>
+                                                        <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
+                                                        <div class="space-y-3 activity-wrapper">
+                                                            <!-- Activity Entry 1 -->
+                                                            @if (isset($itinerary["activity"]) && is_array($itinerary["activity"]))
+                                                                @foreach ($itinerary["activity"] as $activityIndex => $activity)
+                                                                    <div class="activity-item">
+                                                                        <div class="bg-gray-50 rounded-lg p-3">
+                                                                            <div class="flex items-start gap-3">
+                                                                                <div class="flex-1 space-y-3">
+                                                                                    <div class="grid md:grid-cols-3 gap-3">
+                                                                                        <div class="md:col-span-2">
+                                                                                            <input type="text" value="{{$activity["activity_title"]}}"
+                                                                                                name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_title]"
+                                                                                                placeholder="e.g., Senso-ji Temple Visit"
+                                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <textarea
+                                                                                            rows="2"
+                                                                                            name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_description]"
+                                                                                            placeholder="Brief description of the activity..."
+                                                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{$activity["activity_description"]}}</textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
+                                                                                    <i class="fas fa-times"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> 
+                                                                @endforeach
+                                                            @else
+                                                                <div class="activity-item">
+                                                                    <div class="bg-gray-50 rounded-lg p-3">
+                                                                        <div class="flex items-start gap-3">
+                                                                            <div class="flex-1 space-y-3">
+                                                                                <div class="grid md:grid-cols-3 gap-3">
+                                                                                    <div class="md:col-span-2">
+                                                                                        <input type="text"
+                                                                                            name="itinerary[0][activity][0][activity_title]"
+                                                                                            placeholder="e.g., Senso-ji Temple Visit"
+                                                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <textarea
+                                                                                        rows="2"
+                                                                                        name="itinerary[0][activity][0][activity_description]"
+                                                                                        placeholder="Brief description of the activity..."
+                                                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <button type="button"
+                                                                                class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
+                                                                                <i
+                                                                                    class="fas fa-times"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                            @endif
+
+                                                        </div>
+
+                                                        <!-- Add Activity Button -->
+                                                        <button type="button"
+                                                            class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
+                                                            <i class="fas fa-plus-circle"></i>
+                                                            Add activity
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
+                                                <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                    <div class="flex items-center justify-between">
+                                                        <h5 class="font-semibold text-gray-800">
+                                                            Main Image for this Itinerary</h5>
+                                                        
+                                                    </div>
+                                                </div>
+                                                @if (session("temp_itinerary_image.{$itineraryIndex}"))
+                                                    <div class="preview_container temp_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
+                                                        <label for="itinerary_{{$itineraryIndex}}" class="h-full block">
+                                                            <img src="{{asset("storage/" . session("temp_itinerary_image.{$itineraryIndex}"))}}" alt="itineray main image" class="itinerary_preview_src{{$itineraryIndex}} h-full w-full object-cover">
+                                                        </label>
+                                                        <input type="hidden" name="itinerary[{{$itineraryIndex}}][temp_itinerary_image]" value="{{session("temp_itinerary_image.{$itineraryIndex}")}}">
+                                                    </div>
+                                                    <div class="itinerary_image_element{{$itineraryIndex}}">
+                                                        <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
+                                                    </div>
+                                                @else
+                                                    <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer hidden h-[350px]">
+                                                        <label for="itinerary_{{$itineraryIndex}}" class="h-full block">
+                                                            <img src="" alt="" class="itinerary_preview_src{{$itineraryIndex}} h-full w-full object-cover">
+                                                        </label>
+                                                    </div>
+                                                    <div
+                                                        class="m-8 itinerary_image_element{{$itineraryIndex}} border-2 border-dashed border-gray-300 rounded-lg p-8 text-center flex items-center flex-col justify-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
+                                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                                        <p class="text-gray-600 font-medium mb-2">Upload itinerary image</p>
+                                                        <p class="text-sm text-gray-500">This will be displayed as the itinerary banner image</p>
+                                                        <p class="text-sm text-gray-500 mb-4">Recommended size: 1920x1080px</p>
+                                                        <label for="itinerary_{{$itineraryIndex}}"
+                                                            class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm w-fit">
+                                                            Select Itinerary Image
+                                                        </label>
+                                                        <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
+                                                    </div>
+                                                @endif
+                                                
+                                            </div>
+
+                                            <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
+                                                <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                    <div class="flex items-center justify-between">
+                                                        <h5 class="font-semibold text-gray-800">Activity Highlights</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="m-8 space-y-2 itinerary_highlight-wrapper">
+                                                    @if (isset($itinerary["itinerary_highlight"]) && is_array($itinerary["itinerary_highlight"]))
+                                                        @foreach ($itinerary["itinerary_highlight"] as $highlightIndex => $highlight)
+                                                            <div class="itinerary_highlight-item">
+                                                                <div
+                                                                    class="flex items-center gap-2">
+                                                                    <input type="text" value="{{$highlight}}"
+                                                                        name="itinerary[{{$itineraryIndex}}][itinerary_highlight][]"
+                                                                        placeholder="e.g., Tokyo's oldest Buddhist temple"
+                                                                        class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                    <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="itinerary_highlight-item">
+                                                            <div
+                                                                class="flex items-center gap-2">
+                                                                <input type="text"
+                                                                    name="itinerary[0][itinerary_highlight][]"
+                                                                    placeholder="e.g., Tokyo's oldest Buddhist temple"
+                                                                    class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                <button type="button"
+                                                                    class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
+                                                                    <i
+                                                                        class="fas fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                    @endif
+                                                </div>
+                                                <button type="button" class="m-8 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-itinerary-highlight_button mt-3">
+                                                    <i class="fas fa-plus-circle"></i>
+                                                    Add highlight
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="itinerary-item mt-8" data-id="0">
+                                <div class="bg-white rounded-xl shadow-sm p-6 relative">
+                                    <div class="absolute top-6 right-6">
+                                        <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary_button" title="Delete this itinerary">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                                        <div
+                                            class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                            <i class="fas fa-route text-[#e92929]"></i>
+                                        </div>
+                                        Tour Itinerary & Details #1
+                                    </h3>
+
+                                    <!-- Tour Basic Details -->
+                                    <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                        <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                            <div class="flex items-center justify-between">
+                                                <h5 class="font-semibold text-gray-800">
+                                                    <i class="fas fa-info-circle text-gray-400 mr-2"></i>
+                                                    Tour Information
+                                                </h5>
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div class="m-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-700 mb-1">Duration
+                                                    (hours) *</label>
+                                                <input name="itinerary[0][duration]" type="number"
+                                                    placeholder="e.g., 8" min="1" max="24"
+                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                            </div>
+
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-700 mb-1">MaxParticipants
+                                                    *</label>
+                                                <input name="itinerary[0][max_participants]"
+                                                    type="number" placeholder="e.g., 15" min="1"
+                                                    max="50"
+                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                            </div>
+
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-700 mb-1">Tour
+                                                    Type *</label>
+                                                <select name="itinerary[0][tour_type]"
+                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                    <option>public</option>
+                                                    <option>private</option>
+                                                </select>
+                                            </div>
+
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-700 mb-1">Meeting
+                                                    Point *</label>
+                                                <input type="text" name="itinerary[0][meeting_point]"
+                                                    placeholder="e.g., Hotel lobby or JR Shibuya Station"
+                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                            </div>
+
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-700 mb-1">Adult
+                                                    Price (¥) *</label>
+                                                <input name="itinerary[0][adult_price]" type="number"
+                                                    placeholder="e.g., 12000" min="0"
+                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                            </div>
+
+                                            <div>
+                                                <label
+                                                    class="block text-sm font-medium text-gray-700 mb-1">Child
+                                                    Price (¥)</label>
+                                                <input name="itinerary[0][child_price]" type="number"
+                                                    placeholder="e.g., 6000" min="0"
+                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                            </div>
+                                        </div>
+
+                                        <div class="m-8">
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Languages
+                                                Available</label>
+                                            <div class="flex flex-wrap gap-3">
+                                                @foreach ($languages as $language)
+                                                    <label class="flex items-center gap-2 cursor-pointer">
+                                                        <input type="checkbox" value="{{ $language->id }}"
+                                                            name="itinerary[0][languages][]"
+                                                            class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
+                                                        <span
+                                                            class="text-sm text-gray-700">{{$language->language}}</span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-8">
+                                        <!-- Itinerary Item 1 -->
+                                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                <div class="flex items-center justify-between">
+                                                    <h5 class="font-semibold text-gray-800">
+                                                        Itinerary Item</h5>
+                                                    
+                                                </div>
+                                            </div>
+
+                                            <div class="p-8">
+                                                <!-- Activities Section -->
+                                                <div>
+                                                    <label
+                                                        class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
+                                                    <div class="space-y-3 activity-wrapper">
+                                                        <!-- Activity Entry 1 -->
+                                                        <div class="activity-item">
+                                                            <div class="bg-gray-50 rounded-lg p-3">
+                                                                <div class="flex items-start gap-3">
+                                                                    <div class="flex-1 space-y-3">
+                                                                        <div class="grid md:grid-cols-3 gap-3">
+                                                                            <div class="md:col-span-2">
+                                                                                <input type="text"
+                                                                                    name="itinerary[0][activity][0][activity_title]"
+                                                                                    placeholder="e.g., Senso-ji Temple Visit"
+                                                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <textarea
+                                                                                rows="2"
+                                                                                name="itinerary[0][activity][0][activity_description]"
+                                                                                placeholder="Brief description of the activity..."
+                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="button"
+                                                                        class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
+                                                                        <i
+                                                                            class="fas fa-times"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Add Activity Button -->
+                                                    <button type="button"
+                                                        class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
+                                                        <i class="fas fa-plus-circle"></i>
+                                                        Add activity
+                                                    </button>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
+                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                <div class="flex items-center justify-between">
+                                                    <h5 class="font-semibold text-gray-800">
+                                                        Main Image for this Itinerary</h5>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer hidden h-[350px]">
+                                                <label for="itinerary_0" class="h-full block">
+                                                    <img src="" alt="" class="itinerary_preview_src0 h-full w-full object-cover">
+                                                </label>
+                                            </div>
+                                            <div
+                                                class="m-8 itinerary_image_element0 border-2 border-dashed border-gray-300 rounded-lg p-8 text-center flex items-center flex-col justify-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
+                                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                                <p class="text-gray-600 font-medium mb-2">Upload itinerary image</p>
+                                                <p class="text-sm text-gray-500">This will be displayed as the itinerary banner image</p>
+                                                <p class="text-sm text-gray-500 mb-4">Recommended size: 1920x1080px</p>
+                                                <label for="itinerary_0"
+                                                    class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm w-fit">
+                                                    Select Itinerary Image
+                                                </label>
+                                                <input type="file" name="itinerary[0][image]" id="itinerary_0" class="hidden">
+                                            </div>
+                                        </div>
+
+                                        <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
+                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                <div class="flex items-center justify-between">
+                                                    <h5 class="font-semibold text-gray-800">Activity Highlights</h5>
+                                                </div>
+                                            </div>
+                                            <div class="m-8 space-y-2 itinerary_highlight-wrapper">
+                                                <div class="itinerary_highlight-item">
+                                                    <div
+                                                        class="flex items-center gap-2">
+                                                        <input type="text"
+                                                            name="itinerary[0][itinerary_highlight][]"
+                                                            placeholder="e.g., Tokyo's oldest Buddhist temple"
+                                                            class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                        <button type="button"
+                                                            class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
+                                                            <i
+                                                                class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button"
+                                                class="m-8 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-itinerary-highlight_button mt-3">
+                                                <i class="fas fa-plus-circle"></i>
+                                                Add highlight
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Add New Tour Itinerary Button -->
+                    <button type="button"
+                        class="add-itinerary_button w-full py-4 border-2 border-dashed border-[#e92929] rounded-xl text-[#e92929] hover:bg-[#e92929]/5 transition-colors flex items-center justify-center gap-2 font-medium">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add New Tour Itinerary & Details</span>
+                    </button>
+                </div>
+
+                <!-- Gallery Section -->
+                @include('components.gallery')
+
+            </div>
+
+
+
+            <!-- Fixed Publish Button -->
+            <button type="submit" title="Publish Tour"
+                class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white rounded-full hover:shadow-lg transition-all font-medium z-50 flex items-center justify-center">
+                <i class="fas fa-check text-xl"></i>
+            </button>
+        </form>
+    </main>
+    @include('admin.template.template')
+    <script src="{{mix("js/tour_create2.js")}}"></script>
+
+    <script>
+        // Basic functionality for the form
+        document.addEventListener('DOMContentLoaded', function() {
+            // Character counter for overview description
+            const overviewDescription = document.querySelector('textarea[name="overview_description"]');
+            const charCounter = document.querySelector('.text-xs.text-gray-500');
+            
+            if (overviewDescription && charCounter) {
+                overviewDescription.addEventListener('input', function() {
+                    const count = this.value.length;
+                    charCounter.textContent = `${count}/500 characters`;
+                });
             }
-        });
 
+        });
     </script>
-    <script src="{{mix("js/tour_create.js")}}"></script>
-    
-@endsection
+</body>
+
+</html>

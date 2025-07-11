@@ -1,531 +1,979 @@
-@extends('layout.default')
-@section('main')
-    @include('components.menu_modal')
- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-    <main id="home">
-        <div class="loader hidden">
-            <div id="rotate">
-                <div id="move">
-                    <div id="dot"></div>
-                </div>
-                    <div id="ring"></div>
-                </div>
-                <p class="sending_txt">sending...</p>
-        </div>
-        <section class="section_top" id="home">
-            <img src="{{asset("img/bg.jpg")}}" alt="" class="top_img image" />
-            @include('components.header')
-            <div class="top_container absolute z2">
-                <h1 class="top_title z2 js_title">Let Us Take You Away</h1>
-                <p class="section_top_desc font_normal z2 js_title">
-                    Discover the beauty of bespoke travel with us, where your dreams of
-                    perfect escapes turn into vivid realities filled with unforgettable
-                    memories.
-                </p>
-            </div>
-        </section>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>ShogunTours</title>
+      <!-- 検索用キーワード -->
+      <meta name="keywords"
+            content="japatour, japatour-official, Japan tour, tokyo tour, Tokyo travel, Kyoto experience, Osaka trip, Japanese culture, foreign tourist guide, Japan travel package, Mt. Fuji tour, onsen experience, Japan sightseeing">
+      <!-- robots設定 -->
+      <!-- カノニカルURL設定 -->
+      <meta rel="canonical" href="https://japatour-official.com/">
+      <meta name="robots" content="index,follow">
+      <!-- OGP設定（SNSでシェアされた時の表示設定） -->
+      <meta property="og:title" content="JapaTour">
+      <meta property="og:type" content="website">
+      <meta name="description"
+            content="Specialized travel service for international tourists visiting Japan. We offer multilingual tours exploring Tokyo, Kyoto, Osaka and beyond. Let us guide you through traditional cultural experiences to cutting-edge technology, supporting you in discovering all of Japan's wonders.">
+      <meta property="og:url" content="https://japatour-official.com/">
+      <meta property="og:image" content="{{asset("img/logo2.png")}}">
+      <meta property="og:site_name" content="Japatour">
+      <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
+      <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
+            href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
+      <title>ShogunTours</title>
+      <link rel="shortcut icon" href="{{asset("img/logo2.png")}}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+      <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
 
+</head>
 
-      <section class="section_forth z3 relative padding_section" id="tour">
-      <div class="section_forth_wrapper">
-       <!-- Destinations Section -->
-        <div id="destinations-section">
-            <div class="section-header">
-                <h1 class="section-title">Popular Destinations</h1>
-                <p class="section-subtitle">Choose your destination and explore our amazing tours</p>
-            </div>
-
-            <!-- Filter Tabs -->
-            <div class="filter-tabs">
-                <button class="filter-tab active" onclick="filterDestinations('all')">All Destinations</button>
-                <button class="filter-tab" onclick="filterDestinations('kanto')">Kanto Region</button>
-                <button class="filter-tab" onclick="filterDestinations('kansai')">Kansai Region</button>
-                <button class="filter-tab" onclick="filterDestinations('other')">Other Regions</button>
-            </div>
-
-            <!-- Destinations Grid -->
-            <div class="destinations-grid">
-                @foreach ($categories as $category)
-                    <div class="destination-card" data-region="{{$category->region["region"]}}" onclick="showTours('{{$category->category}}')">
-                        <img src="/img/{{$category->category}}_category.jpg" alt="{{$category->category}}" class="destination-image">
-                        <div class="destination-overlay">
-                            <h3 class="destination-name">{{$category->category}}</h3>
-                            <div class="destination-info">
-                                <span><i class="fas fa-map-marked-alt"></i> {{$category->tours_count}}Tours</span>
-                            </div>
+<body>
+      <!-- sending view -->
+      @include("sending")
+      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
+            style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+            <div class="layout-container flex h-full grow flex-col">
+                  <!-- Header -->
+                  <header
+                        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e7] px-10 py-3 sticky top-0 bg-[#fcf8f8] z-50">
+                        <div class="flex items-center gap-4 text-[#1b0e0e]">
+                              <div class="size-4">
+                                    <img src="{{asset("img/logo2.png")}}" alt="">
+                              </div>
+                              <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours
+                              </h2>
                         </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
+                        <div class="flex flex-1 justify-end gap-8">
+                              <div class="flex items-center gap-9">
+                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
+                                          href="#tours">Tours</a>
+                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
+                                          href="#instagram">Gallery</a>
+                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
+                                          href="#blog">Blog</a>
+                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
+                                          href="#faq">FAQ</a>
+                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
+                                          href="#contact">Contact</a>
+                              </div>
+                              <button
+                                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] test-base font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
+                                    <span class="truncate">Book Now</span>
+                              </button>
+                        </div>
+                  </header>
 
-        <!-- Tours Section (Hidden by default) -->
-        <div id="tours-section" class="tours-section">
-            <div class="tours-header">
-                <h2 class="tours-title">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span id="destination-name">Tokyo</span> Tours
-                </h2>
-                <button class="back-button" onclick="showDestinations()">
-                    <i class="fas fa-arrow-left"></i>
-                    Back to Destinations
-                </button>
-            </div>
+                  <!-- Hero Section -->
+                  <div class="flex justify-center">
+                        <div class="layout-content-container flex flex-col max-w-[1900px] flex-1">
+                              <div class="@container">
+                                    <div class="@[480px]:p-4">
+                                          <div id="hero" class="relative flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4 overflow-hidden">
+                                                
+                                                <!-- 背景レイヤー -->
+                                                <div id="bgA" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 opacity-100 z-0"></div>
+                                                <div id="bgB" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 opacity-0 z-0"></div>
 
-            <div id="tours-grid" class="tours-grid">
-                <!-- Tours will be dynamically loaded here -->
-            </div>
-        </div>
+                                                <!-- テキストとボタン -->
+                                                <div class="relative z-10 flex flex-col gap-2 text-center">
+                                                <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
+                                                      Where Legends Walked, You Follow
+                                                </h1>
+                                                <h2 class="text-white text-base font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
+                                                      Step into old Japan with unforgettable tours crafted for modern explorers.
+                                                </h2>
+                                                </div>
+
+                                                <a href="#tours"
+                                                class="relative z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-base font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
+                                                <span class="truncate">Find Your Adventure</span>
+                                                </a>
+                                          </div>
+
+
+                                    </div>
+                              </div>
+                        </div>
+                  </div>
+
+                  <!-- Tours Section -->
+                  <section id="tours" class="flex justify-center py-12">
+                        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                              <!-- Destinations Section -->
+                              <div id="destinations-section">
+                                    <h2
+                                          class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                                          Popular Destinations</h2>
+                                    <p class="text-[#994d4d] test-base font-normal leading-normal px-4 pb-3">Choose your
+                                          destination and explore our amazing tours</p>
+
+                                    <!-- Filter Tabs -->
+                                    <div class="flex flex-wrap gap-2 px-4 pb-3">
+                                          <button
+                                                class="filter-tab active px-4 py-2 rounded-lg bg-[#e92929] text-white test-base font-medium transition-all hover:bg-[#d61f1f]"
+                                                onclick="filterDestinations('all')">All Destinations</button>
+                                    
+                                    </div>
+
+                                    <!-- Destinations Grid -->
+                                    <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4 p-4">
+                                          @foreach ($categories as $category)
+                                          <div class="destination-card relative overflow-hidden rounded-lg cursor-pointer group"
+                                                data-region="kanto" onclick="showTours('{{$category->category}}')">
+                                                <img src="/img/{{$category->category}}_category.jpg"
+                                                      alt="{{$category->category}}" class="w-full h-48 object-cover">
+                                                <div
+                                                      class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-all">
+                                                      <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
+                                                            <h3 class="text-lg font-bold">{{$category->category}}</h3>
+                                                            <p class="test-base opacity-90"><i
+                                                                        class="fas fa-map-marked-alt mr-1"></i>{{$category->tours_count}}
+                                                                  Tours</p>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                          @endforeach
+
+
+                                    </div>
+                              </div>
+
+                              <!-- Tours List Section (Hidden by default) -->
+                              <div id="tours-list-section" class="hidden">
+                                    <div class="flex items-center justify-between px-4 pb-3 pt-5">
+                                          <h2
+                                                class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em]">
+                                                <span id="destination-name">Tokyo</span> Tours
+                                          </h2>
+                                          <button
+                                                class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium hover:bg-[#e7d0d0] transition-colors"
+                                                onclick="showDestinations()">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                      fill="currentColor" viewBox="0 0 256 256">
+                                                      <path
+                                                            d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z">
+                                                      </path>
+                                                </svg>
+                                                Back to Destinations
+                                          </button>
+                                    </div>
+
+                                    <div id="tours-grid" class="grid grid-cols-[repeat(auto-fit,350px)] gap-4 p-4">
+                                          <!-- Tours will be dynamically loaded here -->
+                                    </div>
+                              </div>
+                        </div>
+                  </section>
+
+                  <!-- Instagram Section -->
+                  <section id="instagram" class="flex justify-center py-12 bg-[#f3e7e7]">
+                        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                              <h2
+                                    class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                                    Follow Our Adventures</h2>
+                              <!-- LightWidget WIDGET -->
+                              <!-- LightWidget WIDGET -->
+                              <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe
+                                    src="//lightwidget.com/widgets/520d757f035853c08e16d6504e9175bc.html" scrolling="no"
+                                    allowtransparency="true" class="lightwidget-widget"
+                                    style="width:100%;border:0;overflow:hidden;"></iframe>
+                  </section>
+
+                  <!-- Blog Section -->
+                  <section id="blog" class="flex justify-center py-12">
+                        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                              <h2
+                                    class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                                    Latest Articles</h2>
+                              <div class="p-4">
+                                    <div
+                                          class="flex items-stretch justify-between gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
+                                          <div class="flex flex-[2_2_0px] flex-col gap-4">
+                                                <div class="flex flex-col gap-1">
+                                                      <p class="text-[#1b0e0e] text-lg font-bold leading-tight">
+                                                            Exploring the Hidden Gems of the Pacific Northwest</p>
+                                                      <p class="text-[#994d4d] test-base font-normal leading-normal">
+                                                            Discover the untouched beauty of the Pacific Northwest, from
+                                                            its lush rainforests to its rugged coastlines. This guide
+                                                            takes you off the beaten path to find
+                                                            secluded spots and breathtaking views.
+                                                      </p>
+                                                </div>
+                                                <button
+                                                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium leading-normal w-fit hover:bg-[#e7d0d0] transition-colors">
+                                                      <span class="truncate">Read More</span>
+                                                </button>
+                                          </div>
+                                          <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
+                                                style='background-image: url("https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?w=400&h=300&fit=crop");'>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="p-4">
+                                    <div
+                                          class="flex items-stretch justify-between gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
+                                          <div class="flex flex-[2_2_0px] flex-col gap-4">
+                                                <div class="flex flex-col gap-1">
+                                                      <p class="text-[#1b0e0e] text-lg font-bold leading-tight">A
+                                                            Foodie's Journey Through Southern Italy</p>
+                                                      <p class="text-[#994d4d] test-base font-normal leading-normal">
+                                                            Embark on a culinary adventure through Southern Italy, where
+                                                            every meal is a celebration of local flavors and traditions.
+                                                            From pasta making in Naples to wine
+                                                            tasting in Tuscany, savor the best of Italian cuisine.
+                                                      </p>
+                                                </div>
+                                                <button
+                                                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium leading-normal w-fit hover:bg-[#e7d0d0] transition-colors">
+                                                      <span class="truncate">Read More</span>
+                                                </button>
+                                          </div>
+                                          <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
+                                                style='background-image: url("https://images.unsplash.com/photo-1517732306149-e8f829eb588a?w=400&h=300&fit=crop");'>
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="p-4">
+                                    <div
+                                          class="flex items-stretch justify-between gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
+                                          <div class="flex flex-[2_2_0px] flex-col gap-4">
+                                                <div class="flex flex-col gap-1">
+                                                      <p class="text-[#1b0e0e] text-lg font-bold leading-tight">The
+                                                            Ultimate Guide to Backpacking in Southeast Asia</p>
+                                                      <p class="text-[#994d4d] test-base font-normal leading-normal">
+                                                            Plan your backpacking trip through Southeast Asia with this
+                                                            comprehensive guide. Learn about the best routes, must-see
+                                                            destinations, and tips for budget
+                                                            travel in this vibrant region.
+                                                      </p>
+                                                </div>
+                                                <button
+                                                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium leading-normal w-fit hover:bg-[#e7d0d0] transition-colors">
+                                                      <span class="truncate">Read More</span>
+                                                </button>
+                                          </div>
+                                          <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
+                                                style='background-image: url("https://images.unsplash.com/photo-1494949360228-4e9bde560065?w=400&h=300&fit=crop");'>
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </section>
+
+                  <!-- FAQ Section -->
+                  <section id="faq" class="flex justify-center py-12 bg-[#f3e7e7]">
+                        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                              <h2
+                                    class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                                    Frequently Asked Questions</h2>
+                              <div class="flex flex-col p-4 gap-3">
+                                    <details
+                                          class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
+                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">⁠What
+                                                      areas
+                                                      do your tours cover?
+                                                </p>
+                                                <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
+                                                      data-icon="CaretDown" data-size="20px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                          </summary>
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">We offer
+                                                unforgettable tours across Tokyo, Yokohama, Kamakura, Enoshima, Kyoto,
+                                                Osaka, Nara, Matsumoto, and the scenic Nakasendo trail. From historic
+                                                temples to modern cityscapes and countryside charm — we’ve got Japan
+                                                covered.
+                                          </p>
+                                    </details>
+                                    <details
+                                          class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
+                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">Can we
+                                                      customize our tour itinerary?</p>
+                                                <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
+                                                      data-icon="CaretDown" data-size="20px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                          </summary>
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">
+                                                Absolutely!
+                                                All our private tours are fully customizable. Let us know your
+                                                interests, preferred pace, and any must-see spots — we’ll craft a unique
+                                                experience just for you.
+                                          </p>
+                                    </details>
+                                    <details
+                                          class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
+                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">⁠How do I
+                                                      book a tour and when do I pay?
+                                                </p>
+                                                <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
+                                                      data-icon="CaretDown" data-size="20px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                          </summary>
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">You can
+                                                book
+                                                directly through our website or our trusted partner platforms. Feel free
+                                                to contact us before booking if you'd like to discuss ideas,
+                                                preferences, or questions — we're happy to help.
+                                                We use a “book now, pay later” system. No payment is needed at the time
+                                                of booking. Your tour guide will contact you about a week before your
+                                                tour to finalize the itinerary. Payment (by credit card, cash, or other
+                                                options) is then made prior to the tour date.
+
+                                          </p>
+                                    </details>
+                                    <details
+                                          class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
+                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">Are your
+                                                      tours family-friendly or suitable for elderly guests?
+                                                </p>
+                                                <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
+                                                      data-icon="CaretDown" data-size="20px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                          </summary>
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">Yes! Our
+                                                tours are perfect for guests of all ages. We can adjust routes and
+                                                pacing to suit families with kids, elderly travelers, or anyone with
+                                                mobility needs.
+                                                Children under 12 join for free (excluding their own transportation or
+                                                meal costs).
+                                          </p>
+                                    </details>
+                                    <details
+                                          class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
+                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">What
+                                                      languages do you offer tours in?
+                                                </p>
+                                                <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
+                                                      data-icon="CaretDown" data-size="20px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                          </summary>
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">We offer
+                                                tours in English, Spanish, Italian, French, German, and Russian.
+                                                Please note: Language availability depends on our guide schedule, so we
+                                                recommend requesting your preferred language in advance.
+                                          </p>
+                                    </details>
+                                    <details
+                                          class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
+                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">What is
+                                                      your cancellation and refund policy?
+
+                                                </p>
+                                                <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
+                                                      data-icon="CaretDown" data-size="20px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                          </summary>
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">We
+                                                understand plans can change. Here’s our cancellation policy:
+                                                <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">
+                                                      Within 24 hours of the tour: No refund</li>
+                                                <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">
+                                                      24–48
+                                                      hours before: 50% refund</li>
+                                                <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">
+                                                      48–72
+                                                      hours before: 75% refund</li>
+                                                <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">4
+                                                      days or more before the tour: 100% full refund</li>
+                                          </p>
+                                    </details>
+                              </div>
+                        </div>
+                  </section>
+
+                  <!-- We Are Hiring Section -->
+                  {{-- <section id="hiring" class="flex justify-center py-5 bg-gradient-to-br from-[#e92929] to-[#d61f1f]">
+  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+    <div class="text-center px-4 py-8">
+      <h2 class="text-white text-[32px] font-black leading-tight tracking-[-0.033em] pb-2">Join Our Adventure Team!</h2>
+      <p class="text-white/90 text-lg font-normal leading-normal pb-6">
+        We're looking for passionate individuals who love travel and want to help others explore the world
+      </p>
     </div>
+    
+    <div class="grid md:grid-cols-2 gap-6 p-4">
+      <!-- Position Card 1 -->
+      <div class="bg-white rounded-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h3 class="text-[#1b0e0e] text-xl font-bold">Tour Guide</h3>
+            <p class="text-[#994d4d] test-base">Full-time • Multiple Locations</p>
+          </div>
+          <span class="bg-[#e92929]/10 text-[#e92929] px-3 py-1 rounded-full text-xs font-medium">New</span>
+        </div>
+        <p class="text-[#994d4d] test-base leading-relaxed mb-4">
+          Lead exciting tours and share your passion for adventure with travelers from around the world. Experience in outdoor activities and multilingual skills preferred.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Leadership</span>
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Communication</span>
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Outdoor Skills</span>
+        </div>
+        <button class="w-full bg-[#1b0e0e] text-white py-2 rounded-lg test-base font-medium hover:bg-[#2b1e1e] transition-colors">
+          Apply Now
+        </button>
       </div>
-      </section>
 
-        <section class="section_fifth z3 relative padding_section">
-            <h2 class="font_subtitle aos-init aos-animate review_title" data-aos="fade-up" data-aos-duration="1000" style="color: #fff;">
-                Testimonials
-            </h2>
-            <div class="section_fifth_wrapper">
-                <div class="slider" id="js-slick">
-                    <a href="https://www.getyourguide.com/yokohama-l2128/sankeien-garden-private-walking-tour-with-local-expert--t845779/?preview=X1I5T00029M5BXTX5IQ8CTZJGOT6ZIRT" class="review_link" target="blank">
-                        <div class="review_container js_review_container relative">
-                            <p class="review_container_txt js_review relative review">
-                                Dean's Sankeien tour was very enjoyable. We were an elderly couple from England, but he was able to accommodate our pace at a relaxed pace. The couple seemed to enjoy themselves and were very pleased.
-                            </p>
-                            <div>
-                                <span class="star">
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                </span>
-                                <p class="review_name review_container_txt js_review relative">
-                                    Akemi – Japan
-                                </p>
-                            </div>
-                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+      <!-- Position Card 2 -->
+      <div class="bg-white rounded-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h3 class="text-[#1b0e0e] text-xl font-bold">Travel Coordinator</h3>
+            <p class="text-[#994d4d] test-base">Full-time • Remote</p>
+          </div>
+          <span class="bg-[#e92929]/10 text-[#e92929] px-3 py-1 rounded-full text-xs font-medium">Hot</span>
+        </div>
+        <p class="text-[#994d4d] test-base leading-relaxed mb-4">
+          Plan and coordinate unforgettable travel experiences. Handle bookings, create itineraries, and ensure smooth operations for our adventure tours.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Organization</span>
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Detail-oriented</span>
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Customer Service</span>
+        </div>
+        <button class="w-full bg-[#1b0e0e] text-white py-2 rounded-lg test-base font-medium hover:bg-[#2b1e1e] transition-colors">
+          Apply Now
+        </button>
+      </div>
 
-                        </div>
-                    </a>
-                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="review_link"  target="blank">
-                        <div class="review_container js_review_container relative">
-                            <p class="review_container_txt js_review relative review">
-                                Dean is amazing! Not only he knows everything about Tokyo but he was showing me all the tips to take great pictures with the best spots. He has been very flexible stopping to buy water, finding air portable machine, staying more or less in the places that I preferred… He has also been very helpful along our walk. It is my first time in Japan and he showed me how the “basics” work and what to do or not to do! He also helped when people did not understand my English :-) I am so thankful I booked the tour with him! I will recommend him really strongly to anyone!
-                            </p>
-                            <div>
-                                <span class="star">
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                </span>
-                                <p class="review_name review_container_txt js_review relative">
-                                    Florence – Belgium
-                                </p> 
-                            </div>
-                            
-                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+      <!-- Position Card 3 -->
+      <div class="bg-white rounded-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h3 class="text-[#1b0e0e] text-xl font-bold">Content Creator</h3>
+            <p class="text-[#994d4d] test-base">Part-time • Flexible</p>
+          </div>
+        </div>
+        <p class="text-[#994d4d] test-base leading-relaxed mb-4">
+          Capture and share amazing travel stories through photos, videos, and blog posts. Help inspire others to embark on their own adventures.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Photography</span>
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Writing</span>
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Social Media</span>
+        </div>
+        <button class="w-full bg-[#1b0e0e] text-white py-2 rounded-lg test-base font-medium hover:bg-[#2b1e1e] transition-colors">
+          Apply Now
+        </button>
+      </div>
 
-                        </div>
-                    </a>
-                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="review_link" target="blank">
-                        <div class="review_container js_review_container relative">
-                            <p class="review_container_txt js_review relative review">
-                                Our guide, Dean, flexible, knowledgeable and fluent in English— all things that are important when touring with 4 teenagers. Dean was very good about managing our time and showing us some highlights of Tokyo. He was also very engaged with our teens and answered all their questions whether it was about a historical site or Japanese gaming culture. We highly recommend this tour, especially if you have kids / teens
-                            </p>
-                            <div>
-                                <span class="star">
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                </span>
-                                <p class="review_name review_container_txt js_review relative">
-                                    Keith – United States
-                                </p>
-                            </div>
-                            
-                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
+      <!-- Position Card 4 -->
+      <div class="bg-white rounded-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <h3 class="text-[#1b0e0e] text-xl font-bold">Customer Experience Specialist</h3>
+            <p class="text-[#994d4d] test-base">Full-time • Office</p>
+          </div>
+        </div>
+        <p class="text-[#994d4d] test-base leading-relaxed mb-4">
+          Be the friendly voice that helps travelers plan their perfect adventure. Provide exceptional support and create memorable customer experiences.
+        </p>
+        <div class="flex flex-wrap gap-2 mb-4">
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Empathy</span>
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Problem-solving</span>
+          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Patience</span>
+        </div>
+        <button class="w-full bg-[#1b0e0e] text-white py-2 rounded-lg test-base font-medium hover:bg-[#2b1e1e] transition-colors">
+          Apply Now
+        </button>
+      </div>
+    </div>
 
-                        </div>
-                    </a>
-                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-private-personalized-walking-tours-with-local-guide-t690681/?preview=2AYLCAQH0UHSL8J57ZNTRII3EWED6M3O" class="review_link" target="blank">
-                        <div class="review_container js_review_container relative">
-                            <p class="review_container_txt js_review relative review">
-                                Great attitude, knowledgable, flexible, great small talk, pleasure to be on this tour with Dean, and he knows special places with real food, no scam, fully recommend!!!
-                            </p>
-                            <div>
-                                <span class="star">
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                </span>
-                                <p class="review_name review_container_txt js_review relative">
-                                    Michał – Poland
-                                </p>
-                            </div>
-                            
-                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-
-                        </div>
-                    </a>
-                    <a href="https://www.getyourguide.com/tokyo-l193/yokohama-private-personalized-tours-with-local-guide-t746936/?preview=UAJ52MRGL3EKZHRPKE6AD4GQMJ0W6D62" class="review_link" target="blank">
-                        <div class="review_container js_review_container relative">
-                            <p class="review_container_txt js_review relative review">
-                                The tour was excellent! Dean was very nice and let us personalized the itinerary to our requirements. 100% recommended!
-                            </p>
-                            <div>
-                                <span class="star">
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                </span>
-                                <p class="review_name review_container_txt js_review relative">
-                                    Patricia – Spain
-                                </p> 
-                            </div>
-                            
-                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-
-                        </div>
-                    </a>
-                    <a href="https://www.getyourguide.com/tokyo-l193/enoshima-island-private-walking-tours-with-local-guide-t746962/?preview=YXO3ZGDVG6LFLS54WKFNLRWSG72CKGP7" class="review_link" target="blank">
-                        <div class="review_container js_review_container relative">
-                            <p class="review_container_txt js_review relative review">
-                                Incredible experience, highly recommend booking with Dean! We did a full day in Kamakura and he showed us so much of the rich history of the city and the surrounding area. Dean let us experience everything at our own pace and we never felt rushed. Felt like a friend showing us around town and we enjoyed the sightseeing very much (especially the stories he told us of the places we went to - which we would not have known if we attempted to do this ourselves lol). Again, had a really great time and highly recommend, especially if you’re looking for an escape from the hustle and bustle of Tokyo
-                            </p>
-                            <div>
-                                <span class="star">
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                </span>
-                                <p class="review_name review_container_txt js_review relative">
-                                    Emily – United States
-                                </p>
-                            </div>
-                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-                        </div>
-                    </a>
-                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="review_link" target="blank">
-                        <div class="review_container js_review_container relative">
-                            <p class="review_container_txt js_review relative review">
-                                We absolutely loved this tour! Dean was incredibly helpful and friendly, ensuring the entire day was planned nicely. The itinerary was well thought out, and his casual conversations made the experience even more enjoyable. He shared some fascinating insights and tips about Japanese culture that added so much value to our trip. If we had more time, we would have definitely booked his other tours as well. Highly recommended!
-                            </p>
-                            <div>
-                                <span class="star">
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                </span>
-                                <p class="review_name review_container_txt js_review relative">
-                                    Rei – Turkey
-                                </p>  
-                            </div>
-                            
-                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-                        </div>
-                    </a>
-                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="review_link" target="blank">
-                        <div class="review_container js_review_container relative">
-                            <p class="review_container_txt js_review relative review">
-                                Dean was very flexible with our schedule. He suggested a shrine wrhat that wasn’t on my schedule but it turned out to be a beautiful site. So glad to be able to see Kamakura with Dean.
-                            </p>
-                            <div>
-                                <span class="star">
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                </span>
-                                <p class="review_name review_container_txt js_review relative">
-                                    Helen – United States
-                                </p> 
-                            </div>
-                            
-                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-                        </div>
-                    </a>
-                    <a href="https://www.getyourguide.com/tokyo-l193/tokyo-kamakura-private-personalized-tour-with-local-guide-t725344/?preview=RJL35JEW6ICYG1C4CAW3APIJYY205HMO" class="review_link" target="blank">
-                        <div class="review_container js_review_container relative">
-                            <p class="review_container_txt js_review relative review">
-                                This tour was nothing short of incredible! Dean was so knowledgeable, kind, and funny throughout the tour. I had my one-year-old daughter with me and he helped me plan for navigating Kamakura with a toddler, which relieved the stress I had in doing a solo tour. The photos we received were stunning and so special because it’s difficult to get photos of the two of us when we’re traveling solo. I highly recommend adding them when booking. We were so impressed, that we’re also doing his tour of Enoshima and Yokohama!
-                            </p>
-                            <div>
-                                <span class="star">
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                    <img src="{{asset("img/icons8-star-32.png")}}" alt="" class="star_img" />
-                                </span>
-                                <p class="review_name review_container_txt js_review relative">
-                                    Shaina – United States
-                                </p>
-                            </div>
-                            
-                            <img src="{{asset("img/icons8-get-quote-100.png")}}" alt="" class="quote_img absolute" />
-                        </div>
-                    </a>
+    <!-- Benefits Section -->
+    <div class="mt-8 p-4">
+      <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+        <h3 class="text-white text-xl font-bold mb-4 text-center">Why Work With Us?</h3>
+        <div class="grid md:grid-cols-3 gap-4 text-center">
+          <div class="flex flex-col items-center">
+            <div class="bg-white/20 rounded-full p-3 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 256 256">
+                <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM80,108a28,28,0,1,1,28,28A28,28,0,0,1,80,108Zm96,0a28,28,0,1,1-28-28A28,28,0,0,1,176,108Zm-80,40h64a8,8,0,0,1,0,16H96a8,8,0,0,1,0-16Z"></path>
+              </svg>
             </div>
-        </section>
-        <section class="section_third z3 relative">
-            <div class="section_third_wrapper">
-                <div class="secttion_third-left-area">
-                    <h2>We're Hiring Tour Guides!</h2>
-                    <p>Exciting opportunity! Japatour is seeking passionate Tour Guides. Apply today!</p>
-                    <button class="section_third_wrapper_btn"><a href="#contact">Become a tour guide</a></button>
-                </div>
-                <img src="{{asset("img/tourguide2.png")}}" alt="" class="tourguide_img">
+            <h4 class="text-white font-medium mb-1">Travel Perks</h4>
+            <p class="text-white/80 test-base">Free and discounted tours for you and your family</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="bg-white/20 rounded-full p-3 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 256 256">
+                <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
+              </svg>
             </div>
-        </section>
-        <section class="section_seventh z3 relative padding_section" id="contact">
-            <div class="contact_wrapper">
-                <h2 class="font_subtitle aos-init aos-animate review_title relative z3" data-aos="fade-up" data-aos-duration="1000">
-                    Contat Us
-                <p class="contact_sml c z3 relative">Have questions about your tour or job openings? Leave a message below, and we’ll get back to you shortly!</p>
-                <form action="{{route("sendMessage")}}" method="POST" class="js_form">
-                    @csrf
-                    <div class="contact_filed_container relative z3" data-aos="fade-up" data-aos-duration="1000">
-                        <div class="contact_filed_box">
-                            <div class="input_container">
-                                <label for="">name</label>
-                                <input type="text" class="input_field" name="name"/>
-                            </div>
-                            <div class="input_container">
-                                <label for="">email</label>
-                                <input type="text" class="input_field" name="email"/>
-                            </div> 
-                            <div class="input_container">
-                                <label for="">Message</label>
-                                <textarea  id="" class="textarea" name="body" rows="10"></textarea>  
-                            </div>
-                            <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
+            <h4 class="text-white font-medium mb-1">Flexible Work</h4>
+            <p class="text-white/80 test-base">Remote options and flexible schedules available</p>
+          </div>
+          <div class="flex flex-col items-center">
+            <div class="bg-white/20 rounded-full p-3 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 256 256">
+                <path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
+              </svg>
+            </div>
+            <h4 class="text-white font-medium mb-1">Amazing Team</h4>
+            <p class="text-white/80 test-base">Work with passionate travel enthusiasts</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- CTA -->
+    <div class="text-center p-4 pb-8">
+      <p class="text-white/90 test-base mb-4">Don't see the perfect position? We're always looking for talented people!</p>
+      <button class="bg-white text-[#e92929] px-6 py-3 rounded-lg font-bold hover:bg-[#fcf8f8] transition-colors">
+        Send Us Your Resume
+      </button>
+    </div>
+  </div>
+</section> --}}
 
-                            
-
-                            <div class="btn_container relative z3">
-                                <button type="submit" id="js_submit_btn">Submit</button>
-                            </div>
+                  <!-- Contact Section -->
+                  <section id="contact" class="flex justify-center py-12">
+                        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                              <h2
+                                    class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
+                                    Contact Us</h2>
+                              <p class="text-[#1b0e0e] text-base font-normal leading-normal pb-3 pt-1 px-4">
+                                    We're here to help! Whether you have questions about our tours, need assistance with
+                                    booking, or just want to chat about your travel plans, feel free to reach out.
+                                    Our team is dedicated to providing you with the best possible service and ensuring
+                                    your experience with us is seamless and enjoyable.
+                              </p>
+                              <div class="grid md:grid-cols-2 gap-8 p-4">
+                                    <form action="{{route("sendMessage")}}" method="POST" class="js_form">
+                                          @csrf
+                                          <div class="flex max-w-[480px] flex-wrap items-end gap-4 py-3">
+                                                <label class="flex flex-col min-w-40 flex-1">
+                                                      <input placeholder="Your Name"
+                                                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1b0e0e] focus:outline-0 focus:ring-0 border-none bg-[#f3e7e7] focus:border-none h-14 placeholder:text-[#994d4d] p-4 text-base font-normal leading-normal"
+                                                            value="" name="name" />
+                                                </label>
+                                          </div>
+                                          <div class="flex max-w-[480px] flex-wrap items-end gap-4 py-3">
+                                                <label class="flex flex-col min-w-40 flex-1">
+                                                      <input placeholder="Your Email"
+                                                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1b0e0e] focus:outline-0 focus:ring-0 border-none bg-[#f3e7e7] focus:border-none h-14 placeholder:text-[#994d4d] p-4 text-base font-normal leading-normal"
+                                                            value="" name="email" />
+                                                </label>
+                                          </div>
+                                          <div class="flex max-w-[480px] flex-wrap items-end gap-4 py-3">
+                                                <label class="flex flex-col min-w-40 flex-1">
+                                                      <textarea placeholder="Your Message" name="body"
+                                                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1b0e0e] focus:outline-0 focus:ring-0 border-none bg-[#f3e7e7] focus:border-none min-h-36 placeholder:text-[#994d4d] p-4 text-base font-normal leading-normal"></textarea>
+                                                </label>
+                                          </div>
+                                          <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
+                                          <div class="flex py-3 justify-start">
+                                                <button
+                                                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] test-base font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors"
+                                                      type="submit" id="js_submit_btn">
+                                                      <span class="truncate">Send Message</span>
+                                                </button>
+                                          </div>
+                                    </form>
+                                    <div>
+                                          <h3
+                                                class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em] pb-3">
+                                                Our Details</h3>
+                                          <div class="flex items-center gap-4 bg-[#fcf8f8] min-h-[72px] py-2">
+                                                <div class="text-[#1b0e0e] flex items-center justify-center rounded-lg bg-[#f3e7e7] shrink-0 size-12"
+                                                      data-icon="MapPin" data-size="24px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                                <div class="flex flex-col justify-center">
+                                                      <p
+                                                            class="text-[#1b0e0e] text-base font-medium leading-normal line-clamp-1">
+                                                            Address</p>
+                                                      <p
+                                                            class="text-[#994d4d] test-base font-normal leading-normal line-clamp-2">
+                                                            123 Adventure Lane, Travel Town, 90210</p>
+                                                </div>
+                                          </div>
+                                          <div class="flex items-center gap-4 bg-[#fcf8f8] min-h-[72px] py-2">
+                                                <div class="text-[#1b0e0e] flex items-center justify-center rounded-lg bg-[#f3e7e7] shrink-0 size-12"
+                                                      data-icon="Phone" data-size="24px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                                <div class="flex flex-col justify-center">
+                                                      <p
+                                                            class="text-[#1b0e0e] text-base font-medium leading-normal line-clamp-1">
+                                                            Phone</p>
+                                                      <p
+                                                            class="text-[#994d4d] test-base font-normal leading-normal line-clamp-2">
+                                                            +1 (555) 123-4567</p>
+                                                </div>
+                                          </div>
+                                          <div class="flex items-center gap-4 bg-[#fcf8f8] min-h-[72px] py-2">
+                                                <div class="text-[#1b0e0e] flex items-center justify-center rounded-lg bg-[#f3e7e7] shrink-0 size-12"
+                                                      data-icon="Envelope" data-size="24px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                                <div class="flex flex-col justify-center">
+                                                      <p
+                                                            class="text-[#1b0e0e] text-base font-medium leading-normal line-clamp-1">
+                                                            Email</p>
+                                                      <p
+                                                            class="text-[#994d4d] test-base font-normal leading-normal line-clamp-2">
+                                                            info@japatour-official.com</p>
+                                                </div>
+                                          </div>
+                                          <div class="flex gap-4 pt-4">
+                                                <a href="#"
+                                                      class="rounded-full bg-[#f3e7e7] p-2.5 hover:bg-[#e7d0d0] transition-colors">
+                                                      <div class="text-[#1b0e0e]" data-icon="FacebookLogo"
+                                                            data-size="20px" data-weight="regular">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20px"
+                                                                  height="20px" fill="currentColor"
+                                                                  viewBox="0 0 256 256">
+                                                                  <path
+                                                                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z">
+                                                                  </path>
+                                                            </svg>
+                                                      </div>
+                                                </a>
+                                                <a href="#"
+                                                      class="rounded-full bg-[#f3e7e7] p-2.5 hover:bg-[#e7d0d0] transition-colors">
+                                                      <div class="text-[#1b0e0e]" data-icon="TwitterLogo"
+                                                            data-size="20px" data-weight="regular">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20px"
+                                                                  height="20px" fill="currentColor"
+                                                                  viewBox="0 0 256 256">
+                                                                  <path
+                                                                        d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z">
+                                                                  </path>
+                                                            </svg>
+                                                      </div>
+                                                </a>
+                                                <a href="#"
+                                                      class="rounded-full bg-[#f3e7e7] p-2.5 hover:bg-[#e7d0d0] transition-colors">
+                                                      <div class="text-[#1b0e0e]" data-icon="InstagramLogo"
+                                                            data-size="20px" data-weight="regular">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20px"
+                                                                  height="20px" fill="currentColor"
+                                                                  viewBox="0 0 256 256">
+                                                                  <path
+                                                                        d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z">
+                                                                  </path>
+                                                            </svg>
+                                                      </div>
+                                                </a>
+                                          </div>
+                                    </div>
+                              </div>
                         </div>
-                        <svg class="animated" data-aos="fade-up" data-aos-duration="1000" id="freepik_stories-contact-us" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs"><style>svg#freepik_stories-contact-us:not(.animated) .animable {opacity: 0;}svg#freepik_stories-contact-us.animated #freepik--Icons--inject-2 {animation: 1s 1 forwards cubic-bezier(.36,-0.01,.5,1.38) slideUp,1.5s Infinite  linear floating;animation-delay: 0s,1s;}            @keyframes slideUp {                0% {                    opacity: 0;                    transform: translateY(30px);                }                100% {                    opacity: 1;                    transform: inherit;                }            }                    @keyframes floating {                0% {                    opacity: 1;                    transform: translateY(0px);                }                50% {                    transform: translateY(-10px);                }                100% {                    opacity: 1;                    transform: translateY(0px);                }            }        </style><g id="freepik--Floor--inject-2" class="animable" style="transform-origin: 250px 377.35px;"><ellipse cx="250" cy="377.35" rx="197.05" ry="111.94" style="fill: rgb(245, 245, 245); transform-origin: 250px 377.35px;" id="elgejraxbzxap" class="animable"></ellipse></g><g id="freepik--Shadows--inject-2" class="animable" style="transform-origin: 221.843px 391.992px;"><path d="M332,447.93,184.91,363a8.5,8.5,0,0,1,0-14.73l14.51-9.15a16.5,16.5,0,0,1,16.47,0L363,424.06a8.5,8.5,0,0,1,0,14.73l-14.51,9.14A16.46,16.46,0,0,1,332,447.93Z" style="fill: rgb(224, 224, 224); transform-origin: 273.955px 393.531px;" id="eltcqglp7ey2" class="animable"></path><ellipse cx="108.35" cy="352.17" rx="31.92" ry="18.33" style="fill: rgb(230, 230, 230); transform-origin: 108.35px 352.17px;" id="elzew5meqhdah" class="animable"></ellipse></g><g id="freepik--Plants--inject-2" class="animable animator-active" style="transform-origin: 403.941px 344.214px;"><path d="M384.16,374.7l14,8.05s-7.15-22.47-3.34-45.12c1.44-8.56,4.53-12.81,5.61-15.1s9.45-16.44,2-22.92-24.78,6.55-23.84,41.42A135.23,135.23,0,0,0,384.16,374.7Z" style="fill: #52AAF9; transform-origin: 392.02px 340.378px;" id="elul7j23s1krr" class="animable"></path><g id="elk6eqqycjtp"><path d="M384.16,374.7l14,8.05s-7.15-22.47-3.34-45.12c1.44-8.56,4.53-12.81,5.61-15.1s9.45-16.44,2-22.92-24.78,6.55-23.84,41.42A135.23,135.23,0,0,0,384.16,374.7Z" style="opacity: 0.5; transform-origin: 392.02px 340.378px;" class="animable" id="el33hwx5m7ahu"></path></g><path d="M390.67,378.94a.49.49,0,0,1-.47-.32c-.05-.15-5.4-14.77-5.23-38.27s12.52-36.26,12.64-36.38a.5.5,0,0,1,.71,0,.5.5,0,0,1,0,.71c-.12.12-12.18,12.5-12.35,35.68s5.11,37.78,5.17,37.92a.5.5,0,0,1-.3.64A.47.47,0,0,1,390.67,378.94Z" style="fill: rgb(255, 255, 255); transform-origin: 391.717px 341.382px;" id="elwiywz8hpkit" class="animable"></path><path d="M390,378.14l19.14,11a9.21,9.21,0,0,0,12.22-2.63,10,10,0,0,0,1.51-6.65c-.92-9.94-5.24-12.23.05-16.66s6.67-4.74,6.37-9-3.21-6.12-4.59-7.8-5.2-5.2-2.6-10.4,6.15-10.23.77-12.53c-3.21-1.38-8.56.46-12.08,4.28s-6.42,6.57-9.79,7.49-10.39,1.07-10.09,6.88,1.84,7.8.46,10.39C388.77,357.35,377.46,360.1,390,378.14Z" style="fill: #52AAF9; transform-origin: 406.764px 356.718px;" id="ele3b45nhrrke" class="animable"></path><path d="M399.46,384.06a.52.52,0,0,1-.5-.46c0-.34-2.94-34.66,20.66-57.5a.5.5,0,0,1,.69.72c-23.26,22.51-20.38,56.35-20.35,56.69a.5.5,0,0,1-.45.54Z" style="fill: rgb(255, 255, 255); transform-origin: 409.641px 355.023px;" id="elsjedu46z76" class="animable"></path><path d="M403.25,354.52a.5.5,0,0,1-.5-.46,19.64,19.64,0,0,0-7.23-13.73.5.5,0,0,1-.12-.7.49.49,0,0,1,.69-.12A20.37,20.37,0,0,1,403.75,354a.51.51,0,0,1-.46.55Z" style="fill: rgb(255, 255, 255); transform-origin: 399.529px 346.984px;" id="el2ml1lqzcw7i" class="animable"></path><path d="M401.62,360.41a.5.5,0,0,1-.33-.12.51.51,0,0,1-.05-.71c.24-.28,6.15-6.8,20-5.07a.5.5,0,0,1,.43.56.51.51,0,0,1-.56.44c-13.3-1.67-19.07,4.67-19.13,4.73A.51.51,0,0,1,401.62,360.41Z" style="fill: rgb(255, 255, 255); transform-origin: 411.397px 357.314px;" id="elanv17tnvmlf" class="animable"></path></g><g id="freepik--Device--inject-2" class="animable" style="transform-origin: 270.315px 235.548px;"><path d="M327.52,437.78,198.16,363.09c-9.13-5.27-16.53-19.41-16.53-31.58v-277c0-12.17,7.4-17.76,16.53-12.49l129.36,74.69c9.13,5.27,16.53,19.41,16.53,31.58v277C344.05,437.45,336.65,443.05,327.52,437.78Z" style="fill: rgb(69, 90, 100); transform-origin: 262.84px 239.899px;" id="elx5rwiiv1haa" class="animable"></path><path d="M342.42,108,213.05,33.31c-3.9-2.25-7.48-2.51-10.31-1.13h0a8.45,8.45,0,0,0-1,.59l-14.5,8.43c2.92-1.75,6.74-1.62,10.93.8l129.36,74.69c9.13,5.27,16.53,19.41,16.53,31.58v277c0,6.44-2.07,11-5.37,13.16L353,430.1h0c3.65-1.94,6-6.69,6-13.5v-277C359,127.41,351.55,113.27,342.42,108Z" style="fill: rgb(55, 71, 79); transform-origin: 273.12px 234.882px;" id="elux2xpwn87rs" class="animable"></path><path d="M344.05,148.27v277c0,6.44-2.07,11-5.37,13.16L353,430.1h0c3.65-1.94,6-6.69,6-13.5v-277l-14.9,8.65Z" style="fill: rgb(38, 50, 56); transform-origin: 348.84px 289.015px;" id="elsctkk44dcwb" class="animable"></path><polygon points="358.95 161.09 344.05 169.69 344.05 176.41 358.95 167.8 358.95 161.09" style="fill: rgb(55, 71, 79); transform-origin: 351.5px 168.75px;" id="elpvuf1ceazq" class="animable"></polygon><path d="M352.42,205.78h0c-1.33.77-2.41-.05-2.41-1.82V189.51a5.78,5.78,0,0,1,2.41-4.61h0c1.33-.77,2.41,0,2.41,1.82v14.45A5.78,5.78,0,0,1,352.42,205.78Z" style="fill: rgb(55, 71, 79); transform-origin: 352.42px 195.336px;" id="elmshfov0hvid" class="animable"></path><path d="M350,204V189.51a5.78,5.78,0,0,1,2.41-4.61,1.54,1.54,0,0,1,1.52-.14v0l-1.81-.93h0a1.56,1.56,0,0,0-1.56.12,5.8,5.8,0,0,0-2.42,4.61V203a2.17,2.17,0,0,0,.82,1.93h0l1.89,1v0A2.08,2.08,0,0,1,350,204Z" style="fill: rgb(69, 90, 100); transform-origin: 351.029px 194.803px;" id="elb08aui61jpc" class="animable"></path><path d="M352.42,240.75h0c-1.33.77-2.41,0-2.41-1.82V224.48a5.79,5.79,0,0,1,2.41-4.61h0c1.33-.77,2.41,0,2.41,1.83v14.44A5.76,5.76,0,0,1,352.42,240.75Z" style="fill: rgb(55, 71, 79); transform-origin: 352.42px 230.31px;" id="el3krt0sb7z0x" class="animable"></path><path d="M350,238.93V224.48a5.79,5.79,0,0,1,2.41-4.61,1.57,1.57,0,0,1,1.52-.14h0l-1.81-.94v0a1.51,1.51,0,0,0-1.56.12,5.77,5.77,0,0,0-2.42,4.61V238a2.16,2.16,0,0,0,.82,1.93h0l1.89,1v0A2.07,2.07,0,0,1,350,238.93Z" style="fill: rgb(69, 90, 100); transform-origin: 351.029px 229.779px;" id="el7b767d4fmb9" class="animable"></path><path d="M323,124.48,195.88,51.06a3.51,3.51,0,0,0-5.26,3V331.51c0,9.26,6.57,20.63,14.59,25.26l124,71.63a3.87,3.87,0,0,0,5.8-3.35V145.31C335.06,137.67,329.64,128.3,323,124.48Z" style="fill: #52AAF9; transform-origin: 262.815px 239.754px;" id="eldg6sn6ojq3f" class="animable"></path><g id="elp5pkvkegema"><path d="M323,124.48,195.88,51.06a3.51,3.51,0,0,0-5.26,3V331.51c0,9.26,6.57,20.63,14.59,25.26l124,71.63a3.87,3.87,0,0,0,5.8-3.35V145.31C335.06,137.67,329.64,128.3,323,124.48Z" style="fill: rgb(255, 255, 255); opacity: 0.9; transform-origin: 262.815px 239.754px;" class="animable" id="elzhl7bpnclr"></path></g><polygon points="233.9 70.23 235.87 78.52 278.01 102.82 285.29 98.94 233.9 70.23" style="fill: rgb(69, 90, 100); transform-origin: 259.595px 86.525px;" id="elrs7xa5j4mjk" class="animable"></polygon><path d="M246.29,78.24c0,1.38-1,1.93-2.16,1.25A4.78,4.78,0,0,1,242,75.75c0-1.37,1-1.93,2.16-1.24A4.76,4.76,0,0,1,246.29,78.24Z" style="fill: rgb(38, 50, 56); transform-origin: 244.145px 76.9977px;" id="el6a5u9cc2wcb" class="animable"></path><path d="M274.68,95.79a1.41,1.41,0,0,1-.66-.17l-21.52-12a1.35,1.35,0,0,1,1.31-2.36l21.53,12a1.35,1.35,0,0,1-.66,2.53Z" style="fill: rgb(38, 50, 56); transform-origin: 263.934px 88.448px;" id="elxk6z99cxbv" class="animable"></path><path d="M217.28,108.8c-1.31-.76-2.26-.1-2.26,1.57a5.07,5.07,0,0,0,2.26,4.22,2.38,2.38,0,0,0,2.47,0l2.09,3.78a4.53,4.53,0,0,1-4.75-.23,12.11,12.11,0,0,1-5.78-9.84c0-3.71,2.49-5,5.92-3a13.54,13.54,0,0,1,4.61,5l-2.09,1.66A7.37,7.37,0,0,0,217.28,108.8Z" style="fill: #52AAF9; transform-origin: 216.575px 111.648px;" id="elr98j3rzv89" class="animable"></path><path d="M233.87,121.33c0,3.74-2.53,5-6,3a12.35,12.35,0,0,1-6-10c0-3.74,2.53-5,6-3A12.28,12.28,0,0,1,233.87,121.33Zm-8.29-4.77a5.42,5.42,0,0,0,2.34,4.35c1.24.72,2.24,0,2.24-1.7a5.23,5.23,0,0,0-2.24-4.27C226.66,114.21,225.58,114.83,225.58,116.56Z" style="fill: #52AAF9; transform-origin: 227.87px 117.83px;" id="elrfompl44atp" class="animable"></path><path d="M237.9,117.36l4.32,9v-6.48l3.27,1.89v12.61l-3-1.74-4.3-8.92v6.44l-3.29-1.9V115.62Z" style="fill: #52AAF9; transform-origin: 240.195px 125px;" id="el4tlgdiplli8" class="animable"></path><path d="M256.18,127.91v3.3l-3.12-1.8v9.32l-3.61-2.09v-9.32l-3.1-1.79v-3.29Z" style="fill: #52AAF9; transform-origin: 251.265px 130.485px;" id="el150tcgp5u6k" class="animable"></path><path d="M263.22,142.81l-4.1-2.37-.56,1.46-3.7-2.14,4.61-9.95,3.71,2.14,4.44,15.18-3.85-2.22Zm-.89-3.5L261.21,135l-1.15,3Z" style="fill: #52AAF9; transform-origin: 261.24px 138.47px;" id="elj6tzxqqzxla" class="animable"></path><path d="M273.35,141.17c-1.31-.75-2.26-.1-2.26,1.58a5.09,5.09,0,0,0,2.26,4.22,2.42,2.42,0,0,0,2.48,0l2.09,3.78a4.59,4.59,0,0,1-4.76-.23,12.11,12.11,0,0,1-5.78-9.85c0-3.71,2.5-5,5.92-3a13.76,13.76,0,0,1,4.62,5l-2.09,1.65A7.53,7.53,0,0,0,273.35,141.17Z" style="fill: #52AAF9; transform-origin: 272.65px 144.019px;" id="elzfojea081dk" class="animable"></path><path d="M287.78,146.16v3.29l-3.12-1.8V157l-3.61-2.09v-9.32l-3.1-1.79v-3.29Z" style="fill: #52AAF9; transform-origin: 282.865px 148.755px;" id="el3ob0oetprkp" class="animable"></path><path d="M298.45,161.64c.89.51,1.57.11,1.57-1.14v-7.27l3.62,2.08v7.27c0,3.35-2,4.35-5.2,2.52a10.3,10.3,0,0,1-5.29-8.57v-7.27l3.62,2.09v7.27A3.71,3.71,0,0,0,298.45,161.64Z" style="fill: #52AAF9; transform-origin: 298.395px 157.632px;" id="elahxz6nzclo" class="animable"></path><path d="M309.47,161.68c-.41-.23-.67-.24-.67.14,0,1.58,5.65,3.86,5.65,8.43,0,2.8-2.13,2.81-4.59,1.39a18.27,18.27,0,0,1-5.47-5.17l1.34-2.36a16.08,16.08,0,0,0,4.16,4.36c.53.31.87.31.87-.14,0-1.64-5.66-3.82-5.66-8.25,0-2.52,1.84-3,4.68-1.4a17.42,17.42,0,0,1,4.75,4.23l-1.31,2.42A19.69,19.69,0,0,0,309.47,161.68Z" style="fill: #52AAF9; transform-origin: 309.46px 165.163px;" id="elpnyi5m74n4" class="animable"></path></g><g id="freepik--speech-bubble--inject-2" class="animable" style="transform-origin: 179.174px 155.62px;"><path d="M199.09,170.94a25.69,25.69,0,1,0-6.74,5.83l12.52,5.44Z" style="fill: #52AAF9; transform-origin: 179.174px 155.62px;" id="elwnfzzv1jb1j" class="animable"></path><g id="ele5c6ykk7psl"><path d="M199.09,170.94a25.69,25.69,0,1,0-6.74,5.83l12.52,5.44Z" style="opacity: 0.4; transform-origin: 179.174px 155.62px;" class="animable" id="elewn2q1ulscu"></path></g><path d="M169.65,153.34c0-.39-.28-.61-.79-.61a5.72,5.72,0,0,0-3.16,1.49l-1.42-2.76a9.08,9.08,0,0,1,5.17-1.82c2.4,0,4.22,1.26,4.22,3.14,0,1.34-1,2.63-2.28,3.92l-1.79,1.77h4.23v2.94h-9.09V159l4.05-4.19A2.73,2.73,0,0,0,169.65,153.34Z" style="fill: rgb(255, 255, 255); transform-origin: 169.055px 155.525px;" id="el69000isg6ds" class="animable"></path><path d="M181.23,149.81l-2.76,6.62h1.13V154.2h3.48v2.23h1.32v2.73h-1.32v2.25H179.6v-2.25h-4.95v-2.48l3-6.87Z" style="fill: rgb(255, 255, 255); transform-origin: 179.525px 155.61px;" id="elagoom3v7p8p" class="animable"></path><path d="M195.14,155.64v5.77h-3.72v-4.7a1.08,1.08,0,0,0-1.07-1.23c-.73,0-1.19.57-1.19,1.45v4.48h-3.72V149.15h3.72v4.51a3.14,3.14,0,0,1,2.74-1.46A3.17,3.17,0,0,1,195.14,155.64Z" style="fill: rgb(255, 255, 255); transform-origin: 190.296px 155.28px;" id="eld5ujhfe3xvs" class="animable"></path></g><g id="freepik--Character--inject-2" class="animable" style="transform-origin: 241.879px 274.784px;"><path d="M316.44,248.56V372.81a8,8,0,0,1-12,6.94l-66.92-38.64-11.86-6.84A26.95,26.95,0,0,1,212.2,311V186.74a8,8,0,0,1,12-6.94L303,225.29A26.87,26.87,0,0,1,316.44,248.56Z" style="fill: #52AAF9; transform-origin: 264.32px 279.775px;" id="ellehmyjasb3" class="animable"></path><g id="elr9zbzrosn7"><path d="M316.44,248.56V372.81a8,8,0,0,1-12,6.94l-66.92-38.64-11.86-6.84A26.95,26.95,0,0,1,212.2,311V186.74a8,8,0,0,1,12-6.94L303,225.29A26.87,26.87,0,0,1,316.44,248.56Z" style="fill: rgb(255, 255, 255); opacity: 0.5; transform-origin: 264.32px 279.775px;" class="animable" id="el7sud8qsaz2"></path></g><path d="M277.89,322.08s12.53,20.78,3.48,44.21l-43.88-25.18Z" style="fill: rgb(38, 50, 56); transform-origin: 261.072px 344.185px;" id="elkm91xfw36d9" class="animable"></path><g id="el2ch0q92r3j9"><circle cx="283.92" cy="226.99" r="14.05" style="fill: rgb(38, 50, 56); transform-origin: 283.92px 226.99px; transform: rotate(-82.98deg);" class="animable" id="elwikythirmba"></circle></g><path d="M284,187.59s4.31-7,5.63-6.49-.86,7.18-.86,7.18,6.52,1.36,5.31,3-9.18,1.25-9.18,1.25Z" style="fill: rgb(38, 50, 56); transform-origin: 289.115px 186.822px;" id="elmfog13o3jx" class="animable"></path><path d="M287,205.63c-3,22.54-22,22.54-22,22.54L225.2,210.65s-3-2.63-3.92-8.67a26.41,26.41,0,0,1,0-7.46s0-.05,0-.07c1.27-9.48,8.36-19.67,23.8-22.8a50.59,50.59,0,0,1,10.28-1,46.83,46.83,0,0,1,5,.25c12,1.18,20.41,6.78,24.42,15.49a28,28,0,0,1,2,6.15A38.82,38.82,0,0,1,287,205.63Z" style="fill: rgb(38, 50, 56); transform-origin: 254.233px 199.41px;" id="el9hb6gny7v8i" class="animable"></path><path d="M191.45,249.23s-14.13-.49-19.57,13.28c0,0,6,4.05,13.87,0S191.45,249.23,191.45,249.23Z" style="fill: #52AAF9; transform-origin: 181.802px 256.769px;" id="elnnibyskoxam" class="animable"></path><g id="el5ihohzrt4lr"><path d="M191.45,249.23s-14.13-.49-19.57,13.28c0,0,6,4.05,13.87,0S191.45,249.23,191.45,249.23Z" style="opacity: 0.5; transform-origin: 181.802px 256.769px;" class="animable" id="el59u5hde78m"></path></g><path d="M191.05,255.86s-4-17.38-6.11-17.59-2.52,5.3-2.35,8.41l-5-10.76a2.71,2.71,0,0,0-3.76-1.21c-5,2.75-13.77,11.11,4.72,31.78Z" style="fill: rgb(148, 89, 89); transform-origin: 179.184px 250.431px;" id="elveqzb7karp" class="animable"></path><path d="M242.25,243.84l-3-.39a17.18,17.18,0,0,0-16,6.72l-17.85,23.76-14-24.7s-1.68,16.8-19.57,13.28l19.21,32.33a14.78,14.78,0,0,0,24.18,1.77l16.44-20.21Z" style="fill: #52AAF9; transform-origin: 207.04px 272.686px;" id="elfbci3hy1ag6" class="animable"></path><path d="M280.35,299.29c-4,10.14-4.44,12.12-2,17.19a64.87,64.87,0,0,1,4,11.64s-18.54,20.78-44.93,13l-11.86-6.84a26.56,26.56,0,0,1-6.58-5.36L222.59,302a9.4,9.4,0,0,0-.42-4.21l-3.79-11.11a30.36,30.36,0,0,1,7.52-31.51l12.74-12.45L272.1,247l5,1.43A14.15,14.15,0,0,1,287.18,264C285.54,275.8,282.86,292.92,280.35,299.29Z" style="fill: #52AAF9; transform-origin: 252.038px 292.792px;" id="eln1c7audrt8g" class="animable"></path><g id="el55fpfw9im8x"><path d="M280.35,299.29c-4,10.14-4.44,12.12-2,17.19a64.87,64.87,0,0,1,4,11.64s-18.54,20.78-44.93,13l-11.86-6.84a26.56,26.56,0,0,1-6.58-5.36L222.59,302a9.4,9.4,0,0,0-.42-4.21l-3.79-11.11a30.36,30.36,0,0,1,7.52-31.51l12.74-12.45L272.1,247l5,1.43A14.15,14.15,0,0,1,287.18,264C285.54,275.8,282.86,292.92,280.35,299.29Z" style="opacity: 0.5; transform-origin: 252.038px 292.792px;" class="animable" id="elbe436tuzjt9"></path></g><path d="M260.17,269l-6.7-5.71a5.37,5.37,0,0,0-5.23-1l-8.1,2.79-1.09-4.54a5.38,5.38,0,0,0-6.72-3.91l-3.51,1,5.94-11.38a21.31,21.31,0,0,1,8.59-8.78l2.33-1.28,19.25,1s7.17,3,7.17,9.75l-11.93,22" style="fill: #52AAF9; transform-origin: 250.46px 252.595px;" id="elxxhcd7jrtk8" class="animable"></path><polygon points="265.01 245.72 245.71 260.76 245.71 212.87 265.01 212.87 265.01 245.72" style="fill: rgb(148, 89, 89); transform-origin: 255.36px 236.815px;" id="elhnnpows643u" class="animable"></polygon><polygon points="246.01 241.77 240.14 265.12 264.93 245.72 246.01 241.77" style="fill: rgb(148, 89, 89); transform-origin: 252.535px 253.445px;" id="elh7ufu6tky1t" class="animable"></polygon><path d="M245.71,238.3A33.78,33.78,0,0,0,265,219.94v-7.07h-19.3Z" style="fill: rgb(112, 56, 56); transform-origin: 255.35px 225.585px;" id="elxgqpdz1gn0d" class="animable"></path><path d="M249.87,177.38c-7.32,0-22.88,4.08-24.68,23.24s-.06,34,9.82,35.44,32.84-5.73,35.92-30.53S257,177.38,249.87,177.38Z" style="fill: rgb(148, 89, 89); transform-origin: 247.932px 206.808px;" id="elssljhvlpeek" class="animable"></path><polygon points="238.35 208.73 238.35 220.02 231.73 217.99 238.35 208.73" style="fill: rgb(112, 56, 56); transform-origin: 235.04px 214.375px;" id="el3mu9hxcm2s6" class="animable"></polygon><circle cx="245.71" cy="210.68" r="2.3" style="fill: rgb(38, 50, 56); transform-origin: 245.71px 210.68px;" id="elhhg17kr0emg" class="animable"></circle><path d="M232.87,209.08a2.3,2.3,0,1,1-2.3-2.31A2.3,2.3,0,0,1,232.87,209.08Z" style="fill: rgb(38, 50, 56); transform-origin: 230.57px 209.07px;" id="el5nkofiuz7pd" class="animable"></path><path d="M227.76,204.28l4.5-2.67s-1.72-1.79-3.44-.72S227.76,204.28,227.76,204.28Z" style="fill: rgb(38, 50, 56); transform-origin: 229.948px 202.415px;" id="ellv7z9llelzr" class="animable"></path><path d="M235.24,224.6a9.75,9.75,0,0,0,6.19-1.66s.43,3.27-2.31,3.89S235.24,224.6,235.24,224.6Z" style="fill: rgb(112, 56, 56); transform-origin: 238.347px 224.929px;" id="el7xup5c4k6u4" class="animable"></path><path d="M231.31,183.9s2.75,26.45,38.72,27.28c0,0,10.87-26.29-10.61-34.83S231.31,183.9,231.31,183.9Z" style="fill: rgb(38, 50, 56); transform-origin: 252.045px 192.516px;" id="elxhsezwkapha" class="animable"></path><path d="M280.62,207.22h0l0,0h0l-4.42-2.56h0c-1.68-1-4-.86-6.57.62-5.1,2.94-9.24,10.11-9.24,16,0,2.95,1,5,2.72,6h0l4.34,2.5.25.14.15.09v0c1.64.8,3.83.61,6.24-.78,5.1-3,9.24-10.11,9.24-16C283.3,210.25,282.27,208.19,280.62,207.22Z" style="fill: #52AAF9; transform-origin: 271.86px 217.25px;" id="el64vogqlm124" class="animable"></path><g id="el1db0141es5c"><ellipse cx="274.06" cy="218.51" rx="13.06" ry="7.54" style="fill: #52AAF9; transform-origin: 274.06px 218.51px; transform: rotate(-60deg);" class="animable" id="el7xry6q6ebuf"></ellipse></g><g id="elq7h8ffggjx"><ellipse cx="274.06" cy="218.51" rx="13.06" ry="7.54" style="opacity: 0.5; transform-origin: 274.06px 218.51px; transform: rotate(-60deg);" class="animable" id="elcegvnkhvsp4"></ellipse></g><path d="M282.39,212.77h0l-3-1.75h0c-1.14-.68-2.73-.59-4.49.42a14,14,0,0,0-6.32,10.95c0,2,.71,3.43,1.86,4.09h0l3,1.71a1,1,0,0,0,.17.1l.1.06h0a4.6,4.6,0,0,0,4.28-.54,14,14,0,0,0,6.32-10.94C284.23,214.84,283.53,213.43,282.39,212.77Z" style="fill: #52AAF9; transform-origin: 276.445px 219.615px;" id="el60jz9ifk0ac" class="animable"></path><path d="M284.23,216.85a14,14,0,0,1-6.32,10.94c-3.5,2-6.33.38-6.33-3.65a13.94,13.94,0,0,1,6.33-10.94C281.4,211.18,284.23,212.81,284.23,216.85Z" style="fill: #52AAF9; transform-origin: 277.905px 220.49px;" id="elpuvmq0hapt" class="animable"></path><g id="elbf6u09gx2ju"><path d="M284.23,216.85a14,14,0,0,1-6.32,10.94c-3.5,2-6.33.38-6.33-3.65a13.94,13.94,0,0,1,6.33-10.94C281.4,211.18,284.23,212.81,284.23,216.85Z" style="opacity: 0.3; transform-origin: 277.905px 220.49px;" class="animable" id="elrtj5p3t46mq"></path></g><path d="M266.89,172.22a16.64,16.64,0,0,0-10-3.47H256a53.89,53.89,0,0,0-10.93,1c.66,0,1.32,0,2,0h-2v1.86h1.86a24.71,24.71,0,0,1,23.87,24.73v7.87a2.22,2.22,0,0,0,2.45,2.21l.23,0,2-.62h0a1.86,1.86,0,0,1-.41.08,2.45,2.45,0,0,0,2.12-2.48v-7.3C277.17,182.89,271.46,175.79,266.89,172.22Z" style="fill: #52AAF9; transform-origin: 261.13px 187.589px;" id="elb0q4mxkv9aw" class="animable"></path><path d="M254.3,235.51a5.75,5.75,0,0,1-2.39-.52l-6.25-2.89a.75.75,0,1,1,.62-1.36l6.25,2.89a4.22,4.22,0,0,0,4.82-.9l6-6.2a.75.75,0,0,1,1.06,0,.76.76,0,0,1,0,1.06l-6,6.2A5.69,5.69,0,0,1,254.3,235.51Z" style="fill: #52AAF9; transform-origin: 254.894px 230.91px;" id="el2eryuskvt0i" class="animable"></path><g id="elr0pdye3jvpr"><path d="M254.3,235.51a5.75,5.75,0,0,1-2.39-.52l-6.25-2.89a.75.75,0,1,1,.62-1.36l6.25,2.89a4.22,4.22,0,0,0,4.82-.9l6-6.2a.75.75,0,0,1,1.06,0,.76.76,0,0,1,0,1.06l-6,6.2A5.69,5.69,0,0,1,254.3,235.51Z" style="opacity: 0.5; transform-origin: 254.894px 230.91px;" class="animable" id="elaq4zld6e8pj"></path></g><path d="M247.3,230a2.92,2.92,0,1,1-2.92-2.92A2.92,2.92,0,0,1,247.3,230Z" style="fill: #52AAF9; transform-origin: 244.38px 230px;" id="elx856320zorm" class="animable"></path><g id="elnc8npldbi9"><path d="M247.3,230a2.92,2.92,0,1,1-2.92-2.92A2.92,2.92,0,0,1,247.3,230Z" style="opacity: 0.5; transform-origin: 244.38px 230px;" class="animable" id="elbochej1lobu"></path></g><path d="M277.17,196.1v7.3a2.45,2.45,0,0,1-2.12,2.48,2.36,2.36,0,0,1-2.61-2.35V196.1a26.29,26.29,0,0,0-27.36-26.31,53.89,53.89,0,0,1,10.93-1h.87a16.64,16.64,0,0,1,10,3.47C271.46,175.79,277.17,182.89,277.17,196.1Z" style="fill: #52AAF9; transform-origin: 261.125px 187.34px;" id="elihuv9dwqqlc" class="animable"></path><g id="elxkmkuamkw4d"><path d="M277.17,196.1v7.3a2.45,2.45,0,0,1-2.12,2.48,2.36,2.36,0,0,1-2.61-2.35V196.1a26.29,26.29,0,0,0-27.36-26.31,53.89,53.89,0,0,1,10.93-1h.87a16.64,16.64,0,0,1,10,3.47C271.46,175.79,277.17,182.89,277.17,196.1Z" style="opacity: 0.5; transform-origin: 261.125px 187.34px;" class="animable" id="el9nu4wy6l2kl"></path></g><path d="M265.93,333.67S261.09,347,278.39,353c0,0,5.65-8.3,0-15.09S265.93,333.67,265.93,333.67Z" style="fill: #52AAF9; transform-origin: 273.104px 343.1px;" id="elj091klp8mm" class="animable"></path><g id="el3u1x33n11mf"><path d="M265.93,333.67S261.09,347,278.39,353c0,0,5.65-8.3,0-15.09S265.93,333.67,265.93,333.67Z" style="opacity: 0.7; transform-origin: 273.104px 343.1px;" class="animable" id="elutr5pw90b8q"></path></g><path d="M272,334.28s-16.9,6.19-16.81,8.59,7.18.76,7.18.76l-2.59,1.7a15.84,15.84,0,0,0-6.05,7.38h0a2.92,2.92,0,0,0,1.34,3.65l6.42,3.4a3.07,3.07,0,0,0,4.19-1.35h0a6,6,0,0,1,3.51-3c3.49-1.16,10-4.5,12.61-13.64Z" style="fill: rgb(148, 89, 89); transform-origin: 267.663px 347.199px;" id="elmr3uykpz1m" class="animable"></path><path d="M277.07,248.41s-9,5-4.22,20.18,13.75,38.73,13.75,38.73l-20.67,26.35A15.82,15.82,0,0,1,277,340.31,14,14,0,0,1,278.39,353l25.66-33a23.25,23.25,0,0,0,3.64-21.83l-11-32.12a26.88,26.88,0,0,0-17-16.81Z" style="fill: #52AAF9; transform-origin: 287.44px 300.705px;" id="el2mrf8wmsrqm" class="animable"></path></g><g id="freepik--Icons--inject-2" class="animable" style="transform-origin: 100.88px 178.741px;"><path d="M125.15,158.74l-39.77-23a3.35,3.35,0,0,0-3.17-.35h0a1.92,1.92,0,0,0-.31.18l-8.65,5.07.06,0c-1.09.62-1.78,2.06-1.78,4.12V189c0,3.74,2.27,8.09,5.08,9.71l39.77,23a3.18,3.18,0,0,0,3.5.15.18.18,0,0,0-.07.05l8.59-5h0c1.12-.6,1.83-2.06,1.83-4.15V168.45C130.23,164.71,128,160.36,125.15,158.74Z" style="fill: #52AAF9; transform-origin: 100.88px 178.728px;" id="el4sadco7fwq8" class="animable"></path><path d="M128.81,162.93a10.12,10.12,0,0,0-3.66-4.19l-39.77-23a3.35,3.35,0,0,0-3.17-.35h0a1.92,1.92,0,0,0-.31.18l-8.65,5.07a3.24,3.24,0,0,1,3.36.25l39.77,23a10.3,10.3,0,0,1,3.75,4.38h0Z" style="fill: #52AAF9; transform-origin: 101.03px 151.707px;" id="elwct3782jvy" class="animable"></path><path d="M121.46,217.82c0,2-.64,3.39-1.65,4l8.59-5h0c1.12-.6,1.83-2.06,1.83-4.15V168.45a12.51,12.51,0,0,0-1.42-5.52l-8.68,5.34h0a12.49,12.49,0,0,1,1.33,5.33Z" style="fill: #52AAF9; transform-origin: 125.02px 192.375px;" id="elrjz87jex3g" class="animable"></path><g id="eldhqwq57ybi"><path d="M128.81,162.93a10.12,10.12,0,0,0-3.66-4.19l-39.77-23a3.35,3.35,0,0,0-3.17-.35h0a1.92,1.92,0,0,0-.31.18l-8.65,5.07a3.24,3.24,0,0,1,3.36.25l39.77,23a10.3,10.3,0,0,1,3.75,4.38h0Z" style="opacity: 0.3; transform-origin: 101.03px 151.707px;" class="animable" id="elvroj1t65pos"></path></g><g id="el9vic10xhxoc"><path d="M121.46,217.82c0,2-.64,3.39-1.65,4l8.59-5h0c1.12-.6,1.83-2.06,1.83-4.15V168.45a12.51,12.51,0,0,0-1.42-5.52l-8.68,5.34h0a12.49,12.49,0,0,1,1.33,5.33Z" style="opacity: 0.6; transform-origin: 125.02px 192.375px;" class="animable" id="elw4aecr4c3q"></path></g><path d="M109.8,186.27c0,5.73-2.27,7.68-5.67,5.71a8,8,0,0,1-3.8-5c-1,1.23-2.55,1.31-4.73.05-3.58-2.07-6.4-7-6.4-11.79s2.79-6.44,6.4-4.36a11,11,0,0,1,4.26,4.57v-1.89l3.77,2.18v10.36a3,3,0,0,0,1.33,2.81c1.27.74,2.05-.51,2.05-4.22,0-6.49-4.16-13.37-10.31-16.92s-10.3-1.08-10.3,5.6a21,21,0,0,0,10.19,17.53,11.88,11.88,0,0,0,5.46,1.74l.89,3.45A14.21,14.21,0,0,1,96.59,194c-8-4.63-13.29-13.95-13.29-22.39s5.34-11.5,13.4-6.84C104.49,169.26,109.8,178.25,109.8,186.27Zm-9.88-4.81a7.34,7.34,0,0,0-3.47-6.35c-2-1.17-3.43-.35-3.43,2.37a7.39,7.39,0,0,0,3.43,6.39C98.45,185,99.92,184.27,99.92,181.46Z" style="fill: #52AAF9; transform-origin: 96.55px 179.341px;" id="elic5bh7woav" class="animable"></path><g id="elho6vheu61oc"><g style="opacity: 0.9; transform-origin: 96.55px 179.341px;" class="animable" id="elf4u234d0ngj"><path d="M109.8,186.27c0,5.73-2.27,7.68-5.67,5.71a8,8,0,0,1-3.8-5c-1,1.23-2.55,1.31-4.73.05-3.58-2.07-6.4-7-6.4-11.79s2.79-6.44,6.4-4.36a11,11,0,0,1,4.26,4.57v-1.89l3.77,2.18v10.36a3,3,0,0,0,1.33,2.81c1.27.74,2.05-.51,2.05-4.22,0-6.49-4.16-13.37-10.31-16.92s-10.3-1.08-10.3,5.6a21,21,0,0,0,10.19,17.53,11.88,11.88,0,0,0,5.46,1.74l.89,3.45A14.21,14.21,0,0,1,96.59,194c-8-4.63-13.29-13.95-13.29-22.39s5.34-11.5,13.4-6.84C104.49,169.26,109.8,178.25,109.8,186.27Zm-9.88-4.81a7.34,7.34,0,0,0-3.47-6.35c-2-1.17-3.43-.35-3.43,2.37a7.39,7.39,0,0,0,3.43,6.39C98.45,185,99.92,184.27,99.92,181.46Z" style="fill: rgb(255, 255, 255); transform-origin: 96.55px 179.341px;" id="eld3kwg788nlu" class="animable"></path></g></g><path d="M125.15,237.52l-39.77-23a3.31,3.31,0,0,0-3.17-.34h0a1.92,1.92,0,0,0-.31.18l-8.65,5.07.06,0c-1.09.62-1.78,2.06-1.78,4.11v44.22c0,3.75,2.27,8.09,5.08,9.71l39.77,23a3.16,3.16,0,0,0,3.5.15l-.07.06,8.59-5.05h0c1.12-.59,1.83-2,1.83-4.15V247.22C130.23,243.48,128,239.14,125.15,237.52Z" style="fill: #52AAF9; transform-origin: 100.88px 257.501px;" id="el1m01tedly0n" class="animable"></path><path d="M128.81,241.71a10.06,10.06,0,0,0-3.66-4.19l-39.77-23a3.31,3.31,0,0,0-3.17-.34h0a1.92,1.92,0,0,0-.31.18l-8.65,5.07a3.23,3.23,0,0,1,3.36.24l39.77,23a10.27,10.27,0,0,1,3.75,4.39h0Z" style="fill: #52AAF9; transform-origin: 101.03px 230.492px;" id="el63d1y2bpbxh" class="animable"></path><path d="M121.46,296.59c0,2-.64,3.39-1.65,4.05l8.59-5.05h0c1.12-.59,1.83-2,1.83-4.15V247.22a12.47,12.47,0,0,0-1.42-5.51l-8.68,5.34h0a12.45,12.45,0,0,1,1.33,5.32Z" style="fill: #52AAF9; transform-origin: 125.02px 271.175px;" id="elp5pi0ihwc3b" class="animable"></path><g id="elmvbrbqlldr9"><path d="M128.81,241.71a10.06,10.06,0,0,0-3.66-4.19l-39.77-23a3.31,3.31,0,0,0-3.17-.34h0a1.92,1.92,0,0,0-.31.18l-8.65,5.07a3.23,3.23,0,0,1,3.36.24l39.77,23a10.27,10.27,0,0,1,3.75,4.39h0Z" style="opacity: 0.3; transform-origin: 101.03px 230.492px;" class="animable" id="elrvv81egk9wa"></path></g><g id="elqtplcd2dju"><path d="M121.46,296.59c0,2-.64,3.39-1.65,4.05l8.59-5.05h0c1.12-.59,1.83-2,1.83-4.15V247.22a12.47,12.47,0,0,0-1.42-5.51l-8.68,5.34h0a12.45,12.45,0,0,1,1.33,5.32Z" style="opacity: 0.6; transform-origin: 125.02px 271.175px;" class="animable" id="eloo2db9vyhvt"></path></g><polygon points="92.05 257.29 82.46 241.71 82.46 262.82 92.05 257.29" style="fill: #52AAF9; transform-origin: 87.255px 252.265px;" id="el6dx6pz7omwq" class="animable"></polygon><polygon points="100.96 261.78 110.53 278.35 110.53 257.27 100.96 261.78" style="fill: #52AAF9; transform-origin: 105.745px 267.81px;" id="eltydtrcqblb" class="animable"></polygon><path d="M83.91,241l9.85,16a.63.63,0,0,1,.11.12.28.28,0,0,1,0,.12L96.8,262l2.48-1.17a.69.69,0,0,1,.13-.11.75.75,0,0,1,.32-.1l10-4.69Z" style="fill: #52AAF9; transform-origin: 96.82px 251.5px;" id="el6lv2uxj8m3q" class="animable"></path><path d="M99.51,262.46l-2.68,1.26a.75.75,0,0,1-.33.07.8.8,0,0,1-.69-.38l-2.93-4.76-9.62,5.56,25.89,14.94Z" style="fill: #52AAF9; transform-origin: 96.205px 268.9px;" id="elh5242nqj9g9" class="animable"></path><g id="elajqyif341ap"><g style="opacity: 0.9; transform-origin: 96.495px 260.075px;" class="animable" id="eljlh5e3rolv"><polygon points="92.05 257.29 82.46 241.71 82.46 262.82 92.05 257.29" style="fill: rgb(255, 255, 255); transform-origin: 87.255px 252.265px;" id="el1n5hpjtoikci" class="animable"></polygon><polygon points="100.96 261.78 110.53 278.35 110.53 257.27 100.96 261.78" style="fill: rgb(255, 255, 255); transform-origin: 105.745px 267.81px;" id="ellar3ybiw4p8" class="animable"></polygon><path d="M83.91,241l9.85,16a.63.63,0,0,1,.11.12.28.28,0,0,1,0,.12L96.8,262l2.48-1.17a.69.69,0,0,1,.13-.11.75.75,0,0,1,.32-.1l10-4.69Z" style="fill: rgb(255, 255, 255); transform-origin: 96.82px 251.5px;" id="elcohpf7ki48" class="animable"></path><path d="M99.51,262.46l-2.68,1.26a.75.75,0,0,1-.33.07.8.8,0,0,1-.69-.38l-2.93-4.76-9.62,5.56,25.89,14.94Z" style="fill: rgb(255, 255, 255); transform-origin: 96.205px 268.9px;" id="elhnrknl7648" class="animable"></path></g></g><path d="M125.15,80,85.38,57a3.31,3.31,0,0,0-3.17-.34h0a1.92,1.92,0,0,0-.31.18l-8.65,5.07.06,0c-1.09.61-1.78,2.06-1.78,4.11v44.22c0,3.74,2.27,8.09,5.08,9.71l39.77,23a3.16,3.16,0,0,0,3.5.15l-.07.05,8.59-5h0c1.12-.59,1.83-2,1.83-4.15V89.67C130.23,85.93,128,81.58,125.15,80Z" style="fill: #52AAF9; transform-origin: 100.88px 99.9808px;" id="eld4n96c55y5" class="animable"></path><path d="M128.81,84.16a10.09,10.09,0,0,0-3.66-4.2L85.38,57a3.31,3.31,0,0,0-3.17-.34h0a1.92,1.92,0,0,0-.31.18l-8.65,5.07a3.23,3.23,0,0,1,3.36.24l39.77,23a10.27,10.27,0,0,1,3.75,4.39h0Z" style="fill: #52AAF9; transform-origin: 101.03px 72.9722px;" id="elbn0kz651dah" class="animable"></path><path d="M121.46,139c0,2-.64,3.39-1.65,4l8.59-5h0c1.12-.59,1.83-2,1.83-4.15V89.67a12.47,12.47,0,0,0-1.42-5.51l-8.68,5.34h0a12.45,12.45,0,0,1,1.33,5.32Z" style="fill: #52AAF9; transform-origin: 125.02px 113.58px;" id="elvwvr504wrb" class="animable"></path><g id="elw4hmxu8fblc"><path d="M128.81,84.16a10.09,10.09,0,0,0-3.66-4.2L85.38,57a3.31,3.31,0,0,0-3.17-.34h0a1.92,1.92,0,0,0-.31.18l-8.65,5.07a3.23,3.23,0,0,1,3.36.24l39.77,23a10.27,10.27,0,0,1,3.75,4.39h0Z" style="opacity: 0.3; transform-origin: 101.03px 72.9722px;" class="animable" id="elazyuvpn973r"></path></g><g id="elxhj7jll27v"><path d="M121.46,139c0,2-.64,3.39-1.65,4l8.59-5h0c1.12-.59,1.83-2,1.83-4.15V89.67a12.47,12.47,0,0,0-1.42-5.51l-8.68,5.34h0a12.45,12.45,0,0,1,1.33,5.32Z" style="opacity: 0.6; transform-origin: 125.02px 113.58px;" class="animable" id="elajmstzlbr96"></path></g><path d="M108.45,120c-1.53-2.52-3.07-5-4.6-7.54a3.92,3.92,0,0,0-2.41-2c-.74-.15-1.48-.32-2.24-.54a1.38,1.38,0,0,1-.65-.56,63.22,63.22,0,0,1-5.93-13.6.75.75,0,0,1,.08-.61c.47-.47,1-.9,1.48-1.32s.73-1.39.38-2.65c-.74-2.67-1.45-5.34-2.19-8a4.38,4.38,0,0,0-2.86-3.32,8.09,8.09,0,0,0-4.9.18c-.61.23-.93.78-.94,1.73.26,1.83.43,3.64.78,5.5q3.7,20.12,17.8,37a2.85,2.85,0,0,0,2.23,1.28,6.72,6.72,0,0,0,4.23-1.63C109.6,123.12,109.51,121.7,108.45,120Z" style="fill: #52AAF9; transform-origin: 96.4936px 102.557px;" id="elm71jpa1dv9" class="animable"></path><path d="M108.33,106.37A21.24,21.24,0,0,0,106,98.13a24.35,24.35,0,0,0-3.75-5.51c-.39-.44-.72-.58-.92-.25s0,.8.38,1.23l.39.45a21.07,21.07,0,0,1,5,11.33,4,4,0,0,0,.09.91,2.43,2.43,0,0,0,.59.91c.21.15.45,0,.62,0C108.34,106.79,108.35,106.58,108.33,106.37Z" style="fill: #52AAF9; transform-origin: 104.826px 99.7274px;" id="el2edhqf12sq5" class="animable"></path><path d="M99.27,98.16a8.45,8.45,0,0,1,2.17,5,3.18,3.18,0,0,0,.31.81c.61.5.91.33.91-.3a11,11,0,0,0-2.81-6.41c-.38-.39-.69-.51-.87-.18A1,1,0,0,0,99.27,98.16Z" style="fill: #52AAF9; transform-origin: 100.793px 100.575px;" id="elr77vm21w92" class="animable"></path><g id="eluws1l8d53g"><g style="opacity: 0.9; transform-origin: 96.4936px 102.557px;" class="animable" id="elqaqfm96qkka"><path d="M108.45,120c-1.53-2.52-3.07-5-4.6-7.54a3.92,3.92,0,0,0-2.41-2c-.74-.15-1.48-.32-2.24-.54a1.38,1.38,0,0,1-.65-.56,63.22,63.22,0,0,1-5.93-13.6.75.75,0,0,1,.08-.61c.47-.47,1-.9,1.48-1.32s.73-1.39.38-2.65c-.74-2.67-1.45-5.34-2.19-8a4.38,4.38,0,0,0-2.86-3.32,8.09,8.09,0,0,0-4.9.18c-.61.23-.93.78-.94,1.73.26,1.83.43,3.64.78,5.5q3.7,20.12,17.8,37a2.85,2.85,0,0,0,2.23,1.28,6.72,6.72,0,0,0,4.23-1.63C109.6,123.12,109.51,121.7,108.45,120Z" style="fill: rgb(255, 255, 255); transform-origin: 96.4936px 102.557px;" id="el94z55766et" class="animable"></path><path d="M108.33,106.37A21.24,21.24,0,0,0,106,98.13a24.35,24.35,0,0,0-3.75-5.51c-.39-.44-.72-.58-.92-.25s0,.8.38,1.23l.39.45a21.07,21.07,0,0,1,5,11.33,4,4,0,0,0,.09.91,2.43,2.43,0,0,0,.59.91c.21.15.45,0,.62,0C108.34,106.79,108.35,106.58,108.33,106.37Z" style="fill: rgb(255, 255, 255); transform-origin: 104.826px 99.7274px;" id="eliqk31kwz8v" class="animable"></path><path d="M99.27,98.16a8.45,8.45,0,0,1,2.17,5,3.18,3.18,0,0,0,.31.81c.61.5.91.33.91-.3a11,11,0,0,0-2.81-6.41c-.38-.39-.69-.51-.87-.18A1,1,0,0,0,99.27,98.16Z" style="fill: rgb(255, 255, 255); transform-origin: 100.793px 100.575px;" id="elxekpyjl81mf" class="animable"></path></g></g></g><g id="freepik--Clouds--inject-2" class="animable" style="transform-origin: 383.195px 71.0679px;"><path d="M329.2,53.48l9.37,5.33V55.49c0-.23,0-.47,0-.7s0-.45,0-.67V54h0c.34-4.39,3.67-6.08,7.73-3.73a15.14,15.14,0,0,1,4.62,4.43c.91-6,5.78-8.12,11.67-4.73,6.54,3.78,11.84,13,11.84,20.52v7.1A3.24,3.24,0,0,0,376,80.42l5.52,3.23a8,8,0,0,1,3.92,6.86,3.27,3.27,0,0,1-4.91,2.83L329.34,63.75A9,9,0,0,1,324.86,56,2.9,2.9,0,0,1,329.2,53.48Z" style="fill: rgb(230, 230, 230); transform-origin: 355.15px 71.0679px;" id="elxl7pvvnqjnh" class="animable"></path><path d="M400.63,52.09,407.44,56V53.56c0-.17,0-.34,0-.51s0-.33,0-.49V52.5h0c.25-3.19,2.67-4.42,5.62-2.71A11,11,0,0,1,416.42,53c.67-4.34,4.21-5.91,8.49-3.44,4.76,2.75,8.61,9.43,8.61,14.92v5.17a2.34,2.34,0,0,0,1.16,2l4,2.35a5.78,5.78,0,0,1,2.85,5A2.38,2.38,0,0,1,438,81.08L400.73,59.56a6.51,6.51,0,0,1-3.25-5.63A2.11,2.11,0,0,1,400.63,52.09Z" style="fill: rgb(230, 230, 230); transform-origin: 419.505px 64.8823px;" id="elbt2fzvvu93d" class="animable"></path></g><defs>     <filter id="active" height="200%">         <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="2"></feMorphology>                <feFlood flood-color="#32DFEC" flood-opacity="1" result="PINK"></feFlood>        <feComposite in="PINK" in2="DILATED" operator="in" result="OUTLINE"></feComposite>        <feMerge>            <feMergeNode in="OUTLINE"></feMergeNode>            <feMergeNode in="SourceGraphic"></feMergeNode>        </feMerge>    </filter>    <filter id="hover" height="200%">        <feMorphology in="SourceAlpha" result="DILATED" operator="dilate" radius="2"></feMorphology>                <feFlood flood-color="#ff0000" flood-opacity="0.5" result="PINK"></feFlood>        <feComposite in="PINK" in2="DILATED" operator="in" result="OUTLINE"></feComposite>        <feMerge>            <feMergeNode in="OUTLINE"></feMergeNode>            <feMergeNode in="SourceGraphic"></feMergeNode>        </feMerge>            <feColorMatrix type="matrix" values="0   0   0   0   0                0   1   0   0   0                0   0   0   0   0                0   0   0   1   0 "></feColorMatrix>    </filter></defs></svg>
-                        
-                    </div>
-                </form>
-            </div>
-        </section>
-    </main>
-@endsection
+                  </section>
 
-@section('script')
-        <!-- スムーススクロール -->
-        <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15/dist/smooth-scroll.polyfills.min.js"></script>
-        <script>
-        var scroll = new SmoothScroll('a[href^="#"]', {
-            updateURL: false,
-            easing: 'easeOutQuad',
-            speed: 100,
-        });
-        </script>
-        
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/gsap@3.7.0/dist/ScrollTrigger.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-        <script>
-            AOS.init();
-        </script>
-        <script src="{{mix("js/main.js")}}"></script>
-        <script src="{{mix("js/common.js")}}"></script>
-        <script src="https://www.google.com/recaptcha/api.js?render=6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var submitForm = document.querySelector(".js_form")
-                if (submitForm) {
-                    submitForm.addEventListener('submit', function(e) {
+                  <!-- Footer -->
+                  <footer class="flex justify-center bg-[#1b0e0e] text-white">
+                        <div class="flex max-w-[960px] flex-1 flex-col">
+                              <div class="flex flex-col gap-6 px-5 py-10 text-center @container">
+                                    <div
+                                          class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
+                                          <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
+                                                href="#tours">Tours</a>
+                                          <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
+                                                href="#blog">Blog</a>
+                                          <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
+                                                href="#">Privacy Policy</a>
+                                          <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
+                                                href="#">Terms of Service</a>
+                                    </div>
+                                    <p class="text-white test-base font-normal leading-normal opacity-80">© 2024
+                                          Adventure
+                                          Tours. All rights reserved.</p>
+                              </div>
+                        </div>
+                  </footer>
+            </div>
+      </div>
+
+      <script src="https://www.google.com/recaptcha/api.js?render=6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle"></script>
+      <script src="{{mix("js/main.js")}}"></script>
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+            var submitForm = document.querySelector(".js_form")
+            if (submitForm) {
+                  submitForm.addEventListener('submit', function(e) {
                         e.preventDefault(); // フォームの自動送信を防止
 
 
                         grecaptcha.ready(function() {
-                            grecaptcha.execute('6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle', {action: 'submit'}).then(function(token) {
-                                document.getElementById('recaptchaResponse').value = token;
-                                document.querySelector('form').submit(); // フォームを送信
-                            });
+                              grecaptcha.execute(
+                                    '6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle', {
+                                          action: 'submit'
+                                    }).then(function(token) {
+                                    document.getElementById(
+                                                'recaptchaResponse')
+                                          .value = token;
+                                    document.querySelector('form')
+                                          .submit(); // フォームを送信
+                              });
                         });
-                    });
-                } else {
-                    console.error('Submit button not found');
-                }
+                  });
+            } else {
+                  console.error('Submit button not found');
+            }
+      });
+      </script>
+      <script>
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  const target = document.querySelector(this.getAttribute('href'));
+                  if (target) {
+                        target.scrollIntoView({
+                              behavior: 'smooth',
+                              block: 'start'
+                        });
+                  }
             });
-        </script>
-<script>
-        // Sample tour data for demo
-        const tourData = @json($tours);
+      });
 
-    
+      const tourData = @json($tours);
+
+      console.log(tourData);
+      
       // Show tours for selected destination
-    function showTours(destination) {
+      function showTours(destination) {
             // Hide destinations, show tours
             document.getElementById('destinations-section').style.display = 'none';
-            document.getElementById('tours-section').classList.add('active');
-            
+            document.getElementById('tours-list-section').classList.remove('hidden');
+
             // Update destination name
-            document.getElementById('destination-name').textContent = destination.charAt(0).toUpperCase() + destination.slice(1);
-            
+            document.getElementById('destination-name').textContent = destination;
+
             // Get tours for this destination
             const tours = tourData[destination] || [];
-            
+
             // Render tours
             const toursGrid = document.getElementById('tours-grid');
-            
-            if (tours.length === 0) {
-                toursGrid.innerHTML = `
-                    <div class="no-tours">
-                            <i class="fas fa-map-marked-alt"></i>
-                            <h3>No tours available yet</h3>
-                            <p>We're working on adding tours for this destination.</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            toursGrid.innerHTML = tours.map(tour => `
-                  <div class="tour-card">
-                        ${tour.bookings_count > 100 ? `
-                              <div class="popular-tag">
-                              <i class="fas fa-fire"></i> Popular
-                              </div>
-                        ` : ''}
-                        
-                        <div class="image-wrapper">
-                              <img src="/storage/${tour.hero_image}" alt="${tour.title}" class="tour-image">
-                              <div class="price-badge">
-                                    <span class="currency">¥</span>${tour.price.toLocaleString()}<span class="from">~</span>
-                              </div>
-                              ${tour.badge ? `
-                              <div class="special-badge" 
-                                    style="background: ${tour.badge_color || 'var(--accent-color)'};">
-                                    <i class="fas fa-${tour.badge_icon || 'star'}"></i> ${tour.badge}
-                              </div>
-                              ` : ''}
-                        </div>
-                        
-                        <div class="card-content">
-                              <div class="title-section">
-                                    <h3 class="tour-title">${tour.title}</h3>
-                                    <div class="tour-location">
-                                          <i class="fas fa-map-marker-alt"></i>
-                                          <span>${tour.destinations}</span>
-                                    </div>
-                              </div>
-                              
-                              <p class="tour-description">
-                                    ${tour.overview.length > 100 ? tour.overview.substring(0, 100) + '...' : tour.overview}
-                              </p>
-                              
-                              <div class="features-grid">
-                                    <div class="feature-item">
-                                          <i class="fas fa-clock"></i>
-                                          <span>${tour.hours} hours</span>
-                                    </div>
-                                    <div class="feature-item">
-                                          <i class="fas fa-users"></i>
-                                          <span>Max ${tour.max_participants || 15} people</span>
-                                    </div>
-                                    <div class="feature-item">
-                                          <i class="fas fa-language"></i>
-                                          <span>${tour.languages}</span>
-                                    </div>
-                                    <div class="feature-item">
-                                          <i class="fas fa-${tour.includes_meal ? 'utensils' : 'walking'}"></i>
-                                          <span>${tour.includes_meal ? 'Meal included' : 'Walking tour'}</span>
-                                    </div>
-                              </div>
-                              
-                              <div class="rating-section">
-                                    <div class="rating">
-                                          <div class="stars">
-                                                ${generateStars(tour.rating)}
-                                          </div>
-                                          <span class="rating-text">
-                                                <strong>${tour.rating.toFixed(1)}</strong> 
-                                                (${tour.reviewCount} reviews)
-                                          </span>
-                                    </div>
-                              </div>
-                        </div>
-                        
-                        <div class="quick-view" onclick="window.location.href='/tour/show/${tour.id}'">
-                              <i class="fas fa-eye"></i> See details
-                        </div>
-                  </div>
-                  `).join('');
 
-            // Helper function to generate star ratings
-            function generateStars(rating) {
-                  let stars = '';
-                  for (let i = 1; i <= 5; i++) {
-                        if (i <= Math.floor(rating)) {
-                              stars += '<i class="fas fa-star"></i>';
-                        } else if (i - 0.5 <= rating) {
-                              stars += '<i class="fas fa-star-half-alt"></i>';
-                        } else {
-                              stars += '<i class="far fa-star"></i>';
-                        }
-                  }
-                  return stars;
+            if (tours.length === 0) {
+                  toursGrid.innerHTML = `
+            <div class="col-span-full text-center py-8">
+              <p class="text-[#994d4d] text-lg">No tours available for this destination yet.</p>
+            </div>
+          `;
+                  return;
             }
-                  
+
+            toursGrid.innerHTML = tours.map(tour => `
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group">
+            <div class="relative h-48 overflow-hidden">
+              <img src="${tour.image}" alt="${tour.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+              <div class="absolute top-4 right-4 bg-[#e92929] text-white px-3 py-1 rounded-full test-base font-medium">
+                ¥${tour.price}~
+              </div>
+            </div>
+            <div class="p-4">
+              <h3 class="text-[#1b0e0e] text-lg font-bold mb-2">${tour.title}</h3>
+              <p class="text-[#994d4d] test-base mb-3 line-clamp-2">${tour.subtitle}</p>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-1">
+                  ${generateStars(tour.rating)}
+                  <span class="test-base text-[#994d4d] ml-1">${tour.rating} (${tour.reviews})</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="test-base text-[#994d4d]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" class="inline mr-1">
+                    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a8,8,0,0,1-8,8H136v24a8,8,0,0,1-16,0V156H96a8,8,0,0,1,0-16h24V116a8,8,0,0,1,16,0v24h24A8,8,0,0,1,168,148Z"></path>
+                  </svg>
+                  ${tour.duration}
+                </span>
+                <button onclick="window.location.href='/tour/show/${tour.id}'" class="bg-[#e92929] text-white px-4 py-2 rounded-lg test-base font-medium hover:bg-[#d61f1f] transition-colors">
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
       }
 
-        // Show destinations (back button)
+      // Show destinations (back button)
       function showDestinations() {
-            document.getElementById('tours-section').classList.remove('active');
+            document.getElementById('tours-list-section').classList.add('hidden');
             document.getElementById('destinations-section').style.display = 'block';
       }
 
-        // Filter destinations by region
+      // Filter destinations by region
       function filterDestinations(region) {
             const cards = document.querySelectorAll('.destination-card');
             const tabs = document.querySelectorAll('.filter-tab');
-            
-            // Update active tab
-            tabs.forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter cards
+
+            // Update active tab styling
+            tabs.forEach(tab => {
+                  tab.classList.remove('active', 'bg-[#e92929]', 'text-white');
+                  tab.classList.add('bg-[#f3e7e7]', 'text-[#1b0e0e]');
+            });
+            event.target.classList.add('active', 'bg-[#e92929]', 'text-white');
+            event.target.classList.remove('bg-[#f3e7e7]', 'text-[#1b0e0e]');
+
+            // Filter cards with animation
             cards.forEach(card => {
                   if (region === 'all' || card.dataset.region === region) {
                         card.style.display = 'block';
+                        card.style.animation = 'fadeIn 0.3s ease-in';
                   } else {
                         card.style.display = 'none';
                   }
             });
       }
-</script>
-@endsection
 
+      // Helper function to generate star ratings
+      function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                  if (i <= Math.floor(rating)) {
+                        stars +=
+                              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>';
+                  } else if (i - 0.5 <= rating) {
+                        stars +=
+                              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>';
+                  } else {
+                        stars +=
+                              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e7d0d0" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>';
+                  }
+            }
+            return stars;
+      }
+
+      setTimeout(() => {
+            console.log(document.querySelectorAll(".es-media-card-container"));
+      }, 3000);
+
+
+
+      Array.from(document.querySelectorAll(".es-media-card-container")).forEach((index, card) => {
+            console.log(index);
+            console.log(card);
+
+
+      })
+      </script>
+
+      <style>
+      @keyframes fadeIn {
+            from {
+                  opacity: 0;
+                  transform: translateY(10px);
+            }
+
+            to {
+                  opacity: 1;
+                  transform: translateY(0);
+            }
+      }
+
+      .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+      }
+
+      .feed-powered-by-es {
+            display: none !important;
+      }
+      </style>
+
+      <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                  const images = [
+                        "/img/main1.jpg",
+                        "/img/main2.jpg",
+                        "/img/main3.jpg",
+                        "/img/main4.jpg"
+                  ];
+
+                  const bgA = document.getElementById("bgA");
+                  const bgB = document.getElementById("bgB");
+
+                  let index = 0;
+                  let showA = true;
+
+                  // 初期画像設定
+                  bgA.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('${images[0]}')`;
+
+                  setInterval(() => {
+                  index = (index + 1) % images.length;
+                  const nextImage = `linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.4)), url('${images[index]}')`;
+
+                  if (showA) {
+                        bgB.style.backgroundImage = nextImage;
+                        bgB.style.opacity = "1";
+                        bgA.style.opacity = "0";
+                  } else {
+                        bgA.style.backgroundImage = nextImage;
+                        bgA.style.opacity = "1";
+                        bgB.style.opacity = "0";
+                  }
+
+                  showA = !showA;
+                  }, 4000);
+            });
+      </script>
+
+</body>
+
+</html>

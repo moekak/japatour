@@ -42,8 +42,13 @@ class ToursNew extends Model
         return $query->where("id", $id);
     }
 
-    public static function getAllTours(){
+    public static function getAllToursByCategory(){
         $tours = static::withRelations()->get()->groupBy('category.category');
+        return $tours;
+    }
+
+     public static function getAllTours(){
+        $tours = static::withRelations()->get();
         return $tours;
     }
 

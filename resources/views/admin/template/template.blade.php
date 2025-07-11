@@ -119,7 +119,7 @@
                                     <label class="flex items-center gap-2 cursor-pointer">
                                     <input type="checkbox" 
                                           value="{{ $language->id }}"
-                                          name="itinerary[{$itineraryIndex}][languages][]"
+                                          name="itinerary[{itinerary_index}][languages][]"
                                           class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
                                     <span class="text-sm text-gray-700">{{$language->language}}</span>
                                     </label>

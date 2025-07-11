@@ -30,6 +30,8 @@ class TourController extends Controller
     public function index()
     {
         $tours = ToursNew::getAllTours();
+        // print_r($tours->toArray());
+        // exit;
         return view("admin.tour_list", compact("tours"));
     }
     /**
@@ -40,7 +42,7 @@ class TourController extends Controller
         $languages = Language::getAllLanguages();
         $regions = Region::getAllRigions();
         $categories = Category::getAllCategories();
-        return view("admin.tour_create2", compact("languages", "regions", "categories"));
+        return view("admin.tour_create", compact("languages", "regions", "categories"));
     }
 
 
@@ -48,10 +50,13 @@ class TourController extends Controller
 
     public function store(CreateRequest $request){
         try {
-
+            $tours =ToursNew::getAllToursByCategory();
+            $categories = Category::getCateforiesDataWithRegion();
+            $regions = Region::getAllRigions();
+            
 
             $this->tourService->createTour($request);
-            return redirect()->route("tour_list")->with("success", "success to create Tours!");
+            return view("admin.tour_list", compact("tours", "categories", "regions"))->with("success", "success to create Tours!");
         
         } catch (\Exception $e) {
             // バリデーション失敗時に画像を一時保存
