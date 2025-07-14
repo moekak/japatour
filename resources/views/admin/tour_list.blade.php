@@ -175,10 +175,10 @@
                                         </td>
                                         <td class="px-6 py-4 text-sm font-medium">
                                             <div class="flex items-center gap-2">
-                                                <a class="text-blue-600 hover:text-blue-900 transition-colors" title="View" href="{{ route('tour.edit', ['id' => $tour->id]) }}">
+                                                <a class="text-blue-600 hover:text-blue-900 transition-colors" title="View" href="{{ route('tour.show', ['id' => $tour->id]) }}">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a class="text-yellow-600 hover:text-yellow-900 transition-colors" title="Edit">
+                                                <a class="text-yellow-600 hover:text-yellow-900 transition-colors" title="Edit" href="{{ route('tour.edit', ['id' => $tour->id]) }}">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a onclick="confirmDelete(1)" class="text-red-600 hover:text-red-900 transition-colors" title="Delete">

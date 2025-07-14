@@ -745,6 +745,7 @@
                                                                               Select Itinerary Image
                                                                         </label>
                                                                         <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
+                                                                        <input type="hidden" name="itinerary[{{$itineraryIndex}}][image_prev]" id="itinerary_{{$itineraryIndex}}" class="hidden" value="{{$itinerary['image']}}">
                                                                   </div>
                                                             @endif
                                                       </div>
@@ -812,7 +813,7 @@
             </form>
       </main>
     @include('admin.template.template')
-    <script src="{{mix("js/tour_create2.js")}}"></script>
+    <script src="{{mix("js/tour_edit.js")}}"></script>
 
     <script>
         // Basic functionality for the form

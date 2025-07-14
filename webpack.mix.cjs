@@ -9,6 +9,7 @@ mix.js('resources/js/app.js', 'public/js')
     // .js("resources/js/pages/tour_create.js", 'public/js')
     .js("resources/js/pages/tour_create2.js", 'public/js')
     .js("resources/js/pages/tour_book.js", 'public/js')
+    .js("resources/js/pages/tour_edit.js", 'public/js')
     // .sass('resources/sass/app.scss', 'public/css')
     .setPublicPath('public')
     .webpackConfig({

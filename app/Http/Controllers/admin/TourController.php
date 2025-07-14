@@ -30,8 +30,6 @@ class TourController extends Controller
     public function index()
     {
         $tours = ToursNew::getAllTours();
-        // print_r($tours->toArray());
-        // exit;
         return view("admin.tour_list", compact("tours"));
     }
     /**
@@ -84,9 +82,6 @@ class TourController extends Controller
     {
         try {
             $tour = ToursNew::getSpecificTour($id);
-            // print_r($tour->toArray());
-            // exit;
-
             return view("show2", compact("tour"));
         } catch (\Exception $e) {
             Log::debug($e);
@@ -105,9 +100,6 @@ class TourController extends Controller
             $languages = Language::getAllLanguages();
             $categories = Category::getAllCategories();
 
-     
-            // print_r($tour["tour_gallery_images"]);
-            // exit;
             return view("admin.tour_edit", compact("tour",  "regions", "categories", "languages"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
@@ -117,9 +109,12 @@ class TourController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EditTourRequest $request, string $id)
+    public function update(Request $request, string $id)
     {
         try {
+
+            print_r($request->all());
+            exit;
             $this->tourService->updateTour($request, $id);
             return redirect()->route("tour_list")->with("success", "success to update Tour");
         } catch (\Exception $e) {

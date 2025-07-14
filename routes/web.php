@@ -44,7 +44,7 @@ Route::get("/tour/show/{id}", [TourController::class, "show"])->name("tour.show"
     Route::get("/tour/list", [TourController::class, "index"])->name("tour_list");
     Route::post("/tour/update/{id}", [TourController::class, "update"])->name("tour.update");
     Route::get("/tour/edit/{id}", [TourController::class, "edit"])->name("tour.edit");
-    Route::post("/tour/show", [SendContactMail::class, "SendContactMail"])->name("tours.show");
+    // Route::post("/tour/show", [SendContactMail::class, "SendContactMail"])->name("tour.show");
     Route::delete("/tour/destroy/{id}", [TourController::class, "destroy"])->name("tours.destroy");
 
 
