@@ -56,6 +56,7 @@
       <main class="pt-20 pb-10">
             <form class="container mx-auto px-6 max-w-[1100px]" action="{{ route('tour.update', $tour["id"]) }}" method="POST" enctype="multipart/form-data">
                   @csrf
+                  <input type="hidden" name="tour_id" value="{{$tour["id"]}}">
                   <!-- Page Header -->
                   <div class="mb-8">
                         <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
@@ -223,58 +224,52 @@
                         </h2>
 
                         <p class="text-sm text-gray-600 mb-4">Add key features and highlights that make this tour special</p>
+                        @php
+                              // データソースを統一
+                              $highlightsData = old('highlights', $tour['tour_highlights'] ?? []);
+                        @endphp
+
                         <div id="tour_highlight-wrapper">
-                              @if (old("highlights"))
-                                    @foreach (old("highlights") as $highlightIndex => $highlight)
-                                          <div class="highlight-item">
-                                                <div class="bg-gray-50 rounded-lg p-4">
-                                                      <div class="flex items-start gap-4">
-                                                            <div
-                                                                  class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                                  <i class="fas fa-torii-gate text-[#e92929]"></i>
-                                                            </div>
-                                                            <div class="flex-1">
-                                                                  <input type="text" name="highlights[{{$highlightIndex}}][title]" value="{{$highlight["title"]}}"
-                                                                  placeholder="Highlight title (e.g., Ancient Temples & Shrines)"
-                                                                  class="w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm font-medium">
-                                                                  <textarea rows="2" name="highlights[{{$highlightIndex}}][description]"
-                                                                  placeholder="Brief description of this highlight..."
-                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{$highlight["description"]}}</textarea>
-                                                            </div>
-                                                            <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-highlight_button">
-                                                                  <i class="fas fa-trash"></i>
-                                                            </button>
-                                                      </div>
+                        @foreach ($highlightsData as $highlightIndex => $highlight)
+                              @php
+                                    // 各フィールドのデータを統一的に取得
+                                    $title = old("highlights.{$highlightIndex}.title", $highlight['title'] ?? '');
+                                    $description = old("highlights.{$highlightIndex}.description", $highlight['description'] ?? '');
+                              @endphp
+                              
+                              <div class="highlight-item">
+                                    <div class="bg-gray-50 rounded-lg p-4">
+                                          <div class="flex items-start gap-4">
+                                                <div class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                                                      <i class="fas fa-torii-gate text-[#e92929]"></i>
                                                 </div>
-                                          </div>
-                                    @endforeach
-                              @else 
-                                    @foreach ($tour["tour_highlights"] as $highlightIndex => $highlight)
-                                          <div class="highlight-item">
-                                                <div class="bg-gray-50 rounded-lg p-4">
-                                                      <div class="flex items-start gap-4">
-                                                            <div
-                                                                  class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                                  <i class="fas fa-torii-gate text-[#e92929]"></i>
-                                                            </div>
-                                                            <div class="flex-1">
-                                                                  <input type="text" name="highlights[{{$highlightIndex}}][title]" value="{{$highlight["title"]}}"
-                                                                        placeholder="Highlight title (e.g., Ancient Temples & Shrines)"
-                                                                        class="w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm font-medium">
-                                                                  <textarea rows="2" name="highlights[{{$highlightIndex}}][description]"
-                                                                        placeholder="Brief description of this highlight..."
-                                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{$highlight["description"]}}</textarea>
-                                                            </div>
-                                                            <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-highlight_button">
-                                                                  <i class="fas fa-trash"></i>
-                                                            </button>
-                                                      </div>
+                                                <div class="flex-1">
+                                                      <input type="text" 
+                                                            name="highlights[{{$highlightIndex}}][title]" 
+                                                            value="{{ $title }}"
+                                                            placeholder="Highlight title (e.g., Ancient Temples & Shrines)"
+                                                            class="w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm font-medium">
+                                                      
+                                                      <textarea rows="2" 
+                                                            name="highlights[{{$highlightIndex}}][description]"
+                                                            placeholder="Brief description of this highlight..."
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{ $description }}</textarea>
                                                 </div>
+                                                <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-highlight_button">
+                                                      <i class="fas fa-trash"></i>
+                                                </button>
                                           </div>
-                                    @endforeach
-                              @endif
+                                    </div>
+                              </div>
+                        @endforeach
 
                         </div>
+
+                        {{-- ハイライト追加ボタン（必要に応じて） --}}
+                        <button type="button" class="mt-4 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-highlight_button">
+                        <i class="fas fa-plus-circle"></i>
+                        Add highlight
+                        </button>
 
                         <button type="button"
                               class="add-highlight_button mt-4 w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-[#e92929] hover:text-[#e92929] transition-colors flex items-center justify-center gap-2">
@@ -286,508 +281,311 @@
                   <!-- Multiple Tour Itineraries Section -->
                   <div class="space-y-6" id="itinerary-section">
                         <h2 class="text-2xl font-bold text-gray-800">Tour Itineraries</h2>
-                        <div id="itinerary-wrapper">
-                              @if (old("itinerary"))
-                                    @foreach(old('itinerary') as $itineraryIndex => $itinerary)
-                                          <div class="itinerary-item mt-8" data-id="0">
-                                                <div class="bg-white rounded-xl shadow-sm p-6 relative">
-                                                <div class="absolute top-6 right-6">
-                                                      <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary_button" title="Delete this itinerary">
-                                                            <i class="fas fa-trash"></i>
-                                                      </button>
-                                                </div>
-                                                <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                                                      <div
-                                                            class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                                                            <i class="fas fa-route text-[#e92929]"></i>
-                                                      </div>
-                                                      Tour Itinerary & Details #1
-                                                </h3>
+                        @php
+                        // データソースを統一
+                        $itinerariesData = old('itinerary', $tour['itineraries'] ?? []);
+                        @endphp
 
-                                                <!-- Tour Basic Details -->
+                        <div id="itinerary-wrapper">
+                              @foreach($itinerariesData as $itineraryIndex => $itinerary)
+                                    @php
+                                          // 各フィールドのデータを統一的に取得
+                                          $duration = old("itinerary.{$itineraryIndex}.duration", $itinerary['duration'] ?? '');
+                                          $maxParticipants = old("itinerary.{$itineraryIndex}.max_participants", $itinerary['max_participants'] ?? '');
+                                          $tourType = old("itinerary.{$itineraryIndex}.tour_type", $itinerary['tour_type'] ?? 'public');
+                                          $meetingPoint = old("itinerary.{$itineraryIndex}.meeting_point", $itinerary['meeting_point'] ?? '');
+                                          $adultPrice = old("itinerary.{$itineraryIndex}.adult_price", $itinerary['adult_price'] ?? '');
+                                          $childPrice = old("itinerary.{$itineraryIndex}.child_price", $itinerary['child_price'] ?? '');
+                                          
+                                          // 言語データの処理
+                                          $selectedLanguages = old("itinerary.{$itineraryIndex}.languages", []);
+                                          if (!old('itinerary')) {
+                                                // 初期表示時（編集時）
+                                                $languageIds = array_column($itinerary['itinerary_languages'] ?? [], 'language_id');
+                                          } else {
+                                          // バリデーションエラー時
+                                          $languageIds = $itinerary['languages'] ?? [];
+                                          }
+                                          $checkedLanguages = array_unique(array_merge($selectedLanguages, $languageIds));
+                                          
+                                          // アクティビティデータの統一
+                                          if (!old('itinerary')) {
+                                          // 初期表示時
+                                          $activities = $itinerary['itinerary_activities'] ?? [];
+                                          } else {
+                                          // バリデーションエラー時
+                                          $activities = $itinerary['activity'] ?? [];
+                                          }
+                                          
+                                          // ハイライトデータの統一
+                                          if (!old('itinerary')) {
+                                          // 初期表示時
+                                          $highlights = array_column($itinerary['itinerary_highlights'] ?? [], 'itinerary_highlight');
+                                          } else {
+                                          // バリデーションエラー時
+                                          $highlights = $itinerary['itinerary_highlight'] ?? [];
+                                          }
+                                          
+                                          // 画像データの処理
+                                          $hasSessionImage = session("temp_itinerary_image.{$itineraryIndex}");
+                                          $existingImage = $itinerary['image'] ?? '';
+                                    @endphp
+
+                                    <div class="itinerary-item mt-8" data-id={{$itineraryIndex}}>
+                                          <div class="bg-white rounded-xl shadow-sm p-6 relative">
+                                          <div class="absolute top-6 right-6">
+                                                <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary_button" title="Delete this itinerary">
+                                                      <i class="fas fa-trash"></i>
+                                                </button>
+                                          </div>
+                                          <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                                                <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                                      <i class="fas fa-route text-[#e92929]"></i>
+                                                </div>
+                                                Tour Itinerary & Details #{{$itineraryIndex + 1}}
+                                          </h3>
+
+                                          <!-- Tour Basic Details -->
+                                          <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                                <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                      <div class="flex items-center justify-between">
+                                                      <h5 class="font-semibold text-gray-800">
+                                                            <i class="fas fa-info-circle text-gray-400 mr-2"></i>
+                                                            Tour Information
+                                                      </h5>
+                                                      </div>
+                                                </div>
+
+                                                <div class="m-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                                      <div>
+                                                      <label class="block text-sm font-medium text-gray-700 mb-1">Duration (hours) *</label>
+                                                      <input name="itinerary[{{$itineraryIndex}}][duration]" 
+                                                            type="number" 
+                                                            value="{{ $duration }}"
+                                                            placeholder="e.g., 8" 
+                                                            min="1" 
+                                                            max="24"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                      </div>
+
+                                                      <div>
+                                                      <label class="block text-sm font-medium text-gray-700 mb-1">Max Participants *</label>
+                                                      <input name="itinerary[{{$itineraryIndex}}][max_participants]" 
+                                                            value="{{ $maxParticipants }}"
+                                                            type="number" 
+                                                            placeholder="e.g., 15" 
+                                                            min="1"
+                                                            max="50"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                      </div>
+
+                                                      <div>
+                                                      <label class="block text-sm font-medium text-gray-700 mb-1">Tour Type *</label>
+                                                      <select name="itinerary[{{$itineraryIndex}}][tour_type]"
+                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                            <option value="public" {{ $tourType === "public" ? "selected" : "" }}>public</option>
+                                                            <option value="private" {{ $tourType === "private" ? "selected" : "" }}>private</option>
+                                                      </select>
+                                                      </div>
+
+                                                      <div>
+                                                      <label class="block text-sm font-medium text-gray-700 mb-1">Meeting Point *</label>
+                                                      <input type="text" 
+                                                            name="itinerary[{{$itineraryIndex}}][meeting_point]" 
+                                                            value="{{ $meetingPoint }}"
+                                                            placeholder="e.g., Hotel lobby or JR Shibuya Station"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                      </div>
+
+                                                      <div>
+                                                      <label class="block text-sm font-medium text-gray-700 mb-1">Adult Price (¥) *</label>
+                                                      <input name="itinerary[{{$itineraryIndex}}][adult_price]" 
+                                                            type="number" 
+                                                            value="{{ $adultPrice }}"
+                                                            placeholder="e.g., 12000" 
+                                                            min="0"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                      </div>
+
+                                                      <div>
+                                                      <label class="block text-sm font-medium text-gray-700 mb-1">Child Price (¥)</label>
+                                                      <input name="itinerary[{{$itineraryIndex}}][child_price]" 
+                                                            type="number" 
+                                                            value="{{ $childPrice }}"
+                                                            placeholder="e.g., 6000" 
+                                                            min="0"
+                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                      </div>
+                                                </div>
+
+                                                <div class="m-8">
+                                                      <label class="block text-sm font-medium text-gray-700 mb-2">Languages Available</label>
+                                                      <div class="flex flex-wrap gap-3">
+                                                      @foreach ($languages as $language)
+                                                            <label class="flex items-center gap-2 cursor-pointer">
+                                                                  <input type="checkbox" 
+                                                                        value="{{ $language->id }}"
+                                                                        name="itinerary[{{$itineraryIndex}}][languages][]"
+                                                                        {{ in_array($language->id, $checkedLanguages) ? 'checked' : '' }}
+                                                                        class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
+                                                                  <span class="text-sm text-gray-700">{{ $language->language }}</span>
+                                                            </label>
+                                                      @endforeach
+                                                      </div>
+                                                </div>
+                                          </div>
+
+                                          <div class="mt-8">
+                                                <!-- Itinerary Activities -->
                                                 <div class="border border-gray-200 rounded-lg overflow-hidden">
                                                       <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                            <div class="flex items-center justify-between">
-                                                            <h5 class="font-semibold text-gray-800">
-                                                                  <i class="fas fa-info-circle text-gray-400 mr-2"></i>
-                                                                  Tour Information
-                                                            </h5>
-                                                            
-                                                            </div>
+                                                      <div class="flex items-center justify-between">
+                                                            <h5 class="font-semibold text-gray-800">Itinerary Item</h5>
+                                                      </div>
                                                       </div>
 
-                                                      <div class="m-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                                            <div>
-                                                            <label
-                                                                  class="block text-sm font-medium text-gray-700 mb-1">Duration
-                                                                  (hours) *</label>
-                                                            <input name="itinerary[{{$itineraryIndex}}][duration]" type="number" value="{{$itinerary["duration"]}}"
-                                                                  placeholder="e.g., 8" min="1" max="24"
-                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                            </div>
-
-                                                            <div>
-                                                            <label
-                                                                  class="block text-sm font-medium text-gray-700 mb-1">MaxParticipants
-                                                                  *</label>
-                                                            <input name="itinerary[{{$itineraryIndex}}][max_participants]" value="{{$itinerary["max_participants"]}}"
-                                                                  type="number" placeholder="e.g., 15" min="1"
-                                                                  max="50"
-                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                            </div>
-
-                                                            <div>
-                                                            <label
-                                                                  class="block text-sm font-medium text-gray-700 mb-1">Tour Type *</label>
-                                                            <select name="itinerary[{{$itineraryIndex}}][tour_type]"
-                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                  <option {{old("itinerary.{$itineraryIndex}.tour_type") === "public" ? "selected" : ""}}>public</option>
-                                                                  <option {{old("itinerary.{$itineraryIndex}.tour_type") === "private" ? "selected" : ""}}>private</option>
-                                                            </select>
-                                                            </div>
-
-                                                            <div>
-                                                            <label
-                                                                  class="block text-sm font-medium text-gray-700 mb-1">Meeting
-                                                                  Point *</label>
-                                                            <input type="text" name="itinerary[{{$itineraryIndex}}][meeting_point]" value="{{old("itinerary.{$itineraryIndex}.meeting_point")}}"
-                                                                  placeholder="e.g., Hotel lobby or JR Shibuya Station"
-                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                            </div>
-
-                                                            <div>
-                                                            <label
-                                                                  class="block text-sm font-medium text-gray-700 mb-1">Adult
-                                                                  Price (¥) *</label>
-                                                            <input name="itinerary[{{$itineraryIndex}}][adult_price]" type="number" value="{{old("itinerary.{$itineraryIndex}.adult_price")}}"
-                                                                  placeholder="e.g., 12000" min="0"
-                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                            </div>
-
-                                                            <div>
-                                                            <label
-                                                                  class="block text-sm font-medium text-gray-700 mb-1">Child
-                                                                  Price (¥)</label>
-                                                            <input name="itinerary[{{$itineraryIndex}}][child_price]" type="number" value="{{old("itinerary.{$itineraryIndex}.child_price")}}"
-                                                                  placeholder="e.g., 6000" min="0"
-                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                            </div>
-                                                      </div>
-
-                                                      <div class="m-8">
-                                                            <label class="block text-sm font-medium text-gray-700 mb-2">Languages
-                                                            Available</label>
-                                                            {{-- <p>{{{$itinerary["languages"]}}}</p> --}}
-                                                            <div class="flex flex-wrap gap-3">
-                                                                  @php
-                                                                        $selectedLanguages = old("itinerary.{$itineraryIndex}.languages", []);
-                                                                        $languages = $itinerary["itinerary_languages"];
-                                                                        $languageIds = array_map(function($language){
-                                                                              return $language; 
-                                                                        }, $languages);
-                                                                        
-
-                                                                        print_r($languages);
-                                                                        exit;
-                                                                        // selectedLanguagesとlanguageIdsをマージして重複を除去
-                                                                        $checkedLanguages = array_unique(array_merge($selectedLanguages, $languageIds));
-                                                                        $selectedLanguages = is_array($selectedLanguages) ? $selectedLanguages : [];
-                                                                  @endphp
-
-                                                                  @foreach ($languages as $language)
-                                                                        <label class="flex items-center gap-2 cursor-pointer">
-                                                                              <input type="checkbox" 
-                                                                                    value="{{ $language->id }}"
-                                                                                    name="itinerary[{{$itineraryIndex}}][languages][]"
-                                                                                    {{ in_array($language->id, $checkedLanguages) ? 'checked' : '' }}
-                                                                                    class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
-                                                                              <span class="text-sm text-gray-700">{{$language->language}}</span>
-                                                                        </label>
-                                                                  @endforeach
-                                                            </div>
-                                                      </div>
-                                                </div>
-
-                                                <div class="mt-8">
-                                                      <!-- Itinerary Item 1 -->
-                                                      <div class="border border-gray-200 rounded-lg overflow-hidden">
-                                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                            <div class="flex items-center justify-between">
-                                                                  <h5 class="font-semibold text-gray-800">
-                                                                        Itinerary Item</h5>
-                                                                  
-                                                            </div>
-                                                            </div>
-
-                                                            <div class="p-8">
-                                                            <!-- Activities Section -->
-                                                            <div>
-                                                                  <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
-                                                                  <div class="space-y-3 activity-wrapper">
-                                                                        <!-- Activity Entry 1 -->
-                                                                        @foreach ($itinerary["activity"] as $activityIndex => $activity)
-                                                                              <div class="activity-item">
-                                                                                    <div class="bg-gray-50 rounded-lg p-3">
-                                                                                    <div class="flex items-start gap-3">
-                                                                                          <div class="flex-1 space-y-3">
-                                                                                                <div class="grid md:grid-cols-3 gap-3">
-                                                                                                <div class="md:col-span-2">
-                                                                                                      <input type="text" value="{{$activity["activity_title"]}}"
-                                                                                                            name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_title]"
-                                                                                                            placeholder="e.g., Senso-ji Temple Visit"
-                                                                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                                                </div>
-                                                                                                </div>
-                                                                                                <div>
-                                                                                                <textarea
-                                                                                                      rows="2"
-                                                                                                      name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_description]"
-                                                                                                      placeholder="Brief description of the activity..."
-                                                                                                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{$activity["activity_description"]}}</textarea>
-                                                                                                </div>
+                                                      <div class="p-8">
+                                                      <div>
+                                                            <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
+                                                            <div class="space-y-3 activity-wrapper">
+                                                                  @foreach ($activities as $activityIndex => $activity)
+                                                                  <div class="activity-item">
+                                                                        <div class="bg-gray-50 rounded-lg p-3">
+                                                                              <div class="flex items-start gap-3">
+                                                                              <div class="flex-1 space-y-3">
+                                                                                    <div class="grid md:grid-cols-3 gap-3">
+                                                                                          <div class="md:col-span-2">
+                                                                                          <input type="text" 
+                                                                                                value="{{ $activity['activity_title'] ?? '' }}"
+                                                                                                name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_title]"
+                                                                                                placeholder="e.g., Senso-ji Temple Visit"
+                                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
                                                                                           </div>
-                                                                                          <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
-                                                                                                <i class="fas fa-times"></i>
-                                                                                          </button>
                                                                                     </div>
+                                                                                    <div>
+                                                                                          <textarea rows="2"
+                                                                                                name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_description]"
+                                                                                                placeholder="Brief description of the activity..."
+                                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{ $activity['activity_description'] ?? '' }}</textarea>
                                                                                     </div>
-                                                                              </div> 
-                                                                        @endforeach
-                                                                  </div>
-
-                                                                  <!-- Add Activity Button -->
-                                                                  <button type="button"
-                                                                        class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
-                                                                        <i class="fas fa-plus-circle"></i>
-                                                                        Add activity
-                                                                  </button>
-                                                            </div>
-                                                            </div>
-                                                      </div>
-                                                      <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
-                                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                                  <div class="flex items-center justify-between">
-                                                                        <h5 class="font-semibold text-gray-800"> Main Image for this Itinerary</h5>
-                                                                  </div>
-                                                            </div>
-                                                            @if (session("temp_itinerary_image.{$itineraryIndex}"))
-                                                                  <div class="preview_container temp_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
-                                                                        <label for="itinerary_{{$itineraryIndex}}" class="h-full block">
-                                                                              <img src="{{asset("storage/" . session("temp_itinerary_image.{$itineraryIndex}"))}}" alt="itineray main image" class="itinerary_preview_src{{$itineraryIndex}} h-full w-full object-cover">
-                                                                        </label>
-                                                                        <input type="hidden" name="itinerary[{{$itineraryIndex}}][temp_itinerary_image]" value="{{session("temp_itinerary_image.{$itineraryIndex}")}}">
-                                                                  </div>
-                                                                  <div class="itinerary_image_element{{$itineraryIndex}}">
-                                                                        <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
-                                                                  </div>
-                                                            @else
-                                                                  <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer hidden h-[350px]">
-                                                                        <label for="itinerary_{{$itineraryIndex}}" class="h-full block">
-                                                                              <img src="{{asset("storage/" . $itinerary['image'])}}" alt="" class="itinerary_preview_src{{$itineraryIndex}} h-full w-full object-cover">
-                                                                        </label>
-                                                                  </div>
-                                                                  <div
-                                                                        class="m-8 itinerary_image_element{{$itineraryIndex}} border-2 border-dashed border-gray-300 rounded-lg p-8 text-center flex items-center flex-col justify-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
-                                                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
-                                                                        <p class="text-gray-600 font-medium mb-2">Upload itinerary image</p>
-                                                                        <p class="text-sm text-gray-500">This will be displayed as the itinerary banner image</p>
-                                                                        <p class="text-sm text-gray-500 mb-4">Recommended size: 1920x1080px</p>
-                                                                        <label for="itinerary_{{$itineraryIndex}}"
-                                                                              class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm w-fit">
-                                                                              Select Itinerary Image
-                                                                        </label>
-                                                                        <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
-                                                                  </div>
-                                                            @endif
-                                                            
-                                                      </div>
-
-                                                      <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
-                                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                            <div class="flex items-center justify-between">
-                                                                  <h5 class="font-semibold text-gray-800">Activity Highlights</h5>
-                                                            </div>
-                                                            </div>
-                                                            <div class="m-8 space-y-2 itinerary_highlight-wrapper">
-                                                            @if (isset($itinerary["itinerary_highlight"]) && is_array($itinerary["itinerary_highlight"]))
-                                                                  @foreach ($itinerary["itinerary_highlight"] as $highlightIndex => $highlight)
-                                                                        <div class="itinerary_highlight-item">
-                                                                        <div
-                                                                              class="flex items-center gap-2">
-                                                                              <input type="text" value="{{$highlight}}"
-                                                                                    name="itinerary[{{$itineraryIndex}}][itinerary_highlight][]"
-                                                                                    placeholder="e.g., Tokyo's oldest Buddhist temple"
-                                                                                    class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                              <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
+                                                                              </div>
+                                                                              <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
                                                                                     <i class="fas fa-times"></i>
                                                                               </button>
+                                                                              </div>
                                                                         </div>
-                                                                        </div>
+                                                                  </div>
                                                                   @endforeach
-                                                            @else
+                                                            </div>
+
+                                                            <button type="button"
+                                                                  class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
+                                                                  <i class="fas fa-plus-circle"></i>
+                                                                  Add activity
+                                                            </button>
+                                                      </div>
+                                                      </div>
+                                                </div>
+
+                                                <!-- Itinerary Image -->
+                                                <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
+                                                      <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                      <div class="flex items-center justify-between">
+                                                            <h5 class="font-semibold text-gray-800">Main Image for this Itinerary</h5>
+                                                      </div>
+                                                      </div>
+                                                      
+                                                      @if ($hasSessionImage)
+                                                      <div class="preview_container temp_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
+                                                            <label for="itinerary_{{$itineraryIndex}}" class="h-full block">
+                                                                  <img src="{{ asset('storage/' . session("temp_itinerary_image.{$itineraryIndex}")) }}" 
+                                                                  alt="itinerary main image" 
+                                                                  class="itinerary_preview_src{{$itineraryIndex}} h-full w-full object-cover">
+                                                            </label>
+                                                            <input type="hidden" name="itinerary[{{$itineraryIndex}}][temp_itinerary_image]" value="{{ session("temp_itinerary_image.{$itineraryIndex}") }}">
+                                                      </div>
+                                                      <div class="itinerary_image_element{{$itineraryIndex}}">
+                                                            <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
+                                                      </div>
+                                                      @elseif ($existingImage)
+                                                      <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
+                                                            <label for="itinerary_{{$itineraryIndex}}" class="h-full block">
+                                                                  <img src="{{ asset('storage/' . $existingImage) }}" 
+                                                                  alt="" 
+                                                                  class="itinerary_preview_src{{$itineraryIndex}} h-full w-full object-cover">
+                                                            </label>
+                                                      </div>
+                                                      <div class="itinerary_image_element{{$itineraryIndex}} hidden">
+                                                            <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
+                                                            <input type="hidden" name="itinerary[{{$itineraryIndex}}][existing_image]" value="{{ $existingImage }}">
+                                                      </div>
+                                                      @else
+                                                      <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer hidden h-[350px]">
+                                                            <label for="itinerary_{{$itineraryIndex}}" class="h-full block">
+                                                                  <img src="" alt="" class="itinerary_preview_src{{$itineraryIndex}} h-full w-full object-cover">
+                                                            </label>
+                                                      </div>
+                                                      <div class="m-8 itinerary_image_element{{$itineraryIndex}} border-2 border-dashed border-gray-300 rounded-lg p-8 text-center flex items-center flex-col justify-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
+                                                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                                            <p class="text-gray-600 font-medium mb-2">Upload itinerary image</p>
+                                                            <p class="text-sm text-gray-500">This will be displayed as the itinerary banner image</p>
+                                                            <p class="text-sm text-gray-500 mb-4">Recommended size: 1920x1080px</p>
+                                                            <label for="itinerary_{{$itineraryIndex}}"
+                                                                  class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm w-fit">
+                                                                  Select Itinerary Image
+                                                            </label>
+                                                            <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
+                                                      </div>
+                                                      @endif
+                                                </div>
+
+                                                <!-- Activity Highlights -->
+                                                <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
+                                                      <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                      <div class="flex items-center justify-between">
+                                                            <h5 class="font-semibold text-gray-800">Activity Highlights</h5>
+                                                      </div>
+                                                      </div>
+                                                      <div class="m-8 space-y-2 itinerary_highlight-wrapper">
+                                                      @if (count($highlights) > 0)
+                                                            @foreach ($highlights as $highlightIndex => $highlight)
                                                                   <div class="itinerary_highlight-item">
-                                                                        <div
-                                                                        class="flex items-center gap-2">
-                                                                        <input type="text"
-                                                                              name="itinerary[0][itinerary_highlight][]"
+                                                                  <div class="flex items-center gap-2">
+                                                                        <input type="text" 
+                                                                              value="{{ $highlight }}"
+                                                                              name="itinerary[{{$itineraryIndex}}][itinerary_highlight][]"
                                                                               placeholder="e.g., Tokyo's oldest Buddhist temple"
                                                                               class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                        <button type="button"
-                                                                              class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
-                                                                              <i
-                                                                                    class="fas fa-times"></i>
+                                                                        <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
+                                                                              <i class="fas fa-times"></i>
                                                                         </button>
-                                                                        </div>
-                                                            @endif
-                                                            </div>
-                                                            <button type="button" class="m-8 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-itinerary-highlight_button mt-3">
-                                                            <i class="fas fa-plus-circle"></i>
-                                                            Add highlight
-                                                            </button>
-                                                      </div>
-                                                </div>
-                                                </div>
-                                          </div>
-                                    @endforeach
-                              @else
-                                    @foreach ($tour["itineraries"] as $itineraryIndex => $itinerary)
-                                          <div class="itinerary-item mt-8" data-id="0">
-                                                <div class="bg-white rounded-xl shadow-sm p-6 relative">
-                                                      <div class="absolute top-6 right-6">
-                                                            <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary_button" title="Delete this itinerary">
-                                                                  <i class="fas fa-trash"></i>
-                                                            </button>
-                                                      </div>
-                                                      <h3 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                                                            <div
-                                                                  class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                                                                  <i class="fas fa-route text-[#e92929]"></i>
-                                                            </div>
-                                                            Tour Itinerary & Details #1
-                                                      </h3>
-
-                                                      <!-- Tour Basic Details -->
-                                                      <div class="border border-gray-200 rounded-lg overflow-hidden">
-                                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                                  <div class="flex items-center justify-between">
-                                                                        <h5 class="font-semibold text-gray-800">
-                                                                              <i class="fas fa-info-circle text-gray-400 mr-2"></i>
-                                                                              Tour Information
-                                                                        </h5>
-                                                                        
                                                                   </div>
-                                                            </div>
-
-                                                            <div class="m-8 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                                                  <div>
-                                                                        <label class="block text-sm font-medium text-gray-700 mb-1">Duration (hours) *</label>
-                                                                        <input name="itinerary[{{$itineraryIndex}}][duration]" type="number" placeholder="e.g., 8" min="1" max="24" value="{{ old("itinerary.$itineraryIndex.duration", $itinerary['duration'] ?? '') }}"
-                                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
                                                                   </div>
-
-                                                                  <div>
-                                                                        <label  class="block text-sm font-medium text-gray-700 mb-1">MaxParticipants*</label>
-                                                                        <input value="{{ old("itinerary.$itineraryIndex.max_participants", $itinerary['max_participants'] ?? '') }}" name="itinerary[{{$itineraryIndex}}][max_participants]" type="number" placeholder="e.g., 15" min="1" max="50"class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                  </div>
-
-                                                                  <div>
-                                                                        <label class="block text-sm font-medium text-gray-700 mb-1">Tour Type *</label>
-                                                                        <select name="itinerary[{{$itineraryIndex}}][tour_type]"
-                                                                              class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                              <option {{old("itinerary.{$itineraryIndex}.tour_type", $itinerary["tour_type"]) === "public" ? "selected" : ""}}>public</option>
-                                                                              <option {{old("itinerary.{$itineraryIndex}.tour_type", $itinerary["tour_type"]) === "private" ? "selected" : ""}}>private</option>
-                                                                        </select>
-                                                                  </div>
-
-                                                                  <div>
-                                                                        <label class="block text-sm font-medium text-gray-700 mb-1">Meeting Point *</label>
-                                                                        <input type="text" name="itinerary[{{$itineraryIndex}}][meeting_point]"
-                                                                        placeholder="e.g., Hotel lobby or JR Shibuya Station" value="{{old("itinerary.{$itineraryIndex}.meeting_point", $itinerary["meeting_point"])}}"
-                                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                  </div>
-
-                                                                  <div>
-                                                                        <label  class="block text-sm font-medium text-gray-700 mb-1">Adult Price (¥) *</label>
-                                                                        <input name="itinerary[{{$itineraryIndex}}][adult_price]" type="number" value="{{old("itinerary.{$itineraryIndex}.adult_price", $itinerary["adult_price"])}}"
-                                                                        placeholder="e.g., 12000" min="0"
-                                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                  </div>
-
-                                                                  <div>
-                                                                        <label class="block text-sm font-medium text-gray-700 mb-1">Child Price (¥)</label>
-                                                                        <input name="itinerary[{{$itineraryIndex}}][child_price]" type="number" value="{{old("itinerary.{$itineraryIndex}.child_price", $itinerary["child_price"])}}"
-                                                                              placeholder="e.g., 6000" min="0"
-                                                                              class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                  </div>
-                                                            </div>
-
-                                                            <div class="m-8">
-                                                                  <label class="block text-sm font-medium text-gray-700 mb-2">Languages Available</label>
-                                                                  <div class="flex flex-wrap gap-3">
-                                                                        @php
-                                                                              $selectedLanguages = old("itinerary.{$itineraryIndex}.languages", []);
-                                                                              $itineraryLanguages = $itinerary["itinerary_languages"];
-                                                                              $languageIds = array_map(function($language){
-                                                                                    return $language["language_id"]; 
-                                                                              }, $itineraryLanguages);
-
-                                                                              // selectedLanguagesとlanguageIdsをマージして重複を除去
-                                                                              $checkedLanguages = array_unique(array_merge($selectedLanguages, $languageIds));
-                                                                              $selectedLanguages = is_array($selectedLanguages) ? $selectedLanguages : [];
-                                                                              @endphp
-
-                                                                              @foreach ($languages as $language)
-                                                                              <label class="flex items-center gap-2 cursor-pointer">
-                                                                                    <input type="checkbox" 
-                                                                                          value="{{ $language->id }}"
-                                                                                          name="itinerary[{{$itineraryIndex}}][languages][]"
-                                                                                          {{ in_array($language->id, $checkedLanguages) ? 'checked' : '' }}
-                                                                                          class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
-                                                                                    <span class="text-sm text-gray-700">{{$language->language}}</span>
-                                                                              </label>
-                                                                              @endforeach
-                                                                  </div>
-                                                            </div>
-                                                      </div>
-
-                                                      <div class="mt-8">
-                                                      <!-- Itinerary Item 1 -->
-                                                      <div class="border border-gray-200 rounded-lg overflow-hidden">
-                                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                                  <div class="flex items-center justify-between">
-                                                                  <h5 class="font-semibold text-gray-800">
-                                                                        Itinerary Item</h5>
-                                                                  
-                                                                  </div>
-                                                            </div>
-
-                                                            <div class="p-8">
-                                                                  <!-- Activities Section -->
-                                                                  <div>
-                                                                  <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
-                                                                  <div class="space-y-3 activity-wrapper">
-                                                                        <!-- Activity Entry 1 -->
-                                                                        @foreach ($itinerary["itinerary_activities"] as $activityIndex => $activity)
-                                                                              <div class="activity-item">
-                                                                                    <div class="bg-gray-50 rounded-lg p-3">
-                                                                                          <div class="flex items-start gap-3">
-                                                                                                <div class="flex-1 space-y-3">
-                                                                                                      <div class="grid md:grid-cols-3 gap-3">
-                                                                                                            <div class="md:col-span-2">
-                                                                                                                  <input type="text"
-                                                                                                                  value="{{$activity["activity_title"]}}"
-                                                                                                                        name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][{{$activity["activity_title"]}}]"
-                                                                                                                        placeholder="e.g., Senso-ji Temple Visit"
-                                                                                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                                                            </div>
-                                                                                                      </div>
-                                                                                                      <div>
-                                                                                                            <textarea
-                                                                                                                  rows="2"
-                                                                                                                  name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][{{$activity["activity_description"]}}]"
-                                                      
-                                                                                                                  placeholder="Brief description of the activity..."
-                                                                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{$activity["activity_description"]}}</textarea>
-                                                                                                            </div>
-                                                                                                </div>
-                                                                                                <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
-                                                                                                      <i class="fas fa-times"></i>
-                                                                                                </button>
-                                                                                          </div>
-                                                                                    </div>
-                                                                              </div>
-                                                                        @endforeach
-                                                                  </div>
-
-                                                                  <!-- Add Activity Button -->
-                                                                  <button type="button"
-                                                                        class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
-                                                                        <i class="fas fa-plus-circle"></i>
-                                                                        Add activity
+                                                            @endforeach
+                                                      @else
+                                                            <div class="itinerary_highlight-item">
+                                                                  <div class="flex items-center gap-2">
+                                                                  <input type="text"
+                                                                        name="itinerary[{{$itineraryIndex}}][itinerary_highlight][]"
+                                                                        placeholder="e.g., Tokyo's oldest Buddhist temple"
+                                                                        class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                  <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
+                                                                        <i class="fas fa-times"></i>
                                                                   </button>
                                                                   </div>
-
-
                                                             </div>
+                                                      @endif
                                                       </div>
-                                                      <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
-                                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                                  <div class="flex items-center justify-between">
-                                                                  <h5 class="font-semibold text-gray-800">
-                                                                        Main Image for this Itinerary</h5>
-                                                                  
-                                                                  </div>
-                                                            </div>
-                                                            @if (session("temp_itinerary_image.{$itineraryIndex}"))
-                                                                  <div class="preview_container temp_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
-                                                                        <label for="itinerary_{{$itineraryIndex}}" class="h-full block">
-                                                                              <img src="{{asset("storage/" . session("temp_itinerary_image.{$itineraryIndex}"))}}" alt="itineray main image" class="itinerary_preview_src{{$itineraryIndex}} h-full w-full object-cover">
-                                                                        </label>
-                                                                        <input type="hidden" name="itinerary[{{$itineraryIndex}}][temp_itinerary_image]" value="{{session("temp_itinerary_image.{$itineraryIndex}")}}">
-                                                                  </div>
-                                                                  <div class="itinerary_image_element{{$itineraryIndex}}">
-                                                                        <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
-                                                                  </div>
-                                                            @else
-                                                                  <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer  h-[350px]">
-                                                                        <label for="itinerary_{{$itineraryIndex}}" class="h-full block">
-                                                                              <img src="{{asset("storage/" . $itinerary['image'])}}" alt="" class="itinerary_preview_src{{$itineraryIndex}} h-full w-full object-cover">
-                                                                        </label>
-                                                                  </div>
-                                                                  <div
-                                                                        class="m-8 itinerary_image_element{{$itineraryIndex}} hidden border-2 border-dashed border-gray-300 rounded-lg p-8 text-center flex items-center flex-col justify-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
-                                                                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
-                                                                        <p class="text-gray-600 font-medium mb-2">Upload itinerary image</p>
-                                                                        <p class="text-sm text-gray-500">This will be displayed as the itinerary banner image</p>
-                                                                        <p class="text-sm text-gray-500 mb-4">Recommended size: 1920x1080px</p>
-                                                                        <label for="itinerary_{{$itineraryIndex}}"
-                                                                              class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm w-fit">
-                                                                              Select Itinerary Image
-                                                                        </label>
-                                                                        <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
-                                                                        <input type="hidden" name="itinerary[{{$itineraryIndex}}][image_prev]" id="itinerary_{{$itineraryIndex}}" class="hidden" value="{{$itinerary['image']}}">
-                                                                  </div>
-                                                            @endif
-                                                      </div>
-
-                                                      <div class="border border-gray-200 rounded-lg overflow-hidden mt-8">
-                                                            <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                                  <div class="flex items-center justify-between">
-                                                                  <h5 class="font-semibold text-gray-800">Activity Highlights</h5>
-                                                                  </div>
-                                                            </div>
-                                                            <div class="m-8 space-y-2 itinerary_highlight-wrapper">
-                                                                  @foreach ($itinerary["itinerary_highlights"] as $itineraryHighlightIndex => $itineraryHighlight)
-                                                                        <div class="itinerary_highlight-item">
-                                                                              <div
-                                                                                    class="flex items-center gap-2">
-                                                                                    <input type="text"
-                                                                                          name="itinerary[{{$itineraryIndex}}][itinerary_highlight][{{$itineraryHighlightIndex}}]"
-                                                                                          value="{{$itineraryHighlight["itinerary_highlight"]}}"
-                                                                                          placeholder="e.g., Tokyo's oldest Buddhist temple"
-                                                                                          class="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                                                    <button type="button"
-                                                                                          class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-itinerary-highlight_button">
-                                                                                          <i
-                                                                                          class="fas fa-times"></i>
-                                                                                    </button>
-                                                                              </div>
-                                                                        </div>
-                                                                  @endforeach
-
-                                                            </div>
-                                                            <button type="button"
-                                                                  class="m-8 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-itinerary-highlight_button mt-3">
-                                                                  <i class="fas fa-plus-circle"></i>
-                                                                  Add highlight
-                                                            </button>
-                                                      </div>
-                                                      </div>
+                                                      <button type="button"
+                                                            class="m-8 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-itinerary-highlight_button mt-3">
+                                                      <i class="fas fa-plus-circle"></i>
+                                                      Add highlight
+                                                      </button>
                                                 </div>
                                           </div>
-                                    @endforeach
-
-                              @endif
+                                          </div>
+                                    </div>
+                              @endforeach
                         </div>
 
                         <!-- Add New Tour Itinerary Button -->

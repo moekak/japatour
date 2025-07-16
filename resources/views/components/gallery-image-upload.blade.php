@@ -26,7 +26,7 @@
                     </div>
             </div>
             <img id="preview-{{$index + 1}}" src="{{asset("storage/" . $src)}}" class="w-full h-[{{$height}}px] object-cover rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer" onclick="document.getElementById('gallery-input-{{$index + 1}}').click()">
-            <input type="hidden" id="gallery-input-{{$index + 1}}" name="gallery_image_prev[{{$index}}]" accept="image/*" class="hidden" onchange="previewImage({{$index + 1}}, this)" value="{{$src}}">
+            <input type="hidden" id="gallery-input-{{$index + 1}}" name="gallery_image[{{$index}}]" accept="image/*" class="hidden" onchange="previewImage({{$index + 1}}, this)" value="{{$src}}">
             <input type="file" id="gallery-input-{{$index + 1}}" name="gallery_image[{{$index}}]" accept="image/*" class="hidden" onchange="previewImage({{$index + 1}}, this)" >
             <button type="button" id="remove-{{$index + 1}}" class="hidden absolute top-2 right-2 w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors" onclick="removeImage({{$index + 1}})">
                     <i class="fas fa-times text-sm"></i>

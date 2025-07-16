@@ -5,6 +5,8 @@ export default class DupeInterface {
 
     generateItineraryId() {
         const items = Array.from(document.querySelectorAll(".itinerary-item"));
+        console.log("id" + items[items.length - 1].dataset.id);
+        
         return Number(items[items.length - 1].dataset.id) + 1;
     }
 

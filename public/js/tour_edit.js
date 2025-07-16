@@ -218,6 +218,7 @@ var DupeInterface = /*#__PURE__*/function () {
     key: "generateItineraryId",
     value: function generateItineraryId() {
       var items = Array.from(document.querySelectorAll(".itinerary-item"));
+      console.log("id" + items[items.length - 1].dataset.id);
       return Number(items[items.length - 1].dataset.id) + 1;
     }
   }, {
@@ -306,6 +307,7 @@ var DupeItinerary = /*#__PURE__*/function (_DupeInterface) {
      */
     function duplicateElement() {
       var itineraryIndex = this.generateItineraryId();
+      console.log(itineraryIndex);
       this.createDOM(itineraryIndex);
       this.fileUploadOperator(itineraryIndex);
     }

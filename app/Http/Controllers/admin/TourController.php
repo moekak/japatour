@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CreateTourRequest;
-use App\Http\Requests\Admin\EditTourRequest;
 use App\Http\Requests\Admin\Tour\CreateRequest;
+use App\Http\Requests\Admin\Tour\EditTourRequest;
 use App\Models\AdditionalService;
 use App\Models\Category;
 use App\Models\Language;
@@ -13,7 +12,6 @@ use App\Models\Region;
 use App\Models\ToursNew;
 use App\Services\TempImageService;
 use App\Services\TourService;
-use App\Services\Util\ImageService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -109,7 +107,7 @@ class TourController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(EditTourRequest $request, string $id)
     {
         try {
 

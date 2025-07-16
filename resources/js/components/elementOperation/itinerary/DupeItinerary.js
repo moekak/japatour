@@ -28,6 +28,8 @@ export default class DupeItinerary extends DupeInterface {
      */
     duplicateElement() {
         const itineraryIndex = this.generateItineraryId();
+        console.log(itineraryIndex);
+        
         this.createDOM(itineraryIndex);
         this.fileUploadOperator(itineraryIndex)
     }
