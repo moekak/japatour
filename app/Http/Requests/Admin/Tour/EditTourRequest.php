@@ -5,6 +5,7 @@ namespace App\Http\Requests\Admin\Tour;
 use App\Services\TempImageService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\UploadedFile;
 
 class EditTourRequest extends FormRequest
 {
@@ -34,7 +35,18 @@ class EditTourRequest extends FormRequest
             'overview_description' => ['required', 'string', 'max:1000'],
             
             // Hero Image
-            'hero_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048', 'required_without:temp_hero_image'],
+            'hero_image' => [
+                'nullable',
+                function ($attribute, $value, $fail) {
+                    if (
+                        !($value instanceof UploadedFile) &&
+                        !is_string($value)
+                    ) {
+                        $fail('画像ファイルまたは画像パスを指定してください。');
+                    }
+                },
+                'required_without:temp_hero_image',
+            ],
             "temp_hero_image" => ["nullable", "string", 'required_without:hero_image'],
             
             // Tour Highlights
@@ -64,20 +76,40 @@ class EditTourRequest extends FormRequest
             'itinerary.*.itinerary_highlight' => ['required', 'array', 'min:1'],
             'itinerary.*.itinerary_highlight.*' => ['required', 'string', 'max:50'],
             
-            // Itinerary image
-            'itinerary.*.image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            // // Itinerary image
+            // 'itinerary.*.image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+
+            'itinerary.*.image'  => [
+                'nullable',
+                function ($attribute, $value, $fail) {
+                    if (!is_string($value) && !($value instanceof \Illuminate\Http\UploadedFile)) {
+                        $fail('ギャラリー画像は画像ファイルまたは文字列である必要があります。');
+                    }
+                },
+            ],
+
             // Temp itinerary images (hidden fields)
             'itinerary.*.temp_itinerary_image' => ['nullable', 'string'],
             
             // Gallery images
-            'gallery_image' => ['nullable', 'array'],
-            'gallery_image.0' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'gallery_image.1' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'gallery_image.2' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'gallery_image.3' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'gallery_image.4' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'gallery_image.5' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            
+            // 'gallery_image' => ['nullable', 'array'],
+            // 'gallery_image.0' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            // 'gallery_image.1' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            // 'gallery_image.2' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            // 'gallery_image.3' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            // 'gallery_image.4' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+            // 'gallery_image.5' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+
+                 // Gallery images
+            'gallery_image.*' => [
+                'nullable',
+                function ($attribute, $value, $fail) {
+                    if (!is_string($value) && !($value instanceof \Illuminate\Http\UploadedFile)) {
+                        $fail('ギャラリー画像は画像ファイルまたは文字列である必要があります。');
+                    }
+                },
+            ],
+
             // Temp gallery images
             'temp_gallery_image' => ['nullable', 'array'],
             'temp_gallery_image_0' => ['nullable', 'string'],
@@ -86,6 +118,7 @@ class EditTourRequest extends FormRequest
             'temp_gallery_image_3' => ['nullable', 'string'],
             'temp_gallery_image_4' => ['nullable', 'string'],
             'temp_gallery_image_5' => ['nullable', 'string'],
+
         ];
     }
 
@@ -96,7 +129,7 @@ class EditTourRequest extends FormRequest
             // Itinerary Images のチェック
             if ($this->has('itinerary')) {
                 foreach ($this->input('itinerary', []) as $index => $itinerary) {
-                    $hasNewImage = $this->hasFile("itinerary.{$index}.image");
+                    $hasNewImage = $this->hasFile("itinerary.{$index}.image") || $this->input("itinerary.{$index}.image");
                     $hasTempImage = $this->filled("itinerary.{$index}.temp_itinerary_image");
                     
                     if (!$hasNewImage && !$hasTempImage) {
@@ -113,7 +146,7 @@ class EditTourRequest extends FormRequest
             $missingGalleryImages = [];
             
             for ($i = 0; $i < 6; $i++) {
-                $hasNewImage = $this->hasFile("gallery_image.{$i}");
+                $hasNewImage = $this->hasFile("gallery_image.{$i}") || $this->input("gallery_image.{$i}");
                 $hasTempImage = $this->filled("temp_gallery_image.{$i}");
                 
                 if (!$hasNewImage && !$hasTempImage) {
@@ -246,9 +279,7 @@ class EditTourRequest extends FormRequest
             // Itinerary Image
             'itinerary.*.image.required' => 'Image is required for each itinerary.',
             'itinerary.*.image.required_without' => 'Itinerary image is required when no previous image exists.',
-            'itinerary.*.image.image' => 'The file must be a valid image.',
-            'itinerary.*.image.mimes' => 'Itinerary image must be a JPEG, PNG, JPG, or GIF file.',
-            'itinerary.*.image.max' => 'Itinerary image size cannot exceed 2MB.',
+
             
             // Temp itinerary images
             'temp_itinerary_image_*.required_without' => 'Itinerary image is required.',
@@ -258,12 +289,12 @@ class EditTourRequest extends FormRequest
             'gallery_image.array' => 'Gallery images must be provided as a list.',
             'gallery_image.size' => 'Exactly 6 gallery images are required.',
             
-            'gallery_image.0.required' => 'Gallery image 1 is required.',
-            'gallery_image.1.required' => 'Gallery image 2 is required.',
-            'gallery_image.2.required' => 'Gallery image 3 is required.',
-            'gallery_image.3.required' => 'Gallery image 4 is required.',
-            'gallery_image.4.required' => 'Gallery image 5 is required.',
-            'gallery_image.5.required' => 'Gallery image 6 is required.',
+            // 'gallery_image.0.required' => 'Gallery image 1 is required.',
+            // 'gallery_image.1.required' => 'Gallery image 2 is required.',
+            // 'gallery_image.2.required' => 'Gallery image 3 is required.',
+            // 'gallery_image.3.required' => 'Gallery image 4 is required.',
+            // 'gallery_image.4.required' => 'Gallery image 5 is required.',
+            // 'gallery_image.5.required' => 'Gallery image 6 is required.',
             
             'gallery_image.*.image' => 'Each gallery file must be a valid image.',
             'gallery_image.*.mimes' => 'Gallery images must be JPEG, PNG, JPG, or GIF files.',

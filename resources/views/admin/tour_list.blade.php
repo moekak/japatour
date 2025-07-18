@@ -157,7 +157,7 @@
                                     <tr class="hover:bg-[#fcf8f8] transition-colors">
                                         <td class="px-6 py-4">
                                             <div class="flex items-center">
-                                                <img class="h-10 w-10 rounded-lg object-cover" src="{{asset("storage/" . $tour->hero_image)}}" alt="">
+                                                <img class="h-10 w-10 rounded-lg object-cover" src="{{asset("storage/" . $tour["hero_image"])}}" alt="">
                                                 <div class="ml-4">
                                                     <div class="text-sm font-medium text-[#1b0e0e]">{{$tour->title}}</div>
                                                     <div class="text-sm text-[#994d4d]">{{$tour->subtitle}}</div>

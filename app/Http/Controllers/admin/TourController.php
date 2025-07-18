@@ -46,13 +46,8 @@ class TourController extends Controller
 
     public function store(CreateRequest $request){
         try {
-            $tours =ToursNew::getAllToursByCategory();
-            $categories = Category::getCateforiesDataWithRegion();
-            $regions = Region::getAllRigions();
-            
-
             $this->tourService->createTour($request);
-            return view("admin.tour_list", compact("tours", "categories", "regions"))->with("success", "success to create Tours!");
+            return redirect()->route("tour_list");
         
         } catch (\Exception $e) {
             // バリデーション失敗時に画像を一時保存
@@ -98,6 +93,7 @@ class TourController extends Controller
             $languages = Language::getAllLanguages();
             $categories = Category::getAllCategories();
 
+ 
             return view("admin.tour_edit", compact("tour",  "regions", "categories", "languages"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());

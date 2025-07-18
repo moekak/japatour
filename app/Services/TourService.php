@@ -2,13 +2,10 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Admin\CreateTourRequest;
-use App\Http\Requests\Admin\EditTourRequest;
+
 use App\Http\Requests\Admin\Tour\CreateRequest;
+use App\Http\Requests\Admin\Tour\EditTourRequest;
 use App\Models\Itinerary;
-use App\Models\ItineraryActivity;
-use App\Models\ItineraryHighlight;
-use App\Models\Review;
 use App\Models\ToursNew;
 use App\Services\Repository\AdditionalServiceRepository;
 use App\Services\Repository\QaRepository;
@@ -73,6 +70,7 @@ class TourService
         try{
             DB::beginTransaction();
             $tourData = $this->generateData->prepareTourData($request);
+
             // ツアー作成
             $tour = ToursNew::create($tourData);
 
@@ -82,6 +80,8 @@ class TourService
 
             // Tour Gallery Imageの保存
             $tourGalleryImages = $this->generateData->prepareTourGalleryImage($request, $tour->id);
+            // print_r($tourGalleryImages);
+            // exit;
             DB::table("tour_gallery_images")->insert($tourGalleryImages);
 
             $itineraryData = $this->generateData->prepareItineraryData($request, $tour->id);

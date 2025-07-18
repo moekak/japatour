@@ -83,11 +83,14 @@ class GenerateData
         // 最大6枚まで処理
         for ($i = 0; $i < 6; $i++) {
             $imageData = null;
+
+            // print_r($data["gallery_image"][$i]);
             
             // 新しい画像ファイルがアップロードされた場合
-            if (isset($data["gallery_image"][$i]) && $request->hasFile($data["gallery_image"][$i])) {
+            if (isset($data["gallery_image"][$i]) && $request->hasFile("gallery_image.$i")) {
+                // echo "22222";
                 $imageData = [
-                    'gallery_image' => $this->imageService->saveImage($request->file($data["gallery_image"][$i]), "gallery_image"),
+                    'gallery_image' => $this->imageService->saveImage($data["gallery_image"][$i], "gallery_image"),
                     'tour_id' => $tour_id,
                     'order' => $i,
                 ];
@@ -106,6 +109,9 @@ class GenerateData
                 $galleryImages[] = $imageData; // インデックスではなく、順番に追加
             }
         }
+
+        // print_r($galleryImages);
+        // exit;
         
         return $galleryImages;
     }

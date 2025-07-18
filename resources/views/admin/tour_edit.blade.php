@@ -517,7 +517,7 @@
                                                       </div>
                                                       <div class="itinerary_image_element{{$itineraryIndex}} hidden">
                                                             <input type="file" name="itinerary[{{$itineraryIndex}}][image]" id="itinerary_{{$itineraryIndex}}" class="hidden">
-                                                            <input type="hidden" name="itinerary[{{$itineraryIndex}}][existing_image]" value="{{ $existingImage }}">
+                                                            <input type="hidden" name="itinerary[{{$itineraryIndex}}][image]" value="{{ $existingImage }}">
                                                       </div>
                                                       @else
                                                       <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer hidden h-[350px]">
