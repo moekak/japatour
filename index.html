@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCalendar Clone</title>
+    <style>
+        /* 全体のスタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #2c3e50;
+        }
+
+        /* ヘッダー */
+        header {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid #e7e7e7;
+            background-color: #fff;
+        }
+
+        .logo {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #333;
+            margin-right: auto;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            font-size: 0.9rem;
+            margin-left: 5px;
+            outline: none;
+        }
+
+        .keyboard-shortcut {
+            font-size: 0.7rem;
+            color: #666;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 2px 5px;
+            margin-left: 5px;
+        }
+
+        .version {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        .version-number {
+            font-size: 0.9rem;
+            margin-right: 5px;
+        }
+
+        .toggle-switch {
+            width: 36px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .toggle-switch::after {
+            content: "";
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background-color: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: 0.3s;
+        }
+
+        .github-icon {
+            width: 24px;
+            height: 24px;
+            color: #333;
+        }
+
+        /* メインコンテンツ */
+        .container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* サイドバー */
+        .sidebar {
+            width: 250px;
+            background-color: #f9f9f9;
+            border-right: 1px solid #e7e7e7;
+            padding: 20px 10px;
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 20px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            padding-left: 10px;
+            color: #333;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 8px 15px;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            margin-bottom: 2px;
+        }
+
+        .sidebar-link:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-link.active {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #333;
+        }
+
+        .divider {
+            height: 1px;
+            background-color: #e7e7e7;
+            margin: 15px 0;
+        }
+
+        /* メインコンテンツエリア */
+        .content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #6c757d;
+        }
+
+        .read-more {
+            color: #3498db;
+            text-decoration: none;
+            display: block;
+            margin: 15px 0;
+        }
+
+        /* カレンダー */
+        .calendar-container {
+            background-color: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px 0;
+        }
+
+        .calendar-widget {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            width: 350px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin: 0 auto;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .month-navigation {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-button {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #6c757d;
+        }
+
+        .current-month {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0 10px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+
+        .weekday {
+            font-size: 0.8rem;
+            color: #6c757d;
+            padding: 5px 0;
+            font-weight: 500;
+        }
+
+        .date {
+            position: relative;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            border-radius: 50%;
+            cursor: pointer;
+            margin: 2px auto;
+        }
+
+        .date:hover {
+            background-color: #f2f2f2;
+        }
+
+        .date.today {
+            color: #fff;
+            background-color: #3498db;
+        }
+
+        .date.highlight-red {
+            color: #fff;
+            background-color: #e74c3c;
+        }
+
+        .date.highlight-green {
+            color: #fff;
+            background-color: #2ecc71;
+        }
+
+        .date.highlight-blue {
+            color: #fff;
+            background-color: #3498db;
+        }
+
+        /* 右側のサイドバー */
+        .right-sidebar {
+            width: 250px;
+            padding: 20px;
+            border-left: 1px solid #e7e7e7;
+        }
+
+        .right-sidebar-title {
+            font-size: 0.9rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .right-sidebar-section {
+            margin-bottom: 15px;
+        }
+
+        .right-sidebar-link {
+            display: block;
+            padding: 5px 0;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .right-sidebar-link:hover {
+            color: #3498db;
+        }
+
+        .right-sidebar-link.active {
+            color: #3498db;
+        }
+
+        .ad-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .ad {
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .ad img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .ad-text {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .ad-source {
+            font-size: 0.7rem;
+            color: #aaa;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- メインコンテンツ -->
+    <div class="container">
+        <!-- メインコンテンツエリア -->
+        <main class="content">
+            <section class="section">
+                <div class="calendar-container">
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            <button class="nav-button">←</button>
+                            <div class="current-month">4月 2025</div>
+                            <button class="nav-button">→</button>
+                        </div>
+
+                        <div class="calendar-grid">
+                            <!-- 曜日 -->
+                            <div class="weekday">日</div>
+                            <div class="weekday">月</div>
+                            <div class="weekday">火</div>
+                            <div class="weekday">水</div>
+                            <div class="weekday">木</div>
+                            <div class="weekday">金</div>
+                            <div class="weekday">土</div>
+                            
+                            <!-- 日付はJavaScriptで動的に生成 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 現在の日付を取得
+            const today = new Date();
+            const currentDate = today.getDate();
+            const realCurrentMonth = today.getMonth();
+            const realCurrentYear = today.getFullYear();
+            
+            // 月の配列
+            const months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+            let currentMonthIndex = 3; // 初期表示は4月（0から始まるインデックス）
+            let currentYear = 2025;    // 初期表示は2025年
+            
+            // カレンダーグリッド
+            const calendarGrid = document.querySelector('.calendar-grid');
+            
+            // 週の曜日ヘッダー部分を保存
+            const weekdayHeaders = document.querySelectorAll('.weekday');
+            const weekdayHeadersHTML = Array.from(weekdayHeaders).map(day => day.outerHTML).join('');
+            
+            // カレンダーを描画する関数
+            function renderCalendar(year, month) {
+                // 月の最初の日
+                const firstDay = new Date(year, month, 1);
+                // 月の最後の日
+                const lastDay = new Date(year, month + 1, 0);
+                
+                // 月の最初の日の曜日（0:日曜日, 1:月曜日, ..., 6:土曜日）
+                const firstDayOfWeek = firstDay.getDay();
+                // 月の日数
+                const daysInMonth = lastDay.getDate();
+                
+                // カレンダーグリッドをクリアして曜日ヘッダーを再設定
+                calendarGrid.innerHTML = weekdayHeadersHTML;
+                
+                // 月の最初の日までの空白を追加
+                for (let i = 0; i < firstDayOfWeek; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.className = 'date empty';
+                    calendarGrid.appendChild(emptyDay);
+                }
+                
+                // 月の日付を追加
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateElement = document.createElement('div');
+                    dateElement.className = 'date';
+                    dateElement.textContent = day;
+                    
+                    // ハイライト日の設定（元の画像の特別な日付を保持）
+                    if (month === 3 && year === 2025) { // 4月2025年の場合
+                        if (day === 9 || day === 11) {
+                            dateElement.classList.add('highlight-red');
+                        } else if (day === 13 || day === 27) {
+                            dateElement.classList.add('highlight-blue');
+                        } else if (day === 25 || day === 26) {
+                            dateElement.classList.add('highlight-green');
+                        }
+                    }
+                    
+                    // 今日の日付をハイライト
+                    if (day === currentDate && month === realCurrentMonth && year === realCurrentYear) {
+                        dateElement.classList.add('today');
+                    }
+                    
+                    calendarGrid.appendChild(dateElement);
+                }
+                
+                // 月のタイトルを更新
+                document.querySelector('.current-month').textContent = `${months[month]} ${year}`;
+            }
+            
+            // 初期カレンダーを描画
+            renderCalendar(currentYear, currentMonthIndex);
+            
+            // ナビゲーションボタンのイベントリスナー
+            const prevButton = document.querySelector('.nav-button:first-child');
+            const nextButton = document.querySelector('.nav-button:last-child');
+            
+            prevButton.addEventListener('click', function() {
+                currentMonthIndex--;
+                if (currentMonthIndex < 0) {
+                    currentMonthIndex = 11;
+                    currentYear--;
+                }
+                renderCalendar(currentYear, currentMonthIndex);
+            });
+            
+            nextButton.addEventListener('click', function() {
+                currentMonthIndex++;
+                if (currentMonthIndex > 11) {
+                    currentMonthIndex = 0;
+                    currentYear++;
+                }
+                renderCalendar(currentYear, currentMonthIndex);
+            });
+        });
+    </script>
+</body>
+</html>
