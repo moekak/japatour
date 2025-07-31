@@ -91,15 +91,6 @@ class EditTourRequest extends FormRequest
             // Temp itinerary images (hidden fields)
             'itinerary.*.temp_itinerary_image' => ['nullable', 'string'],
             
-            // Gallery images
-            // 'gallery_image' => ['nullable', 'array'],
-            // 'gallery_image.0' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            // 'gallery_image.1' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            // 'gallery_image.2' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            // 'gallery_image.3' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            // 'gallery_image.4' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-            // 'gallery_image.5' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
-
                  // Gallery images
             'gallery_image.*' => [
                 'nullable',
