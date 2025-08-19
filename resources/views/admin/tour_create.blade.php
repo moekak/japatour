@@ -384,14 +384,14 @@
                                                 
                                                 <div>
                                                     <label class="block text-sm font-medium text-gray-700 mb-2">Rating *</label>
-                                                    <select name="reviews[{{$index}}[rating]" 
+                                                    <select name="reviews[{{$index}}][rating]" 
                                                         class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
                                                         <option value="">Select Rating</option>
-                                                        <option value="5" {{$review["rating"] === 5 ? "selected" : ""}}>⭐⭐⭐⭐⭐ (5 stars)</option>
-                                                        <option value="4" {{$review["rating"] === 4 ? "selected" : ""}}>⭐⭐⭐⭐ (4 stars)</option>
-                                                        <option value="3" {{$review["rating"] === 3 ? "selected" : ""}}>⭐⭐⭐ (3 stars)</option>
-                                                        <option value="2" {{$review["rating"] === 2 ? "selected" : ""}}>⭐⭐ (2 stars)</option>
-                                                        <option value="1" {{$review["rating"] === 1 ? "selected" : ""}}>⭐ (1 star)</option>
+                                                        <option value="5" {{$review["rating"] == 5 ? "selected" : ""}}>⭐⭐⭐⭐⭐ (5 stars)</option>
+                                                        <option value="4" {{$review["rating"] == 4 ? "selected" : ""}}>⭐⭐⭐⭐ (4 stars)</option>
+                                                        <option value="3" {{$review["rating"] == 3 ? "selected" : ""}}>⭐⭐⭐ (3 stars)</option>
+                                                        <option value="2" {{$review["rating"] == 2 ? "selected" : ""}}>⭐⭐ (2 stars)</option>
+                                                        <option value="1" {{$review["rating"] == 1 ? "selected" : ""}}>⭐ (1 star)</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -639,7 +639,7 @@
                                                             <!-- Activity Entry 1 -->
                                                             @if (isset($itinerary["activity"]) && is_array($itinerary["activity"]))
                                                                 @foreach ($itinerary["activity"] as $activityIndex => $activity)
-                                                                    <div class="activity-item">
+                                                                    {{-- <div class="activity-item">
                                                                         <div class="bg-gray-50 rounded-lg p-3">
                                                                             <div class="flex items-start gap-3">
                                                                                 <div class="flex-1 space-y-3">
@@ -664,10 +664,106 @@
                                                                                 </button>
                                                                             </div>
                                                                         </div>
-                                                                    </div> 
+                                                                    </div>  --}}
+                                                                    <div class="activity-item>
+                                                                        <div class="bg-gray-50 rounded-lg p-3">
+                                                                            <div class="flex items-start gap-3">
+                                                                                <!-- アイコン選択エリア（左側に追加） -->
+                                                                                <div class="flex-shrink-0 relative">
+                                                                                    <button type="button" class="icon-selector-btn w-10 h-10 bg-white border-2 border-gray-300 rounded-lg flex items-center justify-center hover:border-[#e92929] transition-all focus:outline-none focus:ring-2 focus:ring-[#e92929]/20">
+                                                                                        <i class="selected-icon fas fa-map-marker-alt text-[#e92929] text-sm"></i>
+                                                                                    </button>
+                                                                                    
+                                                                                    <!-- アイコン選択ドロップダウン -->
+                                                                                    <div class="icon-dropdown absolute top-12 left-0 bg-white border border-gray-200 rounded-lg shadow-lg p-3 w-60 hidden z-10">
+                                                                                        <div class="text-xs font-medium text-gray-600 mb-2">アイコンを選択:</div>
+                                                                                        <div class="grid grid-cols-6 gap-2">
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-map-marker-alt" title="場所">
+                                                                                                <i class="fas fa-map-marker-alt text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-camera" title="写真撮影">
+                                                                                                <i class="fas fa-camera text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-utensils" title="食事">
+                                                                                                <i class="fas fa-utensils text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-shopping-bag" title="ショッピング">
+                                                                                                <i class="fas fa-shopping-bag text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-train" title="交通">
+                                                                                                <i class="fas fa-train text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-museum" title="博物館">
+                                                                                                <i class="fas fa-museum text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-tree" title="公園">
+                                                                                                <i class="fas fa-tree text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-torii-gate" title="神社">
+                                                                                                <i class="fas fa-torii-gate text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-building" title="建物">
+                                                                                                <i class="fas fa-building text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-hot-tub" title="温泉">
+                                                                                                <i class="fas fa-hot-tub text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-mountain" title="山">
+                                                                                                <i class="fas fa-mountain text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-water" title="海">
+                                                                                                <i class="fas fa-water text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-star" title="観光地">
+                                                                                                <i class="fas fa-star text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-coffee" title="カフェ">
+                                                                                                <i class="fas fa-coffee text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-bed" title="宿泊">
+                                                                                                <i class="fas fa-bed text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-bus" title="バス">
+                                                                                                <i class="fas fa-bus text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-ticket-alt" title="チケット">
+                                                                                                <i class="fas fa-ticket-alt text-gray-600"></i>
+                                                                                            </button>
+                                                                                            <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-clock" title="時間">
+                                                                                                <i class="fas fa-clock text-gray-600"></i>
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <!-- 隠しフィールド：選択されたアイコンを保存 -->
+                                                                                    <input type="hidden" name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_icon]" value="fa-map-marker-alt" class="activity-icon-input">
+                                                                                </div>
+
+                                                                                <div class="flex-1 space-y-3">
+                                                                                    <div class="grid md:grid-cols-3 gap-3">
+                                                                                        <div class="md:col-span-2">
+                                                                                            <input type="text" value="{{$activity['activity_title']}}"
+                                                                                                name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_title]"
+                                                                                                placeholder="e.g., Senso-ji Temple Visit"
+                                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <textarea
+                                                                                            rows="2"
+                                                                                            name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_description]"
+                                                                                            placeholder="Brief description of the activity..."
+                                                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{$activity['activity_description']}}</textarea>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
+                                                                                    <i class="fas fa-times"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 @endforeach
                                                             @else
-                                                                <div class="activity-item">
+                                                                {{-- <div class="activity-item">
                                                                     <div class="bg-gray-50 rounded-lg p-3">
                                                                         <div class="flex items-start gap-3">
                                                                             <div class="flex-1 space-y-3">
@@ -694,7 +790,103 @@
                                                                             </button>
                                                                         </div>
                                                                     </div>
-                                                                </div> 
+                                                                </div>  --}}
+                                                                <div class="activity-item">
+                                                                    <div class="bg-gray-50 rounded-lg p-3">
+                                                                        <div class="flex items-start gap-3">
+                                                                            <!-- アイコン選択エリア（左側に追加） -->
+                                                                            <div class="flex-shrink-0 relative">
+                                                                                <button type="button" class="icon-selector-btn w-10 h-10 bg-white border-2 border-gray-300 rounded-lg flex items-center justify-center hover:border-[#e92929] transition-all focus:outline-none focus:ring-2 focus:ring-[#e92929]/20">
+                                                                                    <i class="selected-icon fas fa-map-marker-alt text-[#e92929] text-sm"></i>
+                                                                                </button>
+                                                                                
+                                                                                <!-- アイコン選択ドロップダウン -->
+                                                                                <div class="icon-dropdown absolute top-12 left-0 bg-white border border-gray-200 rounded-lg shadow-lg p-3 w-60 hidden z-10">
+                                                                                    <div class="text-xs font-medium text-gray-600 mb-2">アイコンを選択:</div>
+                                                                                    <div class="grid grid-cols-6 gap-2">
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-map-marker-alt" title="場所">
+                                                                                            <i class="fas fa-map-marker-alt text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-camera" title="写真撮影">
+                                                                                            <i class="fas fa-camera text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-utensils" title="食事">
+                                                                                            <i class="fas fa-utensils text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-shopping-bag" title="ショッピング">
+                                                                                            <i class="fas fa-shopping-bag text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-train" title="交通">
+                                                                                            <i class="fas fa-train text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-museum" title="博物館">
+                                                                                            <i class="fas fa-museum text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-tree" title="公園">
+                                                                                            <i class="fas fa-tree text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-torii-gate" title="神社">
+                                                                                            <i class="fas fa-torii-gate text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-building" title="建物">
+                                                                                            <i class="fas fa-building text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-hot-tub" title="温泉">
+                                                                                            <i class="fas fa-hot-tub text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-mountain" title="山">
+                                                                                            <i class="fas fa-mountain text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-water" title="海">
+                                                                                            <i class="fas fa-water text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-star" title="観光地">
+                                                                                            <i class="fas fa-star text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-coffee" title="カフェ">
+                                                                                            <i class="fas fa-coffee text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-bed" title="宿泊">
+                                                                                            <i class="fas fa-bed text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-bus" title="バス">
+                                                                                            <i class="fas fa-bus text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-ticket-alt" title="チケット">
+                                                                                            <i class="fas fa-ticket-alt text-gray-600"></i>
+                                                                                        </button>
+                                                                                        <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-clock" title="時間">
+                                                                                            <i class="fas fa-clock text-gray-600"></i>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <!-- 隠しフィールド：選択されたアイコンを保存 -->
+                                                                                <input type="hidden" name="itinerary[0][activity][0][activity_icon]" value="fa-map-marker-alt" class="activity-icon-input">
+                                                                            </div>
+
+                                                                            <div class="flex-1 space-y-3">
+                                                                                <div class="grid md:grid-cols-3 gap-3">
+                                                                                    <div class="md:col-span-2">
+                                                                                        <input type="text" 
+                                                                                            name="itinerary[0][activity][0][activity_title]"
+                                                                                            placeholder="e.g., Senso-ji Temple Visit"
+                                                                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div>
+                                                                                    <textarea
+                                                                                        rows="2"
+                                                                                        name="itinerary[0][activity][0][activity_description]"
+                                                                                        placeholder="Brief description of the activity..."
+                                                                                        class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
+                                                                                <i class="fas fa-times"></i>
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             @endif
 
                                                         </div>
@@ -947,7 +1139,7 @@
                                                         class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
                                                     <div class="space-y-3 activity-wrapper">
                                                         <!-- Activity Entry 1 -->
-                                                        <div class="activity-item">
+                                                        {{-- <div class="activity-item">
                                                             <div class="bg-gray-50 rounded-lg p-3">
                                                                 <div class="flex items-start gap-3">
                                                                     <div class="flex-1 space-y-3">
@@ -974,7 +1166,104 @@
                                                                     </button>
                                                                 </div>
                                                             </div>
+                                                        </div> --}}
+                                                        <div class="activity-item">
+                                                            <div class="bg-gray-50 rounded-lg p-3">
+                                                                <div class="flex items-start gap-3">
+                                                                    <!-- アイコン選択エリア（左側に追加） -->
+                                                                    <div class="flex-shrink-0 relative">
+                                                                        <button type="button" class="icon-selector-btn w-10 h-10 bg-white border-2 border-gray-300 rounded-lg flex items-center justify-center hover:border-[#e92929] transition-all focus:outline-none focus:ring-2 focus:ring-[#e92929]/20">
+                                                                            <i class="selected-icon fas fa-map-marker-alt text-[#e92929] text-sm"></i>
+                                                                        </button>
+                                                                        
+                                                                        <!-- アイコン選択ドロップダウン -->
+                                                                        <div class="icon-dropdown absolute top-12 left-0 bg-white border border-gray-200 rounded-lg shadow-lg p-3 w-60 hidden z-10">
+                                                                            <div class="text-xs font-medium text-gray-600 mb-2">アイコンを選択:</div>
+                                                                            <div class="grid grid-cols-6 gap-2">
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-map-marker-alt" title="場所">
+                                                                                    <i class="fas fa-map-marker-alt text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-camera" title="写真撮影">
+                                                                                    <i class="fas fa-camera text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-utensils" title="食事">
+                                                                                    <i class="fas fa-utensils text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-shopping-bag" title="ショッピング">
+                                                                                    <i class="fas fa-shopping-bag text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-train" title="交通">
+                                                                                    <i class="fas fa-train text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-museum" title="博物館">
+                                                                                    <i class="fas fa-museum text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-tree" title="公園">
+                                                                                    <i class="fas fa-tree text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-torii-gate" title="神社">
+                                                                                    <i class="fas fa-torii-gate text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-building" title="建物">
+                                                                                    <i class="fas fa-building text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-hot-tub" title="温泉">
+                                                                                    <i class="fas fa-hot-tub text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-mountain" title="山">
+                                                                                    <i class="fas fa-mountain text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-water" title="海">
+                                                                                    <i class="fas fa-water text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-star" title="観光地">
+                                                                                    <i class="fas fa-star text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-coffee" title="カフェ">
+                                                                                    <i class="fas fa-coffee text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-bed" title="宿泊">
+                                                                                    <i class="fas fa-bed text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-bus" title="バス">
+                                                                                    <i class="fas fa-bus text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-ticket-alt" title="チケット">
+                                                                                    <i class="fas fa-ticket-alt text-gray-600"></i>
+                                                                                </button>
+                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-clock" title="時間">
+                                                                                    <i class="fas fa-clock text-gray-600"></i>
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <!-- 隠しフィールド：選択されたアイコンを保存 -->
+                                                                        <input type="hidden" name="itinerary[0][activity][0][activity_icon]" value="fa-map-marker-alt" class="activity-icon-input">
+                                                                    </div>
+
+                                                                    <div class="flex-1 space-y-3">
+                                                                        <div class="grid md:grid-cols-3 gap-3">
+                                                                            <div class="md:col-span-2">
+                                                                                <input type="text" 
+                                                                                    name="itinerary[0][activity][0][activity_title]"
+                                                                                    placeholder="e.g., Senso-ji Temple Visit"
+                                                                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <textarea
+                                                                                rows="2"
+                                                                                name="itinerary[0][activity][0][activity_description]"
+                                                                                placeholder="Brief description of the activity..."
+                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                    <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
+                                                                        <i class="fas fa-times"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
                                                         </div>
+
                                                     </div>
 
                                                     <!-- Add Activity Button -->
@@ -1088,6 +1377,51 @@
                 });
             }
 
+        });
+
+        // アイコン選択機能
+        document.addEventListener('DOMContentLoaded', function() {
+            // アイコンセレクターボタンのクリック
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.icon-selector-btn')) {
+                    e.preventDefault();
+                    const dropdown = e.target.closest('.activity-item').querySelector('.icon-dropdown');
+                    
+                    // 他のドロップダウンを閉じる
+                    document.querySelectorAll('.icon-dropdown').forEach(dd => {
+                        if (dd !== dropdown) dd.classList.add('hidden');
+                    });
+                    
+                    // 現在のドロップダウンを切り替え
+                    dropdown.classList.toggle('hidden');
+                }
+                
+                // アイコンオプションのクリック
+                if (e.target.closest('.icon-option')) {
+                    e.preventDefault();
+                    const iconOption = e.target.closest('.icon-option');
+                    const selectedIcon = iconOption.getAttribute('data-icon');
+                    const activityItem = iconOption.closest('.activity-item');
+                    
+                    // 選択されたアイコンを更新
+                    const selectorIcon = activityItem.querySelector('.selected-icon');
+                    selectorIcon.className = `selected-icon fas ${selectedIcon} text-[#e92929] text-sm`;
+                    
+                    // 隠しフィールドの値を更新
+                    const hiddenInput = activityItem.querySelector('.activity-icon-input');
+                    hiddenInput.value = selectedIcon;
+                    
+                    // ドロップダウンを閉じる
+                    activityItem.querySelector('.icon-dropdown').classList.add('hidden');
+                }
+                
+                // 外側をクリックしたらドロップダウンを閉じる
+                if (!e.target.closest('.icon-selector-btn') && !e.target.closest('.icon-dropdown')) {
+                    document.querySelectorAll('.icon-dropdown').forEach(dd => {
+                        dd.classList.add('hidden');
+                    });
+                }
+            });
         });
     </script>
 </body>

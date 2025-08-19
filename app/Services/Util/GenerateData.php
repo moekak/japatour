@@ -146,7 +146,7 @@ class GenerateData
     public function prepareItineraryActivity($request, $itinerary_id, $key){
         $data = $request->validated();
         $itineraryActivities = [];
-        $itineraryActivityField = ["activity_title", "activity_description"];
+        $itineraryActivityField = ["activity_title", "activity_description", "activity_icon"];
 
         foreach($data["itinerary"][$key]["activity"] as $key => $activity){
             foreach($itineraryActivityField as $field){

@@ -43,7 +43,7 @@ class ToursNew extends Model
     
 
     public function scopeWithRelations($query){
-        return $query->with(["category","itineraries","tourReviews","tourQuestions", "tourHighlights", "tourGalleryImages", "itineraries.itineraryActivities", "itineraries.itineraryHighlights", "itineraries.itineraryLanguages"]);
+        return $query->with(["category","itineraries","tourReviews","tourQuestions", "tourHighlights", "tourGalleryImages", "itineraries.itineraryActivities", "itineraries.itineraryHighlights", "itineraries.itineraryLanguages", "itineraries.itineraryLanguages.language"]);
     }
     
     public function scopeWithId($query, $id){

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Tour\CreateRequest;
 use App\Http\Requests\Admin\Tour\EditTourRequest;
-use App\Models\AdditionalService;
 use App\Models\Category;
 use App\Models\Language;
 use App\Models\Region;
@@ -36,7 +35,7 @@ class TourController extends Controller
     public function create()
     {
         $languages = Language::getAllLanguages();
-        $regions = Region::getAllRigions();
+        $regions = Region::getAllRegions();
         $categories = Category::getAllCategories();
         return view("admin.tour_create", compact("languages", "regions", "categories"));
     }
@@ -87,7 +86,7 @@ class TourController extends Controller
     {
         try {
             $tour = ToursNew::getSpecificTour($id)->toArray();
-            $regions = Region::getAllRigions();
+            $regions = Region::getAllRegions();
             $languages = Language::getAllLanguages();
             $categories = Category::getAllCategories();
  

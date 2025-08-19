@@ -7,10 +7,27 @@
       <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
       <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
             href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
-      <title>Tokyo City Highlights Tour - Adventure Tours</title>
+      <title>ShogunTours</title>
+      <link rel="shortcut icon" href="{{asset("img/logo2.png")}}">
+      <!-- 検索用キーワード -->
+      <meta name="keywords"
+            content="ShogunTours, ShogunTours-official, Japan tour, tokyo tour, Tokyo travel, Kyoto experience, Osaka trip, Japanese culture, foreign tourist guide, Japan travel package, Mt. Fuji tour, onsen experience, Japan sightseeing">
+      <!-- robots設定 -->
+      <!-- カノニカルURL設定 -->
+      <meta rel="canonical" href="https://shoguntoursjapan.com/">
+      <meta name="robots" content="index,follow">
+      <!-- OGP設定（SNSでシェアされた時の表示設定） -->
+      <meta property="og:title" content="ShogunTours">
+      <meta property="og:type" content="website">
+      <meta name="description"
+            content="Specialized travel service for international tourists visiting Japan. We offer multilingual tours exploring Tokyo, Kyoto, Osaka and beyond. Let us guide you through traditional cultural experiences to cutting-edge technology, supporting you in discovering all of Japan's wonders.">
+      <meta property="og:url" content="https://shoguntoursjapan.com/">
+      <meta property="og:image" content="{{asset("img/logo2.png")}}">
+      <meta property="og:site_name" content="ShogunTours">
       <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
       <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
       <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
@@ -243,9 +260,9 @@
                                           </div>
 
                                           <div class="p-4">
-                                                <h3 class="text-xl font-bold text-gray-800 mb-2">{{$tour->overview_title}}</h3>
+                                                <h3 class="text-xl font-bold text-gray-800 mb-2">{{$itinerary->overview_title}}</h3>
                                                 <p class="text-gray-600 mb-4 line-clamp-3 text-sm">
-                                                      {{$tour->overview_description}}
+                                                      {{$itinerary->overview_description}}
                                                 </p>
 
                                                 <div class="flex items-center justify-between mb-4">
@@ -292,7 +309,7 @@
             <section id="gallery" class="py-10">
                   <div class="container mx-auto px-4">
                         <div class="text-center mb-12">
-                              <h2 class="text-[25px] sm:text-3xl font-bold mb-2 text-left sm:text-center">Capture the Moments</h2>
+                              <h2 class="text-[25px] sm:text-3xl font-bold mb-2 text-left sm:text-center">Gallery</h2>
                               <p class="text-gray-600 text-base text-left sm:text-center">A visual journey through our tour highlights</p>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 max-w-[1100px] mx-auto sm:px-4">
@@ -355,13 +372,13 @@
                                           <i class="fas fa-star-half-alt text-yellow-400 text-xl"></i>
                                     </div>
                                     <span class="text-2xl font-bold">4.8</span>
-                                    <span class="text-gray-600">from 245 reviews</span>
+                                    <span class="text-gray-600">from {{count($tour->tourReviews)}}reviews</span>
                               </div>
                         </div>
 
                         <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                               @foreach ($tour->tourReviews as $review)
-                                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                                    {{-- <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                                           <div class="flex items-center gap-4 mb-4">
                                                 <img src="https://i.pravatar.cc/60?img=1" alt="Reviewer" class="w-12 h-12 rounded-full">
                                                 <div>
@@ -381,6 +398,38 @@
                                           </div>
 
                                           <p class="text-gray-600 mb-4 line-clamp-6">{{ $review->content }}</p>
+                                          <p class="text-base text-gray-400">{{ \Carbon\Carbon::parse($review->date)->format('F j, Y') }}</p>
+                                    </div> --}}
+                                    <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                                          <div class="flex items-center gap-4 mb-4">
+                                                <div>
+                                                      <h4 class="font-semibold">{{ $review->name }}</h4>
+                                                      <div class="flex gap-1">
+                                                                  @php
+                                                                  $emptyStar = 5 - intval($review->rating);
+                                                                  for ($i = 0; $i < $review->rating; $i++) {
+                                                                        echo '<i class="fas fa-star text-yellow-400 text-xs"></i>';
+                                                                  }
+                                                                  for ($i = 0; $i < $emptyStar; $i++) {
+                                                                        echo '<i class="fa-regular fa-star text-yellow-400 text-xs"></i>';
+                                                                  }
+                                                            @endphp
+                                                      </div>
+                                                </div>
+                                          </div>
+
+                                          <div class="review-content mb-4">
+                                                <p class="text-gray-600 review-text line-clamp-6">{{ $review->content }}</p>
+                                                @if(strlen($review->content) > 200)
+                                                      <button class="see-more-btn mt-2 text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors focus:outline-none">
+                                                            See more
+                                                      </button>
+                                                      <button class="see-less-btn mt-2 text-blue-600 hover:text-blue-800 font-medium text-sm transition-colors focus:outline-none hidden">
+                                                            See less
+                                                      </button>
+                                                @endif
+                                          </div>
+
                                           <p class="text-base text-gray-400">{{ \Carbon\Carbon::parse($review->date)->format('F j, Y') }}</p>
                                     </div>
                               @endforeach
@@ -412,45 +461,45 @@
                                           <!-- 日付とゲスト選択 -->
                                           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
                                                 <div>
-                                                <label class="text-sm sm:text-base opacity-80 block mb-2">Select Date</label>
-                                                <div class="bg-white/20 rounded-lg px-4 py-3 flex items-center justify-between cursor-pointer hover:bg-white/30 transition-colors">
-                                                      <span class="text-sm sm:text-base">April 15, 2025</span>
-                                                      <i class="fas fa-calendar-alt text-sm sm:text-base"></i>
-                                                </div>
+                                                      <label class="text-sm sm:text-base opacity-80 block mb-2">Select Date</label>
+                                                      <div class="bg-white/20 rounded-lg px-4 py-3 flex items-center justify-between cursor-pointer hover:bg-white/30 transition-colors">
+                                                            <span class="text-sm sm:text-base">April 15, 2025</span>
+                                                            <i class="fas fa-calendar-alt text-sm sm:text-base"></i>
+                                                      </div>
                                                 </div>
                                                 <div>
-                                                <label class="text-sm sm:text-base opacity-80 block mb-2">Number of Guests</label>
-                                                <div class="bg-white/20 rounded-lg px-4 py-3 flex items-center justify-between">
-                                                      <button class="hover:bg-white/20 w-8 h-8 rounded-full transition-colors flex items-center justify-center">
-                                                            <span class="text-lg">-</span>
-                                                      </button>
-                                                      <span class="text-sm sm:text-base">2 Adults</span>
-                                                      <button class="hover:bg-white/20 w-8 h-8 rounded-full transition-colors flex items-center justify-center">
-                                                            <span class="text-lg">+</span>
-                                                      </button>
-                                                </div>
+                                                      <label class="text-sm sm:text-base opacity-80 block mb-2">Number of Guests</label>
+                                                      <div class="bg-white/20 rounded-lg px-4 py-3 flex items-center justify-between">
+                                                            <button class="hover:bg-white/20 w-8 h-8 rounded-full transition-colors flex items-center justify-center">
+                                                                  <span class="text-lg">-</span>
+                                                            </button>
+                                                            <span class="text-sm sm:text-base">2 Adults</span>
+                                                            <button class="hover:bg-white/20 w-8 h-8 rounded-full transition-colors flex items-center justify-center">
+                                                                  <span class="text-lg">+</span>
+                                                            </button>
+                                                      </div>
                                                 </div>
                                           </div>
 
                                           <!-- 価格と予約ボタン -->
                                           <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
                                                 <div class="text-center sm:text-left">
-                                                <p class="text-sm sm:text-base opacity-80">Total Price</p>
-                                                <div class="flex items-center gap-3 justify-center sm:justify-start">
-                                                      <p class="text-2xl sm:text-3xl font-bold">¥24,000</p>
-                                                      <p class="text-sm sm:text-base opacity-80 line-through">¥30,000</p>
-                                                </div>
+                                                      <p class="text-sm sm:text-base opacity-80">Total Price</p>
+                                                      <div class="flex items-center gap-3 justify-center sm:justify-start">
+                                                            <p class="text-2xl sm:text-3xl font-bold">¥24,000</p>
+                                                            <p class="text-sm sm:text-base opacity-80 line-through">¥30,000</p>
+                                                      </div>
                                                 </div>
                                                 <button class="bg-white text-[#e92929] px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:scale-105 transition-transform text-sm sm:text-base w-full sm:w-auto">
-                                                Book Now & Save 20%
+                                                      Book Now & Save 20%
                                                 </button>
                                           </div>
 
                                           <!-- キャンセルポリシー -->
                                           <div class="text-center">
                                                 <p class="text-xs sm:text-sm opacity-80 flex items-center justify-center gap-2">
-                                                <i class="fas fa-shield-alt"></i>
-                                                <span>Free cancellation up to 24 hours before the tour</span>
+                                                      <i class="fas fa-shield-alt"></i>
+                                                      <span>Free cancellation up to 24 hours before the tour</span>
                                                 </p>
                                           </div>
                                     </div>
@@ -461,31 +510,31 @@
 
 
             <section id="faq" class="flex justify-center py-12 bg-[#f3e7e7]">
-                        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-                              <h2 class="text-[25px] sm:text-3xl font-bold text-gray-800 mb-4 text-center"> Frequently Asked Questions</h2>
-                              <div class="flex flex-col p-4 gap-3">
-                                    @foreach ($tour->tourQuestions as $qa)
-                                          <details
-                                                class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
-                                                <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
-                                                      <p class="text-[#1b0e0e] test-base font-medium leading-normal">{{$qa["question"]}}</p>
-                                                      <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
-                                                            data-icon="CaretDown" data-size="20px" data-weight="regular">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
-                                                                  fill="currentColor" viewBox="0 0 256 256">
-                                                                  <path
-                                                                        d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z">
-                                                                  </path>
-                                                            </svg>
-                                                      </div>
-                                                </summary>
-                                                <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">{{$qa["answer"]}}</p>
-                                          </details>
-                                    @endforeach
-                                    
-                              </div>
+                  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                        <h2 class="text-[25px] sm:text-3xl font-bold text-gray-800 mb-4 text-center"> Frequently Asked Questions</h2>
+                        <div class="flex flex-col p-4 gap-3">
+                              @foreach ($tour->tourQuestions as $qa)
+                                    <details
+                                          class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
+                                          <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">{{$qa["question"]}}</p>
+                                                <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
+                                                      data-icon="CaretDown" data-size="20px" data-weight="regular">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
+                                                            fill="currentColor" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                          </summary>
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">{{$qa["answer"]}}</p>
+                                    </details>
+                              @endforeach
+                              
                         </div>
-                  </section>
+                  </div>
+            </section>
 
             <!-- Footer -->
             @include('components.footer')
@@ -526,101 +575,106 @@
 
 
       function showTourDetails(tourType) {
-            console.log(tourType);
-            
             const tour = tourDetails[tourType];
             console.log(tour);
             
             const modal = document.getElementById('tour-details-modal');
             const content = document.getElementById('tour-details-content');
+            const languages = tour.itinerary_languages.reduce((acc, current)=>{
+                  acc += `${current.language.language}, `
+                  return acc
+            }, "")
+
 
             // Generate timeline HTML
-            const timelineHTML = tour.itinerary_activities.map((item, index) => `
-                  <div class="flex gap-4 relative">
-                        <div class="flex flex-col items-center">
-                              <div class="w-12 h-12 bg-gradient-to-r from-[#e92929] to-[#ff6b6b] rounded-full flex items-center justify-center text-white z-10">
-                                    <i class="fas ${item.icon}"></i>
-                              </div>
-                              ${index < tour.itinerary_activities.length - 1 ? '<div class="w-0.5 h-full timeline-line mt-2"></div>' : ''}
-                        </div>
-                        <div class="flex-1 pb-8">
-                              <div class="bg-gray-50 rounded-xl p-4">
-                                    <div class="flex justify-between items-start mb-2">
-                                          <h4 class="font-semibold text-gray-800">${item.activity_title}</h4>
-                        
+            const timelineHTML = tour.itinerary_activities.map((item, index) => {
+                  return `
+                        <div class="flex gap-4 relative">
+                              <div class="flex flex-col items-center">
+                                    <div class="w-12 h-12 bg-gradient-to-r from-[#e92929] to-[#ff6b6b] rounded-full flex items-center justify-center text-white z-10">
+                                          <i class="fas ${item.activity_icon}"></i>
                                     </div>
-                                    <p class="text-gray-600 test-base">${item.activity_description}</p>
+                                    ${index < tour.itinerary_activities.length - 1 ? '<div class="w-0.5 h-full timeline-line mt-2"></div>' : ''}
+                              </div>
+                              <div class="flex-1 pb-8">
+                                    <div class="bg-gray-50 rounded-xl p-4">
+                                          <div class="flex justify-between items-start mb-2">
+                                                <h4 class="font-semibold text-gray-800">${item.activity_title}</h4>
+                              
+                                          </div>
+                                          <p class="text-gray-600 test-base">${item.activity_description}</p>
+                                    </div>
                               </div>
                         </div>
-                  </div>
-            `).join('');
+                  `
+            }).join('');
 
             content.innerHTML = `
-                <div class="relative">
-                    <button onclick="closeTourDetails()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all">
-                        <i class="fas fa-times text-gray-600"></i>
-                    </button>
-                    
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="/storage/${tour.image}" alt="${tour.overview_title}" class="w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                        <div class="absolute bottom-6 left-6 text-white">
-                            <h2 class="text-3xl font-bold mb-2">${tour.overview_title}</h2>
-                        </div>
-                    </div>
-                    
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-6">
-                            <div>
-                                <span class="text-3xl font-bold text-gray-800">￥${tour.adult_price}</span>
-                                <span class="text-gray-600 ml-2">per person</span>
-                            </div>
-                            <div class="flex items-center gap-4 text-gray-600">
-                                <span><i class="fas fa-clock text-[#e92929]"></i> ${tour.duration} hours</span>
-                                <span><i class="fas fa-users text-[#e92929]"></i> Small group</span>
-                            </div>
-                        </div>
-                        
-                        <p class="text-gray-600 mb-6">${tour.overview_description}</p>
-                        
-                        <div class="bg-gradient-to-r from-[#e92929]/10 to-[#ff6b6b]/10 rounded-xl p-6 mb-6">
-                            <h3 class="font-semibold text-gray-800 mb-3">Tour Highlights</h3>
-                            <ul class="space-y-2">
-                                ${tour.itinerary_highlights.map(highlight => `
-                                    <li class="flex items-center gap-2 text-gray-700">
-                                        <i class="fas fa-check-circle text-[#e92929]"></i>
-                                        <span>${highlight["itinerary_highlight"]}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                        
-                        <h3 class="font-semibold text-gray-800 mb-4">Tour Schedule</h3>
-                        <div class="mb-6">
-                            ${timelineHTML}
-                        </div>
-                        
-                        <div class="grid grid-cols-2 gap-4 mb-6">
-                            <div class="bg-gray-50 rounded-xl p-4">
-                                <h4 class="font-semibold text-gray-800 mb-2">Meeting Point</h4>
-                                <p class="text-gray-600 test-base">${tour["meeting_point"]}</p>
-                            </div>
-                            <div class="bg-gray-50 rounded-xl p-4">
-                                <h4 class="font-semibold text-gray-800 mb-2">Languages</h4>
-                                <p class="text-gray-600 test-base">English, Japanese, Chinese</p>
-                            </div>
-                        </div>
-                        
-                        <button class="w-full bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all">
-                            Book This Tour Now
+                  <div class="relative">
+                        <button onclick="closeTourDetails()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all">
+                              <i class="fas fa-times text-gray-600"></i>
                         </button>
                         
-                        <p class="text-center test-base text-gray-500 mt-4">
-                            <i class="fas fa-shield-alt mr-2"></i>
-                            Free cancellation up to 24 hours before the tour
-                        </p>
-                    </div>
-                </div>
+                        <div class="relative h-64 overflow-hidden">
+                              <img src="/storage/${tour.image}" alt="${tour.overview_title}" class="w-full h-full object-cover">
+                              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                              <div class="absolute bottom-6 left-6 text-white">
+                              <h2 class="text-3xl font-bold mb-2">${tour.overview_title}</h2>
+                              </div>
+                        </div>
+                        
+                        <div class="p-6">
+                              <div class="flex items-center justify-between mb-6">
+                              <div>
+                                    <span class="text-3xl font-bold text-gray-800">￥${tour.adult_price}</span>
+                                    <span class="text-gray-600 ml-2">per person</span>
+                              </div>
+                              <div class="flex items-center gap-4 text-gray-600">
+                                    <span><i class="fas fa-clock text-[#e92929]"></i> ${tour.duration} hours</span>
+                                    <span><i class="fas fa-users text-[#e92929]"></i> Private tour</span>
+                              </div>
+                              </div>
+                              
+                              <p class="text-gray-600 mb-6">${tour.overview_description}</p>
+                              
+                              <div class="bg-gradient-to-r from-[#e92929]/10 to-[#ff6b6b]/10 rounded-xl p-6 mb-6">
+                              <h3 class="font-semibold text-gray-800 mb-3">Tour Highlights</h3>
+                              <ul class="space-y-2">
+                                    ${tour.itinerary_highlights.map(highlight => `
+                                          <li class="flex items-center gap-2 text-gray-700">
+                                          <i class="fas fa-check-circle text-[#e92929]"></i>
+                                          <span>${highlight["itinerary_highlight"]}</span>
+                                          </li>
+                                    `).join('')}
+                              </ul>
+                              </div>
+                              
+                              <h3 class="font-semibold text-gray-800 mb-4">Tour Schedule</h3>
+                              <div class="mb-6">
+                              ${timelineHTML}
+                              </div>
+                              
+                              <div class="grid grid-cols-2 gap-4 mb-6">
+                              <div class="bg-gray-50 rounded-xl p-4">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Meeting Point</h4>
+                                    <p class="text-gray-600 test-base">${tour["meeting_point"]}</p>
+                              </div>
+                              <div class="bg-gray-50 rounded-xl p-4">
+                                    <h4 class="font-semibold text-gray-800 mb-2">Languages</h4>
+                                    <p class="text-gray-600 test-base">${languages}</p>
+                              </div>
+                              </div>
+                              
+                              <button class="w-full bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all">
+                              Book This Tour Now
+                              </button>
+                              
+                              <p class="text-center test-base text-gray-500 mt-4">
+                              <i class="fas fa-shield-alt mr-2"></i>
+                              Free cancellation up to 24 hours before the tour
+                              </p>
+                        </div>
+                  </div>
             `;
 
             modal.classList.remove('hidden');
@@ -687,6 +741,40 @@
             background: #d61f1f;
       }
       </style>
+      <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                  // See more/See less機能
+                  document.addEventListener('click', function(e) {
+                  if (e.target.classList.contains('see-more-btn')) {
+                        const reviewContent = e.target.closest('.review-content');
+                        const reviewText = reviewContent.querySelector('.review-text');
+                        const seeMoreBtn = reviewContent.querySelector('.see-more-btn');
+                        const seeLessBtn = reviewContent.querySelector('.see-less-btn');
+                        
+                        // line-clampを削除して全文表示
+                        reviewText.classList.remove('line-clamp-6');
+                        
+                        // ボタンを切り替え
+                        seeMoreBtn.classList.add('hidden');
+                        seeLessBtn.classList.remove('hidden');
+                  }
+                  
+                  if (e.target.classList.contains('see-less-btn')) {
+                        const reviewContent = e.target.closest('.review-content');
+                        const reviewText = reviewContent.querySelector('.review-text');
+                        const seeMoreBtn = reviewContent.querySelector('.see-more-btn');
+                        const seeLessBtn = reviewContent.querySelector('.see-less-btn');
+                        
+                        // line-clampを追加して省略表示
+                        reviewText.classList.add('line-clamp-6');
+                        
+                        // ボタンを切り替え
+                        seeLessBtn.classList.add('hidden');
+                        seeMoreBtn.classList.remove('hidden');
+                  }
+                  });
+            });
+      </script>
 </body>
 
 </html>

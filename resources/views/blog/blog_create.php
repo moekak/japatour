@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Blog Post - ShogunTours</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
@@ -28,73 +28,29 @@
 
         .editor-toolbar {
             border-bottom: 1px solid #e5e7eb;
-            padding: 12px 16px;
-            background: #f9fafb;
-            border-radius: 8px 8px 0 0;
         }
 
         .editor-content {
             min-height: 300px;
-            padding: 16px;
-            border: 1px solid #d1d5db;
-            border-top: none;
-            border-radius: 0 0 8px 8px;
-            outline: none;
-            font-family: inherit;
+            font-family: 'Inter', monospace;
+        }
+
+        .preview-content {
             line-height: 1.6;
         }
 
-        .editor-content:focus {
-            border-color: #e92929;
-            box-shadow: 0 0 0 2px rgba(233, 41, 41, 0.2);
-        }
-
-        .tag-input {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            align-items: center;
-            min-height: 48px;
-            padding: 8px 12px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            background: white;
-        }
-
-        .tag-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            background: #f3e7e7;
-            color: #1b0e0e;
-            padding: 4px 8px;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-
-        .tag-item button {
-            background: none;
-            border: none;
-            color: #e92929;
-            cursor: pointer;
-            padding: 0;
-            width: 16px;
-            height: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tag-input input {
-            border: none;
-            outline: none;
-            flex: 1;
-            min-width: 120px;
-            font-size: 14px;
-        }
+        .preview-content h1 { font-size: 2rem; font-weight: 700; margin: 1.5rem 0 1rem; }
+        .preview-content h2 { font-size: 1.75rem; font-weight: 600; margin: 1.25rem 0 0.75rem; }
+        .preview-content h3 { font-size: 1.5rem; font-weight: 600; margin: 1rem 0 0.5rem; }
+        .preview-content p { margin: 0.75rem 0; }
+        .preview-content ul, .preview-content ol { margin: 0.75rem 0; padding-left: 1.5rem; }
+        .preview-content li { margin: 0.25rem 0; }
+        .preview-content strong { font-weight: 600; }
+        .preview-content em { font-style: italic; }
+        .preview-content code { background: #f3f4f6; padding: 0.125rem 0.25rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .preview-content blockquote { border-left: 4px solid #e92929; padding-left: 1rem; margin: 1rem 0; font-style: italic; }
     </style>
 </head>
-
 <body class="bg-gray-50">
     <!-- Header -->
     <header class="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 transition-all duration-300 border-b border-gray-100">
@@ -108,8 +64,7 @@
                 </div>
                 <nav class="hidden md:flex items-center gap-8">
                     <a href="#" class="text-gray-600 hover:text-[#e92929] transition-colors text-sm font-medium">Dashboard</a>
-                    <a href="#" class="text-gray-600 hover:text-[#e92929] transition-colors text-sm font-medium">Tours</a>
-                    <a href="#" class="text-[#e92929] text-sm font-medium">Blog</a>
+                    <a href="#" class="text-gray-600 hover:text-[#e92929] transition-colors text-sm font-medium">Blog Posts</a>
                     <a href="#" class="text-gray-600 hover:text-[#e92929] transition-colors text-sm font-medium">Analytics</a>
                     <a href="#" class="text-gray-600 hover:text-[#e92929] transition-colors text-sm font-medium">Settings</a>
                 </nav>
@@ -127,7 +82,7 @@
 
     <!-- Main Content -->
     <main class="pt-20 pb-10">
-        <form class="container mx-auto px-6 max-w-[1100px]" action="#" method="POST" enctype="multipart/form-data">
+        <div class="container mx-auto px-6 max-w-[1200px]">
             <!-- Page Header -->
             <div class="mb-8">
                 <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
@@ -136,644 +91,563 @@
                     <span class="text-gray-800 font-medium">Create New Post</span>
                 </div>
                 <h1 class="text-3xl font-bold text-gray-800">Create New Blog Post</h1>
-                <p class="text-gray-600 mt-2">Share your knowledge and experiences with our travel community</p>
+                <p class="text-gray-600 mt-2">Share your travel insights and stories with the world</p>
             </div>
 
-            <!-- Form Sections -->
-            <div class="space-y-6">
+            <!-- error display -->
+            <div id="js_alert" class="hidden p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Danger</span>
+                <div>
+                    <span class="font-medium">Ensure that these requirements are met:</span>
+                    <ul class="mt-1.5 list-disc list-inside" id="error-container">
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Form Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 
-                <!-- Basic Information -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                        <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-info-circle text-[#e92929]"></i>
-                        </div>
-                        Basic Information
-                    </h2>
-
-                    <div class="space-y-5">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Article Title *</label>
-                            <input type="text" name="title" placeholder="e.g., The Ultimate Guide to Climbing Mount Fuji"
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
-                            <input type="text" name="subtitle" 
-                                placeholder="e.g., Everything you need to know about climbing Japan's most iconic mountain"
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
-                        </div>
-
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Category *</label>
-                                <select name="category" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
-                                    <option value="">Select Category</option>
-                                    <option value="destinations">Destinations</option>
-                                    <option value="culture">Culture</option>
-                                    <option value="travel-tips">Travel Tips</option>
-                                    <option value="food">Food & Dining</option>
-                                    <option value="adventure">Adventure</option>
-                                    <option value="festivals">Festivals & Events</option>
-                                </select>
+                <!-- Main Form Section -->
+                <div class="lg:col-span-2 space-y-6">
+                    
+                    <!-- Basic Information -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                            <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-info-circle text-[#e92929]"></i>
                             </div>
+                            Basic Information
+                        </h2>
+
+                        <div class="space-y-5">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Reading Time (minutes)</label>
-                                <input type="number" name="reading_time" placeholder="e.g., 8" min="1" max="60"
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Post Title *</label>
+                                <input type="text" id="title" name="title" placeholder="e.g., The Ultimate Guide to Tokyo's Hidden Gems" 
                                     class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
                             </div>
-                        </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">SEO Description</label>
-                            <textarea rows="3" name="seo_description"
-                                placeholder="Brief description for search engines (160 characters max)"
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all resize-none"></textarea>
-                            <p class="text-xs text-gray-500 mt-1">0/160 characters</p>
-                        </div>
-                    </div>
-                </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
+                                <input type="text" id="subtitle" name="subtitle" placeholder="e.g., Discover secret spots locals don't want tourists to know"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                            </div>
 
-                <!-- Featured Image -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                        <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-image text-[#e92929]"></i>
-                        </div>
-                        Featured Image
-                    </h2>
-                    
-                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px] flex items-center justify-center" id="featured-image-upload">
-                        <div class="text-center">
-                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
-                            <p class="text-gray-600 font-medium mb-2">Upload featured image</p>
-                            <p class="text-sm text-gray-500">This will be displayed as the main article image</p>
-                            <p class="text-sm text-gray-500 mb-4">Recommended size: 1200x630px</p>
-                            <label for="featured_image" class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm cursor-pointer">
-                                Select Featured Image
-                            </label>
-                            <input type="file" name="featured_image" id="featured_image" class="hidden" accept="image/*">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Article Content -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                        <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fab fa-markdown text-[#e92929]"></i>
-                        </div>
-                        Article Content (Markdown)
-                    </h2>
-
-                    <!-- Tabs for Editor/Preview -->
-                    <div class="flex border-b border-gray-200 mb-4">
-                        <button type="button" id="editor-tab" class="px-4 py-2 text-sm font-medium text-[#e92929] border-b-2 border-[#e92929]" onclick="showTab('editor')">
-                            <i class="fas fa-edit mr-1"></i>Editor
-                        </button>
-                        <button type="button" id="preview-tab" class="px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700" onclick="showTab('preview')">
-                            <i class="fas fa-eye mr-1"></i>Preview
-                        </button>
-                    </div>
-
-                    <!-- Markdown Quick Reference -->
-                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
-                        <h4 class="text-sm font-semibold text-gray-700 mb-2">
-                            <i class="fas fa-question-circle mr-1"></i>Markdown Quick Reference
-                        </h4>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-gray-600">
-                            <div><code class="bg-white px-1 rounded"># Heading 1</code></div>
-                            <div><code class="bg-white px-1 rounded">## Heading 2</code></div>
-                            <div><code class="bg-white px-1 rounded">**Bold text**</code></div>
-                            <div><code class="bg-white px-1 rounded">*Italic text*</code></div>
-                            <div><code class="bg-white px-1 rounded">[Link](url)</code></div>
-                            <div><code class="bg-white px-1 rounded">![Image](url)</code></div>
-                            <div><code class="bg-white px-1 rounded">- List item</code></div>
-                            <div><code class="bg-white px-1 rounded">`Inline code`</code></div>
-                        </div>
-                    </div>
-
-                    <!-- Editor Area -->
-                    <div id="editor-area">
-                        <textarea name="content" id="markdown-editor" 
-                                  placeholder="# Article Title
-
-Write your article content here using Markdown syntax...
-
-## Section 1
-
-Content for section 1 goes here. You can use **bold text**, *italic text*, and [links](https://example.com).
-
-### Subsection
-
-- List item 1
-- List item 2
-- List item 3
-
-## Section 2
-
-More content here. You can add images like this:
-
-![Alt text](https://example.com/image.jpg)
-
-### Code Example
-
-```javascript
-console.log('Hello, world!');
-```
-
-> This is a blockquote for highlighting important information.
-
----
-
-## Conclusion
-
-Final thoughts and wrap-up."
-                                  class="w-full h-96 px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all resize-none font-mono text-sm leading-relaxed"></textarea>
-                    </div>
-
-                    <!-- Preview Area -->
-                    <div id="preview-area" class="hidden">
-                        <div id="markdown-preview" class="prose max-w-none p-4 border border-gray-300 rounded-lg min-h-96 bg-white">
-                            <p class="text-gray-500 italic">Preview will appear here...</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center justify-between mt-4">
-                        <p class="text-xs text-gray-500">
-                            <i class="fab fa-markdown mr-1"></i>
-                            Write using Markdown syntax. Use the Preview tab to see formatted output.
-                        </p>
-                        <div class="flex gap-2">
-                            <button type="button" onclick="insertMarkdown('bold')" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-xs font-medium" title="Bold">
-                                <i class="fas fa-bold"></i>
-                            </button>
-                            <button type="button" onclick="insertMarkdown('italic')" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-xs font-medium" title="Italic">
-                                <i class="fas fa-italic"></i>
-                            </button>
-                            <button type="button" onclick="insertMarkdown('link')" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-xs font-medium" title="Link">
-                                <i class="fas fa-link"></i>
-                            </button>
-                            <button type="button" onclick="insertMarkdown('image')" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-xs font-medium" title="Image">
-                                <i class="fas fa-image"></i>
-                            </button>
-                            <button type="button" onclick="insertMarkdown('list')" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-xs font-medium" title="List">
-                                <i class="fas fa-list"></i>
-                            </button>
-                            <button type="button" onclick="insertMarkdown('code')" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-xs font-medium" title="Code">
-                                <i class="fas fa-code"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Table of Contents -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                        <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-list text-[#e92929]"></i>
-                        </div>
-                        Table of Contents
-                    </h2>
-                    
-                    <p class="text-sm text-gray-600 mb-4">Add sections to help readers navigate your article</p>
-                    
-                    <div id="toc-wrapper" class="space-y-3">
-                        <div class="toc-item">
-                            <div class="bg-gray-50 rounded-lg p-4">
-                                <div class="flex items-start gap-4">
-                                    <div class="flex-1">
-                                        <input type="text" name="toc[0][title]" 
-                                            placeholder="e.g., When to Climb Mount Fuji"
-                                            class="w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm font-medium">
-                                        <input type="text" name="toc[0][anchor]" 
-                                            placeholder="e.g., when-to-climb (URL anchor)"
-                                            class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                    </div>
-                                    <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-toc-button">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Category *</label>
+                                    <select id="category" name="category" 
+                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                                        <option value="">Choose a category</option>
+                                        <option value="travel-tips">Travel Tips</option>
+                                        <option value="destinations">Destinations</option>
+                                        <option value="culture">Culture</option>
+                                        <option value="food">Food & Dining</option>
+                                        <option value="transportation">Transportation</option>
+                                        <option value="accommodation">Accommodation</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                                    <select id="status" name="status" 
+                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                                        <option value="draft">Draft</option>
+                                        <option value="published">Published</option>
+                                        <option value="scheduled">Scheduled</option>
+                                    </select>
                                 </div>
                             </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Meta Description</label>
+                                <textarea id="meta_description" name="meta_description" rows="3" 
+                                    placeholder="Brief description for search engines and social media..."
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all resize-none"></textarea>
+                                <p class="text-xs text-gray-500 mt-1">Recommended: 150-160 characters</p>
+                            </div>
                         </div>
                     </div>
 
-                    <button type="button" class="add-toc-button mt-4 w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-[#e92929] hover:text-[#e92929] transition-colors flex items-center justify-center gap-2">
-                        <i class="fas fa-plus"></i>
-                        <span class="font-medium">Add Section</span>
-                    </button>
-                </div>
-
-                <!-- Tags -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                        <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-tags text-[#e92929]"></i>
-                        </div>
-                        Tags
-                    </h2>
-                    
-                    <div class="tag-input" id="tag-input">
-                        <input type="text" placeholder="Type tag and press Enter" id="tag-input-field">
-                    </div>
-                    <input type="hidden" name="tags" id="tags-hidden">
-                    
-                    <p class="text-xs text-gray-500 mt-2">Add relevant tags to help readers find your content</p>
-                </div>
-
-                <!-- Author Information -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                        <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-user-edit text-[#e92929]"></i>
-                        </div>
-                        Author Information
-                    </h2>
-
-                    <div class="space-y-5">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Author Name *</label>
-                                <input type="text" name="author_name" placeholder="e.g., Yuki Tanaka"
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                    <!-- Featured Image -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                            <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-image text-[#e92929]"></i>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Author Title</label>
-                                <input type="text" name="author_title" placeholder="e.g., Mountain Guide & Travel Writer"
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
-                            </div>
+                            Featured Image
+                        </h2>
+
+                        <div id="image-upload-area" class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-[#e92929] transition-colors cursor-pointer">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-gray-600 font-medium mb-2">Upload featured image</p>
+                            <p class="text-sm text-gray-500 mb-4">Drag and drop or click to select</p>
+                            <p class="text-sm text-gray-500 mb-4">Recommended: 1200x630px (16:9 ratio)</p>
+                            <input type="file" id="featured_image" accept="image/*" class="hidden">
+                            <button type="button" onclick="document.getElementById('featured_image').click()" 
+                                    class="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium">
+                                Select Image
+                            </button>
                         </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Author Bio</label>
-                            <textarea rows="3" name="author_bio"
-                                placeholder="Brief biography of the author..."
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all resize-none"></textarea>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Author Photo</label>
-                            <input type="file" name="author_photo" accept="image/*"
-                                class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Publishing Options -->
-                <div class="bg-white rounded-xl shadow-sm p-6">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
-                        <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-cog text-[#e92929]"></i>
-                        </div>
-                        Publishing Options
-                    </h2>
-
-                    <div class="space-y-5">
-                        <div class="grid md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                                <select name="status" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
-                                    <option value="draft">Draft</option>
-                                    <option value="published">Published</option>
-                                    <option value="scheduled">Scheduled</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Publish Date</label>
-                                <input type="datetime-local" name="publish_date"
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" name="featured" id="featured" value="1"
-                                class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
-                            <label for="featured" class="text-sm text-gray-700">Feature this article (display prominently on homepage)</label>
-                        </div>
-
-                        <div class="flex items-center gap-3">
-                            <input type="checkbox" name="allow_comments" id="allow_comments" value="1" checked
-                                class="w-4 h-4 text-[#e92929] rounded focus:ring-[#e92929] focus:ring-2">
-                            <label for="allow_comments" class="text-sm text-gray-700">Allow comments on this article</label>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- Action Buttons -->
-            <div class="flex items-center justify-between mt-8 pt-6 border-t border-gray-200">
-                <button type="button" class="px-6 py-3 text-gray-600 hover:text-gray-800 transition-colors">
-                    <i class="fas fa-save mr-2"></i>
-                    Save as Draft
-                </button>
-                
-                <div class="flex gap-3">
-                    <button type="button" class="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
-                        Preview
-                    </button>
-                    <button type="submit" class="px-8 py-3 bg-[#e92929] text-white rounded-lg hover:bg-[#d61f1f] transition-colors font-medium">
-                        <i class="fas fa-paper-plane mr-2"></i>
-                        Publish Article
-                    </button>
-                </div>
-            </div>
-
-            <!-- Fixed Publish Button (Mobile) -->
-            <button type="submit" title="Publish Article"
-                class="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white rounded-full hover:shadow-lg transition-all font-medium z-50 flex items-center justify-center md:hidden">
-                <i class="fas fa-paper-plane text-xl"></i>
-            </button>
-        </form>
-    </main>
-
-    <script>
-        // Character counter for SEO description
-        document.querySelector('textarea[name="seo_description"]').addEventListener('input', function() {
-            const count = this.value.length;
-            const counter = this.parentNode.querySelector('.text-xs');
-            counter.textContent = `${count}/160 characters`;
-            
-            if (count > 160) {
-                counter.classList.add('text-red-500');
-                counter.classList.remove('text-gray-500');
-            } else {
-                counter.classList.remove('text-red-500');
-                counter.classList.add('text-gray-500');
-            }
-        });
-
-        // Markdown Editor Functions
-        let isPreviewMode = false;
-
-        function showTab(tab) {
-            const editorTab = document.getElementById('editor-tab');
-            const previewTab = document.getElementById('preview-tab');
-            const editorArea = document.getElementById('editor-area');
-            const previewArea = document.getElementById('preview-area');
-
-            if (tab === 'editor') {
-                isPreviewMode = false;
-                editorTab.classList.add('text-[#e92929]', 'border-b-2', 'border-[#e92929]');
-                editorTab.classList.remove('text-gray-500');
-                previewTab.classList.remove('text-[#e92929]', 'border-b-2', 'border-[#e92929]');
-                previewTab.classList.add('text-gray-500');
-                editorArea.classList.remove('hidden');
-                previewArea.classList.add('hidden');
-            } else {
-                isPreviewMode = true;
-                previewTab.classList.add('text-[#e92929]', 'border-b-2', 'border-[#e92929]');
-                previewTab.classList.remove('text-gray-500');
-                editorTab.classList.remove('text-[#e92929]', 'border-b-2', 'border-[#e92929]');
-                editorTab.classList.add('text-gray-500');
-                editorArea.classList.add('hidden');
-                previewArea.classList.remove('hidden');
-                updatePreview();
-            }
-        }
-
-        function updatePreview() {
-            const markdown = document.getElementById('markdown-editor').value;
-            const preview = document.getElementById('markdown-preview');
-            
-            // Simple markdown to HTML conversion (you'd want to use a proper library like marked.js in production)
-            let html = markdown
-                .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-                .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-                .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-                .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-                .replace(/\*(.*)\*/gim, '<em>$1</em>')
-                .replace(/\[([^\]]*)\]\(([^\)]*)\)/gim, '<a href="$2" class="text-[#e92929] hover:underline">$1</a>')
-                .replace(/!\[([^\]]*)\]\(([^\)]*)\)/gim, '<img src="$2" alt="$1" class="max-w-full h-auto rounded-lg my-4">')
-                .replace(/`([^`]*)`/gim, '<code class="bg-gray-100 px-1 py-0.5 rounded text-sm">$1</code>')
-                .replace(/^> (.*$)/gim, '<blockquote class="border-l-4 border-[#e92929] pl-4 italic text-gray-600 my-4">$1</blockquote>')
-                .replace(/^- (.*$)/gim, '<li>$1</li>')
-                .replace(/(<li>.*<\/li>)/s, '<ul class="list-disc pl-5 my-4">$1</ul>')
-                .replace(/^\d+\. (.*$)/gim, '<li>$1</li>')
-                .replace(/^---$/gim, '<hr class="my-6 border-gray-300">')
-                .replace(/\n\n/gim, '</p><p class="mb-4">')
-                .replace(/\n/gim, '<br>');
-
-            // Wrap in paragraphs
-            if (html && !html.startsWith('<h') && !html.startsWith('<ul') && !html.startsWith('<blockquote')) {
-                html = '<p class="mb-4">' + html + '</p>';
-            }
-
-            preview.innerHTML = html || '<p class="text-gray-500 italic">Preview will appear here...</p>';
-        }
-
-        function insertMarkdown(type) {
-            const editor = document.getElementById('markdown-editor');
-            const start = editor.selectionStart;
-            const end = editor.selectionEnd;
-            const selectedText = editor.value.substring(start, end);
-            let replacement = '';
-
-            switch(type) {
-                case 'bold':
-                    replacement = `**${selectedText || 'bold text'}**`;
-                    break;
-                case 'italic':
-                    replacement = `*${selectedText || 'italic text'}*`;
-                    break;
-                case 'link':
-                    replacement = `[${selectedText || 'link text'}](https://example.com)`;
-                    break;
-                case 'image':
-                    replacement = `![${selectedText || 'alt text'}](https://example.com/image.jpg)`;
-                    break;
-                case 'list':
-                    replacement = selectedText ? selectedText.split('\n').map(line => `- ${line}`).join('\n') : '- List item 1\n- List item 2\n- List item 3';
-                    break;
-                case 'code':
-                    if (selectedText.includes('\n')) {
-                        replacement = `\`\`\`\n${selectedText || 'code here'}\n\`\`\``;
-                    } else {
-                        replacement = `\`${selectedText || 'code'}\``;
-                    }
-                    break;
-            }
-
-            editor.value = editor.value.substring(0, start) + replacement + editor.value.substring(end);
-            
-            // Set cursor position
-            const newPos = start + replacement.length;
-            editor.setSelectionRange(newPos, newPos);
-            editor.focus();
-        }
-
-        // Auto-save functionality
-        let autoSaveTimeout;
-        document.getElementById('markdown-editor').addEventListener('input', function() {
-            clearTimeout(autoSaveTimeout);
-            autoSaveTimeout = setTimeout(function() {
-                // Auto-save logic here
-                console.log('Auto-saving draft...');
-            }, 2000);
-        });
-
-        // Tab key handling for better editing experience
-        document.getElementById('markdown-editor').addEventListener('keydown', function(e) {
-            if (e.key === 'Tab') {
-                e.preventDefault();
-                const start = this.selectionStart;
-                const end = this.selectionEnd;
-                
-                this.value = this.value.substring(0, start) + '  ' + this.value.substring(end);
-                this.selectionStart = this.selectionEnd = start + 2;
-            }
-        });
-
-        // Featured Image Upload
-        document.getElementById('featured_image').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const uploadArea = document.getElementById('featured-image-upload');
-                    uploadArea.innerHTML = `
-                        <img src="${e.target.result}" alt="Featured Image" class="w-full h-full object-cover rounded-lg">
-                        <div class="absolute inset-0 bg-black/50 opacity-0 hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
-                            <label for="featured_image" class="text-white font-medium cursor-pointer">
-                                <i class="fas fa-edit mr-2"></i>Change Image
-                            </label>
-                        </div>
-                    `;
-                    uploadArea.classList.add('relative', 'overflow-hidden');
-                    uploadArea.classList.remove('flex', 'items-center', 'justify-center');
-                };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // Table of Contents Management
-        let tocCount = 1;
-        
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('.add-toc-button')) {
-                const wrapper = document.getElementById('toc-wrapper');
-                const newItem = document.createElement('div');
-                newItem.className = 'toc-item';
-                newItem.innerHTML = `
-                    <div class="bg-gray-50 rounded-lg p-4">
-                        <div class="flex items-start gap-4">
-                            <div class="flex-1">
-                                <input type="text" name="toc[${tocCount}][title]" 
-                                    placeholder="e.g., Essential Gear and Equipment"
-                                    class="w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm font-medium">
-                                <input type="text" name="toc[${tocCount}][anchor]" 
-                                    placeholder="e.g., essential-gear (URL anchor)"
-                                    class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                            </div>
-                            <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-toc-button">
-                                <i class="fas fa-trash"></i>
+                        <div id="image-preview" class="mt-4 hidden">
+                            <img id="preview-img" src="" alt="Preview" class="w-full h-48 object-cover rounded-lg">
+                            <button type="button" onclick="removeImage()" class="mt-2 text-sm text-red-600 hover:text-red-800">
+                                <i class="fas fa-trash mr-1"></i>Remove Image
                             </button>
                         </div>
                     </div>
-                `;
-                wrapper.appendChild(newItem);
-                tocCount++;
-            }
+
+                    <!-- Content Editor -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                            <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-edit text-[#e92929]"></i>
+                            </div>
+                            Content Editor
+                        </h2>
+
+                        <!-- Editor Toolbar -->
+                        <div class="editor-toolbar bg-gray-50 p-3 rounded-t-lg border border-gray-300 flex flex-wrap gap-2">
+                            <button type="button" onclick="insertMarkdown('**', '**')" title="Bold"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors">
+                                <i class="fas fa-bold"></i>
+                            </button>
+                            <button type="button" onclick="insertMarkdown('*', '*')" title="Italic"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors">
+                                <i class="fas fa-italic"></i>
+                            </button>
+                            <div class="border-l border-gray-300 mx-1"></div>
+                            <button type="button" onclick="insertMarkdown('## ', '')" title="Heading 2"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors">
+                                H2
+                            </button>
+                            <button type="button" onclick="insertMarkdown('### ', '')" title="Heading 3"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors">
+                                H3
+                            </button>
+                            <div class="border-l border-gray-300 mx-1"></div>
+                            <button type="button" onclick="insertMarkdown('- ', '')" title="Bullet List"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors">
+                                <i class="fas fa-list-ul"></i>
+                            </button>
+                            <button type="button" onclick="insertMarkdown('1. ', '')" title="Numbered List"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors">
+                                <i class="fas fa-list-ol"></i>
+                            </button>
+                            <div class="border-l border-gray-300 mx-1"></div>
+                            <button type="button" onclick="insertLink()" title="Insert Link"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors">
+                                <i class="fas fa-link"></i>
+                            </button>
+                            <button type="button" onclick="insertImage()" title="Insert Image"
+                                    class="px-3 py-1 bg-white border border-gray-300 rounded hover:bg-gray-100 transition-colors">
+                                <i class="fas fa-image"></i>
+                            </button>
+                        </div>
+
+                        <!-- Editor Textarea -->
+                        <textarea id="content" name="content" rows="20" 
+                                placeholder="Write your blog post content here using Markdown...    
+                                    Examples:
+                                    ## This is a heading
+                                    **This is bold text**
+                                    *This is italic text*
+                                    - This is a bullet point
+                                    1. This is a numbered list
+                                    [Link text](https://example.com)
+                                    ![Image alt text](image-url.jpg)"
+                                class="w-full px-4 py-4 border border-gray-300 border-t-0 rounded-b-lg focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all editor-content resize-none"></textarea>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                            <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-tags text-[#e92929]"></i>
+                            </div>
+                            Tags & SEO
+                        </h2>
+
+                        <div class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tags</label>
+                                <input type="text" id="tags" name="tags" placeholder="tokyo, travel-tips, japan, culture (separate with commas)"
+                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                                <p class="text-xs text-gray-500 mt-1">Separate tags with commas</p>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Reading Time (minutes)</label>
+                                <input type="number" id="reading_time" name="reading_time" min="1" max="60" placeholder="5"
+                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    
+                    <!-- Publish Actions -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Publish</h3>
+                        <div class="space-y-4">
+                            <button type="button" onclick="previewPost()" 
+                                    class="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                                <i class="fas fa-eye mr-2"></i>Preview
+                            </button>
+                            <button type="button" onclick="publishPost()" 
+                                    class="w-full px-6 py-3 bg-[#e92929] text-white rounded-lg hover:bg-[#d61f1f] transition-colors font-medium">
+                                <i class="fas fa-globe mr-2"></i>Publish
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Live Preview -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Live Preview</h3>
+                        <div id="live-preview" class="border border-gray-200 rounded-lg p-4 max-h-96 overflow-y-auto preview-content">
+                            <p class="text-gray-500 text-sm">Start typing to see preview...</p>
+                        </div>
+                    </div>
+
+                    <!-- Post Statistics -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Statistics</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Characters:</span>
+                                <span id="char-count" class="text-sm font-medium">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Words:</span>
+                                <span id="word-count" class="text-sm font-medium">0</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-sm text-gray-600">Estimated reading:</span>
+                                <span id="read-time" class="text-sm font-medium">0 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Posts -->
+                    <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Posts</h3>
+                        <div id="recent-posts" class="space-y-3">
+                            <!-- Recent posts will be populated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Preview Modal -->
+    <div id="preview-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden">
+            <div class="flex justify-between items-center p-6 border-b border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800">Post Preview</h3>
+                <button onclick="closePreview()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div id="preview-content" class="p-6 overflow-y-auto max-h-[70vh] preview-content">
+                <!-- Preview content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Initialize marked.js
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            headerIds: false,
+            mangle: false
+        });
+
+        // Global state
+        let posts = JSON.parse(localStorage.getItem('blogPosts') || '[]');
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            loadRecentPosts();
+            updateLivePreview();
+        });
+
+        function setupEventListeners() {
+            // Content input for live preview and stats
+            document.getElementById('content').addEventListener('input', function() {
+                updateLivePreview();
+                updateStats();
+            });
+
+            // Title input for live preview
+            document.getElementById('title').addEventListener('input', updateLivePreview);
+            document.getElementById('subtitle').addEventListener('input', updateLivePreview);
+            document.getElementById('category').addEventListener('change', updateLivePreview);
+
+            // Image upload
+            document.getElementById('featured_image').addEventListener('change', handleImageUpload);
+        }
+
+        // Markdown editor functions
+        function insertMarkdown(before, after) {
+            const textarea = document.getElementById('content');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
             
-            if (e.target.closest('.remove-toc-button')) {
-                e.target.closest('.toc-item').remove();
-            }
-        });
-
-        // Tags Management
-        const tagInput = document.getElementById('tag-input-field');
-        const tagContainer = document.getElementById('tag-input');
-        const tagsHidden = document.getElementById('tags-hidden');
-        let tags = [];
-
-        tagInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                const tagText = this.value.trim();
-                if (tagText && !tags.includes(tagText)) {
-                    addTag(tagText);
-                    this.value = '';
-                }
-            }
-        });
-
-        function addTag(text) {
-            tags.push(text);
-            updateTagsDisplay();
-            updateTagsInput();
+            const replacement = before + selectedText + after;
+            textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+            
+            const newPosition = start + before.length + selectedText.length;
+            textarea.focus();
+            textarea.setSelectionRange(newPosition, newPosition);
+            
+            updateLivePreview();
+            updateStats();
         }
 
-        function removeTag(text) {
-            tags = tags.filter(tag => tag !== text);
-            updateTagsDisplay();
-            updateTagsInput();
+        function insertLink() {
+            const url = prompt('Enter the URL:');
+            const text = prompt('Enter the link text:') || 'Link';
+            if (url) {
+                insertMarkdown(`[${text}](${url})`, '');
+            }
         }
 
-        function updateTagsDisplay() {
-            const existingTags = tagContainer.querySelectorAll('.tag-item');
-            existingTags.forEach(tag => tag.remove());
+        function insertImage() {
+            const url = prompt('Enter the image URL:');
+            const alt = prompt('Enter the alt text:') || 'Image';
+            if (url) {
+                insertMarkdown(`![${alt}](${url})`, '');
+            }
+        }
 
-            tags.forEach(tag => {
-                const tagElement = document.createElement('div');
-                tagElement.className = 'tag-item';
-                tagElement.innerHTML = `
-                    <span>${tag}</span>
-                    <button type="button" onclick="removeTag('${tag}')">
-                        <i class="fas fa-times"></i>
-                    </button>
-                `;
-                tagContainer.insertBefore(tagElement, tagInput);
+        // Image upload handling
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('preview-img').src = e.target.result;
+                document.getElementById('image-preview').classList.remove('hidden');
+                document.getElementById('image-upload-area').classList.add('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeImage() {
+            document.getElementById('featured_image').value = '';
+            document.getElementById('image-preview').classList.add('hidden');
+            document.getElementById('image-upload-area').classList.remove('hidden');
+        }
+
+        // Live preview update
+        function updateLivePreview() {
+            const title = document.getElementById('title').value || 'Untitled Post';
+            const subtitle = document.getElementById('subtitle').value;
+            const category = document.getElementById('category').value || 'uncategorized';
+            const content = document.getElementById('content').value || 'Start writing your content...';
+
+            const categoryColors = {
+                'travel-tips': 'bg-blue-600',
+                'destinations': 'bg-[#e92929]',
+                'culture': 'bg-purple-600',
+                'food': 'bg-orange-600',
+                'transportation': 'bg-green-600',
+                'accommodation': 'bg-teal-600'
+            };
+
+            const categoryColor = categoryColors[category] || 'bg-gray-600';
+            const renderedContent = marked.parse(content);
+
+            
+
+            const previewHtml = `
+                <div class="mb-4">
+                    <span class="${categoryColor} text-white px-3 py-1 rounded-full text-xs font-medium">${category.replace('-', ' ').toUpperCase()}</span>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-900 mb-2">${title}</h1>
+                ${subtitle ? `<p class="text-gray-600 text-lg mb-4">${subtitle}</p>` : ''}
+                <div class="text-sm text-gray-500 mb-4">
+                    ${new Date().toLocaleDateString()} • ${document.getElementById('reading_time').value || 'Auto'} min read
+                </div>
+                <hr class="mb-4">
+                <div>${renderedContent}</div>
+            `;
+
+            
+            document.getElementById('live-preview').innerHTML = previewHtml;
+        }
+
+        // Update statistics
+        function updateStats() {
+            const content = document.getElementById('content').value;
+            const charCount = content.length;
+            const wordCount = content.trim() ? content.trim().split(/\s+/).length : 0;
+            const readTime = Math.ceil(wordCount / 200); // Assuming 200 words per minute
+
+            document.getElementById('char-count').textContent = charCount.toLocaleString();
+            document.getElementById('word-count').textContent = wordCount.toLocaleString();
+            document.getElementById('read-time').textContent = `${readTime} min`;
+
+            // Auto-update reading time if not manually set
+            if (!document.getElementById('reading_time').value) {
+                document.getElementById('reading_time').value = readTime;
+            }
+        }
+
+        
+
+        // Publish post
+        const publishPost =async() =>{
+            const postData = getFormData(); 
+            const response = await fetch('/api/blog/create', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json', 
+                },
+                body: postData,
             });
+
+            const data = await response.json()
+            
+            if(data.status == "error"){
+                const errorContainer= document.getElementById("js_alert")
+                const errorListBox = document.getElementById("error-container")
+                errorListBox.innerHTML = ""
+                const errors = Object.entries(data.errors).flatMap(([title, error]) => error);
+                const errorContent = errors.map((error) => {
+                    return `<li>${error}</li>`  // ✅ HTMLタグも修正（</li>）
+                }).join("");
+
+                errorListBox.innerHTML = errorContent
+                errorContainer.classList.remove("hidden")
+                errorContainer.classList.add("flex")
+                
+            }else{
+                errorContainer.classList.add("hidden")
+                errorContainer.classList.remove("flex")
+                window.location.href="/blog/list"
+            }
         }
 
-        function updateTagsInput() {
-            tagsHidden.value = tags.join(',');
+        // Preview post
+        function previewPost() {
+
+    
+            const title = document.getElementById('title').value || 'Untitled Post';
+            const subtitle = document.getElementById('subtitle').value;
+            const category = document.getElementById('category').value || 'uncategorized';
+            const content = document.getElementById('content').value || 'No content available';
+
+            const categoryColors = {
+                'travel-tips': 'bg-blue-600',
+                'destinations': 'bg-[#e92929]',
+                'culture': 'bg-purple-600',
+                'food': 'bg-orange-600',
+                'transportation': 'bg-green-600',
+                'accommodation': 'bg-teal-600'
+            };
+
+            const categoryColor = categoryColors[category] || 'bg-gray-600';
+            const renderedContent = marked.parse(content);
+
+            const previewHtml = `
+                <article class="max-w-none">
+                    <header class="mb-8">
+                        <div class="mb-4">
+                            <span class="${categoryColor} text-white px-4 py-2 rounded-full text-sm font-medium">${category.replace('-', ' ').toUpperCase()}</span>
+                        </div>
+                        <h1 class="text-4xl font-bold text-gray-900 mb-4">${title}</h1>
+                        ${subtitle ? `<p class="text-gray-600 text-xl leading-relaxed mb-6">${subtitle}</p>` : ''}
+                        <div class="flex items-center gap-4 text-gray-500 text-sm mb-6">
+                            <span>${new Date().toLocaleDateString()}</span>
+                            <span>•</span>
+                            <span>${document.getElementById('reading_time').value || 'Auto'} min read</span>
+                        </div>
+                    </header>
+                    <div class="prose prose-lg max-w-none">
+                        ${renderedContent}
+                    </div>
+                </article>
+            `;
+
+            document.getElementById('preview-content').innerHTML = previewHtml;
+            document.getElementById('preview-modal').classList.remove('hidden');
         }
 
-        // Auto-generate anchor from title
-        document.querySelectorAll('input[name*="[title]"]').forEach(input => {
-            input.addEventListener('input', function() {
-                const anchorInput = this.parentNode.querySelector('input[name*="[anchor]"]');
-                if (anchorInput && !anchorInput.value) {
-                    const anchor = this.value.toLowerCase()
-                        .replace(/[^\w\s-]/g, '')
-                        .replace(/\s+/g, '-')
-                        .trim();
-                    anchorInput.value = anchor;
-                }
-            });
-        });
+        function closePreview() {
+            document.getElementById('preview-modal').classList.add('hidden');
+        }
 
-        // Form validation
-        document.querySelector('form').addEventListener('submit', function(e) {
-            const requiredFields = ['title', 'category', 'author_name'];
-            let hasErrors = false;
-
-            requiredFields.forEach(field => {
-                const input = document.querySelector(`[name="${field}"]`);
-                if (!input.value.trim()) {
-                    input.classList.add('border-red-500');
-                    hasErrors = true;
-                } else {
-                    input.classList.remove('border-red-500');
-                }
-            });
-
-            const content = document.getElementById('article-content').textContent.trim();
-            if (!content) {
-                document.getElementById('article-content').style.borderColor = '#ef4444';
-                hasErrors = true;
-            } else {
-                document.getElementById('article-content').style.borderColor = '#d1d5db';
+        // Get form data
+        function getFormData() {
+            const formData = new FormData();
+            // テキストデータを追加
+            formData.append('title', document.getElementById('title').value);
+            formData.append('subtitle', document.getElementById('subtitle').value);
+            formData.append('category', document.getElementById('category').value);
+            formData.append('status', document.getElementById('status').value);
+            formData.append('meta_description', document.getElementById('meta_description').value);
+            formData.append('content', document.getElementById('content').value);
+            formData.append('tags', document.getElementById('tags').value);
+            formData.append('reading_time', document.getElementById('reading_time').value);
+            
+            // 画像ファイルを追加
+            const imageFile = document.getElementById('featured_image').files[0];
+            if (imageFile) {
+                formData.append('featured_image', imageFile);
             }
 
-            if (hasErrors) {
-                e.preventDefault();
-                alert('Please fill in all required fields and add article content.');
+            return formData
+        }
+
+        // Clear form
+        function clearForm() {
+            document.querySelectorAll('input, textarea, select').forEach(field => {
+                if (field.type !== 'file') {
+                    field.value = '';
+                }
+            });
+            removeImage();
+            updateLivePreview();
+            updateStats();
+        }
+
+        // Load recent posts
+        function loadRecentPosts() {
+            const recentPostsContainer = document.getElementById('recent-posts');
+            const recentPosts = posts.slice(0, 5);
+
+            if (recentPosts.length === 0) {
+                recentPostsContainer.innerHTML = '<p class="text-gray-500 text-sm">No recent posts</p>';
+                return;
+            }
+
+            recentPostsContainer.innerHTML = recentPosts.map(post => `
+                <div class="border-b border-gray-100 pb-2 last:border-b-0">
+                    <h4 class="text-sm font-medium text-gray-800 truncate">${post.title}</h4>
+                    <p class="text-xs text-gray-500">${new Date(post.createdAt).toLocaleDateString()} • ${post.status}</p>
+                </div>
+            `).join('');
+        }
+
+        // Modal close on outside click
+        document.getElementById('preview-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePreview();
             }
         });
+
+        // Initialize stats on page load
+        updateStats();
     </script>
 </body>
-
 </html>

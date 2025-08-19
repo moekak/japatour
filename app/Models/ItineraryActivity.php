@@ -9,6 +9,7 @@ class ItineraryActivity extends Model
     protected $fillable = [
         "itinerary_id",
         "activity_title",
-        "activity_description"
+        "activity_description",
+        "activity_icon"
     ];
 }

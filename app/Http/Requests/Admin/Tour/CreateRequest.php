@@ -79,10 +79,11 @@ class CreateRequest extends FormRequest
             'itinerary.*.activity' => ['required', 'array', 'min:1'],
             'itinerary.*.activity.*.activity_title' => ['required', 'string', 'max:1000'],
             'itinerary.*.activity.*.activity_description' => ['required', 'string', 'max:1000'],
+            'itinerary.*.activity.*.activity_icon' => ['required', 'string'],
             
             // Itinerary highlights
             'itinerary.*.itinerary_highlight' => ['required', 'array', 'min:1'],
-            'itinerary.*.itinerary_highlight.*' => ['required', 'string', 'max:50'],
+            'itinerary.*.itinerary_highlight.*' => ['required', 'string', 'max:500'],
             
             // Itinerary image
             'itinerary.*.image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
@@ -296,13 +297,14 @@ class CreateRequest extends FormRequest
             'itinerary.*.activity.*.activity_title.max' => 'Activity title cannot exceed 1000 characters.',
             'itinerary.*.activity.*.activity_description.required' => 'Activity description is required.',
             'itinerary.*.activity.*.activity_description.max' => 'Activity description cannot exceed 1000 characters.',
+            'itinerary.*.activity.*.activity_icon.required' => 'Activity icon is required.',
             
             // Itinerary Highlights
             'itinerary.*.itinerary_highlight.required' => 'At least one itinerary highlight is required.',
             'itinerary.*.itinerary_highlight.array' => 'Itinerary highlights must be provided as a list.',
             'itinerary.*.itinerary_highlight.min' => 'At least one itinerary highlight is required.',
             'itinerary.*.itinerary_highlight.*.required' => 'Itinerary highlight text is required.',
-            'itinerary.*.itinerary_highlight.*.max' => 'Itinerary highlight cannot exceed 50 characters.',
+            'itinerary.*.itinerary_highlight.*.max' => 'Itinerary highlight cannot exceed 500 characters.',
             
             // Itinerary Image
             'itinerary.*.image.required' => 'Image is required for each itinerary.',
@@ -356,6 +358,7 @@ class CreateRequest extends FormRequest
             'itinerary.*.languages.*' => 'language',
             'itinerary.*.activity.*.activity_title' => 'activity title',
             'itinerary.*.activity.*.activity_description' => 'activity description',
+            'itinerary.*.activity.*.activity_icon' => 'activity icon',
             'itinerary.*.itinerary_highlight.*' => 'itinerary highlight',
             'itinerary.*.image' => 'itinerary image',
             'gallery.*' => 'gallery image',

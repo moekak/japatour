@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\BlogController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\TopController;
 use App\Http\Controllers\Admin\TourController;
@@ -55,6 +55,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get("/tour/book/{id}", [BookingController::class, "index"])->name("tour.book");
     Route::get("/tour/book/{id}/{date}", [BookingController::class, "index"])->name("tour_date.book");
 
+    Route::get("/blog/list", [BlogController::class, "list"])->name("blog.list");
+    Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+
+    Route::delete('/blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+    Route::get('/blog/{id}/edit', [BlogController::class, 'edit'])->name('blog.edit');
+
 
     Route::get('/thank', function () {
         return view('thank');
@@ -68,6 +74,6 @@ Auth::routes(['register' => false]);
 Route::post('/payment-intent', [BookingController::class, 'createPaymentIntent']);
 
 // ブログ
-Route::get("/show/blog", [BlogController::class, "show"]);
-Route::get("/blog", [BlogController::class, "index"]);
-Route::get("/create/blog", [BlogController::class, "create"]);
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
