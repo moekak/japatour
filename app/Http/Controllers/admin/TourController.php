@@ -24,10 +24,15 @@ class TourController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function list()
     {
         $tours = ToursNew::getAllTours();
-        return view("admin.tour_list", compact("tours"));
+        return view("tour.tour_list", compact("tours"));
+    }
+
+    public function index(){
+        $categorizedTours = ToursNew::getAllToursByCategory()->toArray();
+        return view("tour.tours", compact("categorizedTours"));
     }
     /**
      * Show the form for creating a new resource.
@@ -37,7 +42,7 @@ class TourController extends Controller
         $languages = Language::getAllLanguages();
         $regions = Region::getAllRegions();
         $categories = Category::getAllCategories();
-        return view("admin.tour_create", compact("languages", "regions", "categories"));
+        return view("tour.tour_create", compact("languages", "regions", "categories"));
     }
 
 
@@ -72,7 +77,7 @@ class TourController extends Controller
     {
         try {
             $tour = ToursNew::getSpecificTour($id);
-            return view("show", compact("tour"));
+            return view("tour.tour_show", compact("tour"));
         } catch (\Exception $e) {
             Log::debug($e);
             // return redirect()->route("show")->with("error", "faild to get Tour: " . $e->getMessage());
@@ -89,8 +94,7 @@ class TourController extends Controller
             $regions = Region::getAllRegions();
             $languages = Language::getAllLanguages();
             $categories = Category::getAllCategories();
- 
-            return view("admin.tour_edit", compact("tour",  "regions", "categories", "languages"));
+            return view("tour.tour_edit", compact("tour",  "regions", "categories", "languages"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
         }

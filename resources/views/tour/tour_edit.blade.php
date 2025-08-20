@@ -874,7 +874,7 @@
                   </button>
             </form>
       </main>
-      @include('admin.template.template')
+      @include('template.template')
       <script src="{{mix("js/tour_edit.js")}}"></script>
 
       <script>

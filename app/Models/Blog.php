@@ -17,4 +17,12 @@ class Blog extends Model
         'tags',
         'reading_time',
     ];
+
+    static public function getlatesetBlogs(){
+        return static::latest()->take(3)->get();
+    }
+
+    static public function getRelatedBlogs($category){
+        return static::where("category", $category)->get();
+    }
 }

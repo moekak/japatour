@@ -35,62 +35,7 @@
       <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden js_main"
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
-            
-                  <nav class="bg-[#fcf8f8] border-b border-solid border-b-[#f3e7e7]">
-                        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                              <div class="relative flex h-16 items-center justify-between">
-                                    <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                                          <!-- Mobile menu button-->
-                                          <button type="button" aria-controls="mobile-menu" aria-expanded="false" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
-                                                <span class="absolute -inset-0.5"></span>
-                                                <span class="sr-only">Open main menu</span>
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="block size-6">
-                                                      <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="hidden size-6">
-                                                      <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
-                                                </svg>
-                                          </button>
-                                    </div>
-                                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
-                                          <div class="flex shrink-0 items-center justify-center gap-3 text-[#1b0e0e]">
-                                                <div class="size-8 items-center flex justify-center">
-                                                      <img src="{{asset("img/logo2.png")}}" alt="">
-                                                </div>
-                                                <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours</h2>
-                                          </div>
-                                          <div class="hidden sm:ml-6 sm:flex items-center justify-center">
-                                                <div class="flex space-x-4 items-center justify-center">
-                                                      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                                      <a href="#tours"  class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Tours</a>
-                                                      <a href="#instagram" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Gallery</a>
-                                                      <a href="#blog" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Blog</a>
-                                                      <a href="#faq" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">FAQ</a>
-                                                      <a href="#contact" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Contact</a>
-                                                      <button
-                                                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] test-base font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
-                                                            <span class="truncate">Book Now</span>
-                                                      </button>
-                                                </div>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>
-
-                        <!-- Mobile menu, show/hide based on menu state. -->
-                        <div id="mobile-menu" class="sm:hidden hidden transition-all duration-300 ease-out overflow-hidden max-h-0">
-                              <div class="space-y-1 px-2 pt-2 pb-3">
-                                    <a href="#tours" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Tours</a>
-                                    <a href="#instagram" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Gallery</a>
-                                    <a href="#blog" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Blog</a>
-                                    <a href="#faq" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">FAQ</a>
-                                    <a href="#contact" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Contact</a>
-                              </div>
-                        </div>
-
-                  </nav>
-
-
+                  @include('components.header')
                   <!-- Hero Section -->
                   <div class="flex justify-center">
                         <div class="layout-content-container flex flex-col max-w-[1900px] flex-1">
@@ -219,82 +164,27 @@
                   <!-- Blog Section -->
                   <section id="blog" class="flex justify-center py-12">
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-                              <h2
-                                    class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
-                                    Latest Articles</h2>
-                              <div class="pb-4">
-                                    <div class="flex flex-col sm:flex-row items-stretch gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
-                                          <!-- テキストエリア -->
-                                          <div class="flex flex-col gap-4 sm:w-2/3">
-                                                <div class="flex flex-col gap-1">
-                                                      <p class="text-[#1b0e0e] text-base sm:text-lg font-bold leading-tight">
-                                                      Exploring the Hidden Gems of the Pacific Northwest
-                                                      </p>
-                                                      <p class="text-[#994d4d] text-sm sm:text-base font-normal leading-normal">
-                                                      Discover the untouched beauty of the Pacific Northwest, from its lush rainforests to its rugged coastlines. This guide takes you off the beaten path to find secluded spots and breathtaking views.
-                                                      </p>
+                              <h2 class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"> Latest Articles</h2>
+                              @foreach ($blogs as $blog)
+                                    <div class="pb-4">
+                                          <div class="flex flex-col sm:flex-row items-stretch gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
+                                                <!-- テキストエリア -->
+                                                <div class="flex flex-col gap-4 sm:w-2/3">
+                                                      <div class="flex flex-col gap-1">
+                                                            <p class="text-[#1b0e0e] text-base sm:text-lg font-bold leading-tight">{{$blog->title}}</p>
+                                                            <p class="text-[#994d4d] text-sm sm:text-base font-normal leading-normal">{{$blog->subtitle}}</p>
+                                                      </div>
+                                                      <a href={{route("blog.show", $blog->id)}}
+                                                            class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-lg h-8 px-4 bg-[#f3e7e7] text-[#1b0e0e] text-sm sm:text-base font-medium w-fit hover:bg-[#e7d0d0] transition-colors">
+                                                            <span class="truncate">Read More</span>
+                                                      </a>
                                                 </div>
-                                                <button
-                                                      class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-lg h-8 px-4 bg-[#f3e7e7] text-[#1b0e0e] text-sm sm:text-base font-medium w-fit hover:bg-[#e7d0d0] transition-colors">
-                                                      <span class="truncate">Read More</span>
-                                                </button>
-                                          </div>
 
-                                          <!-- 画像エリア -->
-                                          <div class="w-full sm:w-1/3 aspect-video bg-center bg-no-repeat bg-cover rounded-lg"
-                                                style='background-image: url("https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?w=400&h=300&fit=crop");'>
+                                                <!-- 画像エリア -->
+                                                <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="" class="w-full sm:w-1/3 aspect-video bg-center bg-no-repeat bg-cover rounded-lg">
                                           </div>
                                     </div>
-                              </div>
-                              <div class="pb-4">
-                                    <div class="flex flex-col sm:flex-row items-stretch gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
-                                          <!-- テキストエリア -->
-                                          <div class="flex flex-col gap-4 sm:w-2/3">
-                                                <div class="flex flex-col gap-1">
-                                                      <p class="text-[#1b0e0e] text-base sm:text-lg font-bold leading-tight">
-                                                      Exploring the Hidden Gems of the Pacific Northwest
-                                                      </p>
-                                                      <p class="text-[#994d4d] text-sm sm:text-base font-normal leading-normal">
-                                                      Discover the untouched beauty of the Pacific Northwest, from its lush rainforests to its rugged coastlines. This guide takes you off the beaten path to find secluded spots and breathtaking views.
-                                                      </p>
-                                                </div>
-                                                <button
-                                                      class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-lg h-8 px-4 bg-[#f3e7e7] text-[#1b0e0e] text-sm sm:text-base font-medium w-fit hover:bg-[#e7d0d0] transition-colors">
-                                                      <span class="truncate">Read More</span>
-                                                </button>
-                                          </div>
-
-                                          <!-- 画像エリア -->
-                                          <div class="w-full sm:w-1/3 aspect-video bg-center bg-no-repeat bg-cover rounded-lg"
-                                                style='background-image: url("https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?w=400&h=300&fit=crop");'>
-                                          </div>
-                                    </div>
-                              </div>
-                              <div class="pb-4">
-                                    <div class="flex flex-col sm:flex-row items-stretch gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
-                                          <!-- テキストエリア -->
-                                          <div class="flex flex-col gap-4 sm:w-2/3">
-                                                <div class="flex flex-col gap-1">
-                                                      <p class="text-[#1b0e0e] text-base sm:text-lg font-bold leading-tight">
-                                                      Exploring the Hidden Gems of the Pacific Northwest
-                                                      </p>
-                                                      <p class="text-[#994d4d] text-sm sm:text-base font-normal leading-normal">
-                                                      Discover the untouched beauty of the Pacific Northwest, from its lush rainforests to its rugged coastlines. This guide takes you off the beaten path to find secluded spots and breathtaking views.
-                                                      </p>
-                                                </div>
-                                                <button
-                                                      class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-lg h-8 px-4 bg-[#f3e7e7] text-[#1b0e0e] text-sm sm:text-base font-medium w-fit hover:bg-[#e7d0d0] transition-colors">
-                                                      <span class="truncate">Read More</span>
-                                                </button>
-                                          </div>
-
-                                          <!-- 画像エリア -->
-                                          <div class="w-full sm:w-1/3 aspect-video bg-center bg-no-repeat bg-cover rounded-lg"
-                                                style='background-image: url("https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?w=400&h=300&fit=crop");'>
-                                          </div>
-                                    </div>
-                              </div>
-
+                              @endforeach
                         </div>
                   </section>
 
@@ -307,7 +197,7 @@
                               <div class="flex flex-col p-4 gap-3">
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
-                                           <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+                                          <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
                                                 <p class="text-[#1b0e0e] test-base font-medium leading-normal">⁠What
                                                       areas
                                                       do your tours cover?

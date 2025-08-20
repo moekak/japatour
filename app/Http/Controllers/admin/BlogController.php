@@ -18,7 +18,8 @@ class BlogController extends Controller
 
     public function show($id){
         $blog = Blog::where("id", $id)->first();
-        return view("blog.blog_show", compact("blog"));
+        $relatedBlogs = Blog::getRelatedBlogs($blog->category);
+        return view("blog.blog_show", compact("blog", "relatedBlogs"));
     }
 
     public function list(){

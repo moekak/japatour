@@ -30,40 +30,7 @@
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
                   <!-- Header -->
-                  <header
-                        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e7] px-10 py-3 sticky top-0 bg-[#fcf8f8] z-50">
-                        <div class="flex items-center gap-4 text-[#1b0e0e]">
-                              <div class="size-4">
-                                    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path d="M13.8261 30.5736C16.7203 29.8826 20.2244 29.4783 24 29.4783C27.7756 29.4783 31.2797 29.8826 34.1739 30.5736C36.9144 31.2278 39.9967 32.7669 41.3563 33.8352L24.8486 7.36089C24.4571 6.73303 23.5429 6.73303 23.1514 7.36089L6.64374 33.8352C8.00331 32.7669 11.0856 31.2278 13.8261 30.5736Z"
-                                                fill="currentColor"></path>
-                                          <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M39.998 35.764C39.9944 35.7463 39.9875 35.7155 39.9748 35.6706C39.9436 35.5601 39.8949 35.4259 39.8346 35.2825C39.8168 35.2403 39.7989 35.1993 39.7813 35.1602C38.5103 34.2887 35.9788 33.0607 33.7095 32.5189C30.9875 31.8691 27.6413 31.4783 24 31.4783C20.3587 31.4783 17.0125 31.8691 14.2905 32.5189C12.0012 33.0654 9.44505 34.3104 8.18538 35.1832C8.17384 35.2075 8.16216 35.233 8.15052 35.2592C8.09919 35.3751 8.05721 35.4886 8.02977 35.589C8.00356 35.6848 8.00039 35.7333 8.00004 35.7388C8.00004 35.739 8 35.7393 8.00004 35.7388C8.00004 35.7641 8.0104 36.0767 8.68485 36.6314C9.34546 37.1746 10.4222 37.7531 11.9291 38.2772C14.9242 39.319 19.1919 40 24 40C28.8081 40 33.0758 39.319 36.0709 38.2772C37.5778 37.7531 38.6545 37.1746 39.3151 36.6314C39.9006 36.1499 39.9857 35.8511 39.998 35.764ZM4.95178 32.7688L21.4543 6.30267C22.6288 4.4191 25.3712 4.41909 26.5457 6.30267L43.0534 32.777C43.0709 32.8052 43.0878 32.8338 43.104 32.8629L41.3563 33.8352C43.104 32.8629 43.1038 32.8626 43.104 32.8629L43.1051 32.865L43.1065 32.8675L43.1101 32.8739L43.1199 32.8918C43.1276 32.906 43.1377 32.9246 43.1497 32.9473C43.1738 32.9925 43.2062 33.0545 43.244 33.1299C43.319 33.2792 43.4196 33.489 43.5217 33.7317C43.6901 34.1321 44 34.9311 44 35.7391C44 37.4427 43.003 38.7775 41.8558 39.7209C40.6947 40.6757 39.1354 41.4464 37.385 42.0552C33.8654 43.2794 29.133 44 24 44C18.867 44 14.1346 43.2794 10.615 42.0552C8.86463 41.4464 7.30529 40.6757 6.14419 39.7209C4.99695 38.7775 3.99999 37.4427 3.99999 35.7391C3.99999 34.8725 4.29264 34.0922 4.49321 33.6393C4.60375 33.3898 4.71348 33.1804 4.79687 33.0311C4.83898 32.9556 4.87547 32.8935 4.9035 32.8471C4.91754 32.8238 4.92954 32.8043 4.93916 32.7889L4.94662 32.777L4.95178 32.7688ZM35.9868 29.004L24 9.77997L12.0131 29.004C12.4661 28.8609 12.9179 28.7342 13.3617 28.6282C16.4281 27.8961 20.0901 27.4783 24 27.4783C27.9099 27.4783 31.5719 27.8961 34.6383 28.6282C35.082 28.7342 35.5339 28.8609 35.9868 29.004Z"
-                                                fill="currentColor"></path>
-                                    </svg>
-                              </div>
-                              <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours
-                              </h2>
-                        </div>
-                        <div class="flex flex-1 justify-end gap-8">
-                              <div class="flex items-center gap-9">
-                                    <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
-                                          href="#tours">Tours</a>
-                                    <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
-                                          href="#gallery">Gallery</a>
-                                    <a class="text-[#e92929] text-sm font-medium leading-normal hover:text-[#d61f1f] transition-colors font-bold"
-                                          href="#blog">Blog</a>
-                                    <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
-                                          href="#faq">FAQ</a>
-                                    <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
-                                          href="#contact">Contact</a>
-                              </div>
-                              <button
-                                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
-                                    <span class="truncate">Book Now</span>
-                              </button>
-                        </div>
-                  </header>
+                  @include('components.header')
 
                   <!-- Hero Section -->
                   <div class="flex justify-center">
@@ -319,264 +286,34 @@
                               </div>
 
                               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4" id="articles-grid">
-                                    <!-- Article 1 -->
-                                    <article
-                                          class="article-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
-                                          data-category="travel-tips" onclick="openArticle('tokyo-first-time')">
-                                          <div class="relative h-48 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&h=300&fit=crop"
-                                                      alt="Tokyo streets"
-                                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                                <div class="absolute top-3 left-3">
-                                                      <span
-                                                            class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">Travel
-                                                            Tips</span>
-                                                </div>
-                                          </div>
-                                          <div class="p-4">
-                                                <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                                      <span>Hiroshi Sato</span>
-                                                      <span>•</span>
-                                                      <span>Dec 10, 2024</span>
-                                                </div>
-                                                <h3
-                                                      class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                                      First Time in Tokyo? Here's Your Complete Survival Guide
-                                                </h3>
-                                                <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                                      Navigate Tokyo like a local with our insider tips on
-                                                      transportation, etiquette, and must-visit neighborhoods for
-                                                      first-time visitors.
-                                                </p>
-                                                <div class="flex items-center justify-between">
-                                                      <span class="text-[#994d4d] text-xs">5 min read</span>
-                                                      <div class="flex items-center gap-1 text-[#994d4d]">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                  height="14" fill="currentColor" viewBox="0 0 256 256">
-                                                                  <path
-                                                                        d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.69,146.26,196.16,128,206.8Z">
-                                                                  </path>
-                                                            </svg>
-                                                            <span class="text-xs">89</span>
+                                    @foreach ($blogs as $blog)
+                                          <article
+                                                class="article-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
+                                                data-category="travel-tips" onclick="openArticle({{$blog->id}})">
+                                                <div class="relative h-48 overflow-hidden">
+                                                      <img src="{{ asset('storage/' . $blog->featured_image) }}"
+                                                            alt="Tokyo streets"
+                                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                                      <div class="absolute top-3 left-3">
+                                                            <span
+                                                                  class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">{{$blog->category}}</span>
                                                       </div>
                                                 </div>
-                                          </div>
-                                    </article>
-
-                                    <!-- Article 2 -->
-                                    <article
-                                          class="article-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
-                                          data-category="culture" onclick="openArticle('onsen-etiquette')">
-                                          <div class="relative h-48 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=400&h=300&fit=crop"
-                                                      alt="Traditional onsen"
-                                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                                <div class="absolute top-3 left-3">
-                                                      <span
-                                                            class="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">Culture</span>
-                                                </div>
-                                          </div>
-                                          <div class="p-4">
-                                                <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                                      <span>Akiko Yamamoto</span>
-                                                      <span>•</span>
-                                                      <span>Dec 8, 2024</span>
-                                                </div>
-                                                <h3
-                                                      class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                                      Onsen Etiquette: A Complete Guide to Japanese Hot Springs
-                                                </h3>
-                                                <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                                      Learn the proper etiquette for visiting Japanese hot springs, from
-                                                      bathing procedures to cultural significance and respect.
-                                                </p>
-                                                <div class="flex items-center justify-between">
-                                                      <span class="text-[#994d4d] text-xs">7 min read</span>
-                                                      <div class="flex items-center gap-1 text-[#994d4d]">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                  height="14" fill="currentColor" viewBox="0 0 256 256">
-                                                                  <path
-                                                                        d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.69,146.26,196.16,128,206.8Z">
-                                                                  </path>
-                                                            </svg>
-                                                            <span class="text-xs">156</span>
+                                                <div class="p-4">
+                                                      <h3
+                                                            class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
+                                                            {{$blog->title}}
+                                                      </h3>
+                                                      <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
+                                                            {{$blog->subtitle}}
+                                                      </p>
+                                                      <div class="flex items-center justify-between">
+                                                            <span class="text-[#994d4d] text-xs">{{$blog->reading_time}} min read</span>
+                                                            
                                                       </div>
                                                 </div>
-                                          </div>
-                                    </article>
-
-                                    <!-- Article 3 -->
-                                    <article
-                                          class="article-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
-                                          data-category="food" onclick="openArticle('ramen-guide')">
-                                          <div class="relative h-48 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1623341214825-9f4f963727da?w=400&h=300&fit=crop"
-                                                      alt="Ramen bowl"
-                                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                                <div class="absolute top-3 left-3">
-                                                      <span
-                                                            class="bg-orange-600 text-white px-2 py-1 rounded-full text-xs font-medium">Food
-                                                            & Dining</span>
-                                                </div>
-                                          </div>
-                                          <div class="p-4">
-                                                <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                                      <span>Takeshi Nakamura</span>
-                                                      <span>•</span>
-                                                      <span>Dec 5, 2024</span>
-                                                </div>
-                                                <h3
-                                                      class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                                      The Ultimate Ramen Guide: From Tonkotsu to Miso
-                                                </h3>
-                                                <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                                      Discover the different styles of ramen across Japan and learn
-                                                      where to find the best bowls in Tokyo, Osaka, and beyond.
-                                                </p>
-                                                <div class="flex items-center justify-between">
-                                                      <span class="text-[#994d4d] text-xs">6 min read</span>
-                                                      <div class="flex items-center gap-1 text-[#994d4d]">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                  height="14" fill="currentColor" viewBox="0 0 256 256">
-                                                                  <path
-                                                                        d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.69,146.26,196.16,128,206.8Z">
-                                                                  </path>
-                                                            </svg>
-                                                            <span class="text-xs">203</span>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </article>
-
-                                    <!-- Article 4 -->
-                                    <article
-                                          class="article-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
-                                          data-category="destinations" onclick="openArticle('kyoto-temples')">
-                                          <div class="relative h-48 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1478436127897-769e1b3f0f36?w=400&h=300&fit=crop"
-                                                      alt="Kyoto temple"
-                                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                                <div class="absolute top-3 left-3">
-                                                      <span
-                                                            class="bg-green-600 text-white px-2 py-1 rounded-full text-xs font-medium">Destinations</span>
-                                                </div>
-                                          </div>
-                                          <div class="p-4">
-                                                <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                                      <span>Mei Suzuki</span>
-                                                      <span>•</span>
-                                                      <span>Dec 3, 2024</span>
-                                                </div>
-                                                <h3
-                                                      class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                                      10 Must-Visit Temples in Kyoto Off the Beaten Path
-                                                </h3>
-                                                <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                                      Escape the crowds and discover Kyoto's hidden temple gems that
-                                                      offer tranquility, stunning architecture, and spiritual
-                                                      experiences.
-                                                </p>
-                                                <div class="flex items-center justify-between">
-                                                      <span class="text-[#994d4d] text-xs">9 min read</span>
-                                                      <div class="flex items-center gap-1 text-[#994d4d]">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                  height="14" fill="currentColor" viewBox="0 0 256 256">
-                                                                  <path
-                                                                        d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.69,146.26,196.16,128,206.8Z">
-                                                                  </path>
-                                                            </svg>
-                                                            <span class="text-xs">124</span>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </article>
-
-                                    <!-- Article 5 -->
-                                    <article
-                                          class="article-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
-                                          data-category="travel-tips" onclick="openArticle('jr-pass-guide')">
-                                          <div class="relative h-48 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1464822759844-d150165c99fd?w=400&h=300&fit=crop"
-                                                      alt="Shinkansen bullet train"
-                                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                                <div class="absolute top-3 left-3">
-                                                      <span
-                                                            class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">Travel
-                                                            Tips</span>
-                                                </div>
-                                          </div>
-                                          <div class="p-4">
-                                                <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                                      <span>David Chen</span>
-                                                      <span>•</span>
-                                                      <span>Dec 1, 2024</span>
-                                                </div>
-                                                <h3
-                                                      class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                                      JR Pass vs Individual Tickets: What's Worth It in 2024?
-                                                </h3>
-                                                <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                                      With recent price changes, we break down when the JR Pass is worth
-                                                      buying and explore alternative transportation options for
-                                                      budget-conscious travelers.
-                                                </p>
-                                                <div class="flex items-center justify-between">
-                                                      <span class="text-[#994d4d] text-xs">8 min read</span>
-                                                      <div class="flex items-center gap-1 text-[#994d4d]">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                  height="14" fill="currentColor" viewBox="0 0 256 256">
-                                                                  <path
-                                                                        d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.69,146.26,196.16,128,206.8Z">
-                                                                  </path>
-                                                            </svg>
-                                                            <span class="text-xs">312</span>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </article>
-
-                                    <!-- Article 6 -->
-                                    <article
-                                          class="article-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
-                                          data-category="culture" onclick="openArticle('cherry-blossom')">
-                                          <div class="relative h-48 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1490806843957-31f4c9a91c65?w=400&h=300&fit=crop"
-                                                      alt="Cherry blossoms"
-                                                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                                <div class="absolute top-3 left-3">
-                                                      <span
-                                                            class="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">Culture</span>
-                                                </div>
-                                          </div>
-                                          <div class="p-4">
-                                                <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                                      <span>Sakura Watanabe</span>
-                                                      <span>•</span>
-                                                      <span>Nov 28, 2024</span>
-                                                </div>
-                                                <h3
-                                                      class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                                      Cherry Blossom Season 2024: Timing, Traditions, and Best Spots
-                                                </h3>
-                                                <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                                      Plan your hanami experience with our comprehensive guide to cherry
-                                                      blossom season, including timing predictions and cultural
-                                                      traditions.
-                                                </p>
-                                                <div class="flex items-center justify-between">
-                                                      <span class="text-[#994d4d] text-xs">6 min read</span>
-                                                      <div class="flex items-center gap-1 text-[#994d4d]">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="14"
-                                                                  height="14" fill="currentColor" viewBox="0 0 256 256">
-                                                                  <path
-                                                                        d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.69,146.26,196.16,128,206.8Z">
-                                                                  </path>
-                                                            </svg>
-                                                            <span class="text-xs">278</span>
-                                                      </div>
-                                                </div>
-                                          </div>
-                                    </article>
+                                          </article>
+                                    @endforeach
                               </div>
 
                               <!-- Load More Button -->
@@ -677,7 +414,8 @@
 
             // Open article function (placeholder)
             function openArticle(articleId) {
-                  alert(`Opening article: ${articleId}\nThis would navigate to the full article page.`);
+                  window.location.href = `/blog/${articleId}`
+
             }
 
             // Search functionality
@@ -790,122 +528,6 @@
                   }
             }
       </style>
-</body>
-
-</html>unction openArticle(articleId) {
-alert(`Opening article: ${articleId}\nThis would navigate to the full article page.`);
-}
-
-// Search functionality
-document.querySelector('input[type="text"]').addEventListener('input', function(e) {
-const searchTerm = e.target.value.toLowerCase();
-const articles = document.querySelectorAll('.article-card');
-
-articles.forEach(article => {
-const title = article.querySelector('h3').textContent.toLowerCase();
-const content = article.querySelector('p').textContent.toLowerCase();
-
-if (title.includes(searchTerm) || content.includes(searchTerm)) {
-article.style.display = 'block';
-} else {
-article.style.display = searchTerm === '' ? 'block' : 'none';
-}
-});
-});
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function(e) {
-e.preventDefault();
-const target = document.querySelector(this.getAttribute('href'));
-if (target) {
-target.scrollIntoView({
-behavior: 'smooth',
-block: 'start'
-});
-}
-});
-});
-
-// Newsletter subscription
-document.querySelector('button').addEventListener('click', function(e) {
-if (e.target.textContent.trim() === 'Subscribe') {
-const email = document.querySelector('input[type="email"]').value;
-if (email) {
-alert('Thank you for subscribing! We\'ll send you amazing Japan travel content.');
-document.querySelector('input[type="email"]').value = '';
-} else {
-alert('Please enter your email address.');
-}
-}
-});
-</script>
-
-<style>
-      @keyframes fadeIn {
-            from {
-                  opacity: 0;
-                  transform: translateY(10px);
-            }
-
-            to {
-                  opacity: 1;
-                  transform: translateY(0);
-            }
-      }
-
-      .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-      }
-
-      .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-      }
-
-      /* Enhanced hover effects */
-      .article-card:hover {
-            transform: translateY(-2px);
-      }
-
-      .category-card:hover {
-            transform: translateY(-2px);
-      }
-
-      /* Button hover effects */
-      button:hover {
-            transform: translateY(-1px);
-      }
-
-      button:active {
-            transform: translateY(0);
-      }
-
-      /* Search input focus effect */
-      input:focus {
-            box-shadow: 0 0 0 3px rgba(233, 41, 41, 0.1);
-      }
-
-      /* Responsive adjustments */
-      @media (max-width: 768px) {
-            .grid {
-                  grid-template-columns: 1fr;
-            }
-
-            .md\:grid-cols-2 {
-                  grid-template-columns: 1fr;
-            }
-
-            .md\:grid-cols-4 {
-                  grid-template-columns: repeat(2, 1fr);
-            }
-      }
-</style>
 </body>
 
 </html>

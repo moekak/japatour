@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Region;
 use App\Models\Tour;
@@ -16,9 +17,10 @@ class TopController extends Controller
         $tours =ToursNew::getAllToursByCategory();
         $categories = Category::getCateforiesDataWithRegion();
         $regions = Region::getAllRegions();
+        $blogs = Blog::getlatesetBlogs();
 
         // print_r($tours);
         // exit;
-        return view("index", compact("tours", "categories", "regions"));
+        return view("index", compact("tours", "categories", "regions", "blogs"));
     }
 }

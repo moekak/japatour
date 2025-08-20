@@ -1,67 +1,26 @@
-
-@if (Route::currentRouteName() == 'top')  
-    <header class="absolute z2 js_header_pc pc_header">
-        <div class="header_right font_icon"><a href="#home">JapaTour</a></div>
-        <div class="header_center">
-            <ul>
-                <li class="font_normal"><a href="#home" >Home</a></li>
-                <li class="font_normal"><a href="#about" >About</a></li>
-                <li class="font_normal"><a href="#tour" >Tour</a></li>
-                <li class="font_normal"><a href="#hot">Hot</a></li>
-                <li class="font_normal"><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <header class="sp_header js_header relative">
-        <button class="hamburger js_header_btn" type="button">
-            <span class="hamburger__line"></span>
-            <span class="hamburger__line"></span>
-            <span class="hamburger__line"></span>
-        </button>
-    </header>
-@elseif(Route::currentRouteName() == 'tour.show' || Route::currentRouteName() == 'tour.book' ||  Route::currentRouteName() == 'tour.contact')
-
-    <header class="pc_header" style="transform: none; border-bottom: 1px solid rgba(128, 128, 128, 0.371);">
-        <div class="header_right font_icon" style="color: #52aaf9;"><a href="{{route("top")}}">JapaTour</a></div>
-        <div class="header_center">
-            <ul>
-                <li class="font_normal header-style"><a href="{{route("top")}}" >Home</a></li>
-                <li class="font_normal header-style"><a href="{{route("top")}}#about" >About</a></li>
-                <li class="font_normal header-style"><a href="{{route("top")}}#tour" >Tour</a></li>
-                <li class="font_normal header-style"><a href="{{route("top")}}#hot">Hot</a></li>
-                <li class="font_normal header-style"><a href="{{route("top")}}#contact">Contact</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <header class="sp_header relative" style="transform: none;">
-        <button class="hamburger js_header_btn" type="button">
-            <span class="hamburger__line" style="background: #424242"></span>
-            <span class="hamburger__line" style="background: #424242"></span>
-            <span class="hamburger__line" style="background: #424242"></span>
-        </button>
-    </header>
-@else
-    <header class="pc_header header_style_law">
-        <div class="header_right font_icon"><a href="{{route("top")}}">JapaTour</a></div>
-        <div class="header_center_law">
-            <ul>
-                <li class="font_normal"><a href="{{route("top")}}" >Home</a></li>
-                <li class="font_normal"><a href="{{route("top")}}#about" >About</a></li>
-                <li class="font_normal"><a href="{{route("top")}}#tour" >Tour</a></li>
-                <li class="font_normal"><a href="{{route("top")}}#hot">Hot</a></li>
-                <li class="font_normal"><a href="{{route("top")}}#contact">Contact</a></li>
-            </ul>
-        </div>
-    </header>
-
-    <header class="sp_header relative" style="transform: translateY(0px); border-bottom: 1px solid  rgba(95, 95, 95, 0.181);">
-        <button class="hamburger js_header_btn" type="button">
-            <span class="hamburger__line" style="background: rgba(95, 95, 95);"></span>
-            <span class="hamburger__line" style="background: rgba(95, 95, 95);"></span>
-            <span class="hamburger__line" style="background: rgba(95, 95, 95);"></span>
-        </button>
-    </header>
-@endif
-
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e7] px-10 py-3 sticky top-0 bg-[#fcf8f8] z-50">
+        <a href={{route("top")}} class="flex items-center gap-4 text-[#1b0e0e]">
+            <div class="size-8 items-center flex justify-center">
+                    <img src="{{asset("img/logo2.png")}}" alt="">
+            </div>
+            <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours</h2>
+        </a>
+    <div class="flex flex-1 justify-end gap-8">
+            <div class="flex items-center gap-9">
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                        href="#tours">Tours</a>
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                        href="#gallery">Gallery</a>
+                <a class="text-[#e92929] text-sm font-medium leading-normal hover:text-[#d61f1f] transition-colors font-bold"
+                        href={{route("blog")}}>Blog</a>
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                        href="#faq">FAQ</a>
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                        href="#contact">Contact</a>
+            </div>
+            <button
+                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
+                <span class="truncate">Book Now</span>
+            </button>
+    </div>
+</header>

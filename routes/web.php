@@ -45,7 +45,8 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.tour_edit');
     });
 
-    Route::get("/tour/list", [TourController::class, "index"])->name("tour_list");
+    Route::get("/tour/list", [TourController::class, "list"])->name("tour_list");
+    Route::get("/tours", [TourController::class, "index"])->name("tours");
     Route::post("/tour/update/{id}", [TourController::class, "update"])->name("tour.update");
     Route::get("/tour/edit/{id}", [TourController::class, "edit"])->name("tour.edit");
     Route::delete("/tour/destroy/{id}", [TourController::class, "destroy"])->name("tours.destroy");
@@ -75,5 +76,5 @@ Route::post('/payment-intent', [BookingController::class, 'createPaymentIntent']
 
 // ブログ
 
-Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
