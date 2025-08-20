@@ -8,6 +8,8 @@ class Itinerary extends Model
 {
     protected $fillable = [
         "tour_id",
+        "overview_title",
+        "overview_description",
         "duration",
         "image",
         "max_participants",
@@ -26,6 +28,6 @@ class Itinerary extends Model
     }
 
     public function itineraryLanguages(){
-        return $this->hasMany(itineraryLanguage::class, "itinerary_id", "id");
+        return $this->hasMany(ItineraryLanguage::class, "itinerary_id", "id");
     }
 }

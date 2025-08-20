@@ -8,20 +8,20 @@ use Biscolab\ReCaptcha\Facades\ReCaptcha;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JapaTour</title>
+    <title>ShogunTours</title>
     <!-- 検索用キーワード -->
-    <meta name="keywords" content="japatour, japatour-official, Japan tour, tokyo tour, Tokyo travel, Kyoto experience, Osaka trip, Japanese culture, foreign tourist guide, Japan travel package, Mt. Fuji tour, onsen experience, Japan sightseeing">
+    <meta name="keywords" content="ShogunTours, ShogunTours-official, Japan tour, tokyo tour, Tokyo travel, Kyoto experience, Osaka trip, Japanese culture, foreign tourist guide, Japan travel package, Mt. Fuji tour, onsen experience, Japan sightseeing">
     <!-- robots設定 -->
     <!-- カノニカルURL設定 -->
-    <meta rel="canonical" href="https://japatour-official.com/">
+    <meta rel="canonical" href="https://shoguntoursjapan.com/">
     <meta name="robots" content="index,follow">
     <!-- OGP設定（SNSでシェアされた時の表示設定） -->
-    <meta property="og:title" content="JapaTour">
+    <meta property="og:title" content="ShogunTours">
     <meta property="og:type" content="website">
     <meta name="description" content="Specialized travel service for international tourists visiting Japan. We offer multilingual tours exploring Tokyo, Kyoto, Osaka and beyond. Let us guide you through traditional cultural experiences to cutting-edge technology, supporting you in discovering all of Japan's wonders.">
-    <meta property="og:url" content="https://japatour-official.com/">
+    <meta property="og:url" content="https://shoguntoursjapan.com/">
     <meta property="og:image" content="{{asset("img/logo3.svg")}}">
-    <meta property="og:site_name" content="Japatour">
+    <meta property="og:site_name" content="ShogunTours">
 
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/index_sp.css') }}">

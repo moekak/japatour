@@ -8,65 +8,88 @@
       <title>ShogunTours</title>
       <!-- 検索用キーワード -->
       <meta name="keywords"
-            content="japatour, japatour-official, Japan tour, tokyo tour, Tokyo travel, Kyoto experience, Osaka trip, Japanese culture, foreign tourist guide, Japan travel package, Mt. Fuji tour, onsen experience, Japan sightseeing">
+            content="ShogunTours, ShogunTours-official, Japan tour, tokyo tour, Tokyo travel, Kyoto experience, Osaka trip, Japanese culture, foreign tourist guide, Japan travel package, Mt. Fuji tour, onsen experience, Japan sightseeing">
       <!-- robots設定 -->
       <!-- カノニカルURL設定 -->
-      <meta rel="canonical" href="https://japatour-official.com/">
+      <meta rel="canonical" href="https://shoguntoursjapan.com/">
       <meta name="robots" content="index,follow">
       <!-- OGP設定（SNSでシェアされた時の表示設定） -->
-      <meta property="og:title" content="JapaTour">
+      <meta property="og:title" content="ShogunTours">
       <meta property="og:type" content="website">
       <meta name="description"
             content="Specialized travel service for international tourists visiting Japan. We offer multilingual tours exploring Tokyo, Kyoto, Osaka and beyond. Let us guide you through traditional cultural experiences to cutting-edge technology, supporting you in discovering all of Japan's wonders.">
-      <meta property="og:url" content="https://japatour-official.com/">
+      <meta property="og:url" content="https://shoguntoursjapan.com/">
       <meta property="og:image" content="{{asset("img/logo2.png")}}">
-      <meta property="og:site_name" content="Japatour">
+      <meta property="og:site_name" content="ShogunTours">
       <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
       <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
             href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
-      <title>ShogunTours</title>
       <link rel="shortcut icon" href="{{asset("img/logo2.png")}}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
       <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-
 </head>
 
 <body>
       <!-- sending view -->
       @include("sending")
-      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
+      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden js_main"
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
-                  <!-- Header -->
-                  <header
-                        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f3e7e7] px-10 py-3 sticky top-0 bg-[#fcf8f8] z-50">
-                        <div class="flex items-center gap-4 text-[#1b0e0e]">
-                              <div class="size-4">
-                                    <img src="{{asset("img/logo2.png")}}" alt="">
+            
+                  <nav class="bg-[#fcf8f8] border-b border-solid border-b-[#f3e7e7]">
+                        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+                              <div class="relative flex h-16 items-center justify-between">
+                                    <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                                          <!-- Mobile menu button-->
+                                          <button type="button" aria-controls="mobile-menu" aria-expanded="false" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
+                                                <span class="absolute -inset-0.5"></span>
+                                                <span class="sr-only">Open main menu</span>
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="block size-6">
+                                                      <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="hidden size-6">
+                                                      <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
+                                                </svg>
+                                          </button>
+                                    </div>
+                                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+                                          <div class="flex shrink-0 items-center justify-center gap-3 text-[#1b0e0e]">
+                                                <div class="size-8 items-center flex justify-center">
+                                                      <img src="{{asset("img/logo2.png")}}" alt="">
+                                                </div>
+                                                <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours</h2>
+                                          </div>
+                                          <div class="hidden sm:ml-6 sm:flex items-center justify-center">
+                                                <div class="flex space-x-4 items-center justify-center">
+                                                      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                                                      <a href="#tours"  class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Tours</a>
+                                                      <a href="#instagram" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Gallery</a>
+                                                      <a href="#blog" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Blog</a>
+                                                      <a href="#faq" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">FAQ</a>
+                                                      <a href="#contact" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Contact</a>
+                                                      <button
+                                                            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] test-base font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
+                                                            <span class="truncate">Book Now</span>
+                                                      </button>
+                                                </div>
+                                          </div>
+                                    </div>
                               </div>
-                              <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours
-                              </h2>
                         </div>
-                        <div class="flex flex-1 justify-end gap-8">
-                              <div class="flex items-center gap-9">
-                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
-                                          href="#tours">Tours</a>
-                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
-                                          href="#instagram">Gallery</a>
-                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
-                                          href="#blog">Blog</a>
-                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
-                                          href="#faq">FAQ</a>
-                                    <a class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors"
-                                          href="#contact">Contact</a>
+
+                        <!-- Mobile menu, show/hide based on menu state. -->
+                        <div id="mobile-menu" class="sm:hidden hidden transition-all duration-300 ease-out overflow-hidden max-h-0">
+                              <div class="space-y-1 px-2 pt-2 pb-3">
+                                    <a href="#tours" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Tours</a>
+                                    <a href="#instagram" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Gallery</a>
+                                    <a href="#blog" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Blog</a>
+                                    <a href="#faq" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">FAQ</a>
+                                    <a href="#contact" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Contact</a>
                               </div>
-                              <button
-                                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] test-base font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
-                                    <span class="truncate">Book Now</span>
-                              </button>
                         </div>
-                  </header>
+
+                  </nav>
+
 
                   <!-- Hero Section -->
                   <div class="flex justify-center">
@@ -131,9 +154,10 @@
                                                       class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent group-hover:from-black/80 transition-all">
                                                       <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
                                                             <h3 class="text-lg font-bold">{{$category->category}}</h3>
-                                                            <p class="test-base opacity-90"><i
-                                                                        class="fas fa-map-marked-alt mr-1"></i>{{$category->tours_count}}
-                                                                  Tours</p>
+                                                            <p class="text-base opacity-90">
+                                                                  <i class="fas fa-map-marked-alt mr-1"></i>
+                                                                  {{ count($tours[$category->category] ?? []) }} Tours
+                                                            </p>
                                                       </div>
                                                 </div>
                                           </div>
@@ -147,11 +171,11 @@
                               <div id="tours-list-section" class="hidden">
                                     <div class="flex items-center justify-between px-4 pb-3 pt-5">
                                           <h2
-                                                class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em]">
+                                                class="text-[#1b0e0e] text-[20px] sm:text-[25px] font-bold leading-tight tracking-[-0.015em]">
                                                 <span id="destination-name">Tokyo</span> Tours
                                           </h2>
                                           <button
-                                                class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium hover:bg-[#e7d0d0] transition-colors"
+                                                class="sm:flex hidden items-center gap-2 px-4 py-2 rounded-lg bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium hover:bg-[#e7d0d0] transition-colors"
                                                 onclick="showDestinations()">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                       fill="currentColor" viewBox="0 0 256 256">
@@ -160,6 +184,14 @@
                                                       </path>
                                                 </svg>
                                                 Back to Destinations
+                                          </button>
+                                          <button  onclick="showDestinations()" class="sm:hidden flex items-center gap-2 px-4 py-2 rounded-lg bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium hover:bg-[#e7d0d0] transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                      fill="currentColor" viewBox="0 0 256 256">
+                                                      <path
+                                                            d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z">
+                                                      </path>
+                                                </svg>
                                           </button>
                                     </div>
 
@@ -171,7 +203,7 @@
                   </section>
 
                   <!-- Instagram Section -->
-                  <section id="instagram" class="flex justify-center py-12 bg-[#f3e7e7]">
+                  <section id="instagram" class="flex justify-center py-12 bg-[#f3e7e7] px-4">
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                               <h2
                                     class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
@@ -190,78 +222,79 @@
                               <h2
                                     class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
                                     Latest Articles</h2>
-                              <div class="p-4">
-                                    <div
-                                          class="flex items-stretch justify-between gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
-                                          <div class="flex flex-[2_2_0px] flex-col gap-4">
+                              <div class="pb-4">
+                                    <div class="flex flex-col sm:flex-row items-stretch gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
+                                          <!-- テキストエリア -->
+                                          <div class="flex flex-col gap-4 sm:w-2/3">
                                                 <div class="flex flex-col gap-1">
-                                                      <p class="text-[#1b0e0e] text-lg font-bold leading-tight">
-                                                            Exploring the Hidden Gems of the Pacific Northwest</p>
-                                                      <p class="text-[#994d4d] test-base font-normal leading-normal">
-                                                            Discover the untouched beauty of the Pacific Northwest, from
-                                                            its lush rainforests to its rugged coastlines. This guide
-                                                            takes you off the beaten path to find
-                                                            secluded spots and breathtaking views.
+                                                      <p class="text-[#1b0e0e] text-base sm:text-lg font-bold leading-tight">
+                                                      Exploring the Hidden Gems of the Pacific Northwest
+                                                      </p>
+                                                      <p class="text-[#994d4d] text-sm sm:text-base font-normal leading-normal">
+                                                      Discover the untouched beauty of the Pacific Northwest, from its lush rainforests to its rugged coastlines. This guide takes you off the beaten path to find secluded spots and breathtaking views.
                                                       </p>
                                                 </div>
                                                 <button
-                                                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium leading-normal w-fit hover:bg-[#e7d0d0] transition-colors">
+                                                      class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-lg h-8 px-4 bg-[#f3e7e7] text-[#1b0e0e] text-sm sm:text-base font-medium w-fit hover:bg-[#e7d0d0] transition-colors">
                                                       <span class="truncate">Read More</span>
                                                 </button>
                                           </div>
-                                          <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
+
+                                          <!-- 画像エリア -->
+                                          <div class="w-full sm:w-1/3 aspect-video bg-center bg-no-repeat bg-cover rounded-lg"
                                                 style='background-image: url("https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?w=400&h=300&fit=crop");'>
                                           </div>
                                     </div>
                               </div>
-                              <div class="p-4">
-                                    <div
-                                          class="flex items-stretch justify-between gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
-                                          <div class="flex flex-[2_2_0px] flex-col gap-4">
+                              <div class="pb-4">
+                                    <div class="flex flex-col sm:flex-row items-stretch gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
+                                          <!-- テキストエリア -->
+                                          <div class="flex flex-col gap-4 sm:w-2/3">
                                                 <div class="flex flex-col gap-1">
-                                                      <p class="text-[#1b0e0e] text-lg font-bold leading-tight">A
-                                                            Foodie's Journey Through Southern Italy</p>
-                                                      <p class="text-[#994d4d] test-base font-normal leading-normal">
-                                                            Embark on a culinary adventure through Southern Italy, where
-                                                            every meal is a celebration of local flavors and traditions.
-                                                            From pasta making in Naples to wine
-                                                            tasting in Tuscany, savor the best of Italian cuisine.
+                                                      <p class="text-[#1b0e0e] text-base sm:text-lg font-bold leading-tight">
+                                                      Exploring the Hidden Gems of the Pacific Northwest
+                                                      </p>
+                                                      <p class="text-[#994d4d] text-sm sm:text-base font-normal leading-normal">
+                                                      Discover the untouched beauty of the Pacific Northwest, from its lush rainforests to its rugged coastlines. This guide takes you off the beaten path to find secluded spots and breathtaking views.
                                                       </p>
                                                 </div>
                                                 <button
-                                                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium leading-normal w-fit hover:bg-[#e7d0d0] transition-colors">
+                                                      class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-lg h-8 px-4 bg-[#f3e7e7] text-[#1b0e0e] text-sm sm:text-base font-medium w-fit hover:bg-[#e7d0d0] transition-colors">
                                                       <span class="truncate">Read More</span>
                                                 </button>
                                           </div>
-                                          <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
-                                                style='background-image: url("https://images.unsplash.com/photo-1517732306149-e8f829eb588a?w=400&h=300&fit=crop");'>
+
+                                          <!-- 画像エリア -->
+                                          <div class="w-full sm:w-1/3 aspect-video bg-center bg-no-repeat bg-cover rounded-lg"
+                                                style='background-image: url("https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?w=400&h=300&fit=crop");'>
                                           </div>
                                     </div>
                               </div>
-                              <div class="p-4">
-                                    <div
-                                          class="flex items-stretch justify-between gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
-                                          <div class="flex flex-[2_2_0px] flex-col gap-4">
+                              <div class="pb-4">
+                                    <div class="flex flex-col sm:flex-row items-stretch gap-4 rounded-lg hover:bg-[#f3e7e7] transition-colors p-4">
+                                          <!-- テキストエリア -->
+                                          <div class="flex flex-col gap-4 sm:w-2/3">
                                                 <div class="flex flex-col gap-1">
-                                                      <p class="text-[#1b0e0e] text-lg font-bold leading-tight">The
-                                                            Ultimate Guide to Backpacking in Southeast Asia</p>
-                                                      <p class="text-[#994d4d] test-base font-normal leading-normal">
-                                                            Plan your backpacking trip through Southeast Asia with this
-                                                            comprehensive guide. Learn about the best routes, must-see
-                                                            destinations, and tips for budget
-                                                            travel in this vibrant region.
+                                                      <p class="text-[#1b0e0e] text-base sm:text-lg font-bold leading-tight">
+                                                      Exploring the Hidden Gems of the Pacific Northwest
+                                                      </p>
+                                                      <p class="text-[#994d4d] text-sm sm:text-base font-normal leading-normal">
+                                                      Discover the untouched beauty of the Pacific Northwest, from its lush rainforests to its rugged coastlines. This guide takes you off the beaten path to find secluded spots and breathtaking views.
                                                       </p>
                                                 </div>
                                                 <button
-                                                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-8 px-4 flex-row-reverse bg-[#f3e7e7] text-[#1b0e0e] test-base font-medium leading-normal w-fit hover:bg-[#e7d0d0] transition-colors">
+                                                      class="flex min-w-[84px] max-w-[480px] items-center justify-center rounded-lg h-8 px-4 bg-[#f3e7e7] text-[#1b0e0e] text-sm sm:text-base font-medium w-fit hover:bg-[#e7d0d0] transition-colors">
                                                       <span class="truncate">Read More</span>
                                                 </button>
                                           </div>
-                                          <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg flex-1"
-                                                style='background-image: url("https://images.unsplash.com/photo-1494949360228-4e9bde560065?w=400&h=300&fit=crop");'>
+
+                                          <!-- 画像エリア -->
+                                          <div class="w-full sm:w-1/3 aspect-video bg-center bg-no-repeat bg-cover rounded-lg"
+                                                style='background-image: url("https://images.unsplash.com/photo-1442850473887-0fb77cd0b337?w=400&h=300&fit=crop");'>
                                           </div>
                                     </div>
                               </div>
+
                         </div>
                   </section>
 
@@ -274,7 +307,7 @@
                               <div class="flex flex-col p-4 gap-3">
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
-                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                           <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
                                                 <p class="text-[#1b0e0e] test-base font-medium leading-normal">⁠What
                                                       areas
                                                       do your tours cover?
@@ -289,7 +322,7 @@
                                                       </svg>
                                                 </div>
                                           </summary>
-                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">We offer
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">We offer
                                                 unforgettable tours across Tokyo, Yokohama, Kamakura, Enoshima, Kyoto,
                                                 Osaka, Nara, Matsumoto, and the scenic Nakasendo trail. From historic
                                                 temples to modern cityscapes and countryside charm — we’ve got Japan
@@ -298,7 +331,7 @@
                                     </details>
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
-                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                           <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
                                                 <p class="text-[#1b0e0e] test-base font-medium leading-normal">Can we
                                                       customize our tour itinerary?</p>
                                                 <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
@@ -311,7 +344,7 @@
                                                       </svg>
                                                 </div>
                                           </summary>
-                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">
                                                 Absolutely!
                                                 All our private tours are fully customizable. Let us know your
                                                 interests, preferred pace, and any must-see spots — we’ll craft a unique
@@ -320,7 +353,7 @@
                                     </details>
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
-                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                           <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
                                                 <p class="text-[#1b0e0e] test-base font-medium leading-normal">⁠How do I
                                                       book a tour and when do I pay?
                                                 </p>
@@ -334,7 +367,7 @@
                                                       </svg>
                                                 </div>
                                           </summary>
-                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">You can
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">You can
                                                 book
                                                 directly through our website or our trusted partner platforms. Feel free
                                                 to contact us before booking if you'd like to discuss ideas,
@@ -348,7 +381,7 @@
                                     </details>
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
-                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                           <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
                                                 <p class="text-[#1b0e0e] test-base font-medium leading-normal">Are your
                                                       tours family-friendly or suitable for elderly guests?
                                                 </p>
@@ -362,7 +395,7 @@
                                                       </svg>
                                                 </div>
                                           </summary>
-                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">Yes! Our
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">Yes! Our
                                                 tours are perfect for guests of all ages. We can adjust routes and
                                                 pacing to suit families with kids, elderly travelers, or anyone with
                                                 mobility needs.
@@ -372,7 +405,7 @@
                                     </details>
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
-                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                          <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
                                                 <p class="text-[#1b0e0e] test-base font-medium leading-normal">What
                                                       languages do you offer tours in?
                                                 </p>
@@ -386,7 +419,7 @@
                                                       </svg>
                                                 </div>
                                           </summary>
-                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">We offer
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">We offer
                                                 tours in English, Spanish, Italian, French, German, and Russian.
                                                 Please note: Language availability depends on our guide schedule, so we
                                                 recommend requesting your preferred language in advance.
@@ -394,7 +427,7 @@
                                     </details>
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
-                                          <summary class="flex cursor-pointer items-center justify-between gap-6 py-2">
+                                          <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
                                                 <p class="text-[#1b0e0e] test-base font-medium leading-normal">What is
                                                       your cancellation and refund policy?
 
@@ -409,7 +442,7 @@
                                                       </svg>
                                                 </div>
                                           </summary>
-                                          <p class="text-[#994d4d] test-base font-normal leading-normal pb-2">We
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">We
                                                 understand plans can change. Here’s our cancellation policy:
                                                 <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">
                                                       Within 24 hours of the tour: No refund</li>
@@ -426,150 +459,6 @@
                               </div>
                         </div>
                   </section>
-
-                  <!-- We Are Hiring Section -->
-                  {{-- <section id="hiring" class="flex justify-center py-5 bg-gradient-to-br from-[#e92929] to-[#d61f1f]">
-  <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-    <div class="text-center px-4 py-8">
-      <h2 class="text-white text-[32px] font-black leading-tight tracking-[-0.033em] pb-2">Join Our Adventure Team!</h2>
-      <p class="text-white/90 text-lg font-normal leading-normal pb-6">
-        We're looking for passionate individuals who love travel and want to help others explore the world
-      </p>
-    </div>
-    
-    <div class="grid md:grid-cols-2 gap-6 p-4">
-      <!-- Position Card 1 -->
-      <div class="bg-white rounded-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-        <div class="flex items-start justify-between mb-4">
-          <div>
-            <h3 class="text-[#1b0e0e] text-xl font-bold">Tour Guide</h3>
-            <p class="text-[#994d4d] test-base">Full-time • Multiple Locations</p>
-          </div>
-          <span class="bg-[#e92929]/10 text-[#e92929] px-3 py-1 rounded-full text-xs font-medium">New</span>
-        </div>
-        <p class="text-[#994d4d] test-base leading-relaxed mb-4">
-          Lead exciting tours and share your passion for adventure with travelers from around the world. Experience in outdoor activities and multilingual skills preferred.
-        </p>
-        <div class="flex flex-wrap gap-2 mb-4">
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Leadership</span>
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Communication</span>
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Outdoor Skills</span>
-        </div>
-        <button class="w-full bg-[#1b0e0e] text-white py-2 rounded-lg test-base font-medium hover:bg-[#2b1e1e] transition-colors">
-          Apply Now
-        </button>
-      </div>
-
-      <!-- Position Card 2 -->
-      <div class="bg-white rounded-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-        <div class="flex items-start justify-between mb-4">
-          <div>
-            <h3 class="text-[#1b0e0e] text-xl font-bold">Travel Coordinator</h3>
-            <p class="text-[#994d4d] test-base">Full-time • Remote</p>
-          </div>
-          <span class="bg-[#e92929]/10 text-[#e92929] px-3 py-1 rounded-full text-xs font-medium">Hot</span>
-        </div>
-        <p class="text-[#994d4d] test-base leading-relaxed mb-4">
-          Plan and coordinate unforgettable travel experiences. Handle bookings, create itineraries, and ensure smooth operations for our adventure tours.
-        </p>
-        <div class="flex flex-wrap gap-2 mb-4">
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Organization</span>
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Detail-oriented</span>
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Customer Service</span>
-        </div>
-        <button class="w-full bg-[#1b0e0e] text-white py-2 rounded-lg test-base font-medium hover:bg-[#2b1e1e] transition-colors">
-          Apply Now
-        </button>
-      </div>
-
-      <!-- Position Card 3 -->
-      <div class="bg-white rounded-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-        <div class="flex items-start justify-between mb-4">
-          <div>
-            <h3 class="text-[#1b0e0e] text-xl font-bold">Content Creator</h3>
-            <p class="text-[#994d4d] test-base">Part-time • Flexible</p>
-          </div>
-        </div>
-        <p class="text-[#994d4d] test-base leading-relaxed mb-4">
-          Capture and share amazing travel stories through photos, videos, and blog posts. Help inspire others to embark on their own adventures.
-        </p>
-        <div class="flex flex-wrap gap-2 mb-4">
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Photography</span>
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Writing</span>
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Social Media</span>
-        </div>
-        <button class="w-full bg-[#1b0e0e] text-white py-2 rounded-lg test-base font-medium hover:bg-[#2b1e1e] transition-colors">
-          Apply Now
-        </button>
-      </div>
-
-      <!-- Position Card 4 -->
-      <div class="bg-white rounded-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-        <div class="flex items-start justify-between mb-4">
-          <div>
-            <h3 class="text-[#1b0e0e] text-xl font-bold">Customer Experience Specialist</h3>
-            <p class="text-[#994d4d] test-base">Full-time • Office</p>
-          </div>
-        </div>
-        <p class="text-[#994d4d] test-base leading-relaxed mb-4">
-          Be the friendly voice that helps travelers plan their perfect adventure. Provide exceptional support and create memorable customer experiences.
-        </p>
-        <div class="flex flex-wrap gap-2 mb-4">
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Empathy</span>
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Problem-solving</span>
-          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Patience</span>
-        </div>
-        <button class="w-full bg-[#1b0e0e] text-white py-2 rounded-lg test-base font-medium hover:bg-[#2b1e1e] transition-colors">
-          Apply Now
-        </button>
-      </div>
-    </div>
-
-    <!-- Benefits Section -->
-    <div class="mt-8 p-4">
-      <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-        <h3 class="text-white text-xl font-bold mb-4 text-center">Why Work With Us?</h3>
-        <div class="grid md:grid-cols-3 gap-4 text-center">
-          <div class="flex flex-col items-center">
-            <div class="bg-white/20 rounded-full p-3 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 256 256">
-                <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM80,108a28,28,0,1,1,28,28A28,28,0,0,1,80,108Zm96,0a28,28,0,1,1-28-28A28,28,0,0,1,176,108Zm-80,40h64a8,8,0,0,1,0,16H96a8,8,0,0,1,0-16Z"></path>
-              </svg>
-            </div>
-            <h4 class="text-white font-medium mb-1">Travel Perks</h4>
-            <p class="text-white/80 test-base">Free and discounted tours for you and your family</p>
-          </div>
-          <div class="flex flex-col items-center">
-            <div class="bg-white/20 rounded-full p-3 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 256 256">
-                <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"></path>
-              </svg>
-            </div>
-            <h4 class="text-white font-medium mb-1">Flexible Work</h4>
-            <p class="text-white/80 test-base">Remote options and flexible schedules available</p>
-          </div>
-          <div class="flex flex-col items-center">
-            <div class="bg-white/20 rounded-full p-3 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="white" viewBox="0 0 256 256">
-                <path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,98.7a8,8,0,0,1-11.07-2.33A79.83,79.83,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,206.7Z"></path>
-              </svg>
-            </div>
-            <h4 class="text-white font-medium mb-1">Amazing Team</h4>
-            <p class="text-white/80 test-base">Work with passionate travel enthusiasts</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="text-center p-4 pb-8">
-      <p class="text-white/90 test-base mb-4">Don't see the perfect position? We're always looking for talented people!</p>
-      <button class="bg-white text-[#e92929] px-6 py-3 rounded-lg font-bold hover:bg-[#fcf8f8] transition-colors">
-        Send Us Your Resume
-      </button>
-    </div>
-  </div>
-</section> --}}
 
                   <!-- Contact Section -->
                   <section id="contact" class="flex justify-center py-12">
@@ -673,7 +562,7 @@
                                                             Email</p>
                                                       <p
                                                             class="text-[#994d4d] test-base font-normal leading-normal line-clamp-2">
-                                                            info@japatour-official.com</p>
+                                                            info@shoguntoursjapan.com</p>
                                                 </div>
                                           </div>
                                           <div class="flex gap-4 pt-4">
@@ -723,76 +612,17 @@
                   </section>
 
                   <!-- Footer -->
-                  <footer class="flex justify-center bg-[#1b0e0e] text-white">
-                        <div class="flex max-w-[960px] flex-1 flex-col">
-                              <div class="flex flex-col gap-6 px-5 py-10 text-center @container">
-                                    <div
-                                          class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-                                          <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
-                                                href="#tours">Tours</a>
-                                          <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
-                                                href="#blog">Blog</a>
-                                          <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
-                                                href="#">Privacy Policy</a>
-                                          <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
-                                                href="#">Terms of Service</a>
-                                    </div>
-                                    <p class="text-white test-base font-normal leading-normal opacity-80">© 2024
-                                          Adventure
-                                          Tours. All rights reserved.</p>
-                              </div>
-                        </div>
-                  </footer>
+                  @include('components.footer')
             </div>
       </div>
 
-      <script src="https://www.google.com/recaptcha/api.js?render=6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle"></script>
+      <script src="https://www.google.com/recaptcha/api.js?render=6LfsOIkrAAAAAK9nICyBNQeanLgdeQjHa2Go_Myb"></script>
+      <script src="{{mix("js/common.js")}}"></script>
       <script src="{{mix("js/main.js")}}"></script>
       <script>
-      document.addEventListener('DOMContentLoaded', function() {
-            var submitForm = document.querySelector(".js_form")
-            if (submitForm) {
-                  submitForm.addEventListener('submit', function(e) {
-                        e.preventDefault(); // フォームの自動送信を防止
 
-
-                        grecaptcha.ready(function() {
-                              grecaptcha.execute(
-                                    '6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle', {
-                                          action: 'submit'
-                                    }).then(function(token) {
-                                    document.getElementById(
-                                                'recaptchaResponse')
-                                          .value = token;
-                                    document.querySelector('form')
-                                          .submit(); // フォームを送信
-                              });
-                        });
-                  });
-            } else {
-                  console.error('Submit button not found');
-            }
-      });
-      </script>
-      <script>
-      // Smooth scrolling for navigation links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                  e.preventDefault();
-                  const target = document.querySelector(this.getAttribute('href'));
-                  if (target) {
-                        target.scrollIntoView({
-                              behavior: 'smooth',
-                              block: 'start'
-                        });
-                  }
-            });
-      });
 
       const tourData = @json($tours);
-
-      console.log(tourData);
-      
       // Show tours for selected destination
       function showTours(destination) {
             // Hide destinations, show tours
@@ -820,9 +650,9 @@
             toursGrid.innerHTML = tours.map(tour => `
           <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group">
             <div class="relative h-48 overflow-hidden">
-              <img src="${tour.image}" alt="${tour.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+              <img src="storage/${tour.hero_image}" alt="${tour.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
               <div class="absolute top-4 right-4 bg-[#e92929] text-white px-3 py-1 rounded-full test-base font-medium">
-                ¥${tour.price}~
+                ¥${tour.minimum_price}~
               </div>
             </div>
             <div class="p-4">
@@ -830,8 +660,8 @@
               <p class="text-[#994d4d] test-base mb-3 line-clamp-2">${tour.subtitle}</p>
               <div class="flex items-center justify-between mb-3">
                 <div class="flex items-center gap-1">
-                  ${generateStars(tour.rating)}
-                  <span class="test-base text-[#994d4d] ml-1">${tour.rating} (${tour.reviews})</span>
+                  ${generateStars(tour.average_rate.toFixed(1))}
+                  <span class="test-base text-[#994d4d] ml-1">${tour.average_rate.toFixed(1)} (${tour.tour_reviews.length})</span>
                 </div>
               </div>
               <div class="flex items-center justify-between">
@@ -839,7 +669,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" class="inline mr-1">
                     <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a8,8,0,0,1-8,8H136v24a8,8,0,0,1-16,0V156H96a8,8,0,0,1,0-16h24V116a8,8,0,0,1,16,0v24h24A8,8,0,0,1,168,148Z"></path>
                   </svg>
-                  ${tour.duration}
+                  ${tour.minimum_duration} hours~
                 </span>
                 <button onclick="window.location.href='/tour/show/${tour.id}'" class="bg-[#e92929] text-white px-4 py-2 rounded-lg test-base font-medium hover:bg-[#d61f1f] transition-colors">
                   Book Now
@@ -883,13 +713,25 @@
       // Helper function to generate star ratings
       function generateStars(rating) {
             let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
             for (let i = 1; i <= 5; i++) {
-                  if (i <= Math.floor(rating)) {
+                  if (i <= fullStars) {
                         stars +=
                               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>';
-                  } else if (i - 0.5 <= rating) {
-                        stars +=
-                              '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>';
+                  } else if (i === fullStars + 1 && hasHalfStar){
+                        stars += `
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" class="inline">
+                                    <defs>
+                                    <linearGradient id="half" x1="0" x2="1" y1="0" y2="0">
+                                          <stop offset="50%" stop-color="#e92929"/>
+                                          <stop offset="50%" stop-color="transparent"/>
+                                    </linearGradient>
+                                    </defs>
+                                    <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z" fill="url(#half)" />
+                              </svg>
+                                    `;
                   } else {
                         stars +=
                               '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e7d0d0" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>';
@@ -973,6 +815,7 @@
                   }, 4000);
             });
       </script>
+
 
 </body>
 

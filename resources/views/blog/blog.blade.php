@@ -5,18 +5,18 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>JapaTour - Travel Blog</title>
+      <title>ShogunTours - Travel Blog</title>
       <meta name="keywords"
-            content="japatour, japatour-official, Japan tour, tokyo tour, Tokyo travel, Kyoto experience, Osaka trip, Japanese culture, foreign tourist guide, Japan travel package, Mt. Fuji tour, onsen experience, Japan sightseeing, travel blog, Japan travel tips">
-      <meta rel="canonical" href="https://japatour-official.com/blog">
+            content="ShogunTours, ShogunTours-official, Japan tour, tokyo tour, Tokyo travel, Kyoto experience, Osaka trip, Japanese culture, foreign tourist guide, Japan travel package, Mt. Fuji tour, onsen experience, Japan sightseeing, travel blog, Japan travel tips">
+      <meta rel="canonical" href="https://shoguntoursjapan.com/blog">
       <meta name="robots" content="index,follow">
-      <meta property="og:title" content="JapaTour - Travel Blog">
+      <meta property="og:title" content="ShogunTours - Travel Blog">
       <meta property="og:type" content="website">
       <meta name="description"
             content="Discover Japan through our travel blog. Get insider tips, cultural insights, and travel guides for your perfect Japan adventure. Expert advice from local guides.">
-      <meta property="og:url" content="https://japatour-official.com/blog">
+      <meta property="og:url" content="https://shoguntoursjapan.com/blog">
       <meta property="og:image" content="img/logo3.svg">
-      <meta property="og:site_name" content="Japatour">
+      <meta property="og:site_name" content="ShogunTours">
       <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
       <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
             href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
@@ -42,7 +42,7 @@
                                                 fill="currentColor"></path>
                                     </svg>
                               </div>
-                              <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">Japatour
+                              <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours
                               </h2>
                         </div>
                         <div class="flex flex-1 justify-end gap-8">
@@ -633,7 +633,7 @@
                                           <a class="text-white text-sm font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
                                                 href="#">Terms of Service</a>
                                     </div>
-                                    <p class="text-white text-sm font-normal leading-normal opacity-80">© 2024 JapaTour.
+                                    <p class="text-white text-sm font-normal leading-normal opacity-80">© 2024 ShogunTours.
                                           All rights reserved.</p>
                               </div>
                         </div>

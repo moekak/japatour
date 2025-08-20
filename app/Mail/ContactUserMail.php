@@ -29,7 +29,7 @@ class ContactUserMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(env("MAIL_FROM_ADDRESS"), 'JapaTour'),
+            from: new Address(env("MAIL_FROM_ADDRESS"), 'ShogunTours'),
             subject: 'Thank you for contacting us',
         );
     }

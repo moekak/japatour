@@ -60,9 +60,7 @@
                   <!-- Page Header -->
                   <div class="mb-8">
                         <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
-                              <a href="#" class="hover:text-[#e92929] transition-colors">Dashboard</a>
-                              <i class="fas fa-chevron-right text-xs"></i>
-                              <a href="#" class="hover:text-[#e92929] transition-colors">Tours</a>
+                              <a href="{{route("tour_list")}}" class="hover:text-[#e92929] transition-colors">Tours</a>
                               <i class="fas fa-chevron-right text-xs"></i>
                               <span class="text-gray-800 font-medium">Edit Tour</span>
                         </div>
@@ -214,6 +212,55 @@
                         </div>
                   </div>
 
+                  <!-- QA Section -->
+                  <div class="bg-white rounded-xl shadow-sm p-6" id="highlight-section">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                              <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-question-circle text-[#e92929]"></i>
+                              </div>
+                              QA
+                        </h2>
+                        <p class="text-sm text-gray-600 mb-4">Add common questions and answers that help customers understand the experience.</p>
+                        @php
+                              // データソースを統一
+                              $qaData = old('questions', $tour['tour_questions'] ?? []);
+                        @endphp
+
+                        <div id="qa-wrapper">
+                              @foreach ($qaData as $qaIndex => $qa)
+                                    @php
+                                          // 各フィールドのデータを統一的に取得
+                                          $question = old("questions.{$qaIndex}.question", $qa['question'] ?? '');
+                                          $answer = old("questions.{$qaIndex}.answer", $qa['answer'] ?? '');
+                                    @endphp
+                                    <div class="qa-item">
+                                          <div class="bg-gray-50 rounded-lg p-4">
+                                                <div class="flex items-start gap-4">
+                                                      <div class="flex-1">
+                                                            <input type="text" name="questions[{{$qaIndex}}][question]" value="{{$question}}"
+                                                                  placeholder="Type a frequently asked question..."
+                                                                  class="w-full px-3 py-2 mb-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm font-medium">
+                                                            <textarea rows="2"  name="questions[{{$qaIndex}}][answer]"
+                                                                  placeholder="Type your answer here..."
+                                                                  class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{$answer}}</textarea>
+                                                      </div>
+                                                      <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-qa_button">
+                                                            <i class="fas fa-trash"></i>
+                                                      </button>
+                                                </div>
+                                          </div>
+                                    </div>
+                              @endforeach
+
+                        </div>
+
+                        <button type="button"
+                              class="add-qa_button mt-4 w-full py-3 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-[#e92929] hover:text-[#e92929] transition-colors flex items-center justify-center gap-2">
+                              <i class="fas fa-plus"></i>
+                              <span class="font-medium">Add QA</span>
+                        </button>
+
+
                   <!-- Highlights Section -->
                   <div class="bg-white rounded-xl shadow-sm p-6" id="highlight-section">
                         <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
@@ -278,6 +325,92 @@
                         </button>
                   </div>
 
+                  <!-- Reviews Section -->
+                  <div class="bg-white rounded-xl shadow-sm p-6">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
+                              <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
+                                    <i class="fas fa-star text-[#e92929]"></i>
+                              </div>
+                              Reviews
+                        </h2>
+                        @php
+                              // データソースを統一
+                              $reviews= old('reviews', $tour['tour_reviews'] ?? []);
+                        @endphp
+
+                        <div class="space-y-6">
+                              <!-- Review 1 -->
+                              <div id="review-wrapper" class="space-y-3">
+                                    @foreach ($reviews as $index => $review)
+                                          @php
+                                                // 各フィールドのデータを統一的に取得
+                                                $name = old("reviews.{$index}.name", $review['name'] ?? '');
+                                                $rating = old("reviews.{$index}.rating", $review['rating'] ?? '');
+                                                $content = old("reviews.{$index}.content", $review['content'] ?? '');
+                                                $date = old("reviews.{$index}.date", $review['date'] ?? '');
+                                          @endphp
+                                          <div class="review-item">
+                                          <div class="border border-gray-200 rounded-lg p-4">
+                                                <div class="flex items-center justify-between mb-4">
+                                                      <h3 class="text-lg font-medium text-gray-800">Review #{{ (int) $index + 1 }}</h3>
+                                                      <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-review_button" title="Delete this review">
+                                                      <i class="fas fa-trash"></i>
+                                                      </button>
+                                                </div>
+                                                
+                                                <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                                      <div>
+                                                      <label class="block text-sm font-medium text-gray-700 mb-2">Reviewer Name *</label>
+                                                      <input type="text" name="reviews[{{$index}}][name]" value="{{$name}}"
+                                                            placeholder="e.g., Sarah Johnson"
+                                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                                                      </div>
+                                                      
+                                                      <div>
+                                                      <label class="block text-sm font-medium text-gray-700 mb-2">Rating *</label>
+                                                      <select name="reviews[{{$index}}][rating]" 
+                                                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                                                            <option value="">Select Rating</option>
+                                                            <option value="5" {{$rating== 5 ? "selected" : ""}}>⭐⭐⭐⭐⭐ (5 stars)</option>
+                                                            <option value="4" {{$rating == 4 ? "selected" : ""}}>⭐⭐⭐⭐ (4 stars)</option>
+                                                            <option value="3" {{$rating== 3 ? "selected" : ""}}>⭐⭐⭐ (3 stars)</option>
+                                                            <option value="2" {{$rating== 2 ? "selected" : ""}}>⭐⭐ (2 stars)</option>
+                                                            <option value="1" {{$rating == 1 ? "selected" : ""}}>⭐ (1 star)</option>
+                                                      </select>
+                                                      </div>
+                                                </div>
+
+                                                <div class="mb-4">
+                                                      <label class="block text-sm font-medium text-gray-700 mb-2">Review Content *</label>
+                                                      <textarea rows="3" name="reviews[{{$index}}][content]"
+                                                      placeholder="Share what made this tour amazing..."
+                                                      class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all resize-none">{{$content}}</textarea>
+                                                      <p class="text-xs text-gray-500 mt-1">0/300 characters</p>
+                                                </div>
+
+                                                <div>
+                                                      <label class="block text-sm font-medium text-gray-700 mb-2">Review Date</label>
+                                                      <input type="date" name="reviews[{{$index}}][date]" value="{{$date}}"
+                                                      class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                                                </div>
+                                          </div>
+                                          </div>
+                                    @endforeach
+
+                              </div>
+
+
+
+
+                              <!-- Add New Review Button -->
+                              <button type="button"
+                              class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-review_button">
+                              <i class="fas fa-plus-circle"></i>
+                              Add review
+                              </button>
+                        </div>
+                  </div>
+
                   <!-- Multiple Tour Itineraries Section -->
                   <div class="space-y-6" id="itinerary-section">
                         <h2 class="text-2xl font-bold text-gray-800">Tour Itineraries</h2>
@@ -296,6 +429,8 @@
                                           $meetingPoint = old("itinerary.{$itineraryIndex}.meeting_point", $itinerary['meeting_point'] ?? '');
                                           $adultPrice = old("itinerary.{$itineraryIndex}.adult_price", $itinerary['adult_price'] ?? '');
                                           $childPrice = old("itinerary.{$itineraryIndex}.child_price", $itinerary['child_price'] ?? '');
+                                          $overviewTitle = old("itinerary.{$itineraryIndex}.overview_title", $itinerary['overview_title'] ?? '');
+                                          $overviewDescription = old("itinerary.{$itineraryIndex}.overview_description", $itinerary['overview_description'] ?? '');
                                           
                                           // 言語データの処理
                                           $selectedLanguages = old("itinerary.{$itineraryIndex}.languages", []);
@@ -435,55 +570,184 @@
                                                 </div>
                                           </div>
 
+                                          <!-- Itinerary Overview -->
+                                          <div class="mt-8">
+                                                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                                                      <div class="bg-gray-50 p-4 border-b border-gray-200">
+                                                            <div class="flex items-center justify-between">
+                                                            <h5 class="font-semibold text-gray-800">Overview</h5>
+                                                            </div>
+                                                      </div>
+                                                      <div class="p-8">
+                                                            <div>
+                                                            <div class="space-y-5">
+                                                                  <div>
+                                                                        <label class="block text-sm font-medium text-gray-700 mb-2">Overview Title *</label>
+                                                                        <input type="text" name="itinerary[{{$itineraryIndex}}][overview_title]"
+                                                                        value="{{$overviewTitle}}"
+                                                                        placeholder="e.g., Experience Tokyo Like Never Before"
+                                                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                                                                  </div>
+
+                                                                  <div>
+                                                                        <label class="block text-sm font-medium text-gray-700 mb-2">Overview
+                                                                        Description *</label>
+                                                                        <textarea rows="4"  name="itinerary[{{$itineraryIndex}}][overview_description]"
+                                                                        placeholder="Describe what makes this tour special..."
+                                                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all resize-none">{{$overviewDescription}}</textarea>
+                                                                        <p class="text-xs text-gray-500 mt-1">0/1000 characters</p>
+                                                                  </div>
+                                                            </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+                                                </div>
+
                                           <div class="mt-8">
                                                 <!-- Itinerary Activities -->
                                                 <div class="border border-gray-200 rounded-lg overflow-hidden">
                                                       <div class="bg-gray-50 p-4 border-b border-gray-200">
-                                                      <div class="flex items-center justify-between">
-                                                            <h5 class="font-semibold text-gray-800">Itinerary Item</h5>
-                                                      </div>
+                                                            <div class="flex items-center justify-between">
+                                                                  <h5 class="font-semibold text-gray-800">Itinerary Item</h5>
+                                                            </div>
                                                       </div>
 
                                                       <div class="p-8">
-                                                      <div>
-                                                            <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
-                                                            <div class="space-y-3 activity-wrapper">
-                                                                  @foreach ($activities as $activityIndex => $activity)
-                                                                  <div class="activity-item">
-                                                                        <div class="bg-gray-50 rounded-lg p-3">
-                                                                              <div class="flex items-start gap-3">
-                                                                              <div class="flex-1 space-y-3">
-                                                                                    <div class="grid md:grid-cols-3 gap-3">
-                                                                                          <div class="md:col-span-2">
-                                                                                          <input type="text" 
-                                                                                                value="{{ $activity['activity_title'] ?? '' }}"
-                                                                                                name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_title]"
-                                                                                                placeholder="e.g., Senso-ji Temple Visit"
-                                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                            <div>
+                                                                  <label class="block text-sm font-medium text-gray-700 mb-2">Activities</label>
+                                                                  <div class="space-y-3 activity-wrapper">
+                                                                        @foreach ($activities as $activityIndex => $activity)
+                                                                        {{-- <div class="activity-item">
+                                                                              <div class="bg-gray-50 rounded-lg p-3">
+                                                                                    <div class="flex items-start gap-3">
+                                                                                    <div class="flex-1 space-y-3">
+                                                                                          <div class="grid md:grid-cols-3 gap-3">
+                                                                                                <div class="md:col-span-2">
+                                                                                                <input type="text" 
+                                                                                                      value="{{ $activity['activity_title'] ?? '' }}"
+                                                                                                      name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_title]"
+                                                                                                      placeholder="e.g., Senso-ji Temple Visit"
+                                                                                                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                                                </div>
+                                                                                          </div>
+                                                                                          <div>
+                                                                                                <textarea rows="2"
+                                                                                                      name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_description]"
+                                                                                                      placeholder="Brief description of the activity..."
+                                                                                                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{ $activity['activity_description'] ?? '' }}</textarea>
                                                                                           </div>
                                                                                     </div>
-                                                                                    <div>
-                                                                                          <textarea rows="2"
-                                                                                                name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_description]"
-                                                                                                placeholder="Brief description of the activity..."
-                                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{ $activity['activity_description'] ?? '' }}</textarea>
+                                                                                    <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
+                                                                                          <i class="fas fa-times"></i>
+                                                                                    </button>
                                                                                     </div>
                                                                               </div>
-                                                                              <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
-                                                                                    <i class="fas fa-times"></i>
-                                                                              </button>
+                                                                        </div> --}}
+                                                                        <div class="activity-item">
+                                                                              <div class="bg-gray-50 rounded-lg p-3">
+                                                                                    <div class="flex items-start gap-3">
+                                                                                    <!-- アイコン選択エリア（左側に追加） -->
+                                                                                    <div class="flex-shrink-0 relative">
+                                                                                          <button type="button" class="icon-selector-btn w-10 h-10 bg-white border-2 border-gray-300 rounded-lg flex items-center justify-center hover:border-[#e92929] transition-all focus:outline-none focus:ring-2 focus:ring-[#e92929]/20">
+                                                                                                <i class="selected-icon fas fa-map-marker-alt text-[#e92929] text-sm"></i>
+                                                                                          </button>
+                                                                                          
+                                                                                          <!-- アイコン選択ドロップダウン -->
+                                                                                          <div class="icon-dropdown absolute top-12 left-0 bg-white border border-gray-200 rounded-lg shadow-lg p-3 w-60 hidden z-10">
+                                                                                                <div class="text-xs font-medium text-gray-600 mb-2">アイコンを選択:</div>
+                                                                                                <div class="grid grid-cols-6 gap-2">
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-map-marker-alt" title="場所">
+                                                                                                      <i class="fas fa-map-marker-alt text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-camera" title="写真撮影">
+                                                                                                      <i class="fas fa-camera text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-utensils" title="食事">
+                                                                                                      <i class="fas fa-utensils text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-shopping-bag" title="ショッピング">
+                                                                                                      <i class="fas fa-shopping-bag text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-train" title="交通">
+                                                                                                      <i class="fas fa-train text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-museum" title="博物館">
+                                                                                                      <i class="fas fa-museum text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-tree" title="公園">
+                                                                                                      <i class="fas fa-tree text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-torii-gate" title="神社">
+                                                                                                      <i class="fas fa-torii-gate text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-building" title="建物">
+                                                                                                      <i class="fas fa-building text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-hot-tub" title="温泉">
+                                                                                                      <i class="fas fa-hot-tub text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-mountain" title="山">
+                                                                                                      <i class="fas fa-mountain text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-water" title="海">
+                                                                                                      <i class="fas fa-water text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-star" title="観光地">
+                                                                                                      <i class="fas fa-star text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-coffee" title="カフェ">
+                                                                                                      <i class="fas fa-coffee text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-bed" title="宿泊">
+                                                                                                      <i class="fas fa-bed text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-bus" title="バス">
+                                                                                                      <i class="fas fa-bus text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-ticket-alt" title="チケット">
+                                                                                                      <i class="fas fa-ticket-alt text-gray-600"></i>
+                                                                                                </button>
+                                                                                                <button type="button" class="icon-option w-8 h-8 flex items-center justify-center rounded hover:bg-gray-100 transition-colors" data-icon="fa-clock" title="時間">
+                                                                                                      <i class="fas fa-clock text-gray-600"></i>
+                                                                                                </button>
+                                                                                                </div>
+                                                                                          </div>
+                                                                                          <!-- 隠しフィールド：選択されたアイコンを保存 -->
+                                                                                          <input type="hidden" name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_icon]" value="fa-map-marker-alt" class="activity-icon-input">
+                                                                                    </div>
+
+                                                                                    <div class="flex-1 space-y-3">
+                                                                                          <div class="grid md:grid-cols-3 gap-3">
+                                                                                                <div class="md:col-span-2">
+                                                                                                <input type="text" value="{{$activity['activity_title']}}"
+                                                                                                      name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_title]"
+                                                                                                      placeholder="e.g., Senso-ji Temple Visit"
+                                                                                                      class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
+                                                                                                </div>
+                                                                                          </div>
+                                                                                          <div>
+                                                                                                <textarea
+                                                                                                rows="2"
+                                                                                                name="itinerary[{{$itineraryIndex}}][activity][{{$activityIndex}}][activity_description]"
+                                                                                                placeholder="Brief description of the activity..."
+                                                                                                class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm resize-none">{{$activity['activity_description']}}</textarea>
+                                                                                          </div>
+                                                                                    </div>
+                                                                                    <button type="button" class="p-2 text-gray-400 hover:text-red-500 transition-colors remove-activity_button">
+                                                                                          <i class="fas fa-times"></i>
+                                                                                    </button>
+                                                                                    </div>
                                                                               </div>
                                                                         </div>
+                                                                        @endforeach
                                                                   </div>
-                                                                  @endforeach
-                                                            </div>
 
-                                                            <button type="button"
-                                                                  class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
-                                                                  <i class="fas fa-plus-circle"></i>
-                                                                  Add activity
-                                                            </button>
-                                                      </div>
+                                                                  <button type="button"
+                                                                        class="mt-3 text-[#e92929] hover:text-[#d61f1f] text-sm font-medium flex items-center gap-1 add-activity_button">
+                                                                        <i class="fas fa-plus-circle"></i>
+                                                                        Add activity
+                                                                  </button>
+                                                            </div>
                                                       </div>
                                                 </div>
 
@@ -610,25 +874,69 @@
                   </button>
             </form>
       </main>
-    @include('admin.template.template')
-    <script src="{{mix("js/tour_edit.js")}}"></script>
+      @include('admin.template.template')
+      <script src="{{mix("js/tour_edit.js")}}"></script>
 
-    <script>
-        // Basic functionality for the form
-        document.addEventListener('DOMContentLoaded', function() {
-            // Character counter for overview description
-            const overviewDescription = document.querySelector('textarea[name="overview_description"]');
-            const charCounter = document.querySelector('.text-xs.text-gray-500');
-            
-            if (overviewDescription && charCounter) {
-                overviewDescription.addEventListener('input', function() {
-                    const count = this.value.length;
-                    charCounter.textContent = `${count}/500 characters`;
-                });
-            }
+      <script>
+            // Basic functionality for the form
+            document.addEventListener('DOMContentLoaded', function() {
+                  // Character counter for overview description
+                  const overviewDescription = document.querySelector('textarea[name="overview_description"]');
+                  const charCounter = document.querySelector('.text-xs.text-gray-500');
+                  
+                  if (overviewDescription && charCounter) {
+                        overviewDescription.addEventListener('input', function() {
+                              const count = this.value.length;
+                              charCounter.textContent = `${count}/500 characters`;
+                        });
+                  }
 
-        });
-    </script>
+            });
+            // アイコン選択機能
+            document.addEventListener('DOMContentLoaded', function() {
+                  // アイコンセレクターボタンのクリック
+                  document.addEventListener('click', function(e) {
+                  if (e.target.closest('.icon-selector-btn')) {
+                        e.preventDefault();
+                        const dropdown = e.target.closest('.activity-item').querySelector('.icon-dropdown');
+                        
+                        // 他のドロップダウンを閉じる
+                        document.querySelectorAll('.icon-dropdown').forEach(dd => {
+                              if (dd !== dropdown) dd.classList.add('hidden');
+                        });
+                        
+                        // 現在のドロップダウンを切り替え
+                        dropdown.classList.toggle('hidden');
+                  }
+                  
+                  // アイコンオプションのクリック
+                  if (e.target.closest('.icon-option')) {
+                        e.preventDefault();
+                        const iconOption = e.target.closest('.icon-option');
+                        const selectedIcon = iconOption.getAttribute('data-icon');
+                        const activityItem = iconOption.closest('.activity-item');
+                        
+                        // 選択されたアイコンを更新
+                        const selectorIcon = activityItem.querySelector('.selected-icon');
+                        selectorIcon.className = `selected-icon fas ${selectedIcon} text-[#e92929] text-sm`;
+                        
+                        // 隠しフィールドの値を更新
+                        const hiddenInput = activityItem.querySelector('.activity-icon-input');
+                        hiddenInput.value = selectedIcon;
+                        
+                        // ドロップダウンを閉じる
+                        activityItem.querySelector('.icon-dropdown').classList.add('hidden');
+                  }
+                  
+                  // 外側をクリックしたらドロップダウンを閉じる
+                  if (!e.target.closest('.icon-selector-btn') && !e.target.closest('.icon-dropdown')) {
+                        document.querySelectorAll('.icon-dropdown').forEach(dd => {
+                              dd.classList.add('hidden');
+                        });
+                  }
+                  });
+            });
+      </script>
 </body>
 
 </html>

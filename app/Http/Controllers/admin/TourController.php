@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Tour\CreateRequest;
 use App\Http\Requests\Admin\Tour\EditTourRequest;
-use App\Models\AdditionalService;
 use App\Models\Category;
 use App\Models\Language;
 use App\Models\Region;
@@ -36,12 +35,10 @@ class TourController extends Controller
     public function create()
     {
         $languages = Language::getAllLanguages();
-        $regions = Region::getAllRigions();
+        $regions = Region::getAllRegions();
         $categories = Category::getAllCategories();
         return view("admin.tour_create", compact("languages", "regions", "categories"));
     }
-
-
 
 
     public function store(CreateRequest $request){
@@ -75,7 +72,7 @@ class TourController extends Controller
     {
         try {
             $tour = ToursNew::getSpecificTour($id);
-            return view("show2", compact("tour"));
+            return view("show", compact("tour"));
         } catch (\Exception $e) {
             Log::debug($e);
             // return redirect()->route("show")->with("error", "faild to get Tour: " . $e->getMessage());
@@ -89,10 +86,9 @@ class TourController extends Controller
     {
         try {
             $tour = ToursNew::getSpecificTour($id)->toArray();
-            $regions = Region::getAllRigions();
+            $regions = Region::getAllRegions();
             $languages = Language::getAllLanguages();
             $categories = Category::getAllCategories();
-
  
             return view("admin.tour_edit", compact("tour",  "regions", "categories", "languages"));
         } catch (\Exception $e) {
@@ -106,9 +102,6 @@ class TourController extends Controller
     public function update(EditTourRequest $request, string $id)
     {
         try {
-
-            print_r($request->all());
-            exit;
             $this->tourService->updateTour($request, $id);
             return redirect()->route("tour_list")->with("success", "success to update Tour");
         } catch (\Exception $e) {

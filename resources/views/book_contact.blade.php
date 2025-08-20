@@ -54,7 +54,7 @@
                                     </button>
                               </div>
                               <h2 class="text-[#111418] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Our Contact Information</h2>
-                              <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4">Email: info@japatour-official.com</p>
+                              <p class="text-[#111418] text-base font-normal leading-normal pb-3 pt-1 px-4">Email: info@shoguntoursjapan.com</p>
                               <input type="hidden" name="g-recaptcha-response" id="recaptchaResponse">
                         </form>
                   </div>
@@ -65,7 +65,7 @@
 
 @section('script')
       <script src="{{mix("js/common.js")}}"></script>
-      <script src="https://www.google.com/recaptcha/api.js?render=6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle"></script>
+      <script src="https://www.google.com/recaptcha/api.js?render=6LfsOIkrAAAAAK9nICyBNQeanLgdeQjHa2Go_Myb"></script>
       <script>
             document.addEventListener('DOMContentLoaded', function() {
                   var submitForm = document.querySelector(".js_form")
@@ -75,7 +75,7 @@
 
 
                               grecaptcha.ready(function() {
-                              grecaptcha.execute('6LdFXfsqAAAAAF7fDOUEvJDmIxAaLFb_nfPNMMle', {action: 'submit'}).then(function(token) {
+                              grecaptcha.execute('6LfsOIkrAAAAAK9nICyBNQeanLgdeQjHa2Go_Myb', {action: 'submit'}).then(function(token) {
                                     document.getElementById('recaptchaResponse').value = token;
                                     document.querySelector('form').submit(); // フォームを送信
                               });

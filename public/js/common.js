@@ -21,24 +21,48 @@ var __webpack_exports__ = {};
   !*** ./resources/js/common.js ***!
   \********************************/
 __webpack_require__.r(__webpack_exports__);
-// ハンバーガーメニュー
-var header_btn = document.querySelector(".js_header_btn");
-var menu_modal = document.querySelector(".menu_modal");
-header_btn.addEventListener("click", function () {
-  if (!menu_modal.classList.contains("menu_active")) {
-    // アニメーションを開始
-    menu_modal.classList.add("menu_active");
-    menu_modal.classList.remove("menu_close");
-    document.body.style.overflow = "hidden";
+var menuBtn = document.querySelector('button[aria-controls="mobile-menu"]');
+var mobileMenu = document.getElementById('mobile-menu');
+menuBtn.addEventListener('click', function () {
+  var isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+  menuBtn.setAttribute('aria-expanded', String(!isExpanded));
+  if (isExpanded) {
+    mobileMenu.classList.add('max-h-0', 'hidden');
+    mobileMenu.classList.remove('max-h-96');
   } else {
-    // アニメーションを終了
-    menu_modal.classList.remove("menu_active");
-    menu_modal.classList.add("menu_close");
-    document.body.style.overflowY = "auto";
+    mobileMenu.classList.remove('hidden');
+    mobileMenu.classList.remove('max-h-0');
+    mobileMenu.classList.add('max-h-96');
   }
+});
+var links = document.querySelectorAll('#mobile-menu a');
+links.forEach(function (link) {
+  link.addEventListener('click', function () {
+    // メニューを閉じる（アニメーション付き）
+    mobileMenu.classList.add('max-h-0');
 
-  // ボタンの状態を切り替え
-  header_btn.classList.toggle("is-active");
+    // ボタンの状態もリセット！
+    menuBtn.setAttribute('aria-expanded', 'false');
+
+    // 完全に非表示にする
+    setTimeout(function () {
+      mobileMenu.classList.add('hidden');
+    }, 300); // animation durationと合わせる
+  });
+});
+
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    var target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
 });
 /******/ })()
 ;

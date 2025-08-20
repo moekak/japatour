@@ -13,9 +13,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ DupeEventhandler)
 /* harmony export */ });
 /* harmony import */ var _DupeHighlight_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DupeHighlight.js */ "./resources/js/components/elementOperation/DupeHighlight.js");
-/* harmony import */ var _itinerary_DupeItinerary_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./itinerary/DupeItinerary.js */ "./resources/js/components/elementOperation/itinerary/DupeItinerary.js");
-/* harmony import */ var _itinerary_DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./itinerary/DupeItineraryActivity.js */ "./resources/js/components/elementOperation/itinerary/DupeItineraryActivity.js");
-/* harmony import */ var _itinerary_DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./itinerary/DupeItineraryHighlight.js */ "./resources/js/components/elementOperation/itinerary/DupeItineraryHighlight.js");
+/* harmony import */ var _DupeQA_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DupeQA.js */ "./resources/js/components/elementOperation/DupeQA.js");
+/* harmony import */ var _DupeReview_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DupeReview.js */ "./resources/js/components/elementOperation/DupeReview.js");
+/* harmony import */ var _itinerary_DupeItinerary_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./itinerary/DupeItinerary.js */ "./resources/js/components/elementOperation/itinerary/DupeItinerary.js");
+/* harmony import */ var _itinerary_DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./itinerary/DupeItineraryActivity.js */ "./resources/js/components/elementOperation/itinerary/DupeItineraryActivity.js");
+/* harmony import */ var _itinerary_DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./itinerary/DupeItineraryHighlight.js */ "./resources/js/components/elementOperation/itinerary/DupeItineraryHighlight.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -32,6 +34,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 function _classPrivateMethodInitSpec(e, a) { _checkPrivateRedeclaration(e, a), a.add(e); }
 function _checkPrivateRedeclaration(e, t) { if (t.has(e)) throw new TypeError("Cannot initialize the same private elements twice on an object"); }
 function _assertClassBrand(e, t, n) { if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n; throw new TypeError("Private element is not present on this object"); }
+
+
 
 
 
@@ -53,22 +57,22 @@ var DupeEventhandler = /*#__PURE__*/function () {
     key: "initializeHandlers",
     value: function initializeHandlers() {
       this.handlers = new Map([['remove-activity_button', {
-        instance: _itinerary_DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_2__["default"].getInstance(),
+        instance: _itinerary_DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_4__["default"].getInstance(),
         action: 'delete'
       }], ['add-activity_button', {
-        instance: _itinerary_DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_2__["default"].getInstance(),
+        instance: _itinerary_DupeItineraryActivity_js__WEBPACK_IMPORTED_MODULE_4__["default"].getInstance(),
         action: 'duplicate'
       }], ['remove-itinerary_button', {
-        instance: _itinerary_DupeItinerary_js__WEBPACK_IMPORTED_MODULE_1__["default"].getInstance(),
+        instance: _itinerary_DupeItinerary_js__WEBPACK_IMPORTED_MODULE_3__["default"].getInstance(),
         action: 'delete'
       }], ['add-itinerary_button', {
-        instance: _itinerary_DupeItinerary_js__WEBPACK_IMPORTED_MODULE_1__["default"].getInstance(),
+        instance: _itinerary_DupeItinerary_js__WEBPACK_IMPORTED_MODULE_3__["default"].getInstance(),
         action: 'duplicate'
       }], ['remove-itinerary-highlight_button', {
-        instance: _itinerary_DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_3__["default"].getInstance(),
+        instance: _itinerary_DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_5__["default"].getInstance(),
         action: 'delete'
       }], ['add-itinerary-highlight_button', {
-        instance: _itinerary_DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_3__["default"].getInstance(),
+        instance: _itinerary_DupeItineraryHighlight_js__WEBPACK_IMPORTED_MODULE_5__["default"].getInstance(),
         action: 'duplicate'
       }], ['remove-highlight_button', {
         instance: _DupeHighlight_js__WEBPACK_IMPORTED_MODULE_0__["default"].getInstance(),
@@ -76,6 +80,18 @@ var DupeEventhandler = /*#__PURE__*/function () {
       }], ['add-highlight_button', {
         instance: _DupeHighlight_js__WEBPACK_IMPORTED_MODULE_0__["default"].getInstance(),
         action: 'duplicate'
+      }], ['add-review_button', {
+        instance: _DupeReview_js__WEBPACK_IMPORTED_MODULE_2__["default"].getInstance(),
+        action: 'duplicate'
+      }], ['remove-review_button', {
+        instance: _DupeReview_js__WEBPACK_IMPORTED_MODULE_2__["default"].getInstance(),
+        action: 'delete'
+      }], ['add-qa_button', {
+        instance: _DupeQA_js__WEBPACK_IMPORTED_MODULE_1__["default"].getInstance(),
+        action: 'duplicate'
+      }], ['remove-qa_button', {
+        instance: _DupeQA_js__WEBPACK_IMPORTED_MODULE_1__["default"].getInstance(),
+        action: 'delete'
       }]]);
     }
   }]);
@@ -250,6 +266,170 @@ var DupeInterface = /*#__PURE__*/function () {
     }
   }]);
 }();
+
+
+/***/ }),
+
+/***/ "./resources/js/components/elementOperation/DupeQA.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/elementOperation/DupeQA.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DupeQA)
+/* harmony export */ });
+/* harmony import */ var _DupeInterface_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DupeInterface.js */ "./resources/js/components/elementOperation/DupeInterface.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+
+var DupeQA = /*#__PURE__*/function (_DupeInterface) {
+  function DupeQA() {
+    var _this;
+    _classCallCheck(this, DupeQA);
+    if (DupeQA.instance) {
+      return _possibleConstructorReturn(_this, DupeQA.instance);
+    }
+    _this = _callSuper(this, DupeQA);
+    _this.template = document.getElementById("qa_template").innerHTML;
+    _this.qaWrapper = document.getElementById("qa-wrapper");
+    DupeQA.instance = _this;
+    return _this;
+  }
+  _inherits(DupeQA, _DupeInterface);
+  return _createClass(DupeQA, [{
+    key: "duplicateElement",
+    value:
+    // Tour Hightlightの要素の追加
+    function duplicateElement() {
+      this.createDOM();
+    }
+  }, {
+    key: "createDOM",
+    value: function createDOM() {
+      var qaCount = this.qaWrapper.querySelectorAll(".qa-item").length;
+      var rawHTML = this.template.replace(/{qa_index}/g, qaCount).replace(/{qa_title}/g, qaCount + 1);
+      var newDiv = document.createElement("div");
+      newDiv.classList.add("qa-item");
+      newDiv.innerHTML = rawHTML;
+      this.qaWrapper.appendChild(newDiv);
+    }
+
+    // Tour qaの要素の削除
+  }, {
+    key: "deleteElement",
+    value: function deleteElement(button) {
+      if (!this.hasOneData(this.qaWrapper, "qa")) {
+        alert("create one qa at least");
+        return;
+      }
+      var targetElement = button.closest(".qa-item");
+      this.qaWrapper.removeChild(targetElement);
+    }
+  }], [{
+    key: "getInstance",
+    value: function getInstance() {
+      if (!DupeQA.instance) {
+        DupeQA.instance = new DupeQA();
+      }
+      return DupeQA.instance;
+    }
+  }]);
+}(_DupeInterface_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+/***/ }),
+
+/***/ "./resources/js/components/elementOperation/DupeReview.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/elementOperation/DupeReview.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ DupeReview)
+/* harmony export */ });
+/* harmony import */ var _DupeInterface_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DupeInterface.js */ "./resources/js/components/elementOperation/DupeInterface.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
+function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
+function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
+function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
+function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
+function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
+function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
+
+var DupeReview = /*#__PURE__*/function (_DupeInterface) {
+  function DupeReview() {
+    var _this;
+    _classCallCheck(this, DupeReview);
+    if (DupeReview.instance) {
+      return _possibleConstructorReturn(_this, DupeReview.instance);
+    }
+    _this = _callSuper(this, DupeReview);
+    _this.template = document.getElementById("review_template").innerHTML;
+    _this.reviewWrapper = document.getElementById("review-wrapper");
+    DupeReview.instance = _this;
+    return _this;
+  }
+  _inherits(DupeReview, _DupeInterface);
+  return _createClass(DupeReview, [{
+    key: "duplicateElement",
+    value:
+    // Tour Hightlightの要素の追加
+    function duplicateElement() {
+      this.createDOM();
+    }
+  }, {
+    key: "createDOM",
+    value: function createDOM() {
+      var reviewCount = this.reviewWrapper.querySelectorAll(".review-item").length;
+      var rawHTML = this.template.replace(/{review_index}/g, reviewCount).replace(/{review_title}/g, reviewCount + 1);
+      var newDiv = document.createElement("div");
+      newDiv.classList.add("review-item");
+      newDiv.innerHTML = rawHTML;
+      this.reviewWrapper.appendChild(newDiv);
+    }
+
+    // Tour reviewの要素の削除
+  }, {
+    key: "deleteElement",
+    value: function deleteElement(button) {
+      if (!this.hasOneData(this.reviewWrapper, "review")) {
+        alert("create one review at least");
+        return;
+      }
+      var targetElement = button.closest(".review-item");
+      this.reviewWrapper.removeChild(targetElement);
+    }
+  }], [{
+    key: "getInstance",
+    value: function getInstance() {
+      if (!DupeReview.instance) {
+        DupeReview.instance = new DupeReview();
+      }
+      return DupeReview.instance;
+    }
+  }]);
+}(_DupeInterface_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 /***/ }),

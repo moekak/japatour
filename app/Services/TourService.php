@@ -78,6 +78,14 @@ class TourService
             $itineraryHighlightData = $this->generateData->prepareTourHighlight($request, $tour->id);
             DB::table("tour_highlights")->insert($itineraryHighlightData);
 
+            // Tour reviewsの保存
+            $reviewData = $this->generateData->prepareTourReview($request, $tour->id);
+            DB::table("tour_reviews")->insert($reviewData);
+
+            // Tour QAの保存
+            $qaData = $this->generateData->prepareTourQA($request, $tour->id);
+            DB::table("tour_questions")->insert($qaData);
+
             // Tour Gallery Imageの保存
             $tourGalleryImages = $this->generateData->prepareTourGalleryImage($request, $tour->id);
             // print_r($tourGalleryImages);
@@ -111,77 +119,50 @@ class TourService
     /**
      * ツアーを更新
      */
-    public function updateTour(EditTourRequest $request, string $id)
+    public function updateTour(EditTourRequest $request)
     {
-        $tourData = $this->generateData->prepareTourData($request);
-        $tour = $this->tourRepository->findById($id);
-
-        $reviewData = $this->generateData->prepareReviewData($request, $tour["id"]);// review更新のデータ
-        $qaData = $this->generateData->prepareQAData($request, $tour["id"]);// QA更新のデータ
-        $additionalServiceData = $this->generateData->prepareAdditionalServiceData($request);
-        // 既存のギャラリー画像を取得
-        $currentGalleryImages = GenerateData::generateCurrentImageGalleries($tourData);
-        
-        // 新規と既存のギャラリー画像を結合
-        $tourData["gallery_images"] = GenerateData::generateNewGalleryImagesPath(
-            $request, 
-            $currentGalleryImages
-        );
-        
-        // ヒーロー画像の更新処理
-        if ($request->file('hero_image')) {
-            $tourData["hero_image"] = $this->imageService->saveImage(
-                $request->file('hero_image'), 
-                "hero_image"
-            );
-        } else {
-            $tourData["hero_image"] = $tour->hero_image;
-        }
-
-        // itinerary画像の更新処理
-        $itineraries = $request->input("itinerary"); 
-        if ($itineraries) {
-            foreach ($itineraries as $index => $itineraryData) {
-                $fileKey = "itinerary.{$index}.itinerary_image";
-                if ($request->hasFile($fileKey)) {
-
-                    // 新しい画像がある場合、更新
-                    $imageFile = $request->file($fileKey);
-                    json_decode($tourData["itinerary"], true)[$index]["itinerary_image"] = $this->imageService->saveImage(
-                        $imageFile, 
-                        "itinerary_image"
-                    );
-                } elseif (isset($tour->itinerary[$index]["itinerary_image"])) {
-                    // 新しい画像がなく、既存の画像がある場合、既存の画像を保持
-                    $itineraryData = json_decode($tourData["itinerary"], true); // true を追加して配列として取得
-                    $itineraryData[$index]["itinerary_image"] = $tour->itinerary[$index]["itinerary_image"];
-                    $tourData["itinerary"] = json_encode($itineraryData); // 再度JSONに変換して戻す
-                }
-            }
-        }
-
-        try {
-
+        try{
             DB::beginTransaction();
-            $this->tourRepository->update($id, $tourData);
-            $this->reviewRepository->deleteWhere($tour["id"]);
-            foreach($reviewData as $review){
-                $this->reviewRepository->create($review);
+            // 元のデータを削除する
+            ToursNew::find($request->input("tour_id"))->delete();
+            $tourData = $this->generateData->prepareTourData($request);
+            // ツアー作成
+            $tour = ToursNew::create($tourData);
+
+            // Tour highlightsの保存
+            $itineraryHighlightData = $this->generateData->prepareTourHighlight($request, $tour->id);
+            DB::table("tour_highlights")->insert($itineraryHighlightData);
+
+            // Tour reviewsの保存
+            $reviewData = $this->generateData->prepareTourReview($request, $tour->id);
+            DB::table("tour_reviews")->insert($reviewData);
+
+            // Tour QAの保存
+            $qaData = $this->generateData->prepareTourQA($request, $tour->id);
+            DB::table("tour_questions")->insert($qaData);
+
+            // Tour Gallery Imageの保存
+            $tourGalleryImages = $this->generateData->prepareTourGalleryImage($request, $tour->id);
+            DB::table("tour_gallery_images")->insert($tourGalleryImages);
+
+            $itineraryData = $this->generateData->prepareItineraryData($request, $tour->id);
+
+            foreach($itineraryData as $key => $data){
+                $itinerary = Itinerary::create($data);
+                // Itinerary Activityの保存
+                $itineraryActivityData = $this->generateData->prepareItineraryActivity($request, $itinerary->id, $key);
+                DB::table("itinerary_activities")->insert($itineraryActivityData);
+
+                // Itinerary Highlightの保存
+                $itineraryHighlightData = $this->generateData->prepareItineraryHighlight($request, $itinerary->id, $key);
+                DB::table("itinerary_highlights")->insert($itineraryHighlightData);
+
+                // Itinerary Languageの保存
+                $itineraryLanguages = $this->generateData->prepareItineraryLanguage($request, $itinerary->id, $key);
+                DB::table("itinerary_languages")->insert($itineraryLanguages);
             }
-            
-            $this->qaRepository->deleteWhere($tour["id"]);
-            foreach($qaData as $qa){
-                $this->qaRepository->create($qa);
-            }
-            
-            $this->additionalServiceRepository->deleteAll();
-            foreach($additionalServiceData as $service){
-                $this->additionalServiceRepository->create($service);
-            }
-            
             DB::commit();
-        } catch (\Exception $e) {
-            Log::debug($e);
+        }catch(Exception $e){
             DB::rollBack();
             throw $e;
         }

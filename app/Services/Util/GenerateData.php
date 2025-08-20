@@ -59,8 +59,13 @@ class GenerateData
         $tourFiled = ["title", "subtitle", "badge","category_id", "region_id", "overview_title", "overview_description", "hero_image"];
         foreach($tourFiled as $field){
             if($field === "hero_image"){
-                if(isset($data[$field]) && $request->hasFile($field)){
-                    $tours[$field] = $this->imageService->saveImage($data[$field], $field);
+                if(isset($data[$field])){
+                    if($request->hasFile($field)){
+                        $tours[$field] = $this->imageService->saveImage($data[$field], $field);
+                    }else{
+                        $tours[$field] = $data[$field];
+                    }
+                    
                 }else{
                     $tours[$field] = $data["temp_hero_image"];
                 }
@@ -84,13 +89,11 @@ class GenerateData
         for ($i = 0; $i < 6; $i++) {
             $imageData = null;
 
-            // print_r($data["gallery_image"][$i]);
-            
             // 新しい画像ファイルがアップロードされた場合
-            if (isset($data["gallery_image"][$i]) && $request->hasFile("gallery_image.$i")) {
+            if (isset($data["gallery_image"][$i])) {
                 // echo "22222";
                 $imageData = [
-                    'gallery_image' => $this->imageService->saveImage($data["gallery_image"][$i], "gallery_image"),
+                    'gallery_image' => $request->hasFile("gallery_image.$i") ? $this->imageService->saveImage($data["gallery_image"][$i], "gallery_image") : $data["gallery_image"][$i],
                     'tour_id' => $tour_id,
                     'order' => $i,
                 ];
@@ -110,9 +113,6 @@ class GenerateData
             }
         }
 
-        // print_r($galleryImages);
-        // exit;
-        
         return $galleryImages;
     }
 
@@ -120,16 +120,14 @@ class GenerateData
     public function prepareItineraryData($request, $tour_id){
         $data = $request->validated();
         $itineraries = [];
-        $itineraryField = ["duration", "max_participants", "tour_type", "meeting_point", "adult_price", "child_price", "image"];
+        $itineraryField = ["duration", "max_participants", "tour_type", "meeting_point", "adult_price", "child_price", "image", "overview_title", "overview_description"];
 
 
         foreach($data["itinerary"] as $key => $itinerary){
-        // print_r($itinerary);
-        // exit;
             foreach($itineraryField as $field){
                 if($field === "image"){
-                    if($request->hasFile("itinerary.{$key}.image")){
-                        $itineraries[$key][$field] = $this->imageService->saveImage($itinerary[$field], $field);
+                    if(isset($itinerary["image"])){
+                        $itineraries[$key][$field] = $request->hasFile("itinerary.{$key}.image") ? $this->imageService->saveImage($itinerary[$field], $field) : $itinerary["image"];
                     }elseif(isset($itinerary["temp_itinerary_image"])){
                         $itineraries[$key][$field] = $itinerary["temp_itinerary_image"];
                     }else{
@@ -148,7 +146,7 @@ class GenerateData
     public function prepareItineraryActivity($request, $itinerary_id, $key){
         $data = $request->validated();
         $itineraryActivities = [];
-        $itineraryActivityField = ["activity_title", "activity_description"];
+        $itineraryActivityField = ["activity_title", "activity_description", "activity_icon"];
 
         foreach($data["itinerary"][$key]["activity"] as $key => $activity){
             foreach($itineraryActivityField as $field){
@@ -209,26 +207,39 @@ class GenerateData
         return $tourHighlights;
     }
 
-    /**
-     * レビューの共通準備処理
-     */
-    public function prepareReviewData($request,$tourId)
-    {
-
+    public function prepareTourReview($request, $tour_id){
         $data = $request->validated();
-        $insertingReviewData = [];
-        foreach($data["review"] as $key => $review){
-            $insertingReviewData[$key] = [
-                "name" => $review["name"],
-                "rate" => $review["rate"],
-                "review" => $review["review"],
-                "review_date" => $review["date"],
-                "tour_id" => $tourId
-            ];
+        $tourReviews = [];
+        $tourReviewtField = ["name", "content", "rating", "date"];
+
+        foreach($data["reviews"] as $key => $itinerary){
+            foreach($tourReviewtField as $field){
+                $tourReviews[$key][$field] = $itinerary[$field];
+                $tourReviews[$key]["tour_id"] = $tour_id;  
+            }
+            
         }
 
-        return $insertingReviewData;
+        return $tourReviews;
     }
+
+    public function prepareTourQA($request, $tour_id){
+        $data = $request->validated();
+        $tourQuestions = [];
+        $tourQuestionField = ["question", "answer"];
+
+        foreach($data["questions"] as $key => $itinerary){
+            foreach($tourQuestionField as $field){
+                $tourQuestions[$key][$field] = $itinerary[$field];
+                $tourQuestions[$key]["tour_id"] = $tour_id;  
+            }
+            
+        }
+
+        return $tourQuestions;
+    }
+
+
 
     /**
      * QAーの共通準備処理

@@ -1,4 +1,4 @@
-<div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden js_sending hidden"
+<div class="relative hidden size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden js_sending"
       style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
       <div class="layout-container flex h-full grow flex-col">
             <!-- Header -->
@@ -14,7 +14,7 @@
                                           fill="currentColor"></path>
                               </svg>
                         </div>
-                        <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">Japatour
+                        <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours
                         </h2>
                   </div>
                   <div class="flex flex-1 justify-end gap-8">

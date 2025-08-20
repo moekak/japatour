@@ -1,4 +1,6 @@
 import DupeHighlight from "./DupeHighlight.js";
+import DupeQA from "./DupeQA.js";
+import DupeReview from "./DupeReview.js";
 import DupeItinerary from "./itinerary/DupeItinerary.js";
 import DupeItineraryActivity from "./itinerary/DupeItineraryActivity.js";
 import DupeItineraryHighlight from "./itinerary/DupeItineraryHighlight.js";
@@ -22,7 +24,11 @@ export default class DupeEventhandler {
             ['remove-itinerary-highlight_button', { instance: DupeItineraryHighlight.getInstance(), action: 'delete' }],
             ['add-itinerary-highlight_button', { instance: DupeItineraryHighlight.getInstance(), action: 'duplicate' }],
             ['remove-highlight_button', { instance: DupeHighlight.getInstance(), action: 'delete' }],
-            ['add-highlight_button', { instance: DupeHighlight.getInstance(), action: 'duplicate' }]
+            ['add-highlight_button', { instance: DupeHighlight.getInstance(), action: 'duplicate' }],
+            ['add-review_button', { instance: DupeReview.getInstance(), action: 'duplicate' }],
+            ['remove-review_button', { instance: DupeReview.getInstance(), action: 'delete' }],
+            ['add-qa_button', { instance: DupeQA.getInstance(), action: 'duplicate' }],
+            ['remove-qa_button', { instance: DupeQA.getInstance(), action: 'delete' }],
         ]);
     }
 

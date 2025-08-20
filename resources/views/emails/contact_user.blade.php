@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Thank You for Contacting JapaTour</h2>
+        <h2>Thank You for Contacting ShogunTours</h2>
 
         <p>Dear {{ $name}},</p>
 
@@ -37,15 +37,15 @@
         <p>For future reference, please save your inquiry reference number: #{{ time() }}</p>
 
         <p>Best regards,<br>
-        The JapaTour Team</p>
+        The ShogunTours Team</p>
 
         <div class="footer">
             <p>This is an automated response. Please do not reply to this email.</p>
-            <p>JapaTour<br>
+            <p>ShogunTours<br>
             phone number: 090-6495-4567
-            email: info@japatour-official.com</p>
+            email: info@shoguntoursjapan.com</p>
             <p>Follow us on: 
-                <a href="https://www.instagram.com/japatour_official/">Instagram</a> | 
+                <a href="https://www.instagram.com/ShogunTours_official/">Instagram</a> | 
             </p>
         </div>
     </div>

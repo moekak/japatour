@@ -15,7 +15,10 @@ class TopController extends Controller
     {
         $tours =ToursNew::getAllToursByCategory();
         $categories = Category::getCateforiesDataWithRegion();
-        $regions = Region::getAllRigions();
+        $regions = Region::getAllRegions();
+
+        // print_r($tours);
+        // exit;
         return view("index", compact("tours", "categories", "regions"));
     }
 }

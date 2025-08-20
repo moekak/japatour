@@ -10,4 +10,8 @@ class ItineraryLanguage extends Model
         "itinerary_id",
         "language_id"
     ];
+
+    public function language(){
+        return $this->belongsTo(Language::class, "language_id");
+    }
 }

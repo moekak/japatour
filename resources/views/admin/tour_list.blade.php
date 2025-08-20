@@ -20,7 +20,7 @@
 
 <body class="bg-[#fcf8f8]">
     @if(session('success'))
-        <div class="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg flex items-center gap-3 z-50 animate-slide-in">
+        <div class="fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg flex items-center gap-3 z-[9999] animate-slide-in">
             <i class="fas fa-check-circle"></i>
             <span>{{ session('success') }}</span>
             <button onclick="this.parentElement.remove()" class="ml-4 text-green-700 hover:text-green-900">

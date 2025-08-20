@@ -47,6 +47,18 @@ class CreateRequest extends FormRequest
             'highlights' => ['required', 'array', 'min:1'],
             'highlights.*.title' => ['required', 'string', 'max:50'],
             'highlights.*.description' => ['required', 'string', 'max:500'],
+
+            // Tour Reviews
+            'reviews' => ['required', 'array', 'min:1'],
+            'reviews.*.name' => ['required', 'string', 'max:50'],
+            'reviews.*.rating' => ['required', 'integer'],
+            'reviews.*.content' => ['required', 'string', 'max:3000'],
+            'reviews.*.date' => ['required', 'date'],
+
+            // Tour QA
+            'questions' => ['required', 'array', 'min:1'],
+            'questions.*.question' => ['required', 'string', 'max:1000'],
+            'questions.*.answer' => ['required', 'string', 'max:1000'],
             
             // Itineraries
             'itinerary' => ['required', 'array', 'min:1'],
@@ -56,6 +68,8 @@ class CreateRequest extends FormRequest
             'itinerary.*.meeting_point' => ['required', 'string', 'max:255'],
             'itinerary.*.adult_price' => ['required', 'numeric', 'min:0', 'max:99999999.99'],
             'itinerary.*.child_price' => ['nullable', 'numeric', 'min:0', 'max:99999999.99'],
+            'itinerary.*.overview_title' => ['required', 'string', 'max:100'],
+            'itinerary.*.overview_description' => ['required', 'string', 'max:1000'],
             
             // Languages for each itinerary
             'itinerary.*.languages' => ['required', 'array', 'min:1'],
@@ -63,12 +77,13 @@ class CreateRequest extends FormRequest
             
             // Activities for each itinerary
             'itinerary.*.activity' => ['required', 'array', 'min:1'],
-            'itinerary.*.activity.*.activity_title' => ['required', 'string', 'max:50'],
+            'itinerary.*.activity.*.activity_title' => ['required', 'string', 'max:1000'],
             'itinerary.*.activity.*.activity_description' => ['required', 'string', 'max:1000'],
+            'itinerary.*.activity.*.activity_icon' => ['required', 'string'],
             
             // Itinerary highlights
             'itinerary.*.itinerary_highlight' => ['required', 'array', 'min:1'],
-            'itinerary.*.itinerary_highlight.*' => ['required', 'string', 'max:50'],
+            'itinerary.*.itinerary_highlight.*' => ['required', 'string', 'max:500'],
             
             // Itinerary image
             'itinerary.*.image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
@@ -193,6 +208,40 @@ class CreateRequest extends FormRequest
             'highlights.*.title.max' => 'Highlight title cannot exceed 50 characters.',
             'highlights.*.description.required' => 'Highlight description is required.',
             'highlights.*.description.max' => 'Highlight description cannot exceed 500 characters.',
+
+            // Reviews
+            'reviews.required' => 'At least one review is required.',
+            'reviews.array' => 'Reviews must be an array.',
+            'reviews.min' => 'You must provide at least one review.',
+
+            'reviews.*.name.required' => 'The reviewer name is required.',
+            'reviews.*.name.string' => 'The reviewer name must be a valid string.',
+            'reviews.*.name.max' => 'The reviewer name may not be greater than 50 characters.',
+
+            'reviews.*.rating.required' => 'The rating is required.',
+            'reviews.*.rating.integer' => 'The rating must be an integer.',
+
+            'reviews.*.content.required' => 'The review content is required.',
+            'reviews.*.content.string' => 'The review content must be a valid string.',
+            'reviews.*.content.max' => 'The review content may not be greater than 3000 characters.',
+
+            'reviews.*.date.required' => 'The review date is required.',
+            'reviews.*.date.date' => 'The review date must be a valid date.',
+
+
+            // QA 
+            'questions.required' => 'At least one Q&A entry is required.',
+            'questions.array' => 'The Q&A data must be provided as an array.',
+            'questions.min' => 'Please add at least one Q&A item.',
+
+            'questions.*.question.required' => 'Each Q&A must include a question.',
+            'questions.*.question.string' => 'Each question must be a valid text string.',
+            'questions.*.question.max' => 'Questions may not exceed 1000 characters.',
+
+            'questions.*.answer.required' => 'Each Q&A must include an answer.',
+            'questions.*.answer.string' => 'Each answer must be a valid text string.',
+            'questions.*.answer.max' => 'Answers may not exceed 1000 characters.',
+
             
             // Itineraries
             'itinerary.required' => 'At least one itinerary is required.',
@@ -224,6 +273,14 @@ class CreateRequest extends FormRequest
             'itinerary.*.child_price.numeric' => 'Child price must be a valid number.',
             'itinerary.*.child_price.min' => 'Child price cannot be negative.',
             'itinerary.*.child_price.max' => 'Child price cannot exceed 99,999,999.99.',
+
+            'itinerary.*.overview_title.required' => 'Itinerary overview title is required.',
+            'itinerary.*.overview_title.string' => 'Itinerary overview title must be a valid text.',
+            'itinerary.*.overview_title.max' => 'Itinerary overview title cannot exceed 100 characters.',
+            
+            'itinerary.*.overview_description.required' => 'Itinerary overview description is required.',
+            'itinerary.*.overview_description.string' => 'Itinerary overview description must be a valid text.',
+            'itinerary.*.overview_description.max' => 'Itinerary overview description cannot exceed 1000 characters.',
             
             // Languages
             'itinerary.*.languages.required' => 'At least one language is required for each itinerary.',
@@ -237,16 +294,17 @@ class CreateRequest extends FormRequest
             'itinerary.*.activity.array' => 'Activities must be provided as a list.',
             'itinerary.*.activity.min' => 'At least one activity is required for each itinerary.',
             'itinerary.*.activity.*.activity_title.required' => 'Activity title is required.',
-            'itinerary.*.activity.*.activity_title.max' => 'Activity title cannot exceed 50 characters.',
+            'itinerary.*.activity.*.activity_title.max' => 'Activity title cannot exceed 1000 characters.',
             'itinerary.*.activity.*.activity_description.required' => 'Activity description is required.',
             'itinerary.*.activity.*.activity_description.max' => 'Activity description cannot exceed 1000 characters.',
+            'itinerary.*.activity.*.activity_icon.required' => 'Activity icon is required.',
             
             // Itinerary Highlights
             'itinerary.*.itinerary_highlight.required' => 'At least one itinerary highlight is required.',
             'itinerary.*.itinerary_highlight.array' => 'Itinerary highlights must be provided as a list.',
             'itinerary.*.itinerary_highlight.min' => 'At least one itinerary highlight is required.',
             'itinerary.*.itinerary_highlight.*.required' => 'Itinerary highlight text is required.',
-            'itinerary.*.itinerary_highlight.*.max' => 'Itinerary highlight cannot exceed 50 characters.',
+            'itinerary.*.itinerary_highlight.*.max' => 'Itinerary highlight cannot exceed 500 characters.',
             
             // Itinerary Image
             'itinerary.*.image.required' => 'Image is required for each itinerary.',
@@ -300,6 +358,7 @@ class CreateRequest extends FormRequest
             'itinerary.*.languages.*' => 'language',
             'itinerary.*.activity.*.activity_title' => 'activity title',
             'itinerary.*.activity.*.activity_description' => 'activity description',
+            'itinerary.*.activity.*.activity_icon' => 'activity icon',
             'itinerary.*.itinerary_highlight.*' => 'itinerary highlight',
             'itinerary.*.image' => 'itinerary image',
             'gallery.*' => 'gallery image',
