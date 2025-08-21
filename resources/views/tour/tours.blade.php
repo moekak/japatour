@@ -2,27 +2,7 @@
 <html lang="en">
 
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>ShogunTours - Japan Tours & Experiences</title>
-      <meta name="keywords"
-            content="ShogunTours, Japan tours, Tokyo tours, Kyoto tours, Osaka tours, Mount Fuji tours, cultural experiences, guided tours, Japan travel packages, private tours">
-      <meta rel="canonical" href="https://shoguntoursjapan.com/tours">
-      <meta name="robots" content="index,follow">
-      <meta property="og:title" content="ShogunTours - Japan Tours & Experiences">
-      <meta property="og:type" content="website">
-      <meta name="description"
-            content="Discover authentic Japan with our expertly crafted tours. From Tokyo's bustling streets to Kyoto's ancient temples, experience Japan like never before with local guides.">
-      <meta property="og:url" content="https://shoguntoursjapan.com/tours">
-      <meta property="og:image" content="img/logo3.svg">
-      <meta property="og:site_name" content="ShogunTours">
-      <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-      <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
-            href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
-      <link rel="shortcut icon" href="img/logo3.svg">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-      <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+      @include('components.head')
 </head>
 
 <body>
@@ -30,7 +10,7 @@
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
                   <!-- Header -->
-                  @include('components.header')
+                  @include('components.nav')
 
                   <!-- Hero Section -->
                   <div class="flex justify-center">

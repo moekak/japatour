@@ -15,6 +15,14 @@
 </head>
 
 <body>
+      {{-- success message --}}
+      <div id="success-container" class="hidden fixed top-4 right-4 bg-green-100 border border-green-400 text-green-700 px-6 py-4 rounded-lg items-center gap-3 z-[9999] animate-slide-in">
+            <i class="fas fa-check-circle"></i>
+            <span id="success_message"></span>
+            <button onclick="this.parentElement.remove()" class="ml-4 text-green-700 hover:text-green-900">
+                  <i class="fas fa-times"></i>
+            </button>
+      </div>
       <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
@@ -96,7 +104,7 @@
                                                                         </td>
                                                                         <td class="px-6 py-4">
                                                                               <span class="px-3 py-1 bg-[#f3e7e7] text-[#1b0e0e] rounded-full text-sm">
-                                                                                    {{$blog->category}}
+                                                                                    {{$blog->blogcategory->category_name}}
                                                                               </span>
                                                                         </td>
                                                                         <td class="px-6 py-4 text-[#994d4d]">9</td>
@@ -283,6 +291,13 @@
                   if (currentDeleteId) {
                         closeDeleteModal();
                   }
+            }
+
+            if(localStorage.getItem("success")){
+                  document.getElementById("success-container").classList.remove("hidden")
+                  document.getElementById("success-container").classList.add("flex")
+                  document.getElementById("success_message").innerHTML = localStorage.getItem("success")
+                  localStorage.removeItem("success")
             }
       </script>
 </body>

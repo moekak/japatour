@@ -26,15 +26,15 @@ class CreateBlogRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
-            'subtitle' => ['required', 'string'],
-            'category' => ['required', 'string'],
-            'status' => ['required', 'string'],
-            'meta_description' => ['nullable', 'string'],
-            'content' => ['required', 'string'],
-            'tags' => ['required', 'string'],
-            'reading_time' => ['required', 'string'],
-            'featured_image' => ['required', 'image', "mimes:jpeg,png,jpg,gif", "max:2048"],
+            'title'             => ['required', 'string'],
+            'subtitle'          => ['required', 'string'],
+            'blog_category_id'  => ['required', 'exists:blog_categories,id'],
+            'meta_description'  => ['nullable', 'string'],
+            'content'           => ['required', 'string'],
+            'tags'              => ['required', 'string'],
+            'reading_time'      => ['required', 'string'],
+            'featured_image'    => ['required', 'image', "mimes:jpeg,png,jpg,gif", "max:2048"],
+            'is_featured'       => ['required', 'boolean'],
         ];
     }
 
@@ -47,11 +47,8 @@ class CreateBlogRequest extends FormRequest
         'subtitle.required' => 'Please enter a subtitle.',
         'subtitle.string'   => 'The subtitle must be a text string.',
 
-        'category.required' => 'Please select a category.',
-        'category.string'   => 'The category must be a text string.',
-
-        'status.required' => 'Please select a status.',
-        'status.string'   => 'The status must be a text string.',
+        'blog_category_id.required' => 'Please select a category.',
+        'blog_category_id.exists'   => 'The category is invalid.',
 
         'meta_description.string' => 'The meta description must be a text string.',
 
@@ -68,6 +65,9 @@ class CreateBlogRequest extends FormRequest
         'featured_image.image' => 'The file must be a valid image.',
         'featured_image.mimes' => 'Please upload a JPEG, PNG, JPG, or GIF image.',
         'featured_image.max' => 'The image size must not exceed 2MB.',
+
+        'is_featured.required' => 'Please select featured status.',
+        'is_featured.boolean' => 'The featured field must be true or false.',
     ];
 }
 
@@ -77,7 +77,7 @@ class CreateBlogRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'status'  => 'error',
             'message' => 'Validation failed.',
-            'errors'  => $validator->errors(), // そのまま返すならこちら
+            'errors'  => $validator->errors(),
         ], 422));
     }
 

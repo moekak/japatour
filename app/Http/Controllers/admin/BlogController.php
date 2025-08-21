@@ -6,38 +6,60 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Blog\CreateBlogRequest;
 use App\Http\Requests\Admin\Blog\EditBlogRequest;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::get();
-        return view("blog.blog", compact("blogs"));
+        $categorizedBlogs = Blog::getBlogsExceptFeatured();
+        $featuredBlog = Blog::getFeaturedBlog();
+        $categories = BlogCategory::getCategories();
+
+        return view("blog.blog", compact("categorizedBlogs", "featuredBlog", "categories"));
     }
+
+    public function all(string $category){
+        $blogs = Blog::getBlogs();
+        $categories = BlogCategory::getCategories();
+        $tags = Blog::getTags();
+        
+        return view("blog.blog_all", compact("blogs", "categories", "tags"));
+    }
+
 
     public function show($id){
         $blog = Blog::where("id", $id)->first();
-        $relatedBlogs = Blog::getRelatedBlogs($blog->category);
+        $relatedBlogs = Blog::getRelatedBlogs($blog->blog_category_id, $blog->id);
         return view("blog.blog_show", compact("blog", "relatedBlogs"));
     }
 
+
     public function list(){
-        $blogs = Blog::get();
+        $blogs = Blog::getBlogs();
         return view("blog.blog_list", compact("blogs"));
     }
 
     public function create(Request $request){
-        return view("blog.blog_create");
+        $categories = BlogCategory::all();
+        return view("blog.blog_create", compact("categories"));
     }
 
     public function edit(Request $request, $id){
         $blog = Blog::findOrFail($id);
-        return view("blog.blog_edit", compact("blog"));
+        $categories = BlogCategory::all();
+        return view("blog.blog_edit", compact("blog", "categories"));
     }
 
     public function store(CreateBlogRequest $request){
         $validated = $request->validated();
+
+        if (isset($validated['is_featured']) && $validated['is_featured']) {
+            Blog::where('is_featured', true)
+                ->update(['is_featured' => false]);
+        }
 
         $imagePath = null;
         if ($request->hasFile('featured_image')) {
@@ -52,26 +74,28 @@ class BlogController extends Controller
     }
 
     public function update(EditBlogRequest $request,Blog $blog){
-        $data = $request->validated();
-        $blog->fill($data);
+        DB::transaction(function() use($blog, $request){
+            $data = $request->validated();
+            Log::debug($data);
+            $blog->fill($data);
 
-        // 画像がアップロードされたときだけ保存
-        if ($request->hasFile('cover')) {
-            // 既存を削除（任意）
-            if ($request->hasFile('featured_image')) {
-                $imagePath = $request->file('featured_image')->store('blog-images', 'public');
-                $blog->featured_image = $imagePath; 
+            if (isset($data['is_featured']) && $data['is_featured']) {
+                Blog::where('id', '!=', $blog->id)
+                    ->where('is_featured', true)
+                    ->update(['is_featured' => false]);
             }
 
-            // 保存先：public ディスク（`php artisan storage:link` 済を想定）
-            $path = $request->file('cover')->store('blogs/covers', 'public');
-            $blog->cover_path = $path; // DBのカラム名は適宜
-        }
 
-        if ($blog->isDirty()) {
-            $blog->save();
-        }
+            if ($request->hasFile('featured_image')) {
+                $imagePath = $request->file('featured_image')->store('blog-images', 'public');
+                $blog->featured_image = $imagePath;
+            }
 
+            if ($blog->isDirty()) {
+                $blog->save();
+            }
+
+        });
 
         return response()->json([
             'status'  => 'ok',
@@ -84,5 +108,6 @@ class BlogController extends Controller
 
         return redirect()->route('blog.list');
     }
+
 
 }

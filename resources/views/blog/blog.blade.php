@@ -2,27 +2,7 @@
 <html lang="en">
 
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>ShogunTours - Travel Blog</title>
-      <meta name="keywords"
-            content="ShogunTours, ShogunTours-official, Japan tour, tokyo tour, Tokyo travel, Kyoto experience, Osaka trip, Japanese culture, foreign tourist guide, Japan travel package, Mt. Fuji tour, onsen experience, Japan sightseeing, travel blog, Japan travel tips">
-      <meta rel="canonical" href="https://shoguntoursjapan.com/blog">
-      <meta name="robots" content="index,follow">
-      <meta property="og:title" content="ShogunTours - Travel Blog">
-      <meta property="og:type" content="website">
-      <meta name="description"
-            content="Discover Japan through our travel blog. Get insider tips, cultural insights, and travel guides for your perfect Japan adventure. Expert advice from local guides.">
-      <meta property="og:url" content="https://shoguntoursjapan.com/blog">
-      <meta property="og:image" content="img/logo3.svg">
-      <meta property="og:site_name" content="ShogunTours">
-      <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-      <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"
-            href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
-      <link rel="shortcut icon" href="img/logo3.svg">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-      <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+      @include('components.head')
 </head>
 
 <body>
@@ -30,7 +10,7 @@
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
                   <!-- Header -->
-                  @include('components.header')
+                  @include('components.nav')
 
                   <!-- Hero Section -->
                   <div class="flex justify-center">
@@ -65,55 +45,6 @@
                               </div>
                         </div>
                   </div>
-
-                  <!-- Search and Filter Section -->
-                  <section class="flex justify-center py-8 bg-[#f3e7e7]">
-                        <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
-                              <div class="px-4">
-                                    <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
-                                          <!-- Search Bar -->
-                                          <div class="flex-1 max-w-md">
-                                                <div class="relative">
-                                                      <input type="text" placeholder="Search articles..."
-                                                            class="w-full px-4 py-3 pl-12 rounded-lg bg-white border border-[#e7d0d0] text-[#1b0e0e] placeholder:text-[#994d4d] focus:outline-none focus:border-[#e92929] transition-colors">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                                            fill="#994d4d" viewBox="0 0 256 256"
-                                                            class="absolute left-4 top-1/2 transform -translate-y-1/2">
-                                                            <path
-                                                                  d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z">
-                                                            </path>
-                                                      </svg>
-                                                </div>
-                                          </div>
-
-                                          <!-- Filter Buttons -->
-                                          <div class="flex gap-2 flex-wrap">
-                                                <button onclick="filterPosts('all')"
-                                                      class="filter-btn active px-4 py-2 rounded-lg bg-[#e92929] text-white text-sm font-medium transition-all hover:bg-[#d61f1f]">
-                                                      All Posts
-                                                </button>
-                                                <button onclick="filterPosts('travel-tips')"
-                                                      class="filter-btn px-4 py-2 rounded-lg bg-white text-[#1b0e0e] text-sm font-medium transition-all hover:bg-[#f3e7e7] border border-[#e7d0d0]">
-                                                      Travel Tips
-                                                </button>
-                                                <button onclick="filterPosts('culture')"
-                                                      class="filter-btn px-4 py-2 rounded-lg bg-white text-[#1b0e0e] text-sm font-medium transition-all hover:bg-[#f3e7e7] border border-[#e7d0d0]">
-                                                      Culture
-                                                </button>
-                                                <button onclick="filterPosts('food')"
-                                                      class="filter-btn px-4 py-2 rounded-lg bg-white text-[#1b0e0e] text-sm font-medium transition-all hover:bg-[#f3e7e7] border border-[#e7d0d0]">
-                                                      Food & Dining
-                                                </button>
-                                                <button onclick="filterPosts('destinations')"
-                                                      class="filter-btn px-4 py-2 rounded-lg bg-white text-[#1b0e0e] text-sm font-medium transition-all hover:bg-[#f3e7e7] border border-[#e7d0d0]">
-                                                      Destinations
-                                                </button>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>
-                  </section>
-
                   <!-- Featured Article -->
                   <section id="featured" class="flex justify-center py-12">
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
@@ -121,12 +52,12 @@
                                     class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-6">
                                     Featured Article
                               </h2>
-                              <div class="px-4">
+                              <a class="px-4" href="{{route("blog.show", $featuredBlog->id)}}">
                                     <article
                                           class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
                                           onclick="openArticle('featured-article')">
                                           <div class="relative h-64 md:h-80 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=400&fit=crop"
+                                                <img src="{{ asset('storage/' . $featuredBlog->featured_image) }}"
                                                       alt="Mount Fuji at sunrise"
                                                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                                 <div class="absolute top-4 left-4">
@@ -135,65 +66,35 @@
                                                 </div>
                                                 <div class="absolute top-4 right-4">
                                                       <span
-                                                            class="bg-black/50 text-white px-3 py-1 rounded-full text-sm">Destinations</span>
+                                                            class="bg-black/50 text-white px-3 py-1 rounded-full text-sm">{{$featuredBlog->blogCategory->category_name}}</span>
                                                 </div>
                                           </div>
                                           <div class="p-6">
                                                 <div class="flex items-center gap-4 mb-3 text-sm text-[#994d4d]">
-                                                      <div class="flex items-center gap-2">
-                                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face"
-                                                                  alt="Author" class="w-8 h-8 rounded-full">
-                                                            <span>Yuki Tanaka</span>
-                                                      </div>
+                                                      <span>{{ \Carbon\Carbon::parse($featuredBlog->updated_at)->format('F d, Y') }}</span>
                                                       <span>•</span>
-                                                      <span>December 15, 2024</span>
-                                                      <span>•</span>
-                                                      <span>8 min read</span>
+                                                      <span>{{$featuredBlog->reading_time}} min read</span>
                                                 </div>
-                                                <h3
-                                                      class="text-[#1b0e0e] text-2xl font-bold mb-3 group-hover:text-[#e92929] transition-colors">
-                                                      The Ultimate Guide to Climbing Mount Fuji: Everything You Need to
-                                                      Know
+                                                <h3 class="text-[#1b0e0e] text-2xl font-bold mb-3 group-hover:text-[#e92929] transition-colors">
+                                                      {{$featuredBlog->title}}
                                                 </h3>
                                                 <p class="text-[#994d4d] text-base leading-relaxed mb-4">
-                                                      Mount Fuji, Japan's most iconic landmark, attracts millions of
-                                                      visitors each year. But climbing this sacred mountain requires
-                                                      careful planning and preparation. Our comprehensive guide covers
-                                                      everything from the best climbing routes to essential gear, safety
-                                                      tips, and cultural etiquette to ensure your Fuji adventure is both
-                                                      safe and unforgettable.
+                                                      {{$featuredBlog->subtitle}}
                                                 </p>
                                                 <div class="flex items-center justify-between">
                                                       <div class="flex gap-2">
-                                                            <span
-                                                                  class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Hiking</span>
-                                                            <span
-                                                                  class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Mount
-                                                                  Fuji</span>
-                                                            <span
-                                                                  class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Adventure</span>
-                                                      </div>
-                                                      <div class="flex items-center gap-2 text-[#994d4d]">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                  height="16" fill="currentColor" viewBox="0 0 256 256">
-                                                                  <path
-                                                                        d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.69,146.26,196.16,128,206.8Z">
-                                                                  </path>
-                                                            </svg>
-                                                            <span class="text-sm">247</span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                                  height="16" fill="currentColor" viewBox="0 0 256 256"
-                                                                  class="ml-2">
-                                                                  <path
-                                                                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z">
-                                                                  </path>
-                                                            </svg>
-                                                            <span class="text-sm">45</span>
+                                                      <div class="flex flex-wrap gap-2">
+                                                            @php
+                                                                  $tags = explode(",", $featuredBlog->tags);
+                                                            @endphp
+                                                            @foreach ($tags as $tag)
+                                                                  <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">{{$tag}}</span>
+                                                            @endforeach
                                                       </div>
                                                 </div>
                                           </div>
                                     </article>
-                              </div>
+                              </a>
                         </div>
                   </section>
 
@@ -205,69 +106,17 @@
                                     Explore by Category
                               </h2>
                               <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
-                                    <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                          onclick="filterPosts('travel-tips')">
-                                          <div
-                                                class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                      fill="#e92929" viewBox="0 0 256 256">
-                                                      <path
-                                                            d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z">
-                                                      </path>
-                                                </svg>
-                                          </div>
-                                          <h3 class="text-[#1b0e0e] font-bold mb-2">Travel Tips</h3>
-                                          <p class="text-[#994d4d] text-sm">Essential advice for visiting Japan</p>
-                                          <span class="text-[#e92929] text-xs font-medium">24 articles</span>
-                                    </div>
-
-                                    <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                          onclick="filterPosts('culture')">
-                                          <div
-                                                class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                      fill="#e92929" viewBox="0 0 256 256">
-                                                      <path
-                                                            d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM48,48H208V88H48ZM48,208V104H208V208Z">
-                                                      </path>
-                                                </svg>
-                                          </div>
-                                          <h3 class="text-[#1b0e0e] font-bold mb-2">Culture</h3>
-                                          <p class="text-[#994d4d] text-sm">Traditions, festivals, and customs</p>
-                                          <span class="text-[#e92929] text-xs font-medium">18 articles</span>
-                                    </div>
-
-                                    <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                          onclick="filterPosts('food')">
-                                          <div
-                                                class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                      fill="#e92929" viewBox="0 0 256 256">
-                                                      <path
-                                                            d="M208,88H180.36A103.95,103.95,0,0,0,128,64V32a8,8,0,0,0-16,0V64A103.95,103.95,0,0,0,59.64,88H32a8,8,0,0,0,0,16H59.64A103.95,103.95,0,0,0,112,192v32a8,8,0,0,0,16,0V192a103.95,103.95,0,0,0,52.36-88H208a8,8,0,0,0,0-16ZM128,176a72,72,0,1,1,72-72A72.08,72.08,0,0,1,128,176Z">
-                                                      </path>
-                                                </svg>
-                                          </div>
-                                          <h3 class="text-[#1b0e0e] font-bold mb-2">Food & Dining</h3>
-                                          <p class="text-[#994d4d] text-sm">Culinary adventures and local cuisine</p>
-                                          <span class="text-[#e92929] text-xs font-medium">31 articles</span>
-                                    </div>
-
-                                    <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                          onclick="filterPosts('destinations')">
-                                          <div
-                                                class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                      fill="#e92929" viewBox="0 0 256 256">
-                                                      <path
-                                                            d="M240,208H224V96a16,16,0,0,0-16-16H164.94l-13.71-20.56A16,16,0,0,0,138,53H118a16,16,0,0,0-13.23,6.44L91.06,80H48A16,16,0,0,0,32,96V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM48,96H96a16,16,0,0,0,13.23-6.44L122,69h16l13.77,20.56A16,16,0,0,0,165,96h43V208H48Z">
-                                                      </path>
-                                                </svg>
-                                          </div>
-                                          <h3 class="text-[#1b0e0e] font-bold mb-2">Destinations</h3>
-                                          <p class="text-[#994d4d] text-sm">Hidden gems and popular spots</p>
-                                          <span class="text-[#e92929] text-xs font-medium">27 articles</span>
-                                    </div>
+                                    @foreach ($categories as $category)
+                                          <a class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
+                                                href={{route("blogs", $category->id)}}>
+                                                <div class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
+                                                      <i class="text-[#e92929] {{$category->category_icon}}"></i>
+                                                </div>
+                                                <h3 class="text-[#1b0e0e] font-bold mb-2">{{$category->category_name}}</h3>
+                                                <p class="text-[#994d4d] text-sm">{{$category->category_description}}</p>
+                                                <span class="text-[#e92929] text-xs font-medium">{{count($category->blogs)}} articles</span>
+                                          </a>
+                                    @endforeach
                               </div>
                         </div>
                   </section>
@@ -279,50 +128,45 @@
                                     <h2 class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em]">
                                           Latest Articles
                                     </h2>
-                                    <button
+                                    <a href={{route("blogs", "all")}}
                                           class="text-[#e92929] text-sm font-medium hover:text-[#d61f1f] transition-colors">
                                           View All →
-                                    </button>
+                                    </a>
                               </div>
 
                               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4" id="articles-grid">
-                                    @foreach ($blogs as $blog)
-                                          <article
-                                                class="article-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
-                                                data-category="travel-tips" onclick="openArticle({{$blog->id}})">
-                                                <div class="relative h-48 overflow-hidden">
-                                                      <img src="{{ asset('storage/' . $blog->featured_image) }}"
-                                                            alt="Tokyo streets"
-                                                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                                      <div class="absolute top-3 left-3">
-                                                            <span
-                                                                  class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">{{$blog->category}}</span>
+                                    @foreach ($categorizedBlogs as $category => $blogs)
+                                          @foreach ($blogs as $blog)
+                                                <article class="article-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
+                                                      data-category={{$blog->blog_category_id}} onclick="openArticle({{$blog->id}})">
+                                                      <div class="relative h-48 overflow-hidden">
+                                                            <img src="{{ asset('storage/' . $blog->featured_image) }}"
+                                                                  alt="Tokyo streets"
+                                                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                                            <div class="absolute top-3 left-3">
+                                                                  <span
+                                                                        class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">{{$blog->blogCategory->category_name}}</span>
+                                                            </div>
                                                       </div>
-                                                </div>
-                                                <div class="p-4">
-                                                      <h3
-                                                            class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                                            {{$blog->title}}
-                                                      </h3>
-                                                      <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                                            {{$blog->subtitle}}
-                                                      </p>
-                                                      <div class="flex items-center justify-between">
-                                                            <span class="text-[#994d4d] text-xs">{{$blog->reading_time}} min read</span>
-                                                            
+                                                      <div class="p-4">
+                                                            <h3
+                                                                  class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
+                                                                  {{$blog->title}}
+                                                            </h3>
+                                                            <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
+                                                                  {{$blog->subtitle}}
+                                                            </p>
+                                                            <div class="flex items-center justify-between">
+                                                                  <span class="text-[#994d4d] text-xs">{{$blog->reading_time}} min read</span>
+                                                                  
+                                                            </div>
                                                       </div>
-                                                </div>
-                                          </article>
+                                                </article>
+                                          @endforeach
                                     @endforeach
                               </div>
 
                               <!-- Load More Button -->
-                              <div class="text-center pt-8">
-                                    <button
-                                          class="px-8 py-3 bg-[#e92929] text-white rounded-lg font-medium hover:bg-[#d61f1f] transition-colors">
-                                          Load More Articles
-                                    </button>
-                              </div>
                         </div>
                   </section>
 
@@ -402,8 +246,13 @@
                   event.target.classList.remove('bg-white', 'text-[#1b0e0e]', 'border', 'border-[#e7d0d0]');
 
                   // Filter articles
+
+                  console.log(category);
+                  
                   articles.forEach(article => {
-                        if (category === 'all' || article.dataset.category === category) {
+                        if (category === 'all' || article.dataset.category == category) {
+                              console.log("2222");
+                              
                               article.style.display = 'block';
                               article.style.animation = 'fadeIn 0.5s ease-in';
                         } else {

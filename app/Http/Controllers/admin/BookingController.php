@@ -13,11 +13,9 @@ use Stripe\Stripe;
 
 class BookingController extends Controller
 {
-    public function index($id, $date = null)
+    public function index()
     {
-        $tour = Tour::getSpecificData($id);
-        $services = AdditionalService::getServices();
-        return view("tour_book", compact("tour", "date", "services"));
+        return view("book.booking");
     }
 
     public function createPaymentIntent(Request $request){

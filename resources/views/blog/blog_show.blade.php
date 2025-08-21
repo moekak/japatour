@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Blog Template - ShogunTours</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link rel="stylesheet" as="style" onload="this.rel='stylesheet'"href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    @include('components.head')
     <style>
         #content h1{font-size:2rem;font-weight:700;margin:1.2em 0 .6em}
         #content h2{font-size:1.75rem;font-weight:700;margin:1.1em 0 .55em}
@@ -62,7 +56,7 @@
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
         
-        @include('components.header')
+        @include('components.nav')
 
         <!-- Main Content -->
         <div class="flex justify-center">
@@ -73,7 +67,7 @@
                     <header class="mb-8">
                         <!-- Category Badge -->
                         <div class="mb-4">
-                            <span class="bg-[#e92929] text-white px-4 py-2 rounded-full text-sm font-medium">{{$blog->category}}</span>
+                            <span class="bg-[#e92929] text-white px-4 py-2 rounded-full text-sm font-medium">{{$blog->blogCategory->category_name}}</span>
                         </div>
 
                         <!-- Title -->

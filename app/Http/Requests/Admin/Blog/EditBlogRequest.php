@@ -26,46 +26,40 @@ class EditBlogRequest extends FormRequest
         return [
             'title'            => ['sometimes','nullable','string'],
             'subtitle'         => ['sometimes','nullable','string'],
-            'category'         => ['sometimes','nullable','string'],
+            'blog_category_id' => ['sometimes','nullable','exists:blog_categories,id'],
             'meta_description' => ['sometimes','nullable','string'],
             'content'          => ['sometimes','nullable','string'],
             'tags'             => ['sometimes','nullable','string'],
             'reading_time'     => ['sometimes','nullable','string'],
             'featured_image'   => ['sometimes','image','mimes:jpeg,png,jpg,gif','max:2048'],
+            'is_featured'      => ['sometimes','nullable', 'boolean'],
         ];
     }
 
     public function messages(): array
-{
-    return [
-        'title.required' => 'Please enter a title.',
-        'title.string'   => 'The title must be a text string.',
+    {
+        return [
+            'title.string'   => 'The title must be a text string.',
 
-        'subtitle.required' => 'Please enter a subtitle.',
-        'subtitle.string'   => 'The subtitle must be a text string.',
+            'subtitle.string'   => 'The subtitle must be a text string.',
 
-        'category.required' => 'Please select a category.',
-        'category.string'   => 'The category must be a text string.',
+            'blog_category_id.string'   => 'The category must be a text string.',
 
-        'status.required' => 'Please select a status.',
-        'status.string'   => 'The status must be a text string.',
+            'meta_description.string' => 'The meta description must be a text string.',
 
-        'meta_description.string' => 'The meta description must be a text string.',
+            'content.string'   => 'The content must be a text string.',
 
-        'content.required' => 'Please enter the content.',
-        'content.string'   => 'The content must be a text string.',
+            'tags.string'   => 'The tags field must be a comma-separated text string.',
 
-        'tags.required' => 'Please provide at least one tag.',
-        'tags.string'   => 'The tags field must be a comma-separated text string.',
+            'reading_time.string'   => 'The reading time must be a text string (e.g., "3 min").',
 
-        'reading_time.required' => 'Please provide an estimated reading time.',
-        'reading_time.string'   => 'The reading time must be a text string (e.g., "3 min").',
+            'featured_image.image' => 'The file must be a valid image.',
+            'featured_image.mimes' => 'Please upload a JPEG, PNG, JPG, or GIF image.',
+            'featured_image.max' => 'The image size must not exceed 2MB.',
 
-        'featured_image.image' => 'The file must be a valid image.',
-        'featured_image.mimes' => 'Please upload a JPEG, PNG, JPG, or GIF image.',
-        'featured_image.max' => 'The image size must not exceed 2MB.',
-    ];
-}
+            'is_featured.boolean' => 'The featured field must be true or false.',
+        ];
+    }
 
     protected function failedValidation(Validator $validator)
     {
