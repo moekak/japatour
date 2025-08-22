@@ -1,11 +1,8 @@
-import AdditionalServiceStrategy from "./calculator/AdditionalServiceStrategy.js";
-import DiscountStrategy from "./calculator/DiscountStrategy.js";
+
 import StandardPriceStrategy from "./calculator/StandardPriceStrategy.js";
-// import TourDataInputObserver from "./observer/TourDataInputObserver.js";
-// import TourDataSaveObserver from "./observer/TourDataSaveObserver.js";
 import SummaryDisplayObserver from "./observer/SummaryDisplayObserver.js";
 import TourDataInputObserver from "./observer/TourDataInputObserver.js";
-// import TourDataInputObserver from "./observer/TourDataInputObserver.js";
+import TourDataSaveObserver from "./observer/TourDataSaveObserver.js";
 
 export default class BookingCalculator{
       constructor(){
@@ -63,10 +60,9 @@ export default class BookingCalculator{
                   date: document.getElementById("js_tour-date")
             }));
       }
-
       // 保存オブザーバーの登録
       registerSaveObservers(){
-            this.registerObserver(new TourDataSaveObserve({
+            this.registerObserver(new TourDataSaveObserver({
                   itineraryId: document.getElementById("js_itinerary_id"),
                   adultNumber: document.getElementById("js_adult_number"),
                   adultPrice: document.getElementById("js_adult_price"),
