@@ -20,7 +20,7 @@ export default class BookingInformation{
 
       initialzeEvents(){
             for(const element in this.elements){
-                  this.elements[element].addEventListener("change", ()=>{
+                  this.elements[element].addEventListener("input", ()=>{
                         this.getAndNotify()
                   })
             }
