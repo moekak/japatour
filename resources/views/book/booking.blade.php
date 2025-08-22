@@ -388,7 +388,7 @@
                                                 </div>
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Participants:</span>
-                                                    <span class="text-[#1b0e0e] font-medium"><span class="adult_number"></span>Adults, <span class="child_number"></span>Children/span>
+                                                    <span class="text-[#1b0e0e] font-medium"><span class="adult_number"></span> Adults, <span class="child_number"></span> Children</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -396,9 +396,9 @@
                                         <div class="bg-[#f3e7e7] rounded-lg p-6">
                                             <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Contact Information</h4>
                                             <div class="space-y-2 text-sm">
-                                                <p><span class="text-[#994d4d]">Name:</span> <span class="text-[#1b0e0e] font-medium lastName"></span> <span class="text-[#1b0e0e] font-medium firstName"></span></p>
-                                                <p><span class="text-[#994d4d]">Email:</span> <span class="text-[#1b0e0e] font-medium email"></span></p>
-                                                <p><span class="text-[#994d4d]">Phone:</span> <span class="text-[#1b0e0e] font-medium phone"></span></p>
+                                                <p class="flex justify-between"><span class="text-[#994d4d]">Name:</span> <span class="text-[#1b0e0e] font-medium lastName"></span> <span class="text-[#1b0e0e] font-medium firstName"></span></p>
+                                                <p class="flex justify-between"><span class="text-[#994d4d]">Email:</span> <span class="text-[#1b0e0e] font-medium email"></span></p>
+                                                <p class="flex justify-between"><span class="text-[#994d4d]">Phone:</span> <span class="text-[#1b0e0e] font-medium phone"></span></p>
                                             </div>
                                         </div>
 
