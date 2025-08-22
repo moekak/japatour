@@ -50,7 +50,8 @@ export default class BookingCalculator{
                   adultPrice: document.getElementById('adult-total'),
                   childPrice: document.getElementById('children-total'),
                   summaryContent: document.getElementById("summary-content"),
-                  priceBrakdown: document.getElementById("price-breakdown")
+                  priceBrakdown: document.getElementById("price-breakdown"),
+                  tourTitle: document.getElementById("js_tour_title"),
             }));
       }
 
@@ -163,12 +164,8 @@ export default class BookingCalculator{
 
             const adultNumber = parseInt(this.elements.adultNumber?.innerHTML)
             const childNumber = parseInt(this.elements.childNumber?.innerHTML)
-            // // サービスデータの収集
-            // const services = Array.from(this.elements.serviceCheckboxes || []).map(checkbox => ({
-            //       checked: checkbox.checked,
-            //       price: parseInt(checkbox.dataset.price) || 0
-            // }));
-            
+            const tourTitle = this.selectedTourOption.querySelector(".itinerary-title").innerHTML
+
             const selectedDate = this.elements.dateInput?.value || '';
             
             // 計算オプション
@@ -187,20 +184,13 @@ export default class BookingCalculator{
             
             // 結果をオブザーバーに通知
             this.notifyObservers({
-                  // packageTotal,
-                  // serviceTotal,
                   total,
-                  // basePrice,
-                  // travelers,
                   adultNumber,
                   childNumber,
                   adultPriceTotal,
                   childPriceTotal,
-                  // packageName: selectedPackageName,
                   selectedDate,
-                  // discount,
-                  // basePrice,
-                  // travelersNumber : options.travelers
+                  tourTitle
             });
       }
 }

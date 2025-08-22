@@ -232,7 +232,7 @@
                                                             <i class="fas fa-torii-gate text-[#e92929]"></i>
                                                         </div>
                                                         <div>
-                                                            <h3 class="text-[#1b0e0e] text-lg font-bold">{{$itinerary["overview_title"]}}</h3>
+                                                            <h3 class="text-[#1b0e0e] text-lg font-bold itinerary-title">{{$itinerary["overview_title"]}}</h3>
                                                             <p class="text-[#994d4d] text-sm">{{$itinerary["duration"]}} hours • Max {{$itinerary["max_participants"]}} people</p>
                                                         </div>
                                                     </div>
@@ -418,16 +418,12 @@
                                         <div class="space-y-3">
                                             <div>
                                                 <h4 class="text-[#1b0e0e] font-semibold text-base line-clamp-2">
-                                                    Tokyo Highlights Full-Day Private Tour with Professional Guide
+                                                    {{$tour->title}} - <span id="js_tour_title"></span>
                                                 </h4>
                                             </div>
                                             <div class="flex items-center gap-2 text-[#994d4d] text-sm">
                                                 <i class="fas fa-calendar-alt"></i>
                                                 <span>March 15, 2025 (Saturday)</span>
-                                            </div>
-                                            <div class="flex items-center gap-2 text-[#994d4d] text-sm">
-                                                <i class="fas fa-clock"></i>
-                                                <span>9:00 AM - 6:00 PM</span>
                                             </div>
                                         </div>
                                     </div>
