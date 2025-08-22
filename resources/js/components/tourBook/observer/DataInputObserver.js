@@ -6,6 +6,11 @@ export default class DataInputObserver extends ObserverInterface{
             this.nextButton = document.getElementById("continue-to-step-2")
       }
       update(tourData){
+
+            console.log(tourData);
+            console.log("ツアーデータ");
+            
+            
             const hasAllData = 
                   tourData.itineraryId && 
                   (tourData.adultNumber > 0) && 
