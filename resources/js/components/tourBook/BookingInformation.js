@@ -1,4 +1,4 @@
-import PersonalInfoSaveObserver from "./observer/PersonalInfoSaveObserver"
+import PersonalInfoSaveObserver from "./observer/PersonalInfoSaveObserver.js"
 
 export default class BookingInformation{
       constructor(){
