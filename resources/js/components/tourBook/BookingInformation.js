@@ -46,7 +46,6 @@ export default class BookingInformation{
                   email: document.getElementById("js_email"),
                   phone: document.getElementById("js_phone"),
                   request: document.getElementById("js_request"),
-                  terms: document.getElementById("js_terms"),
             }))
       }
       getAndNotify(){
@@ -55,7 +54,6 @@ export default class BookingInformation{
             const email = this.elements.email.value
             const phone = this.elements.phone.value
             const request = this.elements.request.value
-            const terms = this.elements.terms.value
 
             const data = {
                   firstName,
@@ -63,7 +61,6 @@ export default class BookingInformation{
                   email,
                   phone,
                   request,
-                  terms
             }
 
             console.log(data);
