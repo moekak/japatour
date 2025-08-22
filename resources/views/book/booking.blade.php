@@ -541,7 +541,7 @@
                 onChange: function(selectedDates, dateStr, instance) {
                     if (selectedDates.length > 0) {
                         bookingState.selectedDate = selectedDates[0].toISOString().split('T')[0];
-                        checkStep1Complete();
+                        // checkStep1Complete();
                     }
                 },
                 onReady: function(selectedDates, dateStr, instance) {
@@ -588,18 +588,18 @@
             bookingState.tourPrice = parseInt(element.dataset.price);
 
             // updateSummary();
-            checkStep1Complete();
+            // checkStep1Complete();
         }
 
 
-        function checkStep1Complete() {
-            const continueBtn = document.getElementById('continue-to-step-2');
-            const isComplete = bookingState.selectedTour && bookingState.selectedDate;
+        // function checkStep1Complete() {
+        //     const continueBtn = document.getElementById('continue-to-step-2');
+        //     const isComplete = bookingState.selectedTour && bookingState.selectedDate;
 
-            continueBtn.disabled = !isComplete;
-            continueBtn.classList.toggle('opacity-50', !isComplete);
-            continueBtn.classList.toggle('cursor-not-allowed', !isComplete);
-        }
+        //     continueBtn.disabled = !isComplete;
+        //     continueBtn.classList.toggle('opacity-50', !isComplete);
+        //     continueBtn.classList.toggle('cursor-not-allowed', !isComplete);
+        // }
 
         function validateStep2() {
             const requiredFields = ['first-name', 'last-name', 'email', 'phone', 'terms'];
