@@ -84,6 +84,7 @@ export default class BookingCalculator{
             if(this.elements.incrementAdultBtn){
                   this.elements.incrementAdultBtn.addEventListener("click", ()=>{
                         this.elements.adultNumber.innerHTML = parseInt(this.elements.adultNumber.innerHTML) + 1
+                        this.calculateAndNotify();
                   })
             }
 
@@ -91,6 +92,7 @@ export default class BookingCalculator{
             if(this.elements.decrementAdultBtn){
                   this.elements.decrementAdultBtn.addEventListener("click", ()=>{
                         this.elements.adultNumber.innerHTML = parseInt(this.elements.adultNumber.innerHTML) - 1
+                        this.calculateAndNotify();
                   })
             }
             
@@ -98,6 +100,7 @@ export default class BookingCalculator{
             if(this.elements.incrementChildBtn){
                   this.elements.incrementChildBtn.addEventListener("click", ()=>{
                         this.elements.childNumber.innerHTML = parseInt(this.elements.childNumber.innerHTML) + 1
+                        this.calculateAndNotify();
                   })
             }
 
@@ -105,6 +108,7 @@ export default class BookingCalculator{
             if(this.elements.decrementChildBtn){
                   this.elements.decrementChildBtn.addEventListener("click", ()=>{
                         this.elements.childNumber.innerHTML = parseInt(this.elements.childNumber.innerHTML) - 1
+                        this.calculateAndNotify();
                   })
             }
             
