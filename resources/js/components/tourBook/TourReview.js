@@ -21,8 +21,12 @@ export default class TourReview{
       }
 
       updateReview(){
+            console.log("updateReview");
+            
             for(const element in this.elements){
                   this.elements[element].forEach((el)=>{
+                        console.log(el);
+                        
                         el.innerHtml = document.getElementById(`js_${element}`).value
                   })
             }
