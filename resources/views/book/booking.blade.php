@@ -379,15 +379,16 @@
                                             <div class="space-y-3 text-sm">
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Tour:</span>
-                                                    <span class="text-[#1b0e0e] font-medium">${tourNames[bookingState.selectedTour]}</span>
+                                                    <span class="text-[#1b0e0e] font-medium" id="js_tour_name"></span>
+                                                    <div class="text-[#994d4d] text-xs mt-1" id="js_itinerary_name"></div>
                                                 </div>
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Date:</span>
-                                                    <span class="text-[#1b0e0e] font-medium">${new Date(bookingState.selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                                    <span class="text-[#1b0e0e] font-medium date"></span>
                                                 </div>
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Participants:</span>
-                                                    <span class="text-[#1b0e0e] font-medium">${bookingState.adults} Adults, ${bookingState.children} Children</span>
+                                                    <span class="text-[#1b0e0e] font-medium"><span class="adult_number"></span>Adults, <span class="child_number"></span>Children/span>
                                                 </div>
                                             </div>
                                         </div>
@@ -395,10 +396,9 @@
                                         <div class="bg-[#f3e7e7] rounded-lg p-6">
                                             <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Contact Information</h4>
                                             <div class="space-y-2 text-sm">
-                                                <p><span class="text-[#994d4d]">Name:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('first-name').value} ${document.getElementById('last-name').value}</span></p>
-                                                <p><span class="text-[#994d4d]">Email:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('email').value}</span></p>
-                                                <p><span class="text-[#994d4d]">Phone:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('phone').value}</span></p>
-                                                ${document.getElementById('hotel').value ? `<p><span class="text-[#994d4d]">Hotel:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('hotel').value}</span></p>` : ''}
+                                                <p><span class="text-[#994d4d]">Name:</span> <span class="text-[#1b0e0e] font-medium lastName"></span> <span class="text-[#1b0e0e] font-medium firstName"></span></p>
+                                                <p><span class="text-[#994d4d]">Email:</span> <span class="text-[#1b0e0e] font-medium email"></span></p>
+                                                <p><span class="text-[#994d4d]">Phone:</span> <span class="text-[#1b0e0e] font-medium phone"></span></p>
                                             </div>
                                         </div>
 
@@ -406,17 +406,17 @@
                                             <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Payment Summary</h4>
                                             <div class="space-y-2 text-sm mb-4">
                                                 <div class="flex justify-between">
-                                                    <span class="text-[#994d4d]">Adults (×${bookingState.adults})</span>
-                                                    <span class="text-[#1b0e0e] font-medium">¥${adultTotal.toLocaleString()}</span>
+                                                    <span class="text-[#994d4d]">Adults (×$<span class="adult_number"></span>)</span>
+                                                    <span class="text-[#1b0e0e] font-medium">¥<span class="adult_price"></span></span>
                                                 </div>
                                                 ${bookingState.children > 0 ? `
                                                 <div class="flex justify-between">
-                                                    <span class="text-[#994d4d]">Children (×${bookingState.children})</span>
-                                                    <span class="text-[#1b0e0e] font-medium">¥${childrenTotal.toLocaleString()}</span>
+                                                    <span class="text-[#994d4d]">Children (×$<span class="child_number"></span>)</span>
+                                                    <span class="text-[#1b0e0e] font-medium">¥<span class="child_price"></span></span>
                                                 </div>` : ''}
                                                 <div class="border-t border-[#e7d0d0] pt-2 flex justify-between">
                                                     <span class="text-[#1b0e0e] text-lg font-bold">Total</span>
-                                                    <span class="text-[#1b0e0e] text-lg font-black">¥${grandTotal.toLocaleString()}</span>
+                                                    <span class="text-[#1b0e0e] text-lg font-black">¥<span class="total_price"></span></span>
                                                 </div>
                                             </div>
                                             <p class="text-[#994d4d] text-xs">

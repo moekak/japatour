@@ -149,8 +149,6 @@ export default class BookingCalculator{
             // 大人旅行者数変更イベント
             if (this.elements.adultNumber) {
                   this.elements.adultNumber.addEventListener('change', () => {
-                        console.log("大人料金変更");
-                        
                         this.calculateAndNotify();
                   });
             }
@@ -166,8 +164,6 @@ export default class BookingCalculator{
             // 日付選択イベント
             if (this.elements.dateInput) {
                   this.elements.dateInput.addEventListener('change', (e) => {
-                        console.log("日付"+ e.target.value);
-                        
                         this.calculateAndNotify();
                   });
             }
@@ -189,7 +185,6 @@ export default class BookingCalculator{
             const childNumber = parseInt(this.elements.childNumber?.innerHTML) //子供の人数
             const itineraryTitle = this.selectedTourOption?.querySelector(".itinerary-title").innerHTML || "" //itineraryのタイトル
             const itineraryId= this.selectedTourOption?.querySelector(".itinerary-title").dataset.id || "" //itineraryのID
-
             const selectedDate = this.elements.dateInput?.value || '';
             
             // 計算オプション
@@ -202,9 +197,6 @@ export default class BookingCalculator{
             const adultPriceTotal = StandardPriceStrategy.calculateAdultPrice(this.baseAdultPrice, options);
             const childPriceTotal = StandardPriceStrategy.calculateChildPrice(this.baseChildPrice, options);
             const total = adultPriceTotal + childPriceTotal
-            // const serviceTotal = AdditionalServiceStrategy.calculate(0, options);
-            // const grandTotal = packageTotal + serviceTotal;
-            // const discount = DiscountStrategy.calculate(basePrice, options)
             
             // 結果をオブザーバーに通知
             this.notifyObservers({
