@@ -434,7 +434,7 @@
                                             
                                             <div class="flex items-center gap-2 text-[#994d4d] text-sm">
                                                 <i class="fas fa-calendar-alt"></i>
-                                                <span>March 15, 2025 (Saturday)</span>
+                                                <span id="js_tour-date">March 15, 2025 (Saturday)</span>
                                             </div>
                                         </div>
                                     </div>

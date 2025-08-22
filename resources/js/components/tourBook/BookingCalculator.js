@@ -52,6 +52,7 @@ export default class BookingCalculator{
                   summaryContent: document.getElementById("summary-content"),
                   priceBrakdown: document.getElementById("price-breakdown"),
                   tourTitle: document.getElementById("js_itinerary_title"),
+                  date: document.getElementById("js_tour-date")
             }));
       }
 
@@ -143,7 +144,9 @@ export default class BookingCalculator{
 
             // 日付選択イベント
             if (this.elements.dateInput) {
-                  this.elements.dateInput.addEventListener('change', () => {
+                  this.elements.dateInput.addEventListener('change', (e) => {
+                        console.log("日付"+ e.target.value);
+                        
                         this.calculateAndNotify();
                   });
             }
@@ -164,8 +167,6 @@ export default class BookingCalculator{
 
             const adultNumber = parseInt(this.elements.adultNumber?.innerHTML)
             const childNumber = parseInt(this.elements.childNumber?.innerHTML)
-            console.log(this.selectedTourOption);
-            
             const tourTitle = this.selectedTourOption.querySelector(".itinerary-title").innerHTML
 
             const selectedDate = this.elements.dateInput?.value || '';
