@@ -27,6 +27,10 @@ export default class BookingCalculator{
                   // 旅行者数
                   adultNumber: document.getElementById('adults-count'),
                   childNumber: document.getElementById('children-count'),
+
+                  // 旅行者変更ボタン
+                  incrementAdultBtn : document.getElementById("js_increment-adult"),
+                  decrementAdultBtn : document.getElementById("js_decrement-adult"),
                   
                   // 日付関連
                   dateInput: document.getElementById('date-input'),
@@ -44,16 +48,6 @@ export default class BookingCalculator{
                   childPrice: document.getElementById('children-total'),
                   summaryContent: document.getElementById("summary-content"),
                   priceBrakdown: document.getElementById("price-breakdown")
-
-                  // packageTotal: document.getElementById('package-total'),
-                  // serviceTotal: document.querySelector('.additional-service-price'),
-                  // grandTotal: document.querySelector('.total-price'),
-                  // paymentTotal: document.getElementById('payment-total'),
-                  // depositAmount: document.getElementById('deposit-amount'),
-                  // touristNumber: document.getElementById('summary-travelers'),
-                  // discountTotal : document.querySelector(".discount-value"),
-                  // discountSection : document.querySelector(".discount-section"),
-                  // totalSaving : document.querySelector(".total-savings"),
             }));
       }
 
@@ -81,6 +75,20 @@ export default class BookingCalculator{
                               this.calculateAndNotify();
                         });
                   });
+            }
+
+            // 大人人数増加
+            if(this.elements.incrementAdultBtn){
+                  this.elements.incrementAdultBtn.addEventListener("click", ()=>{
+                        this.elements.adultNumber.innerHTML = parseInt(this.elements.adultNumber.innerHTML) + 1
+                  })
+            }
+
+            // 大人人数減少
+            if(this.elements.decrementAdultBtn){
+                  this.elements.decrementAdultBtn.addEventListener("click", ()=>{
+                        this.elements.adultNumber.innerHTML = parseInt(this.elements.adultNumber.innerHTML) - 1
+                  })
             }
             
             // 大人旅行者数変更イベント
