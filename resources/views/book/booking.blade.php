@@ -374,7 +374,56 @@
                                     <h2 class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Booking Confirmation</h2>
 
                                     <div id="booking-summary" class="space-y-6 mb-8">
-                                        <!-- Summary content will be populated by JavaScript -->
+                                        <div class="bg-[#f3e7e7] rounded-lg p-6">
+                                            <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Tour Details</h4>
+                                            <div class="space-y-3 text-sm">
+                                                <div class="flex justify-between">
+                                                    <span class="text-[#994d4d]">Tour:</span>
+                                                    <span class="text-[#1b0e0e] font-medium">${tourNames[bookingState.selectedTour]}</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span class="text-[#994d4d]">Date:</span>
+                                                    <span class="text-[#1b0e0e] font-medium">${new Date(bookingState.selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                                </div>
+                                                <div class="flex justify-between">
+                                                    <span class="text-[#994d4d]">Participants:</span>
+                                                    <span class="text-[#1b0e0e] font-medium">${bookingState.adults} Adults, ${bookingState.children} Children</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-[#f3e7e7] rounded-lg p-6">
+                                            <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Contact Information</h4>
+                                            <div class="space-y-2 text-sm">
+                                                <p><span class="text-[#994d4d]">Name:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('first-name').value} ${document.getElementById('last-name').value}</span></p>
+                                                <p><span class="text-[#994d4d]">Email:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('email').value}</span></p>
+                                                <p><span class="text-[#994d4d]">Phone:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('phone').value}</span></p>
+                                                ${document.getElementById('hotel').value ? `<p><span class="text-[#994d4d]">Hotel:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('hotel').value}</span></p>` : ''}
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-[#e92929]/5 border border-[#e92929]/20 rounded-lg p-6">
+                                            <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Payment Summary</h4>
+                                            <div class="space-y-2 text-sm mb-4">
+                                                <div class="flex justify-between">
+                                                    <span class="text-[#994d4d]">Adults (×${bookingState.adults})</span>
+                                                    <span class="text-[#1b0e0e] font-medium">¥${adultTotal.toLocaleString()}</span>
+                                                </div>
+                                                ${bookingState.children > 0 ? `
+                                                <div class="flex justify-between">
+                                                    <span class="text-[#994d4d]">Children (×${bookingState.children})</span>
+                                                    <span class="text-[#1b0e0e] font-medium">¥${childrenTotal.toLocaleString()}</span>
+                                                </div>` : ''}
+                                                <div class="border-t border-[#e7d0d0] pt-2 flex justify-between">
+                                                    <span class="text-[#1b0e0e] text-lg font-bold">Total</span>
+                                                    <span class="text-[#1b0e0e] text-lg font-black">¥${grandTotal.toLocaleString()}</span>
+                                                </div>
+                                            </div>
+                                            <p class="text-[#994d4d] text-xs">
+                                                <i class="fas fa-info-circle mr-1"></i>
+                                                Payment will be collected on the day of the tour. No upfront payment required.
+                                            </p>
+                                        </div>
                                     </div>
 
                                     <div class="flex gap-4">
