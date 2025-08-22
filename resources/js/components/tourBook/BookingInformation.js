@@ -19,40 +19,9 @@ export default class BookingInformation{
       }
 
       initialzeEvents(){
-
-            console.log("222222222222222222222222222");
-            
             for(const element in this.elements){
                   console.log(element);
-                  
-            }
-            if(this.elements.firstName){
-                  this.elements.firstName.addEventListener("change", ()=>{
-                        this.getAndNotify()
-                  })
-            }
-            if(this.elements.lastName){
-                  this.elements.lastName.addEventListener("change", ()=>{
-                        this.getAndNotify()
-                  })
-            }
-            if(this.elements.email){
-                  this.elements.email.addEventListener("change", ()=>{
-                        this.getAndNotify()
-                  })
-            }
-            if(this.elements.phone){
-                  this.elements.phone.addEventListener("change", ()=>{
-                        this.getAndNotify()
-                  })
-            }
-            if(this.elements.request){
-                  this.elements.request.addEventListener("change", ()=>{
-                        this.getAndNotify()
-                  })
-            }
-            if(this.elements.terms){
-                  this.elements.terms.addEventListener("change", ()=>{
+                  this.elements.element.addEventListener("change", ()=>{
                         this.getAndNotify()
                   })
             }
@@ -97,6 +66,9 @@ export default class BookingInformation{
                   request,
                   terms
             }
+
+            console.log(data);
+            
 
             this.notifyObservers(data)
       }
