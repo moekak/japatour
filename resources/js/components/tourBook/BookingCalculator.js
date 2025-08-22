@@ -1,6 +1,7 @@
 import AdditionalServiceStrategy from "./calculator/AdditionalServiceStrategy.js";
 import DiscountStrategy from "./calculator/DiscountStrategy.js";
 import StandardPriceStrategy from "./calculator/StandardPriceStrategy.js";
+import DataSaveObserver from "./observer/DataSaveObserver.js";
 import SummaryDisplayObserver from "./observer/SummaryDisplayObserver.js";
 
 export default class BookingCalculator{
@@ -14,6 +15,7 @@ export default class BookingCalculator{
             this.initializeElements();
             // // オブザーバーの登録
             this.registerDisplayObservers();
+            this.registerSaveObservers()
             this.initializeEvents();
             // // 初期計算と通知
             this.calculateAndNotify();
@@ -40,6 +42,8 @@ export default class BookingCalculator{
             };
       }
 
+
+
       // 表示オブザーバーの登録
       registerDisplayObservers() {
             // サマリー表示のオブザーバーを登録
@@ -51,9 +55,22 @@ export default class BookingCalculator{
                   childPrice: document.getElementById('children-total'),
                   summaryContent: document.getElementById("summary-content"),
                   priceBrakdown: document.getElementById("price-breakdown"),
-                  tourTitle: document.getElementById("js_itinerary_title"),
+                  itineraryTitle: document.getElementById("js_itinerary_title"),
                   date: document.getElementById("js_tour-date")
             }));
+      }
+
+      // 保存オブザーバーの登録
+      registerSaveObservers(){
+            this.registerObserver(new DataSaveObserver({
+                  itineraryId: document.getElementById("js_itinerary_id"),
+                  adultNumber: document.getElementById("js_adult_number"),
+                  adultPrice: document.getElementById("js_adult_price"),
+                  childNumber: document.getElementById("js_child_number"),
+                  childPrice: document.getElementById("js_child_price"),
+                  totalPrice: document.getElementById("js_total_price"),
+                  date: document.getElementById("js_date"),
+            }))
       }
 
       // オブザーバー登録メソッド
@@ -62,9 +79,9 @@ export default class BookingCalculator{
       }
 
       // オブザーバーへの通知メソッド
-      notifyObservers(priceData) {
+      notifyObservers(TourData) {
             this.observers.forEach(observer => {
-                  observer.update(priceData);
+                  observer.update(TourData);
             });
       }
 
@@ -164,10 +181,10 @@ export default class BookingCalculator{
       // 計算して通知するメソッド
       calculateAndNotify() {
 
-
-            const adultNumber = parseInt(this.elements.adultNumber?.innerHTML)
-            const childNumber = parseInt(this.elements.childNumber?.innerHTML)
-            const tourTitle = this.selectedTourOption.querySelector(".itinerary-title").innerHTML
+            const adultNumber = parseInt(this.elements.adultNumber?.innerHTML) //大人の人数
+            const childNumber = parseInt(this.elements.childNumber?.innerHTML) //子供の人数
+            const itineraryTitle = this.selectedTourOption.querySelector(".itinerary-title").innerHTML //itineraryのタイトル
+            const itineraryId= this.selectedTourOption.querySelector(".itinerary-title").dataset.id //itineraryのID
 
             const selectedDate = this.elements.dateInput?.value || '';
             
@@ -193,7 +210,8 @@ export default class BookingCalculator{
                   adultPriceTotal,
                   childPriceTotal,
                   selectedDate,
-                  tourTitle
+                  itineraryTitle,
+                  itineraryId
             });
       }
 }

@@ -131,6 +131,15 @@
 </head>
 
 <body>
+    {{-- ツアー情報 --}}
+    <input type="hidden" value="" id="js_itinerary_id">
+    <input type="hidden" value="" id="js_adult_number">
+    <input type="hidden" value="" id="js_adult_price">
+    <input type="hidden" value="" id="js_child_number">
+    <input type="hidden" value="" id="js_child_price">
+    <input type="hidden" value="" id="js_total_price">
+    <input type="hidden" value="" id="js_date">
+
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
         <div class="layout-container flex h-full grow flex-col">
@@ -232,7 +241,7 @@
                                                             <i class="fas fa-torii-gate text-[#e92929]"></i>
                                                         </div>
                                                         <div>
-                                                            <h3 class="text-[#1b0e0e] text-lg font-bold itinerary-title">{{$itinerary["overview_title"]}}</h3>
+                                                            <h3 class="text-[#1b0e0e] text-lg font-bold itinerary-title" data-id={{$itinerary->id}}>{{$itinerary["overview_title"]}}</h3>
                                                             <p class="text-[#994d4d] text-sm">{{$itinerary["duration"]}} hours • Max {{$itinerary["max_participants"]}} people</p>
                                                         </div>
                                                     </div>
