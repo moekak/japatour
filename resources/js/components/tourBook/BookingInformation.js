@@ -3,6 +3,8 @@ import PersonalInfoSaveObserver from "./observer/PersonalInfoSaveObserver.js"
 export default class BookingInformation{
       constructor(){
             this.observers = []
+            this.initializeElements()
+            this.initialzeEvents()
       }
 
       initializeElements(){
@@ -17,9 +19,38 @@ export default class BookingInformation{
       }
 
       initialzeEvents(){
+            for(const element in this.elements){
+                  console.log(element);
+                  
+            }
             if(this.elements.firstName){
                   this.elements.firstName.addEventListener("change", ()=>{
-
+                        this.getAndNotify()
+                  })
+            }
+            if(this.elements.lastName){
+                  this.elements.lastName.addEventListener("change", ()=>{
+                        this.getAndNotify()
+                  })
+            }
+            if(this.elements.email){
+                  this.elements.email.addEventListener("change", ()=>{
+                        this.getAndNotify()
+                  })
+            }
+            if(this.elements.phone){
+                  this.elements.phone.addEventListener("change", ()=>{
+                        this.getAndNotify()
+                  })
+            }
+            if(this.elements.request){
+                  this.elements.request.addEventListener("change", ()=>{
+                        this.getAndNotify()
+                  })
+            }
+            if(this.elements.terms){
+                  this.elements.terms.addEventListener("change", ()=>{
+                        this.getAndNotify()
                   })
             }
       }
