@@ -413,6 +413,26 @@
                                 </div>
 
                                 <div id="price-breakdown" class="hidden">
+                                    <!-- ツアー情報セクション -->
+                                    <div class="border-b border-[#e7d0d0] pb-4 mb-6">
+                                        <div class="space-y-3">
+                                            <div>
+                                                <h4 class="text-[#1b0e0e] font-semibold text-base line-clamp-2">
+                                                    Tokyo Highlights Full-Day Private Tour with Professional Guide
+                                                </h4>
+                                            </div>
+                                            <div class="flex items-center gap-2 text-[#994d4d] text-sm">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <span>March 15, 2025 (Saturday)</span>
+                                            </div>
+                                            <div class="flex items-center gap-2 text-[#994d4d] text-sm">
+                                                <i class="fas fa-clock"></i>
+                                                <span>9:00 AM - 6:00 PM</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 価格内訳 -->
                                     <div class="space-y-3 mb-6">
                                         <div class="flex justify-between">
                                             <span class="text-[#994d4d] text-sm">Adults (×<span id="summary-adults">0</span>)</span>

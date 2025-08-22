@@ -12,8 +12,8 @@ export default class SummaryDisplayObserver extends PriceObserver{
             
             
             this.elements.total.textContent = `￥${priceData.total.toLocaleString('ja-JP')}`;
-            this.elements.adultNumber.textContent = `￥${priceData.adultNumber.toLocaleString('ja-JP')}`;
-            this.elements.childNumber.textContent = `￥${priceData.childNumber.toLocaleString('ja-JP')}`;
+            this.elements.adultNumber.textContent = `${priceData.adultNumber.toLocaleString('ja-JP')}`;
+            this.elements.childNumber.textContent = `${priceData.childNumber.toLocaleString('ja-JP')}`;
             this.elements.adultPrice.textContent = `￥${(priceData.adultPriceTotal).toLocaleString('ja-JP')}`;
             this.elements.childPrice.textContent = `￥${(priceData.childPriceTotal).toLocaleString('ja-JP')}`;
             this.elements.summaryContent.classList.add("hidden");
