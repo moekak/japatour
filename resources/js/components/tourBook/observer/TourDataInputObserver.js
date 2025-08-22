@@ -1,16 +1,11 @@
 import ObserverInterface from "./ObserverInterface.js";
 
-export default class DataInputObserver extends ObserverInterface{
+export default class TourDataInputObserver extends ObserverInterface{
       constructor(){
             super()
             this.nextButton = document.getElementById("continue-to-step-2")
       }
       update(tourData){
-
-            console.log(tourData);
-            console.log("ツアーデータ");
-            
-            
             const hasAllData = 
                   tourData.itineraryId && 
                   (tourData.adultNumber > 0) && 

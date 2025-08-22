@@ -139,6 +139,12 @@
     <input type="hidden" value="" id="js_child_price">
     <input type="hidden" value="" id="js_total_price">
     <input type="hidden" value="" id="js_date">
+    <input type="hidden" value="" id="js_firstName">
+    <input type="hidden" value="" id="js_lastName">
+    <input type="hidden" value="" id="js_email">
+    <input type="hidden" value="" id="js_phone">
+    <input type="hidden" value="" id="js_request">
+    <input type="hidden" value="" id="js_terms">
 
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
@@ -348,12 +354,6 @@
                                             <label class="block text-[#1b0e0e] text-sm font-medium mb-2">Phone Number *</label>
                                             <input type="tel" id="phone" class="w-full px-4 py-3 border-2 border-[#e7d0d0] bg-[#fcf8f8] rounded-lg focus:border-[#e92929] focus:outline-none transition-colors duration-300 text-[#1b0e0e] text-sm" placeholder="+81 90-1234-5678" required>
                                         </div>
-
-                                        <div>
-                                            <label class="block text-[#1b0e0e] text-sm font-medium mb-2">Hotel/Accommodation</label>
-                                            <input type="text" id="hotel" class="w-full px-4 py-3 border-2 border-[#e7d0d0] bg-[#fcf8f8] rounded-lg focus:border-[#e92929] focus:outline-none transition-colors duration-300 text-[#1b0e0e] text-sm" placeholder="Hotel name or address (optional)">
-                                        </div>
-
                                         <div>
                                             <label class="block text-[#1b0e0e] text-sm font-medium mb-2">Special Requests or Dietary Restrictions</label>
                                             <textarea id="special-requests" rows="4" class="w-full px-4 py-3 border-2 border-[#e7d0d0] bg-[#fcf8f8] rounded-lg focus:border-[#e92929] focus:outline-none transition-colors duration-300 text-[#1b0e0e] text-sm" placeholder="Please let us know about any allergies, dietary restrictions, or special requests..."></textarea>
@@ -362,7 +362,7 @@
                                         <div class="flex items-start gap-3">
                                             <input type="checkbox" id="terms" class="mt-1 rounded border-[#e7d0d0] text-[#e92929] focus:ring-[#e92929]" required>
                                             <label for="terms" class="text-[#994d4d] text-sm">
-                                                I agree to the <a href="#" class="text-[#e92929] hover:underline">Terms and Conditions</a> and <a href="#" class="text-[#e92929] hover:underline">Privacy Policy</a>
+                                                I agree to the <a href="{{route("terms")}}" class="text-[#e92929] hover:underline">Terms and Conditions</a> and <a href="{{route("law")}}" class="text-[#e92929] hover:underline">Privacy Policy</a>
                                             </label>
                                         </div>
 

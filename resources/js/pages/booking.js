@@ -1,6 +1,8 @@
 import BookingCalculator from "../components/tourBook/BookingCalculator.js";
+import BookingInformation from "../components/tourBook/BookingInformation.js";
 
-const bookingInstance = new BookingCalculator()
+new BookingCalculator()
+new BookingInformation()
 
 
 document.getElementById('continue-to-step-2').addEventListener("click", ()=>{

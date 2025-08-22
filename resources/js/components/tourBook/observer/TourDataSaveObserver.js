@@ -1,6 +1,6 @@
 import ObserverInterface from "./ObserverInterface.js";
 
-export default class DataSaveObserver extends ObserverInterface{
+export default class TourDataSaveObserver extends ObserverInterface{
       constructor(elements) {
             super();
             this.elements = elements;
