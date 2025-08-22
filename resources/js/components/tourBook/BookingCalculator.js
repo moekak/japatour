@@ -5,42 +5,31 @@ import SummaryDisplayObserver from "./observer/SummaryDisplayObserver.js";
 
 export default class BookingCalculator{
       constructor(){
-            // 基本料金の設定
-            this.basePackagePrice = document.getElementById("js_basic_price").value; // 基本パッケージ料金
+            this.baseAdultPrice = null; // 基本大人パッケージ料金
+            this.baseChildPrice = null; // 基本子供パッケージ料金
+            this.selectedTourOption = null //選択されたTour Itinerary
             // オブザーバーリスト
             this.observers = []
-            // DOM要素の取得
+            // // DOM要素の取得
             this.initializeElements();
-            // オブザーバーの登録
+            // // オブザーバーの登録
             this.registerDisplayObservers();
             this.initializeEvents();
-            // 初期計算と通知
+            // // 初期計算と通知
             this.calculateAndNotify();
       }
-
-
       // DOM要素の初期化
       initializeElements() {
             // フォーム要素
             this.elements = {
-                  // 追加サービス関連
-                  serviceCheckboxes: document.querySelectorAll('.js_service_checkbox'),
-                  servicePriceElement: document.querySelector('.additional-service-price'),
-                  
-                  // 旅行者数関連
-                  travelersSelect: document.getElementById('travelers'),
-                  numberElement: document.querySelector('.js_number'),
-                  tourPriceElement: document.querySelector('.tour-price'),
-                  
-                  // パッケージ関連
-                  optionCards: document.querySelectorAll('.option-card'),
+                  // ツアー選択
+                  tourOption: document.querySelectorAll('.js_tour_option'),
+                  // 旅行者数
+                  adultNumber: document.getElementById('adults-count'),
+                  childNumber: document.getElementById('children-count'),
                   
                   // 日付関連
-                  dateInput: document.getElementById('date_range_start'),
-                  
-                  // 選択されたパッケージ情報
-                  selectedPackageName: '',
-                  selectedPackagePrice: this.basePackagePrice
+                  dateInput: document.getElementById('date-input'),
             };
       }
 
@@ -48,15 +37,23 @@ export default class BookingCalculator{
       registerDisplayObservers() {
             // サマリー表示のオブザーバーを登録
             this.registerObserver(new SummaryDisplayObserver({
-                  packageTotal: document.getElementById('package-total'),
-                  serviceTotal: document.querySelector('.additional-service-price'),
-                  grandTotal: document.querySelector('.total-price'),
-                  paymentTotal: document.getElementById('payment-total'),
-                  depositAmount: document.getElementById('deposit-amount'),
-                  touristNumber: document.getElementById('summary-travelers'),
-                  discountTotal : document.querySelector(".discount-value"),
-                  discountSection : document.querySelector(".discount-section"),
-                  totalSaving : document.querySelector(".total-savings"),
+                  total: document.getElementById('grand-total'),
+                  adultNumber: document.getElementById('summary-adults'),
+                  childNumber: document.getElementById('summary-children'),
+                  adultPrice: document.getElementById('adult-total'),
+                  childPrice: document.getElementById('children-total'),
+                  summaryContent: document.getElementById("summary-content"),
+                  priceBrakdown: document.getElementById("price-breakdown")
+
+                  // packageTotal: document.getElementById('package-total'),
+                  // serviceTotal: document.querySelector('.additional-service-price'),
+                  // grandTotal: document.querySelector('.total-price'),
+                  // paymentTotal: document.getElementById('payment-total'),
+                  // depositAmount: document.getElementById('deposit-amount'),
+                  // touristNumber: document.getElementById('summary-travelers'),
+                  // discountTotal : document.querySelector(".discount-value"),
+                  // discountSection : document.querySelector(".discount-section"),
+                  // totalSaving : document.querySelector(".total-savings"),
             }));
       }
 
@@ -75,39 +72,32 @@ export default class BookingCalculator{
       // イベントリスナーの初期化
       initializeEvents() {
             // 追加サービスのチェックボックス変更イベント
-            if (this.elements.serviceCheckboxes) {
-                  this.elements.serviceCheckboxes.forEach(checkbox => {
-                        checkbox.addEventListener('change', () => {
+            if (this.elements.tourOption) {
+                  this.elements.tourOption.forEach(option => {
+                        option.addEventListener('click', (e) => {
+                              this.selectedTourOption = option
+                              this.baseAdultPrice = option.dataset.adultPrice; // 基本大人パッケージ料金
+                              this.baseChildPrice = option.dataset.childPrice; 
                               this.calculateAndNotify();
                         });
                   });
             }
             
-            // 旅行者数変更イベント
-            if (this.elements.travelersSelect) {
-                  this.elements.travelersSelect.addEventListener('change', () => {
+            // 大人旅行者数変更イベント
+            if (this.elements.adultNumber) {
+                  this.elements.adultNumber.addEventListener('change', () => {
+                        this.calculateAndNotify();
+                  });
+            }
+
+            // 子供旅行者数変更イベント
+            if (this.elements.childNumber) {
+                  this.elements.childNumber.addEventListener('change', () => {
                         this.calculateAndNotify();
                   });
             }
             
-            // パッケージ選択イベント
-            if (this.elements.optionCards) {
-                  this.elements.optionCards.forEach(card => {
-                        card.addEventListener('click', () => {
-                              // 選択状態の更新
-                              this.elements.optionCards.forEach(c => c.classList.remove('selected'));
-                              card.classList.add('selected');
-                              
-                              // 選択されたパッケージ情報の更新
-                              this.elements.selectedPackageName = card.dataset.itinerary || '';
-                              this.elements.selectedPackagePrice = parseInt(card.dataset.price) || this.basePackagePrice;
-                              
-                              // 計算と通知
-                              this.calculateAndNotify();
-                        });
-                  });
-            }
-            
+
             // 日付選択イベント
             if (this.elements.dateInput) {
                   this.elements.dateInput.addEventListener('change', () => {
@@ -127,44 +117,48 @@ export default class BookingCalculator{
       
       // 計算して通知するメソッド
       calculateAndNotify() {
-            // 現在の状態から計算に必要なデータを収集
-            const travelers = parseInt(this.elements.travelersSelect?.value) || 1;
+
+
+            const adultNumber = parseInt(this.elements.adultNumber?.innerHTML)
+            const childNumber = parseInt(this.elements.childNumber?.innerHTML)
+            // // サービスデータの収集
+            // const services = Array.from(this.elements.serviceCheckboxes || []).map(checkbox => ({
+            //       checked: checkbox.checked,
+            //       price: parseInt(checkbox.dataset.price) || 0
+            // }));
             
-            // サービスデータの収集
-            const services = Array.from(this.elements.serviceCheckboxes || []).map(checkbox => ({
-                  checked: checkbox.checked,
-                  price: parseInt(checkbox.dataset.price) || 0
-            }));
-            
-            // 選択されたパッケージと日付
-            const selectedPackageName = this.elements.selectedPackageName;
-            const basePrice = this.elements.selectedPackagePrice || this.basePackagePrice;
             const selectedDate = this.elements.dateInput?.value || '';
             
             // 計算オプション
             const options = {
-                  travelers,
-                  services
+                  adultNumber,
+                  childNumber
             };
 
             // 戦略パターンを使って計算
-            const packageTotal = StandardPriceStrategy.calculate(basePrice, options);
-            const serviceTotal = AdditionalServiceStrategy.calculate(0, options);
-            const grandTotal = packageTotal + serviceTotal;
-            const discount = DiscountStrategy.calculate(basePrice, options)
+            const adultPriceTotal = StandardPriceStrategy.calculateAdultPrice(this.baseAdultPrice, options);
+            const childPriceTotal = StandardPriceStrategy.calculateAdultPrice(this.baseChildPrice, options);
+            const total = adultPriceTotal + childPriceTotal
+            // const serviceTotal = AdditionalServiceStrategy.calculate(0, options);
+            // const grandTotal = packageTotal + serviceTotal;
+            // const discount = DiscountStrategy.calculate(basePrice, options)
             
             // 結果をオブザーバーに通知
             this.notifyObservers({
-                  packageTotal,
-                  serviceTotal,
-                  grandTotal,
-                  basePrice,
-                  travelers,
-                  packageName: selectedPackageName,
+                  // packageTotal,
+                  // serviceTotal,
+                  total,
+                  // basePrice,
+                  // travelers,
+                  adultNumber,
+                  childNumber,
+                  adultPriceTotal,
+                  childPriceTotal,
+                  // packageName: selectedPackageName,
                   selectedDate,
-                  discount,
-                  basePrice,
-                  travelersNumber : options.travelers
+                  // discount,
+                  // basePrice,
+                  // travelersNumber : options.travelers
             });
       }
 }

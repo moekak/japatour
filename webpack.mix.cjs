@@ -10,6 +10,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js("resources/js/pages/tour_create2.js", 'public/js')
     .js("resources/js/pages/tour_book.js", 'public/js')
     .js("resources/js/pages/tour_edit.js", 'public/js')
+    .js("resources/js/pages/booking.js", 'public/js')
     .setPublicPath('public')
     .webpackConfig({
         resolve: {

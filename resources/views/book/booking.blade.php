@@ -136,12 +136,10 @@
                                     </h2>
                                 </div>
                                 <div class="flex gap-4 flex-wrap justify-center">
-                                    <button onclick="scrollToBooking()"
-                                          class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
+                                    <button onclick="scrollToBooking()"  class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
                                         <span class="truncate">Book Now</span>
                                     </button>
-                                    <button onclick="window.location.href='/tours'"
-                                          class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-white/20 backdrop-blur-sm text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-white/30 transition-colors border border-white/30">
+                                    <button onclick="window.location.href='/tours'" class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-white/20 backdrop-blur-sm text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-white/30 transition-colors border border-white/30">
                                         <span class="truncate">View All Tours</span>
                                     </button>
                                 </div>
@@ -153,7 +151,7 @@
 
             <!-- Booking Section -->
             <section class="flex justify-center py-12">
-                <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+                <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
                     
                     <!-- Progress Indicator -->
                     <div class="px-4 mb-8">
@@ -207,86 +205,34 @@
                                     
                                     <!-- Tour Options -->
                                     <div class="space-y-4 mb-8">
-                                        <div class="tour-option border-2 border-[#e7d0d0] bg-white rounded-lg p-6 cursor-pointer hover:border-[#e92929] hover:shadow-lg transition-all duration-300" 
-                                             data-tour="cultural" data-price="12000" data-duration="6">
-                                            <div class="flex items-start justify-between">
-                                                <div class="flex-1">
-                                                    <div class="flex items-center gap-3 mb-3">
-                                                        <div class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center">
-                                                            <i class="fas fa-torii-gate text-[#e92929]"></i>
+                                        @foreach ($tour->itineraries as $itinerary)
+                                            <div class="js_tour_option tour-option border-2 border-[#e7d0d0] bg-white rounded-lg p-6 cursor-pointer hover:border-[#e92929] hover:shadow-lg transition-all duration-300" data-tour="cultural" data-child-price="{{$itinerary->child_price}}" data-adult-price="{{$itinerary->adult_price}}" data-duration="6">
+                                                <div class="flex items-start justify-between">
+                                                    <div class="flex-1">
+                                                        <div class="flex items-center gap-3 mb-3">
+                                                            <div class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center">
+                                                                <i class="fas fa-torii-gate text-[#e92929]"></i>
+                                                            </div>
+                                                            <div>
+                                                                <h3 class="text-[#1b0e0e] text-lg font-bold">{{$itinerary["overview_title"]}}</h3>
+                                                                <p class="text-[#994d4d] text-sm">{{$itinerary["duration"]}} hours • Max {{$itinerary["max_participants"]}} people</p>
+                                                            </div>
                                                         </div>
-                                                        <div>
-                                                            <h3 class="text-[#1b0e0e] text-lg font-bold">Cultural Heritage Tour</h3>
-                                                            <p class="text-[#994d4d] text-sm">6 hours • Max 8 people</p>
+                                                        <p class="text-[#994d4d] text-sm leading-relaxed mb-4">{{$itinerary["overview_description"]}}</p>
+                                                        <div class="flex flex-wrap gap-2">
+                                                            @foreach ($itinerary["itineraryHighlights"] as $highlight)
+                                                                <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">{{$highlight->itinerary_highlight}}</span>
+                                                            @endforeach
                                                         </div>
                                                     </div>
-                                                    <p class="text-[#994d4d] text-sm leading-relaxed mb-4">Explore traditional temples, gardens, and experience authentic Japanese culture with our expert guide.</p>
-                                                    <div class="flex flex-wrap gap-2">
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Senso-ji Temple</span>
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Tea Ceremony</span>
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Traditional Gardens</span>
+                                                    <div class="text-right ml-4">
+                                                        <div class="text-[#1b0e0e] text-2xl font-black">¥{{$itinerary["adult_price"]}}</div>
+                                                        <p class="text-[#994d4d] text-sm">per person</p>
                                                     </div>
-                                                </div>
-                                                <div class="text-right ml-4">
-                                                    <div class="text-[#1b0e0e] text-2xl font-black">¥12,000</div>
-                                                    <p class="text-[#994d4d] text-sm">per person</p>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="tour-option border-2 border-[#e7d0d0] bg-white rounded-lg p-6 cursor-pointer hover:border-[#e92929] hover:shadow-lg transition-all duration-300" 
-                                             data-tour="food" data-price="15000" data-duration="5">
-                                            <div class="flex items-start justify-between">
-                                                <div class="flex-1">
-                                                    <div class="flex items-center gap-3 mb-3">
-                                                        <div class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center">
-                                                            <i class="fas fa-utensils text-[#e92929]"></i>
-                                                        </div>
-                                                        <div>
-                                                            <h3 class="text-[#1b0e0e] text-lg font-bold">Tokyo Food Adventure</h3>
-                                                            <p class="text-[#994d4d] text-sm">5 hours • Max 6 people</p>
-                                                        </div>
-                                                    </div>
-                                                    <p class="text-[#994d4d] text-sm leading-relaxed mb-4">Discover hidden culinary gems and taste authentic Japanese flavors in local markets and restaurants.</p>
-                                                    <div class="flex flex-wrap gap-2">
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Tsukiji Market</span>
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Ramen Tasting</span>
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Sake Experience</span>
-                                                    </div>
-                                                </div>
-                                                <div class="text-right ml-4">
-                                                    <div class="text-[#1b0e0e] text-2xl font-black">¥15,000</div>
-                                                    <p class="text-[#994d4d] text-sm">per person</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="tour-option border-2 border-[#e7d0d0] bg-white rounded-lg p-6 cursor-pointer hover:border-[#e92929] hover:shadow-lg transition-all duration-300" 
-                                             data-tour="modern" data-price="10000" data-duration="4">
-                                            <div class="flex items-start justify-between">
-                                                <div class="flex-1">
-                                                    <div class="flex items-center gap-3 mb-3">
-                                                        <div class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center">
-                                                            <i class="fas fa-city text-[#e92929]"></i>
-                                                        </div>
-                                                        <div>
-                                                            <h3 class="text-[#1b0e0e] text-lg font-bold">Modern Tokyo Experience</h3>
-                                                            <p class="text-[#994d4d] text-sm">4 hours • Max 10 people</p>
-                                                        </div>
-                                                    </div>
-                                                    <p class="text-[#994d4d] text-sm leading-relaxed mb-4">Experience the futuristic side of Tokyo with technology, pop culture, and modern architecture.</p>
-                                                    <div class="flex flex-wrap gap-2">
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Shibuya Crossing</span>
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Harajuku</span>
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Tokyo Skytree</span>
-                                                    </div>
-                                                </div>
-                                                <div class="text-right ml-4">
-                                                    <div class="text-[#1b0e0e] text-2xl font-black">¥10,000</div>
-                                                    <p class="text-[#994d4d] text-sm">per person</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
+                                        
                                     </div>
 
                                     <!-- Date Selection -->
@@ -494,22 +440,11 @@
                 </div>
             </section>
 
-            <!-- Footer -->
-            <footer class="flex justify-center bg-[#1b0e0e] text-white">
-                <div class="flex max-w-[960px] flex-1 flex-col">
-                    <div class="flex flex-col gap-6 px-5 py-10 text-center @container">
-                        <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-                            <a class="text-white text-sm hover:text-[#e92929] transition-colors" href="#tours">Tours</a>
-                            <a class="text-white text-sm hover:text-[#e92929] transition-colors" href="#blog">Blog</a>
-                            <a class="text-white text-sm hover:text-[#e92929] transition-colors" href="#">Privacy Policy</a>
-                            <a class="text-white text-sm hover:text-[#e92929] transition-colors" href="#">Terms of Service</a>
-                        </div>
-                        <p class="text-white text-sm opacity-80">© 2025 ShogunTours. All rights reserved.</p>
-                    </div>
-                </div>
-            </footer>
+            @include('components.footer')
         </div>
     </div>
+
+    <script src="{{mix("js/booking.js")}}"></script>
 
     <script>
         // State management
@@ -564,24 +499,24 @@
         }
         
         function setupEventListeners() {
-            // Tour selection
-            document.querySelectorAll('.tour-option').forEach(option => {
-                option.addEventListener('click', function() {
-                    selectTour(this);
-                });
-            });
+            // // Tour selection
+            // document.querySelectorAll('.tour-option').forEach(option => {
+            //     option.addEventListener('click', function() {
+            //         selectTour(this);
+            //     });
+            // });
 
-            // Navigation buttons
-            document.getElementById('continue-to-step-2').addEventListener('click', () => goToStep(2));
-            document.getElementById('back-to-step-1').addEventListener('click', () => goToStep(1));
-            document.getElementById('continue-to-step-3').addEventListener('click', () => goToStep(3));
-            document.getElementById('back-to-step-2').addEventListener('click', () => goToStep(2));
-            document.getElementById('confirm-booking').addEventListener('click', confirmBooking);
+            // // Navigation buttons
+            // document.getElementById('continue-to-step-2').addEventListener('click', () => goToStep(2));
+            // document.getElementById('back-to-step-1').addEventListener('click', () => goToStep(1));
+            // document.getElementById('continue-to-step-3').addEventListener('click', () => goToStep(3));
+            // document.getElementById('back-to-step-2').addEventListener('click', () => goToStep(2));
+            // document.getElementById('confirm-booking').addEventListener('click', confirmBooking);
 
-            // Form validation
-            document.querySelectorAll('#step-2-content input, #step-2-content textarea').forEach(input => {
-                input.addEventListener('input', validateStep2);
-            });
+            // // Form validation
+            // document.querySelectorAll('#step-2-content input, #step-2-content textarea').forEach(input => {
+            //     input.addEventListener('input', validateStep2);
+            // });
         }
 
         function selectTour(element) {
@@ -599,7 +534,7 @@
             bookingState.selectedTour = element.dataset.tour;
             bookingState.tourPrice = parseInt(element.dataset.price);
 
-            updateSummary();
+            // updateSummary();
             checkStep1Complete();
         }
 
@@ -612,7 +547,7 @@
             }
             
             document.getElementById(`${type}-count`).textContent = bookingState[type];
-            updateSummary();
+            // updateSummary();
             checkStep1Complete();
         }
 
@@ -624,7 +559,7 @@
             }
             
             document.getElementById(`${type}-count`).textContent = bookingState[type];
-            updateSummary();
+            // updateSummary();
             checkStep1Complete();
         }
 
@@ -649,46 +584,46 @@
             continueBtn.classList.toggle('opacity-50', !isValid);
         }
 
-        function updateSummary() {
-            const summaryContent = document.getElementById('summary-content');
-            const priceBreakdown = document.getElementById('price-breakdown');
+        // function updateSummary() {
+        //     const summaryContent = document.getElementById('summary-content');
+        //     const priceBreakdown = document.getElementById('price-breakdown');
 
-            if (!bookingState.selectedTour) {
-                summaryContent.innerHTML = `
-                    <div class="text-center text-[#994d4d] py-8">
-                        <i class="fas fa-clipboard-list text-4xl mb-4"></i>
-                        <p class="text-sm">Select a tour to see pricing details</p>
-                    </div>
-                `;
-                priceBreakdown.classList.add('hidden');
-                return;
-            }
+        //     if (!bookingState.selectedTour) {
+        //         summaryContent.innerHTML = `
+        //             <div class="text-center text-[#994d4d] py-8">
+        //                 <i class="fas fa-clipboard-list text-4xl mb-4"></i>
+        //                 <p class="text-sm">Select a tour to see pricing details</p>
+        //             </div>
+        //         `;
+        //         priceBreakdown.classList.add('hidden');
+        //         return;
+        //     }
 
-            const tourNames = {
-                'cultural': 'Cultural Heritage Tour',
-                'food': 'Tokyo Food Adventure', 
-                'modern': 'Modern Tokyo Experience'
-            };
+        //     const tourNames = {
+        //         'cultural': 'Cultural Heritage Tour',
+        //         'food': 'Tokyo Food Adventure', 
+        //         'modern': 'Modern Tokyo Experience'
+        //     };
 
-            const adultTotal = bookingState.adults * bookingState.tourPrice;
-            const childrenTotal = bookingState.children * Math.round(bookingState.tourPrice * 0.7);
-            const grandTotal = adultTotal + childrenTotal;
+        //     const adultTotal = bookingState.adults * bookingState.tourPrice;
+        //     const childrenTotal = bookingState.children * Math.round(bookingState.tourPrice * 0.7);
+        //     const grandTotal = adultTotal + childrenTotal;
 
-            summaryContent.innerHTML = `
-                <div class="border-b border-[#e7d0d0] pb-4 mb-4">
-                    <h4 class="text-[#1b0e0e] text-sm font-bold">${tourNames[bookingState.selectedTour]}</h4>
-                    ${bookingState.selectedDate ? `<p class="text-[#994d4d] text-sm mt-1">${new Date(bookingState.selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>` : ''}
-                </div>
-            `;
+        //     summaryContent.innerHTML = `
+        //         <div class="border-b border-[#e7d0d0] pb-4 mb-4">
+        //             <h4 class="text-[#1b0e0e] text-sm font-bold">${tourNames[bookingState.selectedTour]}</h4>
+        //             ${bookingState.selectedDate ? `<p class="text-[#994d4d] text-sm mt-1">${new Date(bookingState.selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>` : ''}
+        //         </div>
+        //     `;
 
-            document.getElementById('summary-adults').textContent = bookingState.adults;
-            document.getElementById('summary-children').textContent = bookingState.children;
-            document.getElementById('adult-total').textContent = `¥${adultTotal.toLocaleString()}`;
-            document.getElementById('children-total').textContent = `¥${childrenTotal.toLocaleString()}`;
-            document.getElementById('grand-total').textContent = `¥${grandTotal.toLocaleString()}`;
+        //     document.getElementById('summary-adults').textContent = bookingState.adults;
+        //     document.getElementById('summary-children').textContent = bookingState.children;
+        //     document.getElementById('adult-total').textContent = `¥${adultTotal.toLocaleString()}`;
+        //     document.getElementById('children-total').textContent = `¥${childrenTotal.toLocaleString()}`;
+        //     document.getElementById('grand-total').textContent = `¥${grandTotal.toLocaleString()}`;
 
-            priceBreakdown.classList.remove('hidden');
-        }
+        //     priceBreakdown.classList.remove('hidden');
+        // }
 
         function goToStep(step) {
             // Hide all steps

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AdditionalService;
 use App\Models\Tour;
+use App\Models\ToursNew;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,9 +14,10 @@ use Stripe\Stripe;
 
 class BookingController extends Controller
 {
-    public function index()
+    public function index(string $id)
     {
-        return view("book.booking");
+        $tour = ToursNew::getSpecificTour($id);
+        return view("book.booking", compact("tour"));
     }
 
     public function createPaymentIntent(Request $request){

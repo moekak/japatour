@@ -53,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get("/tour/create", [TourController::class, "create"])->name("admin.tour_create");
 
-    Route::get("/tour/book", [BookingController::class, "index"])->name("tour.book");
+    Route::get("/tour/book/{id}", [BookingController::class, "index"])->name("tour.book");
     Route::get("/tour/book/{id}/{date}", [BookingController::class, "index"])->name("tour_date.book");
 
     Route::get("/blog/list", [BlogController::class, "list"])->name("blog.list");
