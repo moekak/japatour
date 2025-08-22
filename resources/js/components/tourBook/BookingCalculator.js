@@ -1,6 +1,7 @@
 import AdditionalServiceStrategy from "./calculator/AdditionalServiceStrategy.js";
 import DiscountStrategy from "./calculator/DiscountStrategy.js";
 import StandardPriceStrategy from "./calculator/StandardPriceStrategy.js";
+import DataInputObserver from "./observer/DataInputObserver.js";
 import DataSaveObserver from "./observer/DataSaveObserver.js";
 import SummaryDisplayObserver from "./observer/SummaryDisplayObserver.js";
 
@@ -16,6 +17,7 @@ export default class BookingCalculator{
             // // オブザーバーの登録
             this.registerDisplayObservers();
             this.registerSaveObservers()
+            this.registerInputObservers()
             this.initializeEvents();
             // // 初期計算と通知
             this.calculateAndNotify();
@@ -71,6 +73,10 @@ export default class BookingCalculator{
                   totalPrice: document.getElementById("js_total_price"),
                   date: document.getElementById("js_date"),
             }))
+      }
+
+      registerInputObservers(){
+            this.registerObserver(new DataInputObserver())
       }
 
       // オブザーバー登録メソッド
