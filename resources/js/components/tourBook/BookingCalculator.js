@@ -183,8 +183,8 @@ export default class BookingCalculator{
 
             const adultNumber = parseInt(this.elements.adultNumber?.innerHTML) //大人の人数
             const childNumber = parseInt(this.elements.childNumber?.innerHTML) //子供の人数
-            const itineraryTitle = this.selectedTourOption.querySelector(".itinerary-title").innerHTML //itineraryのタイトル
-            const itineraryId= this.selectedTourOption.querySelector(".itinerary-title").dataset.id //itineraryのID
+            const itineraryTitle = this.selectedTourOption.querySelector(".itinerary-title")?.innerHTML || "" //itineraryのタイトル
+            const itineraryId= this.selectedTourOption.querySelector(".itinerary-title")?.dataset.id || "" //itineraryのID
 
             const selectedDate = this.elements.dateInput?.value || '';
             
