@@ -1,4 +1,4 @@
-import ObserverInterface from "./ObserverInterface";
+import ObserverInterface from "./ObserverInterface.js";
 
 export default class DataInputObserver extends ObserverInterface{
       constructor(){
