@@ -14,7 +14,7 @@ export default class PersonalInfoSaveObserver extends ObserverInterface{
             this.elements.phone.value = information.phone
             this.elements.request.value = information.request
 
-            const hasData =  this.elements.firstName && this.elements.lastName && this.elements.email && this.elements.phone
+            const hasData =  this.elements.firstName !== "" && this.elements.lastName!== ""  && this.elements.email !== "" && this.elements.phone !== "" 
             this.reviewButton.disabled = !hasData
       }
       
