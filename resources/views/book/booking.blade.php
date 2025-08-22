@@ -281,11 +281,11 @@
                                                     <div class="text-[#994d4d] text-sm">Age 13+</div>
                                                 </div>
                                                 <div class="flex items-center gap-3">
-                                                    <button id="js_increment-adult" class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="decrementCounter('adults')">
+                                                    <button id="js_increment-adult" class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300">
                                                         <i class="fas fa-minus text-sm"></i>
                                                     </button>
                                                     <span id="adults-count" class="w-8 text-center text-[#1b0e0e] text-lg font-bold">2</span>
-                                                    <button id="js_decrement-adult" class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="incrementCounter('adults')">
+                                                    <button id="js_decrement-adult" class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300">
                                                         <i class="fas fa-plus text-sm"></i>
                                                     </button>
                                                 </div>
@@ -297,11 +297,11 @@
                                                     <div class="text-[#994d4d] text-sm">Age 6-12</div>
                                                 </div>
                                                 <div class="flex items-center gap-3">
-                                                    <button class="js_childNumber_btn w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="decrementCounter('children')">
+                                                    <button class="js_childNumber_btn w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300">
                                                         <i class="fas fa-minus text-sm"></i>
                                                     </button>
                                                     <span id="children-count" class="w-8 text-center text-[#1b0e0e] text-lg font-bold">0</span>
-                                                    <button class="js_childNumber_btn w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="incrementCounter('children')">
+                                                    <button class="js_childNumber_btn w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300">
                                                         <i class="fas fa-plus text-sm"></i>
                                                     </button>
                                                 </div>
@@ -555,30 +555,6 @@
             checkStep1Complete();
         }
 
-        function incrementCounter(type) {
-            const maxParticipants = 10;
-            if (type === 'adults' && bookingState.adults < maxParticipants) {
-                bookingState.adults++;
-            } else if (type === 'children' && bookingState.children < maxParticipants) {
-                bookingState.children++;
-            }
-
-            document.getElementById(`${type}-count`).textContent = bookingState[type];
-            // updateSummary();
-            checkStep1Complete();
-        }
-
-        function decrementCounter(type) {
-            if (type === 'adults' && bookingState.adults > 1) {
-                bookingState.adults--;
-            } else if (type === 'children' && bookingState.children > 0) {
-                bookingState.children--;
-            }
-
-            document.getElementById(`${type}-count`).textContent = bookingState[type];
-            // updateSummary();
-            checkStep1Complete();
-        }
 
         function checkStep1Complete() {
             const continueBtn = document.getElementById('continue-to-step-2');
