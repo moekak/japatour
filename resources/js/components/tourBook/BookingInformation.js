@@ -21,7 +21,7 @@ export default class BookingInformation{
       initialzeEvents(){
             for(const element in this.elements){
                   console.log(element);
-                  this.elements.element.addEventListener("change", ()=>{
+                  this.elements[element].addEventListener("change", ()=>{
                         this.getAndNotify()
                   })
             }
