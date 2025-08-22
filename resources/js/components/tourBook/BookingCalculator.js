@@ -51,7 +51,7 @@ export default class BookingCalculator{
                   childPrice: document.getElementById('children-total'),
                   summaryContent: document.getElementById("summary-content"),
                   priceBrakdown: document.getElementById("price-breakdown"),
-                  tourTitle: document.getElementById("js_tour_title"),
+                  tourTitle: document.getElementById("js_itinerary_title"),
             }));
       }
 

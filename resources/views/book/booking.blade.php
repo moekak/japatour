@@ -417,10 +417,21 @@
                                     <div class="border-b border-[#e7d0d0] pb-4 mb-6">
                                         <div class="space-y-3">
                                             <div>
-                                                <h4 class="text-[#1b0e0e] font-semibold text-base line-clamp-2">
-                                                    {{$tour->title}} - <span id="js_tour_title"></span>
+                                                <!-- メインツアータイトル -->
+                                                <h4 class="text-[#1b0e0e] font-semibold text-base line-clamp-2 mb-2">
+                                                    {{$tour->title}}
                                                 </h4>
+                                                
+                                                <!-- itineraryタイトル（小さく表示） -->
+                                                <div class="bg-[#f8f4f4] rounded-md px-3 py-2">
+                                                    <div class="flex items-center gap-2">
+                                                        <i class="fas fa-route text-[#994d4d] text-xs"></i>
+                                                        <span class="text-[#994d4d] text-xs font-medium uppercase tracking-wide">Itinerary</span>
+                                                    </div>
+                                                    <p class="text-[#1b0e0e] text-sm mt-1 line-clamp-1" id="js_itinerary_title"></p>
+                                                </div>
                                             </div>
+                                            
                                             <div class="flex items-center gap-2 text-[#994d4d] text-sm">
                                                 <i class="fas fa-calendar-alt"></i>
                                                 <span>March 15, 2025 (Saturday)</span>
