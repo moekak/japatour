@@ -5,6 +5,7 @@ export default class BookingInformation{
             this.observers = []
             this.initializeElements()
             this.initialzeEvents()
+            this.resisterSaveObservers()
       }
 
       initializeElements(){
