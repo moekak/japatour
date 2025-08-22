@@ -32,6 +32,9 @@ export default class BookingCalculator{
                   incrementAdultBtn : document.getElementById("js_increment-adult"),
                   decrementAdultBtn : document.getElementById("js_decrement-adult"),
                   
+                  incrementChildBtn : document.getElementById("js_increment-child"),
+                  decrementChildBtn : document.getElementById("js_decrement-child"),
+                  
                   // 日付関連
                   dateInput: document.getElementById('date-input'),
             };
@@ -88,6 +91,20 @@ export default class BookingCalculator{
             if(this.elements.decrementAdultBtn){
                   this.elements.decrementAdultBtn.addEventListener("click", ()=>{
                         this.elements.adultNumber.innerHTML = parseInt(this.elements.adultNumber.innerHTML) - 1
+                  })
+            }
+            
+            // 子供人数増加
+            if(this.elements.incrementChildBtn){
+                  this.elements.incrementChildBtn.addEventListener("click", ()=>{
+                        this.elements.childNumber.innerHTML = parseInt(this.elements.childNumber.innerHTML) + 1
+                  })
+            }
+
+            // 子供人数減少
+            if(this.elements.decrementChildBtn){
+                  this.elements.decrementChildBtn.addEventListener("click", ()=>{
+                        this.elements.childNumber.innerHTML = parseInt(this.elements.childNumber.innerHTML) - 1
                   })
             }
             
