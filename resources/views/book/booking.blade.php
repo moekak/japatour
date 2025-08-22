@@ -5,7 +5,7 @@
     @include('components.head')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
-    
+
     <style>
         /* Flatpickr customization */
         .flatpickr-calendar {
@@ -66,8 +66,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .fade-in {
@@ -75,9 +82,19 @@
         }
 
         @keyframes successPulse {
-            0% { transform: scale(0.8); opacity: 0; }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         .success-animation {
@@ -106,7 +123,8 @@
         }
 
         /* Input focus effects */
-        input:focus, textarea:focus {
+        input:focus,
+        textarea:focus {
             box-shadow: 0 0 0 3px rgba(233, 41, 41, 0.1);
         }
     </style>
@@ -114,9 +132,9 @@
 
 <body>
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
-         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+        style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
         <div class="layout-container flex h-full grow flex-col">
-            
+
             <!-- Header -->
             @include('components.nav')
 
@@ -126,7 +144,7 @@
                     <div class="@container">
                         <div class="@[480px]:p-4">
                             <div class="flex min-h-[400px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4"
-                                 style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&h=600&fit=crop");'>
+                                style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&h=600&fit=crop");'>
                                 <div class="flex flex-col gap-2 text-center">
                                     <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
                                         Book Your Perfect Tokyo Adventure
@@ -136,7 +154,7 @@
                                     </h2>
                                 </div>
                                 <div class="flex gap-4 flex-wrap justify-center">
-                                    <button onclick="scrollToBooking()"  class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
+                                    <button onclick="scrollToBooking()" class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
                                         <span class="truncate">Book Now</span>
                                     </button>
                                     <button onclick="window.location.href='/tours'" class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-white/20 backdrop-blur-sm text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-white/30 transition-colors border border-white/30">
@@ -152,7 +170,7 @@
             <!-- Booking Section -->
             <section class="flex justify-center py-12">
                 <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
-                    
+
                     <!-- Progress Indicator -->
                     <div class="px-4 mb-8">
                         <div class="flex items-center justify-center">
@@ -164,12 +182,12 @@
                                     </div>
                                     <div class="ml-2 text-sm font-medium text-[#1b0e0e]">Tour Selection</div>
                                 </div>
-                                
+
                                 <!-- Progress Line 1 -->
                                 <div class="w-16 h-1 bg-[#f3e7e7] rounded-full overflow-hidden">
                                     <div id="progress-1" class="h-full bg-[#e92929] transition-all duration-500" style="width: 0%"></div>
                                 </div>
-                                
+
                                 <!-- Step 2 -->
                                 <div class="flex items-center">
                                     <div id="step-2" class="flex items-center justify-center w-10 h-10 rounded-full bg-[#f3e7e7] text-[#994d4d] text-sm font-bold transition-all duration-300 step-indicator-item">
@@ -177,12 +195,12 @@
                                     </div>
                                     <div class="ml-2 text-sm font-medium text-[#994d4d]">Information</div>
                                 </div>
-                                
+
                                 <!-- Progress Line 2 -->
                                 <div class="w-16 h-1 bg-[#f3e7e7] rounded-full overflow-hidden">
                                     <div id="progress-2" class="h-full bg-[#e92929] transition-all duration-500" style="width: 0%"></div>
                                 </div>
-                                
+
                                 <!-- Step 3 -->
                                 <div class="flex items-center">
                                     <div id="step-3" class="flex items-center justify-center w-10 h-10 rounded-full bg-[#f3e7e7] text-[#994d4d] text-sm font-bold transition-all duration-300 step-indicator-item">
@@ -198,56 +216,55 @@
                         <!-- Booking Form -->
                         <div class="lg:col-span-2">
                             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                                
+
                                 <!-- Step 1: Tour Selection -->
                                 <div id="step-1-content" class="fade-in p-6 lg:p-8">
                                     <h2 class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Choose Your Adventure</h2>
-                                    
+
                                     <!-- Tour Options -->
                                     <div class="space-y-4 mb-8">
                                         @foreach ($tour->itineraries as $itinerary)
-                                            <div class="js_tour_option tour-option border-2 border-[#e7d0d0] bg-white rounded-lg p-6 cursor-pointer hover:border-[#e92929] hover:shadow-lg transition-all duration-300" data-tour="cultural" data-child-price="{{$itinerary->child_price}}" data-adult-price="{{$itinerary->adult_price}}" data-duration="6">
-                                                <div class="flex items-start justify-between">
-                                                    <div class="flex-1">
-                                                        <div class="flex items-center gap-3 mb-3">
-                                                            <div class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center">
-                                                                <i class="fas fa-torii-gate text-[#e92929]"></i>
-                                                            </div>
-                                                            <div>
-                                                                <h3 class="text-[#1b0e0e] text-lg font-bold">{{$itinerary["overview_title"]}}</h3>
-                                                                <p class="text-[#994d4d] text-sm">{{$itinerary["duration"]}} hours • Max {{$itinerary["max_participants"]}} people</p>
-                                                            </div>
+                                        <div class="js_tour_option tour-option border-2 border-[#e7d0d0] bg-white rounded-lg p-6 cursor-pointer hover:border-[#e92929] hover:shadow-lg transition-all duration-300" data-tour="cultural" data-child-price="{{$itinerary->child_price}}" data-adult-price="{{$itinerary->adult_price}}" data-duration="6">
+                                            <div class="flex items-start justify-between">
+                                                <div class="flex-1">
+                                                    <div class="flex items-center gap-3 mb-3">
+                                                        <div class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center">
+                                                            <i class="fas fa-torii-gate text-[#e92929]"></i>
                                                         </div>
-                                                        <p class="text-[#994d4d] text-sm leading-relaxed mb-4">{{$itinerary["overview_description"]}}</p>
-                                                        <div class="flex flex-wrap gap-2">
-                                                            @foreach ($itinerary["itineraryHighlights"] as $highlight)
-                                                                <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">{{$highlight->itinerary_highlight}}</span>
-                                                            @endforeach
+                                                        <div>
+                                                            <h3 class="text-[#1b0e0e] text-lg font-bold">{{$itinerary["overview_title"]}}</h3>
+                                                            <p class="text-[#994d4d] text-sm">{{$itinerary["duration"]}} hours • Max {{$itinerary["max_participants"]}} people</p>
                                                         </div>
                                                     </div>
-                                                    <div class="text-right ml-4">
-                                                        <div class="text-[#1b0e0e] text-2xl font-black">¥{{$itinerary["adult_price"]}}</div>
-                                                        <p class="text-[#994d4d] text-sm">per person</p>
+                                                    <p class="text-[#994d4d] text-sm leading-relaxed mb-4">{{$itinerary["overview_description"]}}</p>
+                                                    <div class="flex flex-wrap gap-2">
+                                                        @foreach ($itinerary["itineraryHighlights"] as $highlight)
+                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">{{$highlight->itinerary_highlight}}</span>
+                                                        @endforeach
                                                     </div>
                                                 </div>
+                                                <div class="text-right ml-4">
+                                                    <div class="text-[#1b0e0e] text-2xl font-black">¥{{$itinerary["adult_price"]}}</div>
+                                                    <p class="text-[#994d4d] text-sm">per person</p>
+                                                </div>
                                             </div>
+                                        </div>
                                         @endforeach
-                                        
+
                                     </div>
 
                                     <!-- Date Selection -->
                                     <div class="mb-8">
                                         <h3 class="text-[#1b0e0e] text-lg font-bold mb-4">Select Date</h3>
-                                        
+
                                         <!-- Date Input with Flatpickr -->
                                         <div class="relative">
-                                            <input 
-                                                type="text" 
-                                                id="date-input" 
-                                                class="w-full px-4 py-3 border-2 border-[#e7d0d0] bg-[#fcf8f8] rounded-lg focus:border-[#e92929] focus:outline-none transition-colors duration-300 text-[#1b0e0e] text-sm cursor-pointer" 
+                                            <input
+                                                type="text"
+                                                id="date-input"
+                                                class="w-full px-4 py-3 border-2 border-[#e7d0d0] bg-[#fcf8f8] rounded-lg focus:border-[#e92929] focus:outline-none transition-colors duration-300 text-[#1b0e0e] text-sm cursor-pointer"
                                                 placeholder="Select date"
-                                                readonly
-                                            >
+                                                readonly>
                                             <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
                                                 <i class="fas fa-calendar-alt text-[#994d4d]"></i>
                                             </div>
@@ -264,27 +281,27 @@
                                                     <div class="text-[#994d4d] text-sm">Age 13+</div>
                                                 </div>
                                                 <div class="flex items-center gap-3">
-                                                    <button class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="decrementCounter('adults')">
+                                                    <button class="js_adultNumber_btn w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="decrementCounter('adults')">
                                                         <i class="fas fa-minus text-sm"></i>
                                                     </button>
                                                     <span id="adults-count" class="w-8 text-center text-[#1b0e0e] text-lg font-bold">2</span>
-                                                    <button class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="incrementCounter('adults')">
+                                                    <button class="js_adultNumber_btn w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="incrementCounter('adults')">
                                                         <i class="fas fa-plus text-sm"></i>
                                                     </button>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="flex items-center justify-between bg-[#f3e7e7] rounded-lg p-4">
                                                 <div>
                                                     <div class="text-[#1b0e0e] text-sm font-medium">Children</div>
                                                     <div class="text-[#994d4d] text-sm">Age 6-12</div>
                                                 </div>
                                                 <div class="flex items-center gap-3">
-                                                    <button class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="decrementCounter('children')">
+                                                    <button class="js_childNumber_btn w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="decrementCounter('children')">
                                                         <i class="fas fa-minus text-sm"></i>
                                                     </button>
                                                     <span id="children-count" class="w-8 text-center text-[#1b0e0e] text-lg font-bold">0</span>
-                                                    <button class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="incrementCounter('children')">
+                                                    <button class="js_childNumber_btn w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300" onclick="incrementCounter('children')">
                                                         <i class="fas fa-plus text-sm"></i>
                                                     </button>
                                                 </div>
@@ -300,7 +317,7 @@
                                 <!-- Step 2: Personal Information -->
                                 <div id="step-2-content" class="hidden p-6 lg:p-8">
                                     <h2 class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Personal Information</h2>
-                                    
+
                                     <form id="booking-form" class="space-y-6">
                                         <div class="grid md:grid-cols-2 gap-6">
                                             <div>
@@ -354,7 +371,7 @@
                                 <!-- Step 3: Confirmation -->
                                 <div id="step-3-content" class="hidden p-6 lg:p-8">
                                     <h2 class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em] mb-6">Booking Confirmation</h2>
-                                    
+
                                     <div id="booking-summary" class="space-y-6 mb-8">
                                         <!-- Summary content will be populated by JavaScript -->
                                     </div>
@@ -387,7 +404,7 @@
                         <div class="lg:col-span-1">
                             <div class="bg-white rounded-lg shadow-lg p-6 sticky top-8">
                                 <h3 class="text-[#1b0e0e] text-lg font-bold mb-6">Booking Summary</h3>
-                                
+
                                 <div id="summary-content">
                                     <div class="text-center text-[#994d4d] py-8">
                                         <i class="fas fa-clipboard-list text-4xl mb-4"></i>
@@ -471,7 +488,7 @@
         function initializeDatePicker() {
             // Get today's date
             const today = new Date();
-            
+
             // Initialize Flatpickr
             datePicker = flatpickr("#date-input", {
                 dateFormat: "l, F j, Y", // Monday, April 15, 2025
@@ -481,7 +498,7 @@
                 disable: [
                     // Disable some random dates as "booked"
                     "2025-04-18",
-                    "2025-04-25", 
+                    "2025-04-25",
                     "2025-05-01",
                     "2025-05-15"
                 ],
@@ -497,7 +514,7 @@
                 }
             });
         }
-        
+
         function setupEventListeners() {
             // // Tour selection
             // document.querySelectorAll('.tour-option').forEach(option => {
@@ -545,7 +562,7 @@
             } else if (type === 'children' && bookingState.children < maxParticipants) {
                 bookingState.children++;
             }
-            
+
             document.getElementById(`${type}-count`).textContent = bookingState[type];
             // updateSummary();
             checkStep1Complete();
@@ -557,7 +574,7 @@
             } else if (type === 'children' && bookingState.children > 0) {
                 bookingState.children--;
             }
-            
+
             document.getElementById(`${type}-count`).textContent = bookingState[type];
             // updateSummary();
             checkStep1Complete();
@@ -566,7 +583,7 @@
         function checkStep1Complete() {
             const continueBtn = document.getElementById('continue-to-step-2');
             const isComplete = bookingState.selectedTour && bookingState.selectedDate;
-            
+
             continueBtn.disabled = !isComplete;
             continueBtn.classList.toggle('opacity-50', !isComplete);
             continueBtn.classList.toggle('cursor-not-allowed', !isComplete);
@@ -647,11 +664,11 @@
 
         function updateStepIndicator() {
             const steps = [1, 2, 3];
-            
+
             steps.forEach(stepNum => {
                 const stepEl = document.getElementById(`step-${stepNum}`);
                 const progressEl = document.getElementById(`progress-${stepNum}`);
-                
+
                 if (stepNum < bookingState.step) {
                     // Completed step
                     stepEl.className = 'flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white text-sm font-bold transition-all duration-300 step-indicator-item';
@@ -674,7 +691,7 @@
         function showBookingSummary() {
             const tourNames = {
                 'cultural': 'Cultural Heritage Tour',
-                'food': 'Tokyo Food Adventure', 
+                'food': 'Tokyo Food Adventure',
                 'modern': 'Modern Tokyo Experience'
             };
 
@@ -746,10 +763,10 @@
             setTimeout(() => {
                 // Hide confirmation content
                 document.getElementById('step-3-content').classList.add('hidden');
-                
+
                 // Show success message
                 document.getElementById('success-message').classList.remove('hidden');
-                
+
                 // Update step indicator to show completion
                 bookingState.step = 4;
                 updateStepIndicator();
@@ -759,7 +776,7 @@
         function scrollToBooking() {
             const bookingSection = document.querySelector('section');
             if (bookingSection) {
-                bookingSection.scrollIntoView({ 
+                bookingSection.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });

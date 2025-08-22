@@ -120,6 +120,7 @@ var BookingCalculator = /*#__PURE__*/function () {
       // 大人旅行者数変更イベント
       if (this.elements.adultNumber) {
         this.elements.adultNumber.addEventListener('change', function () {
+          console.log("大人料金変更");
           _this.calculateAndNotify();
         });
       }
@@ -172,7 +173,7 @@ var BookingCalculator = /*#__PURE__*/function () {
 
       // 戦略パターンを使って計算
       var adultPriceTotal = _calculator_StandardPriceStrategy_js__WEBPACK_IMPORTED_MODULE_2__["default"].calculateAdultPrice(this.baseAdultPrice, options);
-      var childPriceTotal = _calculator_StandardPriceStrategy_js__WEBPACK_IMPORTED_MODULE_2__["default"].calculateAdultPrice(this.baseChildPrice, options);
+      var childPriceTotal = _calculator_StandardPriceStrategy_js__WEBPACK_IMPORTED_MODULE_2__["default"].calculateChildPrice(this.baseChildPrice, options);
       var total = adultPriceTotal + childPriceTotal;
       // const serviceTotal = AdditionalServiceStrategy.calculate(0, options);
       // const grandTotal = packageTotal + serviceTotal;
@@ -378,6 +379,7 @@ var StandardPriceStrategy = /*#__PURE__*/function (_PriceCalculationStra) {
       //      return basePrice * options.travelers 
       // }
 
+      console.log("子供の料金" + options.childNumber);
       return childPrice * options.childNumber;
     }
   }]);
@@ -459,7 +461,7 @@ var SummaryDisplayObserver = /*#__PURE__*/function (_PriceObserver) {
       this.elements.total.textContent = "\uFFE5".concat(priceData.total.toLocaleString('ja-JP'));
       this.elements.adultNumber.textContent = "\uFFE5".concat(priceData.adultNumber.toLocaleString('ja-JP'));
       this.elements.childNumber.textContent = "\uFFE5".concat(priceData.childNumber.toLocaleString('ja-JP'));
-      this.elements.adultPrice.textContent = "\uFFE5".concat((priceData.adultPriceTotal * 0.2).toLocaleString('ja-JP'));
+      this.elements.adultPrice.textContent = "\uFFE5".concat(priceData.adultPriceTotal.toLocaleString('ja-JP'));
       this.elements.childPrice.textContent = "\uFFE5".concat(priceData.childPriceTotal.toLocaleString('ja-JP'));
       this.elements.summaryContent.classList.add("hidden");
       this.elements.priceBrakdown.classList.remove("hidden");

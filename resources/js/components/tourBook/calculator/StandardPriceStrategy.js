@@ -24,6 +24,9 @@ export default class StandardPriceStrategy extends PriceCalculationStrategy{
             //      return basePrice * options.travelers 
             // }
 
+            console.log("子供の料金" + options.childNumber);
+            
+
             return childPrice * options.childNumber
             
             

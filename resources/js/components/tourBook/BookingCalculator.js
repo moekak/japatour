@@ -86,6 +86,8 @@ export default class BookingCalculator{
             // 大人旅行者数変更イベント
             if (this.elements.adultNumber) {
                   this.elements.adultNumber.addEventListener('change', () => {
+                        console.log("大人料金変更");
+                        
                         this.calculateAndNotify();
                   });
             }
@@ -137,7 +139,7 @@ export default class BookingCalculator{
 
             // 戦略パターンを使って計算
             const adultPriceTotal = StandardPriceStrategy.calculateAdultPrice(this.baseAdultPrice, options);
-            const childPriceTotal = StandardPriceStrategy.calculateAdultPrice(this.baseChildPrice, options);
+            const childPriceTotal = StandardPriceStrategy.calculateChildPrice(this.baseChildPrice, options);
             const total = adultPriceTotal + childPriceTotal
             // const serviceTotal = AdditionalServiceStrategy.calculate(0, options);
             // const grandTotal = packageTotal + serviceTotal;
