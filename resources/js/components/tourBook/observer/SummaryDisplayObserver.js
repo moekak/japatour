@@ -12,7 +12,7 @@ export default class SummaryDisplayObserver extends ObserverInterface{
             this.elements.childNumber.textContent = `${TourData.childNumber.toLocaleString('ja-JP')}`;
             this.elements.adultPrice.textContent = `￥${(TourData.adultPriceTotal).toLocaleString('ja-JP')}`;
             this.elements.childPrice.textContent = `￥${(TourData.childPriceTotal).toLocaleString('ja-JP')}`;
-            this.elements.tourTitle.textContent = TourData.tourTitle
+            this.elements.tourTitle.textContent = TourData.itineraryTitle
             this.elements.date.textContent = TourData.selectedDate
             this.elements.summaryContent.classList.add("hidden");
             this.elements.priceBrakdown.classList.remove("hidden");
