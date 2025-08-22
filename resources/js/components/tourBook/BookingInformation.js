@@ -19,6 +19,9 @@ export default class BookingInformation{
       }
 
       initialzeEvents(){
+
+            console.log("222222222222222222222222222");
+            
             for(const element in this.elements){
                   console.log(element);
                   
