@@ -15,13 +15,11 @@ export default class BookingInformation{
                   email: document.getElementById("email"),
                   phone: document.getElementById("phone"),
                   request: document.getElementById("special-requests"),
-                  terms: document.getElementById("terms"),
             }
       }
 
       initialzeEvents(){
             for(const element in this.elements){
-                  console.log(element);
                   this.elements[element].addEventListener("change", ()=>{
                         this.getAndNotify()
                   })

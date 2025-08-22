@@ -4,6 +4,7 @@ export default class PersonalInfoSaveObserver extends ObserverInterface{
       constructor(elements) {
             super();
             this.elements = elements;
+            this.reviewButton = document.getElementById("continue-to-step-3")
       }
       
       update(information) {
@@ -12,7 +13,9 @@ export default class PersonalInfoSaveObserver extends ObserverInterface{
             this.elements.email.value = information.email
             this.elements.phone.value = information.phone
             this.elements.request.value = information.request
-            this.elements.terms.value = information.terms
+
+            const hasData =  this.elements.firstName && this.elements.lastName && this.elements.email && this.elements.phone
+            this.reviewButton.disabled = !hasData
       }
       
 }
