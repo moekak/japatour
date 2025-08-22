@@ -68,13 +68,24 @@ export default class BookingCalculator{
 
       // イベントリスナーの初期化
       initializeEvents() {
-            // 追加サービスのチェックボックス変更イベント
+            // ツアー選択
             if (this.elements.tourOption) {
                   this.elements.tourOption.forEach(option => {
                         option.addEventListener('click', (e) => {
-                              this.selectedTourOption = option
+                              const selectedOption = e.currentTarget
+                              this.selectedTourOption = selectedOption
                               this.baseAdultPrice = option.dataset.adultPrice; // 基本大人パッケージ料金
                               this.baseChildPrice = option.dataset.childPrice; 
+
+                              // スタイル変更
+                              this.elements.tourOption.forEach(opt=>{
+                                    opt.classList.remove('border-[#e92929]', 'bg-red-50');
+                                    opt.classList.add('border-[#e7d0d0]');
+                              })
+
+                              // スタイル変更
+                              selectedOption.classList.remove('border-[#e7d0d0]');
+                              selectedOption.classList.add('border-[#e92929]', 'bg-red-50');
                               this.calculateAndNotify();
                         });
                   });
