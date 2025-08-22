@@ -164,6 +164,8 @@ export default class BookingCalculator{
 
             const adultNumber = parseInt(this.elements.adultNumber?.innerHTML)
             const childNumber = parseInt(this.elements.childNumber?.innerHTML)
+            console.log(this.selectedTourOption);
+            
             const tourTitle = this.selectedTourOption.querySelector(".itinerary-title").innerHTML
 
             const selectedDate = this.elements.dateInput?.value || '';
