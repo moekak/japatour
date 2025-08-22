@@ -27,7 +27,7 @@ export default class TourReview{
                   this.elements[element].forEach((el)=>{
                         console.log(el);
                         
-                        el.innerHtml = document.getElementById(`js_${element}`).value
+                        el.innerHTML = document.getElementById(`js_${element}`).value
                   })
             }
       }
