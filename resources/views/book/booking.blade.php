@@ -410,11 +410,11 @@
                                             <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Payment Summary</h4>
                                             <div class="space-y-2 text-sm mb-4">
                                                 <div class="flex justify-between">
-                                                    <span class="text-[#994d4d]">Adults (×$<span class="adult_number"></span>)</span>
+                                                    <span class="text-[#994d4d]">Adults (×<span class="adult_number"></span>)</span>
                                                     <span class="text-[#1b0e0e] font-medium">¥<span class="adult_price"></span></span>
                                                 </div>
                                                 <div class="flex justify-between">
-                                                    <span class="text-[#994d4d]">Children (×$<span class="child_number"></span>)</span>
+                                                    <span class="text-[#994d4d]">Children (×<span class="child_number"></span>)</span>
                                                     <span class="text-[#1b0e0e] font-medium">¥<span class="child_price"></span></span>
                                                 </div>
                                                 <div class="border-t border-[#e7d0d0] pt-2 flex justify-between">
