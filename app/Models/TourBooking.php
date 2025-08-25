@@ -7,16 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class TourBooking extends Model
 {
     protected $fillable = [
-        "tour_id",
-        "customer_name",
-        "customer_email",
-        "cusomter_phone",
-        "country",
-        "number_of_participants",
-        "special_requests",
-        "total_price",
+        "itinerary_id",
+        "customer_id",
+        "children_number",
+        "children_price",
+        "adult_number",
+        "adult_price",
+        "request",
         "tour_date",
-        "tour_itinerary",
-        "additional_service"
+        "created_at",
+        "updated_at"
     ];
 }

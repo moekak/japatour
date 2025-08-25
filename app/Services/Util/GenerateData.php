@@ -2,6 +2,7 @@
 
 namespace App\Services\Util;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 
 class GenerateData
@@ -281,5 +282,31 @@ class GenerateData
         return $insertingAdditionalServiceData;
     }
 
+
+    public function prepareCustomerData($data){
+        return [
+            "first_name" => $data["first_name"],
+            "first_name" => $data["last_name"],
+            "phone_number" => $data["phone_number"],
+            "email" => $data["email"],
+            "created_at" => Carbon::now(),
+            "updated_at" => Carbon::now(),
+        ];
+    }
+
+    public function prepareBookingData($data, $customer_id){
+        return [
+            "itinerary_id" => (int) $data["itinerary_id"],
+            "customer_id" => (int) $customer_id,
+            "children_number" =>(int) $data["children_number"],
+            "children_price" => (int) $data["children_price"],
+            "adult_number" => (int) $data["adult_number"],
+            "adult_price" => (int) $data["adult_price"],
+            "request" => $data["request"],
+            "tour_date" => Carbon::parse($data["tour_date"])->format('Y-m-d'),
+            "created_at" => Carbon::now(),
+            "updated_at" => Carbon::now(),
+        ];
+    }
 
 }

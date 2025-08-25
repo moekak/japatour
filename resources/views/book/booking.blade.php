@@ -131,7 +131,7 @@
 </head>
 
 <body>
-    @if ($errors->any())
+    @if ($errors->any() || session("error"))
         <div id="error-toast" class="fixed top-4 right-4 z-[900]">
         <div class="bg-white border-l-4 border-[#e92929] rounded-lg shadow-xl max-w-md overflow-hidden">
             <div class="flex items-start p-4">
@@ -147,7 +147,7 @@
                     </p>
                     <ul class="mt-1">
                         @foreach ($errors->all() as $error)
-                            <li class="text-[#994d4d] text-sm">{{$error}}</li>
+                            <li class="text-[#994d4d] text-sm">{{$error || session("error")}}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -159,7 +159,6 @@
     </div>
 
     @endif
-   
 
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
