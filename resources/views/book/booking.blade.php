@@ -419,7 +419,8 @@
                                         <button type="button" id="back-to-step-2" class="flex-1 border-2 border-[#e7d0d0] text-[#994d4d] py-3 rounded-lg font-medium hover:border-[#994d4d] transition-colors duration-300">
                                             Back
                                         </button>
-                                        <form action="{{route("book.store")}}" method="POST">
+                                        <form action="{{route("book.store")}}" method="POST" class="flex-1 bg-[#e92929] text-white py-3 rounded-lg font-medium hover:bg-[#d61f1f] transition-all duration-300">
+                                            @csrf
                                             {{-- ツアー情報 --}}
                                             <input type="hidden" value="" id="js_itinerary_id" name="itinerary_id">
                                             <input type="hidden" value="" id="js_adult_number" name="adult_number">
@@ -435,7 +436,7 @@
                                             <input type="hidden" value="" id="js_request" name="request">
                                             <input type="hidden" value={{$tour->title}} id="js_tour_name">
                                             <input type="hidden" value={{$tour->title}} id="js_itinerary_name">
-                                            <button type="submit" id="confirm-booking" class="flex-1 bg-[#e92929] text-white py-3 rounded-lg font-medium hover:bg-[#d61f1f] transition-all duration-300">
+                                            <button type="submit" id="confirm-booking">
                                                 Confirm & Book Now
                                             </button>
                                         </form>
