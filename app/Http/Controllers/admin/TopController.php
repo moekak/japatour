@@ -7,7 +7,6 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Region;
 use App\Models\Tour;
-use App\Models\Tour;
 use Illuminate\Http\Request;
 
 class TopController extends Controller
