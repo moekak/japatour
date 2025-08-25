@@ -28,7 +28,6 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
 
-        Log::debug($this->all());
         return [
             // Basic Tour Information
             'title' => ['required', 'string', 'max:50'],

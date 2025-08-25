@@ -22,11 +22,11 @@ class CreateBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'itinerary_id' => ['required', 'integer', 'exists:itineraries,id'],
-            'adult_number' => ['required', 'integer', 'min:1'],
-            'adult_price' => ['required', 'integer', 'min:1'], 
-            'children_number' => ['required', 'integer', 'min:0'], 
-            'children_price' => ['required', 'integer', 'min:0'], 
+            'itinerary_id' => ['required', 'string', 'exists:itineraries,id'],
+            'adult_number' => ['required', 'string', 'min:1'],
+            'adult_price' => ['required', 'string', 'min:1'], 
+            'children_number' => ['required', 'string', 'min:0'], 
+            'children_price' => ['required', 'string', 'min:0'], 
             'tour_date' => ['required', 'date', 'after_or_equal:today'], // 過去の日付を防ぐ
             'first_name' => ['required', 'string'], 
             'last_name' => ['required', 'string'],

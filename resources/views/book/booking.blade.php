@@ -145,9 +145,9 @@
                     <p id="error-toast-message" class="text-[#994d4d] text-sm mt-1">
                         Please fix the errors below and try again.
                     </p>
-                    <ul>
+                    <ul class="mt-1">
                         @foreach ($errors->all() as $error)
-                            <li>{{$error}}</li>
+                            <li class="text-[#994d4d] text-sm">{{$error}}</li>
                         @endforeach
                     </ul>
                 </div>
