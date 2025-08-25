@@ -131,6 +131,26 @@
 </head>
 
 <body>
+    <div id="error-toast" class="fixed top-4 right-4 z-50 hidden">
+        <div class="bg-white border-l-4 border-[#e92929] rounded-lg shadow-xl max-w-md overflow-hidden">
+            <div class="flex items-start p-4">
+                <div class="flex-shrink-0">
+                    <div class="w-10 h-10 bg-[#e92929]/10 rounded-full flex items-center justify-center">
+                        <i class="fas fa-exclamation-triangle text-[#e92929]"></i>
+                    </div>
+                </div>
+                <div class="ml-3 flex-1">
+                    <h3 class="text-[#1b0e0e] text-sm font-semibold">Error</h3>
+                    <p id="error-toast-message" class="text-[#994d4d] text-sm mt-1">
+                        Please fix the errors below and try again.
+                    </p>
+                </div>
+                <button id="close-toast" class="ml-4 text-[#994d4d] hover:text-[#e92929] transition-colors">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
 
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
