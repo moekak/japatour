@@ -23,7 +23,7 @@ class BookingController extends Controller
     }
 
     public function store(Request $request){
-        print_r($request);
+        print_r($request->all());
     }
 
     // public function createPaymentIntent(Request $request){
