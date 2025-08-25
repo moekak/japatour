@@ -131,7 +131,8 @@
 </head>
 
 <body>
-    <div id="error-toast" class="fixed top-4 right-4 z-[900]">
+    @if ($errors->any())
+        <div id="error-toast" class="fixed top-4 right-4 z-[900]">
         <div class="bg-white border-l-4 border-[#e92929] rounded-lg shadow-xl max-w-md overflow-hidden">
             <div class="flex items-start p-4">
                 <div class="flex-shrink-0">
@@ -144,6 +145,11 @@
                     <p id="error-toast-message" class="text-[#994d4d] text-sm mt-1">
                         Please fix the errors below and try again.
                     </p>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
                 </div>
                 <button id="close-toast" class="ml-4 text-[#994d4d] hover:text-[#e92929] transition-colors">
                     <i class="fas fa-times"></i>
@@ -152,6 +158,8 @@
         </div>
     </div>
 
+    @endif
+   
 
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
