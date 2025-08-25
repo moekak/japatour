@@ -11,9 +11,18 @@ document.getElementById('continue-to-step-2').addEventListener("click", ()=>{
       document.getElementById("step-2-content").classList.remove("hidden")
       document.getElementById("step-1-content").classList.add("hidden")
 })
+
+document.getElementById('back-to-step-1').addEventListener("click", ()=>{
+      document.getElementById("step-1-content").classList.remove("hidden")
+      document.getElementById("step-2-content").classList.add("hidden")
+})
 document.getElementById('continue-to-step-3').addEventListener("click", ()=>{
       document.getElementById("step-3-content").classList.remove("hidden")
       document.getElementById("step-2-content").classList.add("hidden")
 
       tourReviewInstance.updateReview()
+})
+document.getElementById('back-to-step-1').addEventListener("click", ()=>{
+      document.getElementById("step-2-content").classList.remove("hidden")
+      document.getElementById("step-3-content").classList.add("hidden")
 })
