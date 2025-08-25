@@ -20,18 +20,19 @@ class BookingService
       }
       public function createBooking(CreateBookingRequest $request){
             try{
+                  DB::beginTransaction();
                   $validated  = $request->validated();
-                  return DB::transaction(function () use($validated){
-                        $customerData = $this->generateData->prepareCustomerData($validated);
-                        $customer = Customer::create($customerData);
+                  $customerData = $this->generateData->prepareCustomerData($validated);
+                  $customer = Customer::create($customerData);
 
-                        $bookingData = $this->generateData->prepareBookingData($validated, $customer->id);
-                        $booking = TourBooking::create($bookingData);
+                  $bookingData = $this->generateData->prepareBookingData($validated, $customer->id);
+                  $booking = TourBooking::create($bookingData);
 
-                        return ["customer" => $customer, "booking" => $booking];
-                  });
+                  DB::commit();
+                  return ["customer" => $customer, "booking" => $booking];
 
             }catch(\Exception $e){
+                  DB::rollBack();
                   Log::debug($e);
                   return redirect()->back()->with('error', 'Booking failed. Please try again.');
             }
