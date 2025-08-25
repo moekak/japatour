@@ -29,7 +29,7 @@ class BookingService
                   $bookingData = $this->generateData->prepareBookingData($validated, $customer->id);
                   $booking = TourBooking::create($bookingData);
 
-                  $this->lineService->sendMessage("Udc313f36db4dacb3e07584ca2de23dc8", "テスト");
+                  $this->lineService->sendMessage("C4809840668b8c611a772a6fc325e62c4");
 
                   DB::commit();
                   return ["customer" => $customer->toArray(), "booking" => $booking->toArray()];
