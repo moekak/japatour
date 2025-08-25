@@ -28,6 +28,9 @@ class BookingService
                   $bookingData = $this->generateData->prepareBookingData($validated, $customer->id);
                   $booking = TourBooking::create($bookingData);
 
+                  print_r($customer);
+                  exit;
+
                   DB::commit();
                   return ["customer" => $customer->toArray(), "booking" => $booking->toArray()];
 
