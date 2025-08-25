@@ -24,7 +24,7 @@ class BookingService
                   $customer = null;
                   $booking = null;
                   
-                  DB::transaction(function () use($validated){
+                  DB::transaction(function () use($validated, &$customer, &$booking){
                         $customerData = $this->generateData->prepareCustomerData($validated);
                         $customer = Customer::create($customerData);
 
