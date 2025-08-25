@@ -13,10 +13,12 @@ class BookingService
 {
 
       protected $generateData;
+      protected $lineService;
 
-      public function __construct(GenerateData $generateData)
+      public function __construct(GenerateData $generateData, LineService $lineService)
       {
             $this->generateData = $generateData;
+            $this->lineService = $lineService;
       }
       public function createBooking(CreateBookingRequest $request){
             try{
@@ -27,6 +29,7 @@ class BookingService
                   $bookingData = $this->generateData->prepareBookingData($validated, $customer->id);
                   $booking = TourBooking::create($bookingData);
 
+                  $this->lineService->sendMessage("Udc313f36db4dacb3e07584ca2de23dc8", "テスト");
 
                   DB::commit();
                   return ["customer" => $customer->toArray(), "booking" => $booking->toArray()];
