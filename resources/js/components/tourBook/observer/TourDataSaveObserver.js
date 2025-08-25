@@ -10,10 +10,10 @@ export default class TourDataSaveObserver extends ObserverInterface{
             this.elements.itineraryId.value = data.itineraryId
             this.elements.itineraryTitle.value = data.itineraryTitle
             this.elements.adultNumber.value =  data.adultNumber
-            this.elements.adultPrice.value = data.adultPriceTotal
+            this.elements.adultPrice.value = data.adultPriceTotal.toLocaleString('ja-JP')
             this.elements.childNumber.value = data.childNumber
-            this.elements.childPrice.value = data.childPriceTotal
-            this.elements.totalPrice.value = data.total
+            this.elements.childPrice.value = data.childPriceTotal.toLocaleString('ja-JP')
+            this.elements.totalPrice.value = data.total.toLocaleString('ja-JP')
             this.elements.date.value = data.selectedDate
       }
       
