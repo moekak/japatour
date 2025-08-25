@@ -8,6 +8,7 @@ export default class TourDataSaveObserver extends ObserverInterface{
       
       update(data) {
             this.elements.itineraryId.value = data.itineraryId
+            this.elements.itineraryTitle.value = data.itineraryTitle
             this.elements.adultNumber.value =  data.adultNumber
             this.elements.adultPrice.value = data.adultPriceTotal
             this.elements.childNumber.value = data.childNumber

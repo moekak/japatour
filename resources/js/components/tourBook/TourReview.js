@@ -16,7 +16,8 @@ export default class TourReview{
                   email: document.querySelectorAll(".email"),
                   phone: document.querySelectorAll(".phone"),
                   request: document.querySelectorAll(".request"),
-                  tour_name : document.querySelectorAll(".tour_name")
+                  tour_name : document.querySelectorAll(".tour_name"),
+                  itinerary_name : document.querySelectorAll(".itinerary_name")
 
             }
       }

@@ -64,6 +64,7 @@ export default class BookingCalculator{
       registerSaveObservers(){
             this.registerObserver(new TourDataSaveObserver({
                   itineraryId: document.getElementById("js_itinerary_id"),
+                  itineraryTitle: document.getElementById("js_itinerary_name"),
                   adultNumber: document.getElementById("js_adult_number"),
                   adultPrice: document.getElementById("js_adult_price"),
                   childNumber: document.getElementById("js_child_number"),

@@ -145,6 +145,7 @@
     <input type="hidden" value="" id="js_phone">
     <input type="hidden" value="" id="js_request">
     <input type="hidden" value={{$tour->title}} id="js_tour_name">
+    <input type="hidden" value={{$tour->title}} id="js_itinerary_name">
 
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
@@ -381,7 +382,7 @@
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Tour:</span>
                                                     <span class="text-[#1b0e0e] font-medium tour_name"></span>
-                                                    <div class="text-[#994d4d] text-xs mt-1" id="js_itinerary_name"></div>
+                                                    <div class="text-[#994d4d] text-xs mt-1 itinerary_name"></div>
                                                 </div>
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Date:</span>
