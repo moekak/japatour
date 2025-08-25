@@ -28,7 +28,7 @@ class BookingService
                   $bookingData = $this->generateData->prepareBookingData($validated, $customer->id);
                   $booking = TourBooking::create($bookingData);
 
-                  print_r($customer);
+                  print_r($validated );
                   exit;
 
                   DB::commit();
