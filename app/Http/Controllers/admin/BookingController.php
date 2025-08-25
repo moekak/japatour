@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Booking\CreateBookingRequest;
 use App\Models\AdditionalService;
 use App\Models\Tour;
 use Exception;
@@ -22,8 +23,9 @@ class BookingController extends Controller
         return view("book.book_confirmation");
     }
 
-    public function store(Request $request){
-        print_r($request->all());
+    public function store(CreateBookingRequest $request){
+        $validated = $request->validated();
+        print_r($validated);
     }
 
     // public function createPaymentIntent(Request $request){
