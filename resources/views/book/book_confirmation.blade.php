@@ -77,25 +77,7 @@
 
 <body class="bg-[#fcf8f8] min-h-screen">
       <!-- Header -->
-      <header class="bg-white shadow-sm border-b border-[#e7d0d0]">
-            <div class="max-w-[1900px] mx-auto px-4 py-4">
-                  <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                              <div class="w-10 h-10 bg-[#e92929] rounded-lg flex items-center justify-center">
-                                    <i class="fas fa-torii-gate text-white text-lg"></i>
-                              </div>
-                              <div>
-                                    <h1 class="text-[#1b0e0e] text-lg font-black">ShogunTours</h1>
-                                    <p class="text-[#994d4d] text-xs">Authentic Tokyo Experiences</p>
-                              </div>
-                        </div>
-                        <div class="text-[#994d4d] text-sm">
-                              <i class="fas fa-phone mr-1"></i>
-                              +81 3-1234-5678
-                        </div>
-                  </div>
-            </div>
-      </header>
+      @include("components.header")
 
       <div class="max-w-[1200px] mx-auto px-4 py-12">
             <!-- Success Message -->

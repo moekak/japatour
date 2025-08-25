@@ -131,7 +131,7 @@
 </head>
 
 <body>
-    <div id="error-toast" class="fixed top-4 right-4 z-50 hidden">
+    <div id="error-toast" class="fixed top-4 right-4 z-[900]">
         <div class="bg-white border-l-4 border-[#e92929] rounded-lg shadow-xl max-w-md overflow-hidden">
             <div class="flex items-start p-4">
                 <div class="flex-shrink-0">
