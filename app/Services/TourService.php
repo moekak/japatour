@@ -7,9 +7,7 @@ use App\Http\Requests\Admin\Tour\CreateRequest;
 use App\Http\Requests\Admin\Tour\EditTourRequest;
 use App\Models\Itinerary;
 use App\Models\Tour;
-use App\Services\Repository\AdditionalServiceRepository;
 use App\Services\Repository\QaRepository;
-use App\Services\Repository\ReviewRepository;
 use App\Services\Repository\TourRepository;
 use App\Services\Util\GenerateData;
 use App\Services\Util\ImageService;
@@ -21,20 +19,16 @@ use Illuminate\Support\Facades\Log;
 class TourService
 {
     protected $tourRepository;
-    protected $reviewRepository;
-    protected $additionalServiceRepository;
     protected $qaRepository;
     protected $imageService;
     protected $generateData;
 
-    public function __construct(TourRepository $tourRepository, ReviewRepository $reviewRepository, QaRepository $qaRepository, AdditionalServiceRepository $additionalServiceRepository,ImageService $imageService, GenerateData $generateData)
+    public function __construct(TourRepository $tourRepository,  QaRepository $qaRepository,ImageService $imageService, GenerateData $generateData)
     {
         $this->tourRepository = $tourRepository;
-        $this->reviewRepository = $reviewRepository;
         $this->qaRepository = $qaRepository;
         $this->imageService = $imageService;
         $this->generateData = $generateData;
-        $this->additionalServiceRepository = $additionalServiceRepository;
     }
 
     /**
