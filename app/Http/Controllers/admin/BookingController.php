@@ -18,6 +18,9 @@ class BookingController extends Controller
         $tour = Tour::getSpecificTour($id);
         return view("book.booking", compact("tour"));
     }
+    public function confirmation(){
+        return view("book.book_confirmation");
+    }
 
     public function createPaymentIntent(Request $request){
         try{

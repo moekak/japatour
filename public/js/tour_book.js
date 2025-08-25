@@ -88,6 +88,7 @@ var BookingCalculator = /*#__PURE__*/function () {
     value: function registerSaveObservers() {
       this.registerObserver(new _observer_TourDataSaveObserver_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
         itineraryId: document.getElementById("js_itinerary_id"),
+        itineraryTitle: document.getElementById("js_itinerary_name"),
         adultNumber: document.getElementById("js_adult_number"),
         adultPrice: document.getElementById("js_adult_price"),
         childNumber: document.getElementById("js_child_number"),
@@ -455,8 +456,6 @@ var SummaryDisplayObserver = /*#__PURE__*/function (_ObserverInterface) {
   return _createClass(SummaryDisplayObserver, [{
     key: "update",
     value: function update(TourData) {
-      console.log(this.elements.childPrice);
-      console.log(TourData.childPriceTotal);
       this.elements.total.textContent = "\uFFE5".concat(TourData.total.toLocaleString('ja-JP'));
       this.elements.adultNumber.textContent = "".concat(TourData.adultNumber.toLocaleString('ja-JP'));
       this.elements.childNumber.textContent = "".concat(TourData.childNumber.toLocaleString('ja-JP'));
@@ -557,11 +556,12 @@ var TourDataSaveObserver = /*#__PURE__*/function (_ObserverInterface) {
     key: "update",
     value: function update(data) {
       this.elements.itineraryId.value = data.itineraryId;
+      this.elements.itineraryTitle.value = data.itineraryTitle;
       this.elements.adultNumber.value = data.adultNumber;
-      this.elements.adultPrice.value = data.adultPriceTotal;
+      this.elements.adultPrice.value = data.adultPriceTotal.toLocaleString('ja-JP');
       this.elements.childNumber.value = data.childNumber;
-      this.elements.childPrice.value = data.childPriceTotal;
-      this.elements.totalPrice.value = data.total;
+      this.elements.childPrice.value = data.childPriceTotal.toLocaleString('ja-JP');
+      this.elements.totalPrice.value = data.total.toLocaleString('ja-JP');
       this.elements.date.value = data.selectedDate;
     }
   }]);
