@@ -381,8 +381,10 @@
                                             <div class="space-y-3 text-sm">
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Tour:</span>
-                                                    <span class="text-[#1b0e0e] font-medium tour_name"></span>
-                                                    <div class="text-[#994d4d] text-xs mt-1 itinerary_name"></div>
+                                                    <div>
+                                                        <span class="text-[#1b0e0e] font-medium tour_name"></span>|
+                                                        <div class="text-[#994d4d] text-xs mt-1 itinerary_name"></div>
+                                                    </div>
                                                 </div>
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Date:</span>
