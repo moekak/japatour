@@ -7,6 +7,10 @@ export default class SummaryDisplayObserver extends ObserverInterface{
       }
       
       update(TourData) {
+            console.log(this.elements.childPrice);
+            console.log(TourData.childPriceTotal);
+            
+            
             this.elements.total.textContent = `￥${TourData.total.toLocaleString('ja-JP')}`;
             this.elements.adultNumber.textContent = `${TourData.adultNumber.toLocaleString('ja-JP')}`;
             this.elements.childNumber.textContent = `${TourData.childNumber.toLocaleString('ja-JP')}`;
