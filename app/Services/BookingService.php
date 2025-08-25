@@ -21,18 +21,15 @@ class BookingService
       public function createBooking(CreateBookingRequest $request){
             try{
                   $validated  = $request->validated();
-                  $customer = null;
-                  $booking = null;
-                  
-                  DB::transaction(function () use($validated, &$customer, &$booking){
+                  return DB::transaction(function () use($validated){
                         $customerData = $this->generateData->prepareCustomerData($validated);
                         $customer = Customer::create($customerData);
 
                         $bookingData = $this->generateData->prepareBookingData($validated, $customer->id);
                         $booking = TourBooking::create($bookingData);
-                  });
 
-                  return ["customer" => $customer, "booking" => $booking];
+                        return ["customer" => $customer, "booking" => $booking];
+                  });
 
             }catch(\Exception $e){
                   Log::debug($e);
