@@ -22,14 +22,13 @@ class BookingService
             try{
                   DB::beginTransaction();
                   $validated  = $request->validated();
+                  print_r($validated);
                   $customerData = $this->generateData->prepareCustomerData($validated);
                   $customer = Customer::create($customerData);
 
                   $bookingData = $this->generateData->prepareBookingData($validated, $customer->id);
                   $booking = TourBooking::create($bookingData);
 
-                  print_r($validated );
-                  exit;
 
                   DB::commit();
                   return ["customer" => $customer->toArray(), "booking" => $booking->toArray()];
