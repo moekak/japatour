@@ -29,7 +29,7 @@ class BookingService
                   $booking = TourBooking::create($bookingData);
 
                   DB::commit();
-                  return ["customer" => $customer, "booking" => $booking];
+                  return ["customer" => $customer->toArray(), "booking" => $booking->toArray()];
 
             }catch(\Exception $e){
                   DB::rollBack();
