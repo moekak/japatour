@@ -32,7 +32,7 @@ class BookingService
                         $booking = TourBooking::create($bookingData);
                   });
 
-                  return redirect()->to("confirmation")->with(["customer" => $customer, "booking" => $booking]);
+                  return ["customer" => $customer, "booking" => $booking];
 
             }catch(\Exception $e){
                   Log::debug($e);
