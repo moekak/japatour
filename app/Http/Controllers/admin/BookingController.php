@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\AdditionalService;
 use App\Models\Tour;
-use App\Models\ToursNew;
+use App\Models\Tour;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -16,7 +16,7 @@ class BookingController extends Controller
 {
     public function index(string $id)
     {
-        $tour = ToursNew::getSpecificTour($id);
+        $tour = Tour::getSpecificTour($id);
         return view("book.booking", compact("tour"));
     }
 

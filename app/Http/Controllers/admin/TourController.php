@@ -8,7 +8,7 @@ use App\Http\Requests\Admin\Tour\EditTourRequest;
 use App\Models\Category;
 use App\Models\Language;
 use App\Models\Region;
-use App\Models\ToursNew;
+use App\Models\Tour;
 use App\Services\TempImageService;
 use App\Services\TourService;
 use Illuminate\Http\Request;
@@ -26,12 +26,12 @@ class TourController extends Controller
      */
     public function list()
     {
-        $tours = ToursNew::getAllTours();
+        $tours = Tour::getAllTours();
         return view("tour.tour_list", compact("tours"));
     }
 
     public function index(){
-        $categorizedTours = ToursNew::getAllToursByCategory()->toArray();
+        $categorizedTours = Tour::getAllToursByCategory()->toArray();
         return view("tour.tours", compact("categorizedTours"));
     }
     /**
@@ -76,7 +76,7 @@ class TourController extends Controller
     public function show(string $id)
     {
         try {
-            $tour = ToursNew::getSpecificTour($id);
+            $tour = Tour::getSpecificTour($id);
             return view("tour.tour_show", compact("tour"));
         } catch (\Exception $e) {
             Log::debug($e);
@@ -90,7 +90,7 @@ class TourController extends Controller
     public function edit(string $id)
     {
         try {
-            $tour = ToursNew::getSpecificTour($id)->toArray();
+            $tour = Tour::getSpecificTour($id)->toArray();
             $regions = Region::getAllRegions();
             $languages = Language::getAllLanguages();
             $categories = Category::getAllCategories();

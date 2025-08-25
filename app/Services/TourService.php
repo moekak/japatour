@@ -6,7 +6,7 @@ namespace App\Services;
 use App\Http\Requests\Admin\Tour\CreateRequest;
 use App\Http\Requests\Admin\Tour\EditTourRequest;
 use App\Models\Itinerary;
-use App\Models\ToursNew;
+use App\Models\Tour;
 use App\Services\Repository\AdditionalServiceRepository;
 use App\Services\Repository\QaRepository;
 use App\Services\Repository\ReviewRepository;
@@ -72,7 +72,7 @@ class TourService
             $tourData = $this->generateData->prepareTourData($request);
 
             // ツアー作成
-            $tour = ToursNew::create($tourData);
+            $tour = Tour::create($tourData);
 
             // Tour highlightsの保存
             $itineraryHighlightData = $this->generateData->prepareTourHighlight($request, $tour->id);
@@ -124,10 +124,10 @@ class TourService
         try{
             DB::beginTransaction();
             // 元のデータを削除する
-            ToursNew::find($request->input("tour_id"))->delete();
+            Tour::find($request->input("tour_id"))->delete();
             $tourData = $this->generateData->prepareTourData($request);
             // ツアー作成
-            $tour = ToursNew::create($tourData);
+            $tour = Tour::create($tourData);
 
             // Tour highlightsの保存
             $itineraryHighlightData = $this->generateData->prepareTourHighlight($request, $tour->id);
