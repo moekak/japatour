@@ -131,21 +131,7 @@
 </head>
 
 <body>
-    {{-- ツアー情報 --}}
-    <input type="hidden" value="" id="js_itinerary_id">
-    <input type="hidden" value="" id="js_adult_number">
-    <input type="hidden" value="" id="js_adult_price">
-    <input type="hidden" value="" id="js_child_number">
-    <input type="hidden" value="" id="js_child_price">
-    <input type="hidden" value="" id="js_total_price">
-    <input type="hidden" value="" id="js_date">
-    <input type="hidden" value="" id="js_firstName">
-    <input type="hidden" value="" id="js_lastName">
-    <input type="hidden" value="" id="js_email">
-    <input type="hidden" value="" id="js_phone">
-    <input type="hidden" value="" id="js_request">
-    <input type="hidden" value={{$tour->title}} id="js_tour_name">
-    <input type="hidden" value={{$tour->title}} id="js_itinerary_name">
+
 
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
@@ -433,9 +419,27 @@
                                         <button type="button" id="back-to-step-2" class="flex-1 border-2 border-[#e7d0d0] text-[#994d4d] py-3 rounded-lg font-medium hover:border-[#994d4d] transition-colors duration-300">
                                             Back
                                         </button>
-                                        <button type="button" id="confirm-booking" class="flex-1 bg-[#e92929] text-white py-3 rounded-lg font-medium hover:bg-[#d61f1f] transition-all duration-300">
-                                            Confirm & Book Now
-                                        </button>
+                                        <form action="{{route("book.store")}}" method="POST">
+                                            {{-- ツアー情報 --}}
+                                            <input type="hidden" value="" id="js_itinerary_id" name="itinerary_id">
+                                            <input type="hidden" value="" id="js_adult_number" name="adult_number">
+                                            <input type="hidden" value="" id="js_adult_price" name="adult_price">
+                                            <input type="hidden" value="" id="js_child_number" name="children_number">
+                                            <input type="hidden" value="" id="js_child_price" name="children_price">
+                                            <input type="hidden" value="" id="js_total_price">
+                                            <input type="hidden" value="" id="js_date" name="tour_date">
+                                            <input type="hidden" value="" id="js_firstName" name="first_name">
+                                            <input type="hidden" value="" id="js_lastName" name="last_name">
+                                            <input type="hidden" value="" id="js_email" name="email">
+                                            <input type="hidden" value="" id="js_phone" name="phone_number">
+                                            <input type="hidden" value="" id="js_request" name="request">
+                                            <input type="hidden" value={{$tour->title}} id="js_tour_name">
+                                            <input type="hidden" value={{$tour->title}} id="js_itinerary_name">
+                                            <button type="submit" id="confirm-booking" class="flex-1 bg-[#e92929] text-white py-3 rounded-lg font-medium hover:bg-[#d61f1f] transition-all duration-300">
+                                                Confirm & Book Now
+                                            </button>
+                                        </form>
+                                        
                                     </div>
                                 </div>
 
