@@ -286,7 +286,7 @@ class GenerateData
     public function prepareCustomerData($data){
         return [
             "first_name" => $data["first_name"],
-            "first_name" => $data["last_name"],
+            "last_name" => $data["last_name"],
             "phone_number" => $data["phone_number"],
             "email" => $data["email"],
             "created_at" => Carbon::now(),

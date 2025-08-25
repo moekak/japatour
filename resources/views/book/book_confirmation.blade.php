@@ -77,7 +77,7 @@
 
 <body class="bg-[#fcf8f8] min-h-screen">
       <!-- Header -->
-      @include("components.header")
+      @include('components.nav')
 
       <div class="max-w-[1200px] mx-auto px-4 py-12">
             <!-- Success Message -->
