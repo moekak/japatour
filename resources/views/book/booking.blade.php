@@ -144,6 +144,7 @@
     <input type="hidden" value="" id="js_email">
     <input type="hidden" value="" id="js_phone">
     <input type="hidden" value="" id="js_request">
+    <input type="hidden" value={{$tour->title}} id="js_tour_name">
 
     <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
@@ -379,7 +380,7 @@
                                             <div class="space-y-3 text-sm">
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Tour:</span>
-                                                    <span class="text-[#1b0e0e] font-medium" id="js_tour_name"></span>
+                                                    <span class="text-[#1b0e0e] font-medium tour_name"></span>
                                                     <div class="text-[#994d4d] text-xs mt-1" id="js_itinerary_name"></div>
                                                 </div>
                                                 <div class="flex justify-between">
@@ -396,7 +397,7 @@
                                         <div class="bg-[#f3e7e7] rounded-lg p-6">
                                             <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Contact Information</h4>
                                             <div class="space-y-2 text-sm">
-                                                <p class="flex justify-between"><span class="text-[#994d4d]">Name:</span> <span class="text-[#1b0e0e] font-medium lastName"></span> <span class="text-[#1b0e0e] font-medium firstName"></span></p>
+                                                <p class="flex justify-between"><span class="text-[#994d4d]">Name:</span><span><span class="text-[#1b0e0e] font-medium lastName"></span> <span class="text-[#1b0e0e] font-medium firstName"></span></span></p>
                                                 <p class="flex justify-between"><span class="text-[#994d4d]">Email:</span> <span class="text-[#1b0e0e] font-medium email"></span></p>
                                                 <p class="flex justify-between"><span class="text-[#994d4d]">Phone:</span> <span class="text-[#1b0e0e] font-medium phone"></span></p>
                                             </div>
@@ -409,11 +410,10 @@
                                                     <span class="text-[#994d4d]">Adults (×$<span class="adult_number"></span>)</span>
                                                     <span class="text-[#1b0e0e] font-medium">¥<span class="adult_price"></span></span>
                                                 </div>
-                                                ${bookingState.children > 0 ? `
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Children (×$<span class="child_number"></span>)</span>
                                                     <span class="text-[#1b0e0e] font-medium">¥<span class="child_price"></span></span>
-                                                </div>` : ''}
+                                                </div>
                                                 <div class="border-t border-[#e7d0d0] pt-2 flex justify-between">
                                                     <span class="text-[#1b0e0e] text-lg font-bold">Total</span>
                                                     <span class="text-[#1b0e0e] text-lg font-black">¥<span class="total_price"></span></span>

@@ -16,17 +16,14 @@ export default class TourReview{
                   email: document.querySelectorAll(".email"),
                   phone: document.querySelectorAll(".phone"),
                   request: document.querySelectorAll(".request"),
+                  tour_name : document.querySelectorAll(".tour_name")
 
             }
       }
 
       updateReview(){
-            console.log("updateReview");
-            
             for(const element in this.elements){
                   this.elements[element].forEach((el)=>{
-                        console.log(el);
-                        
                         el.innerHTML = document.getElementById(`js_${element}`).value
                   })
             }
