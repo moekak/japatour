@@ -34,6 +34,8 @@ class BookingController extends Controller
     public function store(CreateBookingRequest $request){
 
         $bookingData = $this->bookingService->createBooking($request);
+        print_r($bookingData);
+        exit;
         return redirect()->to("confirmation")->with(["customer" => $bookingData["customer"], "booking" => $bookingData["booking"]]);
     }
 
