@@ -63,7 +63,7 @@
             <div class="layout-content-container flex flex-col max-w-[900px] flex-1">
                 
                 <!-- Article Content -->
-                <article class="px-6 py-8">
+                <article class="py-6 px-4 md:px-6 md:py-8">
                     <header class="mb-8">
                         <!-- Category Badge -->
                         <div class="mb-4">
@@ -71,12 +71,12 @@
                         </div>
 
                         <!-- Title -->
-                        <h1 class="text-[#1b0e0e] text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-6">
+                        <h1 class="text-[#1b0e0e] text-3xl ms:text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-6">
                             {{$blog->title}}
                         </h1>
 
                         <!-- Subtitle -->
-                        <p class="text-[#994d4d] text-xl leading-relaxed mb-6">
+                        <p class="text-[#994d4d] text-base ms:text-xl leading-relaxed mb-6">
                             {{$blog->subtitle}}
                         </p>
 
@@ -98,9 +98,9 @@
                         <div id="content"></div>
                         <!-- Call to Action -->
                         <div class="bg-[#e92929]/10 border border-[#e92929]/20 rounded-lg p-6 text-center mt-8">
-                            <h3 class="text-[#e92929] text-xl font-bold mb-3">Ready to Start Your Japan Adventure?</h3>
-                            <p class="text-[#1b0e0e] mb-4">Let our experienced guides help you create the perfect itinerary.</p>
-                            <button class="px-6 py-3 bg-[#e92929] text-white rounded-lg font-bold hover:bg-[#d61f1f] transition-colors">
+                            <h3 class="text-[#e92929] text-lg md:text-xl font-bold mb-3">Ready to Start Your Japan Adventure?</h3>
+                            <p class="text-[#1b0e0e] text-base mb-4">Let our experienced guides help you create the perfect itinerary.</p>
+                            <button class="px-6 py-3 bg-[#e92929] text-sm md:text-base text-white rounded-lg font-bold hover:bg-[#d61f1f] transition-colors">
                                 Plan Your Trip
                             </button>
                         </div>

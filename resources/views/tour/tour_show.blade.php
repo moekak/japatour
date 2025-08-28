@@ -65,59 +65,7 @@
       <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <!-- Minimal Header -->
-            <nav class="bg-[#fcf8f8] border-b border-solid border-b-[#f3e7e7]">
-                  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                        <div class="relative flex h-16 items-center justify-between">
-                              <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                                    <!-- Mobile menu button-->
-                                    <button type="button" aria-controls="mobile-menu" aria-expanded="false" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
-                                          <span class="absolute -inset-0.5"></span>
-                                          <span class="sr-only">Open main menu</span>
-                                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="block size-6">
-                                                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
-                                          </svg>
-                                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="hidden size-6">
-                                                <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
-                                          </svg>
-                                    </button>
-                              </div>
-                              <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
-                                    <a class="flex shrink-0 items-center justify-center gap-3 text-[#1b0e0e]" href="{{route("top")}}">
-                                          <div class="size-8 items-center flex justify-center">
-                                                <img src="{{asset("img/logo2.png")}}" alt="">
-                                          </div>
-                                          <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours</h2>
-                                    </a>
-                                    <div class="hidden sm:ml-6 sm:flex items-center justify-center">
-                                          <div class="flex space-x-4 items-center justify-center">
-                                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                                <a href="#tour"  class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Tour</a>
-                                                <a href="#itineraries" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Itineraries</a>
-                                                <a href="#gallery" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Gallery</a>
-                                                <a href="#reviews" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">Reviews</a>
-                                                <a href="#faq" class="text-[#1b0e0e] test-base font-medium leading-normal hover:text-[#e92929] transition-colors">FQA</a>
-                                                <button
-                                                      class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] test-base font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
-                                                      <span class="truncate">Book Now</span>
-                                                </button>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>
-                  </div>
-
-                  <!-- Mobile menu, show/hide based on menu state. -->
-                  <div id="mobile-menu" class="sm:hidden hidden transition-all duration-300 ease-out overflow-hidden max-h-0">
-                        <div class="space-y-1 px-2 pt-2 pb-3">
-                              <a href="#tour" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Tour</a>
-                              <a href="#itineraries" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Itineraries</a>
-                              <a href="#gallery" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Gallery</a>
-                              <a href="#reviews" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">Reviews</a>
-                              <a href="#faq" class="block rounded-md px-3 py-2 text-base font-medium text-[#1b0e0e] hover:bg-gray-800 hover:text-white">FQA</a>
-                        </div>
-                  </div>
-
-            </nav>
+           @include('components.nav')
 
 
             <!-- Hero Section - Full Screen -->
@@ -180,7 +128,7 @@
             <!-- Overview Section -->
             <section id="overview" class="my-20 pb-20 max-w-[1100px] m-auto">
                   <div class="container mx-auto px-4">
-                        <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="grid grid-cols-1 [@media(min-width:900px)]:grid-cols-2 gap-12 items-center">
                               <div>
                                     <h2 class="text-[25px] sm:text-3xl font-bold mb-6">{{$tour->overview_title}}</h2>
                                     <p class="text-gray-600 text-base font-normal mb-6">
@@ -203,7 +151,7 @@
                                     </div>
                               </div>
 
-                              <div class="relative">
+                              <div class="relative hidden [@media(min-width:900px)]:block" >
                                     <img src="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=600&h=700&fit=crop"
                                           alt="Senso-ji Temple" class="rounded-2xl shadow-2xl">
                               </div>
@@ -354,28 +302,7 @@
 
                         <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                               @foreach ($tour->tourReviews as $review)
-                                    {{-- <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
-                                          <div class="flex items-center gap-4 mb-4">
-                                                <img src="https://i.pravatar.cc/60?img=1" alt="Reviewer" class="w-12 h-12 rounded-full">
-                                                <div>
-                                                      <h4 class="font-semibold">{{ $review->name }}</h4>
-                                                      <div class="flex gap-1">
-                                                            @php
-                                                                  $emptyStar = 5 - intval($review->rating);
-                                                                  for ($i = 0; $i < $review->rating; $i++) {
-                                                                        echo '<i class="fas fa-star text-yellow-400 text-xs"></i>';
-                                                                  }
-                                                                  for ($i = 0; $i < $emptyStar; $i++) {
-                                                                        echo '<i class="fa-regular fa-star text-yellow-400 text-xs"></i>';
-                                                                  }
-                                                            @endphp
-                                                      </div>
-                                                </div>
-                                          </div>
-
-                                          <p class="text-gray-600 mb-4 line-clamp-6">{{ $review->content }}</p>
-                                          <p class="text-base text-gray-400">{{ \Carbon\Carbon::parse($review->date)->format('F j, Y') }}</p>
-                                    </div> --}}
+                                   
                                     <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                                           <div class="flex items-center gap-4 mb-4">
                                                 <div>
@@ -599,16 +526,16 @@
                               </div>
                         </div>
                         
-                        <div class="p-6">
-                              <div class="flex items-center justify-between mb-6">
-                              <div>
-                                    <span class="text-3xl font-bold text-gray-800">￥${tour.adult_price}</span>
-                                    <span class="text-gray-600 ml-2">per person</span>
-                              </div>
-                              <div class="flex items-center gap-4 text-gray-600">
-                                    <span><i class="fas fa-clock text-[#e92929]"></i> ${tour.duration} hours</span>
-                                    <span><i class="fas fa-users text-[#e92929]"></i> Private tour</span>
-                              </div>
+                        <div class="py-6 px-3 md:p-6">
+                              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
+                                    <div>
+                                          <span class="text-3xl font-bold text-gray-800">￥${tour.adult_price}</span>
+                                          <span class="text-gray-600 ml-2">per person</span>
+                                    </div>
+                                    <div class="flex items-center gap-4 text-gray-600">
+                                          <span><i class="fas fa-clock text-[#e92929]"></i> ${tour.duration} hours</span>
+                                          <span><i class="fas fa-users text-[#e92929]"></i> Private tour</span>
+                                    </div>
                               </div>
                               
                               <p class="text-gray-600 mb-6">${tour.overview_description}</p>

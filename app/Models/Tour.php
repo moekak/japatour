@@ -15,7 +15,8 @@ class Tour extends Model
         "region_id",
         "hero_image",
         "overview_title",
-        "overview_description"
+        "overview_description",
+        "is_featured"
     ];
 
     public function itineraries(){

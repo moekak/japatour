@@ -26,6 +26,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@tailwindplus/elements": "^1.0.9",
         "flatpickr": "^4.6.13",
         "laravel-mix": "^6.0.49"
     }

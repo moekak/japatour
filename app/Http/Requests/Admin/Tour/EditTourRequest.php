@@ -33,6 +33,7 @@ class EditTourRequest extends FormRequest
             'category_id' => ['required', 'integer', 'exists:categories,id'],
             'overview_title' => ['required', 'string', 'max:50'],
             'overview_description' => ['required', 'string', 'max:1000'],
+            'is_featured'       => ['required', 'boolean'],
             
             // Hero Image
             'hero_image' => [
@@ -216,6 +217,9 @@ class EditTourRequest extends FormRequest
             'overview_description.required' => 'Overview description is required.',
             'overview_description.string' => 'Overview description must be a valid text.',
             'overview_description.max' => 'Overview description cannot exceed 1000 characters.',
+
+            'is_featured.required' => 'Please select featured status.',
+            'is_featured.boolean' => 'The featured field must be true or false.',
             
             // Hero Image
 

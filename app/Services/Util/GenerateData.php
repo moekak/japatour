@@ -56,8 +56,9 @@ class GenerateData
     {
 
         $data = $request->validated();
+
         $tours = [];
-        $tourFiled = ["title", "subtitle", "badge","category_id", "region_id", "overview_title", "overview_description", "hero_image"];
+        $tourFiled = ["title", "subtitle", "badge","category_id", "region_id", "overview_title", "overview_description", "hero_image", "is_featured"];
         foreach($tourFiled as $field){
             if($field === "hero_image"){
                 if(isset($data[$field])){
@@ -71,11 +72,14 @@ class GenerateData
                     $tours[$field] = $data["temp_hero_image"];
                 }
                 
+            }elseif($field === "is_featured"){
+                $tours[$field] = $data["is_featured"] == "1";
             }elseif(isset($data[$field])){
                 $tours[$field] = $data[$field];
             }
             
         }
+
 
         return $tours;
     }

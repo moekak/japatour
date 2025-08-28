@@ -112,24 +112,37 @@
                                     <label class="block text-sm font-medium text-gray-700 mb-2">BadgeLabel</label>
                                     <input type="text" name="badge" value="{{ old('badge', $tour["badge"]) }}" placeholder="e.g., Best seller" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
                               </div>
-                              <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-4">
+                              <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                                     <div>
                                           <label class="block text-sm font-medium text-gray-700 mb-1">Region</label>
                                           <select name="region_id" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                <option selected disabled >Choose a region</option>
+                                                <option selected disabled>Choose a region</option>
                                                 @foreach ($regions as $region)
-                                                      <option {{old("region_id", $tour["region_id"]) == $region->id ? "selected" : ""}} value="{{$region->id}}" >{{$region->region}}</option>
+                                                <option {{old("region_id", $tour["region_id"]) == $region->id ? "selected" : ""}} value="{{$region->id}}">{{$region->region}}</option>
                                                 @endforeach
                                           </select>
                                     </div>
                                     <div>
                                           <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
                                           <select name="category_id" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
-                                                <option selected disabled >Choose a category</option>
+                                                <option selected disabled>Choose a category</option>
                                                 @foreach ($categories as $category)
-                                                      <option {{old("category_id", $tour["category_id"]) == $category->id ? "selected" : ""}} value="{{$category->id}}" >{{$category->category}}</option>
+                                                <option {{old("category_id", $tour["category_id"]) == $category->id ? "selected" : ""}} value="{{$category->id}}">{{$category->category}}</option>
                                                 @endforeach
                                           </select>
+                                    </div>
+                                    <div>
+                                          <label class="block text-sm font-medium text-gray-700 mb-1">Featured</label>
+                                          <div class="flex items-center space-x-6 h-[52px]">
+                                                <label class="flex items-center">
+                                                <input type="radio" name="is_featured" value="1" {{old("is_featured", $tour["is_featured"]) == "1" ? "checked" : ""}} class="w-4 h-4 text-[#e92929] border-gray-300 focus:ring-[#e92929] focus:ring-2">
+                                                <span class="ml-2 text-sm text-gray-700">Yes</span>
+                                                </label>
+                                                <label class="flex items-center">
+                                                <input type="radio" name="is_featured" value="0" {{old("is_featured", $tour["is_featured"]) == "0" ? "checked" : ""}} class="w-4 h-4 text-[#e92929] border-gray-300 focus:ring-[#e92929] focus:ring-2">
+                                                <span class="ml-2 text-sm text-gray-700">No</span>
+                                                </label>
+                                          </div>
                                     </div>
                               </div>
 

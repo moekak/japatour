@@ -395,7 +395,7 @@ var TourReview = /*#__PURE__*/function () {
       var _this = this;
       var _loop = function _loop(element) {
         _this.elements[element].forEach(function (el) {
-          el.innerHTML = document.getElementById("js_".concat(element)).value;
+          el.innerHTML = document.getElementById("js_".concat(element)).value.toLocaleString('ja-JP');
         });
       };
       for (var element in this.elements) {
@@ -767,10 +767,10 @@ var TourDataSaveObserver = /*#__PURE__*/function (_ObserverInterface) {
       this.elements.itineraryId.value = data.itineraryId;
       this.elements.itineraryTitle.value = data.itineraryTitle;
       this.elements.adultNumber.value = data.adultNumber;
-      this.elements.adultPrice.value = data.adultPriceTotal.toLocaleString('ja-JP');
+      this.elements.adultPrice.value = data.adultPriceTotal;
       this.elements.childNumber.value = data.childNumber;
-      this.elements.childPrice.value = data.childPriceTotal.toLocaleString('ja-JP');
-      this.elements.totalPrice.value = data.total.toLocaleString('ja-JP');
+      this.elements.childPrice.value = data.childPriceTotal;
+      this.elements.totalPrice.value = data.total;
       this.elements.date.value = data.selectedDate;
     }
   }]);

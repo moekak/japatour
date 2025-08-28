@@ -25,7 +25,7 @@ export default class TourReview{
       updateReview(){
             for(const element in this.elements){
                   this.elements[element].forEach((el)=>{
-                        el.innerHTML = document.getElementById(`js_${element}`).value
+                        el.innerHTML = document.getElementById(`js_${element}`).value.toLocaleString('ja-JP')
                   })
             }
       }
