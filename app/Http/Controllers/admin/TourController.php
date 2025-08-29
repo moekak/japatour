@@ -31,7 +31,7 @@ class TourController extends Controller
     }
 
     public function index(){
-        $categorizedTours = Tour::getAllToursByCategory()->toArray();
+        $categorizedTours = Tour::getAllToursByCategoryWithoutFeatured()->toArray();
         $featuredTour = Tour::getFeaturedTour();
         $tourCount = Tour::getTourCount();
         $categories = Category::all();

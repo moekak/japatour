@@ -58,6 +58,19 @@ class Tour extends Model
 
     public static function getAllToursByCategory(){
         $tours = static::withRelations()
+            ->get()
+            ->map(function($tour) {
+                $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
+                $tour->minimum_price = $tour->itineraries->min('adult_price') ?? 0;
+                $tour->minimum_duration = $tour->itineraries->min('duration') ?? 0;
+                return $tour;
+            })
+            ->groupBy('category.category');
+        return $tours;
+    }
+
+    public static function getAllToursByCategoryWithoutFeatured(){
+        $tours = static::withRelations()
             ->withIsFeatured("0")
             ->get()
             ->map(function($tour) {
@@ -69,6 +82,7 @@ class Tour extends Model
             ->groupBy('category.category');
         return $tours;
     }
+
 
 
     public static function getTourCount(){
