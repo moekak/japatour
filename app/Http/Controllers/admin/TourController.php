@@ -40,8 +40,6 @@ class TourController extends Controller
 
     public function all(string $category){
         $blogs = $category === "all" ? Tour::getSpecificTour("category_id", $category) : Tour::getAllTours();
-        print_r($blogs);
-        exit;
         return view("tour.tour_all", compact("blogs"));
     }
 
