@@ -56,17 +56,8 @@ class Tour extends Model
         $tours = static::withRelations()
             ->get()
             ->map(function($tour) {
-                // レビューの平均点を計算してプロパティに追加
                 $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
-                return $tour;
-            })
-            ->map(function($tour) {
-                // レビューの平均点を計算してプロパティに追加
                 $tour->minimum_price = $tour->itineraries->min('adult_price') ?? 0;
-                return $tour;
-            })
-            ->map(function($tour) {
-                // レビューの平均点を計算してプロパティに追加
                 $tour->minimum_duration = $tour->itineraries->min('duration') ?? 0;
                 return $tour;
             })

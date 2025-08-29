@@ -56,6 +56,15 @@ class TourService
         return ["tour" => $tour, "averageRate" => $averageRate ];
     }
 
+
+    public function hasFeaturedTour(){
+        return Tour::where("is_featured", 1)->first();
+    }
+
+    public function updatePreviousFeaturedTour($data){
+        $data->update(["is_featured", 0]);
+    }
+
     /**
      * ツアーを新規作成
      */
@@ -64,6 +73,11 @@ class TourService
         try{
             DB::beginTransaction();
             $tourData = $this->generateData->prepareTourData($request);
+
+            $previousFeaturedTour = $this->hasFeaturedTour();
+            if($previousFeaturedTour){
+                $this->updatePreviousFeaturedTour($previousFeaturedTour);
+            }
 
             // ツアー作成
             $tour = Tour::create($tourData);
