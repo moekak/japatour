@@ -162,10 +162,8 @@
                                                                   class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Nature</span>
                                                       </div>
                                                       <div class="flex items-center gap-2 text-[#994d4d]">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
-                                                                  <path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path>
-                                                            </svg>
-                                                            <span class="text-sm font-medium">{{$featuredTour->average_rate}} (127 reviews)</span>
+                                                            {!!\App\Services\Util\FormatService::generateStar( $featuredTour->average_rate) !!}
+                                                            <span class="text-sm font-medium">{{number_format($featuredTour->average_rate, 1)}} (127 reviews)</span>
                                                       </div>
                                                 </div>
                                           </div>
