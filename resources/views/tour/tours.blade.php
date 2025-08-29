@@ -210,7 +210,7 @@
                                           All Tours
                                     </h2>
                                     <div class="text-sm text-[#994d4d]">
-                                          Showing 21 tours
+                                          Showing {{ $tourCount }} tours
                                     </div>
                               </div>
 
