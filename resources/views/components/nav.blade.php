@@ -10,17 +10,29 @@
     <!-- Desktop Navigation -->
     <div class="hidden lg:flex flex-1 justify-end gap-8">
         <div class="flex items-center gap-9">
-            <a href="">{{ Route::currentRouteName() }}</a>
-            <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+            @if (Route::currentRouteName() === "top")
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
                 href="{{ route("tours") }}">Tours</a>
-            <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
-                href="#gallery">Gallery</a>
-            <a class="text-[#e92929] text-sm font-medium leading-normal hover:text-[#d61f1f] transition-colors"
-                href="{{ route("blogs") }}">Blog</a>
-            <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
-                href="#faq">FAQ</a>
-            <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
-                href="#contact">Contact</a>
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                    href="#gallery">Gallery</a>
+                <a class="text-[#e92929] text-sm font-medium leading-normal hover:text-[#d61f1f] transition-colors"
+                    href="{{ route("blogs") }}">Blog</a>
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                    href="#faq">FAQ</a>
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                    href="#contact">Contact</a>
+            @elseif(Route::currentRouteName() === "tour.show")
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                    href="{{ route("tours") }}">Tours</a>
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                    href="#gallery">Gallery</a>
+                <a class="text-[#e92929] text-sm font-medium leading-normal hover:text-[#d61f1f] transition-colors"
+                    href="{{ route("blogs") }}">Blog</a>
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                    href="#faq">FAQ</a>
+                <a class="text-[#1b0e0e] text-sm font-medium leading-normal hover:text-[#e92929] transition-colors"
+                    href="#contact">Contact</a>
+            @endif
         </div>
         <button
             class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
