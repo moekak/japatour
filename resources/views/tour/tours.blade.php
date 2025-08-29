@@ -105,7 +105,7 @@
                                           class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
                                           onclick="openTour('featured-tour')">
                                           <div class="relative h-64 md:h-80 overflow-hidden">
-                                                <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=400&fit=crop"
+                                                <img src="{{ asset('storage/' . $featuredTour["hero_image"]) }}"
                                                       alt="Mount Fuji Tour"
                                                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                                 <div class="absolute top-4 left-4">
