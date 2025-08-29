@@ -113,8 +113,7 @@
                                                             class="bg-[#e92929] text-white px-3 py-1 rounded-full text-sm font-medium">Featured</span>
                                                 </div>
                                                 <div class="absolute top-4 right-4">
-                                                      <span
-                                                            class="bg-black/50 text-white px-3 py-1 rounded-full text-sm">Adventure</span>
+                                                      <span class="bg-black/50 text-white px-3 py-1 rounded-full text-sm">{{$featuredTour->badge}}</span>
                                                 </div>
                                                 <div class="absolute bottom-4 left-4">
                                                       <div class="flex items-center gap-2 text-white">

@@ -121,23 +121,6 @@
                                                 
                                           @endforeach
                                     </div>
-
-                                    <!-- Pagination -->
-                                    {{-- <div class="flex justify-center mt-12">
-                                          <nav class="flex items-center gap-2">
-                                                <button class="px-3 py-2 rounded-lg border border-[#e7d0d0] text-[#994d4d] hover:bg-[#f3e7e7] transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                                                      <i class="fas fa-chevron-left text-sm"></i>
-                                                </button>
-                                                <button class="px-4 py-2 rounded-lg bg-[#e92929] text-white font-medium">1</button>
-                                                <button class="px-4 py-2 rounded-lg border border-[#e7d0d0] text-[#1b0e0e] hover:bg-[#f3e7e7] transition-colors">2</button>
-                                                <button class="px-4 py-2 rounded-lg border border-[#e7d0d0] text-[#1b0e0e] hover:bg-[#f3e7e7] transition-colors">3</button>
-                                                <span class="px-2 text-[#994d4d]">...</span>
-                                                <button class="px-4 py-2 rounded-lg border border-[#e7d0d0] text-[#1b0e0e] hover:bg-[#f3e7e7] transition-colors">15</button>
-                                                <button class="px-3 py-2 rounded-lg border border-[#e7d0d0] text-[#1b0e0e] hover:bg-[#f3e7e7] transition-colors">
-                                                      <i class="fas fa-chevron-right text-sm"></i>
-                                                </button>
-                                          </nav>
-                                    </div> --}}
                               </div>
                         </div>
                   </section>

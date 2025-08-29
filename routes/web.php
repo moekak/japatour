@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get("/tour/list", [TourController::class, "list"])->name("tour_list");
     Route::get("/tours", [TourController::class, "index"])->name("tours");
+    Route::post("/tour", [BookingController::class, "all"])->name("tour");
     Route::post("/tour/update/{id}", [TourController::class, "update"])->name("tour.update");
     Route::get("/tour/edit/{id}", [TourController::class, "edit"])->name("tour.edit");
     Route::delete("/tour/destroy/{id}", [TourController::class, "destroy"])->name("tours.destroy");

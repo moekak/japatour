@@ -36,6 +36,15 @@ class TourController extends Controller
         $categories = Category::all();
         return view("tour.tours", compact("categorizedTours", "categories", "featuredTour"));
     }
+
+    public function all(){
+        // $blogs = Blog::getBlogs();
+        // $categories = BlogCategory::getCategories();
+        // $tags = Blog::getTags();
+        
+        return view("tour.tour_all");
+    }
+
     /**
      * Show the form for creating a new resource.
      */
