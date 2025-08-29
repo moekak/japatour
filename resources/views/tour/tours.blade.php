@@ -228,38 +228,8 @@
                                                 <p class="text-[#994d4d] test-base mb-3 line-clamp-2">{{$tour["subtitle"]}}</p>
                                                 <div class="flex items-center justify-between mb-3">
                                                       <div class="flex items-center gap-1">
-                                                            @php
-                                                                  $stars = '';
-                                                                  $rating = $tour["average_rate"];
-                                                                  $fullStars = floor($rating);
-                                                                  $hasHalfStar = ($rating - $fullStars) >= 0.5;
-
-                                                                  for ($i = 1; $i <= 5; $i++) {
-                                                                        if ($i <=$fullStars) {
-                                                                              $stars .='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>' ;
-                                                                        } else if ($i===$fullStars + 1 && $hasHalfStar) {
-                                                                              $uniqueId='half-' . uniqid();
-                                                                              $stars .='
-                                                                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" class="inline">
-                                                                                    <defs>
-                                                                                          <linearGradient id="' .$uniqueId.'" x1="0" x2="1" y1="0" y2="0">
-                                                                                                <stop offset="50%" stop-color="#e92929" />
-                                                                                                <stop offset="50%" stop-color="#e7d0d0" />
-                                                                                          </linearGradient>
-                                                                                    </defs>
-                                                                                    <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z" fill="url(#'.$uniqueId.')" />
-                                                                              </svg>';
-                                                                        } else {
-                                                                              $stars .= '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e7d0d0" viewBox="0 0 256 256" class="inline">
-                                                                                    <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path>
-                                                                              </svg>';
-                                                                        }
-                                                                  }
-                                                            @endphp
-
-                                                            {!! $stars !!}
-                                                            {{-- ${generateStars(tour.average_rate.toFixed(1))} --}}
-                                                            <span class="test-base text-[#994d4d] ml-1">{{$tour["average_rate"]}} ({{count($tour["tour_reviews"])}})</span>
+                                                            {!!\App\Services\Util\FormatService::generateStar( $tour["average_rate"])!!}
+                                                            <span class="test-base text-[#994d4d] ml-1">{{{{number_format($tour["average_rate"], 1)}}}} ({{count($tour["tour_reviews"])}})</span>
                                                       </div>
                                                 </div>
                                                 <div class="flex items-center justify-between">
