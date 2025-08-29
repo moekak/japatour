@@ -218,7 +218,7 @@
                                           <div class="relative h-48 overflow-hidden">
                                                 <img src="{{ asset('storage/' . $tour["hero_image"]) }}" alt={{$tour["title"]}} class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                                                 <div class="absolute top-4 right-4 bg-[#e92929] text-white px-3 py-1 rounded-full test-base font-medium">
-                                                      ￥{{$tour["minimum_price"]}}~
+                                                      ￥{{number_format($tour["minimum_price"])}}~
                                                 </div>
                                           </div>
                                           <div class="p-4">
