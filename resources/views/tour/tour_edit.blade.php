@@ -54,9 +54,9 @@
 
       <!-- Main Content -->
       <main class="pt-20 pb-10">
-            <form class="container mx-auto px-6 max-w-[1100px]" action="{{ route('tour.update', $tour["id"]) }}" method="POST" enctype="multipart/form-data">
+            <form class="container mx-auto px-6 max-w-[1100px]" action="{{ route('tour.update', $tour[0]["id"]) }}" method="POST" enctype="multipart/form-data">
                   @csrf
-                  <input type="hidden" name="tour_id" value="{{$tour["id"]}}">
+                  <input type="hidden" name="tour_id" value="{{$tour[0]["id"]}}">
                   <!-- Page Header -->
                   <div class="mb-8">
                         <div class="flex items-center gap-2 text-sm text-gray-600 mb-4">
@@ -98,19 +98,19 @@
                         <div class="space-y-5">
                               <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Tour Title *</label>
-                                    <input type="text" name="title" placeholder="e.g., Tokyo City Highlights Tour" value="{{ old('title', $tour["title"]) }}" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                                    <input type="text" name="title" placeholder="e.g., Tokyo City Highlights Tour" value="{{ old('title', $tour[0]["title"]) }}" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
                               </div>
 
                               <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Subtitle</label>
-                                    <input type="text" name="subtitle" value="{{ old('subtitle', $tour["subtitle"]) }}"
+                                    <input type="text" name="subtitle" value="{{ old('subtitle', $tour[0]["subtitle"]) }}"
                                           placeholder="e.g., An unforgettable journey through Japan's vibrant capital"
                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
                               </div>
 
                               <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">BadgeLabel</label>
-                                    <input type="text" name="badge" value="{{ old('badge', $tour["badge"]) }}" placeholder="e.g., Best seller" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
+                                    <input type="text" name="badge" value="{{ old('badge', $tour[0]["badge"]) }}" placeholder="e.g., Best seller" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
                               </div>
                               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
                                     <div>
@@ -118,7 +118,7 @@
                                           <select name="region_id" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
                                                 <option selected disabled>Choose a region</option>
                                                 @foreach ($regions as $region)
-                                                <option {{old("region_id", $tour["region_id"]) == $region->id ? "selected" : ""}} value="{{$region->id}}">{{$region->region}}</option>
+                                                <option {{old("region_id", $tour[0]["region_id"]) == $region->id ? "selected" : ""}} value="{{$region->id}}">{{$region->region}}</option>
                                                 @endforeach
                                           </select>
                                     </div>
@@ -127,7 +127,7 @@
                                           <select name="category_id" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all text-sm">
                                                 <option selected disabled>Choose a category</option>
                                                 @foreach ($categories as $category)
-                                                <option {{old("category_id", $tour["category_id"]) == $category->id ? "selected" : ""}} value="{{$category->id}}">{{$category->category}}</option>
+                                                <option {{old("category_id", $tour[0]["category_id"]) == $category->id ? "selected" : ""}} value="{{$category->id}}">{{$category->category}}</option>
                                                 @endforeach
                                           </select>
                                     </div>
@@ -135,11 +135,11 @@
                                           <label class="block text-sm font-medium text-gray-700 mb-1">Featured</label>
                                           <div class="flex items-center space-x-6 h-[52px]">
                                                 <label class="flex items-center">
-                                                <input type="radio" name="is_featured" value="1" {{old("is_featured", $tour["is_featured"]) == "1" ? "checked" : ""}} class="w-4 h-4 text-[#e92929] border-gray-300 focus:ring-[#e92929] focus:ring-2">
+                                                <input type="radio" name="is_featured" value="1" {{old("is_featured", $tour[0]["is_featured"]) == "1" ? "checked" : ""}} class="w-4 h-4 text-[#e92929] border-gray-300 focus:ring-[#e92929] focus:ring-2">
                                                 <span class="ml-2 text-sm text-gray-700">Yes</span>
                                                 </label>
                                                 <label class="flex items-center">
-                                                <input type="radio" name="is_featured" value="0" {{old("is_featured", $tour["is_featured"]) == "0" ? "checked" : ""}} class="w-4 h-4 text-[#e92929] border-gray-300 focus:ring-[#e92929] focus:ring-2">
+                                                <input type="radio" name="is_featured" value="0" {{old("is_featured", $tour[0]["is_featured"]) == "0" ? "checked" : ""}} class="w-4 h-4 text-[#e92929] border-gray-300 focus:ring-[#e92929] focus:ring-2">
                                                 <span class="ml-2 text-sm text-gray-700">No</span>
                                                 </label>
                                           </div>
@@ -168,12 +168,12 @@
                                     <input type="file"  name="hero_image" id="hero_image" class="hidden">
                               </div>
                         
-                        @elseif($tour["hero_image"])
+                        @elseif($tour[0]["hero_image"])
                               <div class="preview_container border-2 border-dashed border-gray-300 rounded-lg p-5 text-center hover:border-[#e92929] transition-colors cursor-pointer h-[350px]">
                                     <label for="hero_image" class="h-full block">
-                                          <img src="{{asset("storage/" . $tour["hero_image"])}}" alt="" class="preview_src h-full w-full object-cover">
+                                          <img src="{{asset("storage/" . $tour[0]["hero_image"])}}" alt="" class="preview_src h-full w-full object-cover">
                                     </label>
-                                    <input type="hidden" name="hero_image" value="{{$tour["hero_image"]}}">
+                                    <input type="hidden" name="hero_image" value="{{$tour[0]["hero_image"]}}">
                               </div>
                               <div class="hero_image_element">
                                     <input type="file"  name="hero_image" id="hero_image" class="hidden">
@@ -210,7 +210,7 @@
                         <div class="space-y-5">
                               <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Overview Title *</label>
-                                    <input type="text" name="overview_title" value="{{old("overview_title", $tour["overview_title"])}}"
+                                    <input type="text" name="overview_title" value="{{old("overview_title", $tour[0]["overview_title"])}}"
                                           placeholder="e.g., Experience Tokyo Like Never Before"
                                           class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all">
                               </div>
@@ -219,8 +219,8 @@
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Overview Description *</label>
                                     <textarea rows="4" name="overview_description"
                                           placeholder="Describe what makes this tour special..."
-                                          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all resize-none">{{old("overview_description", $tour["overview_description"])}}</textarea>
-                                    <p class="text-xs text-gray-500 mt-1">{{strlen($tour["overview_description"])}}/500 characters</p>
+                                          class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-[#e92929] focus:outline-none focus:ring-2 focus:ring-[#e92929]/20 transition-all resize-none">{{old("overview_description", $tour[0]["overview_description"])}}</textarea>
+                                    <p class="text-xs text-gray-500 mt-1">{{strlen($tour[0]["overview_description"])}}/500 characters</p>
                               </div>
                         </div>
                   </div>
@@ -236,7 +236,7 @@
                         <p class="text-sm text-gray-600 mb-4">Add common questions and answers that help customers understand the experience.</p>
                         @php
                               // データソースを統一
-                              $qaData = old('questions', $tour['tour_questions'] ?? []);
+                              $qaData = old('questions', $tour[0]['tour_questions'] ?? []);
                         @endphp
 
                         <div id="qa-wrapper">
@@ -286,7 +286,7 @@
                         <p class="text-sm text-gray-600 mb-4">Add key features and highlights that make this tour special</p>
                         @php
                               // データソースを統一
-                              $highlightsData = old('highlights', $tour['tour_highlights'] ?? []);
+                              $highlightsData = old('highlights', $tour[0]['tour_highlights'] ?? []);
                         @endphp
 
                         <div id="tour_highlight-wrapper">
@@ -348,7 +348,7 @@
                         </h2>
                         @php
                               // データソースを統一
-                              $reviews= old('reviews', $tour['tour_reviews'] ?? []);
+                              $reviews= old('reviews', $tour[0]['tour_reviews'] ?? []);
                         @endphp
 
                         <div class="space-y-6">
@@ -429,7 +429,7 @@
                         <h2 class="text-2xl font-bold text-gray-800">Tour Itineraries</h2>
                         @php
                         // データソースを統一
-                        $itinerariesData = old('itinerary', $tour['itineraries'] ?? []);
+                        $itinerariesData = old('itinerary', $tour[0]['itineraries'] ?? []);
                         @endphp
 
                         <div id="itinerary-wrapper">
