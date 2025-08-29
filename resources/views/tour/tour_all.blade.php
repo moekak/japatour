@@ -137,7 +137,7 @@
                                           </div>
                                     </div>
                                     <div class="p-4">
-                                          <div class="flex items-center gap-2 mb-2 text-xs text-[#1b0e0e]">
+                                          <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
                                                 <i class="fas fa-clock"></i>
                                                 <span>Full Day ({{$tour->minimum_duration}} hours~)</span>
                                                 <span>•</span>
@@ -145,14 +145,14 @@
                                                 <span>Max 12 people</span>
                                           </div>
                                           <h3 class="text-[#1b0e0e] text-lg font-bold mb-2  transition-colors line-clamp-2">{{$tour->title}}</h3>
-                                          <p class="text-[#1b0e0e] text-sm leading-relaxed mb-3 line-clamp-3">{{$tour->subtitle}}</p>
+                                          <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">{{$tour->subtitle}}</p>
                                           <div class="flex items-center justify-between">
                                                 <div class="flex items-center gap-2">
-                                                      <div class="flex items-center gap-1 text-[#1b0e0e]">
-                                                            <i class="fas fa-star text-yellow-400 text-sm"></i>
+                                                      <div class="flex items-center gap-1 text-[#994d4d]">
+                                                            {{\App\Services\FormatService::generateStar($tour->average_rate)}}
                                                             <span class="text-sm font-medium">{{number_format($tour->average_rate, 1)}}</span>
                                                       </div>
-                                                      <span class="text-[#1b0e0e] text-xs">({{$tour->review_count ?? 0}} reviews)</span>
+                                                      <span class="text-[#994d4d] text-xs">({{$tour->review_count ?? 0}} reviews)</span>
                                                 </div>
                                                 <div class="text-right">
                                                       <div class="text-[#e92929] text-lg font-bold">¥{{ number_format($tour->minimum_price) }}~</div>
