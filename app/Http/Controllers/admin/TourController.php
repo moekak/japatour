@@ -33,8 +33,9 @@ class TourController extends Controller
     public function index(){
         $categorizedTours = Tour::getAllToursByCategory()->toArray();
         $featuredTour = Tour::getFeaturedTour();
+        $tourCount = Tour::getTourCount();
         $categories = Category::all();
-        return view("tour.tours", compact("categorizedTours", "categories", "featuredTour"));
+        return view("tour.tours", compact("categorizedTours", "categories", "featuredTour", "tourCount"));
     }
 
     public function all(){

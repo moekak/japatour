@@ -70,6 +70,10 @@ class Tour extends Model
         return $tours;
     }
 
+
+    public static function getTourCount(){
+        return static::withIsFeatured("0")->count();
+    }
     public static function getFeaturedTour(){
         $featuredTour = static::withRelations()
             ->withIsFeatured("1")
