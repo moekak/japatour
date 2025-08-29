@@ -226,7 +226,7 @@
                                                             </svg>
                                                             {{$tour["minimum_duration"]}}hours~
                                                       </span>
-                                                      <a href="{{route("tour.show", $tour->id)}}" class="bg-[#e92929] text-white px-4 py-2 rounded-lg test-base font-medium hover:bg-[#d61f1f] transition-colors">
+                                                      <a href="{{route("tour.show", $tour["id"])}}" class="bg-[#e92929] text-white px-4 py-2 rounded-lg test-base font-medium hover:bg-[#d61f1f] transition-colors">
                                                             See more
                                                       </a>
                                                 </div>

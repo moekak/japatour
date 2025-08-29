@@ -31,7 +31,7 @@
       </div>
 
       <!-- Search and Filter Section -->
-      <section class="flex justify-center py-8 bg-[#f3e7e7] sticky top-0 z-10 shadow-sm backdrop-blur-sm">
+      {{-- <section class="flex justify-center py-8 bg-[#f3e7e7] sticky top-0 z-10 shadow-sm backdrop-blur-sm">
             <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
                   <div class="px-4">
                   <!-- Main Search Bar -->
@@ -86,36 +86,295 @@
                   </div>
                   </div>
             </div>
-      </section>
+      </section> --}}
 
-      <!-- Featured Tour Banner -->
-      <!-- <section class="flex justify-center py-6">
+      <section class="flex justify-center py-8 bg-[#f3e7e7] sticky top-0 z-10 shadow-sm backdrop-blur-sm">
             <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
                   <div class="px-4">
-                  <div class="bg-gradient-to-r from-[#e92929] to-[#d61f1f] rounded-xl p-6 text-white relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
-                        <div class="relative z-10">
-                              <div class="flex items-center gap-2 mb-2">
-                              <i class="fas fa-star text-yellow-300"></i>
-                              <span class="text-sm font-medium">Featured Tour</span>
+                  <!-- Main Search Bar -->
+                  <div class="mb-6">
+                        <div class="relative max-w-2xl mx-auto">
+                              <div class="relative">
+                              <input type="text" id="main-search" placeholder="Search tours by destination, activity, or duration..." 
+                                    class="w-full px-6 py-4 pl-14 pr-32 rounded-xl bg-white border-2 border-[#e7d0d0] text-[#1b0e0e] placeholder:text-[#994d4d] focus:outline-none focus:border-[#e92929] focus:ring-4 focus:ring-[#e92929]/10 transition-all text-lg shadow-lg">
+                              <button class="absolute left-5 top-1/2 transform -translate-y-1/2" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#994d4d" viewBox="0 0 256 256">
+                                          <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+                                    </svg>
+                              </button>
+                              <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-[#e92929] text-white px-6 py-2 rounded-lg hover:bg-[#d41f1f] transition-colors font-medium">
+                                    Search
+                              </button>
                               </div>
-                              <h3 class="text-xl font-bold mb-2">Ultimate Tokyo Experience</h3>
-                              <p class="text-sm opacity-90 mb-3">3 days exploring Tokyo's culture, cuisine, and hidden gems with expert local guides</p>
-                              <div class="flex items-center justify-between">
+                              
+                              <!-- Search Suggestions -->
+                              <div id="search-suggestions" class="hidden absolute top-full left-0 right-0 bg-white border border-[#e7d0d0] rounded-lg mt-2 shadow-lg z-20 max-h-64 overflow-y-auto">
+                              <div id="recent-searches" class="p-3">
+                                    <h4 class="text-sm font-medium text-[#1b0e0e] mb-2">Popular Searches</h4>
+                                    <div class="flex flex-wrap gap-2">
+                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs cursor-pointer hover:bg-[#e7d0d0] transition-colors">Tokyo</span>
+                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs cursor-pointer hover:bg-[#e7d0d0] transition-colors">Mt. Fuji</span>
+                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs cursor-pointer hover:bg-[#e7d0d0] transition-colors">Kyoto</span>
+                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs cursor-pointer hover:bg-[#e7d0d0] transition-colors">Osaka</span>
+                                    </div>
+                              </div>
+                              </div>
+                        </div>
+                  </div>
+                  
+                  <!-- Advanced Filter Toggle -->
+                  <div class="mb-4 flex justify-center">
+                        <button class="text-[#994d4d] hover:text-[#e92929] text-sm font-medium flex items-center gap-2 transition-colors">
+                              <i class="fas fa-sliders-h"></i>
+                              Advanced Filters
+                              <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                  </div>
+
+                  <!-- Advanced Filters Panel -->
+                  <div class="mb-6 bg-white rounded-xl border border-[#e7d0d0] shadow-sm overflow-hidden">
+                        <div class="p-6">
+                              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                              <!-- Price Range -->
+                              <div>
+                                    <label class="block text-sm font-medium text-[#1b0e0e] mb-3">Price Range</label>
+                                    <div class="space-y-3">
+                                          <div class="flex items-center gap-3">
+                                          <input type="number" placeholder="Min price" 
+                                                class="w-full px-3 py-2 border border-[#e7d0d0] rounded-lg text-sm focus:outline-none focus:border-[#e92929] focus:ring-2 focus:ring-[#e92929]/10">
+                                          <span class="text-[#994d4d] text-sm">to</span>
+                                          <input type="number" placeholder="Max price" 
+                                                class="w-full px-3 py-2 border border-[#e7d0d0] rounded-lg text-sm focus:outline-none focus:border-[#e92929] focus:ring-2 focus:ring-[#e92929]/10">
+                                          </div>
+                                          <div class="text-xs text-[#994d4d]">
+                                          <div class="flex justify-between">
+                                                <span>$50</span>
+                                                <span>$5,000</span>
+                                          </div>
+                                          </div>
+                                    </div>
+                              </div>
+
+                              <!-- Duration -->
+                              <div>
+                                    <label class="block text-sm font-medium text-[#1b0e0e] mb-3">Duration</label>
+                                    <div class="space-y-2">
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Half day (under 4h)</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Full day (4-8h)</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">2-3 days</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">4-7 days</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">8+ days</span>
+                                          </label>
+                                    </div>
+                              </div>
+
+                              <!-- Tour Type -->
+                              <div>
+                                    <label class="block text-sm font-medium text-[#1b0e0e] mb-3">Tour Type</label>
+                                    <div class="space-y-2">
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Culture & History</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Nature & Outdoors</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Food & Culinary</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Adventure</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Family Friendly</span>
+                                          </label>
+                                    </div>
+                              </div>
+
+                              <!-- Additional Options -->
+                              <div>
+                                    <label class="block text-sm font-medium text-[#1b0e0e] mb-3">Features</label>
+                                    <div class="space-y-2">
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">English Guide</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Private Tour</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Transportation</span>
+                                          </label>
+                                          <label class="flex items-center">
+                                          <input type="checkbox" class="mr-2 text-[#e92929] focus:ring-[#e92929]">
+                                          <span class="text-sm text-[#1b0e0e]">Instant Booking</span>
+                                          </label>
+                                    </div>
+                              </div>
+                              </div>
+                              
+                              <!-- Filter Actions -->
+                              <div class="mt-6 flex items-center justify-between">
+                              <button class="text-[#994d4d] hover:text-[#e92929] text-sm font-medium transition-colors">
+                                    <i class="fas fa-undo mr-1"></i>
+                                    Reset Filters
+                              </button>
+                              <div class="flex gap-3">
+                                    <button class="px-6 py-2 border border-[#e7d0d0] text-[#994d4d] rounded-lg hover:bg-[#f3e7e7] transition-colors font-medium">
+                                          Cancel
+                                    </button>
+                                    <button class="px-6 py-2 bg-[#e92929] text-white rounded-lg hover:bg-[#d41f1f] transition-colors font-medium">
+                                          Apply Filters
+                                    </button>
+                              </div>
+                              </div>
+                        </div>
+                  </div>
+                  
+                  <!-- Results Header with Sort Options -->
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+                        <!-- Results Count and Active Filters -->
+                        <div class="flex items-center gap-4">
+                              <div class="flex items-center gap-2">
+                              <span id="results-count" class="text-[#1b0e0e] font-medium">Showing 6 of 24 tours</span>
+                              <div id="active-filters" class="flex gap-2">
+                                    <span class="bg-[#e92929] text-white px-3 py-1 rounded-full text-xs flex items-center gap-1">
+                                          Culture & History
+                                          <i class="fas fa-times cursor-pointer hover:text-[#f3e7e7]"></i>
+                                    </span>
+                                    <span class="bg-[#e92929] text-white px-3 py-1 rounded-full text-xs flex items-center gap-1">
+                                          1-3 days
+                                          <i class="fas fa-times cursor-pointer hover:text-[#f3e7e7]"></i>
+                                    </span>
+                              </div>
+                              </div>
+                              <div id="search-status" class="hidden text-[#994d4d] text-sm">
+                              <i class="fas fa-spinner fa-spin mr-1"></i>
+                              Searching...
+                              </div>
+                        </div>
+                        
+                        <!-- Sort and View Options -->
+                        <div class="flex items-center gap-3">
+                              <!-- Sort Dropdown -->
+                              <div class="relative">
+                              <select class="px-4 py-2 border border-[#e7d0d0] rounded-lg text-sm font-medium text-[#1b0e0e] focus:outline-none focus:border-[#e92929] focus:ring-2 focus:ring-[#e92929]/10 bg-white">
+                                    <option>Sort by Price: Low to High</option>
+                                    <option>Sort by Price: High to Low</option>
+                                    <option>Sort by Popularity</option>
+                                    <option>Sort by Rating</option>
+                                    <option>Sort by Newest</option>
+                                    <option>Sort by Duration: Short to Long</option>
+                                    <option>Sort by Duration: Long to Short</option>
+                              </select>
+                              </div>
+
+                              <!-- Results per page -->
+                              <select class="px-3 py-2 border border-[#e7d0d0] rounded-lg text-sm font-medium text-[#1b0e0e] focus:outline-none focus:border-[#e92929] focus:ring-2 focus:ring-[#e92929]/10 bg-white">
+                              <option>Show 6</option>
+                              <option>Show 12</option>
+                              <option>Show 24</option>
+                              <option>Show 48</option>
+                              </select>
+
+                              <!-- View Type Toggle -->
+                              <div class="flex border border-[#e7d0d0] rounded-lg overflow-hidden">
+                              <button class="px-3 py-2 bg-[#e92929] text-white hover:bg-[#d41f1f] transition-colors">
+                                    <i class="fas fa-th-large"></i>
+                              </button>
+                              <button class="px-3 py-2 bg-white text-[#994d4d] hover:bg-[#f3e7e7] transition-colors border-l border-[#e7d0d0]">
+                                    <i class="fas fa-list"></i>
+                              </button>
+                              </div>
+                        </div>
+                  </div>
+
+                  <!-- Quick Filter Tags -->
+                  <div class="mb-6">
+                        <div class="flex items-center gap-2 mb-3">
+                              <span class="text-sm font-medium text-[#1b0e0e]">Quick filters:</span>
+                              <button class="text-[#994d4d] hover:text-[#e92929] text-xs transition-colors">
+                              Clear all
+                              </button>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                              <button class="bg-white border border-[#e7d0d0] text-[#1b0e0e] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#f3e7e7] hover:border-[#e92929] transition-all">
+                              <i class="fas fa-dollar-sign mr-1 text-[#994d4d]"></i>
+                              Under $100
+                              </button>
+                              <button class="bg-white border border-[#e7d0d0] text-[#1b0e0e] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#f3e7e7] hover:border-[#e92929] transition-all">
+                              <i class="fas fa-clock mr-1 text-[#994d4d]"></i>
+                              Full day
+                              </button>
+                              <button class="bg-white border border-[#e7d0d0] text-[#1b0e0e] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#f3e7e7] hover:border-[#e92929] transition-all">
+                              <i class="fas fa-users mr-1 text-[#994d4d]"></i>
+                              Group tours
+                              </button>
+                              <button class="bg-white border border-[#e7d0d0] text-[#1b0e0e] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#f3e7e7] hover:border-[#e92929] transition-all">
+                              <i class="fas fa-user mr-1 text-[#994d4d]"></i>
+                              Private
+                              </button>
+                              <button class="bg-white border border-[#e7d0d0] text-[#1b0e0e] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#f3e7e7] hover:border-[#e92929] transition-all">
+                              <i class="fas fa-star mr-1 text-[#994d4d]"></i>
+                              Highly rated (4.5+)
+                              </button>
+                              <button class="bg-white border border-[#e7d0d0] text-[#1b0e0e] px-4 py-2 rounded-full text-sm font-medium hover:bg-[#f3e7e7] hover:border-[#e92929] transition-all">
+                              <i class="fas fa-bolt mr-1 text-[#994d4d]"></i>
+                              Instant booking
+                              </button>
+                        </div>
+                  </div>
+
+                  <!-- Search Results Summary -->
+                  <div class="bg-white rounded-lg border border-[#e7d0d0] p-4 mb-6">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                               <div class="flex items-center gap-4">
-                                    <span class="text-lg font-bold">¥89,000</span>
-                                    <span class="text-sm opacity-75">per person</span>
+                              <div class="text-sm text-[#1b0e0e]">
+                                    Found <span class="font-medium">24 tours</span>
+                                    <span class="text-[#994d4d] ml-2">(showing 6)</span>
                               </div>
-                              <button class="bg-white text-[#e92929] px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                                    View Details
+                              <div class="flex items-center gap-2 text-xs text-[#994d4d]">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Avg price: $185 | Avg duration: 1.5 days</span>
+                              </div>
+                              </div>
+                              
+                              <!-- Export and Save Options -->
+                              <div class="flex items-center gap-2">
+                              <button class="px-3 py-2 border border-[#e7d0d0] text-[#994d4d] rounded-lg hover:bg-[#f3e7e7] transition-colors text-sm font-medium">
+                                    <i class="fas fa-heart mr-1"></i>
+                                    Save search
+                              </button>
+                              <button class="px-3 py-2 border border-[#e7d0d0] text-[#994d4d] rounded-lg hover:bg-[#f3e7e7] transition-colors text-sm font-medium">
+                                    <i class="fas fa-download mr-1"></i>
+                                    Export
                               </button>
                               </div>
                         </div>
                   </div>
                   </div>
             </div>
-      </section> -->
-
+      </section>
       <!-- Tours Grid -->
       <section class="flex justify-center py-8">
             <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
@@ -126,14 +385,8 @@
                                     data-price="45000" data-duration="1" data-category="cultural">
                                     <div class="relative h-48 overflow-hidden">
                                           <img src="{{ asset('storage/' . $tour['hero_image']) }}" alt="{{$tour->title}}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                          {{-- <div class="absolute top-3 left-3">
-                                                <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">{{$tour->badge}}</span>
-                                          </div> --}}
-                                          <div class="absolute top-3 right-3">
-                                                <div class="bg-black/50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
-                                                      <i class="fas fa-star text-yellow-300"></i>
-                                                      <span>{{number_format($tour->average_rate, 1)}}</span>
-                                                </div>
+                                          <div class="absolute top-4 right-4">
+                                                <span class="bg-black/50 text-white px-3 py-1 rounded-full text-sm">{{$tour->badge}}</span>
                                           </div>
                                     </div>
                                     <div class="p-4">
