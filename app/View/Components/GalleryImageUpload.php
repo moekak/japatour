@@ -5,6 +5,7 @@ namespace App\View\Components;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Query\IndexHint;
+use Illuminate\Support\Facades\Log;
 use Illuminate\View\Component;
 
 class GalleryImageUpload extends Component
@@ -23,6 +24,7 @@ class GalleryImageUpload extends Component
         $this->height = $height;
         $this->src = $src;
 
+        Log::debug($src);
     }
 
     /**

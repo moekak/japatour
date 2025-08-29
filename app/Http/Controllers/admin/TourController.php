@@ -103,6 +103,9 @@ class TourController extends Controller
             $regions = Region::getAllRegions();
             $languages = Language::getAllLanguages();
             $categories = Category::getAllCategories();
+
+            // print_r($tour);
+            // exit;
             return view("tour.tour_edit", compact("tour",  "regions", "categories", "languages"));
         } catch (\Exception $e) {
             return redirect()->route("tour_list")->with("error", "faild to get Tour: " . $e->getMessage());
