@@ -165,6 +165,7 @@
       <div class="grid grid-cols-3 gap-4 max-w-[1100px] mx-auto">
             <!-- Column 1 -->
             <div class="space-y-4">
+                  <p>{{$tour['tour_gallery_images'][0]['gallery_image']}}</p>
                   <!-- Image 1 - Large -->
                   <x-gallery-image-upload :index="0" :height="500" :src="$tour['tour_gallery_images'][0]['gallery_image'] ?? null"/>
                   <!-- Image 2 - Medium -->
