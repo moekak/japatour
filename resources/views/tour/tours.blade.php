@@ -153,17 +153,17 @@
                                                       {{$featuredTour->subtitle}}
                                                 </p>
                                                 <div class="flex items-center justify-between">
-                                                      <div class="flex gap-2">
+                                                      {{-- <div class="flex gap-2">
                                                             <span
                                                                   class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Mount Fuji</span>
                                                             <span
                                                                   class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Hakone</span>
                                                             <span
                                                                   class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Nature</span>
-                                                      </div>
+                                                      </div> --}}
                                                       <div class="flex items-center gap-2 text-[#994d4d]">
                                                             {!!\App\Services\Util\FormatService::generateStar( $featuredTour->average_rate) !!}
-                                                            <span class="text-sm font-medium">{{number_format($featuredTour->average_rate, 1)}} (127 reviews)</span>
+                                                            <span class="text-sm font-medium">{{number_format($featuredTour->average_rate, 1)}} ({{count($featuredTour->tourReviews)}} reviews)</span>
                                                       </div>
                                                 </div>
                                           </div>
