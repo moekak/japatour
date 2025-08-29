@@ -139,7 +139,7 @@
                                     <div class="p-4">
                                           <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
                                                 <i class="fas fa-clock"></i>
-                                                <span>Full Day ({{$tour->minimum_duration}} hours~)</span>
+                                                <span>{{$tour->minimum_duration}} hours~</span>
                                                 <span>•</span>
                                                 <i class="fas fa-users"></i>
                                                 <span>Max 12 people</span>
@@ -152,7 +152,7 @@
                                                             {!!\App\Services\Util\FormatService::generateStar($tour->average_rate)!!}
                                                             <span class="text-sm font-medium">{{number_format($tour->average_rate, 1)}}</span>
                                                       </div>
-                                                      <span class="text-[#994d4d] text-xs">({{$tour->review_count ?? 0}} reviews)</span>
+                                                      <span class="text-[#994d4d] text-xs">({{count($tour->tourReviews) ?? 0}} reviews)</span>
                                                 </div>
                                                 <div class="text-right">
                                                       <div class="text-[#e92929] text-lg font-bold">¥{{ number_format($tour->minimum_price) }}~</div>
