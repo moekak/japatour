@@ -47,13 +47,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get("/tour/list", [TourController::class, "list"])->name("tour_list");
     Route::get("/tours", [TourController::class, "index"])->name("tours");
+        
+    Route::get("/tour/create", [TourController::class, "create"])->name("admin.tour_create");
+
     Route::get("/tour/{category}", [TourController::class, "all"])->name("tour");
     Route::post("/tour/update/{id}", [TourController::class, "update"])->name("tour.update");
     Route::get("/tour/edit/{id}", [TourController::class, "edit"])->name("tour.edit");
     Route::delete("/tour/destroy/{id}", [TourController::class, "destroy"])->name("tours.destroy");
     
-    Route::get("/tour/create", [TourController::class, "create"])->name("admin.tour_create");
-
     Route::get("/tour/book/{id}", [BookingController::class, "index"])->name("tour.book");
     Route::get("/tour/confirmation", [BookingController::class, "confirmation"])->name("confirmation");
     Route::post("/tour/book", [BookingController::class, "store"])->name("book.store");
