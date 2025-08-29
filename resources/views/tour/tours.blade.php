@@ -181,7 +181,7 @@
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                               <h2
                                     class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-6">
-                                    Tour Categories
+                                    Tour Destinations
                               </h2>
                               <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
                                     @foreach ($categories as $category)
@@ -189,16 +189,13 @@
                                                 onclick="filterTours({{$category->category}})">
                                                 <div
                                                       class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
-                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                            fill="#e92929" viewBox="0 0 256 256">
-                                                            <path
-                                                                  d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM48,48H208V88H48ZM48,208V104H208V208Z">
-                                                            </path>
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#e92929" viewBox="0 0 256 256">
+                                                            <path d="M128,16a88.1,88.1,0,0,0-88,88c0,75.3,80,132.2,83.4,134.9a8,8,0,0,0,9.2,0C136,236.2,216,179.3,216,104A88.1,88.1,0,0,0,128,16Zm0,56a32,32,0,1,1-32,32A32,32,0,0,1,128,72Z"/>
                                                       </svg>
                                                 </div>
-                                                <h3 class="text-[#1b0e0e] font-bold mb-2">Cultural Tours</h3>
-                                                <p class="text-[#994d4d] text-sm">Temples, traditions & history</p>
-                                                <span class="text-[#e92929] text-xs font-medium">12 tours</span>
+                                                {{-- <h3 class="text-[#1b0e0e] font-bold mb-2">Cultural Tours</h3>
+                                                <p class="text-[#994d4d] text-sm">Temples, traditions & history</p> --}}
+                                                <span class="text-[#e92929] text-xs font-medium">{{count($categorizedTours[$category->category])}} tours</span>
                                           </div>
                                     @endforeach
 
@@ -235,36 +232,36 @@
                                                 <div class="flex items-center justify-between mb-3">
                                                       <div class="flex items-center gap-1">
                                                             @php
-                                                            $stars = '';
-                                                            $rating = $tour["average_rate"];
-                                                            $fullStars = floor($rating);
-                                                            $hasHalfStar = ($rating - $fullStars) >= 0.5;
+                                                                  $stars = '';
+                                                                  $rating = $tour["average_rate"];
+                                                                  $fullStars = floor($rating);
+                                                                  $hasHalfStar = ($rating - $fullStars) >= 0.5;
 
-                                                            for ($i = 1; $i <= 5; $i++) {
-                                                                  if ($i <=$fullStars) {
-                                                                  $stars .='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>' ;
-                                                                  } else if ($i===$fullStars + 1 && $hasHalfStar) {
-                                                                  $uniqueId='half-' . uniqid();
-                                                                  $stars .='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" class="inline">
-                                                                                    <defs>
-                                                                                    <linearGradient id="' .$uniqueId.'" x1="0" x2="1" y1="0" y2="0">
-                                                                  <stop offset="50%" stop-color="#e92929" />
-                                                                  <stop offset="50%" stop-color="#e7d0d0" />
-                                                                  </linearGradient>
-                                                                  </defs>
-                                                                  <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z" fill="url(#'.$uniqueId.')" />
-                                                                  </svg>';
-                                                                  } else {
-                                                                  $stars .= '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e7d0d0" viewBox="0 0 256 256" class="inline">
-                                                                        <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path>
-                                                                  </svg>';
+                                                                  for ($i = 1; $i <= 5; $i++) {
+                                                                        if ($i <=$fullStars) {
+                                                                              $stars .='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>' ;
+                                                                        } else if ($i===$fullStars + 1 && $hasHalfStar) {
+                                                                              $uniqueId='half-' . uniqid();
+                                                                              $stars .='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" class="inline">
+                                                                                                <defs>
+                                                                                                <linearGradient id="' .$uniqueId.'" x1="0" x2="1" y1="0" y2="0">
+                                                                              <stop offset="50%" stop-color="#e92929" />
+                                                                              <stop offset="50%" stop-color="#e7d0d0" />
+                                                                              </linearGradient>
+                                                                              </defs>
+                                                                              <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z" fill="url(#'.$uniqueId.')" />
+                                                                              </svg>';
+                                                                        } else {
+                                                                              $stars .= '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e7d0d0" viewBox="0 0 256 256" class="inline">
+                                                                                    <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path>
+                                                                              </svg>';
+                                                                        }
                                                                   }
-                                                                  }
-                                                                  @endphp
+                                                            @endphp
 
-                                                                  {!! $stars !!}
-                                                                  {{-- ${generateStars(tour.average_rate.toFixed(1))} --}}
-                                                                  <span class="test-base text-[#994d4d] ml-1">{{$tour["average_rate"]}} ({{count($tour["tour_reviews"])}})</span>
+                                                            {!! $stars !!}
+                                                            {{-- ${generateStars(tour.average_rate.toFixed(1))} --}}
+                                                            <span class="test-base text-[#994d4d] ml-1">{{$tour["average_rate"]}} ({{count($tour["tour_reviews"])}})</span>
                                                       </div>
                                                 </div>
                                                 <div class="flex items-center justify-between">

@@ -27,14 +27,13 @@ class TourController extends Controller
     public function list()
     {
         $tours = Tour::getAllTours();
-        $categories = Category::all();
-        return view("tour.tour_list", compact("tours", "categories"));
+        return view("tour.tour_list", compact("tours"));
     }
 
     public function index(){
         $categorizedTours = Tour::getAllToursByCategory()->toArray();
-
-        return view("tour.tours", compact("categorizedTours"));
+        $categories = Category::all();
+        return view("tour.tours", compact("categorizedTours", "categories"));
     }
     /**
      * Show the form for creating a new resource.
