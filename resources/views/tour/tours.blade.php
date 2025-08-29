@@ -228,8 +228,8 @@
                                                 <p class="text-[#994d4d] test-base mb-3 line-clamp-2">{{$tour["subtitle"]}}</p>
                                                 <div class="flex items-center justify-between mb-3">
                                                       <div class="flex items-center gap-1">
-                                                            {!!\App\Services\Util\FormatService::generateStar( $tour["average_rate"])!!}
-                                                            <span class="test-base text-[#994d4d] ml-1">{{{{number_format($tour["average_rate"], 1)}}}} ({{count($tour["tour_reviews"])}})</span>
+                                                            {!!\App\Services\Util\FormatService::generateStar( $tour["average_rate"]) !!}
+                                                            <span class="test-base text-[#994d4d] ml-1">{{number_format($tour["average_rate"], 1)}} ({{count($tour["tour_reviews"])}})</span>
                                                       </div>
                                                 </div>
                                                 <div class="flex items-center justify-between">
