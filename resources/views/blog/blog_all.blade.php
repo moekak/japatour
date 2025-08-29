@@ -107,7 +107,7 @@
                                                                         @endphp
                                                                         <div class="flex gap-1 items-center overflow-hidden">
                                                                               @php
-                                                                                    $maxVisibleTags = 3; // 表示する最大タグ数
+                                                                                    $maxVisibleTags = 2; // 表示する最大タグ数
                                                                                     $visibleTags = array_slice($tags, 0, $maxVisibleTags);
                                                                                     $hiddenCount = count($tags) - $maxVisibleTags;
                                                                               @endphp
