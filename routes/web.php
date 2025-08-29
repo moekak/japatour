@@ -77,6 +77,6 @@ Route::post('/payment-intent', [BookingController::class, 'createPaymentIntent']
 
 // ブログ
 
-Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-Route::get('/blogs/{category}', [BlogController::class, 'all'])->name('blogs');
+Route::get('/blogs', [BlogController::class, 'index'])->name('blogs');
+Route::get('/blog/{category}', [BlogController::class, 'all'])->name('blog');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');

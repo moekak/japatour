@@ -108,7 +108,7 @@
                               <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
                                     @foreach ($categories as $category)
                                           <a class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                                href={{route("blogs", $category->id)}}>
+                                                href={{route("blog", $category->id)}}>
                                                 <div class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
                                                       <i class="text-[#e92929] {{$category->category_icon}}"></i>
                                                 </div>
@@ -128,7 +128,7 @@
                                     <h2 class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em]">
                                           Latest Articles
                                     </h2>
-                                    <a href={{route("blogs", "all")}}
+                                    <a href={{route("blog", "all")}}
                                           class="text-[#e92929] text-sm font-medium hover:text-[#d61f1f] transition-colors">
                                           View All →
                                     </a>
