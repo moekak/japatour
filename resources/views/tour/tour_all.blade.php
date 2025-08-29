@@ -126,9 +126,9 @@
                                     data-price="45000" data-duration="1" data-category="cultural">
                                     <div class="relative h-48 overflow-hidden">
                                           <img src="{{ asset('storage/' . $tour['hero_image']) }}" alt="{{$tour->title}}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                          <div class="absolute top-3 left-3">
+                                          {{-- <div class="absolute top-3 left-3">
                                                 <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">{{$tour->badge}}</span>
-                                          </div>
+                                          </div> --}}
                                           <div class="absolute top-3 right-3">
                                                 <div class="bg-black/50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
                                                       <i class="fas fa-star text-yellow-300"></i>
@@ -137,26 +137,26 @@
                                           </div>
                                     </div>
                                     <div class="p-4">
-                                          <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
+                                          <div class="flex items-center gap-2 mb-2 text-xs text-[#1b0e0e]">
                                                 <i class="fas fa-clock"></i>
                                                 <span>Full Day ({{$tour->minimum_duration}} hours~)</span>
                                                 <span>•</span>
                                                 <i class="fas fa-users"></i>
                                                 <span>Max 12 people</span>
                                           </div>
-                                          <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">{{$tour->title}}</h3>
-                                          <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">{{$tour->subtitle}}</p>
+                                          <h3 class="text-[#1b0e0e] text-lg font-bold mb-2  transition-colors line-clamp-2">{{$tour->title}}</h3>
+                                          <p class="text-[#1b0e0e] text-sm leading-relaxed mb-3 line-clamp-3">{{$tour->subtitle}}</p>
                                           <div class="flex items-center justify-between">
                                                 <div class="flex items-center gap-2">
-                                                      <div class="flex items-center gap-1 text-[#994d4d]">
+                                                      <div class="flex items-center gap-1 text-[#1b0e0e]">
                                                             <i class="fas fa-star text-yellow-400 text-sm"></i>
                                                             <span class="text-sm font-medium">{{number_format($tour->average_rate, 1)}}</span>
                                                       </div>
-                                                      <span class="text-[#994d4d] text-xs">({{$tour->review_count ?? 0}} reviews)</span>
+                                                      <span class="text-[#1b0e0e] text-xs">({{$tour->review_count ?? 0}} reviews)</span>
                                                 </div>
                                                 <div class="text-right">
                                                       <div class="text-[#e92929] text-lg font-bold">¥{{ number_format($tour->minimum_price) }}~</div>
-                                                      <div class="text-[#994d4d] text-xs">per person</div>
+                                                      {{-- <div class="text-[#994d4d] text-xs">per person</div> --}}
                                                 </div>
                                           </div>
                                     </div>
