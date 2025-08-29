@@ -62,7 +62,7 @@ class TourService
     }
 
     public function updatePreviousFeaturedTour($data){
-        $data->update(["is_featured", 0]);
+        $data->update(["is_featured" => "0"]);
     }
 
     /**
@@ -73,10 +73,11 @@ class TourService
         try{
             DB::beginTransaction();
             $tourData = $this->generateData->prepareTourData($request);
-
-            $previousFeaturedTour = $this->hasFeaturedTour();
-            if($previousFeaturedTour){
-                $this->updatePreviousFeaturedTour($previousFeaturedTour);
+            if($tourData["is_featured"] == "1"){
+                $previousFeaturedTour = $this->hasFeaturedTour();
+                if($previousFeaturedTour){
+                    $this->updatePreviousFeaturedTour($previousFeaturedTour);
+                }
             }
 
             // ツアー作成
@@ -134,6 +135,14 @@ class TourService
             // 元のデータを削除する
             Tour::find($request->input("tour_id"))->delete();
             $tourData = $this->generateData->prepareTourData($request);
+
+            if($tourData["is_featured"] == "1"){
+                $previousFeaturedTour = $this->hasFeaturedTour();
+                if($previousFeaturedTour){
+                    $this->updatePreviousFeaturedTour($previousFeaturedTour);
+                }
+            }
+
             // ツアー作成
             $tour = Tour::create($tourData);
 
