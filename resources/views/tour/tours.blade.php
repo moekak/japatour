@@ -184,69 +184,24 @@
                                     Tour Categories
                               </h2>
                               <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
-                                    <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                          onclick="filterTours('cultural')">
-                                          <div
-                                                class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                      fill="#e92929" viewBox="0 0 256 256">
-                                                      <path
-                                                            d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM48,48H208V88H48ZM48,208V104H208V208Z">
-                                                      </path>
-                                                </svg>
+                                    @foreach ($categories as $category)
+                                          <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
+                                                onclick="filterTours({{$category->category}})">
+                                                <div
+                                                      class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
+                                                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                            fill="#e92929" viewBox="0 0 256 256">
+                                                            <path
+                                                                  d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM48,48H208V88H48ZM48,208V104H208V208Z">
+                                                            </path>
+                                                      </svg>
+                                                </div>
+                                                <h3 class="text-[#1b0e0e] font-bold mb-2">Cultural Tours</h3>
+                                                <p class="text-[#994d4d] text-sm">Temples, traditions & history</p>
+                                                <span class="text-[#e92929] text-xs font-medium">12 tours</span>
                                           </div>
-                                          <h3 class="text-[#1b0e0e] font-bold mb-2">Cultural Tours</h3>
-                                          <p class="text-[#994d4d] text-sm">Temples, traditions & history</p>
-                                          <span class="text-[#e92929] text-xs font-medium">12 tours</span>
-                                    </div>
+                                    @endforeach
 
-                                    <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                          onclick="filterTours('adventure')">
-                                          <div
-                                                class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                      fill="#e92929" viewBox="0 0 256 256">
-                                                      <path
-                                                            d="M128,18A110,110,0,1,0,238,128,110.12,110.12,0,0,0,128,18Zm0,208a98,98,0,1,1,98-98A98.11,98.11,0,0,1,128,226ZM172.49,99.51a12,12,0,0,1,0,17l-32,32a12,12,0,0,1-17,0l-32-32a12,12,0,0,1,17-17L128,119l19.51-19.52A12,12,0,0,1,172.49,99.51Z">
-                                                      </path>
-                                                </svg>
-                                          </div>
-                                          <h3 class="text-[#1b0e0e] font-bold mb-2">Adventure Tours</h3>
-                                          <p class="text-[#994d4d] text-sm">Hiking, nature & outdoor activities</p>
-                                          <span class="text-[#e92929] text-xs font-medium">8 tours</span>
-                                    </div>
-
-                                    <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                          onclick="filterTours('food')">
-                                          <div
-                                                class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                      fill="#e92929" viewBox="0 0 256 256">
-                                                      <path
-                                                            d="M208,88H180.36A103.95,103.95,0,0,0,128,64V32a8,8,0,0,0-16,0V64A103.95,103.95,0,0,0,59.64,88H32a8,8,0,0,0,0,16H59.64A103.95,103.95,0,0,0,112,192v32a8,8,0,0,0,16,0V192a103.95,103.95,0,0,0,52.36-88H208a8,8,0,0,0,0-16ZM128,176a72,72,0,1,1,72-72A72.08,72.08,0,0,1,128,176Z">
-                                                      </path>
-                                                </svg>
-                                          </div>
-                                          <h3 class="text-[#1b0e0e] font-bold mb-2">Food Tours</h3>
-                                          <p class="text-[#994d4d] text-sm">Culinary experiences & local cuisine</p>
-                                          <span class="text-[#e92929] text-xs font-medium">15 tours</span>
-                                    </div>
-
-                                    <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                          onclick="filterTours('private')">
-                                          <div
-                                                class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                      fill="#e92929" viewBox="0 0 256 256">
-                                                      <path
-                                                            d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,87.63a8,8,0,0,1-11.07,2.22A79.75,79.75,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,195.63Z">
-                                                      </path>
-                                                </svg>
-                                          </div>
-                                          <h3 class="text-[#1b0e0e] font-bold mb-2">Private Tours</h3>
-                                          <p class="text-[#994d4d] text-sm">Customized experiences</p>
-                                          <span class="text-[#e92929] text-xs font-medium">6 tours</span>
-                                    </div>
                               </div>
                         </div>
                   </section>
@@ -266,64 +221,66 @@
                               <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4" id="tours-grid">
                                     <!-- Tour Card 1 -->
                                     @foreach ($categorizedTours as $date => $tours)
-                                          @foreach ($tours as $tour)
-                                                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group">
-                                                      <div class="relative h-48 overflow-hidden">
-                                                            <img src="{{ asset('storage/' . $tour["hero_image"]) }}" alt="${tour.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                                                            <div class="absolute top-4 right-4 bg-[#e92929] text-white px-3 py-1 rounded-full test-base font-medium">
-                                                                  ￥{{$tour["minimum_price"]}}~
-                                                            </div>
-                                                      </div>
-                                                      <div class="p-4">
-                                                            <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 line-clamp-1">{{$tour["title"]}}</h3>
-                                                            <p class="text-[#994d4d] test-base mb-3 line-clamp-2">{{$tour["subtitle"]}}</p>
-                                                            <div class="flex items-center justify-between mb-3">
-                                                            <div class="flex items-center gap-1">
-                                                                  @php
-                                                                        $stars = '';
-                                                                        $rating = $tour["average_rate"];
-                                                                        $fullStars = floor($rating);
-                                                                        $hasHalfStar = ($rating - $fullStars) >= 0.5;
+                                    @foreach ($tours as $tour)
+                                    <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow cursor-pointer group">
+                                          <div class="relative h-48 overflow-hidden">
+                                                <img src="{{ asset('storage/' . $tour["hero_image"]) }}" alt="${tour.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                                <div class="absolute top-4 right-4 bg-[#e92929] text-white px-3 py-1 rounded-full test-base font-medium">
+                                                      ￥{{$tour["minimum_price"]}}~
+                                                </div>
+                                          </div>
+                                          <div class="p-4">
+                                                <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 line-clamp-1">{{$tour["title"]}}</h3>
+                                                <p class="text-[#994d4d] test-base mb-3 line-clamp-2">{{$tour["subtitle"]}}</p>
+                                                <div class="flex items-center justify-between mb-3">
+                                                      <div class="flex items-center gap-1">
+                                                            @php
+                                                            $stars = '';
+                                                            $rating = $tour["average_rate"];
+                                                            $fullStars = floor($rating);
+                                                            $hasHalfStar = ($rating - $fullStars) >= 0.5;
 
-                                                                        for ($i = 1; $i <= 5; $i++) {
-                                                                        if ($i <= $fullStars) {
-                                                                              $stars .= '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>';
-                                                                        } else if ($i === $fullStars + 1 && $hasHalfStar) {
-                                                                              $uniqueId = 'half-' . uniqid();
-                                                                              $stars .= '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" class="inline">
+                                                            for ($i = 1; $i <= 5; $i++) {
+                                                                  if ($i <=$fullStars) {
+                                                                  $stars .='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>' ;
+                                                                  } else if ($i===$fullStars + 1 && $hasHalfStar) {
+                                                                  $uniqueId='half-' . uniqid();
+                                                                  $stars .='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" class="inline">
                                                                                     <defs>
-                                                                                    <linearGradient id="'.$uniqueId.'" x1="0" x2="1" y1="0" y2="0">
-                                                                                          <stop offset="50%" stop-color="#e92929"/>
-                                                                                          <stop offset="50%" stop-color="#e7d0d0"/>
-                                                                                    </linearGradient>
-                                                                                    </defs>
-                                                                                    <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z" fill="url(#'.$uniqueId.')" />
-                                                                              </svg>';
-                                                                        } else {
-                                                                              $stars .= '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e7d0d0" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>';
-                                                                        }
+                                                                                    <linearGradient id="' .$uniqueId.'" x1="0" x2="1" y1="0" y2="0">
+                                                                  <stop offset="50%" stop-color="#e92929" />
+                                                                  <stop offset="50%" stop-color="#e7d0d0" />
+                                                                  </linearGradient>
+                                                                  </defs>
+                                                                  <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z" fill="url(#'.$uniqueId.')" />
+                                                                  </svg>';
+                                                                  } else {
+                                                                  $stars .= '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e7d0d0" viewBox="0 0 256 256" class="inline">
+                                                                        <path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path>
+                                                                  </svg>';
+                                                                  }
                                                                   }
                                                                   @endphp
 
                                                                   {!! $stars !!}
                                                                   {{-- ${generateStars(tour.average_rate.toFixed(1))} --}}
                                                                   <span class="test-base text-[#994d4d] ml-1">{{$tour["average_rate"]}} ({{count($tour["tour_reviews"])}})</span>
-                                                            </div>
-                                                            </div>
-                                                            <div class="flex items-center justify-between">
-                                                                  <span class="test-base text-[#994d4d]">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" class="inline mr-1">
-                                                                              <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a8,8,0,0,1-8,8H136v24a8,8,0,0,1-16,0V156H96a8,8,0,0,1,0-16h24V116a8,8,0,0,1,16,0v24h24A8,8,0,0,1,168,148Z"></path>
-                                                                        </svg>
-                                                                        {{$tour["minimum_duration"]}}hours~
-                                                                  </span>
-                                                                  <button onclick="window.location.href='/tour/show/${tour.id}'" class="bg-[#e92929] text-white px-4 py-2 rounded-lg test-base font-medium hover:bg-[#d61f1f] transition-colors">
-                                                                        Book Now
-                                                                  </button>
-                                                            </div>
                                                       </div>
                                                 </div>
-                                          @endforeach
+                                                <div class="flex items-center justify-between">
+                                                      <span class="test-base text-[#994d4d]">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256" class="inline mr-1">
+                                                                  <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a8,8,0,0,1-8,8H136v24a8,8,0,0,1-16,0V156H96a8,8,0,0,1,0-16h24V116a8,8,0,0,1,16,0v24h24A8,8,0,0,1,168,148Z"></path>
+                                                            </svg>
+                                                            {{$tour["minimum_duration"]}}hours~
+                                                      </span>
+                                                      <button onclick="window.location.href='/tour/show/${tour.id}'" class="bg-[#e92929] text-white px-4 py-2 rounded-lg test-base font-medium hover:bg-[#d61f1f] transition-colors">
+                                                            Book Now
+                                                      </button>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    @endforeach
                                     @endforeach
                               </div>
 
@@ -371,17 +328,16 @@
       </div>
 
       <script>
-
             function generateStars(rating) {
                   let stars = '';
                   const fullStars = Math.floor(rating);
                   const hasHalfStar = rating % 1 >= 0.5;
-                  
+
                   for (let i = 1; i <= 5; i++) {
                         if (i <= fullStars) {
                               stars +=
                                     '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#e92929" viewBox="0 0 256 256" class="inline"><path d="M234.29,114.85l-45,38.83L203,211.75a16.4,16.4,0,0,1-24.5,17.82L128,198.49,77.47,229.57A16.4,16.4,0,0,1,53,211.75l13.76-58.07-45-38.83A16.46,16.46,0,0,1,31.08,86l59-4.76,22.76-55.08a16.36,16.36,0,0,1,30.27,0l22.75,55.08,59,4.76a16.46,16.46,0,0,1,9.37,28.86Z"></path></svg>';
-                        } else if (i === fullStars + 1 && hasHalfStar){
+                        } else if (i === fullStars + 1 && hasHalfStar) {
                               stars += `
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 256 256" class="inline">
                                           <defs>
@@ -643,8 +599,13 @@
 
             /* Loading animation for future use */
             @keyframes spin {
-                  0% { transform: rotate(0deg); }
-                  100% { transform: rotate(360deg); }
+                  0% {
+                        transform: rotate(0deg);
+                  }
+
+                  100% {
+                        transform: rotate(360deg);
+                  }
             }
 
             .loading {
