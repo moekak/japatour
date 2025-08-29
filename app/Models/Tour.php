@@ -99,7 +99,7 @@ class Tour extends Model
         return $tours;
     }
 
-    public static function getSpecificTour($id, $column){
+    public static function getSpecificTour($column, $id){
         $tour = static::withId($column, $id)->withRelations()->first();
         if ($tour) {
             $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
