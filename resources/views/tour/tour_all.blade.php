@@ -149,7 +149,7 @@
                                           <div class="flex items-center justify-between">
                                                 <div class="flex items-center gap-2">
                                                       <div class="flex items-center gap-1 text-[#994d4d]">
-                                                            {{\App\Services\Util\FormatService::generateStar($tour->average_rate)}}
+                                                            {{!!\App\Services\Util\FormatService::generateStar($tour->average_rate)!!}}
                                                             <span class="text-sm font-medium">{{number_format($tour->average_rate, 1)}}</span>
                                                       </div>
                                                       <span class="text-[#994d4d] text-xs">({{$tour->review_count ?? 0}} reviews)</span>
