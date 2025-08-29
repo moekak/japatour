@@ -105,10 +105,20 @@
                                                                         @php
                                                                               $tags = explode(",", $blog->tags)
                                                                         @endphp
-                                                                        <div class="flex gap-1">
-                                                                              @foreach ($tags as $tag)
-                                                                                    <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">{{$tag}}</span>
+                                                                        <div class="flex gap-1 items-center overflow-hidden">
+                                                                              @php
+                                                                                    $maxVisibleTags = 3; // 表示する最大タグ数
+                                                                                    $visibleTags = array_slice($tags, 0, $maxVisibleTags);
+                                                                                    $hiddenCount = count($tags) - $maxVisibleTags;
+                                                                              @endphp
+                                                                              
+                                                                              @foreach ($visibleTags as $tag)
+                                                                                    <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs whitespace-nowrap flex-shrink-0">{{$tag}}</span>
                                                                               @endforeach
+                                                                              
+                                                                              @if ($hiddenCount > 0)
+                                                                                    <span class="bg-[#e7d0d0] text-[#994d4d] px-2 py-1 rounded-full text-xs whitespace-nowrap flex-shrink-0">+{{$hiddenCount}}</span>
+                                                                              @endif
                                                                         </div>
                                                                         <div class="flex items-center gap-1 text-[#994d4d]">
                                                                               <i class="far fa-eye text-xs"></i>
