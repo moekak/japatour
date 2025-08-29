@@ -101,16 +101,13 @@
                                     Featured Tour
                               </h2>
                               <div class="px-4">
-                                    <article
-                                          class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer"
-                                          onclick="openTour('featured-tour')">
+                                    <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer" onclick="openTour('featured-tour')">
                                           <div class="relative h-64 md:h-80 overflow-hidden">
-                                                <img src="{{ asset('storage/' . $featuredTour["hero_image"]) }}"
+                                                <img src="{{ asset('storage/' . $featuredTour['hero_image']) }}"
                                                       alt="Mount Fuji Tour"
                                                       class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                                                 <div class="absolute top-4 left-4">
-                                                      <span
-                                                            class="bg-[#e92929] text-white px-3 py-1 rounded-full text-sm font-medium">Featured</span>
+                                                      <span class="bg-[#e92929] text-white px-3 py-1 rounded-full text-sm font-medium">Featured</span>
                                                 </div>
                                                 <div class="absolute top-4 right-4">
                                                       <span class="bg-black/50 text-white px-3 py-1 rounded-full text-sm">{{$featuredTour->badge}}</span>
@@ -141,10 +138,6 @@
                                                                   <span>Max 12 people</span>
                                                             </div>
                                                       </div>
-                                                      <div class="text-right">
-                                                            <span class="text-2xl font-bold text-[#e92929]">¥{{ number_format($featuredTour->minimum_price) }}~</span>
-                                                            <span class="text-sm text-[#994d4d] block">per person</span>
-                                                      </div>
                                                 </div>
                                                 <h3 class="text-[#1b0e0e] text-2xl font-bold mb-3 group-hover:text-[#e92929] transition-colors">
                                                       {{$featuredTour->title}}
@@ -153,17 +146,13 @@
                                                       {{$featuredTour->subtitle}}
                                                 </p>
                                                 <div class="flex items-center justify-between">
-                                                      {{-- <div class="flex gap-2">
-                                                            <span
-                                                                  class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Mount Fuji</span>
-                                                            <span
-                                                                  class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Hakone</span>
-                                                            <span
-                                                                  class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">Nature</span>
-                                                      </div> --}}
                                                       <div class="flex items-center gap-2 text-[#994d4d]">
-                                                            {!!\App\Services\Util\FormatService::generateStar( $featuredTour->average_rate) !!}
+                                                            {!!\App\Services\Util\FormatService::generateStar($featuredTour->average_rate) !!}
                                                             <span class="text-sm font-medium">{{number_format($featuredTour->average_rate, 1)}} ({{count($featuredTour->tourReviews)}} reviews)</span>
+                                                      </div>
+                                                      <div class="text-right">
+                                                            <div class="text-[#e92929] text-2xl font-bold">¥{{ number_format($featuredTour->minimum_price) }}~</div>
+                                                            <div class="text-[#994d4d] text-sm">per person</div>
                                                       </div>
                                                 </div>
                                           </div>
