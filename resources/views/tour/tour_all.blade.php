@@ -121,265 +121,49 @@
             <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
                   <div class="px-4">
                   <div id="tours-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-300">
-                        
-                        <!-- Tour Card 1 -->
-                        <div class="tour-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer" 
-                              data-price="45000" data-duration="1" data-category="cultural">
-                              <div class="relative h-48 overflow-hidden">
-                              <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=400&h=300&fit=crop" 
-                                    alt="Kyoto Temple Tour" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                              <div class="absolute top-3 left-3">
-                                    <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">Cultural</span>
-                              </div>
-                              <div class="absolute top-3 right-3">
-                                    <div class="bg-black/50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
-                                          <i class="fas fa-star text-yellow-300"></i>
-                                          <span>4.8</span>
+                        @foreach ($tours as $tour)
+                              <div class="tour-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer" 
+                                    data-price="45000" data-duration="1" data-category="cultural">
+                                    <div class="relative h-48 overflow-hidden">
+                                          <img src="{{ asset('storage/' . $tour["hero_image"]) }}" alt="{{$tour->title}}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                          <div class="absolute top-3 left-3">
+                                                <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">{{$tour->badge}}</span>
+                                          </div>
+                                          <div class="absolute top-3 right-3">
+                                                <div class="bg-black/50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
+                                                      <i class="fas fa-star text-yellow-300"></i>
+                                                      <span>{{$tour->average_rate}}</span>
+                                                </div>
+                                          </div>
+                                    </div>
+                                    <div class="p-4">
+                                          <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
+                                                <i class="fas fa-clock"></i>
+                                                <span>Full Day ({{$tour->minimum_duration}} hours~)</span>
+                                                <span>•</span>
+                                                <i class="fas fa-users"></i>
+                                                <span>Max 12 people</span>
+                                          </div>
+                                          <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
+                                                {{$tour->title}}
+                                          </h3>
+                                          <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
+                                                {{$tour->subtitle}}
+                                          </p>
+                                          <div class="flex items-center justify-between">
+                                                <div class="flex gap-1">
+                                                      <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Temple</span>
+                                                      <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Garden</span>
+                                                </div>
+                                                <div class="text-right">
+                                                      <div class="text-[#e92929] text-lg font-bold">¥{{ number_format($tour->minimum_price) }}~</div>
+                                                      <div class="text-[#994d4d] text-xs">per person</div>
+                                                </div>
+                                          </div>
                                     </div>
                               </div>
-                              </div>
-                              <div class="p-4">
-                              <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                    <i class="fas fa-clock"></i>
-                                    <span>1 day</span>
-                                    <span>•</span>
-                                    <i class="fas fa-users"></i>
-                                    <span>Max 12 people</span>
-                              </div>
-                              <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                    Kyoto Temple & Garden Discovery
-                              </h3>
-                              <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                    Explore ancient temples and traditional gardens with a certified cultural guide. Experience authentic tea ceremony and meditation.
-                              </p>
-                              <div class="flex items-center justify-between">
-                                    <div class="flex gap-1">
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Temple</span>
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Garden</span>
-                                    </div>
-                                    <div class="text-right">
-                                          <div class="text-[#e92929] text-lg font-bold">¥45,000</div>
-                                          <div class="text-[#994d4d] text-xs">per person</div>
-                                    </div>
-                              </div>
-                              </div>
-                        </div>
 
-                        <!-- Tour Card 2 -->
-                        <div class="tour-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer" 
-                              data-price="120000" data-duration="3" data-category="adventure">
-                              <div class="relative h-48 overflow-hidden">
-                              <img src="https://images.unsplash.com/photo-1570459027562-4a916cc6113f?w=400&h=300&fit=crop" 
-                                    alt="Mt. Fuji Adventure" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                              <div class="absolute top-3 left-3">
-                                    <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">Adventure</span>
-                              </div>
-                              <div class="absolute top-3 right-3">
-                                    <div class="bg-black/50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
-                                          <i class="fas fa-star text-yellow-300"></i>
-                                          <span>4.9</span>
-                                    </div>
-                              </div>
-                              </div>
-                              <div class="p-4">
-                              <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                    <i class="fas fa-clock"></i>
-                                    <span>3 days</span>
-                                    <span>•</span>
-                                    <i class="fas fa-users"></i>
-                                    <span>Max 8 people</span>
-                              </div>
-                              <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                    Mt. Fuji Hiking & Hot Springs
-                              </h3>
-                              <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                    Epic 3-day adventure including guided Fuji hike, traditional ryokan stay, and relaxing onsen experience in Hakone.
-                              </p>
-                              <div class="flex items-center justify-between">
-                                    <div class="flex gap-1">
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Hiking</span>
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Onsen</span>
-                                    </div>
-                                    <div class="text-right">
-                                          <div class="text-[#e92929] text-lg font-bold">¥120,000</div>
-                                          <div class="text-[#994d4d] text-xs">per person</div>
-                                    </div>
-                              </div>
-                              </div>
-                        </div>
-
-                        <!-- Tour Card 3 -->
-                        <div class="tour-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer" 
-                              data-price="78000" data-duration="2" data-category="culinary">
-                              <div class="relative h-48 overflow-hidden">
-                              <img src="https://images.unsplash.com/photo-1555939594-58e4ac16f060?w=400&h=300&fit=crop" 
-                                    alt="Tokyo Food Tour" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                              <div class="absolute top-3 left-3">
-                                    <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">Culinary</span>
-                              </div>
-                              <div class="absolute top-3 right-3">
-                                    <div class="bg-black/50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
-                                          <i class="fas fa-star text-yellow-300"></i>
-                                          <span>4.7</span>
-                                    </div>
-                              </div>
-                              </div>
-                              <div class="p-4">
-                              <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                    <i class="fas fa-clock"></i>
-                                    <span>2 days</span>
-                                    <span>•</span>
-                                    <i class="fas fa-users"></i>
-                                    <span>Max 10 people</span>
-                              </div>
-                              <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                    Tokyo Street Food Adventure
-                              </h3>
-                              <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                    Discover authentic Tokyo flavors from hidden izakayas to famous ramen shops. Includes sake tasting and cooking class.
-                              </p>
-                              <div class="flex items-center justify-between">
-                                    <div class="flex gap-1">
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Food</span>
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Sake</span>
-                                    </div>
-                                    <div class="text-right">
-                                          <div class="text-[#e92929] text-lg font-bold">¥78,000</div>
-                                          <div class="text-[#994d4d] text-xs">per person</div>
-                                    </div>
-                              </div>
-                              </div>
-                        </div>
-
-                        <!-- Tour Card 4 -->
-                        <div class="tour-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer" 
-                              data-price="65000" data-duration="1" data-category="cultural">
-                              <div class="relative h-48 overflow-hidden">
-                              <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=400&h=300&fit=crop" 
-                                    alt="Osaka Castle Tour" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                              <div class="absolute top-3 left-3">
-                                    <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">Cultural</span>
-                              </div>
-                              <div class="absolute top-3 right-3">
-                                    <div class="bg-black/50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
-                                          <i class="fas fa-star text-yellow-300"></i>
-                                          <span>4.6</span>
-                                    </div>
-                              </div>
-                              </div>
-                              <div class="p-4">
-                              <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                    <i class="fas fa-clock"></i>
-                                    <span>1 day</span>
-                                    <span>•</span>
-                                    <i class="fas fa-users"></i>
-                                    <span>Max 15 people</span>
-                              </div>
-                              <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                    Osaka Castle & Dotonbori Walk
-                              </h3>
-                              <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                    Historic castle tour followed by vibrant Dotonbori district exploration. Includes takoyaki tasting and river cruise.
-                              </p>
-                              <div class="flex items-center justify-between">
-                                    <div class="flex gap-1">
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Castle</span>
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">History</span>
-                                    </div>
-                                    <div class="text-right">
-                                          <div class="text-[#e92929] text-lg font-bold">¥65,000</div>
-                                          <div class="text-[#994d4d] text-xs">per person</div>
-                                    </div>
-                              </div>
-                              </div>
-                        </div>
-
-                        <!-- Tour Card 5 -->
-                        <div class="tour-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer" 
-                              data-price="95000" data-duration="2" data-category="nature">
-                              <div class="relative h-48 overflow-hidden">
-                              <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=400&h=300&fit=crop" 
-                                    alt="Bamboo Forest Tour" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                              <div class="absolute top-3 left-3">
-                                    <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">Nature</span>
-                              </div>
-                              <div class="absolute top-3 right-3">
-                                    <div class="bg-black/50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
-                                          <i class="fas fa-star text-yellow-300"></i>
-                                          <span>4.9</span>
-                                    </div>
-                              </div>
-                              </div>
-                              <div class="p-4">
-                              <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                    <i class="fas fa-clock"></i>
-                                    <span>2 days</span>
-                                    <span>•</span>
-                                    <i class="fas fa-users"></i>
-                                    <span>Max 6 people</span>
-                              </div>
-                              <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                    Arashiyama Bamboo & Nature Trek
-                              </h3>
-                              <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                    Peaceful journey through Kyoto's famous bamboo groves, monkey park visit, and scenic river boat ride.
-                              </p>
-                              <div class="flex items-center justify-between">
-                                    <div class="flex gap-1">
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Bamboo</span>
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Nature</span>
-                                    </div>
-                                    <div class="text-right">
-                                          <div class="text-[#e92929] text-lg font-bold">¥95,000</div>
-                                          <div class="text-[#994d4d] text-xs">per person</div>
-                                    </div>
-                              </div>
-                              </div>
-                        </div>
-
-                        <!-- Tour Card 6 -->
-                        <div class="tour-card bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer" 
-                              data-price="180000" data-duration="5" data-category="premium">
-                              <div class="relative h-48 overflow-hidden">
-                              <img src="https://images.unsplash.com/photo-1480796927426-f609979314bd?w=400&h=300&fit=crop" 
-                                    alt="Luxury Ryokan Experience" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
-                              <div class="absolute top-3 left-3">
-                                    <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">Premium</span>
-                              </div>
-                              <div class="absolute top-3 right-3">
-                                    <div class="bg-black/50 text-white px-2 py-1 rounded-full text-xs flex items-center gap-1">
-                                          <i class="fas fa-star text-yellow-300"></i>
-                                          <span>5.0</span>
-                                    </div>
-                              </div>
-                              </div>
-                              <div class="p-4">
-                              <div class="flex items-center gap-2 mb-2 text-xs text-[#994d4d]">
-                                    <i class="fas fa-clock"></i>
-                                    <span>5 days</span>
-                                    <span>•</span>
-                                    <i class="fas fa-users"></i>
-                                    <span>Max 4 people</span>
-                              </div>
-                              <h3 class="text-[#1b0e0e] text-lg font-bold mb-2 group-hover:text-[#e92929] transition-colors line-clamp-2">
-                                    Luxury Ryokan & Kaiseki Experience
-                              </h3>
-                              <p class="text-[#994d4d] text-sm leading-relaxed mb-3 line-clamp-3">
-                                    Exclusive 5-day luxury experience in historic ryokans with private onsen, multi-course kaiseki dining, and personal concierge.
-                              </p>
-                              <div class="flex items-center justify-between">
-                                    <div class="flex gap-1">
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Luxury</span>
-                                          <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Ryokan</span>
-                                    </div>
-                                    <div class="text-right">
-                                          <div class="text-[#e92929] text-lg font-bold">¥180,000</div>
-                                          <div class="text-[#994d4d] text-xs">per person</div>
-                                    </div>
-                              </div>
-                              </div>
-                        </div>
-
+                        @endforeach
                   </div>
                   
                   <!-- Load More Button -->
