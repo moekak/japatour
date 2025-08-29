@@ -74,7 +74,7 @@
                         <div class="@container">
                         <div class="@[480px]:p-4">
                               <div id="hero" class="relative flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4 overflow-hidden">
-                                    <img src="{{ asset('storage/' . $tour->hero_image) }}" alt="{{ $tour->title }}" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 opacity-100 z-0 w-full h-full object-cover">
+                                    <img src="{{ asset('storage/' . $tour[0]->hero_image) }}" alt="{{ $tour[0]->title }}" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 opacity-100 z-0 w-full h-full object-cover">
                                     <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
                                     <!-- Badge -->
                                     <div class="relative z-10 inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
@@ -85,14 +85,14 @@
                                     <!-- テキストとボタン -->
                                     <div class="relative z-10 flex flex-col gap-2 text-center">
                                           <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                                                {{$tour->title}}
+                                                {{$tour[0]->title}}
                                           </h1>
                                           <h2 class="text-white text-base font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
-                                                {{$tour->subtitle}}
+                                                {{$tour[0]->subtitle}}
                                           </h2>
                                     </div>
 
-                                    <a href="{{route("tour.book", $tour->id)}}" class="relative z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-base font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
+                                    <a href="{{route("tour.book", $tour[0]->id)}}" class="relative z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-base font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
                                           <span class="truncate">Reserve Your Spot - ¥12,000</span>
                                     </a>
                               </div>
@@ -130,13 +130,13 @@
                   <div class="container mx-auto px-4">
                         <div class="grid grid-cols-1 [@media(min-width:900px)]:grid-cols-2 gap-12 items-center">
                               <div>
-                                    <h2 class="text-[25px] sm:text-3xl font-bold mb-6">{{$tour->overview_title}}</h2>
+                                    <h2 class="text-[25px] sm:text-3xl font-bold mb-6">{{$tour[0]->overview_title}}</h2>
                                     <p class="text-gray-600 text-base font-normal mb-6">
-                                          {{$tour->overview_description}}
+                                          {{$tour[0]->overview_description}}
                                     </p>
 
                                     <div class="space-y-4 mb-8">
-                                          @foreach ($tour->tourHighlights as $highlight)
+                                          @foreach ($tour[0]->tourHighlights as $highlight)
                                                 <div class="flex items-start gap-4">
                                                       <div
                                                             class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -163,7 +163,7 @@
             <section id="itineraries" class="py-20 -mt-20  bg-gray-50 ">
                   <div class="mx-auto px-4 max-w-[1100px] m-auto">
                         <div class="text-center mb-12">
-                              <h2 class="text-[25px] sm:text-3xl font-bold text-gray-800 mb-4 text-left sm:text-center">Choose Your {{$tour->category["category"]}} Adventure</h2>
+                              <h2 class="text-[25px] sm:text-3xl font-bold text-gray-800 mb-4 text-left sm:text-center">Choose Your {{$tour[0]->category["category"]}} Adventure</h2>
                               <p class="text-gray-600 text-base max-w-2xl mx-auto text-left sm:text-center">
                                     From cultural experiences to food tours, we have the perfect journey waiting for you
                               </p>
@@ -171,11 +171,11 @@
 
                         <!-- Tour Cards -->
                         <div class="grid md:grid-cols-3 gap-8 ">
-                              @foreach ($tour->itineraries as $index => $itinerary)
+                              @foreach ($tour[0]->itineraries as $index => $itinerary)
                                     <div class="bg-white rounded-2xl overflow-hidden smooth-shadow-lg card-hover cursor-pointer"
                                           onclick="showTourDetails({{$index }})">
                                           <div class="relative h-48 overflow-hidden">
-                                                <img src="{{ asset('storage/' . $itinerary->image) }}" alt="{{ $tour->title }}" class="w-full h-full object-cover">
+                                                <img src="{{ asset('storage/' . $itinerary->image) }}" alt="{{ $tour[0]->title }}" class="w-full h-full object-cover">
                                                 <div class="absolute bottom-4 right-4">
                                                       <div class="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
                                                             <span class="text-xl font-bold text-gray-800">¥{{$itinerary["adult_price"]}}~</span>
@@ -240,12 +240,12 @@
                               <!-- 左列 -->
                               <div class="space-y-1 sm:space-y-2">
                                     <div class="w-full aspect-[3/4] sm:h-[400px] lg:h-[500px]">
-                                          <img src="{{ asset('storage/' . $tour->tourGalleryImages[0]['gallery_image']) }}" 
+                                          <img src="{{ asset('storage/' . $tour[0]->tourGalleryImages[0]['gallery_image']) }}" 
                                           alt="Gallery" 
                                           class="rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer w-full h-full object-cover">
                                     </div>
                                     <div class="w-full aspect-[5/4] sm:h-[250px] lg:h-[300px]">
-                                          <img src="{{ asset('storage/' . $tour->tourGalleryImages[1]['gallery_image']) }}" 
+                                          <img src="{{ asset('storage/' . $tour[0]->tourGalleryImages[1]['gallery_image']) }}" 
                                           alt="Gallery" 
                                           class="rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer w-full h-full object-cover">
                                     </div>
@@ -254,12 +254,12 @@
                               <!-- 中央列 -->
                               <div class="space-y-1 sm:space-y-2">
                                     <div class="w-full aspect-[5/4] sm:h-[250px] lg:h-[300px]">
-                                          <img src="{{ asset('storage/' . $tour->tourGalleryImages[2]['gallery_image']) }}" 
+                                          <img src="{{ asset('storage/' . $tour[0]->tourGalleryImages[2]['gallery_image']) }}" 
                                           alt="Gallery" 
                                           class="rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer w-full h-full object-cover">
                                     </div>
                                     <div class="w-full aspect-[3/4] sm:h-[400px] lg:h-[500px]">
-                                          <img src="{{ asset('storage/' . $tour->tourGalleryImages[3]['gallery_image']) }}" 
+                                          <img src="{{ asset('storage/' . $tour[0]->tourGalleryImages[3]['gallery_image']) }}" 
                                           alt="Gallery" 
                                           class="rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer w-full h-full object-cover">
                                     </div>
@@ -268,12 +268,12 @@
                               <!-- 右列 -->
                               <div class="space-y-1 sm:space-y-2 sm:col-span-2 lg:col-span-1">
                                     <div class="w-full aspect-square sm:h-[320px] lg:h-[400px]">
-                                          <img src="{{ asset('storage/' . $tour->tourGalleryImages[4]['gallery_image']) }}" 
+                                          <img src="{{ asset('storage/' . $tour[0]->tourGalleryImages[4]['gallery_image']) }}" 
                                           alt="Gallery" 
                                           class="rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer w-full h-full object-cover">
                                     </div>
                                     <div class="w-full aspect-square sm:h-[320px] lg:h-[400px]">
-                                          <img src="{{ asset('storage/' . $tour->tourGalleryImages[5]['gallery_image']) }}" 
+                                          <img src="{{ asset('storage/' . $tour[0]->tourGalleryImages[5]['gallery_image']) }}" 
                                           alt="Gallery" 
                                           class="rounded-lg shadow-lg hover:shadow-xl transition-shadow cursor-pointer w-full h-full object-cover">
                                     </div>
@@ -296,12 +296,12 @@
                                           <i class="fas fa-star-half-alt text-yellow-400 text-xl"></i>
                                     </div>
                                     <span class="text-2xl font-bold">4.8</span>
-                                    <span class="text-gray-600">from {{count($tour->tourReviews)}}reviews</span>
+                                    <span class="text-gray-600">from {{count($tour[0]->tourReviews)}}reviews</span>
                               </div>
                         </div>
 
                         <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                              @foreach ($tour->tourReviews as $review)
+                              @foreach ($tour[0]->tourReviews as $review)
                                    
                                     <div class="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
                                           <div class="flex items-center gap-4 mb-4">
@@ -416,7 +416,7 @@
                   <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                         <h2 class="text-[25px] sm:text-3xl font-bold text-gray-800 mb-4 text-center"> Frequently Asked Questions</h2>
                         <div class="flex flex-col p-4 gap-3">
-                              @foreach ($tour->tourQuestions as $qa)
+                              @foreach ($tour[0]->tourQuestions as $qa)
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
                                           <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
@@ -474,7 +474,7 @@
       </script>
       <script>
       // Tour details data
-      const tourDetails = @json($tour->itineraries);
+      const tourDetails = @json($tour[0]->itineraries);
 
 
       function showTourDetails(tourType) {

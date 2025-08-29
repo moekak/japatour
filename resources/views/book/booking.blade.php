@@ -252,7 +252,7 @@
 
                                     <!-- Tour Options -->
                                     <div class="space-y-4 mb-8">
-                                        @foreach ($tour->itineraries as $itinerary)
+                                        @foreach ($tour[0]->itineraries as $itinerary)
                                         <div class="js_tour_option tour-option border-2 border-[#e7d0d0] bg-white rounded-lg p-6 cursor-pointer hover:border-[#e92929] hover:shadow-lg transition-all duration-300" data-tour="cultural" data-child-price="{{$itinerary->child_price}}" data-adult-price="{{$itinerary->adult_price}}" data-duration="6">
                                             <div class="flex items-start justify-between">
                                                 <div class="flex-1">
@@ -461,8 +461,8 @@
                                             <input type="hidden" value="" id="js_email" name="email">
                                             <input type="hidden" value="" id="js_phone" name="phone_number">
                                             <input type="hidden" value="" id="js_request" name="request">
-                                            <input type="hidden" value={{$tour->title}} id="js_tour_name">
-                                            <input type="hidden" value={{$tour->title}} id="js_itinerary_name">
+                                            <input type="hidden" value={{$tour[0]->title}} id="js_tour_name">
+                                            <input type="hidden" value={{$tour[0]->title}} id="js_itinerary_name">
                                             <button type="submit" id="confirm-booking" cla>
                                                 Confirm & Book Now
                                             </button>
@@ -504,7 +504,7 @@
                                             <div>
                                                 <!-- メインツアータイトル -->
                                                 <h4 class="text-[#1b0e0e] font-semibold text-base line-clamp-2 mb-2">
-                                                    {{$tour->title}}
+                                                    {{$tour[0]->title}}
                                                 </h4>
 
                                                 <!-- itineraryタイトル（小さく表示） -->
