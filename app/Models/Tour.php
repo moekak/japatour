@@ -48,8 +48,8 @@ class Tour extends Model
         return $query->with(["category","itineraries","tourReviews","tourQuestions", "tourHighlights", "tourGalleryImages", "itineraries.itineraryActivities", "itineraries.itineraryHighlights", "itineraries.itineraryLanguages", "itineraries.itineraryLanguages.language"]);
     }
     
-    public function scopeWithId($query, $id){
-        return $query->where("id", $id);
+    public function scopeWithId($query, $column, $id){
+        return $query->where($column, $id);
     }
 
     public function scopeWithIsFeatured($query, $type){
@@ -88,12 +88,24 @@ class Tour extends Model
     }
 
     public static function getAllTours(){
-        $tours = static::withRelations()->get();
+        $tours = static::withRelations()
+            ->get()
+            ->map(function($tour) {
+                    $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
+                    $tour->minimum_price = $tour->itineraries->min('adult_price') ?? 0;
+                    $tour->minimum_duration = $tour->itineraries->min('duration') ?? 0;
+                    return $tour;
+                });
         return $tours;
     }
 
-    public static function getSpecificTour($id){
-        $tour = static::withId($id)->withRelations()->first();
+    public static function getSpecificTour($id, $column){
+        $tour = static::withId($column, $id)->withRelations()->first();
+        if ($tour) {
+            $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
+            $tour->minimum_price = $tour->itineraries->min('adult_price') ?? 0;
+            $tour->minimum_duration = $tour->itineraries->min('duration') ?? 0;
+        }
         return $tour;
     }
 

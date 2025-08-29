@@ -183,8 +183,7 @@
                               </h2>
                               <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
                                     @foreach ($categories as $category)
-                                    <div class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group"
-                                          onclick="filterTours({{$category->category}})">
+                                    <a href="{{route("tour", $category->id)}}" class="category-card bg-white rounded-lg p-6 text-center hover:shadow-lg transition-all cursor-pointer group">
                                           <div
                                                 class="w-12 h-12 bg-[#e92929]/10 rounded-full flex items-center justify-center mx-auto mb-3 group-hover:bg-[#e92929]/20 transition-colors">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#e92929" viewBox="0 0 256 256">
@@ -194,7 +193,7 @@
                                           <h3 class="text-[#1b0e0e] font-bold mb-2">{{$category->category}}</h3>
                                           <!-- <p class="text-[#994d4d] text-sm">Temples, traditions & history</p>  -->
                                           <span class="text-[#e92929] text-xs font-medium">{{count($categorizedTours[$category->category] ?? [])}} tours</span>
-                                    </div>
+                                    </a>
                                     @endforeach
 
                               </div>

@@ -38,12 +38,11 @@ class TourController extends Controller
         return view("tour.tours", compact("categorizedTours", "categories", "featuredTour", "tourCount"));
     }
 
-    public function all(){
-        // $blogs = Blog::getBlogs();
-        // $categories = BlogCategory::getCategories();
-        // $tags = Blog::getTags();
-        
-        return view("tour.tour_all");
+    public function all(string $category){
+        $blogs = $category === "all" ? Tour::getSpecificTour("category_id", $category) : Tour::getAllTours();
+        print_r($blogs);
+        exit;
+        return view("tour.tour_all", compact("blogs"));
     }
 
     /**
@@ -88,7 +87,7 @@ class TourController extends Controller
     public function show(string $id)
     {
         try {
-            $tour = Tour::getSpecificTour($id);
+            $tour = Tour::getSpecificTour("id", $id);
             return view("tour.tour_show", compact("tour"));
         } catch (\Exception $e) {
             Log::debug($e);
@@ -102,7 +101,7 @@ class TourController extends Controller
     public function edit(string $id)
     {
         try {
-            $tour = Tour::getSpecificTour($id)->toArray();
+            $tour = Tour::getSpecificTour("id", $id)->toArray();
             $regions = Region::getAllRegions();
             $languages = Language::getAllLanguages();
             $categories = Category::getAllCategories();

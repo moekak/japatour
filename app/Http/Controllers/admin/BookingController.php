@@ -24,7 +24,7 @@ class BookingController extends Controller
     }
     public function index(string $id)
     {
-        $tour = Tour::getSpecificTour($id);
+        $tour = Tour::getSpecificTour("id", $id);
         return view("book.booking", compact("tour"));
     }
     public function confirmation(){
