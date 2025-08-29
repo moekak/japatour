@@ -4,9 +4,9 @@
                 <div
                         class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
                         <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
-                            href="#tours">Tours</a>
+                            href="{{route("tours")}}">Tours</a>
                         <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
-                            href="#blog">Blog</a>
+                            href="{{route("blogs")}}">Blog</a>
                         <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
                             href="{{route("law")}}">Privacy Policy</a>
                         <a class="text-white test-base font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors"
