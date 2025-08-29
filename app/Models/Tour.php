@@ -52,8 +52,13 @@ class Tour extends Model
         return $query->where("id", $id);
     }
 
+    public function scopeWithIsFeatured($query, $type){
+        return $query->where("is_featured", $type);
+    }
+
     public static function getAllToursByCategory(){
         $tours = static::withRelations()
+            ->withIsFeatured("0")
             ->get()
             ->map(function($tour) {
                 $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
@@ -63,6 +68,19 @@ class Tour extends Model
             })
             ->groupBy('category.category');
         return $tours;
+    }
+
+    public static function getFeaturedTour(){
+        $featuredTour = static::withRelations()
+            ->withIsFeatured("1")
+            ->first();
+        if ($featuredTour) {
+            $featuredTour->average_rate = $featuredTour->tourReviews->avg('rating') ?? 0;
+            $featuredTour->minimum_price = $featuredTour->itineraries->min('adult_price') ?? 0;
+            $featuredTour->minimum_duration = $featuredTour->itineraries->min('duration') ?? 0;
+        }
+
+        return $featuredTour;
     }
 
     public static function getAllTours(){

@@ -132,27 +132,26 @@
                                                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
                                                                         <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm64-88a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V72a8,8,0,0,1,16,0v48h48A8,8,0,0,1,192,128Z"></path>
                                                                   </svg>
-                                                                  <span>Full Day (8 hours)</span>
+                                                                  <span>Full Day ({{$featuredTour->minimum_duration}} hours~)</span>
                                                             </div>
                                                             <span>•</span>
                                                             <div class="flex items-center gap-1">
                                                                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
                                                                         <path d="M117.25,157.92a60,60,0,1,0-66.5,0A95.83,95.83,0,0,0,3.53,195.63a8,8,0,1,0,13.4,8.74,80,80,0,0,1,134.14,0,8,8,0,0,0,13.4-8.74A95.83,95.83,0,0,0,117.25,157.92ZM40,108a44,44,0,1,1,44,44A44.05,44.05,0,0,1,40,108Zm210.14,87.63a8,8,0,0,1-11.07,2.22A79.75,79.75,0,0,0,172,168a8,8,0,0,1,0-16,44,44,0,1,0-16.34-84.87,8,8,0,1,1-5.94-14.85,60,60,0,0,1,55.53,105.64,95.83,95.83,0,0,1,47.22,37.71A8,8,0,0,1,250.14,195.63Z"></path>
                                                                   </svg>
-                                                                  <span>Max 8 people</span>
+                                                                  <span>Max 12 people</span>
                                                             </div>
                                                       </div>
                                                       <div class="text-right">
-                                                            <span class="text-2xl font-bold text-[#e92929]">¥15,800</span>
+                                                            <span class="text-2xl font-bold text-[#e92929]">¥{{ number_format($featuredTour->minimum_price) }}~</span>
                                                             <span class="text-sm text-[#994d4d] block">per person</span>
                                                       </div>
                                                 </div>
-                                                <h3
-                                                      class="text-[#1b0e0e] text-2xl font-bold mb-3 group-hover:text-[#e92929] transition-colors">
-                                                      Mount Fuji & Hakone Day Tour with Lake Ashi Cruise
+                                                <h3 class="text-[#1b0e0e] text-2xl font-bold mb-3 group-hover:text-[#e92929] transition-colors">
+                                                      {{$featuredTour->title}}
                                                 </h3>
                                                 <p class="text-[#994d4d] text-base leading-relaxed mb-4">
-                                                      Experience the majesty of Mount Fuji on this full-day adventure. Visit the 5th Station, cruise on Lake Ashi, and ride the Hakone Ropeway for breathtaking views. Includes traditional Japanese lunch and expert English-speaking guide.
+                                                      {{$featuredTour->subtitle}}
                                                 </p>
                                                 <div class="flex items-center justify-between">
                                                       <div class="flex gap-2">
@@ -167,7 +166,7 @@
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
                                                                   <path d="M234.5,114.38l-45.1,39.36,13.51,58.6a16,16,0,0,1-23.84,17.34l-51.11-31-51,31a16,16,0,0,1-23.84-17.34L66.61,153.8,21.5,114.38a16,16,0,0,1,9.11-28.06l59.46-5.15,23.21-55.36a15.95,15.95,0,0,1,29.44,0L166,81.17l59.44,5.15a16,16,0,0,1,9.11,28.06Z"></path>
                                                             </svg>
-                                                            <span class="text-sm font-medium">4.8 (127 reviews)</span>
+                                                            <span class="text-sm font-medium">{{$featuredTour->average_rate}} (127 reviews)</span>
                                                       </div>
                                                 </div>
                                           </div>
