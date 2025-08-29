@@ -46,7 +46,7 @@
                   </div>
 
                   <!-- Search and Filter Section -->
-                  <section class="flex justify-center py-8 bg-[#f3e7e7]">
+                  {{-- <section class="flex justify-center py-8 bg-[#f3e7e7]">
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                               <div class="px-4">
                                     <div class="flex flex-col md:flex-row gap-4 items-center justify-between">
@@ -91,7 +91,7 @@
                                     </div>
                               </div>
                         </div>
-                  </section>
+                  </section> --}}
 
                   <!-- Featured Tour -->
                   <section id="featured" class="flex justify-center py-12">
@@ -226,9 +226,9 @@
                                                             </svg>
                                                             {{$tour["minimum_duration"]}}hours~
                                                       </span>
-                                                      <button onclick="window.location.href='/tour/show/${tour.id}'" class="bg-[#e92929] text-white px-4 py-2 rounded-lg test-base font-medium hover:bg-[#d61f1f] transition-colors">
+                                                      <a href="{{route("tour.show", $tour->id)}}" class="bg-[#e92929] text-white px-4 py-2 rounded-lg test-base font-medium hover:bg-[#d61f1f] transition-colors">
                                                             See more
-                                                      </button>
+                                                      </a>
                                                 </div>
                                           </div>
                                     </div>
@@ -238,10 +238,10 @@
 
                               <!-- Load More Button -->
                               <div class="text-center pt-8">
-                                    <button
+                                    <a href="{{route("tour", "all")}}"
                                           class="px-8 py-3 bg-[#e92929] text-white rounded-lg font-medium hover:bg-[#d61f1f] transition-colors">
                                           View all tours
-                                    </button>
+                                    </a>
                               </div>
                         </div>
                   </section>
