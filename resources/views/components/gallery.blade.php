@@ -152,7 +152,7 @@
 
 
 
- <div class="bg-white rounded-xl shadow-sm p-6">
+<div class="bg-white rounded-xl shadow-sm p-6">
       <h2 class="text-xl font-semibold text-gray-800 mb-6 flex items-center">
             <div class="w-8 h-8 bg-[#e92929]/10 rounded-lg flex items-center justify-center mr-3">
                   <i class="fas fa-images text-[#e92929]"></i>
@@ -166,27 +166,25 @@
             <!-- Column 1 -->
             <div class="space-y-4">
                   <!-- Image 1 - Large -->
-                  <x-gallery-image-upload :index="0" :height="500" :src="$tour['tour_gallery_images'][0]['gallery_image'] ?? null"/>
+                  <x-gallery-image-upload :index="0" :height="500" :src={{$tour['tour_gallery_images'][0]['gallery_image'] ?? null}} />
                   <!-- Image 2 - Medium -->
-                  <x-gallery-image-upload :index="1" :height="300" :src="$tour['tour_gallery_images'][1]['gallery_image'] ?? null"/>
+                  <x-gallery-image-upload :index="1" :height="300" :src={{$tour['tour_gallery_images'][1]['gallery_image'] ?? null}} />
             </div>
 
             <!-- Column 2 -->
             <div class="space-y-4">
                   <!-- Image 3 - Medium -->
-                  <x-gallery-image-upload :index="2" :height="300" :src="$tour['tour_gallery_images'][2]['gallery_image'] ?? null"/>
+                  <x-gallery-image-upload :index="2" :height="300" :src={{$tour['tour_gallery_images'][2]['gallery_image'] ?? null}} />
                   <!-- Image 4 - Large -->
-                  <x-gallery-image-upload :index="3" :height="500" :src="$tour['tour_gallery_images'][3]['gallery_image'] ?? null"/>
+                  <x-gallery-image-upload :index="3" :height="500" :src={{$tour['tour_gallery_images'][3]['gallery_image'] ?? null}} />
             </div>
 
             <!-- Column 3 -->
             <div class="space-y-4">
                   <!-- Image 5 - Square -->
-                  <x-gallery-image-upload :index="4" :height="400" :src="$tour['tour_gallery_images'][4]['gallery_image'] ?? null"/>
+                  <x-gallery-image-upload :index="4" :height="400" :src={{$tour['tour_gallery_images'][4]['gallery_image'] ?? null}} />
                   <!-- Image 6 - Square -->
-                  <x-gallery-image-upload :index="5" :height="400" :src="$tour['tour_gallery_images'][5]['gallery_image'] ?? null"/>
+                  <x-gallery-image-upload :index="5" :height="400" :src={{$tour['tour_gallery_images'][5]['gallery_image'] ?? null}} />
             </div>
       </div>
 </div>
-
-
