@@ -39,7 +39,7 @@ class TourController extends Controller
     }
 
     public function all(string $category){
-        $tours = $category === "all" ? Tour::getSpecificTour("category_id", $category) : Tour::getAllTours();
+        $tours = $category === "all" ? Tour::getAllTours()  : Tour::getSpecificTour("category_id", $category);
         // $featuredTour = Tour::getFeaturedTour();
         return view("tour.tour_all", compact("tours"));
     }

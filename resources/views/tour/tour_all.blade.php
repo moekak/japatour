@@ -89,7 +89,7 @@
       </section>
 
       <!-- Featured Tour Banner -->
-      <section class="flex justify-center py-6">
+      <!-- <section class="flex justify-center py-6">
             <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
                   <div class="px-4">
                   <div class="bg-gradient-to-r from-[#e92929] to-[#d61f1f] rounded-xl p-6 text-white relative overflow-hidden">
@@ -114,7 +114,7 @@
                   </div>
                   </div>
             </div>
-      </section>
+      </section> -->
 
       <!-- Tours Grid -->
       <section class="flex justify-center py-8">
@@ -151,10 +151,6 @@
                                                 {{$tour->subtitle}}
                                           </p>
                                           <div class="flex items-center justify-between">
-                                                <div class="flex gap-1">
-                                                      <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Temple</span>
-                                                      <span class="bg-[#f3e7e7] text-[#1b0e0e] px-2 py-1 rounded-full text-xs">Garden</span>
-                                                </div>
                                                 <div class="text-right">
                                                       <div class="text-[#e92929] text-lg font-bold">¥{{ number_format($tour->minimum_price) }}~</div>
                                                       <div class="text-[#994d4d] text-xs">per person</div>

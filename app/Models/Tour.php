@@ -100,13 +100,16 @@ class Tour extends Model
     }
 
     public static function getSpecificTour($column, $id){
-        $tour = static::withId($column, $id)->withRelations()->first();
-        if ($tour) {
-            $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
-            $tour->minimum_price = $tour->itineraries->min('adult_price') ?? 0;
-            $tour->minimum_duration = $tour->itineraries->min('duration') ?? 0;
-        }
-        return $tour;
+        $tours = static::withId($column, $id)
+            ->withRelations()
+            ->get()
+            ->map(function($tour) {
+                $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
+                $tour->minimum_price = $tour->itineraries->min('adult_price') ?? 0;
+                $tour->minimum_duration = $tour->itineraries->min('duration') ?? 0;
+                return $tour;
+            });
+        return $tours;
     }
 
 }
