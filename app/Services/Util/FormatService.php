@@ -22,4 +22,22 @@ class FormatService
 
             return $star;
       }
+
+      public static function generateYellowStar($average){
+            $star = "";
+            $int = intval($average);
+            $fractional_part = fmod($average, 1);
+            $empty = 5 - $int;
+            for($i = 0; $i < $int; $i ++){
+                  $star .= '<i class="fas fa-star text-yellow-400 text-xl"></i>';
+            }
+            if($fractional_part > 0){
+                  $star .= '<i class="fas fa-star-half-alt text-yellow-400 text-xl"></i>';
+            }
+            if($empty > 1){
+                  $star .= '<i class="far fa-star text-yellow-400 text-xl"></i>';
+            }
+
+            return $star;
+      }
 }

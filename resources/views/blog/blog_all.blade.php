@@ -6,7 +6,7 @@
 </head>
 
 <body>
-      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
+      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root"
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
                   <!-- Header -->
@@ -35,7 +35,7 @@
                         </div>
                   </div>
                   <!-- Search and Filter Section -->
-                  <section class="flex justify-center py-8 bg-[#f3e7e7] sticky top-0 z-10 shadow-sm backdrop-blur-sm">
+                  <section class="flex justify-center py-5 md:py-8 bg-[#f3e7e7] shadow-sm backdrop-blur-sm">
                         <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
                               <div class="px-4">
                                     <!-- Main Search Bar -->
@@ -105,7 +105,7 @@
                                                                         @php
                                                                               $tags = explode(",", $blog->tags)
                                                                         @endphp
-                                                                        <div class="flex gap-1 items-center overflow-hidden">
+                                                                        <div class="flex gap-1 items-center">
                                                                               @php
                                                                                     $maxVisibleTags = 2; // 表示する最大タグ数
                                                                                     $visibleTags = array_slice($tags, 0, $maxVisibleTags);
@@ -120,10 +120,10 @@
                                                                                     <span class="bg-[#e7d0d0] text-[#994d4d] px-2 py-1 rounded-full text-xs whitespace-nowrap flex-shrink-0">+{{$hiddenCount}}</span>
                                                                               @endif
                                                                         </div>
-                                                                        <div class="flex items-center gap-1 text-[#994d4d]">
+                                                                        {{-- <div class="flex items-center gap-1 text-[#994d4d]">
                                                                               <i class="far fa-eye text-xs"></i>
                                                                               <span class="text-xs">2.1k</span>
-                                                                        </div>
+                                                                        </div> --}}
                                                                   </div>
                                                             </div>
                                                       </a>
@@ -136,7 +136,7 @@
                   </section>
 
                   <!-- Newsletter Section -->
-                  <section class="flex justify-center py-12 bg-[#f3e7e7]">
+                  {{-- <section class="flex justify-center py-12 bg-[#f3e7e7]">
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                               <div class="text-center px-4">
                                     <h2 class="text-[#1b0e0e] text-[28px] font-bold leading-tight tracking-[-0.015em] mb-4">
@@ -158,22 +158,10 @@
                                     </div>
                               </div>
                         </div>
-                  </section>
+                  </section> --}}
 
                   <!-- Footer -->
-                  <footer class="flex justify-center bg-[#1b0e0e] text-white">
-                        <div class="flex max-w-[960px] flex-1 flex-col">
-                              <div class="flex flex-col gap-6 px-5 py-10 text-center @container">
-                                    <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-                                          <a class="text-white text-sm font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors" href="#tours">Tours</a>
-                                          <a class="text-white text-sm font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors" href="#blog">Blog</a>
-                                          <a class="text-white text-sm font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors" href="#">Privacy Policy</a>
-                                          <a class="text-white text-sm font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors" href="#">Terms of Service</a>
-                                    </div>
-                                    <p class="text-white text-sm font-normal leading-normal opacity-80">© 2024 ShogunTours. All rights reserved.</p>
-                              </div>
-                        </div>
-                  </footer>
+                  @include('components.footer')
             </div>
       </div>
 
@@ -202,7 +190,6 @@
                   activeFilters.searchTerm = searchTerm;
                   
                   if (searchTerm) {
-
                         addToRecentSearches(searchTerm);
                   } 
                   

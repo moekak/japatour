@@ -7,10 +7,6 @@
       <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-      * {
-            font-family: 'Inter', sans-serif;
-      }
-
       .glass-effect {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -62,11 +58,10 @@
 </head>
 
 <body>
-      <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden"
+      <div class="relative flex size-full min-h-screen flex-col  group/design-root"
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <!-- Minimal Header -->
-           @include('components.nav')
-
+            @include('components.nav')
 
             <!-- Hero Section - Full Screen -->
             <section class="flex justify-center" id="tour">
@@ -79,7 +74,7 @@
                                     <!-- Badge -->
                                     <div class="relative z-10 inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full">
                                           <i class="fas fa-fire text-yellow-400"></i>
-                                          <span class="text-sm font-medium text-white">Bestseller</span>
+                                          <span class="text-sm font-medium text-white">{{$tour[0]->badge}}</span>
                                     </div>
 
                                     <!-- テキストとボタン -->
@@ -93,40 +88,15 @@
                                     </div>
 
                                     <a href="{{route("tour.book", $tour[0]->id)}}" class="relative z-10 flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-base font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
-                                          <span class="truncate">Reserve Your Spot - ¥12,000</span>
+                                          <span class="truncate">Reserve Your Spot - ¥{{ number_format($tour[0]->minimum_price) }}~</span>
                                     </a>
                               </div>
                         </div>
                         </div>
                   </div>
             </section>
-
-            <!-- Quick Stats Bar -->
-            {{-- <section class="bg-gray-50 py-8 border-y">
-                  <div class="container mx-auto px-4">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                              <div class="text-center">
-                                    <div class="text-3xl font-bold text-[#e92929]">98%</div>
-                                    <p class="text-gray-600 test-base mt-1">Satisfaction Rate</p>
-                              </div>
-                              <div class="text-center">
-                                    <div class="text-3xl font-bold text-[#e92929]">2,500+</div>
-                                    <p class="text-gray-600 test-base mt-1">Happy Travelers</p>
-                              </div>
-                              <div class="text-center">
-                                    <div class="text-3xl font-bold text-[#e92929]">5</div>
-                                    <p class="text-gray-600 test-base mt-1">Major Attractions</p>
-                              </div>
-                              <div class="text-center">
-                                    <div class="text-3xl font-bold text-[#e92929]">1</div>
-                                    <p class="text-gray-600 test-base mt-1">Unforgettable Day</p>
-                              </div>
-                        </div>
-                  </div>
-            </section> --}}
-
             <!-- Overview Section -->
-            <section id="overview" class="my-20 pb-20 max-w-[1100px] m-auto">
+            <section id="overview" class="my-10 pb-10 md:my-20 md:pb-20 max-w-[1100px] m-auto">
                   <div class="container mx-auto px-4">
                         <div class="grid grid-cols-1 [@media(min-width:900px)]:grid-cols-2 gap-12 items-center">
                               <div>
@@ -140,7 +110,7 @@
                                                 <div class="flex items-start gap-4">
                                                       <div
                                                             class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                            <i class="fas fa-torii-gate text-[#e92929]"></i>
+                                                            <i class="fas fa-lightbulb text-[#e92929]"></i>
                                                       </div>
                                                       <div>
                                                             <h4 className="font-semibold mb-1">{{$highlight->title}}</h4>
@@ -160,7 +130,7 @@
             </section>
 
             <!-- Tour Selection with Modern Cards -->
-            <section id="itineraries" class="py-20 -mt-20  bg-gray-50 ">
+            <section id="itineraries" class="py-10 -mt-10 md:py-20 md:-mt-20  bg-gray-50 ">
                   <div class="mx-auto px-4 max-w-[1100px] m-auto">
                         <div class="text-center mb-12">
                               <h2 class="text-[25px] sm:text-3xl font-bold text-gray-800 mb-4 text-left sm:text-center">Choose Your {{$tour[0]->category["category"]}} Adventure</h2>
@@ -178,7 +148,7 @@
                                                 <img src="{{ asset('storage/' . $itinerary->image) }}" alt="{{ $tour[0]->title }}" class="w-full h-full object-cover">
                                                 <div class="absolute bottom-4 right-4">
                                                       <div class="bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2">
-                                                            <span class="text-xl font-bold text-gray-800">¥{{$itinerary["adult_price"]}}~</span>
+                                                            <span class="text-xl font-bold text-gray-800">¥{{number_format($itinerary["adult_price"])}}~</span>
                                                       </div>
                                                 </div>
                                           </div>
@@ -201,13 +171,13 @@
                                                             </span>
                                                       </div>
                                                 </div>
-
+{{-- 
                                                 <div class="flex flex-wrap gap-2 mb-4">
                                                       @foreach ($itinerary["itineraryHighlights"] as $highlight)
                                                       <span
                                                             class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs">{{$highlight["itinerary_highlight"]}}</span>
                                                       @endforeach
-                                                </div>
+                                                </div> --}}
 
                                                 <button
                                                       class="w-full bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white py-3 rounded-xl text-sm font-semibold hover:shadow-lg transition-all">
@@ -289,13 +259,9 @@
                               <h2 class="text-[25px] sm:text-3xl font-bold mb-4">What Our Travelers Say</h2>
                               <div class="hidden sm:flex items-center justify-center gap-4">
                                     <div class="flex gap-1">
-                                          <i class="fas fa-star text-yellow-400 text-xl"></i>
-                                          <i class="fas fa-star text-yellow-400 text-xl"></i>
-                                          <i class="fas fa-star text-yellow-400 text-xl"></i>
-                                          <i class="fas fa-star text-yellow-400 text-xl"></i>
-                                          <i class="fas fa-star-half-alt text-yellow-400 text-xl"></i>
+                                          {!!\App\Services\Util\FormatService::generateYellowStar($tour[0]->average_rate)!!}
                                     </div>
-                                    <span class="text-2xl font-bold">4.8</span>
+                                    <span class="text-2xl font-bold">{{$tour[0]->average_rate}}</span>
                                     <span class="text-gray-600">from {{count($tour[0]->tourReviews)}}reviews</span>
                               </div>
                         </div>
@@ -341,7 +307,7 @@
             </section>
 
             <!-- Booking Section - Floating Card -->
-            <section class="py-12 sm:py-16 lg:py-20">
+            {{-- <section class="py-12 sm:py-16 lg:py-20">
                   <div class="container mx-auto px-4">
                         <div class="bg-gradient-to-r from-[#e92929] to-[#f04040] rounded-2xl p-6 sm:p-8 lg:p-12 text-white relative overflow-hidden">
                               <!-- 装飾的な背景要素 -->
@@ -402,14 +368,14 @@
                                           <div class="text-center">
                                                 <p class="text-xs sm:text-sm opacity-80 flex items-center justify-center gap-2">
                                                       <i class="fas fa-shield-alt"></i>
-                                                      <span>Free cancellation up to 24 hours before the tour</span>
+                                                      <span>Free cancellation up to 72 hours before the tour</span>
                                                 </p>
                                           </div>
                                     </div>
                               </div>
                         </div>
                   </div>
-            </section>
+            </section> --}}
 
 
             <section id="faq" class="flex justify-center py-12 bg-[#f3e7e7]">
@@ -442,7 +408,7 @@
             <!-- Footer -->
             @include('components.footer')
       </div>
-      <script src="{{mix("js/common.js")}}"></script>
+      {{-- <script src="{{mix("js/common.js")}}"></script> --}}
       <script>
             
             // Smooth scrolling
@@ -463,24 +429,12 @@
                         }
                   });
             });
-
-            // Gallery lightbox (simplified)
-            document.querySelectorAll('#gallery img').forEach(img => {
-                  img.addEventListener('click', function() {
-                        // You can implement a lightbox here
-                        console.log('Image clicked:', this.src);
-                  });
-            });
       </script>
       <script>
       // Tour details data
       const tourDetails = @json($tour[0]->itineraries);
-
-
       function showTourDetails(tourType) {
             const tour = tourDetails[tourType];
-            console.log(tour);
-            
             const modal = document.getElementById('tour-details-modal');
             const content = document.getElementById('tour-details-content');
             const languages = tour.itinerary_languages.reduce((acc, current)=>{
@@ -529,7 +483,7 @@
                         <div class="py-6 px-3 md:p-6">
                               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-3">
                                     <div>
-                                          <span class="text-3xl font-bold text-gray-800">￥${tour.adult_price}</span>
+                                          <span class="text-3xl font-bold text-gray-800">￥${tour.adult_price.toLocaleString('ja-JP')}</span>
                                           <span class="text-gray-600 ml-2">per person</span>
                                     </div>
                                     <div class="flex items-center gap-4 text-gray-600">
@@ -568,13 +522,13 @@
                               </div>
                               </div>
                               
-                              <button class="w-full bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all">
-                              Book This Tour Now
+                              <button onclick="bookTour(${tour['id']})" class="w-full bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white py-4 rounded-xl font-semibold hover:shadow-lg transition-all">
+                                    Book This Tour Now
                               </button>
                               
                               <p class="text-center test-base text-gray-500 mt-4">
                               <i class="fas fa-shield-alt mr-2"></i>
-                              Free cancellation up to 24 hours before the tour
+                              Free cancellation up to 72 hours before the tour
                               </p>
                         </div>
                   </div>
@@ -590,15 +544,11 @@
       }
 
 
-      // Header scroll effect
-      window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                  header.classList.add('shadow-lg');
-            } else {
-                  header.classList.remove('shadow-lg');
-            }
-      });
+      function bookTour(itineraryId) {
+            const tourId = @json(request()->route('id'));
+            localStorage.setItem("itineraryId", itineraryId);
+            window.location.href = `/tour/book/${tourId}`;
+      }
       </script>
 
       <style>
@@ -627,7 +577,7 @@
       }
 
       /* Custom scrollbar */
-      ::-webkit-scrollbar {
+      /* ::-webkit-scrollbar {
             width: 10px;
       }
 
@@ -642,7 +592,7 @@
 
       ::-webkit-scrollbar-thumb:hover {
             background: #d61f1f;
-      }
+      } */
       </style>
       <script>
             document.addEventListener('DOMContentLoaded', function() {

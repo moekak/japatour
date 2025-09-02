@@ -1,8 +1,10 @@
 
 import StandardPriceStrategy from "./calculator/StandardPriceStrategy.js";
+import LocalStorage from "./LocalStorage.js";
 import SummaryDisplayObserver from "./observer/SummaryDisplayObserver.js";
 import TourDataInputObserver from "./observer/TourDataInputObserver.js";
 import TourDataSaveObserver from "./observer/TourDataSaveObserver.js";
+import UIOperator from "./UIOperator.js";
 
 export default class BookingCalculator{
       constructor(){
@@ -51,9 +53,9 @@ export default class BookingCalculator{
             this.registerObserver(new SummaryDisplayObserver({
                   total: document.getElementById('grand-total'),
                   adultNumber: document.getElementById('summary-adults'),
-                  childNumber: document.getElementById('summary-children'),
+                  childNumber: document.getElementById('summary-youth'),
                   adultPrice: document.getElementById('adult-total'),
-                  childPrice: document.getElementById('children-total'),
+                  childPrice: document.getElementById('youth-total'),
                   summaryContent: document.getElementById("summary-content"),
                   priceBrakdown: document.getElementById("price-breakdown"),
                   itineraryTitle: document.getElementById("js_itinerary_title"),
@@ -90,26 +92,37 @@ export default class BookingCalculator{
             });
       }
 
+      updatePrices(selectedOption){
+            this.selectedTourOption = selectedOption
+            this.baseAdultPrice = selectedOption?.dataset.adultPrice; // 基本大人パッケージ料金
+            this.baseChildPrice = selectedOption?.dataset.childPrice; 
+      }
+
       // イベントリスナーの初期化
       initializeEvents() {
+
+            const itineraryId = LocalStorage.getData()
+            if(itineraryId){
+                  const selectedOption = Array.from(this.elements.tourOption).filter(el => el.dataset.id == itineraryId)
+                  UIOperator.addClickedStyle(selectedOption[0]);
+                  this.updatePrices(selectedOption[0])
+                  this.calculateAndNotify();
+            }
+            
             // ツアー選択
             if (this.elements.tourOption) {
                   this.elements.tourOption.forEach(option => {
                         option.addEventListener('click', (e) => {
                               const selectedOption = e.currentTarget
-                              this.selectedTourOption = selectedOption
-                              this.baseAdultPrice = option.dataset.adultPrice; // 基本大人パッケージ料金
-                              this.baseChildPrice = option.dataset.childPrice; 
+                              this.updatePrices(selectedOption)
 
                               // スタイル変更
                               this.elements.tourOption.forEach(opt=>{
-                                    opt.classList.remove('border-[#e92929]', 'bg-red-50');
-                                    opt.classList.add('border-[#e7d0d0]');
+                                    UIOperator.removeClickedStyle(opt);
                               })
 
                               // スタイル変更
-                              selectedOption.classList.remove('border-[#e7d0d0]');
-                              selectedOption.classList.add('border-[#e92929]', 'bg-red-50');
+                              UIOperator.addClickedStyle(selectedOption);
                               this.calculateAndNotify();
                         });
                   });

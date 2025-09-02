@@ -13,15 +13,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ BookingCalculator)
 /* harmony export */ });
 /* harmony import */ var _calculator_StandardPriceStrategy_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./calculator/StandardPriceStrategy.js */ "./resources/js/components/tourBook/calculator/StandardPriceStrategy.js");
-/* harmony import */ var _observer_SummaryDisplayObserver_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./observer/SummaryDisplayObserver.js */ "./resources/js/components/tourBook/observer/SummaryDisplayObserver.js");
-/* harmony import */ var _observer_TourDataInputObserver_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./observer/TourDataInputObserver.js */ "./resources/js/components/tourBook/observer/TourDataInputObserver.js");
-/* harmony import */ var _observer_TourDataSaveObserver_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./observer/TourDataSaveObserver.js */ "./resources/js/components/tourBook/observer/TourDataSaveObserver.js");
+/* harmony import */ var _LocalStorage_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LocalStorage.js */ "./resources/js/components/tourBook/LocalStorage.js");
+/* harmony import */ var _observer_SummaryDisplayObserver_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./observer/SummaryDisplayObserver.js */ "./resources/js/components/tourBook/observer/SummaryDisplayObserver.js");
+/* harmony import */ var _observer_TourDataInputObserver_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./observer/TourDataInputObserver.js */ "./resources/js/components/tourBook/observer/TourDataInputObserver.js");
+/* harmony import */ var _observer_TourDataSaveObserver_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./observer/TourDataSaveObserver.js */ "./resources/js/components/tourBook/observer/TourDataSaveObserver.js");
+/* harmony import */ var _UIOperator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UIOperator.js */ "./resources/js/components/tourBook/UIOperator.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+
+
 
 
 
@@ -70,12 +74,12 @@ var BookingCalculator = /*#__PURE__*/function () {
     key: "registerDisplayObservers",
     value: function registerDisplayObservers() {
       // サマリー表示のオブザーバーを登録
-      this.registerObserver(new _observer_SummaryDisplayObserver_js__WEBPACK_IMPORTED_MODULE_1__["default"]({
+      this.registerObserver(new _observer_SummaryDisplayObserver_js__WEBPACK_IMPORTED_MODULE_2__["default"]({
         total: document.getElementById('grand-total'),
         adultNumber: document.getElementById('summary-adults'),
-        childNumber: document.getElementById('summary-children'),
+        childNumber: document.getElementById('summary-youth'),
         adultPrice: document.getElementById('adult-total'),
-        childPrice: document.getElementById('children-total'),
+        childPrice: document.getElementById('youth-total'),
         summaryContent: document.getElementById("summary-content"),
         priceBrakdown: document.getElementById("price-breakdown"),
         itineraryTitle: document.getElementById("js_itinerary_title"),
@@ -86,7 +90,7 @@ var BookingCalculator = /*#__PURE__*/function () {
   }, {
     key: "registerSaveObservers",
     value: function registerSaveObservers() {
-      this.registerObserver(new _observer_TourDataSaveObserver_js__WEBPACK_IMPORTED_MODULE_3__["default"]({
+      this.registerObserver(new _observer_TourDataSaveObserver_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
         itineraryId: document.getElementById("js_itinerary_id"),
         itineraryTitle: document.getElementById("js_itinerary_name"),
         adultNumber: document.getElementById("js_adult_number"),
@@ -100,7 +104,7 @@ var BookingCalculator = /*#__PURE__*/function () {
   }, {
     key: "registerInputObservers",
     value: function registerInputObservers() {
-      this.registerObserver(new _observer_TourDataInputObserver_js__WEBPACK_IMPORTED_MODULE_2__["default"]());
+      this.registerObserver(new _observer_TourDataInputObserver_js__WEBPACK_IMPORTED_MODULE_3__["default"]());
     }
 
     // オブザーバー登録メソッド
@@ -118,30 +122,43 @@ var BookingCalculator = /*#__PURE__*/function () {
         observer.update(TourData);
       });
     }
+  }, {
+    key: "updatePrices",
+    value: function updatePrices(selectedOption) {
+      this.selectedTourOption = selectedOption;
+      this.baseAdultPrice = selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.dataset.adultPrice; // 基本大人パッケージ料金
+      this.baseChildPrice = selectedOption === null || selectedOption === void 0 ? void 0 : selectedOption.dataset.childPrice;
+    }
 
     // イベントリスナーの初期化
   }, {
     key: "initializeEvents",
     value: function initializeEvents() {
       var _this = this;
+      var itineraryId = _LocalStorage_js__WEBPACK_IMPORTED_MODULE_1__["default"].getData();
+      if (itineraryId) {
+        var selectedOption = Array.from(this.elements.tourOption).filter(function (el) {
+          return el.dataset.id == itineraryId;
+        });
+        _UIOperator_js__WEBPACK_IMPORTED_MODULE_5__["default"].addClickedStyle(selectedOption[0]);
+        this.updatePrices(selectedOption[0]);
+        this.calculateAndNotify();
+      }
+
       // ツアー選択
       if (this.elements.tourOption) {
         this.elements.tourOption.forEach(function (option) {
           option.addEventListener('click', function (e) {
             var selectedOption = e.currentTarget;
-            _this.selectedTourOption = selectedOption;
-            _this.baseAdultPrice = option.dataset.adultPrice; // 基本大人パッケージ料金
-            _this.baseChildPrice = option.dataset.childPrice;
+            _this.updatePrices(selectedOption);
 
             // スタイル変更
             _this.elements.tourOption.forEach(function (opt) {
-              opt.classList.remove('border-[#e92929]', 'bg-red-50');
-              opt.classList.add('border-[#e7d0d0]');
+              _UIOperator_js__WEBPACK_IMPORTED_MODULE_5__["default"].removeClickedStyle(opt);
             });
 
             // スタイル変更
-            selectedOption.classList.remove('border-[#e7d0d0]');
-            selectedOption.classList.add('border-[#e92929]', 'bg-red-50');
+            _UIOperator_js__WEBPACK_IMPORTED_MODULE_5__["default"].addClickedStyle(selectedOption);
             _this.calculateAndNotify();
           });
         });
@@ -340,8 +357,43 @@ var BookingInformation = /*#__PURE__*/function () {
         phone: phone,
         request: request
       };
-      console.log(data);
       this.notifyObservers(data);
+    }
+  }]);
+}();
+
+
+/***/ }),
+
+/***/ "./resources/js/components/tourBook/LocalStorage.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/tourBook/LocalStorage.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ LocalStorage)
+/* harmony export */ });
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
+function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
+function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var LocalStorage = /*#__PURE__*/function () {
+  function LocalStorage() {
+    _classCallCheck(this, LocalStorage);
+  }
+  return _createClass(LocalStorage, null, [{
+    key: "getData",
+    value: function getData() {
+      return localStorage.getItem("itineraryId");
+    }
+  }, {
+    key: "resetData",
+    value: function resetData() {
+      localStorage.removeItem("itineraryId");
     }
   }]);
 }();
@@ -408,44 +460,40 @@ var TourReview = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./resources/js/components/tourBook/calculator/DiscountStrategy.js":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/tourBook/calculator/DiscountStrategy.js ***!
-  \*************************************************************************/
+/***/ "./resources/js/components/tourBook/UIOperator.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/tourBook/UIOperator.js ***!
+  \********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ DiscountStrategy)
+/* harmony export */   "default": () => (/* binding */ UIOperator)
 /* harmony export */ });
-/* harmony import */ var _PriceCalculationStrategy_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PriceCalculationStrategy.js */ "./resources/js/components/tourBook/calculator/PriceCalculationStrategy.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
 function _createClass(e, r, t) { return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", { writable: !1 }), e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-function _callSuper(t, o, e) { return o = _getPrototypeOf(o), _possibleConstructorReturn(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e)); }
-function _possibleConstructorReturn(t, e) { if (e && ("object" == _typeof(e) || "function" == typeof e)) return e; if (void 0 !== e) throw new TypeError("Derived constructors may only return object or undefined"); return _assertThisInitialized(t); }
-function _assertThisInitialized(e) { if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); return e; }
-function _isNativeReflectConstruct() { try { var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); } catch (t) {} return (_isNativeReflectConstruct = function _isNativeReflectConstruct() { return !!t; })(); }
-function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function (t) { return t.__proto__ || Object.getPrototypeOf(t); }, _getPrototypeOf(t); }
-function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
-function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
-
-var DiscountStrategy = /*#__PURE__*/function (_PriceCalculationStra) {
-  function DiscountStrategy() {
-    _classCallCheck(this, DiscountStrategy);
-    return _callSuper(this, DiscountStrategy, arguments);
+var UIOperator = /*#__PURE__*/function () {
+  function UIOperator() {
+    _classCallCheck(this, UIOperator);
   }
-  _inherits(DiscountStrategy, _PriceCalculationStra);
-  return _createClass(DiscountStrategy, null, [{
-    key: "calculate",
-    value: function calculate(basePrice, options) {
-      return 0.15 * basePrice * options.travelers;
+  return _createClass(UIOperator, null, [{
+    key: "removeClickedStyle",
+    value: function removeClickedStyle(element) {
+      element === null || element === void 0 || element.classList.remove('border-[#e92929]', 'bg-red-50');
+      element === null || element === void 0 || element.classList.add('border-[#e7d0d0]');
+    }
+  }, {
+    key: "addClickedStyle",
+    value: function addClickedStyle(selectedElement) {
+      selectedElement === null || selectedElement === void 0 || selectedElement.classList.remove('border-[#e7d0d0]');
+      selectedElement === null || selectedElement === void 0 || selectedElement.classList.add('border-[#e92929]', 'bg-red-50');
     }
   }]);
-}(_PriceCalculationStrategy_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+}();
 
 
 /***/ }),
@@ -491,8 +539,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ StandardPriceStrategy)
 /* harmony export */ });
-/* harmony import */ var _DiscountStrategy_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DiscountStrategy.js */ "./resources/js/components/tourBook/calculator/DiscountStrategy.js");
-/* harmony import */ var _PriceCalculationStrategy_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PriceCalculationStrategy.js */ "./resources/js/components/tourBook/calculator/PriceCalculationStrategy.js");
+/* harmony import */ var _PriceCalculationStrategy_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PriceCalculationStrategy.js */ "./resources/js/components/tourBook/calculator/PriceCalculationStrategy.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _classCallCheck(a, n) { if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function"); }
 function _defineProperties(e, r) { for (var t = 0; t < r.length; t++) { var o = r[t]; o.enumerable = o.enumerable || !1, o.configurable = !0, "value" in o && (o.writable = !0), Object.defineProperty(e, _toPropertyKey(o.key), o); } }
@@ -507,7 +554,6 @@ function _getPrototypeOf(t) { return _getPrototypeOf = Object.setPrototypeOf ? O
 function _inherits(t, e) { if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function"); t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } }), Object.defineProperty(t, "prototype", { writable: !1 }), e && _setPrototypeOf(t, e); }
 function _setPrototypeOf(t, e) { return _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function (t, e) { return t.__proto__ = e, t; }, _setPrototypeOf(t, e); }
 
-
 var StandardPriceStrategy = /*#__PURE__*/function (_PriceCalculationStra) {
   function StandardPriceStrategy() {
     _classCallCheck(this, StandardPriceStrategy);
@@ -517,30 +563,15 @@ var StandardPriceStrategy = /*#__PURE__*/function (_PriceCalculationStra) {
   return _createClass(StandardPriceStrategy, null, [{
     key: "calculateAdultPrice",
     value: function calculateAdultPrice(adultPrice, options) {
-      // if(options.travelers > 1){
-      //       return (basePrice * options.travelers) - DiscountStrategy.calculate(basePrice, options)
-      // }else{
-      //      return basePrice * options.travelers 
-      // }
-
-      console.log(options);
-      console.log(adultPrice);
       return adultPrice * options.adultNumber;
     }
   }, {
     key: "calculateChildPrice",
     value: function calculateChildPrice(childPrice, options) {
-      // if(options.travelers > 1){
-      //       return (basePrice * options.travelers) - DiscountStrategy.calculate(basePrice, options)
-      // }else{
-      //      return basePrice * options.travelers 
-      // }
-
-      console.log("子供の料金" + childPrice);
       return childPrice * options.childNumber;
     }
   }]);
-}(_PriceCalculationStrategy_js__WEBPACK_IMPORTED_MODULE_1__["default"]);
+}(_PriceCalculationStrategy_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 
 /***/ }),
@@ -665,11 +696,12 @@ var SummaryDisplayObserver = /*#__PURE__*/function (_ObserverInterface) {
   return _createClass(SummaryDisplayObserver, [{
     key: "update",
     value: function update(TourData) {
-      this.elements.total.textContent = "\uFFE5".concat(TourData.total.toLocaleString('ja-JP'));
-      this.elements.adultNumber.textContent = "".concat(TourData.adultNumber.toLocaleString('ja-JP'));
-      this.elements.childNumber.textContent = "".concat(TourData.childNumber.toLocaleString('ja-JP'));
-      this.elements.adultPrice.textContent = "\uFFE5".concat(TourData.adultPriceTotal.toLocaleString('ja-JP'));
-      this.elements.childPrice.textContent = "\uFFE5".concat(TourData.childPriceTotal.toLocaleString('ja-JP'));
+      var _TourData$adultNumbe, _TourData$childNumber;
+      this.elements.total.textContent = "\uFFE5".concat(TourData.total ? TourData.total.toLocaleString('ja-JP') : 0);
+      this.elements.adultNumber.textContent = "".concat((_TourData$adultNumbe = TourData.adultNumbe) !== null && _TourData$adultNumbe !== void 0 ? _TourData$adultNumbe : 0);
+      this.elements.childNumber.textContent = "".concat((_TourData$childNumber = TourData.childNumber) !== null && _TourData$childNumber !== void 0 ? _TourData$childNumber : 0);
+      this.elements.adultPrice.textContent = "\uFFE5".concat((TourData.adultPriceTotal ? TourData.adultPriceTotal : 0).toLocaleString('ja-JP'));
+      this.elements.childPrice.textContent = "\uFFE5".concat((TourData.childPriceTotal ? TourData.childPriceTotal : 0).toLocaleString('ja-JP'));
       this.elements.itineraryTitle.textContent = TourData.itineraryTitle;
       this.elements.date.textContent = TourData.selectedDate;
       this.elements.summaryContent.classList.add("hidden");

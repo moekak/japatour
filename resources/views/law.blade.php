@@ -21,41 +21,7 @@
         <div class="layout-container flex h-full grow flex-col">
             
             <!-- Navigation -->
-            <nav class="bg-[#fcf8f8] border-b border-solid border-b-[#f3e7e7]">
-                <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                    <div class="relative flex h-16 items-center justify-between">
-                        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                            <button type="button" aria-controls="mobile-menu" aria-expanded="false" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
-                                <span class="absolute -inset-0.5"></span>
-                                <span class="sr-only">Open main menu</span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="block size-6">
-                                    <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
-                            <a href="/" class="flex shrink-0 items-center justify-center gap-3 text-[#1b0e0e]">
-                                <div class="size-8 items-center flex justify-center">
-                                    <img src="/img/logo2.png" alt="ShogunTours Logo">
-                                </div>
-                                <h2 class="text-[#1b0e0e] text-lg font-bold leading-tight tracking-[-0.015em]">ShogunTours</h2>
-                            </a>
-                            <div class="hidden sm:ml-6 sm:flex items-center justify-center">
-                                <div class="flex space-x-4 items-center justify-center">
-                                    <a href="/#tours" class="text-[#1b0e0e] text-base font-medium leading-normal hover:text-[#e92929] transition-colors">Tours</a>
-                                    <a href="/#instagram" class="text-[#1b0e0e] text-base font-medium leading-normal hover:text-[#e92929] transition-colors">Gallery</a>
-                                    <a href="/#blog" class="text-[#1b0e0e] text-base font-medium leading-normal hover:text-[#e92929] transition-colors">Blog</a>
-                                    <a href="/#faq" class="text-[#1b0e0e] text-base font-medium leading-normal hover:text-[#e92929] transition-colors">FAQ</a>
-                                    <a href="/#contact" class="text-[#1b0e0e] text-base font-medium leading-normal hover:text-[#e92929] transition-colors">Contact</a>
-                                    <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#e92929] text-[#fcf8f8] text-base font-bold leading-normal tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
-                                        <span class="truncate">Book Now</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+            @include('components.nav')
 
             <!-- Hero Section -->
             <div class="flex justify-center bg-gradient-to-r from-[#e92929] to-[#f04040] relative overflow-hidden">
@@ -287,7 +253,7 @@
                                         <h5 class="font-semibold text-[#1b0e0e] mb-2">How to Exercise Your Rights</h5>
                                         <p class="text-sm mb-2">To exercise any of these rights, please contact us at:</p>
                                         <div class="text-sm">
-                                            <p><strong>Email:</strong> privacy@shoguntoursjapan.com</p>
+                                            <p><strong>Email:</strong> info@shoguntoursjapan.com</p>
                                             <p><strong>Subject line:</strong> "Privacy Rights Request"</p>
                                             <p><strong>Response time:</strong> We will respond within 30 days</p>
                                         </div>
@@ -367,34 +333,11 @@
                                     <h4 class="text-[#1b0e0e] font-semibold">9.2 Data Protection Officer</h4>
                                     <p>For privacy-related questions or concerns, please contact our Data Protection Officer:</p>
                                     <div class="bg-[#fcf8f8] border border-[#f3e7e7] rounded-lg p-4">
-                                        <p><strong>Email:</strong> privacy@shoguntoursjapan.com</p>
-                                        <p><strong>Mail:</strong> ShogunTours Privacy Office, 123 Adventure Lane, Travel Town, Japan</p>
-                                        <p><strong>Phone:</strong> +81-3-XXXX-XXXX</p>
+                                        <p><strong>Email:</strong> info@shoguntoursjapan.com</p>
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-
-                        <!-- Contact Section -->
-                        <div class="mt-12 bg-gradient-to-r from-[#e92929] to-[#f04040] rounded-2xl p-8 text-white relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
-                            <div class="relative z-10">
-                                <h3 class="text-2xl font-bold mb-4">Questions About Your Privacy?</h3>
-                                <p class="text-lg mb-6 opacity-90">
-                                    We're committed to transparency and protecting your personal information. Don't hesitate to reach out with any privacy concerns.
-                                </p>
-                                <div class="flex flex-col sm:flex-row gap-4">
-                                    <a href="mailto:privacy@shoguntoursjapan.com" class="bg-white text-[#e92929] px-6 py-3 rounded-lg font-bold hover:scale-105 transition-transform text-center">
-                                        Contact Privacy Officer
-                                    </a>
-                                    <a href="/#contact" class="bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-lg font-bold hover:bg-white/30 transition-colors text-center">
-                                        General Contact
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </section>

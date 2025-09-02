@@ -6,7 +6,7 @@
 </head>
 
 <body>
-      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
+      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root"
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
                   <!-- Header -->
@@ -86,10 +86,16 @@
                                                       <div class="flex flex-wrap gap-2">
                                                             @php
                                                                   $tags = explode(",", $featuredBlog->tags);
+                                                                  $maxVisibleTags = 2; // 表示する最大タグ数
+                                                                  $visibleTags = array_slice($tags, 0, $maxVisibleTags);
+                                                                  $hiddenCount = count($tags) - $maxVisibleTags;
                                                             @endphp
-                                                            @foreach ($tags as $tag)
+                                                            @foreach ($visibleTags as $tag)
                                                                   <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">{{$tag}}</span>
                                                             @endforeach
+                                                            @if ($hiddenCount > 0)
+                                                                  <span class="bg-[#e7d0d0] text-[#994d4d] px-2 py-1 rounded-full text-xs whitespace-nowrap flex-shrink-0">+{{$hiddenCount}}</span>
+                                                            @endif
                                                       </div>
                                                 </div>
                                           </div>
@@ -171,7 +177,7 @@
                   </section>
 
                   <!-- Newsletter Section -->
-                  <section class="flex justify-center py-12 bg-[#f3e7e7]">
+                  {{-- <section class="flex justify-center py-12 bg-[#f3e7e7]">
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                               <div class="text-center px-4">
                                     <h2
@@ -197,7 +203,7 @@
                                     </div>
                               </div>
                         </div>
-                  </section>
+                  </section> --}}
 
                   <!-- Footer -->
                   <footer class="flex justify-center bg-[#1b0e0e] text-white">
@@ -246,12 +252,8 @@
                   event.target.classList.remove('bg-white', 'text-[#1b0e0e]', 'border', 'border-[#e7d0d0]');
 
                   // Filter articles
-
-                  console.log(category);
-                  
                   articles.forEach(article => {
                         if (category === 'all' || article.dataset.category == category) {
-                              console.log("2222");
                               
                               article.style.display = 'block';
                               article.style.animation = 'fadeIn 0.5s ease-in';

@@ -88,90 +88,88 @@
 <body>
       <div class="container">
             <div class="header">
-                  <h1>Booking Confirmed</h1>
+                  <h1>Request Received</h1>
             </div>
 
-            <div class="content">
-                  <p>Dear {{ $personalInfo["first_name"] }} {{ $personalInfo["last_name"]}},</p>
+      <div class="content">
+            <p>Dear {{ $personalInfo["first_name"] }} {{ $personalInfo["last_name"] }},</p>
 
-                  <p>Your tour is confirmed! Here are your booking details:</p>
+            <p>Thank you for your request! Here are the details you submitted:</p>
 
-                  <div class="section">
-                        <h3>Your Information</h3>
-                        <p><strong>Name:</strong> {{ $personalInfo["first_name"] }} {{ $personalInfo["last_name"]}}</p>
-                        <p><strong>Email:</strong> {{ $personalInfo["email"] }}</p>
-                        <p><strong>Phone:</strong> {{ $personalInfo["phone_number"] }}</p>
+            <div class="section">
+                  <h3>Your Information</h3>
+                  <p><strong>Name:</strong> {{ $personalInfo["first_name"] }} {{ $personalInfo["last_name"] }}</p>
+                  <p><strong>Email:</strong> {{ $personalInfo["email"] }}</p>
+                  <p><strong>Phone:</strong> {{ $personalInfo["phone_number"] }}</p>
+            </div>
+
+            <div class="section">
+                  <h3>Requested Tour Details</h3>
+                  <p><strong>Tour:</strong> {{ $tourDetails["tour_title"] }}</p>
+                  <p><strong>Itinerary:</strong> {{ $tourDetails["itinerary_title"] }}</p>
+                  <p><strong>Preferred Date:</strong> {{ $tourDetails["tour_date"] }}</p>
+                  <p><strong>Guests:</strong> {{ $tourDetails["adult_number"] }} Adults{{ $tourDetails["children_number"] > 0 ? ', ' . $tourDetails["children_number"] . ' Children' : '' }}</p>
+            </div>
+
+            <div class="section">
+                  <h3>Estimated Price</h3>
+                  <div class="price-line">
+                  <span>Adults ({{ $tourDetails["adult_number"] }})</span>
+                  <span>　¥{{ number_format($tourDetails["adult_price"]) }}</span>
                   </div>
-
-                  <div class="section">
-                        <h3>Tour Details</h3>
-                        <p><strong>Tour:</strong> {{ $tourDetails["tour_title"] }}</p>
-                        <p><strong>Itinerary:</strong> {{ $tourDetails["itinerary_title"] }}</p>
-                        <p><strong>Date:</strong> {{ $tourDetails["tour_date"] }}</p>
-                        <p><strong>Guests:</strong> {{ $tourDetails["adult_number"] }} Adults{{ $tourDetails["children_number"] > 0 ? ', ' . $tourDetails["children_number"] . ' Children' : '' }}</p>
+                  @if($tourDetails["children_number"] > 0)
+                  <div class="price-line">
+                        <span>Children ({{ $tourDetails["children_number"] }})</span>
+                        <span>　¥{{ number_format($tourDetails["children_price"]) }}</span>
                   </div>
-
-                  <div class="section">
-                        <h3>Price</h3>
-                        <div class="price-line">
-                              <span>Adults ({{ $tourDetails["adult_number"] }})</span>
-                              <span>¥{{ number_format($tourDetails["adult_price"]) }}</span>
-                        </div>
-                              @if($tourDetails["children_number"] > 0)
-                              <div class="price-line">
-                                    <span>Children ({{ $tourDetails["children_number"] }})</span>
-                                    <span>¥{{ number_format($tourDetails["children_price"]) }}</span>
-                              </div>
-                        @endif
-                        <div class="price-line total">
-                              <span>Total</span>
-                              <span>¥{{ number_format($tourDetails["children_price"] + $tourDetails["adult_price"]) }}</span>
-                        </div>
-                        <p style="font-size: 12px; color: #666; margin-top: 8px;">
-                              Payment on tour day (cash)
-                        </p>
-                  </div>
-
-                        @if($tourDetails["request"])
-                        <div class="section">
-                              <h3>Your Requests</h3>
-                              <p>{{ $tourDetails["request"] }}</p>
-                        </div>
                   @endif
-
-                  <div class="section">
-                        <h3>Important</h3>
-                        <ul>
-                              <li>Free cancellation up to 24 hours before</li>
-                              <li>Tours run in light rain</li>
-                              <li>Guide contact details sent 24 hours before tour</li>
-                              <li>Bring comfortable shoes and camera</li>
-                        </ul>
+                  <div class="price-line total">
+                  <span>Total (estimate)</span>
+                  <span>   ¥{{ number_format($tourDetails["children_price"] + $tourDetails["adult_price"]) }}</span>
                   </div>
-
-                  <div class="section">
-                        <h3>Included</h3>
-                        <ul>
-                              <li>Professional guide</li>
-                              <li>All entrance fees</li>
-                              <li>Transportation during tour</li>
-                        </ul>
-                  </div>
-
-                  <div class="contact">
-                        <p><strong>Questions or changes?</strong></p>
-                        <a href="tel:+8190-6495-4567">Call Us</a>
-                        <a href="mailto:info@shoguntoursjapan.com">Email</a>
-                  </div>
-
-                  <p>Best regards,<br>
-                  <strong>ShogunTours Team</strong></p>
+                  <p style="font-size: 12px; color: #666; margin-top: 8px;">
+                  Payment details will be confirmed after your request is approved.
+                  </p>
             </div>
 
-            <div class="footer">
-                  <p>ShogunTours<br>
-                  Phone: 090-6495-4567 | Email: info@shoguntoursjapan.com</p>
+            @if($tourDetails["request"])
+            <div class="section">
+                  <h3>Special Requests</h3>
+                  <p>{{ $tourDetails["request"] }}</p>
             </div>
+            @endif
+
+            <div class="section">
+                  <h3>Next Steps</h3>
+                  <ul>
+                  <li>We will review your request and confirm availability.</li>
+                  <li>Once confirmed, we’ll send booking and payment instructions.</li>
+                  <li>No payment is required until your booking is officially confirmed.</li>
+                  </ul>
+            </div>
+
+            <div class="section">
+                  <h3>Important Notes</h3>
+                  <ul>
+                  <li>Free cancellation up to 7 days before confirmed booking</li>
+                  <li>Guide contact details will be provided a week before a tour</li>
+                  </ul>
+            </div>
+
+            <div class="contact">
+                  <p><strong>Questions or changes?</strong></p>
+                  <a href="mailto:info@shoguntoursjapan.com">Email</a>
+            </div>
+
+            <p>Best regards,<br>
+            <strong>ShogunTours Team</strong></p>
       </div>
+
+      <div class="footer">
+            <p>ShogunTours<br>
+            Email: info@shoguntoursjapan.com</p>
+      </div>
+</div>
+
 </body>
 </html>

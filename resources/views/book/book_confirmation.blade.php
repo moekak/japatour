@@ -2,69 +2,7 @@
 <html lang="en">
 
 <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Booking Confirmed - ShogunTours</title>
-      <script src="https://cdn.tailwindcss.com"></script>
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-      <style>
-            body {
-                  font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;
-            }
-
-            @keyframes fadeIn {
-                  from {
-                        opacity: 0;
-                        transform: translateY(20px);
-                  }
-
-                  to {
-                        opacity: 1;
-                        transform: translateY(0);
-                  }
-            }
-
-            @keyframes successPulse {
-                  0% {
-                        transform: scale(0.8);
-                        opacity: 0;
-                  }
-
-                  50% {
-                        transform: scale(1.05);
-                  }
-
-                  100% {
-                        transform: scale(1);
-                        opacity: 1;
-                  }
-            }
-
-            @keyframes slideInFromRight {
-                  from {
-                        opacity: 0;
-                        transform: translateX(50px);
-                  }
-
-                  to {
-                        opacity: 1;
-                        transform: translateX(0);
-                  }
-            }
-
-            .fade-in {
-                  animation: fadeIn 0.8s ease-out forwards;
-            }
-
-            .success-animation {
-                  animation: successPulse 0.8s ease-out;
-            }
-
-            .slide-in {
-                  animation: slideInFromRight 0.6s ease-out forwards;
-            }
-      </style>
+      @include('components.head')
 </head>
 
 <body class="bg-[#fcf8f8] min-h-screen">
@@ -73,13 +11,13 @@
 
       <div class="max-w-[1200px] mx-auto px-4 py-12">
             <!-- Success Message -->
-            <div class="text-center mb-12 fade-in">
-                  <div class="success-animation mb-6">
-                        <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                              <i class="fas fa-check text-4xl text-green-600"></i>
+            <div class="text-center mb-12">
+                  <div class=" mb-6">
+                        <div class="w-12 h-12 md:w-24 md:h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                              <i class="fas fa-check text-2xl md:text-4xl text-green-600"></i>
                         </div>
-                        <h1 class="text-[#1b0e0e] text-4xl font-black mb-2">Thank You!</h1>
-                        <p class="text-[#994d4d] text-lg">Your booking request has been submitted successfully</p>
+                        <h1 class="text-[#1b0e0e] text-3xl md:text-4xl font-black mb-2">Thank You!</h1>
+                        <p class="text-[#994d4d] text-base md:text-lg">Your booking request has been submitted successfully</p>
                   </div>
 
                   <div class="bg-green-50 border border-green-200 rounded-lg p-6 max-w-2xl mx-auto">
@@ -95,7 +33,7 @@
 
             <div class="grid lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
                   <!-- What's Next -->
-                  <div class="bg-white rounded-lg shadow-lg p-6 slide-in">
+                  <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="text-[#1b0e0e] text-lg font-bold mb-6">What Happens Next?</h3>
 
                         <div class="space-y-6">
@@ -127,7 +65,7 @@
                                     </div>
                                     <div>
                                           <h4 class="text-[#994d4d] font-semibold text-sm">Contact & Confirmation</h4>
-                                          <p class="text-[#994d4d] text-sm">We'll email you within 24 hours with confirmation</p>
+                                          <p class="text-[#994d4d] text-sm">We'll email you within 72 hours with confirmation</p>
                                           <span class="text-[#994d4d] text-sm">⏳ Upcoming</span>
                                     </div>
                               </div>
@@ -146,20 +84,10 @@
                   </div>
 
                   <!-- Support -->
-                  <div class="bg-white rounded-lg shadow-lg p-6 slide-in">
+                  <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="text-[#1b0e0e] text-lg font-bold mb-4">Need Help?</h3>
 
                         <div class="space-y-4 mb-6">
-                              <a href="tel:+81312345678" class="flex items-center gap-3 p-3 bg-[#f3e7e7] rounded-lg hover:bg-[#e7d0d0] transition-colors">
-                                    <div class="w-10 h-10 bg-[#e92929] rounded-lg flex items-center justify-center">
-                                          <i class="fas fa-phone text-white"></i>
-                                    </div>
-                                    <div>
-                                          <div class="text-[#1b0e0e] font-medium text-sm">Call Us</div>
-                                          <div class="text-[#994d4d] text-sm">+81 3-1234-5678</div>
-                                    </div>
-                              </a>
-
                               <a href="mailto:info@shoguntoursjapan.com" class="flex items-center gap-3 p-3 bg-[#f3e7e7] rounded-lg hover:bg-[#e7d0d0] transition-colors">
                                     <div class="w-10 h-10 bg-[#e92929] rounded-lg flex items-center justify-center">
                                           <i class="fas fa-envelope text-white"></i>
@@ -177,7 +105,7 @@
                                     <span class="font-medium text-sm">Quick Tip</span>
                               </div>
                               <p class="text-blue-600 text-sm">
-                                    Check your email (including spam folder) for our confirmation message within 24 hours.
+                                    Check your email (including spam folder) for our confirmation message within 72 hours.
                               </p>
                         </div>
 
@@ -188,36 +116,37 @@
                                           <i class="fas fa-shield-alt text-green-600"></i>
                                     </div>
                                     <div>
-                                          <h4 class="text-[#1b0e0e] font-bold text-sm">Free Cancellation</h4>
-                                          <p class="text-[#994d4d] text-sm">Peace of mind guaranteed</p>
+                                          <h4 class="text-[#1b0e0e] font-bold text-sm">Book now, pay later</h4>
+                                          <p class="text-[#994d4d] text-sm">Flexible & worry-free booking</p>
                                     </div>
                               </div>
 
                               <div class="space-y-2 text-sm">
                                     <div class="flex items-center gap-2">
                                           <i class="fas fa-check text-green-600"></i>
-                                          <span class="text-[#1b0e0e]">Cancel up to 24 hours before</span>
+                                          <span class="text-[#1b0e0e]">Payment due 14 days before tour</span>
                                     </div>
                                     <div class="flex items-center gap-2">
                                           <i class="fas fa-check text-green-600"></i>
-                                          <span class="text-[#1b0e0e]">100% refund guaranteed</span>
+                                          <span class="text-[#1b0e0e]">Free cancellation up to 7 days before tour</span>
                                     </div>
                                     <div class="flex items-center gap-2">
                                           <i class="fas fa-check text-green-600"></i>
-                                          <span class="text-[#1b0e0e]">Weather protection included</span>
+                                          <span class="text-[#1b0e0e]">100% refund guarantee for eligible cancellations</span>
                                     </div>
                               </div>
                         </div>
+
                   </div>
             </div>
 
             <!-- Action Buttons -->
             <div class="text-center mt-12 slide-in">
-                  <div class="flex justify-center gap-4">
-                        <button onclick="window.location.href='/tours'" class="bg-[#e92929] text-white py-3 px-8 rounded-lg font-medium hover:bg-[#d61f1f] transition-all duration-300 flex items-center justify-center gap-2">
+                  <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="{{route("tours")}}" class="bg-[#e92929] text-white py-3 px-8 rounded-lg font-medium hover:bg-[#d61f1f] transition-all duration-300 flex items-center justify-center gap-2">
                               <i class="fas fa-plus-circle"></i>
                               Book Another Tour
-                        </button>
+                        </a>
                         <a href={{route("top")}} class="bg-white border-2 border-[#e7d0d0] text-[#994d4d] py-3 px-8 rounded-lg font-medium hover:border-[#994d4d] hover:bg-[#f3e7e7] transition-all duration-300 flex items-center justify-center gap-2">
                               <i class="fas fa-home"></i>
                               Back to Home

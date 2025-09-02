@@ -8,7 +8,7 @@
     <title>Message Sent - Thank You! - ShogunTours</title>
     <meta name="keywords" content="ShogunTours, thank you, message sent, Japan tour booking">
     <meta name="robots" content="noindex,nofollow">
-    <meta name="description" content="Thank you for contacting ShogunTours. We'll get back to you within 24 hours to help plan your perfect Japan adventure.">
+    <meta name="description" content="Thank you for contacting ShogunTours. We'll get back to you within 72 hours to help plan your perfect Japan adventure.">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
     <link rel="stylesheet" as="style" onload="this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" />
     <link rel="shortcut icon" href="/img/logo2.png">
@@ -132,7 +132,7 @@
                                 Message Sent Successfully!
                             </h1>
                             <p class="text-[#994d4d] text-lg font-normal leading-normal mb-8 max-w-2xl mx-auto">
-                                Thank you for contacting ShogunTours. We'll get back to you within 24 hours to help plan your perfect Japan adventure. Your journey to discovering the land where legends walked begins here!
+                                Thank you for contacting ShogunTours. We'll get back to you within 72 hours to help plan your perfect Japan adventure. Your journey to discovering the land where legends walked begins here!
                             </p>
 
                             <!-- Success Details Card -->
@@ -152,7 +152,7 @@
                                                 <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a8,8,0,0,1-8,8H136v24a8,8,0,0,1-16,0V156H96a8,8,0,0,1,0-16h24V116a8,8,0,0,1,16,0v24h24A8,8,0,0,1,168,148Z"></path>
                                             </svg>
                                         </div>
-                                        <span class="text-green-800 font-medium text-base">Response time: Within 24 hours</span>
+                                        <span class="text-green-800 font-medium text-base">Response time: Within 72 hours</span>
                                     </div>
                                     <div class="flex items-center gap-3 justify-center sm:justify-start">
                                         <div class="flex-shrink-0">

@@ -29,7 +29,7 @@
                   Message Sent Successfully!
             </h1>
             <p class="text-[#994d4d] text-lg font-normal leading-normal mb-6">
-                  Thank you for contacting us. We'll get back to you within 24 hours to
+                  Thank you for contacting us. We'll get back to you within 72 hours to
                   help plan your perfect Japan adventure.
             </p>
 

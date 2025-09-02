@@ -7,7 +7,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
 
     <style>
-        /* Flatpickr customization */
+        @media (min-width: 1024px) {
+            .booking-summary-sidebar {
+                position: sticky;
+                top: 5rem; /<span class="text-red-500">*</span> 32px <span class="text-red-500">*</span>/
+                height: fit-content;
+                max-height: calc(100vh - 4rem); /<span class="text-red-500">*</span> ビューポートの高さから上下マージンを引く <span class="text-red-500">*</span>/
+                overflow-y: auto; /<span class="text-red-500">*</span> 内容が長い場合にスクロール可能 <span class="text-red-500">*</span>/
+            }
+        }
+        /<span class="text-red-500">*</span> Flatpickr customization <span class="text-red-500">*</span>/
         .flatpickr-calendar {
             background: #fcf8f8 !important;
             border: 2px solid #e7d0d0 !important;
@@ -101,7 +110,7 @@
             animation: successPulse 0.6s ease-out;
         }
 
-        /* Enhanced hover effects */
+        /<span class="text-red-500">*</span> Enhanced hover effects <span class="text-red-500">*</span>/
         .tour-option:hover {
             transform: translateY(-2px);
             transition: all 0.3s ease;
@@ -112,7 +121,7 @@
             transition: all 0.3s ease;
         }
 
-        /* Button hover effects */
+        /<span class="text-red-500">*</span> Button hover effects <span class="text-red-500">*</span>/
         button:hover {
             transform: translateY(-1px);
             transition: all 0.3s ease;
@@ -122,7 +131,7 @@
             transform: translateY(0);
         }
 
-        /* Input focus effects */
+        /<span class="text-red-500">*</span> Input focus effects <span class="text-red-500">*</span>/
         input:focus,
         textarea:focus {
             box-shadow: 0 0 0 3px rgba(233, 41, 41, 0.1);
@@ -133,7 +142,7 @@
 <body>
     @if ($errors->any() || session("error"))
         <div id="error-toast" class="fixed top-4 right-4 z-[900]">
-        <div class="bg-white border-l-4 border-[#e92929] rounded-lg shadow-xl max-w-md overflow-hidden">
+        <div class="bg-white border-l-4 border-[#e92929] rounded-lg shadow-xl max-w-md">
             <div class="flex items-start p-4">
                 <div class="flex-shrink-0">
                     <div class="w-10 h-10 bg-[#e92929]/10 rounded-full flex items-center justify-center">
@@ -160,7 +169,7 @@
 
     @endif
 
-    <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
+    <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
         <div class="layout-container flex h-full grow flex-col">
 
@@ -183,10 +192,7 @@
                                     </h2>
                                 </div>
                                 <div class="flex gap-4 flex-wrap justify-center">
-                                    <button onclick="scrollToBooking()" class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
-                                        <span class="truncate">Book Now</span>
-                                    </button>
-                                    <button onclick="window.location.href='/tours'" class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-white/20 backdrop-blur-sm text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-white/30 transition-colors border border-white/30">
+                                    <button onclick="window.location.href='/tours'" class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
                                         <span class="truncate">View All Tours</span>
                                     </button>
                                 </div>
@@ -201,7 +207,7 @@
                 <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
 
                     <!-- Progress Indicator -->
-                    <div class="px-4 mb-8">
+                    {{-- <div class="px-4 mb-8">
                         <div class="flex items-center justify-center">
                             <div class="flex items-center space-x-4">
                                 <!-- Step 1 -->
@@ -239,12 +245,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="grid lg:grid-cols-3 gap-8 px-4">
                         <!-- Booking Form -->
                         <div class="lg:col-span-2">
-                            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                            <div class="bg-white rounded-lg shadow-lg">
 
                                 <!-- Step 1: Tour Selection -->
                                 <div id="step-1-content" class="fade-in p-6 lg:p-8">
@@ -253,31 +259,67 @@
                                     <!-- Tour Options -->
                                     <div class="space-y-4 mb-8">
                                         @foreach ($tour[0]->itineraries as $itinerary)
-                                        <div class="js_tour_option tour-option border-2 border-[#e7d0d0] bg-white rounded-lg p-6 cursor-pointer hover:border-[#e92929] hover:shadow-lg transition-all duration-300" data-tour="cultural" data-child-price="{{$itinerary->child_price}}" data-adult-price="{{$itinerary->adult_price}}" data-duration="6">
-                                            <div class="flex items-start justify-between">
+                                        <div
+                                            class="js_tour_option tour-option group border-2 border-[#e7d0d0] bg-white rounded-xl p-4 sm:p-5 md:p-6 cursor-pointer hover:border-[#e92929] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#e92929]/40 transition-all duration-300"
+                                            role="button" tabindex="0"
+                                            data-id="{{ $itinerary->id }}"
+                                            data-tour="cultural"
+                                            data-child-price="{{ $itinerary->child_price }}"
+                                            data-adult-price="{{ $itinerary->adult_price }}"
+                                            data-duration="{{ $itinerary->duration }}"
+                                        >
+                                            <!-- 上段：タイトル・概要・メタ情報 -->
+                                            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-6">
+                                                <!-- 左側：アイコン + テキスト -->
                                                 <div class="flex-1">
-                                                    <div class="flex items-center gap-3 mb-3">
-                                                        <div class="w-12 h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center">
-                                                            <i class="fas fa-torii-gate text-[#e92929]"></i>
+                                                    <div class="flex items-start gap-3 mb-2">
+                                                        <div class="w-11 h-11 sm:w-12 sm:h-12 bg-[#e92929]/10 rounded-lg flex items-center justify-center shrink-0">
+                                                            <i class="fas fa-torii-gate text-[#e92929] text-lg sm:text-xl"></i>
                                                         </div>
-                                                        <div>
-                                                            <h3 class="text-[#1b0e0e] text-lg font-bold itinerary-title" data-id={{$itinerary->id}}>{{$itinerary["overview_title"]}}</h3>
-                                                            <p class="text-[#994d4d] text-sm">{{$itinerary["duration"]}} hours • Max {{$itinerary["max_participants"]}} people</p>
+                                                        <div class="min-w-0">
+                                                            <h3
+                                                                class="text-[#1b0e0e] text-base sm:text-lg md:text-xl font-bold leading-snug itinerary-title break-words"
+                                                                data-id="{{ $itinerary->id }}"
+                                                            >
+                                                                {{ $itinerary["overview_title"] }}
+                                                            </h3>
+                                                            <p class="text-[#994d4d] text-xs sm:text-sm mt-1">
+                                                                <i class="far fa-clock mr-1"></i>{{ $itinerary["duration"] }} hours
+                                                                <span class="mx-2">•</span>
+                                                                <i class="fas fa-user-friends mr-1"></i>Max {{ $itinerary["max_participants"] }} people
+                                                            </p>
                                                         </div>
                                                     </div>
-                                                    <p class="text-[#994d4d] text-sm leading-relaxed mb-4">{{$itinerary["overview_description"]}}</p>
-                                                    <div class="flex flex-wrap gap-2">
-                                                        @foreach ($itinerary["itineraryHighlights"] as $highlight)
-                                                        <span class="bg-[#f3e7e7] text-[#1b0e0e] px-3 py-1 rounded-full text-xs">{{$highlight->itinerary_highlight}}</span>
-                                                        @endforeach
-                                                    </div>
+
+                                                    <p class="text-[#5c3a3a] text-sm sm:text-base leading-relaxed mt-2 md:mt-3 line-clamp-3">
+                                                        {{ $itinerary["overview_description"] }}
+                                                    </p>
                                                 </div>
-                                                <div class="text-right ml-4">
-                                                    <div class="text-[#1b0e0e] text-2xl font-black">¥{{$itinerary["adult_price"]}}</div>
-                                                    <p class="text-[#994d4d] text-sm">per person</p>
+
+                                                <!-- 右側：価格 -->
+                                                <div class="md:text-right md:min-w-[180px] flex md:block items-end justify-between">
+                                                    <div class="md:ml-4">
+                                                        <div class="text-[#1b0e0e] text-2xl md:text-3xl font-black leading-none">
+                                                            ¥{{ number_format($itinerary["adult_price"]) }} <span class="font-normal text-[#994d4d] text-sm t-1 md:mt-1 opacity-90">per person</span>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
+
+                                            <!-- 下段：フッターバッジ（任意） -->
+                                            <div class="mt-4 flex flex-wrap items-center gap-2">
+                                                <span class="inline-flex items-center gap-1 rounded-full border border-[#e7d0d0] px-2.5 py-1 text-xs text-[#1b0e0e]">
+                                                    <i class="far fa-calendar-check"></i><span>Request first, pay later</span>
+                                                </span>
+                                                <span class="inline-flex items-center gap-1 rounded-full border border-[#e7d0d0] px-2.5 py-1 text-xs text-[#1b0e0e]">
+                                                    <i class="fas fa-undo-alt"></i><span>Free cancel up to 7 days</span>
+                                                </span>
+                                                <span class="inline-flex items-center gap-1 rounded-full border border-[#e7d0d0] px-2.5 py-1 text-xs text-[#1b0e0e]">
+                                                    <i class="far fa-credit-card"></i><span>Payment due 14 days before*</span>
+                                                </span>
+                                            </div>
                                         </div>
+
                                         @endforeach
 
                                     </div>
@@ -303,17 +345,18 @@
                                     <!-- Participants -->
                                     <div class="mb-8">
                                         <h3 class="text-[#1b0e0e] text-lg font-bold mb-4">Number of Participants</h3>
+                                        <p class="text-xs text-[#994d4d] mb-4">Youth up to 12 years old join for free</p>
                                         <div class="grid md:grid-cols-2 gap-6">
                                             <div class="flex items-center justify-between bg-[#f3e7e7] rounded-lg p-4">
                                                 <div>
                                                     <div class="text-[#1b0e0e] text-sm font-medium">Adults</div>
-                                                    <div class="text-[#994d4d] text-sm">Age 13+</div>
+                                                    <div class="text-[#994d4d] text-sm">Age 18+</div>
                                                 </div>
                                                 <div class="flex items-center gap-3">
                                                     <button id="js_decrement-adult" class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300">
                                                         <i class="fas fa-minus text-sm"></i>
                                                     </button>
-                                                    <span id="adults-count" class="w-8 text-center text-[#1b0e0e] text-lg font-bold">2</span>
+                                                    <span id="adults-count" class="w-8 text-center text-[#1b0e0e] text-lg font-bold">0</span>
                                                     <button id="js_increment-adult" class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300">
                                                         <i class="fas fa-plus text-sm"></i>
                                                     </button>
@@ -322,8 +365,8 @@
 
                                             <div class="flex items-center justify-between bg-[#f3e7e7] rounded-lg p-4">
                                                 <div>
-                                                    <div class="text-[#1b0e0e] text-sm font-medium">Children</div>
-                                                    <div class="text-[#994d4d] text-sm">Age 6-12</div>
+                                                    <div class="text-[#1b0e0e] text-sm font-medium">Youth</div>
+                                                    <div class="text-[#994d4d] text-sm">Age 13-17</div>
                                                 </div>
                                                 <div class="flex items-center gap-3">
                                                     <button id="js_decrement-child" class="w-10 h-10 border-2 border-[#e7d0d0] bg-white rounded-full flex items-center justify-center hover:border-[#e92929] hover:text-[#e92929] transition-all duration-300">
@@ -350,22 +393,22 @@
                                     <form id="booking-form" class="space-y-6">
                                         <div class="grid md:grid-cols-2 gap-6">
                                             <div>
-                                                <label class="block text-[#1b0e0e] text-sm font-medium mb-2">First Name *</label>
+                                                <label class="block text-[#1b0e0e] text-sm font-medium mb-2">First Name <span class="text-red-500">*</span></label>
                                                 <input type="text" id="first-name" class="w-full px-4 py-3 border-2 border-[#e7d0d0] bg-[#fcf8f8] rounded-lg focus:border-[#e92929] focus:outline-none transition-colors duration-300 text-[#1b0e0e] text-sm" placeholder="Enter your first name" required>
                                             </div>
                                             <div>
-                                                <label class="block text-[#1b0e0e] text-sm font-medium mb-2">Last Name *</label>
+                                                <label class="block text-[#1b0e0e] text-sm font-medium mb-2">Last Name <span class="text-red-500">*</span></label>
                                                 <input type="text" id="last-name" class="w-full px-4 py-3 border-2 border-[#e7d0d0] bg-[#fcf8f8] rounded-lg focus:border-[#e92929] focus:outline-none transition-colors duration-300 text-[#1b0e0e] text-sm" placeholder="Enter your last name" required>
                                             </div>
                                         </div>
 
                                         <div>
-                                            <label class="block text-[#1b0e0e] text-sm font-medium mb-2">Email Address *</label>
+                                            <label class="block text-[#1b0e0e] text-sm font-medium mb-2">Email Address <span class="text-red-500">*</span></label>
                                             <input type="email" id="email" class="w-full px-4 py-3 border-2 border-[#e7d0d0] bg-[#fcf8f8] rounded-lg focus:border-[#e92929] focus:outline-none transition-colors duration-300 text-[#1b0e0e] text-sm" placeholder="your.email@example.com" required>
                                         </div>
 
                                         <div>
-                                            <label class="block text-[#1b0e0e] text-sm font-medium mb-2">Phone Number *</label>
+                                            <label class="block text-[#1b0e0e] text-sm font-medium mb-2">Phone Number <span class="text-red-500">*</span></label>
                                             <input type="tel" id="phone" class="w-full px-4 py-3 border-2 border-[#e7d0d0] bg-[#fcf8f8] rounded-lg focus:border-[#e92929] focus:outline-none transition-colors duration-300 text-[#1b0e0e] text-sm" placeholder="+81 90-1234-5678" required>
                                         </div>
                                         <div>
@@ -405,7 +448,7 @@
                                                 </div>
                                                 <div class="flex justify-between">
                                                     <span class="text-[#994d4d]">Participants:</span>
-                                                    <span class="text-[#1b0e0e] font-medium"><span class="adult_number"></span> Adults, <span class="child_number"></span> Children</span>
+                                                    <span class="text-[#1b0e0e] font-medium"><span class="adult_number"></span> Adults, <span class="child_number"></span> Youth</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -427,7 +470,7 @@
                                                     <span class="text-[#1b0e0e] font-medium">¥<span class="adult_price"></span></span>
                                                 </div>
                                                 <div class="flex justify-between">
-                                                    <span class="text-[#994d4d]">Children (×<span class="child_number"></span>)</span>
+                                                    <span class="text-[#994d4d]">Youth (×<span class="child_number"></span>)</span>
                                                     <span class="text-[#1b0e0e] font-medium">¥<span class="child_price"></span></span>
                                                 </div>
                                                 <div class="border-t border-[#e7d0d0] pt-2 flex justify-between">
@@ -487,7 +530,7 @@
 
                         <!-- Booking Summary Sidebar -->
                         <div class="lg:col-span-1">
-                            <div class="bg-white rounded-lg shadow-lg p-6 sticky top-8">
+                            <div class="bg-white rounded-lg shadow-lg p-6 booking-summary-sidebar">
                                 <h3 class="text-[#1b0e0e] text-lg font-bold mb-6">Booking Summary</h3>
 
                                 <div id="summary-content">
@@ -531,8 +574,8 @@
                                             <span id="adult-total" class="text-[#1b0e0e] text-sm font-medium">¥0</span>
                                         </div>
                                         <div class="flex justify-between">
-                                            <span class="text-[#994d4d] text-sm">Children (×<span id="summary-children">0</span>)</span>
-                                            <span id="children-total" class="text-[#1b0e0e] text-sm font-medium">¥0</span>
+                                            <span class="text-[#994d4d] text-sm">Youth (×<span id="summary-youth">0</span>)</span>
+                                            <span id="youth-total" class="text-[#1b0e0e] text-sm font-medium">¥0</span>
                                         </div>
                                         <div class="border-t border-[#e7d0d0] pt-3">
                                             <div class="flex justify-between items-center">
@@ -576,24 +619,12 @@
     <script src="{{mix("js/booking.js")}}"></script>
 
     <script>
-        // State management
-        let bookingState = {
-            step: 1,
-            selectedTour: null,
-            selectedDate: null,
-            adults: 2,
-            children: 0,
-            tourPrice: 0,
-            personalInfo: {}
-        };
 
         // Flatpickr instance
         let datePicker;
 
         // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            setupEventListeners();
-            updateStepIndicator();
             initializeDatePicker();
         });
 
@@ -614,12 +645,6 @@
                     "2025-05-01",
                     "2025-05-15"
                 ],
-                onChange: function(selectedDates, dateStr, instance) {
-                    if (selectedDates.length > 0) {
-                        bookingState.selectedDate = selectedDates[0].toISOString().split('T')[0];
-                        // checkStep1Complete();
-                    }
-                },
                 onReady: function(selectedDates, dateStr, instance) {
                     // Add custom class to calendar
                     instance.calendarContainer.classList.add('shogun-calendar');
@@ -627,249 +652,7 @@
             });
         }
 
-        function setupEventListeners() {
-            // // Tour selection
-            // document.querySelectorAll('.tour-option').forEach(option => {
-            //     option.addEventListener('click', function() {
-            //         selectTour(this);
-            //     });
-            // });
 
-            // // Navigation buttons
-            // document.getElementById('continue-to-step-2').addEventListener('click', () => goToStep(2));
-            // document.getElementById('back-to-step-1').addEventListener('click', () => goToStep(1));
-            // document.getElementById('continue-to-step-3').addEventListener('click', () => goToStep(3));
-            // document.getElementById('back-to-step-2').addEventListener('click', () => goToStep(2));
-            // document.getElementById('confirm-booking').addEventListener('click', confirmBooking);
-
-            // // Form validation
-            // document.querySelectorAll('#step-2-content input, #step-2-content textarea').forEach(input => {
-            //     input.addEventListener('input', validateStep2);
-            // });
-        }
-
-        function selectTour(element) {
-            // Remove previous selection
-            document.querySelectorAll('.tour-option').forEach(opt => {
-                opt.classList.remove('border-[#e92929]', 'bg-red-50');
-                opt.classList.add('border-[#e7d0d0]');
-            });
-
-            // Add selection styles
-            element.classList.remove('border-[#e7d0d0]');
-            element.classList.add('border-[#e92929]', 'bg-red-50');
-
-            // Update state
-            bookingState.selectedTour = element.dataset.tour;
-            bookingState.tourPrice = parseInt(element.dataset.price);
-
-            // updateSummary();
-            // checkStep1Complete();
-        }
-
-
-        // function checkStep1Complete() {
-        //     const continueBtn = document.getElementById('continue-to-step-2');
-        //     const isComplete = bookingState.selectedTour && bookingState.selectedDate;
-
-        //     continueBtn.disabled = !isComplete;
-        //     continueBtn.classList.toggle('opacity-50', !isComplete);
-        //     continueBtn.classList.toggle('cursor-not-allowed', !isComplete);
-        // }
-
-        function validateStep2() {
-            const requiredFields = ['first-name', 'last-name', 'email', 'phone', 'terms'];
-            const isValid = requiredFields.every(field => {
-                const element = document.getElementById(field);
-                return element.type === 'checkbox' ? element.checked : element.value.trim() !== '';
-            });
-
-            const continueBtn = document.getElementById('continue-to-step-3');
-            continueBtn.disabled = !isValid;
-            continueBtn.classList.toggle('opacity-50', !isValid);
-        }
-
-        // function updateSummary() {
-        //     const summaryContent = document.getElementById('summary-content');
-        //     const priceBreakdown = document.getElementById('price-breakdown');
-
-        //     if (!bookingState.selectedTour) {
-        //         summaryContent.innerHTML = `
-        //             <div class="text-center text-[#994d4d] py-8">
-        //                 <i class="fas fa-clipboard-list text-4xl mb-4"></i>
-        //                 <p class="text-sm">Select a tour to see pricing details</p>
-        //             </div>
-        //         `;
-        //         priceBreakdown.classList.add('hidden');
-        //         return;
-        //     }
-
-        //     const tourNames = {
-        //         'cultural': 'Cultural Heritage Tour',
-        //         'food': 'Tokyo Food Adventure', 
-        //         'modern': 'Modern Tokyo Experience'
-        //     };
-
-        //     const adultTotal = bookingState.adults * bookingState.tourPrice;
-        //     const childrenTotal = bookingState.children * Math.round(bookingState.tourPrice * 0.7);
-        //     const grandTotal = adultTotal + childrenTotal;
-
-        //     summaryContent.innerHTML = `
-        //         <div class="border-b border-[#e7d0d0] pb-4 mb-4">
-        //             <h4 class="text-[#1b0e0e] text-sm font-bold">${tourNames[bookingState.selectedTour]}</h4>
-        //             ${bookingState.selectedDate ? `<p class="text-[#994d4d] text-sm mt-1">${new Date(bookingState.selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>` : ''}
-        //         </div>
-        //     `;
-
-        //     document.getElementById('summary-adults').textContent = bookingState.adults;
-        //     document.getElementById('summary-children').textContent = bookingState.children;
-        //     document.getElementById('adult-total').textContent = `¥${adultTotal.toLocaleString()}`;
-        //     document.getElementById('children-total').textContent = `¥${childrenTotal.toLocaleString()}`;
-        //     document.getElementById('grand-total').textContent = `¥${grandTotal.toLocaleString()}`;
-
-        //     priceBreakdown.classList.remove('hidden');
-        // }
-
-        function goToStep(step) {
-            // Hide all steps
-            document.querySelectorAll('[id^="step-"][id$="-content"]').forEach(el => {
-                el.classList.add('hidden');
-            });
-
-            // Show current step
-            document.getElementById(`step-${step}-content`).classList.remove('hidden');
-
-            // Update state
-            bookingState.step = step;
-
-            // Handle step 3 - show summary
-            if (step === 3) {
-                showBookingSummary();
-            }
-
-            updateStepIndicator();
-        }
-
-        function updateStepIndicator() {
-            const steps = [1, 2, 3];
-
-            steps.forEach(stepNum => {
-                const stepEl = document.getElementById(`step-${stepNum}`);
-                const progressEl = document.getElementById(`progress-${stepNum}`);
-
-                if (stepNum < bookingState.step) {
-                    // Completed step
-                    stepEl.className = 'flex items-center justify-center w-10 h-10 rounded-full bg-green-500 text-white text-sm font-bold transition-all duration-300 step-indicator-item';
-                    stepEl.innerHTML = '<i class="fas fa-check"></i>';
-                    if (progressEl) progressEl.style.width = '100%';
-                } else if (stepNum === bookingState.step) {
-                    // Current step
-                    stepEl.className = 'flex items-center justify-center w-10 h-10 rounded-full bg-[#e92929] text-[#fcf8f8] text-sm font-bold transition-all duration-300 step-indicator-item';
-                    stepEl.textContent = stepNum;
-                    if (progressEl) progressEl.style.width = '50%';
-                } else {
-                    // Future step
-                    stepEl.className = 'flex items-center justify-center w-10 h-10 rounded-full bg-[#f3e7e7] text-[#994d4d] text-sm font-bold transition-all duration-300 step-indicator-item';
-                    stepEl.textContent = stepNum;
-                    if (progressEl) progressEl.style.width = '0%';
-                }
-            });
-        }
-
-        function showBookingSummary() {
-            const tourNames = {
-                'cultural': 'Cultural Heritage Tour',
-                'food': 'Tokyo Food Adventure',
-                'modern': 'Modern Tokyo Experience'
-            };
-
-            const adultTotal = bookingState.adults * bookingState.tourPrice;
-            const childrenTotal = bookingState.children * Math.round(bookingState.tourPrice * 0.7);
-            const grandTotal = adultTotal + childrenTotal;
-
-            const summaryHtml = `
-                <div class="bg-[#f3e7e7] rounded-lg p-6">
-                    <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Tour Details</h4>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between">
-                            <span class="text-[#994d4d]">Tour:</span>
-                            <span class="text-[#1b0e0e] font-medium">${tourNames[bookingState.selectedTour]}</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-[#994d4d]">Date:</span>
-                            <span class="text-[#1b0e0e] font-medium">${new Date(bookingState.selectedDate).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <span class="text-[#994d4d]">Participants:</span>
-                            <span class="text-[#1b0e0e] font-medium">${bookingState.adults} Adults, ${bookingState.children} Children</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-[#f3e7e7] rounded-lg p-6">
-                    <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Contact Information</h4>
-                    <div class="space-y-2 text-sm">
-                        <p><span class="text-[#994d4d]">Name:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('first-name').value} ${document.getElementById('last-name').value}</span></p>
-                        <p><span class="text-[#994d4d]">Email:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('email').value}</span></p>
-                        <p><span class="text-[#994d4d]">Phone:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('phone').value}</span></p>
-                        ${document.getElementById('hotel').value ? `<p><span class="text-[#994d4d]">Hotel:</span> <span class="text-[#1b0e0e] font-medium">${document.getElementById('hotel').value}</span></p>` : ''}
-                    </div>
-                </div>
-
-                <div class="bg-[#e92929]/5 border border-[#e92929]/20 rounded-lg p-6">
-                    <h4 class="text-[#1b0e0e] text-lg font-bold mb-4">Payment Summary</h4>
-                    <div class="space-y-2 text-sm mb-4">
-                        <div class="flex justify-between">
-                            <span class="text-[#994d4d]">Adults (×${bookingState.adults})</span>
-                            <span class="text-[#1b0e0e] font-medium">¥${adultTotal.toLocaleString()}</span>
-                        </div>
-                        ${bookingState.children > 0 ? `
-                        <div class="flex justify-between">
-                            <span class="text-[#994d4d]">Children (×${bookingState.children})</span>
-                            <span class="text-[#1b0e0e] font-medium">¥${childrenTotal.toLocaleString()}</span>
-                        </div>` : ''}
-                        <div class="border-t border-[#e7d0d0] pt-2 flex justify-between">
-                            <span class="text-[#1b0e0e] text-lg font-bold">Total</span>
-                            <span class="text-[#1b0e0e] text-lg font-black">¥${grandTotal.toLocaleString()}</span>
-                        </div>
-                    </div>
-                    <p class="text-[#994d4d] text-xs">
-                        <i class="fas fa-info-circle mr-1"></i>
-                        Payment will be collected on the day of the tour. No upfront payment required.
-                    </p>
-                </div>
-            `;
-
-            document.getElementById('booking-summary').innerHTML = summaryHtml;
-        }
-
-        function confirmBooking() {
-            // Simulate booking process
-            document.getElementById('confirm-booking').innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
-            document.getElementById('confirm-booking').disabled = true;
-
-            setTimeout(() => {
-                // Hide confirmation content
-                document.getElementById('step-3-content').classList.add('hidden');
-
-                // Show success message
-                document.getElementById('success-message').classList.remove('hidden');
-
-                // Update step indicator to show completion
-                bookingState.step = 4;
-                updateStepIndicator();
-            }, 2000);
-        }
-
-        function scrollToBooking() {
-            const bookingSection = document.querySelector('section');
-            if (bookingSection) {
-                bookingSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        }
     </script>
 </body>
 

@@ -53,7 +53,7 @@
     </style>
 </head>
 <body>
-    <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
+    <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root"
         style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
         
         @include('components.nav')
@@ -100,9 +100,9 @@
                         <div class="bg-[#e92929]/10 border border-[#e92929]/20 rounded-lg p-6 text-center mt-8">
                             <h3 class="text-[#e92929] text-lg md:text-xl font-bold mb-3">Ready to Start Your Japan Adventure?</h3>
                             <p class="text-[#1b0e0e] text-base mb-4">Let our experienced guides help you create the perfect itinerary.</p>
-                            <button class="px-6 py-3 bg-[#e92929] text-sm md:text-base text-white rounded-lg font-bold hover:bg-[#d61f1f] transition-colors">
+                            <a href="{{route("tours")}}" class="px-6 py-3 bg-[#e92929] text-sm md:text-base text-white rounded-lg font-bold hover:bg-[#d61f1f] transition-colors">
                                 Plan Your Trip
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -126,11 +126,11 @@
                             <span class="text-[#994d4d] text-sm font-medium">Share this article:</span>
                             <button class="flex items-center gap-2 px-3 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors">
                                 <i class="fab fa-facebook-f"></i>
-                                Facebook
+                                <span class="hidden md:block">Facebook</span>
                             </button>
                             <button class="flex items-center gap-2 px-3 py-2 bg-sky-500 text-white rounded-lg text-sm hover:bg-sky-600 transition-colors">
                                 <i class="fab fa-twitter"></i>
-                                Twitter
+                                <span class="hidden md:block">Twitter</span>
                             </button>
                         </div>
                     </footer>
@@ -146,13 +146,17 @@
                 </h2>
                 <div class="grid md:grid-cols-3 gap-6 p-4">
                     @foreach ($relatedBlogs as $blog)
+                    {{-- @php
+                        print_r($blog);
+                        exit;
+                    @endphp --}}
                         <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow group cursor-pointer">
                             <div class="relative h-48 overflow-hidden">
                                 <img src="{{ asset('storage/' . $blog->featured_image) }}"
                                     alt="Japanese culture"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
                                 <div class="absolute top-3 left-3">
-                                    <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">{{$blog->category}}</span>
+                                    <span class="bg-[#e92929] text-white px-2 py-1 rounded-full text-xs font-medium">{{$blog->blogCategory->category_name}}</span>
                                 </div>
                             </div>
                             <div class="p-4">
@@ -174,19 +178,7 @@
         </section>
 
         <!-- Footer -->
-        <footer class="flex justify-center bg-[#1b0e0e] text-white">
-            <div class="flex max-w-[1100px] flex-1 flex-col">
-                <div class="flex flex-col gap-6 px-5 py-10 text-center @container">
-                    <div class="flex flex-wrap items-center justify-center gap-6 @[480px]:flex-row @[480px]:justify-around">
-                        <a class="text-white text-sm font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors" href="#home">Home</a>
-                        <a class="text-white text-sm font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors" href="#blog">Blog</a>
-                        <a class="text-white text-sm font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors" href="#privacy">Privacy Policy</a>
-                        <a class="text-white text-sm font-normal leading-normal min-w-40 hover:text-[#e92929] transition-colors" href="#terms">Terms of Service</a>
-                    </div>
-                    <p class="text-white text-sm font-normal leading-normal opacity-80">© 2025 ShogunTours. All rights reserved.</p>
-                </div>
-            </div>
-        </footer>
+        @include('components.footer')
     </div>
 
     <style>

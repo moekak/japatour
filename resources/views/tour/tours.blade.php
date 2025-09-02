@@ -6,7 +6,7 @@
 </head>
 
 <body>
-      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden"
+      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root"
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
                   <!-- Header -->
@@ -33,10 +33,6 @@
                                                       <button onclick="scrollToSection('tours')"
                                                             class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-[#e92929] text-[#fcf8f8] text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-[#d61f1f] transition-colors">
                                                             <span class="truncate">View Tours</span>
-                                                      </button>
-                                                      <button onclick="scrollToSection('popular')"
-                                                            class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-white/20 backdrop-blur-sm text-white text-sm font-bold leading-normal tracking-[0.015em] @[480px]:text-base @[480px]:font-bold @[480px]:leading-normal @[480px]:tracking-[0.015em] hover:bg-white/30 transition-colors border border-white/30">
-                                                            <span class="truncate">Popular Tours</span>
                                                       </button>
                                                 </div>
                                           </div>
@@ -94,7 +90,7 @@
                   </section> --}}
 
                   <!-- Featured Tour -->
-                  <section id="featured" class="flex justify-center py-12">
+                  <section id="featured" class="overflow-x-hidden flex justify-center py-12" onclick="window.location.href='/tour/show/{{$featuredTour['id']}}'">
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                               <h2
                                     class="text-[#1b0e0e] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-6">
@@ -142,13 +138,13 @@
                                                 <h3 class="text-[#1b0e0e] text-2xl font-bold mb-3 group-hover:text-[#e92929] transition-colors">
                                                       {{$featuredTour->title}}
                                                 </h3>
-                                                <p class="text-[#994d4d] text-base leading-relaxed mb-4">
+                                                <p class="text-[#994d4d] text-base  mb-4 line-clamp-2">
                                                       {{$featuredTour->subtitle}}
                                                 </p>
                                                 <div class="flex items-center justify-between">
-                                                      <div class="flex items-center gap-2 text-[#994d4d]">
+                                                      <div class="flex items-center gap-1 md:gap-2 text-[#994d4d]">
                                                             {!!\App\Services\Util\FormatService::generateStar($featuredTour->average_rate) !!}
-                                                            <span class="text-sm font-medium">{{number_format($featuredTour->average_rate, 1)}} ({{count($featuredTour->tourReviews)}} reviews)</span>
+                                                            {{-- <span class="text-sm font-medium">{{number_format($featuredTour->average_rate, 1)}} <span class="hidden md:block">({{count($featuredTour->tourReviews)}} reviews)</span></span> --}}
                                                       </div>
                                                       <div class="text-right">
                                                             <div class="text-[#e92929] text-2xl font-bold">¥{{ number_format($featuredTour->minimum_price) }}~</div>
@@ -258,17 +254,17 @@
                                           Book your perfect Japan tour today and create unforgettable memories with our expert local guides.
                                     </p>
                                     <div class="flex gap-4 justify-center flex-wrap">
-                                          <button
+                                          <a href="#tours-grid"
                                                 class="px-8 py-4 bg-[#e92929] text-white rounded-lg font-bold hover:bg-[#d61f1f] transition-colors text-lg">
                                                 Book a Tour Now
-                                          </button>
-                                          <button
+                                          </a>
+                                          <a href="{{route("top")}}#contact"
                                                 class="px-8 py-4 bg-white text-[#e92929] rounded-lg font-bold hover:bg-gray-50 transition-colors text-lg border-2 border-[#e92929]">
                                                 Contact Us
-                                          </button>
+                                          </a>
                                     </div>
                                     <p class="text-[#994d4d] text-sm mt-4">
-                                          Free cancellation up to 24 hours before your tour starts
+                                          Free cancellation up to 72 hours before your tour starts
                                     </p>
                               </div>
                         </div>

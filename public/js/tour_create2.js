@@ -234,7 +234,6 @@ var DupeInterface = /*#__PURE__*/function () {
     key: "generateItineraryId",
     value: function generateItineraryId() {
       var items = Array.from(document.querySelectorAll(".itinerary-item"));
-      console.log("id" + items[items.length - 1].dataset.id);
       return Number(items[items.length - 1].dataset.id) + 1;
     }
   }, {
@@ -791,7 +790,6 @@ var FileOperation = /*#__PURE__*/function () {
 }();
 function _displayPreview(file) {
   var objectURL = URL.createObjectURL(file);
-  console.log(this.previewImageElement);
   this.previewImageElement.closest(".preview_container").classList.remove("hidden");
   this.imageElement.classList.add("hidden");
   this.previewImageElement.src = objectURL;

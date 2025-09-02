@@ -152,7 +152,8 @@
                                         <span class="ml-2 text-sm text-gray-700">Yes</span>
                                     </label>
                                     <label class="flex items-center">
-                                        <input type="radio" name="is_featured" value="0" {{old("is_featured") == "0" ? "checked" : ""}} class="w-4 h-4 text-[#e92929] border-gray-300 focus:ring-[#e92929] focus:ring-2">
+                                        <input type="radio" name="is_featured" value="0" {{old("is_featured
+                                        ") == "0" ? "checked" : ""}} class="w-4 h-4 text-[#e92929] border-gray-300 focus:ring-[#e92929] focus:ring-2">
                                         <span class="ml-2 text-sm text-gray-700">No</span>
                                     </label>
                                 </div>

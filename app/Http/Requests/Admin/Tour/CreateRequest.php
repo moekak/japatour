@@ -254,7 +254,7 @@ class CreateRequest extends FormRequest
             'itinerary.*.duration.required' => 'Duration is required for each itinerary.',
             'itinerary.*.duration.integer' => 'Duration must be a valid number.',
             'itinerary.*.duration.min' => 'Duration must be at least 1 hour.',
-            'itinerary.*.duration.max' => 'Duration cannot exceed 24 hours.',
+            'itinerary.*.duration.max' => 'Duration cannot exceed 72 hours.',
             
             'itinerary.*.max_participants.required' => 'Maximum participants is required for each itinerary.',
             'itinerary.*.max_participants.integer' => 'Maximum participants must be a valid number.',

@@ -63,9 +63,6 @@ export default class BookingInformation{
                   request,
             }
 
-            console.log(data);
-            
-
             this.notifyObservers(data)
       }
 

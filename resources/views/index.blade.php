@@ -8,7 +8,7 @@
 <body>
       <!-- sending view -->
       @include("sending")
-      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root overflow-x-hidden js_main"
+      <div class="relative flex size-full min-h-screen flex-col bg-[#fcf8f8] group/design-root js_main"
             style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
             <div class="layout-container flex h-full grow flex-col">
                   @include('components.nav')
@@ -130,11 +130,7 @@
                                     class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
                                     Follow Our Adventures</h2>
                               <!-- LightWidget WIDGET -->
-                              <!-- LightWidget WIDGET -->
-                              <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe
-                                    src="//lightwidget.com/widgets/520d757f035853c08e16d6504e9175bc.html" scrolling="no"
-                                    allowtransparency="true" class="lightwidget-widget"
-                                    style="width:100%;border:0;overflow:hidden;"></iframe>
+                              <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="https://cdn.lightwidget.com/widgets/520d757f035853c08e16d6504e9175bc.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
                   </section>
 
                   <!-- Blog Section -->
@@ -311,7 +307,7 @@
                                           <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">We
                                                 understand plans can change. Here’s our cancellation policy:
                                                 <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">
-                                                      Within 24 hours of the tour: No refund</li>
+                                                      Within 72 hours of the tour: No refund</li>
                                                 <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">
                                                       24–48
                                                       hours before: 50% refund</li>
@@ -327,7 +323,7 @@
                   </section>
 
                   <!-- Contact Section -->
-                  <section id="contact" class="flex justify-center py-12">
+                  <section id="contact" class="flex justify-center py-12 overflow-x-hidden">
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                               <h2 class="text-[#1b0e0e] text-[25px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">
                                     Contact Us
@@ -434,7 +430,7 @@
             <div class="relative h-48 overflow-hidden">
               <img src="storage/${tour.hero_image}" alt="${tour.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
               <div class="absolute top-4 right-4 bg-[#e92929] text-white px-3 py-1 rounded-full test-base font-medium">
-                ¥${tour.minimum_price}~
+                ¥${tour.minimum_price.toLocaleString('ja-JP')}~
               </div>
             </div>
             <div class="p-4">
@@ -454,7 +450,7 @@
                   ${tour.minimum_duration} hours~
                 </span>
                 <button onclick="window.location.href='/tour/show/${tour.id}'" class="bg-[#e92929] text-white px-4 py-2 rounded-lg test-base font-medium hover:bg-[#d61f1f] transition-colors">
-                  Book Now
+                  See more
                 </button>
               </div>
             </div>
@@ -522,18 +518,6 @@
             return stars;
       }
 
-      setTimeout(() => {
-            console.log(document.querySelectorAll(".es-media-card-container"));
-      }, 3000);
-
-
-
-      Array.from(document.querySelectorAll(".es-media-card-container")).forEach((index, card) => {
-            console.log(index);
-            console.log(card);
-
-
-      })
       </script>
 
       <style>
@@ -595,6 +579,15 @@
 
                   showA = !showA;
                   }, 4000);
+            });
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                  anchor.addEventListener('click', function (e) {
+                        e.preventDefault();
+                        document.querySelector(this.getAttribute('href')).scrollIntoView({
+                              behavior: 'smooth'
+                        });
+                  });
             });
       </script>
 

@@ -15,8 +15,7 @@ export default class FileOperation {
 
       #displayPreview(file) {
             const objectURL = URL.createObjectURL(file);
-            console.log(this.previewImageElement);
-            
+
             this.previewImageElement.closest(".preview_container").classList.remove("hidden");
             this.imageElement.classList.add("hidden");
             this.previewImageElement.src = objectURL;

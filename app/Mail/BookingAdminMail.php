@@ -8,9 +8,8 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Mail\Mailables\Address;
 
-class BookingMail extends Mailable
+class BookingAdminMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,8 +27,7 @@ class BookingMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address(env("MAIL_FROM_ADDRESS"), 'ShogunTours'),
-            subject: 'Thank you for booking a tour',
+            subject: "NEW BOOKING REQUEST - ACTION REQUIRED",
         );
     }
 
@@ -39,7 +37,7 @@ class BookingMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.booking_confirmation',
+            view: 'emails.booking_confirmation_admin',
             with: [
                 "personalInfo" => $this->personalInfo,
                 "tourDetails" => $this->tourDetails,
