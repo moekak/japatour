@@ -13,9 +13,9 @@ class Template{
             $email = $personalInfo["email"] ?? "";
             $phone = $personalInfo["phone_number"] ?? "";
             $adultNumber = $bookingData['adult_number'] ?? 0;
-            $childrenNumber = $bookingData['children_number'] ?? 0;
+            $childrenNumber = $bookingData['youth_number'] ?? 0;
             $adultPrice = $bookingData["adult_price"] ?? 0;
-            $childrenPrice = $bookingData["children_price"] ?? 0;
+            $childrenPrice = $bookingData["youth_price"] ?? 0;
 
             $data = [
                   'to' => $userId,

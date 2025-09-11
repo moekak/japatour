@@ -302,8 +302,8 @@ class GenerateData
         return [
             "itinerary_id" => (int) $data["itinerary_id"],
             "customer_id" => (int) $customer_id,
-            "children_number" =>(int) $data["children_number"],
-            "children_price" => (int) $data["children_price"],
+            "youth_number" =>(int) $data["youth_number"],
+            "youth_price" => (int) $data["youth_price"],
             "adult_number" => (int) $data["adult_number"],
             "adult_price" => (int) $data["adult_price"],
             "request" => $data["request"],

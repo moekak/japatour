@@ -51,13 +51,13 @@
                                                       </button>
                                                 </div>
                                                 
-                                                <!-- Search Suggestions -->
+                                                {{-- <!-- Search Suggestions -->
                                                 <div id="search-suggestions" class="hidden absolute top-full left-0 right-0 bg-white border border-[#e7d0d0] rounded-lg mt-2 shadow-lg z-20 max-h-64 overflow-y-auto">
-                                                      <div id="recent-searches" class="p-3">
+                                                      <div id="recent-searches" class="p-3 z-100">
                                                             <h4 class="text-sm font-medium text-[#1b0e0e] mb-2">Recent Searches</h4>
                                                             <div class="text-sm text-[#994d4d]">No recent searches</div>
                                                       </div>
-                                                </div>
+                                                </div> --}}
                                           </div>
                                     </div>
                                     
@@ -177,7 +177,6 @@
 
             // Initialize
             document.addEventListener('DOMContentLoaded', function() {
-                  updateRecentSearches();
                   updateResultsCount();
             });
 
@@ -194,36 +193,28 @@
                   } 
                   
                   filterArticles();
-                  updateActiveFiltersDisplay();
+                  // // updateActiveFiltersDisplay();();
             }
 
             function clearSearch() {
                   document.getElementById('main-search').value = '';
                   activeFilters.searchTerm = '';
                   filterArticles();
-                  updateActiveFiltersDisplay();
+                  // updateActiveFiltersDisplay();();
             }
 
             function setSearchTerm(term) {
                   document.getElementById('main-search').value = term;
-                  document.getElementById('search-suggestions').classList.add('hidden');
                   handleSearch();
             }
 
-            // Search suggestions
-            document.getElementById('main-search').addEventListener('focus', function() {
-                  document.getElementById('search-suggestions').classList.remove('hidden');
-            });
+
 
             document.getElementById('main-search').addEventListener('input', function() {
                   handleSearch();
             });
 
-            document.addEventListener('click', function(e) {
-                  if (!e.target.closest('#main-search') && !e.target.closest('#search-suggestions')) {
-                        document.getElementById('search-suggestions').classList.add('hidden');
-                  }
-            });
+
 
             // Recent searches management
             function addToRecentSearches(term) {
@@ -234,28 +225,9 @@
                   recentSearches = recentSearches.slice(0, 5);
                   
                   localStorage.setItem('recentSearches', JSON.stringify(recentSearches));
-                  updateRecentSearches();
             }
 
-            function updateRecentSearches() {
-                  const container = document.getElementById('recent-searches');
-                  if (recentSearches.length === 0) {
-                        container.innerHTML = '<h4 class="text-sm font-medium text-[#1b0e0e] mb-2">Recent Searches</h4><div class="text-sm text-[#994d4d]">No recent searches</div>';
-                        return;
-                  }
-                  
-                  const html = `
-                        <h4 class="text-sm font-medium text-[#1b0e0e] mb-2">Recent Searches</h4>
-                        <div class="space-y-1">
-                              ${recentSearches.map(search => `
-                                    <button onclick="setSearchTerm('${search}')" class="block w-full text-left px-2 py-1 text-sm text-[#994d4d] hover:text-[#e92929] hover:bg-[#f3e7e7] rounded transition-colors">
-                                          <i class="fas fa-history mr-2"></i>${search}
-                                    </button>
-                              `).join('')}
-                        </div>
-                  `;
-                  container.innerHTML = html;
-            }
+      
 
             // Category filtering
             function updateCategoryFilter() {
@@ -281,7 +253,7 @@
                   }
                   
                   filterArticles();
-                  updateActiveFiltersDisplay();
+                  // updateActiveFiltersDisplay();();
             }
 
             // Tag filtering
@@ -300,7 +272,7 @@
                   }
                   
                   filterArticles();
-                  updateActiveFiltersDisplay();
+                  // updateActiveFiltersDisplay();();
             }
 
 

@@ -9,8 +9,8 @@ class TourBooking extends Model
     protected $fillable = [
         "itinerary_id",
         "customer_id",
-        "children_number",
-        "children_price",
+        "youth_number",
+        "youth_price",
         "adult_number",
         "adult_price",
         "request",

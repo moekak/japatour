@@ -177,7 +177,7 @@
                   </section>
 
                   <!-- Newsletter Section -->
-                  {{-- <section class="flex justify-center py-12 bg-[#f3e7e7]">
+                  <section class="flex justify-center py-12 bg-[#f3e7e7]">
                         <div class="layout-content-container flex flex-col max-w-[960px] flex-1">
                               <div class="text-center px-4">
                                     <h2
@@ -203,7 +203,7 @@
                                     </div>
                               </div>
                         </div>
-                  </section> --}}
+                  </section>
 
                   <!-- Footer -->
                   <footer class="flex justify-center bg-[#1b0e0e] text-white">

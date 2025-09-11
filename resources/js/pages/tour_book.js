@@ -36,8 +36,6 @@ async function createPaymentIntent() {
       formData.append("total", totalCost);
 
       const formDataObj = Object.fromEntries(formData.entries());
-      console.log("FormData contents:", formDataObj);
-      
       return fetch('/api/create-payment-intent', {
             method: 'POST',
             body: formData
@@ -51,8 +49,6 @@ async function initializePaymentElement() {
             const response = await createPaymentIntent();
             const data = await response.json();
 
-            console.log(data);
-            
             
             if (!response.ok) {
                   throw new Error(data.error || 'Payment Intent creation failed');
@@ -172,11 +168,9 @@ const showStep = (step) =>{
 document.querySelectorAll('.next-step').forEach(button => {
       button.addEventListener('click', () => {
             if(currentStep === 1 && validator() == false){
-                  console.log("aaaaaa");
                   return
                   
             }if(currentStep === 2 && validatorTourOptions() === false){
-                  console.log("vvvv");
                   return
             }
             if (currentStep < 3) {

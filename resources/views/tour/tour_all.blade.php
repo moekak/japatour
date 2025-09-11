@@ -40,8 +40,8 @@
                   </div>
             </div>
       </div>
-
-      {{-- <section class="flex justify-center py-8 bg-[#f3e7e7] shadow-sm backdrop-blur-sm">
+{{-- 
+      <section class="flex justify-center py-8 bg-[#f3e7e7] shadow-sm backdrop-blur-sm">
             <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
                   <div class="px-4">
                   <!-- Main Search Bar -->

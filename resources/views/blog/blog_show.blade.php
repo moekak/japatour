@@ -229,13 +229,8 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         const md = {!! json_encode($blog->content) !!}; // JSで正しい文字列になる
-
-        console.log(md);
-        
         const html = marked.parse(md);
         document.getElementById('content').innerHTML = html;
-
-        console.log(document.getElementById('content').innerHTML);
         
     </script>
 

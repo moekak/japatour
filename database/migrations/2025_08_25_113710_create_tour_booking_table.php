@@ -26,8 +26,8 @@ return new class extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
             $table->foreignId('customer_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->integer("children_number");
-            $table->integer("children_price");
+            $table->integer("youth_number");
+            $table->integer("youth_price");
             $table->integer("adult_number");
             $table->integer("adult_price");
             $table->text("request")->nullable();

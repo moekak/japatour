@@ -108,7 +108,7 @@
                   <p><strong>Tour:</strong> {{ $tourDetails["tour_title"] }}</p>
                   <p><strong>Itinerary:</strong> {{ $tourDetails["itinerary_title"] }}</p>
                   <p><strong>Preferred Date:</strong> {{ $tourDetails["tour_date"] }}</p>
-                  <p><strong>Guests:</strong> {{ $tourDetails["adult_number"] }} Adults{{ $tourDetails["children_number"] > 0 ? ', ' . $tourDetails["children_number"] . ' Children' : '' }}</p>
+                  <p><strong>Guests:</strong> {{ $tourDetails["adult_number"] }} Adults{{ $tourDetails["youth_number"] > 0 ? ', ' . $tourDetails["youth_number"] . ' Children' : '' }}</p>
             </div>
 
             <div class="section">
@@ -117,15 +117,15 @@
                   <span>Adults ({{ $tourDetails["adult_number"] }})</span>
                   <span>　¥{{ number_format($tourDetails["adult_price"]) }}</span>
                   </div>
-                  @if($tourDetails["children_number"] > 0)
+                  @if($tourDetails["youth_number"] > 0)
                   <div class="price-line">
-                        <span>Children ({{ $tourDetails["children_number"] }})</span>
-                        <span>　¥{{ number_format($tourDetails["children_price"]) }}</span>
+                        <span>Children ({{ $tourDetails["youth_number"] }})</span>
+                        <span>　¥{{ number_format($tourDetails["youth_price"]) }}</span>
                   </div>
                   @endif
                   <div class="price-line total">
                   <span>Total (estimate)</span>
-                  <span>   ¥{{ number_format($tourDetails["children_price"] + $tourDetails["adult_price"]) }}</span>
+                  <span>   ¥{{ number_format($tourDetails["youth_price"] + $tourDetails["adult_price"]) }}</span>
                   </div>
                   <p style="font-size: 12px; color: #666; margin-top: 8px;">
                   Payment details will be confirmed after your request is approved.

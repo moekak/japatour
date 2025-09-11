@@ -185,7 +185,7 @@
                                 style='background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=1200&h=600&fit=crop");'>
                                 <div class="flex flex-col gap-2 text-center">
                                     <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-5xl @[480px]:font-black @[480px]:leading-tight @[480px]:tracking-[-0.033em]">
-                                        Book Your Perfect Tokyo Adventure
+                                        Book Your Perfect Adventure
                                     </h1>
                                     <h2 class="text-white text-sm font-normal leading-normal @[480px]:text-base @[480px]:font-normal @[480px]:leading-normal">
                                         Personalized tours with expert local guides • Small groups • Authentic experiences
@@ -495,8 +495,8 @@
                                             <input type="hidden" value="" id="js_itinerary_id" name="itinerary_id">
                                             <input type="hidden" value="" id="js_adult_number" name="adult_number">
                                             <input type="hidden" value="" id="js_adult_price" name="adult_price">
-                                            <input type="hidden" value="" id="js_child_number" name="children_number">
-                                            <input type="hidden" value="" id="js_child_price" name="children_price">
+                                            <input type="hidden" value="" id="js_child_number" name="youth_number">
+                                            <input type="hidden" value="" id="js_child_price" name="youth_price">
                                             <input type="hidden" value="" id="js_total_price">
                                             <input type="hidden" value="" id="js_date" name="tour_date">
                                             <input type="hidden" value="" id="js_firstName" name="first_name">

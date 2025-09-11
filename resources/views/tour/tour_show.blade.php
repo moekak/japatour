@@ -171,14 +171,6 @@
                                                             </span>
                                                       </div>
                                                 </div>
-{{-- 
-                                                <div class="flex flex-wrap gap-2 mb-4">
-                                                      @foreach ($itinerary["itineraryHighlights"] as $highlight)
-                                                      <span
-                                                            class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs">{{$highlight["itinerary_highlight"]}}</span>
-                                                      @endforeach
-                                                </div> --}}
-
                                                 <button
                                                       class="w-full bg-gradient-to-r from-[#e92929] to-[#ff6b6b] text-white py-3 rounded-xl text-sm font-semibold hover:shadow-lg transition-all">
                                                       View Details <i class="fas fa-arrow-right ml-2"></i>
@@ -305,77 +297,6 @@
 
                         </div>
             </section>
-
-            <!-- Booking Section - Floating Card -->
-            {{-- <section class="py-12 sm:py-16 lg:py-20">
-                  <div class="container mx-auto px-4">
-                        <div class="bg-gradient-to-r from-[#e92929] to-[#f04040] rounded-2xl p-6 sm:p-8 lg:p-12 text-white relative overflow-hidden">
-                              <!-- 装飾的な背景要素 -->
-                              <div class="absolute top-0 right-0 w-32 h-32 sm:w-48 sm:h-48 lg:w-64 lg:h-64 bg-white/10 rounded-full -mr-16 -mt-16 sm:-mr-24 sm:-mt-24 lg:-mr-32 lg:-mt-32"></div>
-                              <div class="absolute bottom-0 left-0 w-24 h-24 sm:w-32 sm:h-32 lg:w-48 lg:h-48 bg-white/10 rounded-full -ml-12 -mb-12 sm:-ml-16 sm:-mb-16 lg:-ml-24 lg:-mb-24"></div>
-
-                              <div class="relative z-10 max-w-4xl mx-auto">
-                                    <!-- ヘッダー -->
-                                    <div class="text-center mb-8">
-                                          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">
-                                                Ready to Explore Tokyo?
-                                          </h2>
-                                          <p class="text-lg sm:text-xl opacity-90 max-w-2xl mx-auto">
-                                                Limited spots available for the upcoming season. Book now and save 20%!
-                                          </p>
-                                    </div>
-
-                                    <!-- 予約フォーム -->
-                                    <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4 sm:p-6 lg:p-8 max-w-3xl mx-auto">
-                                          <!-- 日付とゲスト選択 -->
-                                          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6">
-                                                <div>
-                                                      <label class="text-sm sm:text-base opacity-80 block mb-2">Select Date</label>
-                                                      <div class="bg-white/20 rounded-lg px-4 py-3 flex items-center justify-between cursor-pointer hover:bg-white/30 transition-colors">
-                                                            <span class="text-sm sm:text-base">April 15, 2025</span>
-                                                            <i class="fas fa-calendar-alt text-sm sm:text-base"></i>
-                                                      </div>
-                                                </div>
-                                                <div>
-                                                      <label class="text-sm sm:text-base opacity-80 block mb-2">Number of Guests</label>
-                                                      <div class="bg-white/20 rounded-lg px-4 py-3 flex items-center justify-between">
-                                                            <button class="hover:bg-white/20 w-8 h-8 rounded-full transition-colors flex items-center justify-center">
-                                                                  <span class="text-lg">-</span>
-                                                            </button>
-                                                            <span class="text-sm sm:text-base">2 Adults</span>
-                                                            <button class="hover:bg-white/20 w-8 h-8 rounded-full transition-colors flex items-center justify-center">
-                                                                  <span class="text-lg">+</span>
-                                                            </button>
-                                                      </div>
-                                                </div>
-                                          </div>
-
-                                          <!-- 価格と予約ボタン -->
-                                          <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-                                                <div class="text-center sm:text-left">
-                                                      <p class="text-sm sm:text-base opacity-80">Total Price</p>
-                                                      <div class="flex items-center gap-3 justify-center sm:justify-start">
-                                                            <p class="text-2xl sm:text-3xl font-bold">¥24,000</p>
-                                                            <p class="text-sm sm:text-base opacity-80 line-through">¥30,000</p>
-                                                      </div>
-                                                </div>
-                                                <button class="bg-white text-[#e92929] px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold hover:scale-105 transition-transform text-sm sm:text-base w-full sm:w-auto">
-                                                      Book Now & Save 20%
-                                                </button>
-                                          </div>
-
-                                          <!-- キャンセルポリシー -->
-                                          <div class="text-center">
-                                                <p class="text-xs sm:text-sm opacity-80 flex items-center justify-center gap-2">
-                                                      <i class="fas fa-shield-alt"></i>
-                                                      <span>Free cancellation up to 72 hours before the tour</span>
-                                                </p>
-                                          </div>
-                                    </div>
-                              </div>
-                        </div>
-                  </div>
-            </section> --}}
 
 
             <section id="faq" class="flex justify-center py-12 bg-[#f3e7e7]">
