@@ -49,7 +49,6 @@ Route::get("/tour/confirmation", [BookingController::class, "confirmation"])->na
 Route::post("/tour/book", [BookingController::class, "store"])->name("book.store");
 Route::get("/tour/book/{id}", [BookingController::class, "index"])->name("tour.book");
 
-
 Route::middleware(['auth'])->group(function () {
     Route::get('/tour/edit', function () {
         return view('admin.tour_edit');
