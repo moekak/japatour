@@ -48,7 +48,7 @@ Route::get("/tour/show/{id}", [TourController::class, "show"])->name("tour.show"
 Route::get("/tour/confirmation", [BookingController::class, "confirmation"])->name("confirmation");
 Route::post("/tour/book", [BookingController::class, "store"])->name("book.store");
 Route::get("/tour/book/{id}", [BookingController::class, "index"])->name("tour.book");
-Route::get("/tour/{category}", [TourController::class, "all"])->name("tour");
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/tour/edit', function () {
@@ -74,8 +74,10 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+
 Route::get("/tours", [TourController::class, "index"])->name("tours");
 Route::post("/tour/store", [TourController::class, "store"])->name("tours.store");
+Route::get("/tour/{category}", [TourController::class, "all"])->name("tour");
 Auth::routes(['register' => false]);
 
 Route::post('/payment-intent', [BookingController::class, 'createPaymentIntent']);
