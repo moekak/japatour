@@ -116,7 +116,7 @@
                                           </button>
                                     </div>
 
-                                    <div id="tours-grid" class="grid grid-cols-[repeat(auto-fit,350px)] gap-4 p-4">
+                                    <div id="tours-grid" class="grid grid-cols-[repeat(auto-fit,100%)] gap-4 p-4 md:grid-cols-[repeat(auto-fit,350px)]">
                                           <!-- Tours will be dynamically loaded here -->
                                     </div>
                               </div>
@@ -215,9 +215,8 @@
                                     </details>
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
-                                           <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
-                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">⁠How do I
-                                                      book a tour and when do I pay?
+                                          <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">How do I book a tour and when do I pay?
                                                 </p>
                                                 <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
                                                       data-icon="CaretDown" data-size="20px" data-weight="regular">
@@ -229,16 +228,8 @@
                                                       </svg>
                                                 </div>
                                           </summary>
-                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">You can
-                                                book
-                                                directly through our website or our trusted partner platforms. Feel free
-                                                to contact us before booking if you'd like to discuss ideas,
-                                                preferences, or questions — we're happy to help.
-                                                We use a “book now, pay later” system. No payment is needed at the time
-                                                of booking. Your tour guide will contact you about a week before your
-                                                tour to finalize the itinerary. Payment (by credit card, cash, or other
-                                                options) is then made prior to the tour date.
-
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">
+                                                Simply send us a booking request. Once we review the details, we’ll contact you to confirm. After confirmation, payment is required to secure your spot.
                                           </p>
                                     </details>
                                     <details
@@ -268,9 +259,7 @@
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
                                           <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
-                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">What
-                                                      languages do you offer tours in?
-                                                </p>
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">What languages do you offer tours in? </p>
                                                 <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
                                                       data-icon="CaretDown" data-size="20px" data-weight="regular">
                                                       <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
@@ -281,19 +270,12 @@
                                                       </svg>
                                                 </div>
                                           </summary>
-                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">We offer
-                                                tours in English, Spanish, Italian, French, German, and Russian.
-                                                Please note: Language availability depends on our guide schedule, so we
-                                                recommend requesting your preferred language in advance.
-                                          </p>
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">Our tours are currently available in English, Spanish, and Italian. We’re working on adding more languages in the future.</p>
                                     </details>
                                     <details
                                           class="flex flex-col rounded-lg border border-[#e7d0d0] bg-[#fcf8f8] px-[15px] py-[7px] group">
                                           <summary class="cursor-pointer list-none appearance-none [&::-webkit-details-marker]:hidden flex items-center justify-between">
-                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">What is
-                                                      your cancellation and refund policy?
-
-                                                </p>
+                                                <p class="text-[#1b0e0e] test-base font-medium leading-normal">What is your cancellation and refund policy?</p>
                                                 <div class="text-[#1b0e0e] group-open:rotate-180 transition-transform"
                                                       data-icon="CaretDown" data-size="20px" data-weight="regular">
                                                       <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px"
@@ -304,19 +286,7 @@
                                                       </svg>
                                                 </div>
                                           </summary>
-                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">We
-                                                understand plans can change. Here’s our cancellation policy:
-                                                <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">
-                                                      Within 72 hours of the tour: No refund</li>
-                                                <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">
-                                                      24–48
-                                                      hours before: 50% refund</li>
-                                                <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">
-                                                      48–72
-                                                      hours before: 75% refund</li>
-                                                <li class="text-[#994d4d] test-base font-normal leading-normal pb-2">4
-                                                      days or more before the tour: 100% full refund</li>
-                                          </p>
+                                          <p class="text-[#994d4d] test-base font-normal leading-normal pt-2 pb-2">The logistics fee is non-refundable. However, if you cancel at least 24 hours before your tour, you’ll receive a full refund for the remaining amount.</p>
                                     </details>
                               </div>
                         </div>

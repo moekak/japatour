@@ -56,11 +56,11 @@ class TourController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function store(CreateRequest $request){
         try {
 
-            print_r($request->all());
-            exit;
+            // print_r($request->all());
+            // exit;
             $this->tourService->createTour($request);
             return redirect()->route("tour_list");
         

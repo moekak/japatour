@@ -389,7 +389,7 @@
 
             content.innerHTML = `
                   <div class="relative">
-                        <button onclick="closeTourDetails()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all">
+                        <button onclick="closeTourDetails()" class="fixed top-4 right-4 z-10 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-all">
                               <i class="fas fa-times text-gray-600"></i>
                         </button>
                         
