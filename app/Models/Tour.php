@@ -56,8 +56,12 @@ class Tour extends Model
         return $query->where("is_featured", $type);
     }
 
+    public function scopeWithIsPublished($query){
+        return $query->where("is_published", "1");
+    }
+
     public static function getAllToursByCategory(){
-        $tours = static::withRelations()
+        $tours = static::withRelations()->withIsPublished()
             ->get()
             ->map(function($tour) {
                 $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
@@ -70,7 +74,7 @@ class Tour extends Model
     }
 
     public static function getAllToursByCategoryWithoutFeatured(){
-        $tours = static::withRelations()
+        $tours = static::withRelations()->withIsPublished()
             ->withIsFeatured("0")
             ->get()
             ->map(function($tour) {
@@ -86,10 +90,10 @@ class Tour extends Model
 
 
     public static function getTourCount(){
-        return static::withIsFeatured("0")->count();
+        return static::withIsFeatured("0")->withIsPublished()->count();
     }
     public static function getFeaturedTour(){
-        $featuredTour = static::withRelations()
+        $featuredTour = static::withRelations()->withIsPublished()
             ->withIsFeatured("1")
             ->first();
         if ($featuredTour) {
@@ -102,7 +106,7 @@ class Tour extends Model
     }
 
     public static function getAllTours(){
-        $tours = static::withRelations()
+        $tours = static::withRelations()->withIsPublished()
             ->get()
             ->map(function($tour) {
                     $tour->average_rate = $tour->tourReviews->avg('rating') ?? 0;
@@ -114,7 +118,7 @@ class Tour extends Model
     }
 
     public static function getSpecificTour($column, $id){
-        $tours = static::withId($column, $id)
+        $tours = static::withId($column, $id)->withIsPublished()
             ->withRelations()
             ->get()
             ->map(function($tour) {
